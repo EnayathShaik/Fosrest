@@ -142,13 +142,17 @@
 <div id="sidebar-wrapper">
                     <ul class="sidebar-nav">
                         <!-- <li class="sidebar-brand"></li> -->
+                        
+                        <li><a href="">Training Schedule Master</a></li>
+                        <li> <a href="">Training Closure Report</a> </li>
+                        <li> <a href="">Generate Certificate</a> </li>
+                        <li> <a href="">Update Training Schedule</a> </li>
                         <li><a href="HolidayMaster.fssai">Holiday Master</a></li>
-                        <li><a href="manageCourseContent.fssai">Manage Course Content</a></li>
-                      <!--   <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li> -->
-                        <li> <a href="trainingpartnerassessmentcalendar.fssai">Update Assessor</a> </li>
-                        <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
-                        <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li>
-                        <li> <a href="feedbackMaster.fssai">Feedback Master</a> </li>
+                        <li> <a href="">Unit Master</a> </li>
+                        <li> <a href="">Module Master</a> </li>
+                        <li> <a href="">Assessment Questions</a> </li>
+                        <li> <a href="">Subject Master</a> </li>
+                        <li> <a href="">Training Calendar</a> </li>
                     </ul>
                 </div>
 

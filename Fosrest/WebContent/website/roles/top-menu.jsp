@@ -312,8 +312,8 @@
                                             <li><a href="regionMappingMaster.fssai" class="clr">Region Mapping</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="manageTrainingPartnerForm.fssai">Manage Training Partner</a></li>
-                                    <li><a href="manageAssessmentAgencyForm.fssai">Manage Assessment Agency</a></li>
+                                    <li><a href="">Training Partner List</a></li>
+                                    <li><a href="">Activate Trainee ID</a></li>
                                 </ul>
                                <ul class="nav navbar-nav navbar-right">
 							<li class="dropdown active"><a href="#"

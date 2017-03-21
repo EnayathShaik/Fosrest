@@ -31,7 +31,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-6 fostac-logo-left">
-                            <a href="#"><img src="website/afterLogin/img/fostac-logo.png" class="img-responsive fostac-logo-top-padding" alt="logo" /></a>
+                            <a href="#"><img src="website/afterLogin/img/fosrest-logo.png" class="img-responsive fostac-logo-top-padding" alt="logo" /></a>
                         </div>
 
                         <div class="col-xs-6 fssai-logo-right">
@@ -40,7 +40,7 @@
                     </div>
                     <!--<div>
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><img src="img/fostac-logo.png" class="img-responsive" alt="logo" /></a></li>
+                            <li><a href="#"><img src="img/fosrest-logo.png" class="img-responsive" alt="logo" /></a></li>
 
                         </ul>
 
