@@ -1,0 +1,23 @@
+<script type = "text/javascript" >
+       function preventBack(){window.history.forward();}
+        setTimeout("preventBack()", 10);
+        window.onunload=function(){null};
+    </script>
+
+ <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+              <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Course Enrollment <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                  <li><a href="basicTrainer.fssai" class="clr">Basic Course</a></li>
+                  <li><a href="advanceTrainer.fssai" class="clr">Advanced Course</a></li>
+                  <li><a href="specialTrainer.fssai" class="clr">Special Course</a></li>
+                </ul>
+          </li>
+              <li> <a href="generateAdmitCardTrainer.fssai">Generate Admit Card</a> </li>
+             <li> <a href="course-training-trainer.fssai?courseTypeId=1">Training</a> </li>
+<!--               <li> <a href="assessment-instructions-trainer.fssai">Assessment</a> </li> -->
+					<li> <a href="assessment-instructions-trainer.fssai">Assessment</a>
+              <li> <a href="feedbackFormTrainer.fssai">Feedback</a> </li>
+              <li> <a href="generateCertificateTrainer.fssai">Certification</a> </li>
+            </ul>
+      </div>

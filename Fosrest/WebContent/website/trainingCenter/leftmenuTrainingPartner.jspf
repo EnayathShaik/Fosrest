@@ -1,0 +1,16 @@
+<script type = "text/javascript" >
+       function preventBack(){window.history.forward();}
+        setTimeout("preventBack()", 10);
+        window.onunload=function(){null};
+    </script>
+
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <!-- <li class="sidebar-brand">
+                        </li> -->
+          <li> <a href="postVacancyTrainingCenter.fssai">Post Vacancy for Trainer</a> </li>
+          <li> <a href="trainingpartnerapplicationstatus1.fssai">Application Status</a> </li>
+           <li><a href="viewtrainingpartnertrainingcalendar.fssai">View Training Calendar</a></li>
+           <li><a href="viewFeedbackDetails.fssai">View Feedback</a></li>
+        </ul>
+      </div>
