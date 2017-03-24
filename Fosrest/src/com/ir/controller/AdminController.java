@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +46,7 @@ import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingPartnerForm;
+import com.ir.form.ModuleMasterForm;
 import com.ir.form.RegionForm;
 import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
@@ -58,17 +60,22 @@ import com.ir.model.CourseType;
 import com.ir.model.District;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
+import com.ir.model.SubjectMaster;
+import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
 import com.ir.service.PageLoadService;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
+import com.zentect.list.constant.ListConstant;
+
 
 @Controller
 public class AdminController {
@@ -80,6 +87,8 @@ public class AdminController {
 	@Autowired
 	@Qualifier("pageLoadService")
 	PageLoadService pageLoadService;
+	
+	ListConstant lst =  new ListConstant();   
 
 	@RequestMapping(value = "/stateMaster", method = RequestMethod.GET)
 	public String stateMaster(
@@ -1318,7 +1327,11 @@ public class AdminController {
 	}
 	
 	
-   	//For add and update region mapping both
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * All Add Edit delete for Holiday Master
+	 */
 	 
   	@RequestMapping(value = "/HolidayMaster", method = RequestMethod.GET)
 	public String listHolidayMaster(@ModelAttribute("HolidayMaster") HolidayMaster holidayMaster ,Model model) {
@@ -1350,22 +1363,11 @@ public class AdminController {
      return "redirect:/HolidayMaster.fssai";
  }
 
-/* @RequestMapping("HolidayMaster/edit/{id}")
- public ModelAndView editHolidayMaster(@PathVariable("id") int id, Model model){
-	 
-     model.addAttribute("HolidayMaster", this.adminService.getHolidayMasterById(id));
-    
-     model.addAttribute("listHolidayMaster", this.adminService.listHolidayMaster());
-     
-  
-     ModelAndView modelAndView = new ModelAndView("HolidayMaster");
-     return modelAndView;
- }*/
 
  @RequestMapping(value="/HolidayMaster/edit/{id}" , method=RequestMethod.POST)
 	@ResponseBody
 	public void editHolidayMaster(@PathVariable("id") int id ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		new ZLogger("searchFeedbackMaster","searchFeedbackMaster............" + id  , "AdminController.java");
+		new ZLogger("HolidayMaster/edit","HolidayMaster/edit............" + id  , "AdminController.java");
 		
 		HolidayMaster hm = this.adminService.getHolidayMasterById(id);
 		//List courseList = adminService.searchFeedbackMaster(data);
@@ -1378,6 +1380,203 @@ public class AdminController {
 		
 	}
 	
+ 
+ 
+
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * All Add Edit delete for Unit Master
+	 */
+ 
+	@RequestMapping(value = "/UnitMaster", method = RequestMethod.GET)
+	public String listUnitMaster(@ModelAttribute("UnitMaster") UnitMaster UnitMaster ,Model model) {
+			System.out.println("listUnitMaster");
+			Map<String , String> userType = lst.userTypeMap;			
+			Map<String , String> trainingType = lst.trainingTypeMap;
+			Map<String , String> trainingPhase = lst.trainingPhaseMap;
+			model.addAttribute("userType",userType);
+			model.addAttribute("trainingType",trainingType);
+			model.addAttribute("trainingPhase",trainingPhase);
+			model.addAttribute("UnitMaster", new UnitMaster());
+			model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		return "UnitMaster";
+	}
+
 	
+	@RequestMapping(value= "/UnitMaster/add", method = RequestMethod.POST) 
+	public String addUnitMaster(@ModelAttribute("UnitMaster") UnitMaster p){
+		System.out.println("p.getId() "+p.getUnitId());
+		if(p.getUnitId() == 0){
+			//new person, add it
+			this.adminService.addUnitMaster(p);
+		}else{
+			//existing person, call update
+			this.adminService.updateUnitMaster(p);
+		}
+		System.out.println("after insert");
+		return "redirect:/UnitMaster.fssai";
+	}
+	
+	@RequestMapping("/UnitMaster/remove/{id}")
+public String removeUnitMaster(@PathVariable("id") int id){
+		
+  this.adminService.removeUnitMaster(id);
+  return "redirect:/UnitMaster.fssai";
+}
+
+
+@RequestMapping(value="/UnitMaster/edit/{id}" , method=RequestMethod.POST)
+	@ResponseBody
+	public void editUnitMaster(@PathVariable("id") int id ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("/UnitMaster/edit","/UnitMaster/edit............" + id  , "AdminController.java");
+		
+		UnitMaster hm = this.adminService.getUnitMasterById(id);
+		//List courseList = adminService.searchFeedbackMaster(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(hm); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+
+	
+
+/**
+ * @author Jyoti Mekal
+ *
+ * All Add Edit delete for Module Master
+ */
+
+@RequestMapping(value = "/ModuleMaster", method = RequestMethod.GET)
+public String listModuleMaster(@ModelAttribute("ModuleMasterForm") ModuleMaster ModuleMaster ,Model model) {
+		System.out.println("listModuleMaster");
+		Map<String , String> userType = lst.userTypeMap;			
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> trainingPhase = lst.trainingPhaseMap;
+		model.addAttribute("userType",userType);
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("trainingPhase",trainingPhase);
+		model.addAttribute("ModuleMasterForm", new ModuleMasterForm());
+		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
+	return "ModuleMaster";
+}
+
+
+@RequestMapping(value= "/ModuleMaster/add", method = RequestMethod.POST) 
+public String addModuleMaster(@ModelAttribute("ModuleMasterForm") ModuleMasterForm p){
+	System.out.println("p.getId() "+p.getModuleId() + " " +p.getUnitId());
+	ModuleMaster moduleMaster = new ModuleMaster();
+	moduleMaster.setModuleId(p.getModuleId());
+	moduleMaster.setModuleName(p.getModuleName());
+	moduleMaster.setStatus(p.getStatus());
+	moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p.getUnitId()));
+	
+	if(p.getModuleId() == 0){
+		//new person, add it
+		this.adminService.addModuleMaster(moduleMaster);
+	}else{
+		//existing person, call update
+		this.adminService.updateModuleMaster(moduleMaster);
+	}
+	System.out.println("after insert");
+	return "redirect:/ModuleMaster.fssai";
+}
+
+@RequestMapping("/ModuleMaster/remove/{id}")
+public String removeModuleMaster(@PathVariable("id") int id){
+	
+this.adminService.removeModuleMaster(id);
+return "redirect:/ModuleMaster.fssai";
+}
+
+
+@RequestMapping(value="/ModuleMaster/edit/{id}" , method=RequestMethod.POST)
+@ResponseBody
+public void editModuleMaster(@PathVariable("id") int id ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("/ModuleMaster/edit","/ModuleMaster/edit............" + id  , "AdminController.java");
+	
+	ModuleMaster hm = this.adminService.getModuleMasterById(id);
+	//List courseList = adminService.searchFeedbackMaster(data);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(hm); 
+	System.out.println("newList "+newList);
+	out.write(newList);
+	out.flush();
+	
+}
+
+
+
+
+/**
+ * @author Jyoti Mekal
+ *
+ * All Add Edit delete for Subject Master
+ */
+
+@RequestMapping(value = "/SubjectMaster", method = RequestMethod.GET)
+public String listSubjectMaster(@ModelAttribute("SubjectMaster") SubjectMaster SubjectMaster ,Model model) {
+		System.out.println("listSubjectMaster");
+		Map<String , String> userType = lst.userTypeMap;			
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> trainingPhase = lst.trainingPhaseMap;
+		model.addAttribute("userType",userType);
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("SubjectMaster", new SubjectMaster());
+		model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
+	return "SubjectMaster";
+}
+
+
+@RequestMapping(value= "/SubjectMaster/add", method = RequestMethod.POST) 
+public String addSubjectMaster(@ModelAttribute("SubjectMaster") SubjectMaster p){
+	System.out.println("p.getId() "+p.getSubjectId());
+	if(p.getSubjectId() == 0){
+		//new person, add it
+		this.adminService.addSubjectMaster(p);
+	}else{
+		//existing person, call update
+		this.adminService.updateSubjectMaster(p);
+	}
+	System.out.println("after insert");
+	return "redirect:/SubjectMaster.fssai";
+}
+
+@RequestMapping("/SubjectMaster/remove/{id}")
+public String removeSubjectMaster(@PathVariable("id") int id){
+	
+this.adminService.removeSubjectMaster(id);
+return "redirect:/SubjectMaster.fssai";
+}
+
+
+@RequestMapping(value="/SubjectMaster/edit/{id}" , method=RequestMethod.POST)
+@ResponseBody
+public void editSubjectMaster(@PathVariable("id") int id ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("/SubjectMaster/edit","/SubjectMaster/edit............" + id  , "AdminController.java");
+	
+	SubjectMaster hm = this.adminService.getSubjectMasterById(id);
+	//List courseList = adminService.searchFeedbackMaster(data);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(hm); 
+	System.out.println("newList "+newList);
+	out.write(newList);
+	out.flush();
+	
+}
+
+
+
+
+
+
+
 	
 }

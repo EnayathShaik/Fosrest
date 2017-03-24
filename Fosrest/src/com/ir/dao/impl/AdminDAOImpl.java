@@ -53,13 +53,16 @@ import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.Region;
 import com.ir.model.State;
+import com.ir.model.SubjectMaster;
 import com.ir.model.TrainingCalendar;
+import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.PageLoadService;
@@ -1647,6 +1650,11 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Holiday Master
+		 */
 		
 		@Override
 		public void addHolidayMaster(HolidayMaster p) {
@@ -1705,6 +1713,215 @@ public class AdminDAOImpl implements AdminDAO {
 			}
 			return mccList;
 		}
+		
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Unit Master
+		 */
+		
+		@Override
+		public void addUnitMaster(UnitMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("UnitMaster "+p.getUnitId());
+			
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateUnitMaster(UnitMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeUnitMaster
+		
+		@Override
+		public void removeUnitMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			UnitMaster p = (UnitMaster) session.load(UnitMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public UnitMaster getUnitMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from UnitMaster where UnitId="+id);
+		
+		List<UnitMaster> UnitMasterList = query.list();
+		UnitMaster hm = UnitMasterList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<UnitMaster> listUnitMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listUnitMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<UnitMaster> mccList = session.createQuery("from UnitMaster").list();
+			for (UnitMaster p : mccList) {
+				System.out.println("Unit List::" + p);
+			}
+			return mccList;
+		}
+
+		
+		
+		
+		
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Module Master
+		 */
+		
+		@Override
+		public void addModuleMaster(ModuleMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("ModuleMaster "+p.getModuleId() + " p.getUnitMaster() "+p.getUnitMaster().getUnitId());
+			UnitMaster  um = getUnitMasterById(p.getUnitMaster().getUnitId());
+			p.setUnitMaster(um);
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateModuleMaster(ModuleMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeModuleMaster
+		
+		@Override
+		public void removeModuleMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			ModuleMaster p = (ModuleMaster) session.load(ModuleMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public ModuleMaster getModuleMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from ModuleMaster where ModuleId="+id);
+		
+		List<ModuleMaster> ModuleMasterList = query.list();
+		ModuleMaster hm = ModuleMasterList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<ModuleMaster> listModuleMaster() {
+			System.out.println("inside listUnitMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<ModuleMaster> mccList = session.createQuery("from ModuleMaster").list();
+			for (ModuleMaster p : mccList) {
+				System.out.println("Unit List::" + p);
+			}
+			return mccList;
+		}
+
+		
+		
+	
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Subject Master
+		 */
+		
+		@Override
+		public void addSubjectMaster(SubjectMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("SubjectMaster "+p.getSubjectId() + " " + p.getSubjectName());
+			//getModuleMasterById
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateSubjectMaster(SubjectMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeSubjectMaster
+		
+		@Override
+		public void removeSubjectMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			SubjectMaster p = (SubjectMaster) session.load(SubjectMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public SubjectMaster getSubjectMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from SubjectMaster where SubjectId="+id);
+		
+		List<SubjectMaster> SubjectMasterList = query.list();
+		SubjectMaster hm = SubjectMasterList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<SubjectMaster> listSubjectMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listSubjectMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<SubjectMaster> mccList = session.createQuery("from SubjectMaster").list();
+			for (SubjectMaster p : mccList) {
+				System.out.println("Subject List::" + p);
+			}
+			return mccList;
+		}
+
+		
+		
+		
 		
 }
 

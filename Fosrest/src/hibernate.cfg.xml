@@ -30,7 +30,7 @@
 		<property name="hibernate.enable_lazy_load_no_trans">true</property>
 		<property name="show_sql">true</property>
 		<!-- <property name="connection.pool_size">100</property> -->
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
 		<mapping class="com.ir.model.ManageCourseContent"/>
 		<mapping class="com.ir.model.CourseName"/>
 		<mapping class="com.ir.model.CourseType"/>
@@ -69,6 +69,9 @@
 		<mapping class="com.ir.model.TrainingCalendarHistoryLogs"/>
 		<mapping class="com.ir.model.TraineeDailyAttendance"/>
 		<mapping class="com.ir.model.HolidayMaster"/>
+		<mapping class="com.ir.model.UnitMaster"/>
+		<mapping class="com.ir.model.ModuleMaster"/>
+		<mapping class="com.ir.model.SubjectMaster"/>
 		
 <!-- 		<mapping class="com.ir.form.AssessmentAnswerCriteria"/> -->
 <!-- 		<mapping class="com.ir.model.CourseEnrolledUser"/> -->

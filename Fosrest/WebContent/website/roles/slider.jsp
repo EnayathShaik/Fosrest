@@ -148,10 +148,10 @@
                         <li> <a href="">Generate Certificate</a> </li>
                         <li> <a href="">Update Training Schedule</a> </li>
                         <li><a href="HolidayMaster.fssai">Holiday Master</a></li>
-                        <li> <a href="">Unit Master</a> </li>
-                        <li> <a href="">Module Master</a> </li>
+                        <li> <a href="UnitMaster.fssai">Unit Master</a> </li>
+                        <li> <a href="ModuleMaster.fssai">Module Master</a> </li>
                         <li> <a href="">Assessment Questions</a> </li>
-                        <li> <a href="">Subject Master</a> </li>
+                        <li> <a href="SubjectMaster.fssai">Subject Master</a> </li>
                         <li> <a href="">Training Calendar</a> </li>
                     </ul>
                 </div>

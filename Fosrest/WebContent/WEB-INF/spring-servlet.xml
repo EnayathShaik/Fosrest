@@ -159,6 +159,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.TrainingCalendarHistoryLogs</value>
 				<value>com.ir.model.TraineeDailyAttendance</value>
 				<value>com.ir.model.HolidayMaster</value>
+				<value>com.ir.model.UnitMaster</value>
+				<value>com.ir.model.ModuleMaster</value>
+				<value>com.ir.model.SubjectMaster</value>
 				
 				
 <!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
@@ -178,7 +181,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				
 				
 				

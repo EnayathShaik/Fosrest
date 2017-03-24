@@ -4,8 +4,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class ListConstant {
-	//Title
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * All constant list maintain here.
+	 */
+	
+
 	public static final Map<String, String> titleMap;
     static {
         Map<String, String> aMap = new HashMap<String, String>();
@@ -14,7 +21,7 @@ public class ListConstant {
         titleMap = Collections.unmodifiableMap(aMap);
     }
     //Training Type
-    private static final Map<String, String> trainingTypeMap;
+    public static final Map<String, String> trainingTypeMap;
     static {
         Map<String, String> atrainingTypeMap = new HashMap<String, String>();
         atrainingTypeMap.put("IND", "Induction");
@@ -32,7 +39,7 @@ public class ListConstant {
     }
     
   //User Type
-    private static final Map<String, String> trainingPhaseMap;
+    public static final Map<String, String> trainingPhaseMap;
     static {
         Map<String, String> atrainingPhaseMap = new HashMap<String, String>();
         atrainingPhaseMap.put("FND", "FOUNDATION");

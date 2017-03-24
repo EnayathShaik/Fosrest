@@ -34,14 +34,18 @@ import com.ir.model.District;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
+import com.ir.model.SubjectMaster;
+import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
+
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -453,7 +457,11 @@ public class AdminServiceImpl implements AdminService {
 	}	
 	
 	
-	//addHolidayMaster
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For Holiday Master
+	 */
 	
 	@Override
 	@Transactional
@@ -495,4 +503,162 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listHolidayMaster();
 	}
+	
+	
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For Unit Master
+	 */
+
+	@Override
+	@Transactional
+	public void addUnitMaster(UnitMaster p){
+		 this.adminDAO.addUnitMaster(p);
+		
+	}
+	
+	//updateUnitMaster
+	@Override
+	@Transactional
+	public void updateUnitMaster(UnitMaster p){
+		 this.adminDAO.updateUnitMaster(p);
+		
+	}
+	
+	//removeUnitMaster
+	
+	@Override
+	@Transactional
+	public void removeUnitMaster(int id){
+		 this.adminDAO.removeUnitMaster(id);
+		
+	}
+	
+//	/getUnitMasterById
+	@Override
+	@Transactional
+	public UnitMaster getUnitMasterById(int id){
+		return this.adminDAO.getUnitMasterById(id);
+		
+	}
+	
+	//listUnitMaster
+	
+	@Override
+	@Transactional
+	public List<UnitMaster> listUnitMaster() {
+		// TODO Auto-generated method stub
+		return this.adminDAO.listUnitMaster();
+	}
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For Module Master
+	 */
+
+	@Override
+	@Transactional
+	public void addModuleMaster(ModuleMaster p){
+		 this.adminDAO.addModuleMaster(p);
+		
+	}
+	
+	//updateModuleMaster
+	@Override
+	@Transactional
+	public void updateModuleMaster(ModuleMaster p){
+		 this.adminDAO.updateModuleMaster(p);
+		
+	}
+	
+	//removeModuleMaster
+	
+	@Override
+	@Transactional
+	public void removeModuleMaster(int id){
+		 this.adminDAO.removeModuleMaster(id);
+		
+	}
+	
+//	/getModuleMasterById
+	@Override
+	@Transactional
+	public ModuleMaster getModuleMasterById(int id){
+		return this.adminDAO.getModuleMasterById(id);
+		
+	}
+	
+	//listModuleMaster
+	
+	@Override
+	@Transactional
+	public List<ModuleMaster> listModuleMaster() {
+		// TODO Auto-generated method stub
+		return this.adminDAO.listModuleMaster();
+	}
+	
+	
+	
+	
+
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For Subject Master
+	 */
+
+	@Override
+	@Transactional
+	public void addSubjectMaster(SubjectMaster p){
+		 this.adminDAO.addSubjectMaster(p);
+		
+	}
+	
+	//updateSubjectMaster
+	@Override
+	@Transactional
+	public void updateSubjectMaster(SubjectMaster p){
+		 this.adminDAO.updateSubjectMaster(p);
+		
+	}
+	
+	//removeSubjectMaster
+	
+	@Override
+	@Transactional
+	public void removeSubjectMaster(int id){
+		 this.adminDAO.removeSubjectMaster(id);
+		
+	}
+	
+//	/getSubjectMasterById
+	@Override
+	@Transactional
+	public SubjectMaster getSubjectMasterById(int id){
+		return this.adminDAO.getSubjectMasterById(id);
+		
+	}
+	
+	//listSubjectMaster
+	
+	@Override
+	@Transactional
+	public List<SubjectMaster> listSubjectMaster() {
+		// TODO Auto-generated method stub
+		return this.adminDAO.listSubjectMaster();
+	}
+	
+	
+	
+	
+	
+	
 }

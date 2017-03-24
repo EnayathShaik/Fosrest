@@ -28,11 +28,14 @@ import com.ir.model.District;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
+import com.ir.model.SubjectMaster;
+import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 
@@ -144,4 +147,41 @@ public interface AdminDAO {
 		public HolidayMaster getHolidayMasterById(int id);
 		
 		public List<HolidayMaster> listHolidayMaster();
+		
+		
+		public void addUnitMaster(UnitMaster p);
+		
+		public void updateUnitMaster(UnitMaster p);
+		
+		public void removeUnitMaster(int id);
+		
+		public UnitMaster getUnitMasterById(int id);
+		
+		public List<UnitMaster> listUnitMaster();
+		
+		
+		
+		
+
+		public void addModuleMaster(ModuleMaster p);
+		
+		public void updateModuleMaster(ModuleMaster p);
+		
+		public void removeModuleMaster(int id);
+		
+		public ModuleMaster getModuleMasterById(int id);
+		
+		public List<ModuleMaster> listModuleMaster();
+		
+		
+		public void addSubjectMaster(SubjectMaster p);
+		
+		public void updateSubjectMaster(SubjectMaster p);
+		
+		public void removeSubjectMaster(int id);
+		
+		public SubjectMaster getSubjectMasterById(int id);
+		
+		public List<SubjectMaster> listSubjectMaster();
+		
 }
