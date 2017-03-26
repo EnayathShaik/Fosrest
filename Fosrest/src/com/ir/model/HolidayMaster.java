@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
@@ -18,7 +22,12 @@ public class HolidayMaster {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name= "holidayId")
 	private int holidayId;
+	
+	@NotEmpty(message="Holiday Can not be blank.")
+	@NotBlank
 	private String holidayDate;
+	
+	@NotEmpty(message="Holiday Reasons not be blank.")
 	private String holidayReason;
 	
 
@@ -37,7 +46,7 @@ public class HolidayMaster {
 		this.holidayId = holidayId;
 	}
 
-
+	@NotNull
 	public String getHolidayDate() {
 		return holidayDate;
 	}

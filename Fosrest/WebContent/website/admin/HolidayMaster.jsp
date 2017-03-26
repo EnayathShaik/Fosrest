@@ -55,7 +55,7 @@
 													<div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Holiday Date:</strong></li>
-                                                        <li class="style-li error-red"> </li>
+                                                        <li > <cf:errors path="holidayDate" class="style-li error-red" ></cf:errors> </li>
                                                     </ul>
                                                 </div>
                                                 <cf:input class="form-control" path="holidayDate" id="holidayDate" name="holidayDate" type="text" placeholder="Date"/> </div>
@@ -66,7 +66,7 @@
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                                <cf:input class="form-control" type="text" path="holidayReason" id="holidayReason" name="holidayReason" placeholder="Training Partner Website Link"/> </div>
+                                                <cf:input class="form-control" type="text"  path="holidayReason" id="holidayReason" name="holidayReason" placeholder="Holiday Reason"/> </div>
                                             <div class="row">
                                             
                                                <!-- left -->
@@ -128,7 +128,7 @@
 												<td>${HolidayMaster.holidayId}</td>
 												<td>${HolidayMaster.holidayDate}</td>
 												<td>${HolidayMaster.holidayReason}</td>
-												 <%-- <td><a href="<ct:url value='/HolidayMaster/edit/${HolidayMaster.holidayId}.fssai' />" >Edit</a></td> --%> 
+												  
 												<td><button onclick='editHoliday(${HolidayMaster.holidayId});return false;' >Edit</button></td>
 												<td><a href="<ct:url value='/HolidayMaster/remove/${HolidayMaster.holidayId}.fssai' />" >Delete</a></td>
 											</tr>

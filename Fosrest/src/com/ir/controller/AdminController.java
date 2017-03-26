@@ -53,6 +53,7 @@ import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
+import com.ir.form.TrainingScheduleForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.model.City;
 import com.ir.model.CourseName;
@@ -67,6 +68,7 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
@@ -1343,7 +1345,15 @@ public class AdminController {
  
 	
 	@RequestMapping(value= "/HolidayMaster/add", method = RequestMethod.POST) 
-	public String addHolidayMaster(@ModelAttribute("HolidayMaster") HolidayMaster p){
+	public String addHolidayMaster(@ModelAttribute("HolidayMaster") HolidayMaster p , BindingResult result){
+	System.out.println(result.hasErrors());	
+if (result.hasErrors()) {
+			
+			new ZLogger("HolidayMaster", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("HolidayMaster", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+			return "redirect:/HolidayMaster.fssai";
+		}
+		
 		System.out.println("p.getId() "+p.getHolidayId());
 		if(p.getHolidayId() == 0){
 			//new person, add it
@@ -1574,7 +1584,42 @@ public void editSubjectMaster(@PathVariable("id") int id ,@RequestBody GenerateC
 
 
 
+/**
+ * @author Jyoti Mekal
+ *
+ * All Add Edit delete for Training Schedule
+ */
 
+@RequestMapping(value = "/TrainingSchedule", method = RequestMethod.GET)
+public String TrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule ,Model model) {
+		System.out.println("listTrainingSchedule");
+		Map<String , String> userType = lst.userTypeMap;			
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> trainingPhase = lst.trainingPhaseMap;
+		model.addAttribute("userType",userType);
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("trainingPhase" , trainingPhase);
+		model.addAttribute("TrainingScheduleForm", new TrainingScheduleForm());
+	//	model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
+	return "TrainingSchedule";
+}
+
+
+
+@RequestMapping(value = "/ListTrainingSchedule", method = RequestMethod.POST)
+public String ListTrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule ,Model model) {
+	
+		System.out.println("listTrainingSchedule" + TrainingSchedule.getTrainingType());
+		Map<String , String> userType = lst.userTypeMap;			
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> trainingPhase = lst.trainingPhaseMap;
+		model.addAttribute("userType",userType);
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("trainingPhase" , trainingPhase);
+		model.addAttribute("TrainingScheduleForm", new TrainingScheduleForm());
+		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
+	return "TrainingSchedule";
+}
 
 
 

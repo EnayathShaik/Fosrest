@@ -916,10 +916,6 @@
 		<put-attribute name="body" value="/website/admin/ModuleMaster.jsp" />
 	</definition>
 
-
-
-
-
 	<definition name="SubjectMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/SubjectMaster.jsp" />
@@ -930,5 +926,14 @@
 		<put-attribute name="body" value="/website/admin/SubjectMaster.jsp" />
 	</definition>
 
+<definition name="TrainingSchedule" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/TrainingSchedule.jsp" />
+	</definition>
+	
+	<definition name="TrainingSchedule/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/TrainingSchedule.jsp" />
+	</definition>
 
 </tiles-definitions>

@@ -22,6 +22,7 @@ import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
+import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -36,6 +37,7 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
@@ -206,6 +208,10 @@ public interface AdminService {
 	public void removeSubjectMaster(int id);
 	public SubjectMaster getSubjectMasterById(int id);
 	public List<SubjectMaster> listSubjectMaster();
+	
+	
+	
+	public List<TrainingSchedule> listTrainingSchedule();
 	
 }
 

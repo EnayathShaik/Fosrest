@@ -39,6 +39,7 @@ import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
+import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestion;
 import com.ir.model.AssessorUserManagement;
@@ -62,6 +63,7 @@ import com.ir.model.Region;
 import com.ir.model.State;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TrainingCalendar;
+import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
@@ -1921,6 +1923,30 @@ public class AdminDAOImpl implements AdminDAO {
 
 		
 		
+		
+		
+		@Override
+		public List<TrainingSchedule> listTrainingSchedule() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTrainingSchedule");
+			TrainingSchedule bean = new TrainingSchedule();
+			List<TrainingSchedule> list = new ArrayList<TrainingSchedule>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> lst = session.createSQLQuery("select cast('Refresher' as varchar(20)) as trainingType , cast('AO' as varchar(20)) as UserType , cast('Foundation' as varchar(20) ) as trainingPhase , 1 as day , cast('Inaugration' as varchar(20)) as unit ,cast('Introduction to Participants' as varchar(20)) as module , cast('2 hrs' as varchar(20)) as duration").list();
+			for (Object[] li : lst ) {
+				
+				bean.setTrainingType((String) li[0]);
+				bean.setUserType((String) li[1]);
+				bean.setTrainingPhase((String) li[2]);
+				bean.setDay(((int)li[3]));
+				bean.setUnit((String) li[4]);
+				bean.setModule((String)li[5]);
+				bean.setDuration((String) li[6]);
+				list.add(bean);
+			}
+System.out.println("list "+list);
+			return list;
+		}
 		
 		
 }
