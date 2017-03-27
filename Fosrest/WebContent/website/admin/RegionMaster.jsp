@@ -162,7 +162,7 @@
 												<td>${RegionMaster.cityMaster.districtMaster.stateMaster.stateName}</td>
 												<td>${RegionMaster.cityMaster.districtMaster.districtName}</td>
 												<td>${RegionMaster.cityMaster.cityName}</td>
-												<td>${RegionMaster.RegionName}</td>
+												<td>${RegionMaster.regionName}</td>
 												<td><ct:choose><ct:when test="${ RegionMaster.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
 												<td><button onclick='editRegion(${RegionMaster.id});return false;' >Edit</button></td>
 												<td><a href="<ct:url value='/RegionMaster/remove/${RegionMaster.id}.fssai' />" >Delete</a></td>
@@ -204,7 +204,7 @@
             	    $("#stateId").val(mainData1.cityMaster.districtMaster.stateMaster.stateId);
             	    $("#districtId").val(mainData1.cityMaster.districtMaster.districtId);
             	    $("#cityId").val(mainData1.cityMaster.cityId);
-            	    $("#regionName").val(mainData1.RegionName);
+            	    $("#regionName").val(mainData1.regionName);
             	     $("#updatebtn").css("display" , "block");
             	     
             	     $("#createbtn").css("display" , "none");

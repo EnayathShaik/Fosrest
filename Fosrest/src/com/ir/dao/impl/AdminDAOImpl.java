@@ -2213,7 +2213,7 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println(" id " +id);
 			Session session = this.sessionFactory.getCurrentSession();
 			
-		Query query = session.createQuery("from RegionMaster where RegionId="+id);
+		Query query = session.createQuery("from RegionMaster where id="+id);
 		
 		List<RegionMaster> RegionMasterList = query.list();
 		RegionMaster hm = RegionMasterList.get(0);
