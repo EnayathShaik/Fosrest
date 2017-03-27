@@ -31,6 +31,7 @@ function pan_validate(id, pan) {
 	if (regpan.test(pan) == false) {
 		document.getElementById(id).value = "";
 		alert('INVALID PAN');
+		return false;
 	}
 	
 }

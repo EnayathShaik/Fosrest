@@ -139,6 +139,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.KindOfBusiness</value>
 				<value>com.ir.model.PersonalInformationTrainee</value>
 				<value>com.ir.model.PersonalInformationTrainer</value>
+				<value>com.ir.model.PersonalInformationTrainingInstitute</value>
 				<value>com.ir.model.PersonalInformationTrainingPartner</value>
 				<value>com.ir.model.PersonalInformationAssessor</value>
 				<value>com.ir.model.TrainingPartner</value>

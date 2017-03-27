@@ -66,7 +66,7 @@ public class ListConstant {
     }
     
   //User Type
-    private static final Map<String, String> noOfOptionMap;
+    public static final Map<String, String> noOfOptionMap;
     static {
         Map<String, String> anoOfOptionMap = new HashMap<String, String>();
         anoOfOptionMap.put("1", "1");
@@ -87,7 +87,7 @@ public class ListConstant {
     }
     
   //User Type
-    private static final Map<String, String> expBGMap;
+    public static final Map<String, String> expBGMap;
     static {
         Map<String, String> aexpBGMap = new HashMap<String, String>();
         aexpBGMap.put("IND", "Industry");
@@ -195,6 +195,16 @@ public class ListConstant {
         avacancyMap.put("P", "Part time");
         avacancyMap.put("F", "Full time");
         vacancyMap = Collections.unmodifiableMap(avacancyMap);
+    }
+    
+    
+    public static final Map<String, String> trainingParterMap;
+    static {
+        Map<String, String> avacancyMap = new HashMap<String, String>();
+        avacancyMap.put("1", "SUTRA");
+        avacancyMap.put("2", "NIIT");
+        avacancyMap.put("3", "JETKING");
+        trainingParterMap = Collections.unmodifiableMap(avacancyMap);
     }
     
 

@@ -161,7 +161,7 @@ public class LoginController {
 		{
 			PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetails.getId() );
 			new ZLogger("loginProcess","in trainee login  "+ personalInformationTrainee.getFirstName(), "LoginController.java");
-			session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());
+			//session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
@@ -173,7 +173,7 @@ public class LoginController {
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
-			session.setAttribute("loginUser2", personalInformationTrainer.getPersonalInformationTrainerId());
+			session.setAttribute("loginUser2", personalInformationTrainer.getId());
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
 			return "trainerHomepage";

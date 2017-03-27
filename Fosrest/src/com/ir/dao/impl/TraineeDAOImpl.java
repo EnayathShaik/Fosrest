@@ -1,5 +1,6 @@
 package com.ir.dao.impl;
 
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,14 +36,19 @@ import com.ir.model.District;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.KindOfBusiness;
+import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.TrainingCalendar;
 import com.ir.model.Utility;
+import com.ir.service.PageLoadService;
 import com.ir.util.ChangePasswordUtility;
+import com.ir.util.EncryptionPasswordANDVerification;
+import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.zentech.logger.ZLogger;
 
@@ -56,7 +62,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Autowired
 	@Qualifier("changePasswordUtility")
 	public ChangePasswordUtility changePasswordUtility;
+	
+	@Autowired
+	@Qualifier("pageLoadService")
+	PageLoadService pageLoadService;
 
+	
+	
 	@Autowired
 	public CourseEnrolledUser courseEnrolledUser;
 
@@ -373,7 +385,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 
 		if (registrationFormTrainee.getKindOfBusiness() == 6) {
-			personalInformationTrainee.setKindOfBusiness(kob);
+			/*personalInformationTrainee.setKindOfBusiness(kob);
 			personalInformationTrainee.setDesignation(null);
 			personalInformationTrainee.setCompanyName(null);
 			personalInformationTrainee.setRegistrationNo(null);
@@ -382,21 +394,21 @@ public class TraineeDAOImpl implements TraineeDAO {
 			personalInformationTrainee.setBussCity(null);
 			personalInformationTrainee.setBussDistrict(null);
 			personalInformationTrainee.setBussState(null);
-			personalInformationTrainee.setBussPincode(null);
+			personalInformationTrainee.setBussPincode(null);*/
 
 		} else {
 			new ZLogger("updateTrainee","Else Kind of business", "TraineeDAOImpl.java");
-			personalInformationTrainee.setCompanyName(registrationFormTrainee
+			/*personalInformationTrainee.setCompanyName(registrationFormTrainee
 					.getCompanyName());
 			personalInformationTrainee.setDesignation(registrationFormTrainee
 					.getDesignation());
 			personalInformationTrainee
 					.setRegistrationNo(registrationFormTrainee
 							.getRegistrationNo());
-			personalInformationTrainee.setKindOfBusiness(kob);
+			personalInformationTrainee.setKindOfBusiness(kob);*/
 
 			if (checkCompany) {
-				personalInformationTrainee
+				/*personalInformationTrainee
 						.setBusinessAddressLine1(registrationFormTrainee
 								.getCorrespondenceAddress1());
 				personalInformationTrainee
@@ -408,10 +420,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 				personalInformationTrainee
 						.setBussPincode(registrationFormTrainee
 								.getCorrespondencePincode());
-				personalInformationTrainee.setCheckCompany("true");
+				personalInformationTrainee.setCheckCompany("true");*/
 
 			} else {
-				personalInformationTrainee
+				/*personalInformationTrainee
 						.setBusinessAddressLine1(registrationFormTrainee
 								.getBusinessAddressLine1());
 				personalInformationTrainee
@@ -427,7 +439,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				personalInformationTrainee
 						.setBussPincode(registrationFormTrainee
 								.getBussPincode());
-				personalInformationTrainee.setCheckCompany("false");
+				personalInformationTrainee.setCheckCompany("false");*/
 			}
 		}
 
@@ -437,9 +449,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainee
 				.setCorrespondenceAddress2(registrationFormTrainee
 						.getCorrespondenceAddress2());
-		personalInformationTrainee.setCorrespondenceState(cs);
+		/*personalInformationTrainee.setCorrespondenceState(cs);
 		personalInformationTrainee.setCorrespondenceDistrict(cd);
-		personalInformationTrainee.setCorrespondenceCity(cc);
+		personalInformationTrainee.setCorrespondenceCity(cc);*/
 		personalInformationTrainee.setEmail(registrationFormTrainee.getEmail());
 		personalInformationTrainee.setMobile(registrationFormTrainee
 				.getMobile());
@@ -447,7 +459,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				.setCorrespondencePincode(registrationFormTrainee
 						.getCorrespondencePincode());
 		if (correspondADD) {
-			personalInformationTrainee
+			/*personalInformationTrainee
 					.setResidentialLine1(registrationFormTrainee
 							.getCorrespondenceAddress1());
 			personalInformationTrainee
@@ -458,7 +470,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			personalInformationTrainee.setResidentialDistrict(cd);
 			personalInformationTrainee.setResPincode(registrationFormTrainee
 					.getCorrespondencePincode());
-			personalInformationTrainee.setCheckPermanent("true");
+			personalInformationTrainee.setCheckPermanent("true");*/
 		} else {
 			personalInformationTrainee
 					.setResidentialLine1(registrationFormTrainee
@@ -466,12 +478,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 			personalInformationTrainee
 					.setResidentialLine2(registrationFormTrainee
 							.getResidentialAddressLine2());
-			personalInformationTrainee.setResState(ps);
+			/*personalInformationTrainee.setResState(ps);
 			personalInformationTrainee.setResCity(pc);
 			personalInformationTrainee.setResidentialDistrict(pd);
 			personalInformationTrainee.setResPincode(registrationFormTrainee
 					.getResPincode());
-			personalInformationTrainee.setCheckPermanent("false");
+			personalInformationTrainee.setCheckPermanent("false");*/
 		}
 
 		session.update(personalInformationTrainee);
@@ -1160,5 +1172,102 @@ public class TraineeDAOImpl implements TraineeDAO {
 		
 		return "updated Sucessfully";
 	}
+	
+	//addPersonalInfoTrainee
+	
+	@Override
+	public  String addPersonalInfoTrainee(PersonalInformationTrainee p){
+
+		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
+		char[] pass = passwordGenerator.get();
+		String passwordString = String.valueOf(pass);
+		
+		Session session = sessionFactory.getCurrentSession();
+		String encryprPassword = null;
+		try{
+			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
+			encryprPassword = encryptionPasswordANDVerification.encryptPass(passwordString);
+			
+		}catch(NoSuchAlgorithmException e){
+			System.out.println( " no such algo exception error catch ");
+		}
+		
+		String nextSequenceUserID = pageLoadService.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
+		LoginDetails loginDetails = new LoginDetails();
+		loginDetails.setLoginId(nextSequenceUserID);
+		loginDetails.setPassword(passwordString);
+		loginDetails.setEncrypted_Password(encryprPassword);
+		loginDetails.setStatus("A");
+		loginDetails.setProfileId(3);
+		p.setLoginDetails(loginDetails);
+		
+		session.save(p);
+		return passwordString+"&"+nextSequenceUserID;
+	}	
+	
+	@Override
+	public  String addPersonalInfoTrainer(PersonalInformationTrainer p){
+
+		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
+		char[] pass = passwordGenerator.get();
+		String passwordString = String.valueOf(pass);
+		
+		Session session = sessionFactory.getCurrentSession();
+		String encryprPassword = null;
+		try{
+			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
+			encryprPassword = encryptionPasswordANDVerification.encryptPass(passwordString);
+			
+		}catch(NoSuchAlgorithmException e){
+			System.out.println( " no such algo exception error catch ");
+		}
+		
+		String nextSequenceUserID = pageLoadService.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
+		LoginDetails loginDetails = new LoginDetails();
+		loginDetails.setLoginId(nextSequenceUserID);
+		loginDetails.setPassword(passwordString);
+		loginDetails.setEncrypted_Password(encryprPassword);
+		loginDetails.setStatus("A");
+		loginDetails.setProfileId(3);
+		p.setLoginDetails(loginDetails);
+		
+		session.save(p);
+		return passwordString+"&"+nextSequenceUserID;
+	}	
+	
+	
+	
+	@Override
+	public  String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p){
+
+		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
+		char[] pass = passwordGenerator.get();
+		String passwordString = String.valueOf(pass);
+		
+		Session session = sessionFactory.getCurrentSession();
+		String encryprPassword = null;
+		try{
+			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
+			encryprPassword = encryptionPasswordANDVerification.encryptPass(passwordString);
+			
+		}catch(NoSuchAlgorithmException e){
+			System.out.println( " no such algo exception error catch ");
+		}
+		
+	System.out.println(	p.getTpName() + " ");
+		String nextSequenceUserID = pageLoadService.getNextCombinationId("TCTP"+p.getTpName(), "personalinformationtrainingInstitute" , "000000");
+		LoginDetails loginDetails = new LoginDetails();
+		loginDetails.setLoginId(nextSequenceUserID);
+		loginDetails.setPassword(passwordString);
+		loginDetails.setEncrypted_Password(encryprPassword);
+		loginDetails.setStatus("A");
+		loginDetails.setProfileId(4);
+		p.setLoginDetails(loginDetails);
+		
+		session.save(p);
+		return passwordString+"&"+nextSequenceUserID;
+	}	
+	
+	
 	
 }

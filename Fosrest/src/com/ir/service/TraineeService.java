@@ -16,6 +16,8 @@ import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Utility;
 
@@ -121,6 +123,15 @@ public interface TraineeService {
 	public List getAttendanceDeatilsByID(String id);
 	
 	public String savePaymentStatus(String data);
+	
+	
+	/*********************************FOSREST **********************************************************/
+	
+	public String addPersonalInfoTrainee(PersonalInformationTrainee p);
+	
+	public String addPersonalInfoTrainer(PersonalInformationTrainer p);
+	
+	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p );
 	
 	
 }

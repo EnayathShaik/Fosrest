@@ -18,6 +18,7 @@
     <link href="website/afterLogin/css/swipebox.css" rel="stylesheet" />
     <link href="website/css/visibility.css" rel="stylesheet" />
     <link href="website/css/flatpickr.css" rel="stylesheet" />
+    <script src="website/js/jquery-2.1.0.min.js"></script>
     <script src="website/js/flatpickr.js"></script>
     <script src="website/js/JsBarcode.code128.min.js"></script>
     <style>

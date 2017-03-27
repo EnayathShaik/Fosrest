@@ -201,10 +201,10 @@ public class RegistrationControllerTrainer implements Serializable{
 	 if(userId > 0){
 		 trainingPartnerList = registrationServiceTrainer.trainingPartnerList();
 		 PersonalInformationTrainer personalInformationTrainer = registrationServiceTrainer.FullDetailTrainer(userId);
-		model.addAttribute("trainingPartnerID", personalInformationTrainer.getAssociatedTrainingpartnerName().getManageTrainingPartnerId());
+		//model.addAttribute("trainingPartnerID", personalInformationTrainer.getAssociatedTrainingpartnerName().getManageTrainingPartnerId());
 		System.out.println("trainingPartnerList "+trainingPartnerList);
-		model.addAttribute("trainingPartnerList" , trainingPartnerList);
-		System.out.println(" partner ID "+personalInformationTrainer.getAssociatedTrainingpartnerName().getManageTrainingPartnerId());
+	//	model.addAttribute("trainingPartnerList" , trainingPartnerList);
+		//System.out.println(" partner ID "+personalInformationTrainer.getAssociatedTrainingpartnerName().getManageTrainingPartnerId());
 		 session.setAttribute("loginUr", personalInformationTrainer);
 		 
 	 }

@@ -55,7 +55,7 @@
 													<div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Holiday Date:</strong></li>
-                                                        <li > <cf:errors path="holidayDate" class="style-li error-red" ></cf:errors> </li>
+                                                        <li > <cf:errors path="holidayDate" style="color:red" ></cf:errors> </li>
                                                     </ul>
                                                 </div>
                                                 <cf:input class="form-control" path="holidayDate" id="holidayDate" name="holidayDate" type="text" placeholder="Date"/> </div>

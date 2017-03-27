@@ -32,17 +32,7 @@ window.onload = OnStart;
         return false;
     }
     function validateFields() {
-        //alert("validate");
-
-    /*     if (document.getElementById("userId").value == "") {
-            document.getElementById('userId').style.borderColor = "red";
-            document.getElementById("userIdError").style.display = 'block';
-            document.getElementById("userId").focus();
-            return false;
-        } else {
-            document.getElementById('userId').style.borderColor = "#ccc";
-            document.getElementById("userIdError").style.display = 'none';
-        } */
+   
         if (document.getElementById("Title").value == 0) {
             document.getElementById('Title').style.borderColor = "red";
             document.getElementById("TitleError").style.display = 'block';

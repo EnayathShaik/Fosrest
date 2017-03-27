@@ -935,5 +935,22 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/TrainingSchedule.jsp" />
 	</definition>
+	
+	
+		<definition name="PersonalInformationTrainee" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/personalInformationTrainee.jsp" />
+	</definition>
+	
+	
+		<definition name="PersonalInformationTrainer" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/personalInformationTrainer.jsp" />
+	</definition>
+
+	<definition name="PersonalInformationTrainingInstitute" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/personalInformationTrainingInstitute.jsp" />
+	</definition>
 
 </tiles-definitions>

@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <head>
                 <base href="<%=basePath%>">
 
-                <title>Fostac E-Learning System</title>
+                <title>Fosrest E-Learning System</title>
                 <meta http-equiv="pragma" content="no-cache">
                 <meta http-equiv="cache-control" content="no-cache">
                 <meta http-equiv="expires" content="0">
@@ -126,13 +126,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             </div>
                                             <div class="col-md-6 col-xs-12">
                                                 <div class="col-md-4 col-xs-12" align="center">
-                                                    <a href="trainee.fssai"><img src="website/images/trainee.png"></a>
+                                                    <a href="PersonalInformationTrainee.fssai"><img src="website/images/trainee.png"></a>
                                                 </div>
                                                 <div class="col-md-4 col-xs-12" align="center">
-                                                    <a href="trainer.fssai"><img src="website/images/trainer.png"></a>
+                                                    <a href="PersonalInformationTrainer.fssai"><img src="website/images/trainer.png"></a>
                                                 </div>
                                                 <div class="col-md-4 col-xs-12" align="center">
-                                                    <a href="assessor.fssai"><img src="website/images/assessor.png"></a>
+                                                    <a href="PersonalInformationTrainingInstitute.fssai"><img src="website/images/assessor.png"></a>
                                                 </div>
 
                                             </div>

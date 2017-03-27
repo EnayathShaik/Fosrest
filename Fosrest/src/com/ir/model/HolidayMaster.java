@@ -14,6 +14,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
+
+
 @Entity
 @Table(name="HolidayMaster")
 public class HolidayMaster {
@@ -23,8 +25,7 @@ public class HolidayMaster {
 	@Column(name= "holidayId")
 	private int holidayId;
 	
-	@NotEmpty(message="Holiday Can not be blank.")
-	@NotBlank
+	@NotEmpty(message = "Please enter holidayDate .")
 	private String holidayDate;
 	
 	@NotEmpty(message="Holiday Reasons not be blank.")

@@ -19,6 +19,8 @@ import com.ir.model.FeedbackMaster;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.Utility;
@@ -85,4 +87,10 @@ public interface TraineeDAO {
 	public List getAttendanceDeatilsByID(String id);
 	
 	public String savePaymentStatus(String data);
+	
+	public String addPersonalInfoTrainee(PersonalInformationTrainee p);
+	
+	public String addPersonalInfoTrainer(PersonalInformationTrainer p);
+	
+	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p);
 }

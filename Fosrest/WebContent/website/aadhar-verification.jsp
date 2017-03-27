@@ -10,7 +10,6 @@
     
     function isAadharCorrect(){
     	var aadhar=document.getElementById( "AadharNumber" ).value;
-    	//dateP,name
     	var DOB = $("#dateP").val();
     	localStorage.setItem("DOB", DOB);
     	
@@ -106,24 +105,7 @@
             </div>
             
             <div class="col-xs-12" style="margin-top: 20px; text-align: -webkit-center;"> <a href="registrationFormTrainee.fssai" onclick="return isAadharCorrect();" class="btn login-btn" data-toggle="modal" data-target="#aadhar-verification" style="width: 40%;">Verify</a> 
-              
-              <!-- details of modal -->
-              <!-- <div id="aadhar-verification" class="modal fade" role="dialog">
-                <div class="modal-dialog"> 
-                  
-                  Modal content
-                  <div class="modal-content">
-                    <div class="modal-body"> <br>
-                      <p class="text-center" style="color: green;">Aadhar Verified!</p>
-                      <p class="text-center">Your Linked Bank Account : State Bank of India</p>
-                      button
-                      <div class="col-xs-12 text-center"> <a href="registrationFormTrainee.fssai" class="btn login-btn">Ok</a> </div>
-                      <br>
-                      <br>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
+
             </div>
             
           </fieldset>

@@ -1,6 +1,5 @@
 package com.ir.model;
-
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,52 +9,82 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Email;
 
+
+
 @Entity
-@Table(name="personalInformationTrainee")
+@Table(name="personalinformationtrainee")
 public class PersonalInformationTrainee {
-	
-	
 	@Id
-    @Column(name="personalInformationTraineeId")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private int id;
+	@Column(name = "ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "PERSONALINFOTRAINEE_SEQ", allocationSize=1, initialValue=1)
+	private int id;
 	
+
+	private String userType;
 	
-	 private String checkCompany;
-	 private String checkPermanent;
-	 public String getCaste() {
-		return caste;
-	}
-
-	public void setCaste(String caste) {
-		this.caste = caste;
-	}
-
-	private String caste;
-	 
-	 
+	@NotNull
+	@Size(min=1, max=50 , message="Select Induction Trainee")
+	private String inductionTrainee;
+	
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
 	
 	
+	public LoginDetails getLoginDetails() {
+		return loginDetails;
+	}
+
+	public void setLoginDetails(LoginDetails loginDetails) {
+		this.loginDetails = loginDetails;
+	}
+
+	private String empID;
 	
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="title")
-	private Title title;
+	
+	
+	 public String getEmpID() {
+		return empID;
+	}
+
+	public void setEmpID(String empID) {
+		this.empID = empID;
+	}
+
+
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public String getInductionTrainee() {
+		return inductionTrainee;
+	}
+
+	public void setInductionTrainee(String inductionTrainee) {
+		this.inductionTrainee = inductionTrainee;
+	}
+
+
+	private String title;
+	
 	
 	@NotNull
+	
 	@Size(min=1, max=50 , message="enter your FirstName")
-	private String FirstName;
+	private String firstName;
 
 	private String MiddleName;
 	@NotNull
@@ -66,7 +95,7 @@ public class PersonalInformationTrainee {
 	@Size(min=1, max=100 , message="enter your father's name")
 	private String FatherName;
 	
-	private String registrationNo;
+	
 	
 	@NotNull
 	@Size(min=12, max=12 , message="enter your AadharNumber ")
@@ -89,11 +118,11 @@ public class PersonalInformationTrainee {
 	@Size(min=1, max=100 , message="enter your ResidentialAddress2")
 	private String ResidentialLine2;
 
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="resState")
-	private State resState;
+	
+	private String resState;
 
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="resCity")
-	private City resCity;
+	
+	private String resCity;
 	
 	@NotNull
 	@Size(min=1, max=6 , message="enter your Pincode")
@@ -105,48 +134,27 @@ public class PersonalInformationTrainee {
 	@Size(min=1, max=100 , message="enter your correspondenceAddress1")
 	private String correspondenceAddress2;
 
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="correspondenceState")
-	private State correspondenceState;
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="correspondenceCity")
-	private City correspondenceCity;
+	
+	private String correspondenceState;
+	
+	private String correspondenceCity;
 	@NotNull @Size(min=6, max=6 , message="* enter your correspondencePincode ")
 	private String correspondencePincode;
 
 
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="residentialDistrict")
-	private District residentialDistrict;
+	private String residentialDistrict;
 	@NotNull
 
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="correspondenceDistrict")
-	private District correspondenceDistrict;
-	//@NotNull
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="bussDistrict")
-	private District bussDistrict;
-	
-    
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="KindOfBusiness")
-	private KindOfBusiness KindOfBusiness;
-	//@NotNull @Size(min=1, max=50 , message="enter your Designation")
-	//@Column(name="designation")
-	private String Designation;
-	//@NotNull  @Size(min=1, max=100 , message="enter your BusinessAddress ")
-	private String BusinessAddressLine1;
-	//@NotNull  @Size(min=1, max=100 , message="enter your BusinessAddress ")
-	private String BusinessAddressLine2;
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="bussCity")
-	private City bussCity;
-	//@NotNull @Size(min=6, max=6 , message="enter your bussPincode")
-	private String bussPincode;
-	// @Size(min=1, max=50 )
-	private String CompanyName;
 
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="bussState")
-	private State bussState;
+	private String correspondenceDistrict;
+
+	
+	
 
 	@Transient
 	private boolean checkCorrespondence;
 	
-	public PersonalInformationTrainee(){}
+	
 
 	public int getId() {
 		return id;
@@ -156,47 +164,21 @@ public class PersonalInformationTrainee {
 		this.id = id;
 	}
 
-	
-
-	public String getCheckCompany() {
-		return checkCompany;
-	}
-
-	public void setCheckCompany(String checkCompany) {
-		this.checkCompany = checkCompany;
-	}
-
-	public String getCheckPermanent() {
-		return checkPermanent;
-	}
-
-	public void setCheckPermanent(String checkPermanent) {
-		this.checkPermanent = checkPermanent;
-	}
-
-	public LoginDetails getLoginDetails() {
-		return loginDetails;
-	}
-
-	public void setLoginDetails(LoginDetails loginDetails) {
-		this.loginDetails = loginDetails;
-	}
-
-	public Title getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(Title title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getMiddleName() {
@@ -204,7 +186,7 @@ public class PersonalInformationTrainee {
 	}
 
 	public void setMiddleName(String middleName) {
-		MiddleName = middleName;
+		this.MiddleName = middleName;
 	}
 
 	public String getLastName() {
@@ -212,7 +194,7 @@ public class PersonalInformationTrainee {
 	}
 
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.LastName = lastName;
 	}
 
 	public String getFatherName() {
@@ -220,23 +202,17 @@ public class PersonalInformationTrainee {
 	}
 
 	public void setFatherName(String fatherName) {
-		FatherName = fatherName;
+		this.FatherName = fatherName;
 	}
 
-	public String getRegistrationNo() {
-		return registrationNo;
-	}
 
-	public void setRegistrationNo(String registrationNo) {
-		this.registrationNo = registrationNo;
-	}
 
 	public String getAadharNumber() {
 		return AadharNumber;
 	}
 
 	public void setAadharNumber(String aadharNumber) {
-		AadharNumber = aadharNumber;
+		this.AadharNumber = aadharNumber;
 	}
 
 	public String getEmail() {
@@ -244,7 +220,7 @@ public class PersonalInformationTrainee {
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.Email = email;
 	}
 
 	public String getDob() {
@@ -284,7 +260,7 @@ public class PersonalInformationTrainee {
 	}
 
 	public void setResidentialLine1(String residentialLine1) {
-		ResidentialLine1 = residentialLine1;
+		this.ResidentialLine1 = residentialLine1;
 	}
 
 	public String getResidentialLine2() {
@@ -292,22 +268,22 @@ public class PersonalInformationTrainee {
 	}
 
 	public void setResidentialLine2(String residentialLine2) {
-		ResidentialLine2 = residentialLine2;
+		this.ResidentialLine2 = residentialLine2;
 	}
 
-	public State getResState() {
+	public String getResState() {
 		return resState;
 	}
 
-	public void setResState(State resState) {
+	public void setResState(String resState) {
 		this.resState = resState;
 	}
 
-	public City getResCity() {
+	public String getResCity() {
 		return resCity;
 	}
 
-	public void setResCity(City resCity) {
+	public void setResCity(String resCity) {
 		this.resCity = resCity;
 	}
 
@@ -335,19 +311,19 @@ public class PersonalInformationTrainee {
 		this.correspondenceAddress2 = correspondenceAddress2;
 	}
 
-	public State getCorrespondenceState() {
+	public String getCorrespondenceState() {
 		return correspondenceState;
 	}
 
-	public void setCorrespondenceState(State correspondenceState) {
+	public void setCorrespondenceState(String correspondenceState) {
 		this.correspondenceState = correspondenceState;
 	}
 
-	public City getCorrespondenceCity() {
+	public String getCorrespondenceCity() {
 		return correspondenceCity;
 	}
 
-	public void setCorrespondenceCity(City correspondenceCity) {
+	public void setCorrespondenceCity(String correspondenceCity) {
 		this.correspondenceCity = correspondenceCity;
 	}
 
@@ -359,95 +335,23 @@ public class PersonalInformationTrainee {
 		this.correspondencePincode = correspondencePincode;
 	}
 
-	public District getResidentialDistrict() {
+	public String getResidentialDistrict() {
 		return residentialDistrict;
 	}
 
-	public void setResidentialDistrict(District residentialDistrict) {
+	public void setResidentialDistrict(String residentialDistrict) {
 		this.residentialDistrict = residentialDistrict;
 	}
 
-	public District getCorrespondenceDistrict() {
+	public String getCorrespondenceDistrict() {
 		return correspondenceDistrict;
 	}
 
-	public void setCorrespondenceDistrict(District correspondenceDistrict) {
+	public void setCorrespondenceDistrict(String correspondenceDistrict) {
 		this.correspondenceDistrict = correspondenceDistrict;
 	}
 
-	public District getBussDistrict() {
-		return bussDistrict;
-	}
-
-	public void setBussDistrict(District bussDistrict) {
-		this.bussDistrict = bussDistrict;
-	}
-
-	public KindOfBusiness getKindOfBusiness() {
-		return KindOfBusiness;
-	}
-
-	public void setKindOfBusiness(KindOfBusiness kindOfBusiness) {
-		KindOfBusiness = kindOfBusiness;
-	}
-
-	public String getDesignation() {
-		return Designation;
-	}
-
-	public void setDesignation(String designation) {
-		Designation = designation;
-	}
-
-	public String getBusinessAddressLine1() {
-		return BusinessAddressLine1;
-	}
-
-	public void setBusinessAddressLine1(String businessAddressLine1) {
-		BusinessAddressLine1 = businessAddressLine1;
-	}
-
-	public String getBusinessAddressLine2() {
-		return BusinessAddressLine2;
-	}
-
-	public void setBusinessAddressLine2(String businessAddressLine2) {
-		BusinessAddressLine2 = businessAddressLine2;
-	}
-
-	public City getBussCity() {
-		return bussCity;
-	}
-
-	public void setBussCity(City bussCity) {
-		this.bussCity = bussCity;
-	}
-
-	public String getBussPincode() {
-		return bussPincode;
-	}
-
-	public void setBussPincode(String bussPincode) {
-		this.bussPincode = bussPincode;
-	}
-
-	public String getCompanyName() {
-		return CompanyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		CompanyName = companyName;
-	}
-
-	public State getBussState() {
-		return bussState;
-	}
-
-	public void setBussState(State bussState) {
-		this.bussState = bussState;
-	}
-
-	public boolean isCheckCorrespondence() {
+		public boolean isCheckCorrespondence() {
 		return checkCorrespondence;
 	}
 
@@ -464,33 +368,10 @@ public class PersonalInformationTrainee {
 	public void setSteps(int steps) {
 		this.steps = steps;
 	}
-	
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date")
-	private Date createDate;
 
-	@UpdateTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modify_date")
-	private Date modifyDate;
-
-	public Date getCreateDate() {
-		return createDate;
+	@Override
+	public String toString() {
+		return "PersonalInformationTrainee [id=" + id + ", FirstName=" + firstName + ", mobile=" + mobile +  ", Email="+Email +" , AadharNumber="+AadharNumber+   "]";
 	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getModifyDate() {
-		return modifyDate;
-	}
-
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
-	}
-
-	
 	
 }

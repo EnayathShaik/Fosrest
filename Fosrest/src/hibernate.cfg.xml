@@ -45,6 +45,7 @@
 		<mapping class="com.ir.model.ManageAssessmentAgency"/>
 		<mapping class="com.ir.model.PersonalInformationTrainee"/>
 		<mapping class="com.ir.model.PersonalInformationTrainer"/>
+		<mapping class="com.ir.model.PersonalInformationTrainingInstitute"/>
 		<mapping class="com.ir.model.PersonalInformationTrainingPartner"/>
 		<mapping class="com.ir.model.KindOfBusiness"/>
 		<mapping class="com.ir.model.Title"/>

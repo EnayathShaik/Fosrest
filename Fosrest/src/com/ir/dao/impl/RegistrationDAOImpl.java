@@ -186,8 +186,8 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		loginDetails.setProfileId(3);
 		PersonalInformationTrainee personalInformationTrainee = new PersonalInformationTrainee();
 		personalInformationTrainee.setSteps(0);
-		personalInformationTrainee.setTitle(tt);
-		personalInformationTrainee.setCaste(registrationFormTrainee.getCaste() == null ? "" : registrationFormTrainee.getCaste().trim());
+		//personalInformationTrainee.setTitle(tt);
+		//personalInformationTrainee.setCaste(registrationFormTrainee.getCaste() == null ? "" : registrationFormTrainee.getCaste().trim());
 		personalInformationTrainee.setAadharNumber(registrationFormTrainee.getAadharNumber() == null ? "" : registrationFormTrainee.getAadharNumber().trim());
 		personalInformationTrainee.setFirstName(registrationFormTrainee.getFirstName() == null ? "" : registrationFormTrainee.getFirstName().trim());
 		personalInformationTrainee.setLastName(registrationFormTrainee.getLastName() == null ? "" : registrationFormTrainee.getLastName().trim());
@@ -198,9 +198,9 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		personalInformationTrainee.setMobile(registrationFormTrainee.getMobile() == null ? "" : registrationFormTrainee.getMobile().trim());		
 		personalInformationTrainee.setCorrespondenceAddress1(registrationFormTrainee.getCorrespondenceAddress1() == null ? "" : registrationFormTrainee.getCorrespondenceAddress1().trim());
 		personalInformationTrainee.setCorrespondenceAddress2(registrationFormTrainee.getCorrespondenceAddress2() == null ? "" : registrationFormTrainee.getCorrespondenceAddress2().trim());
-		personalInformationTrainee.setCorrespondenceState(cs);
-		personalInformationTrainee.setCorrespondenceDistrict(cd);
-		personalInformationTrainee.setCorrespondenceCity(cc);
+	//	personalInformationTrainee.setCorrespondenceState(cs);
+		//personalInformationTrainee.setCorrespondenceDistrict(cd);
+		//personalInformationTrainee.setCorrespondenceCity(cc);
 		personalInformationTrainee.setCorrespondencePincode(registrationFormTrainee.getCorrespondencePincode() == null ? "" : registrationFormTrainee.getCorrespondencePincode().trim());
 		personalInformationTrainee.setFatherName(registrationFormTrainee.getFatherName() == null ? "" : registrationFormTrainee.getFatherName().trim());
 		
@@ -209,26 +209,26 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		if(correspondADD){
 			personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getCorrespondenceAddress1() == null ? "" : registrationFormTrainee.getCorrespondenceAddress1().trim());
 			personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getCorrespondenceAddress2() == null ? "" : registrationFormTrainee.getCorrespondenceAddress2().trim());
-			personalInformationTrainee.setResState(cs);
-			personalInformationTrainee.setResCity(cc);
-			personalInformationTrainee.setResidentialDistrict(cd);
+		//	personalInformationTrainee.setResState(cs);
+		//	personalInformationTrainee.setResCity(cc);
+		//  personalInformationTrainee.setResidentialDistrict(cd);
 			personalInformationTrainee.setResPincode(registrationFormTrainee.getCorrespondencePincode() == null ? "" : registrationFormTrainee.getCorrespondencePincode().trim());
-			personalInformationTrainee.setCheckPermanent("true");
+			//personalInformationTrainee.setCheckPermanent("true");
 		}else{
 			personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getResidentialAddressLine1() == null ? "" : registrationFormTrainee.getResidentialAddressLine1().trim());
 			personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getResidentialAddressLine2() == null ? "" : registrationFormTrainee.getResidentialAddressLine2().trim());
-			personalInformationTrainee.setResState(ps);
-			personalInformationTrainee.setResCity(pc);
-			personalInformationTrainee.setResidentialDistrict(pd);
+		//	personalInformationTrainee.setResState(ps);
+		//	personalInformationTrainee.setResCity(pc);
+		//	personalInformationTrainee.setResidentialDistrict(pd);
 			personalInformationTrainee.setResPincode(registrationFormTrainee.getResPincode() == null ? "" : registrationFormTrainee.getResPincode().trim());
-			personalInformationTrainee.setCheckPermanent("false");
+			//personalInformationTrainee.setCheckPermanent("false");
 			}
 		
 		if(registrationFormTrainee.getKindOfBusiness()==6){
 			System.out.println(" IF Kind of business");
 			registrationFormTrainee.setKindOfBusiness(6);
 			KindOfBusiness koFbusiness = new KindOfBusiness(6, "Not in business");
-			personalInformationTrainee.setKindOfBusiness(koFbusiness);
+			/*personalInformationTrainee.setKindOfBusiness(koFbusiness);
 			personalInformationTrainee.setDesignation(null);
 			personalInformationTrainee.setCompanyName(null);
 			personalInformationTrainee.setRegistrationNo(null);
@@ -237,27 +237,27 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			personalInformationTrainee.setBussCity(null);
 			personalInformationTrainee.setBussDistrict(null);
 			personalInformationTrainee.setBussState(null);
-			personalInformationTrainee.setBussPincode(null);
+			personalInformationTrainee.setBussPincode(null);*/
 			
 		}
 		else{
-			System.out.println("Else Kind of business");
+		/*	System.out.println("Else Kind of business");
 			personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation() == null ? "" : registrationFormTrainee.getDesignation().trim());
 			personalInformationTrainee.setKindOfBusiness(kob);
 			personalInformationTrainee.setCompanyName(registrationFormTrainee.getCompanyName() == null ? "" : registrationFormTrainee.getCompanyName().trim());
 			personalInformationTrainee.setRegistrationNo(registrationFormTrainee.getRegistrationNo() == null ? "" : registrationFormTrainee.getRegistrationNo().trim());
-			
+			*/
 
 			if(checkCompany){
-				personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getCorrespondenceAddress1() == null ? "" : registrationFormTrainee.getCorrespondenceAddress1().trim());
+				/*personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getCorrespondenceAddress1() == null ? "" : registrationFormTrainee.getCorrespondenceAddress1().trim());
 				personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getCorrespondenceAddress2() == null ? "" : registrationFormTrainee.getCorrespondenceAddress2().trim());
 				personalInformationTrainee.setBussCity(cc);
 				personalInformationTrainee.setBussDistrict(cd);
 				personalInformationTrainee.setBussState(cs);
 				personalInformationTrainee.setBussPincode(registrationFormTrainee.getCorrespondencePincode() == null ? "" : registrationFormTrainee.getCorrespondencePincode().trim());
-				personalInformationTrainee.setCheckCompany("true");
+				personalInformationTrainee.setCheckCompany("true");*/
 			}else{
-				personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getBusinessAddressLine1() == null ? "" : registrationFormTrainee.getBusinessAddressLine1().trim());
+	/*			personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getBusinessAddressLine1() == null ? "" : registrationFormTrainee.getBusinessAddressLine1().trim());
 				personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getBusinessAddressLine2() == null ? "" : registrationFormTrainee.getBusinessAddressLine2().trim());
 				personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation() == null ? "" : registrationFormTrainee.getDesignation().trim());
 			
@@ -265,10 +265,10 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 				personalInformationTrainee.setBussCity(bc);
 				personalInformationTrainee.setBussDistrict(bd);
 				personalInformationTrainee.setBussPincode(registrationFormTrainee.getBussPincode() == null ? "" : registrationFormTrainee.getBussPincode().trim());
-				personalInformationTrainee.setCheckCompany("false");
+				personalInformationTrainee.setCheckCompany("false");*/
 	}
 		}
-		personalInformationTrainee.setLoginDetails(loginDetails);
+	//	personalInformationTrainee.setLoginDetails(loginDetails);
 		session.save(personalInformationTrainee);
 		return passwordString+"&"+nextSequenceUserID;
 	}

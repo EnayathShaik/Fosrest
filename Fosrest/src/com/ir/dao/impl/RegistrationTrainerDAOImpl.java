@@ -106,7 +106,7 @@ private Title title;
 				}catch(NoSuchAlgorithmException e){
 					System.out.println( " no such algo exception error catch ");
 				}
-				String uniqueID = pageLoadService.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
+				/*		String uniqueID = pageLoadService.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
 				
 				State ps = getState(registrationFormTrainer.getTrainingCenterPermanentState()); 
 				State cs = getState(registrationFormTrainer.getTrainingCenterCorrespondenceState());
@@ -226,13 +226,13 @@ private Title title;
 							session.save(courseEnrolledSpecial);
 						}
 					}
-				}
-				return passwordString+"&"+uniqueID;
+				}*/
+				return passwordString+"&";
 	}
 	
 	@Override
 	public String updatetrainer(RegistrationFormTrainer registrationFormTrainer, int id) {
-		State ps = getState(registrationFormTrainer.getTrainingCenterPermanentState()); 
+		/*State ps = getState(registrationFormTrainer.getTrainingCenterPermanentState()); 
 		State cs = getState(registrationFormTrainer.getTrainingCenterCorrespondenceState());
 		District pd = getDistrict(registrationFormTrainer.getTrainingCenterPermanentDistrict());
 		District cd = getDistrict(registrationFormTrainer.getTrainingCenterCorrespondenceDistrict());
@@ -254,7 +254,7 @@ private Title title;
 		personalinformationtrainer.setTrainingCenterPermanentEmail(registrationFormTrainer.getTrainingCenterPermanentEmail());
 		personalinformationtrainer.setTrainingCenterPermanentMobile(registrationFormTrainer.getTrainingCenterPermanentMobile());
 		personalinformationtrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode());
-		/*
+		
 		
 		personalinformationtrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterPermanentLine1());
 		personalinformationtrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterPermanentLine2());
@@ -262,7 +262,7 @@ private Title title;
 		personalinformationtrainer.setPermanentdistrict(pd);
 		personalinformationtrainer.setPermanentcity(pc);
 		personalinformationtrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterPermanentPincode());
-		*/
+		
 		boolean checkPeramanent=registrationFormTrainer.isCheckPermanent();
 		if(checkPeramanent){
 			personalinformationtrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
@@ -297,7 +297,7 @@ private Title title;
 		personalinformationtrainer.setTrainingSessionWishToConduct(registrationFormTrainer.getTrainingSessionWishToConduct());
 		personalinformationtrainer.setGender(registrationFormTrainer.getGender());
 		personalinformationtrainer.setExpInFoodSafefyTimeYear(registrationFormTrainer.getExpInFoodSafefyTimeYear());
-		s.update(personalinformationtrainer);
+		s.update(personalinformationtrainer);*/
 		return "updated";
 		}
 

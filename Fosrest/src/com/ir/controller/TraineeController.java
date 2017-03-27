@@ -8,11 +8,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,6 +48,7 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.State;
+import com.ir.model.SubjectMaster;
 import com.ir.model.Title;
 import com.ir.model.TraineeAssessment;
 import com.ir.model.TrainingPartner;
@@ -54,7 +57,9 @@ import com.ir.service.AssessmentService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
 import com.ir.util.Profiles;
+import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
+import com.zentect.list.constant.ListConstant;
 
 @Controller
 @SessionAttributes
@@ -76,7 +81,7 @@ public class TraineeController {
 	@Autowired
 	@Qualifier("assessmentService")
 	public AssessmentService assessmentService;
-	
+	ListConstant lst =  new ListConstant();  
 	// Rishi 
 	@RequestMapping(value="/contactTrainee" , method=RequestMethod.GET)
 	public String contactTrainee(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee, Model model , HttpSession session){
@@ -351,8 +356,8 @@ public class TraineeController {
 			 if(userId > 0){
 					PersonalInformationTrainee personalInformationTrainee = traineeService.FullDetail(userId);
 					Title title = new Title();
-					title.setTitleId(personalInformationTrainee.getTitle().getTitleId());
-					title.setTitleName(personalInformationTrainee.getTitle().getTitleName());
+					//title.setTitleId(personalInformationTrainee.getTitle().getTitleId());
+					//title.setTitleName(personalInformationTrainee.getTitle().getTitleName());
 					List<Title> titleList = new ArrayList<Title>();
 					titleList.add(title);
 					List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
@@ -715,6 +720,62 @@ public class TraineeController {
 		out.flush();
 		
 	}
+	
+	
+	
+	/***************************************************** FOSREST*********************************************************************/
+	
+	
+	
+	/**
+	 * @author Jyoti Mekal
+	 */
+	@RequestMapping(value = "/PersonalInformationTrainee", method = RequestMethod.GET)
+	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model) {
+			System.out.println("PersonalInformationTrainee");
+			Map<String , String> userType = lst.userTypeMap;			
+			Map<String , String> titleMap = lst.titleMap;
+			//titleMap
+			model.addAttribute("userType",userType);
+			model.addAttribute("titleMap",titleMap);
+			model.addAttribute("PersonalInformationTrainee", new PersonalInformationTrainee());
+		return "PersonalInformationTrainee";
+	}
+
+	
+	
+	@RequestMapping(value = "/PersonalInformationTraineeAdd", method = RequestMethod.POST)
+	public String addPersonalInfoTrainee(@Valid @ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee p , BindingResult result, Model model){
+		System.out.println("Add PersonalInformationTrainee");
+		String personalInformationTrainee = null;
+
+		try{
+			System.out.println(" city "+p.getCorrespondenceCity());
+			personalInformationTrainee = this.traineeService.addPersonalInfoTrainee(p);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		if(personalInformationTrainee != null && ! personalInformationTrainee.equalsIgnoreCase("")){
+			String[] all = personalInformationTrainee.split("&");
+			model.addAttribute("id" , all[1]);
+			model.addAttribute("pwd" , all[0]);
+			new Thread(new Mail("Thanks", p.getEmail(), all[1], all[0], p.getFirstName())).start();
+			return "welcome";
+		}else{
+			return "PersonalInformationTrainee";
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

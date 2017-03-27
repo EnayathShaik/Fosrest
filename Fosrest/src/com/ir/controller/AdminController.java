@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
@@ -1345,9 +1345,10 @@ public class AdminController {
  
 	
 	@RequestMapping(value= "/HolidayMaster/add", method = RequestMethod.POST) 
-	public String addHolidayMaster(@ModelAttribute("HolidayMaster") HolidayMaster p , BindingResult result){
+	public String addHolidayMaster(@Valid @ModelAttribute("HolidayMaster") HolidayMaster p , BindingResult result){
 	System.out.println(result.hasErrors());	
-if (result.hasErrors()) {
+	
+		if (result.hasErrors()) {
 			
 			new ZLogger("HolidayMaster", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
 			new ZLogger("HolidayMaster", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");

@@ -20,12 +20,12 @@ import org.hibernate.validator.constraints.Email;
 
 
 @Entity
-@Table(name="personalinformationtrainer")
-public class PersonalInformationTrainer {
+@Table(name="personalinformationtrainingInstitute")
+public class PersonalInformationTrainingInstitute {
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
-	@SequenceGenerator(name = "id_Sequence", sequenceName = "PERSONALINFOTRAINEE_SEQ", allocationSize=1, initialValue=1)
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "PERSONALINFOTRAINIGINSTITUTE_SEQ", allocationSize=1, initialValue=1)
 	private int id;
 	
 
@@ -74,50 +74,65 @@ public class PersonalInformationTrainer {
 	
 	@NotNull
 	
-	@Size(min=1, max=50 , message="enter your FirstName")
-	private String firstName;
+	@Size(min=1, max=50 , message="enter your Training Center Name")
+	private String trainingCenterName;
 
-	private String MiddleName;
-	@NotNull
-	@Size(min=1, max=50 , message="enter your LastName ")
-	private String  LastName ;
+	private int trainingPartnerName;
+	
 
-	@NotNull
-	@Size(min=1, max=100 , message="enter your father's name")
-	private String FatherName;
-	
-	
-	
-	@NotNull
-	@Size(min=12, max=12 , message="enter your AadharNumber ")
-	private String  AadharNumber ; 
+
 	 @Email
 	private String Email;
-	@NotNull
-	private String dob;
+	
 
 	@Size(max=10 , message = "enter your mobile Number")
 	private String mobile;
-	@NotNull
-	private String gender;
-	@NotNull 
-	private int profileCode;
-	@NotNull
-	@Size(min=1, max=100 , message="enter your ResidentialAddress1 ")
-	private String ResidentialLine1; 
-	@NotNull 
-	@Size(min=1, max=100 , message="enter your ResidentialAddress2")
-	private String ResidentialLine2;
+	
 
-	
-	private String resState;
 
+
+	private String pan;
 	
-	private String resCity;
+	private String firstName;
+	private String middleName;
+	private String lastName;
 	
-	@NotNull
-	@Size(min=1, max=6 , message="enter your Pincode")
-	private String resPincode;
+	
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPan() {
+		return pan;
+	}
+
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
+
+
+
 	@NotNull
 	@Size(min=1, max=100 , message="enter your correspondenceAddress1")
 	private String correspondenceAddress1;
@@ -160,48 +175,7 @@ public class PersonalInformationTrainer {
 		this.title = title;
 	}
 
-	
-	public String getFirstName() {
-		return firstName;
-	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getMiddleName() {
-		return MiddleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.MiddleName = middleName;
-	}
-
-	public String getLastName() {
-		return LastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.LastName = lastName;
-	}
-
-	public String getFatherName() {
-		return FatherName;
-	}
-
-	public void setFatherName(String fatherName) {
-		this.FatherName = fatherName;
-	}
-
-
-
-	public String getAadharNumber() {
-		return AadharNumber;
-	}
-
-	public void setAadharNumber(String aadharNumber) {
-		this.AadharNumber = aadharNumber;
-	}
 
 	public String getEmail() {
 		return Email;
@@ -211,13 +185,7 @@ public class PersonalInformationTrainer {
 		this.Email = email;
 	}
 
-	public String getDob() {
-		return dob;
-	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
+	
 
 	public String getMobile() {
 		return mobile;
@@ -225,62 +193,6 @@ public class PersonalInformationTrainer {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public int getProfileCode() {
-		return profileCode;
-	}
-
-	public void setProfileCode(int profileCode) {
-		this.profileCode = profileCode;
-	}
-
-	public String getResidentialLine1() {
-		return ResidentialLine1;
-	}
-
-	public void setResidentialLine1(String residentialLine1) {
-		this.ResidentialLine1 = residentialLine1;
-	}
-
-	public String getResidentialLine2() {
-		return ResidentialLine2;
-	}
-
-	public void setResidentialLine2(String residentialLine2) {
-		this.ResidentialLine2 = residentialLine2;
-	}
-
-	public String getResState() {
-		return resState;
-	}
-
-	public void setResState(String resState) {
-		this.resState = resState;
-	}
-
-	public String getResCity() {
-		return resCity;
-	}
-
-	public void setResCity(String resCity) {
-		this.resCity = resCity;
-	}
-
-	public String getResPincode() {
-		return resPincode;
-	}
-
-	public void setResPincode(String resPincode) {
-		this.resPincode = resPincode;
 	}
 
 	public String getCorrespondenceAddress1() {
@@ -350,21 +262,7 @@ public class PersonalInformationTrainer {
 	public void setSteps(int steps) {
 		this.steps = steps;
 	}
-	
-	
-	private String ExpBackground;
-	
-	
-
-	public String getExpBackground() {
-		return ExpBackground;
-	}
-
-	public void setExpBackground(String expBackground) {
-		ExpBackground = expBackground;
-	}
-
-	
+		
 	private int sessWishToConduct;
 	
 	
@@ -375,59 +273,104 @@ public class PersonalInformationTrainer {
 	public void setSessWishToConduct(int sessWishToConduct) {
 		this.sessWishToConduct = sessWishToConduct;
 	}
-	
-	
-	private int expInYear;
-	private int expInMonth;
-	
-	
 
-	public int getExpInYear() {
-		return expInYear;
+	
+	private String trainingType;
+	
+	private int seatingCapacity;
+	
+	
+	
+	public int getSeatingCapacity() {
+		return seatingCapacity;
 	}
 
-	public void setExpInYear(int expInYear) {
-		this.expInYear = expInYear;
+	public void setSeatingCapacity(int seatingCapacity) {
+		this.seatingCapacity = seatingCapacity;
 	}
 
-	public int getExpInMonth() {
-		return expInMonth;
+	public String getTrainingCenterName() {
+		return trainingCenterName;
 	}
 
-	public void setExpInMonth(int expInMonth) {
-		this.expInMonth = expInMonth;
+	public void setTrainingCenterName(String trainingCenterName) {
+		this.trainingCenterName = trainingCenterName;
 	}
 
-	private String AssociatedWithAnyTrainingInstitute;
-	
-	
-	
-	
-	public String getAssociatedWithAnyTrainingInstitute() {
-		return AssociatedWithAnyTrainingInstitute;
+	public int getTrainingPartnerName() {
+		return trainingPartnerName;
 	}
 
-	public void setAssociatedWithAnyTrainingInstitute(
-			String associatedWithAnyTrainingInstitute) {
-		AssociatedWithAnyTrainingInstitute = associatedWithAnyTrainingInstitute;
+	public void setTrainingPartnerName(int trainingPartnerName) {
+		this.trainingPartnerName = trainingPartnerName;
 	}
 
-	private int noOfSessionConducted;
-	
-	
-	
-	
-	public int getNoOfSessionConducted() {
-		return noOfSessionConducted;
+	public String getTrainingType() {
+		return trainingType;
 	}
 
-	public void setNoOfSessionConducted(int noOfSessionConducted) {
-		this.noOfSessionConducted = noOfSessionConducted;
+	public void setTrainingType(String trainingType) {
+		this.trainingType = trainingType;
+	}
+
+	
+	private int noOfInHouseTrainer;
+	
+	private int noOfYearExp;
+	
+	private boolean availableTVProjector;
+	
+	private boolean availableInHouseTrainer;
+	
+	
+	
+	
+	
+	public int getNoOfInHouseTrainer() {
+		return noOfInHouseTrainer;
+	}
+
+	public void setNoOfInHouseTrainer(int noOfInHouseTrainer) {
+		this.noOfInHouseTrainer = noOfInHouseTrainer;
+	}
+
+	public int getNoOfYearExp() {
+		return noOfYearExp;
+	}
+
+	public void setNoOfYearExp(int noOfYearExp) {
+		this.noOfYearExp = noOfYearExp;
+	}
+
+	public boolean isAvailableTVProjector() {
+		return availableTVProjector;
+	}
+
+	public void setAvailableTVProjector(boolean availableTVProjector) {
+		this.availableTVProjector = availableTVProjector;
+	}
+
+	public boolean isAvailableInHouseTrainer() {
+		return availableInHouseTrainer;
+	}
+
+	public void setAvailableInHouseTrainer(boolean availableInHouseTrainer) {
+		this.availableInHouseTrainer = availableInHouseTrainer;
+	}
+
+	private String tpName;
+	
+	public String getTpName() {
+		return tpName;
+	}
+
+	public void setTpName(String tpName) {
+		this.tpName = tpName;
 	}
 
 	@Override
 	public String toString() {
-		return "PersonalInformationTrainee [id=" + id + ", FirstName=" + firstName + ", mobile=" + mobile +  ", Email="+Email +" , AadharNumber="+AadharNumber+   "]";
+		return "PersonalInformationTrainee [id=" + id  + ", mobile=" + mobile +  ", Email="+Email +   "]";
 	}
 	
 }

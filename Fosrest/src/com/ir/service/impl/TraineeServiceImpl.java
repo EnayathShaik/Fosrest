@@ -23,6 +23,8 @@ import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Utility;
 import com.ir.service.TraineeService;
@@ -272,4 +274,31 @@ public class TraineeServiceImpl implements TraineeService {
 		// TODO Auto-generated method stub
 		return traineeDAO.savePaymentStatus(data);
 	}	
-}
+	
+	//addPersonalInfoTrainee
+	
+	
+	
+	@Override
+	@Transactional
+	public String addPersonalInfoTrainee(PersonalInformationTrainee  p) {
+		// TODO Auto-generated method stub
+		return traineeDAO.addPersonalInfoTrainee(p);
+	}
+	
+	
+	@Override
+	@Transactional
+	public String addPersonalInfoTrainer(PersonalInformationTrainer  p) {
+		// TODO Auto-generated method stub
+		return traineeDAO.addPersonalInfoTrainer(p);
+	}
+	
+//	/addPersonalInfoTrainingInstitute
+	
+	@Override
+	@Transactional
+	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute  p) {
+		// TODO Auto-generated method stub
+		return traineeDAO.addPersonalInfoTrainingInstitute(p);
+	}}
