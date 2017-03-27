@@ -148,15 +148,15 @@
 								<div class="col-md-3 xs-hidden"></div>
 								<div class="col-md-6 col-xs-12">
 									<div class="col-md-4 col-xs-12" align="center">
-										<a href="trainee.fssai"><img
+										<a href="PersonalInformationTrainee.fssai"><img
 											src="website/images/trainee.png"></a>
 									</div>
 									<div class="col-md-4 col-xs-12" align="center">
-										<a href="trainer.fssai"><img
+										<a href="PersonalInformationTrainer.fssai"><img
 											src="website/images/trainer.png"></a>
 									</div>
 									<div class="col-md-4 col-xs-12" align="center">
-										<a href="assessor.fssai"><img
+										<a href="PersonalInformationTrainingInstitute.fssai"><img
 											src="website/images/assessor.png"></a>
 									</div>
 
