@@ -24,9 +24,11 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
+import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.District;
+import com.ir.model.DistrictMaster;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.ManageTrainingPartner;
@@ -35,7 +37,9 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.RegionMaster;
 import com.ir.model.State;
+import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -213,5 +217,40 @@ public interface AdminService {
 	
 	public List<TrainingSchedule> listTrainingSchedule();
 	
+	
+	
+	
+	public void addStateMaster(StateMaster p);
+	public void updateStateMaster(StateMaster p);
+	public void removeStateMaster(int id);
+	public StateMaster getStateMasterById(int id);
+	public List<StateMaster> listStateMaster();
+
+	
+	
+	public void addDistrictMaster(DistrictMaster p);
+	public void updateDistrictMaster(DistrictMaster p);
+	public void removeDistrictMaster(int id);
+	public DistrictMaster getDistrictMasterById(int id);
+	public List<DistrictMaster> listDistrictMaster();
+	
+	
+	
+	
+	public void addCityMaster(CityMaster p);
+	public void updateCityMaster(CityMaster p);
+	public void removeCityMaster(int id);
+	public CityMaster getCityMasterById(int id);
+	public List<CityMaster> listCityMaster();
+	
+	
+	
+	
+
+	public void addRegionMaster(RegionMaster p);
+	public void updateRegionMaster(RegionMaster p);
+	public void removeRegionMaster(int id);
+	public RegionMaster getRegionMasterById(int id);
+	public List<RegionMaster> listRegionMaster();
 }
 

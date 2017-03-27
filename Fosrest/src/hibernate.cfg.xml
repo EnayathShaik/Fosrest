@@ -73,7 +73,10 @@
 		<mapping class="com.ir.model.UnitMaster"/>
 		<mapping class="com.ir.model.ModuleMaster"/>
 		<mapping class="com.ir.model.SubjectMaster"/>
-		
+		<mapping class="com.ir.model.StateMaster"/>
+		<mapping class="com.ir.model.DistrictMaster"/>
+		<mapping class="com.ir.model.CityMaster"/>
+		<mapping class="com.ir.model.RegionMaster"/>
 <!-- 		<mapping class="com.ir.form.AssessmentAnswerCriteria"/> -->
 <!-- 		<mapping class="com.ir.model.CourseEnrolledUser"/> -->
 		<!-- 

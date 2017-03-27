@@ -163,8 +163,10 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.UnitMaster</value>
 				<value>com.ir.model.ModuleMaster</value>
 				<value>com.ir.model.SubjectMaster</value>
-				
-				
+				<value>com.ir.model.StateMaster</value>
+				<value>com.ir.model.DistrictMaster</value>
+				<value>com.ir.model.CityMaster</value>
+				<value>com.ir.model.RegionMaster</value>
 <!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
 				<!-- 
 				

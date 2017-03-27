@@ -306,7 +306,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			// TODO Auto-generated method stub
 			System.out.println("Page Load DAOImpl process start in district name ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from District where status = 'A'  and stateId =  '"+stateId+"'");
+			Query query = session.createQuery("from DistrictMaster where status = 'A'  and stateId =  '"+stateId+"'");
 			List districtList = query.list();
 			System.out.println("district  ************* list dao     :"+ districtList);
 			return districtList;
@@ -316,7 +316,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<City> loadCity(String distId) {
 			System.out.println("Page Load DAOImpl process start in city ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from City  where status = 'A' and districtid= '"+distId+"'");
+			Query query = session.createQuery("from CityMaster  where status = 'A' and districtid= '"+distId+"'");
 			List listCity = query.list();
 			System.out.println("city  ************* list dao     :"+ listCity);
 			return listCity;

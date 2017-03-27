@@ -44,10 +44,12 @@ import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestion;
 import com.ir.model.AssessorUserManagement;
 import com.ir.model.City;
+import com.ir.model.CityMaster;
 import com.ir.model.ContactTraineee;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.District;
+import com.ir.model.DistrictMaster;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.LoginDetails;
@@ -60,7 +62,9 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.Region;
+import com.ir.model.RegionMaster;
 import com.ir.model.State;
+import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingSchedule;
@@ -1944,9 +1948,293 @@ public class AdminDAOImpl implements AdminDAO {
 				bean.setDuration((String) li[6]);
 				list.add(bean);
 			}
-System.out.println("list "+list);
+
 			return list;
 		}
+
+		
+
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For State Master
+		 */
+		
+		@Override
+		public void addStateMaster(StateMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getStateId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateStateMaster(StateMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeStateMaster
+		
+		@Override
+		public void removeStateMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			StateMaster p = (StateMaster) session.load(StateMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public StateMaster getStateMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from StateMaster where StateId="+id);
+		
+		List<StateMaster> StateMasterList = query.list();
+		StateMaster hm = StateMasterList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<StateMaster> listStateMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listStateMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<StateMaster> mccList = session.createQuery("from StateMaster").list();
+			for (StateMaster p : mccList) {
+				System.out.println("State List::" + p);
+			}
+			return mccList;
+		}
+		
+		
+		
+		
+		
+		
+
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For District Master
+		 */
+		
+		@Override
+		public void addDistrictMaster(DistrictMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("DistrictMaster "+p.getDistrictId());
+			StateMaster sm =  getStateMasterById(p.getStateMaster().getStateId());
+			p.setStateMaster(sm);
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateDistrictMaster(DistrictMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeDistrictMaster
+		
+		@Override
+		public void removeDistrictMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			DistrictMaster p = (DistrictMaster) session.load(DistrictMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public DistrictMaster getDistrictMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from DistrictMaster where DistrictId="+id);
+		
+		List<DistrictMaster> DistrictMasterList = query.list();
+		DistrictMaster hm = DistrictMasterList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<DistrictMaster> listDistrictMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listDistrictMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<DistrictMaster> mccList = session.createQuery("from DistrictMaster").list();
+			for (DistrictMaster p : mccList) {
+				System.out.println("District List::" + p);
+			}
+			return mccList;
+		}
+		
+		
+		
+		
+		
+		
+		
+
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For City Master
+		 */
+		
+		@Override
+		public void addCityMaster(CityMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("CityMaster "+p.getCityId());
+			DistrictMaster dm =  getDistrictMasterById(p.getDistrictMaster().getDistrictId());
+			p.setDistrictMaster(dm);
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateCityMaster(CityMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeCityMaster
+		
+		@Override
+		public void removeCityMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			CityMaster p = (CityMaster) session.load(CityMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public CityMaster getCityMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from CityMaster where CityId="+id);
+		
+		List<CityMaster> CityMasterList = query.list();
+		CityMaster hm = CityMasterList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<CityMaster> listCityMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listCityMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<CityMaster> mccList = session.createQuery("from CityMaster").list();
+			for (CityMaster p : mccList) {
+				System.out.println("City List::" + p);
+			}
+			return mccList;
+		}
+		
+		
+		
+		
+		
+
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Region Master
+		 */
+		
+		@Override
+		public void addRegionMaster(RegionMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMaster "+p.getId());
+			CityMaster cm =  getCityMasterById(p.getCityMaster().getCityId());
+			p.setCityMaster(cm);
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateRegionMaster(RegionMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeRegionMaster
+		
+		@Override
+		public void removeRegionMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			RegionMaster p = (RegionMaster) session.load(RegionMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public RegionMaster getRegionMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from RegionMaster where RegionId="+id);
+		
+		List<RegionMaster> RegionMasterList = query.list();
+		RegionMaster hm = RegionMasterList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<RegionMaster> listRegionMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listRegionMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<RegionMaster> mccList = session.createQuery("from RegionMaster").list();
+			for (RegionMaster p : mccList) {
+				System.out.println("Region List::" + p);
+			}
+			return mccList;
+		}
+		
+		
 		
 		
 }

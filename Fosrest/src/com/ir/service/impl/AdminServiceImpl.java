@@ -29,9 +29,11 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
+import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.District;
+import com.ir.model.DistrictMaster;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.ManageTrainingPartner;
@@ -40,7 +42,9 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.RegionMaster;
 import com.ir.model.State;
+import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -666,6 +670,215 @@ public class AdminServiceImpl implements AdminService {
 	public List<TrainingSchedule> listTrainingSchedule() {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listTrainingSchedule();
+	}
+	
+	
+	
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For State Master
+	 */
+	
+	@Override
+	@Transactional
+	public void addStateMaster(StateMaster p){
+		 this.adminDAO.addStateMaster(p);
+		
+	}
+	
+	//updateStateMaster
+	@Override
+	@Transactional
+	public void updateStateMaster(StateMaster p){
+		 this.adminDAO.updateStateMaster(p);
+		
+	}
+	
+	//removeStateMaster
+	
+	@Override
+	@Transactional
+	public void removeStateMaster(int id){
+		 this.adminDAO.removeStateMaster(id);
+		
+	}
+	
+//	/getStateMasterById
+	@Override
+	@Transactional
+	public StateMaster getStateMasterById(int id){
+		return this.adminDAO.getStateMasterById(id);
+		
+	}
+	
+	//listStateMaster
+	
+	@Override
+	@Transactional
+	public List<StateMaster> listStateMaster() {
+		// TODO Auto-generated method stub
+		return this.adminDAO.listStateMaster();
+	}
+	
+	
+	
+	
+	
+	
+
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For District Master
+	 */
+	
+	@Override
+	@Transactional
+	public void addDistrictMaster(DistrictMaster p){
+		 this.adminDAO.addDistrictMaster(p);
+		
+	}
+	
+	//updateDistrictMaster
+	@Override
+	@Transactional
+	public void updateDistrictMaster(DistrictMaster p){
+		 this.adminDAO.updateDistrictMaster(p);
+		
+	}
+	
+	//removeDistrictMaster
+	
+	@Override
+	@Transactional
+	public void removeDistrictMaster(int id){
+		 this.adminDAO.removeDistrictMaster(id);
+		
+	}
+	
+//	/getDistrictMasterById
+	@Override
+	@Transactional
+	public DistrictMaster getDistrictMasterById(int id){
+		return this.adminDAO.getDistrictMasterById(id);
+		
+	}
+	
+	//listDistrictMaster
+	
+	@Override
+	@Transactional
+	public List<DistrictMaster> listDistrictMaster() {
+		// TODO Auto-generated method stub
+		return this.adminDAO.listDistrictMaster();
+	}
+	
+
+	
+	
+	
+	
+	
+
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For City Master
+	 */
+	
+	@Override
+	@Transactional
+	public void addCityMaster(CityMaster p){
+		 this.adminDAO.addCityMaster(p);
+		
+	}
+	
+	//updateCityMaster
+	@Override
+	@Transactional
+	public void updateCityMaster(CityMaster p){
+		 this.adminDAO.updateCityMaster(p);
+		
+	}
+	
+	//removeCityMaster
+	
+	@Override
+	@Transactional
+	public void removeCityMaster(int id){
+		 this.adminDAO.removeCityMaster(id);
+		
+	}
+	
+//	/getCityMasterById
+	@Override
+	@Transactional
+	public CityMaster getCityMasterById(int id){
+		return this.adminDAO.getCityMasterById(id);
+		
+	}
+	
+	//listCityMaster
+	
+	@Override
+	@Transactional
+	public List<CityMaster> listCityMaster() {
+		// TODO Auto-generated method stub
+		return this.adminDAO.listCityMaster();
+	}
+	
+	
+	
+	
+	
+	
+
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For Region Master
+	 */
+	
+	@Override
+	@Transactional
+	public void addRegionMaster(RegionMaster p){
+		 this.adminDAO.addRegionMaster(p);
+		
+	}
+	
+	//updateRegionMaster
+	@Override
+	@Transactional
+	public void updateRegionMaster(RegionMaster p){
+		 this.adminDAO.updateRegionMaster(p);
+		
+	}
+	
+	//removeRegionMaster
+	
+	@Override
+	@Transactional
+	public void removeRegionMaster(int id){
+		 this.adminDAO.removeRegionMaster(id);
+		
+	}
+	
+//	/getRegionMasterById
+	@Override
+	@Transactional
+	public RegionMaster getRegionMasterById(int id){
+		return this.adminDAO.getRegionMasterById(id);
+		
+	}
+	
+	//listRegionMaster
+	
+	@Override
+	@Transactional
+	public List<RegionMaster> listRegionMaster() {
+		// TODO Auto-generated method stub
+		return this.adminDAO.listRegionMaster();
 	}
 	
 	

@@ -306,10 +306,10 @@
                                     </li>
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="stateMaster.fssai" class="clr">State</a></li>
-                                            <li><a href="districtMaster.fssai" class="clr">District</a></li>
-                                            <li><a href="cityMaster.fssai" class="clr">City</a></li>                                            
-                                            <li><a href="regionMappingMaster.fssai" class="clr">Region Mapping</a></li>
+                                            <li><a href="StateMaster.fssai" class="clr">State</a></li>
+                                            <li><a href="DistrictMaster.fssai" class="clr">District</a></li>
+                                            <li><a href="CityMaster.fssai" class="clr">City</a></li>                                            
+                                            <li><a href="RegionMaster.fssai" class="clr">Region Mapping</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="">Training Partner List</a></li>

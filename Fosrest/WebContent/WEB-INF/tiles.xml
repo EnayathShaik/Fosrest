@@ -952,5 +952,52 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/personalInformationTrainingInstitute.jsp" />
 	</definition>
+	
+		<definition name="StateMaster" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/StateMaster.jsp" />
+	</definition>
+
+	<definition name="StateMaster/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/StateMaster.jsp" />
+	</definition>
+	
+	
+		<definition name="DistrictMaster" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/DistrictMaster.jsp" />
+	</definition>
+
+	<definition name="DistrictMaster/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/DistrictMaster.jsp" />
+	</definition>
+	
+
+		<definition name="CityMaster" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/CityMaster.jsp" />
+	</definition>
+
+	<definition name="CityMaster/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/CityMaster.jsp" />
+	</definition>
+	
+	
+		
+		
+	
+		<definition name="RegionMaster" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/RegionMaster.jsp" />
+	</definition>
+
+	<definition name="RegionMaster/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/RegionMaster.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
