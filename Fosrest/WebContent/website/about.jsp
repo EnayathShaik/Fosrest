@@ -16,7 +16,9 @@
     <!--/.carousel-->
 </section>
 <!--/#main-slider-->
-<section id="feature" class="tp-mrg">
+
+
++<section id="feature" class="tp-mrg">
     <div class="container">
         <div class="row">
             <div class="features">

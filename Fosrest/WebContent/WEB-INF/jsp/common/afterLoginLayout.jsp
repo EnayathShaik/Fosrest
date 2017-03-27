@@ -10,6 +10,11 @@
 
     <!-- stylesheet -->
     <link href="website/afterLogin/css/bootstrap.css" rel="stylesheet" />
+
+    <link href="website/afterLogin/css/demo_table.css" rel="stylesheet" type="text/css" />
+	<link href="website/afterLogin/css/demo_table_jui.css" rel="stylesheet" type="text/css" />
+	<link href="website/afterLogin/css/jquery-ui-1.8.24.custom.css" rel="stylesheet" type="text/css" media="all" />
+
     <link href="website/afterLogin/css/custom.css" rel="stylesheet" />
     <link href="website/afterLogin/css/font-awesome.css" rel="stylesheet" />
     <link href="website/afterLogin/css/aos.css" rel="stylesheet" />
@@ -21,6 +26,9 @@
     <script src="website/js/jquery-2.1.0.min.js"></script>
     <script src="website/js/flatpickr.js"></script>
     <script src="website/js/JsBarcode.code128.min.js"></script>
+   
+   
+      <!--  <script src="website/afterLogin/js/owl.carousel.js"></script>   -->
     <style>
         #news .item img {
             display: block;

@@ -110,7 +110,7 @@
                                                             <fieldset>
                                             <legend>Training Schedule</legend>
                                             <ct:if test="${!empty listHolidayMaster}">
-                                            <table class="table table-bordered table-responsive">
+                                            <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                 <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>

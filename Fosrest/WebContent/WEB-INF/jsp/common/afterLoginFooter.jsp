@@ -29,8 +29,25 @@
     <!-- carousel -->
     <script src="website/afterLogin/js/owl.carousel.js"></script>
     <script>
+    
+    
         $(document).ready(function () {
-        	
+        	var table = $(document).ready(function () {
+                $("#datatablesfosrest").dataTable({
+                    "bAutoWidth": false
+                    , "bProcessing": true
+                    , "iDisplayLength": 5
+                    , "bPaginate": true
+                    , "sPaginationType": "full_numbers"
+                    , "bJQueryUI": true
+                    , "dom": 'Bfrtip'
+                    , "buttons": [
+                        'csv',
+
+                    ],
+    				"colReorder" : true,
+                });
+            });
         	
         	
         	$(function(){
@@ -65,6 +82,9 @@
 
         });
     </script>
+      <script src="website/afterLogin/js/jquery-1.12.3.js" type="text/javascript"></script> 
+    <script src="website/afterLogin/js/jquery.dataTables.min.js" type="text/javascript"></script> 
+    
 
     <!-- gallery -->
     <script src="website/afterLogin/js/jquery.swipebox.js"></script>

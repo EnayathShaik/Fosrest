@@ -122,6 +122,9 @@
     <script src="js/owl.carousel.js"></script>
     <script>
         $(document).ready(function () {
+        	
+        	
+        	
 
             $("#news").owlCarousel({
 
