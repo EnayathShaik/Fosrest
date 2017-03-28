@@ -122,7 +122,7 @@
                                     </div>
                                   	<cf:select path="trainingPartnerName" class="form-control" onchange="getTPName()">
 													<cf:option value="0" label="Select Training Partner" />
-													<cf:options items="${trainingParterMap}" />
+													<cf:options items="${listTrainingPartner}" itemValue="trainingPartnerId" itemLabel="trainingPartnerName" />
 												</cf:select>
                                 </div>
                                 <div class="form-group">

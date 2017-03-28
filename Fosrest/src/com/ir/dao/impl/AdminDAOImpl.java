@@ -3,6 +3,7 @@ package com.ir.dao.impl;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -60,6 +61,7 @@ import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.Region;
 import com.ir.model.RegionMaster;
@@ -67,6 +69,7 @@ import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TrainingCalendar;
+import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
@@ -1925,7 +1928,62 @@ public class AdminDAOImpl implements AdminDAO {
 			return mccList;
 		}
 
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Training Schedule Master
+		 */
 		
+		@Override
+		public void addTrainingSchedule(TrainingSchedule p) {
+			// TODO Auto-generated method stub
+			System.out.println("TrainingSchedule "+p.getTrainingScheduleId() );
+			//getModuleMasterById
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateTrainingSchedule(TrainingSchedule p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeTrainingSchedule
+		
+		@Override
+		public void removeTrainingSchedule(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			/*TrainingSchedule p = (TrainingSchedule) session.load(TrainingSchedule.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}*/
+			System.out.println(" id  "+id);
+			String sql="update TrainingSchedule set isActive='I' where trainingScheduleId="+id;
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+			
+		}
+		
+		@Override
+		public TrainingSchedule getTrainingScheduleById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from TrainingSchedule where trainingScheduleId="+id);
+		
+		List<TrainingSchedule> TrainingScheduleList = query.list();
+		TrainingSchedule hm = TrainingScheduleList.get(0);
+			return hm; 
+			
+			
+		}
 		
 		
 		
@@ -1933,25 +1991,28 @@ public class AdminDAOImpl implements AdminDAO {
 		public List<TrainingSchedule> listTrainingSchedule() {
 			// TODO Auto-generated method stub
 			System.out.println("inside listTrainingSchedule");
-			TrainingSchedule bean = new TrainingSchedule();
-			List<TrainingSchedule> list = new ArrayList<TrainingSchedule>();
 			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> lst = session.createSQLQuery("select cast('Refresher' as varchar(20)) as trainingType , cast('AO' as varchar(20)) as UserType , cast('Foundation' as varchar(20) ) as trainingPhase , 1 as day , cast('Inaugration' as varchar(20)) as unit ,cast('Introduction to Participants' as varchar(20)) as module , cast('2 hrs' as varchar(20)) as duration").list();
-			for (Object[] li : lst ) {
-				
-				bean.setTrainingType((String) li[0]);
-				bean.setUserType((String) li[1]);
-				bean.setTrainingPhase((String) li[2]);
-				bean.setDay(((int)li[3]));
-				bean.setUnit((String) li[4]);
-				bean.setModule((String)li[5]);
-				bean.setDuration((String) li[6]);
-				list.add(bean);
+			List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' ").list();
+			for (TrainingSchedule p : mccList) {
+				System.out.println("TrainingSchedule List::" + p);
 			}
-
-			return list;
+			return mccList;
 		}
 
+		
+		//listTrainingInstitude
+		@Override
+		public List<PersonalInformationTrainingInstitute> listTrainingInstitude() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listSubjectMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<PersonalInformationTrainingInstitute> mccList = session.createQuery("from PersonalInformationTrainingInstitute").list();
+			for (PersonalInformationTrainingInstitute p : mccList) {
+				System.out.println("PersonalInformationTrainingInstitute List::" + p);
+			}
+			return mccList;
+		}
+	
 		
 
 		/**
@@ -2234,7 +2295,73 @@ public class AdminDAOImpl implements AdminDAO {
 			return mccList;
 		}
 		
+	
 		
+		
+
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Training Partner Master
+		 */
+		
+		@Override
+		public void addTrainingPartner(TrainingPartner p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getTrainingPartnerId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateTrainingPartner(TrainingPartner p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeTrainingPartner
+		
+		@Override
+		public void removeTrainingPartner(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			TrainingPartner p = (TrainingPartner) session.load(TrainingPartner.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public TrainingPartner getTrainingPartnerById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from TrainingPartner where trainingPartnerId="+id);
+		
+		List<TrainingPartner> TrainingPartnerList = query.list();
+		TrainingPartner hm = TrainingPartnerList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<TrainingPartner> listTrainingPartner() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTrainingPartner");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<TrainingPartner> mccList = session.createQuery("from TrainingPartner").list();
+			for (TrainingPartner p : mccList) {
+				System.out.println("Holiday List::" + p);
+			}
+			return mccList;
+		}
 		
 		
 }

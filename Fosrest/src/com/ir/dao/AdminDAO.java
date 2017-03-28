@@ -1,5 +1,4 @@
 package com.ir.dao;
-
 import java.util.List;
 
 import com.ir.bean.common.IntStringBean;
@@ -35,11 +34,13 @@ import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
@@ -190,7 +191,20 @@ public interface AdminDAO {
 		
 		public List<SubjectMaster> listSubjectMaster();
 		
+		
+		
+		
+		
+		public void addTrainingSchedule(TrainingSchedule p);
+		
+		public void updateTrainingSchedule(TrainingSchedule p);
+		
+		public void removeTrainingSchedule(int id);
+		
+		public TrainingSchedule getTrainingScheduleById(int id);
 		public List<TrainingSchedule> listTrainingSchedule();
+		
+		public List<PersonalInformationTrainingInstitute> listTrainingInstitude();
 		
 		
 		
@@ -244,4 +258,19 @@ public interface AdminDAO {
 		public RegionMaster getRegionMasterById(int id);
 		
 		public List<RegionMaster> listRegionMaster();
+		
+		
+		//Trainingpartner Master
+		
+				public void addTrainingPartner(TrainingPartner p);
+				
+				public void updateTrainingPartner(TrainingPartner p);
+				
+				public void removeTrainingPartner(int id);
+				
+				public TrainingPartner getTrainingPartnerById(int id);
+				
+				public List<TrainingPartner> listTrainingPartner();
+		
+		
 }

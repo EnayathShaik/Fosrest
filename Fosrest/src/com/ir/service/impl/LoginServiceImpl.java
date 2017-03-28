@@ -18,7 +18,7 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.TrainingPartner;
+import com.ir.model.TrainingPartner_old;
 import com.ir.service.LoginService;
 
 @Service("LoginService")
@@ -52,8 +52,8 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	@Transactional
-	public List<TrainingPartner> trainingPartnerCountList() {
-		List<TrainingPartner> trainingPartnerCountList= loginDAO.trainingPartnerCountList();
+	public List<TrainingPartner_old> trainingPartnerCountList() {
+		List<TrainingPartner_old> trainingPartnerCountList= loginDAO.trainingPartnerCountList();
 		return trainingPartnerCountList;
 	}
 

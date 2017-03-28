@@ -77,10 +77,8 @@
 		<mapping class="com.ir.model.DistrictMaster"/>
 		<mapping class="com.ir.model.CityMaster"/>
 		<mapping class="com.ir.model.RegionMaster"/>
-<!-- 		<mapping class="com.ir.form.AssessmentAnswerCriteria"/> -->
-<!-- 		<mapping class="com.ir.model.CourseEnrolledUser"/> -->
-		<!-- 
-		<mapping class="com.ir.model.AssessorUserManagement"/>
-		 -->
+		<mapping class="com.ir.model.TrainingPartner"/>
+		<mapping class="com.ir.model.TrainingSchedule"/>
+		
 	</session-factory>
 </hibernate-configuration>

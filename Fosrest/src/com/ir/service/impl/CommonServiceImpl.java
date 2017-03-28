@@ -65,4 +65,13 @@ public class CommonServiceImpl implements CommonService{
 		String modeOfTraining = commonDao.getCourseTrainingMode(courseName);
 		return modeOfTraining;
 	}
+	
+	//getTrainingInstitude
+	
+	@Override
+	@Transactional
+	public List getTrainingInstitude(String trainingPartner){
+		List  trainingInstitude = commonDao.getTrainingInstitude( trainingPartner);
+		return trainingInstitude;
+	}
 }

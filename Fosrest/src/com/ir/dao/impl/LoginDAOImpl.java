@@ -23,7 +23,7 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.TrainingPartner;
+import com.ir.model.TrainingPartner_old;
 import com.ir.util.EncryptionPasswordANDVerification;
 
 @Repository("LoginDAO")
@@ -124,11 +124,11 @@ public class LoginDAOImpl implements LoginDAO{
 
 	
 	@Override
-	public List<TrainingPartner> trainingPartnerCountList() {
+	public List<TrainingPartner_old> trainingPartnerCountList() {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select trainingpartnername , count(trainingpartnername) from managetrainingpartner group by trainingpartnername";
 		Query query = session.createSQLQuery(sql);
-		List<TrainingPartner> trainingPartnerCountList = query.list();
+		List<TrainingPartner_old> trainingPartnerCountList = query.list();
 		return trainingPartnerCountList;
 	}
 

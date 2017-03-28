@@ -27,8 +27,9 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
-import com.ir.model.TrainingPartner;
+import com.ir.model.TrainingPartner_old;
 import com.ir.model.Utility;
+import com.ir.service.AdminService;
 import com.ir.service.AssessmentAgencyService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
@@ -48,6 +49,14 @@ public class TrainerController {
 	@Autowired
 	@Qualifier("pageLoadService")
 	PageLoadService pageLoadService;
+	
+	
+	
+	//
+	
+	@Autowired
+	@Qualifier("adminService")
+	AdminService adminService;
 	
 	@Autowired
 	@Qualifier("trainerContactService")
@@ -109,7 +118,7 @@ public class TrainerController {
 	
 	@RequestMapping(value="/admit-cardtrainer" , method=RequestMethod.GET)
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
+			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner_old tp,BindingResult result ,HttpSession session, Model model ){
 		if(session.getAttribute("loginIdUnique")!=null){
 			String loginid=session.getAttribute("loginIdUnique").toString();
 			AdmitCardForm admitCardForm=traineeService.generateTrainerAdmitCard(Integer.parseInt(loginid),Profiles.TRAINER.value());
@@ -238,7 +247,7 @@ public class TrainerController {
 			model.addAttribute("ExpInYearMap",opt);
 			model.addAttribute("ExpInMonthMap",opt);
 			model.addAttribute("trainingParterMap",trainingParterMap);
-			
+			model.addAttribute("listTrainingPartner", adminService.listTrainingPartner());
 			model.addAttribute("PersonalInformationTrainingInstitute", new PersonalInformationTrainingInstitute());
 		return "PersonalInformationTrainingInstitute";
 	}

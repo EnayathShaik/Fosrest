@@ -1,5 +1,6 @@
 package com.ir.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -36,11 +37,13 @@ import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
@@ -216,7 +219,11 @@ public interface AdminService {
 	
 	
 	public List<TrainingSchedule> listTrainingSchedule();
-	
+	public void addTrainingSchedule(TrainingSchedule p);
+	public void updateTrainingSchedule(TrainingSchedule p);
+	public void removeTrainingSchedule(int id);
+	public TrainingSchedule getTrainingScheduleById(int id);
+	public List<PersonalInformationTrainingInstitute> listTrainingInstitude();
 	
 	
 	
@@ -252,5 +259,20 @@ public interface AdminService {
 	public void removeRegionMaster(int id);
 	public RegionMaster getRegionMasterById(int id);
 	public List<RegionMaster> listRegionMaster();
+	
+	
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * All Add Edit delete for Holiday Master
+	 */
+	
+	
+	public void addTrainingPartner(TrainingPartner p);
+	public void updateTrainingPartner(TrainingPartner p);
+	public void removeTrainingPartner(int id);
+	public TrainingPartner getTrainingPartnerById(int id);
+	public List<TrainingPartner> listTrainingPartner();
+	
 }
 

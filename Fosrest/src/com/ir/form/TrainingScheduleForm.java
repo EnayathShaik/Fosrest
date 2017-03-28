@@ -20,20 +20,20 @@ import org.hibernate.annotations.ColumnDefault;
 
 public class TrainingScheduleForm {
 	
-	
+	private int trainingScheduleId;
 	private String userType;
 	private String trainingType;
 	private String trainingPhase;
-	private String status;
+	private String trainingInstitudeStatus;
 	private int day;
 	private String unit;
 	private String module;
 	private String duration;
+	private String trainingStartDate;
+	private String trainingEndDate;
+	private int trainingPartner;
+	private int trainingInstitude;
 	
-	
-	
-	
-
 	public TrainingScheduleForm() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -41,6 +41,20 @@ public class TrainingScheduleForm {
 
 
 	
+
+	public int getTrainingScheduleId() {
+		return trainingScheduleId;
+	}
+
+
+
+
+	public void setTrainingScheduleId(int trainingScheduleId) {
+		this.trainingScheduleId = trainingScheduleId;
+	}
+
+
+
 
 	public String getUserType() {
 		return userType;
@@ -75,23 +89,6 @@ public class TrainingScheduleForm {
 	public void setTrainingPhase(String trainingPhase) {
 		this.trainingPhase = trainingPhase;
 	}
-
-
-
-	
-
-	public String getStatus() {
-		return status;
-	}
-
-
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-
-
 
 	public int getDay() {
 		return day;
@@ -144,6 +141,76 @@ public class TrainingScheduleForm {
 
 	public void setDuration(String duration) {
 		this.duration = duration;
+	}
+
+
+
+
+	public String getTrainingInstitudeStatus() {
+		return trainingInstitudeStatus;
+	}
+
+
+
+
+	public void setTrainingInstitudeStatus(String trainingInstitudeStatus) {
+		this.trainingInstitudeStatus = trainingInstitudeStatus;
+	}
+
+
+
+
+	public String getTrainingStartDate() {
+		return trainingStartDate;
+	}
+
+
+
+
+	public void setTrainingStartDate(String trainingStartDate) {
+		this.trainingStartDate = trainingStartDate;
+	}
+
+
+
+
+	public String getTrainingEndDate() {
+		return trainingEndDate;
+	}
+
+
+
+
+	public void setTrainingEndDate(String trainingEndDate) {
+		this.trainingEndDate = trainingEndDate;
+	}
+
+
+
+
+	public int getTrainingPartner() {
+		return trainingPartner;
+	}
+
+
+
+
+	public void setTrainingPartner(int trainingPartner) {
+		this.trainingPartner = trainingPartner;
+	}
+
+
+
+
+	public int getTrainingInstitude() {
+		return trainingInstitude;
+	}
+
+
+
+
+	public void setTrainingInstitude(int trainingInstitude) {
+		this.trainingInstitude = trainingInstitude;
 	}
 
 

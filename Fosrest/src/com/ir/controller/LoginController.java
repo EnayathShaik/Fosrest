@@ -24,7 +24,7 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.TrainingPartner;
+import com.ir.model.TrainingPartner_old;
 import com.ir.service.LoginService;
 import com.ir.service.TrainingPartnerService;
 import com.ir.service.UpdateService;
@@ -140,7 +140,7 @@ public class LoginController {
 		session.setAttribute("loginIdUnique", loginDetails.getId());
 		if(loginDetails!=null && loginDetails.getProfileId()==1 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			model.addAttribute("loginDetails", loginDetails);
-			List<TrainingPartner> trainingPartnerList = trainingPartnerList();
+			List<TrainingPartner_old> trainingPartnerList = trainingPartnerList();
 			session.setAttribute("trainingPartnerList", trainingPartnerList);
 			session.setAttribute("loginUser", loginDetails);  
 			session.setAttribute("logId",loginDetails.getLoginId());
@@ -328,8 +328,8 @@ public class LoginController {
 	}
 	
 	//@ModelAttribute("trainingPartnerCountList")
-	public List<TrainingPartner> trainingPartnerList(){
-		List<TrainingPartner> trainingPartnerList = null;
+	public List<TrainingPartner_old> trainingPartnerList(){
+		List<TrainingPartner_old> trainingPartnerList = null;
 		try{
 			trainingPartnerList = loginService.trainingPartnerCountList();
 		}catch(Exception e){

@@ -2,91 +2,90 @@ package com.ir.model;
 
 
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
+
 
 @Entity
-@Table(name="trainingPartner")
+@Table(name="TrainingPartner")
 public class TrainingPartner {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name= "tpId")
-	private int tpId;
-	private String tpName;
-	private int tpRating;
-	private Date createdDate;
-	private int createdBy;
-
+	@Column(name= "trainingPartnerId")
+	private int trainingPartnerId;
+	
+	@NotEmpty(message = "Please enter Training Partner .")
+	private String trainingPartnerName;
+	
+	@NotEmpty(message="Website  Link can not be blank.")
+	private String tpWebLink;
+	
+	private String status;
+	
+	
 	public TrainingPartner() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getTpId() {
-		return tpId;
+
+
+	public int getTrainingPartnerId() {
+		return trainingPartnerId;
 	}
-	public void setTpId(int tpId) {
-		this.tpId = tpId;
+
+
+	public void setTrainingPartnerId(int trainingPartnerId) {
+		this.trainingPartnerId = trainingPartnerId;
 	}
-	public String getTpName() {
-		return tpName;
+
+
+
+
+
+	public String getStatus() {
+		return status;
 	}
-	public void setTpName(String tpName) {
-		this.tpName = tpName;
+
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	public int getTpRating() {
-		return tpRating;
+
+
+	public String getTrainingPartnerName() {
+		return trainingPartnerName;
 	}
-	public void setTpRating(int tpRating) {
-		this.tpRating = tpRating;
+
+
+	public void setTrainingPartnerName(String trainingPartnerName) {
+		this.trainingPartnerName = trainingPartnerName;
 	}
-	public Date getCreatedDate() {
-		return createdDate;
+
+
+	public String getTpWebLink() {
+		return tpWebLink;
 	}
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+
+
+	public void setTpWebLink(String tpWebLink) {
+		this.tpWebLink = tpWebLink;
 	}
-	public int getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(int createdBy) {
-		this.createdBy = createdBy;
-	}
+
+
 	
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date")
-	private Date createDate;
 
-	@UpdateTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modify_date")
-	private Date modifyDate;
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getModifyDate() {
-		return modifyDate;
-	}
-
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
-	}
+	
+	
+	
+ 
 }

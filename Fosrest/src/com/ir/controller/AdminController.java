@@ -37,6 +37,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 
 
+
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.constantes.TableLink;
@@ -82,6 +83,7 @@ import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
@@ -103,6 +105,8 @@ public class AdminController {
 	@Autowired
 	@Qualifier("pageLoadService")
 	PageLoadService pageLoadService;
+	
+	
 	
 	ListConstant lst =  new ListConstant();   
 
@@ -1611,13 +1615,60 @@ public String TrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingS
 		Map<String , String> userType = lst.userTypeMap;			
 		Map<String , String> trainingType = lst.trainingTypeMap;
 		Map<String , String> trainingPhase = lst.trainingPhaseMap;
+		Map<String , String> userStatusMap = lst.userStatusMap;
 		model.addAttribute("userType",userType);
 		model.addAttribute("trainingType",trainingType);
 		model.addAttribute("trainingPhase" , trainingPhase);
+		model.addAttribute("userStatusMap" , userStatusMap);
 		model.addAttribute("TrainingScheduleForm", new TrainingScheduleForm());
-	//	model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
+		model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
+		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
+		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
+		
+		
+		
 	return "TrainingSchedule";
 }
+
+@RequestMapping(value= "/TrainingSchedule/add", method = RequestMethod.POST) 
+public String addTrainingSchedule(@ModelAttribute("TrainingSchedule") TrainingSchedule p){
+	System.out.println("p.getId() "+p.getTrainingScheduleId());
+	if(p.getTrainingScheduleId() == 0){
+		//new person, add it
+		this.adminService.addTrainingSchedule(p);
+	}else{
+		//existing person, call update
+		this.adminService.updateTrainingSchedule(p);
+	}
+	System.out.println("after insert");
+	return "redirect:/TrainingSchedule.fssai";
+}
+
+@RequestMapping("/TrainingSchedule/remove/{id}")
+public String removeTrainingSchedule(@PathVariable("id") int id){
+	
+this.adminService.removeTrainingSchedule(id);
+return "redirect:/TrainingSchedule.fssai";
+}
+
+
+@RequestMapping(value="/TrainingSchedule/edit/{id}" , method=RequestMethod.POST)
+@ResponseBody
+public void editTrainingSchedule(@PathVariable("id") int id ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("/TrainingSchedule/edit","/TrainingSchedule/edit............" + id  , "AdminController.java");
+	
+	TrainingSchedule hm = this.adminService.getTrainingScheduleById(id);
+	//List courseList = adminService.searchFeedbackMaster(data);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(hm); 
+	System.out.println("newList "+newList);
+	out.write(newList);
+	out.flush();
+	
+}
+
+
 
 
 
@@ -1923,6 +1974,74 @@ public void editRegionMaster(@PathVariable("id") int id ,@RequestBody GenerateCo
 	out.flush();
 	
 }
+
+
+
+
+/**
+ * @author Jyoti Mekal
+ *
+ * All Add Edit delete for TrainingPartner Master
+ */
+ 
+	@RequestMapping(value = "/TrainingPartner", method = RequestMethod.GET)
+public String listTrainingPartner(@ModelAttribute("TrainingPartner") TrainingPartner trainingPartner ,Model model) {
+	System.out.println("listTrainingPartner");
+		model.addAttribute("TrainingPartner", new TrainingPartner());
+		model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
+	return "TrainingPartner";
+}
+
+
+@RequestMapping(value= "/TrainingPartner/add", method = RequestMethod.POST) 
+public String addTrainingPartnerMaster(@Valid @ModelAttribute("TrainingPartner") TrainingPartner p , BindingResult result){
+System.out.println(result.hasErrors());	
+
+	if (result.hasErrors()) {
+		
+		new ZLogger("TrainingPartnerMaster", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+		new ZLogger("TrainingPartnerMaster", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+		return "redirect:/TrainingPartnerMaster.fssai";
+	}
+	
+	System.out.println("p.getId() "+p.getTrainingPartnerId());
+	if(p.getTrainingPartnerId() == 0){
+		//new person, add it
+		this.adminService.addTrainingPartner(p);
+	}else{
+		//existing person, call update
+		this.adminService.updateTrainingPartner(p);
+	}
+	System.out.println("after insert");
+	return "redirect:/TrainingPartner.fssai";
+}
+
+@RequestMapping("/TrainingPartner/remove/{id}")
+public String removeTrainingPartnerMaster(@PathVariable("id") int id){
+	
+ this.adminService.removeTrainingPartner(id);
+ return "redirect:/TrainingPartner.fssai";
+}
+
+
+@RequestMapping(value="/TrainingPartner/edit/{id}" , method=RequestMethod.POST)
+@ResponseBody
+public void editTrainingPartnerMaster(@PathVariable("id") int id ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("TrainingPartner/edit","TrainingPartnerMaster/edit............" + id  , "AdminController.java");
+	
+	TrainingPartner hm = this.adminService.getTrainingPartnerById(id);
+	//List courseList = adminService.searchFeedbackMaster(data);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(hm); 
+	System.out.println("newList "+newList);
+	out.write(newList);
+	out.flush();
+	
+}
+
+
+
 
 
 

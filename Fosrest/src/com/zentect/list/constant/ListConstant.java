@@ -56,7 +56,7 @@ public class ListConstant {
     }
     
   //User Type
-    private static final Map<String, String> userStatusMap;
+    public static final Map<String, String> userStatusMap;
     static {
         Map<String, String> auserStatusMap = new HashMap<String, String>();
         auserStatusMap.put("PEN", "Pending");

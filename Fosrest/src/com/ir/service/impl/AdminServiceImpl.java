@@ -1,5 +1,6 @@
 package com.ir.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -41,11 +42,13 @@ import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
@@ -653,6 +656,7 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
+
 	//listSubjectMaster
 	
 	@Override
@@ -662,6 +666,55 @@ public class AdminServiceImpl implements AdminService {
 		return this.adminDAO.listSubjectMaster();
 	}
 	
+	
+	
+
+	
+
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For TrainingSchedule
+	 */
+
+	@Override
+	@Transactional
+	public void addTrainingSchedule(TrainingSchedule p){
+		 this.adminDAO.addTrainingSchedule(p);
+		
+	}
+	
+	//updateTrainingSchedule
+	@Override
+	@Transactional
+	public void updateTrainingSchedule(TrainingSchedule p){
+		 this.adminDAO.updateTrainingSchedule(p);
+		
+	}
+	
+	//removeTrainingSchedule
+	
+	@Override
+	@Transactional
+	public void removeTrainingSchedule(int id){
+		 this.adminDAO.removeTrainingSchedule(id);
+		
+	}
+	
+//	/getTrainingScheduleById
+	@Override
+	@Transactional
+	public TrainingSchedule getTrainingScheduleById(int id){
+		return this.adminDAO.getTrainingScheduleById(id);
+		
+	}
+	
+	@Override
+	@Transactional
+	public List<PersonalInformationTrainingInstitute> listTrainingInstitude(){
+		return this.adminDAO.listTrainingInstitude();
+		
+	}
 	
 	
 	
@@ -880,6 +933,57 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listRegionMaster();
 	}
+	
+	
+	
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * Impl For Holiday Master
+	 */
+	
+	@Override
+	@Transactional
+	public void addTrainingPartner(TrainingPartner p){
+		 this.adminDAO.addTrainingPartner(p);
+		
+	}
+	
+	//updateTrainingPartner
+	@Override
+	@Transactional
+	public void updateTrainingPartner(TrainingPartner p){
+		 this.adminDAO.updateTrainingPartner(p);
+		
+	}
+	
+	//removeTrainingPartner
+	
+	@Override
+	@Transactional
+	public void removeTrainingPartner(int id){
+		 this.adminDAO.removeTrainingPartner(id);
+		
+	}
+	
+//	/getTrainingPartnerById
+	@Override
+	@Transactional
+	public TrainingPartner getTrainingPartnerById(int id){
+		return this.adminDAO.getTrainingPartnerById(id);
+		
+	}
+	
+	//listTrainingPartner
+	
+	@Override
+	@Transactional
+	public List<TrainingPartner> listTrainingPartner() {
+		// TODO Auto-generated method stub
+		return this.adminDAO.listTrainingPartner();
+	}
+	
+	
 	
 	
 	

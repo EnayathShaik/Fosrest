@@ -195,3 +195,29 @@ function getBatch(val , idName){
 	      });
 }
 
+
+function getTrainingInstitude(val , idName) {
+	$('#'+idName+' option').remove();
+ 	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	$.ajax({
+		type : 'post',
+		url : 'getTrainingInstitude.fssai?data='+ val,
+		contentType : "application/json",
+	    data:name,
+		success : function(response) {
+			var mainData1 = jQuery.parseJSON(response);
+			$('#'+idName+' option').remove();
+			$('#'+idName).append(
+					'<option value="0" label="--Select Training Institude--" />');
+			$.each(mainData1, function(i, obj) {
+				$('#'+idName)
+						.append(
+								'<option value='+obj[0]+' >' + obj[1]
+										+ '</option>');
+			});
+		}
+	});
+}

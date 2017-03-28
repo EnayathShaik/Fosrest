@@ -28,24 +28,29 @@ public class TrainingSchedule {
 	private String userType;
 	private String trainingType;
 	private String trainingPhase;
-	private String status;
-	private int day;
-	private String unit;
-	private String module;
-	private String duration;
+	private String trainingInstitudeStatus;
+	private String trainingStartDate;
+	private String trainingEndDate;
+	private int trainingPartner;
+	private int trainingInstitude;
+	@Column(name="isActive", columnDefinition="character varying(10) default 'A'")
+	private String isActive;
+	
+	
+	
 
-	
-	
-	
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 
 	public TrainingSchedule() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-
-
 
 	public String getUserType() {
 		return userType;
@@ -82,20 +87,6 @@ public class TrainingSchedule {
 	}
 
 
-	public String getStatus() {
-		return status;
-	}
-
-
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-
-
-
-
 	public int getTrainingScheduleId() {
 		return trainingScheduleId;
 	}
@@ -108,69 +99,47 @@ public class TrainingSchedule {
 		this.trainingScheduleId = trainingScheduleId;
 	}
 
+	public String getTrainingInstitudeStatus() {
+		return trainingInstitudeStatus;
+	}
 
+	public void setTrainingInstitudeStatus(String trainingInstitudeStatus) {
+		this.trainingInstitudeStatus = trainingInstitudeStatus;
+	}
 
+	public String getTrainingStartDate() {
+		return trainingStartDate;
+	}
 
+	public void setTrainingStartDate(String trainingStartDate) {
+		this.trainingStartDate = trainingStartDate;
+	}
 
-	public int getDay() {
-		return day;
+	public String getTrainingEndDate() {
+		return trainingEndDate;
+	}
+
+	public void setTrainingEndDate(String trainingEndDate) {
+		this.trainingEndDate = trainingEndDate;
+	}
+
+	public int getTrainingPartner() {
+		return trainingPartner;
+	}
+
+	public void setTrainingPartner(int trainingPartner) {
+		this.trainingPartner = trainingPartner;
+	}
+
+	public int getTrainingInstitude() {
+		return trainingInstitude;
+	}
+
+	public void setTrainingInstitude(int trainingInstitude) {
+		this.trainingInstitude = trainingInstitude;
 	}
 
 
-
-
-
-	public void setDay(int day) {
-		this.day = day;
-	}
-
-
-
-
-
-	public String getUnit() {
-		return unit;
-	}
-
-
-
-
-
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-
-
-
-
-
-	public String getModule() {
-		return module;
-	}
-
-
-
-
-
-	public void setModule(String module) {
-		this.module = module;
-	}
-
-
-
-
-
-	public String getDuration() {
-		return duration;
-	}
-
-
-
-
-
-	public void setDuration(String duration) {
-		this.duration = duration;
-	}
 
 
 	

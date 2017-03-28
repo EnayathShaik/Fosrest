@@ -295,6 +295,7 @@
                                 <ul class="nav navbar-nav">
                                     <li></li>
                                     <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
+                                    <li ><a href="TrainingPartner.fssai">Training Partner List</a></li>
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
@@ -348,6 +349,7 @@
                                 <ul class="nav navbar-nav">
                                     <li></li>
                                     <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
+                                  
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>

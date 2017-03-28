@@ -11,7 +11,7 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.TrainingPartner;
+import com.ir.model.TrainingPartner_old;
 
 public interface LoginService {
 	
@@ -25,7 +25,7 @@ public interface LoginService {
 	public PersonalInformationTrainee FullDetail(int loginId);
 
 	
-	public List<TrainingPartner> trainingPartnerCountList();
+	public List<TrainingPartner_old> trainingPartnerCountList();
 
 	
 	public ManageAssessmentAgency FullDetailAssessmentAgency(int id);

@@ -51,7 +51,7 @@ import com.ir.model.State;
 import com.ir.model.SubjectMaster;
 import com.ir.model.Title;
 import com.ir.model.TraineeAssessment;
-import com.ir.model.TrainingPartner;
+import com.ir.model.TrainingPartner_old;
 import com.ir.model.Utility;
 import com.ir.service.AssessmentService;
 import com.ir.service.PageLoadService;
@@ -412,7 +412,7 @@ public class TraineeController {
 	
 	@RequestMapping(value="/admit-cardtrainee" , method=RequestMethod.GET)
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
+			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner_old tp,BindingResult result ,HttpSession session, Model model ){
 		new ZLogger("admit-cardtrainee","Generate Admit Card .........................."  , "TraineeController.java");
 		String imagePath = "";
 		String userName = "";

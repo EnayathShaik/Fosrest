@@ -985,10 +985,6 @@
 		<put-attribute name="body" value="/website/admin/CityMaster.jsp" />
 	</definition>
 	
-	
-		
-		
-	
 		<definition name="RegionMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/RegionMaster.jsp" />
@@ -999,5 +995,16 @@
 		<put-attribute name="body" value="/website/admin/RegionMaster.jsp" />
 	</definition>
 	
+	
+	
+		<definition name="TrainingPartner" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/TrainingPartner.jsp" />
+	</definition>
+
+	<definition name="TrainingPartner/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/TrainingPartner.jsp" />
+	</definition>
 
 </tiles-definitions>
