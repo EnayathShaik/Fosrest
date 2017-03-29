@@ -13,6 +13,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
+import com.ir.form.GenerateCertificateForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
@@ -224,6 +225,9 @@ public interface AdminService {
 	public void removeTrainingSchedule(int id);
 	public TrainingSchedule getTrainingScheduleById(int id);
 	public List<PersonalInformationTrainingInstitute> listTrainingInstitude();
+	
+	public List<GenerateCertificateForm> listGenerateCertificate();
+	
 	
 	
 	

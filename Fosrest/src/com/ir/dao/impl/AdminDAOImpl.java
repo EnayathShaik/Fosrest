@@ -30,6 +30,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
+import com.ir.form.GenerateCertificateForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
@@ -2363,6 +2364,30 @@ public class AdminDAOImpl implements AdminDAO {
 			return mccList;
 		}
 		
+		@Override
+		public List<GenerateCertificateForm> listGenerateCertificate() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listGenerateCertificateForm");
+			GenerateCertificateForm bean = new GenerateCertificateForm();
+			List<GenerateCertificateForm> list = new ArrayList<GenerateCertificateForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> lst = session.createSQLQuery("select cast('Refresher' as varchar(20)) as trainingType ,cast('26-03-2017' as varchar(40)) as trainingDate, cast('Adlab' as varchar(20)) as trainingPartner , cast('Adlab' as varchar(20) ) as trainingInstitute,cast('Mr.Anuj' as varchar(40)) as traineeName,cast('pending' as varchar(40)) as attendanceStatus,cast('pending' as varchar(40)) as certificateStatus,cast('pending' as varchar(40)) as generateCertificate").list();
+			for (Object[] li : lst ) {
+				
+				bean.setTrainingType((String) li[0]);
+				bean.setTrainingDate((String) (li[1]));
+				bean.setTrainingPartner((String) li[2]);
+				bean.setTrainingInstitute((String) li[3]);
+				bean.setTraineeName((String) li[4]);
+				bean.setAttendanceStatus((String) li[5]);
+				bean.setCertificateStatus((String) li[6]);
+				bean.setGenerateCertificate((String) li[7]);
+				
+				list.add(bean);
+			}
+System.out.println("list "+list);
+			return list;
+		}
 		
 }
 

@@ -18,6 +18,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
+import com.ir.form.GenerateCertificateForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
@@ -983,7 +984,15 @@ public class AdminServiceImpl implements AdminService {
 		return this.adminDAO.listTrainingPartner();
 	}
 	
+	//listGenerateCertificate
 	
+	
+		@Override
+		@Transactional
+		public List<GenerateCertificateForm> listGenerateCertificate() {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listGenerateCertificate();
+		}
 	
 	
 	

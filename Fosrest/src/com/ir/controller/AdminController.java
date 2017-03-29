@@ -50,6 +50,7 @@ import com.ir.form.CityMasterForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
 import com.ir.form.DistrictMasterForm;
+import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.HolidayMasterForm;
 import com.ir.form.ManageAssessmentAgencyForm;
@@ -2039,6 +2040,43 @@ public void editTrainingPartnerMaster(@PathVariable("id") int id ,@RequestBody G
 	out.flush();
 	
 }
+
+//for generate certificate
+
+@RequestMapping(value = "/GenerateCertificate", method = RequestMethod.GET)
+public String GenerateCertificate(@ModelAttribute("GenerateCertificateForm") GenerateCertificateForm generateCertificateForm ,Model model) {
+		System.out.println("listGenerateCertificate");
+			
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> trainingpartner = lst.trainingPartnerMap;
+
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("trainingPartner",trainingpartner);
+		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
+		model.addAttribute("GenerateCertificateForm", new GenerateCertificateForm());
+	
+	return "GenerateCertificate";
+}
+
+@RequestMapping(value = "/ListGenerateCertificate", method = RequestMethod.POST)
+public String ListGenerateCertificate(@ModelAttribute("GenerateCertificateForm") GenerateCertificateForm generateCertificateForm ,Model model) {
+	
+		System.out.println("listGenerateCertificate" + generateCertificateForm.getTrainingType());
+				
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> trainingPartner = lst.trainingPartnerMap;
+		Map<String , String> trainingInstitute = lst.trainingInstituteMap; //no need
+		
+		
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("trainingPartner",trainingPartner);
+		model.addAttribute("trainingInstitute" , trainingInstitute);
+		model.addAttribute("GenerateCertificateForm", new GenerateCertificateForm());
+		model.addAttribute("listGenerateCertificate", this.adminService.listGenerateCertificate());
+	
+	return "GenerateCertificate";
+}
+
 
 
 

@@ -144,9 +144,9 @@
                         <!-- <li class="sidebar-brand"></li> -->
                         
                         <li><a href="TrainingSchedule.fssai">Training Schedule Master</a></li>
-                        <li> <a href="">Training Closure Report</a> </li>
-                        <li> <a href="">Generate Certificate</a> </li>
-                        <li> <a href="">Update Training Schedule</a> </li>
+                        <li> <a href="TrainingClosure.fssai">Training Closure Report</a> </li>
+                        <li> <a href="GenerateCertificate.fssai">Generate Certificate</a> </li>
+                        <li> <a href="UpdateTrainingSchedule.fssai">Update Training Schedule</a> </li>
                         <li><a href="HolidayMaster.fssai">Holiday Master</a></li>
                         <li> <a href="UnitMaster.fssai">Unit Master</a> </li>
                         <li> <a href="ModuleMaster.fssai">Module Master</a> </li>

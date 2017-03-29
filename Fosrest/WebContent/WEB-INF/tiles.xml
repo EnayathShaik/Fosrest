@@ -1006,5 +1006,15 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/TrainingPartner.jsp" />
 	</definition>
+	
+	<definition name="GenerateCertificate" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/GenerateCertificate.jsp" />
+	</definition>
+	
+	<definition name="GenerateCertificate/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/GenerateCertificate.jsp" />
+	</definition>
 
 </tiles-definitions>
