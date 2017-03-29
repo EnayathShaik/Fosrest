@@ -1,17 +1,6 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
-            <script>
-                function OnStart() {
-                   
-                	flatpickr("#holidayDate" , {
-                		
-                	});	
-                }
-                window.onload = OnStart;
-
-            </script>
-            
         
             <ct:url var="addAction" value="/TrainingPartner/add.fssai" ></ct:url>
             <cf:form action="${addAction}" name="myForm" method="POST" commandName="TrainingPartner" onsubmit="return validateFields();">
@@ -41,11 +30,11 @@
                                         <div class="row">
 
                                             <div class="col-xs-12">
-                                                <h1>Holiday Master <label id="created">${created }</label></h1>
+                                                <h1>Training Partner List<label id="created">${created }</label></h1>
                                                 <div class="row">
                                                     <div class="col-xs-12">
 													<fieldset>
-                                        <legend>Holiday Master</legend>
+                                        <legend>Training Partner</legend>
                                         <!-- table starts here -->
                                         <!-- left side -->
                                         <div class="col-md-6 col-xs-12">
