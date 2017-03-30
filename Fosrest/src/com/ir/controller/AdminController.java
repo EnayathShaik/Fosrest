@@ -28,16 +28,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
-
-
-
-
-
-
-
-
-
-
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.constantes.TableLink;
@@ -2048,7 +2038,7 @@ public String GenerateCertificate(@ModelAttribute("GenerateCertificateForm") Gen
 		System.out.println("listGenerateCertificate");
 			
 		Map<String , String> trainingType = lst.trainingTypeMap;
-		Map<String , String> trainingpartner = lst.trainingPartnerMap;
+		Map<String , String> trainingpartner = lst.trainingParterMap;
 
 		model.addAttribute("trainingType",trainingType);
 		model.addAttribute("trainingPartner",trainingpartner);
@@ -2064,13 +2054,13 @@ public String ListGenerateCertificate(@ModelAttribute("GenerateCertificateForm")
 		System.out.println("listGenerateCertificate" + generateCertificateForm.getTrainingType());
 				
 		Map<String , String> trainingType = lst.trainingTypeMap;
-		Map<String , String> trainingPartner = lst.trainingPartnerMap;
-		Map<String , String> trainingInstitute = lst.trainingInstituteMap; //no need
+		Map<String , String> trainingPartner = lst.trainingParterMap;
+	
 		
 		
 		model.addAttribute("trainingType",trainingType);
 		model.addAttribute("trainingPartner",trainingPartner);
-		model.addAttribute("trainingInstitute" , trainingInstitute);
+		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
 		model.addAttribute("GenerateCertificateForm", new GenerateCertificateForm());
 		model.addAttribute("listGenerateCertificate", this.adminService.listGenerateCertificate());
 	
