@@ -42,6 +42,7 @@ import com.ir.model.AssessmentQuestion;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CourseTrainee;
 import com.ir.model.CourseType;
+import com.ir.model.District;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.KindOfBusiness;
@@ -53,6 +54,7 @@ import com.ir.model.Title;
 import com.ir.model.TraineeAssessment;
 import com.ir.model.TrainingPartner_old;
 import com.ir.model.Utility;
+import com.ir.service.AdminService;
 import com.ir.service.AssessmentService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
@@ -75,6 +77,11 @@ public class TraineeController {
 	@Autowired
 	@Qualifier("traineeService")
 	public TraineeService traineeService;
+	
+	@Autowired
+	@Qualifier("adminService")
+	AdminService adminService;
+	
 	
 	
 	
@@ -363,6 +370,7 @@ public class TraineeController {
 					List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
 					model.addAttribute("kindOfBusinessList" , kindOfBusinessList);
 					session.setAttribute("loginUser", personalInformationTrainee);
+					session.setAttribute("PersonalInformationTrainee", personalInformationTrainee);
 					session.setAttribute("titleList", titleList);
 				 }
 		}catch(Exception e){
@@ -731,14 +739,21 @@ public class TraineeController {
 	 * @author Jyoti Mekal
 	 */
 	@RequestMapping(value = "/PersonalInformationTrainee", method = RequestMethod.GET)
-	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model) {
-			System.out.println("PersonalInformationTrainee");
+	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request) {
+			System.out.println("PersonalInformationTrainee ");
+			int userId = Integer.parseInt(request.getParameter("userId"));
+			if(userId > 0){
+				personalInformationTrainee = traineeService.FullDetail(userId);	
+			}
+			
 			Map<String , String> userType = lst.userTypeMap;			
 			Map<String , String> titleMap = lst.titleMap;
-			//titleMap
+			
+			model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 			model.addAttribute("userType",userType);
 			model.addAttribute("titleMap",titleMap);
 			model.addAttribute("PersonalInformationTrainee", new PersonalInformationTrainee());
+			model.addAttribute("isUpdate", "Y");
 		return "PersonalInformationTrainee";
 	}
 
