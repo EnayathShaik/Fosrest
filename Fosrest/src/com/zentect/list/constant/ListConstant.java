@@ -18,6 +18,7 @@ public class ListConstant {
         Map<String, String> aMap = new HashMap<String, String>();
         aMap.put("Mr", "Mr");
         aMap.put("Mrs", "Mrs");
+        aMap.put("Miss", "Miss");
         titleMap = Collections.unmodifiableMap(aMap);
     }
     //Training Type

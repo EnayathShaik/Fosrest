@@ -10,6 +10,7 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.TrainingPartner_old;
 
@@ -41,5 +42,7 @@ public interface LoginService {
 
 	
 	public PersonalInformationTrainingPartner FullDetailtrainingpartner(int loginId);
+	
+	public PersonalInformationTrainingInstitute FullDetailtrainingInstitute(int loginId);
 	
 }

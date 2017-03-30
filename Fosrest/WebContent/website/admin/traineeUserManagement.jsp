@@ -141,9 +141,10 @@
                                                 <!-- fostac logo -->
                                                 <!-- login form -->
                                                 <div class="row" style="height:20px;"></div>
-                                                <div class="row">
+                                               <div class="row">
                                                     <div class="col-xs-12">
-                                                        <table class="table table-hover table-bordered table-responsive">
+                                                     <table id="datatablesfosrest" class="table table-bordered table-responsive">
+                                                     <!--    <table class="table table-hover table-bordered table-responsive"> -->
                                                             <thead>
                                                                 <th>User ID</th>
                                                                 <th>First Name</th>
@@ -159,7 +160,8 @@
                                                                         <ct:forEach var="listValue" items="${searchTraineeUsermanagement}" varStatus="loop">
                                                                             <tr>
                                                                                 <td>
-                                                                                    <label><a href="updateInformation.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                                    <%-- <label><a href="updateInformation.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label> --%>
+                                                                                    <label><a href="PersonalInformationTrainee.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                                 </td>
                                                                                 <td>
                                                                                     <label>${listValue[2] }</label>
@@ -195,7 +197,7 @@
                                                         </table>
                                                     </div>
                                                     <div class="col-md-2 hidden-xs"></div>
-                                                </div>
+                                                </div> 
                                             </section>
                                         </div>
                                         <!-- row -->

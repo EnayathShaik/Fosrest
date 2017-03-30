@@ -27,7 +27,8 @@
  
  
  function OnStart(){
-	 
+	 var isUpdate = '${isUpdate}';
+	 alert(isUpdate);
 	 var id = '${pwd}';
 	 if(id !== ''){
 		 alert("inside");
@@ -71,13 +72,6 @@
 
 <!-- <head> -->
 <body>
-<h3 style="display:none;" id="success" >
-<strong>
-You have been registered successfully !!!
-</strong>
-<br><br>
-Your UserId is : ${id } and password is  : ${pwd}
-</h3>
 	 
 	<cf:form action="PersonalInformationTraineeAdd.fssai" name="myForm" method="POST"
 		commandName="PersonalInformationTrainee">
@@ -284,10 +278,9 @@ Your UserId is : ${id } and password is  : ${pwd}
                                             <li class="style-li error-red"> * </li>
                                         </ul>
                                     </div>
-                                    <cf:select path="correspondenceState" class="form-control">
-                                        <cf:option value="Rajasthan" label="Rajasthan" />
-                                        <cf:option value="UP"  label="Uttar Pradesh"/>
-                                        <cf:option value="MH" label="Maharashtra" />
+                                    <cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value , 'correspondenceDistrict')">
+                                	<cf:option value="0" label="Select state Name" />
+									<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
                                     </cf:select>
                                 </div>
 
@@ -314,9 +307,9 @@ Your UserId is : ${id } and password is  : ${pwd}
                                             <li class="style-li error-red"> * </li>
                                         </ul>
                                     </div>
-                                    <cf:select path="correspondenceDistrict" class="form-control">
-                                        <cf:option value="Gbd" label="Ghaziabad" />
-                                         <cf:option value="lkn" label="Lucknow" />
+                                    <cf:select path="correspondenceDistrict" class="form-control" onchange="getCity(this.value , 'correspondenceCity')">
+                                        <%-- <cf:option value="Gbd" label="Ghaziabad" />
+                                         <cf:option value="lkn" label="Lucknow" /> --%>
                                     </cf:select>
                                 </div>
 
@@ -407,10 +400,9 @@ Your UserId is : ${id } and password is  : ${pwd}
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                   <cf:select path="resState" class="form-control">
-                                        <cf:option value="Rajasthan" label="Rajasthan" />
-                                        <cf:option value="UP"  label="Uttar Pradesh"/>
-                                        <cf:option value="MH" label="Maharashtra" />
+                                   <cf:select path="resState" class="form-control" onchange="getDistrict(this.value , 'residentialDistrict')">
+                                        <cf:option value="0" label="Select state Name" />
+									<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
                                     </cf:select>
                                 </div>
 
@@ -428,9 +420,8 @@ Your UserId is : ${id } and password is  : ${pwd}
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                   <cf:select path="residentialDistrict" class="form-control">
-                                        <cf:option value="Gbd" label="Ghaziabad" />
-                                         <cf:option value="lkn" label="Lucknow" />
+                                   <cf:select path="residentialDistrict" class="form-control" onchange="getCity(this.value , 'resCity')">
+                                        
                                     </cf:select>
                                 </div>
 

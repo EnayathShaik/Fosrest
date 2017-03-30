@@ -368,6 +368,7 @@ public class PersonalInformationTrainee {
 	public void setSteps(int steps) {
 		this.steps = steps;
 	}
+	
 
 	@Override
 	public String toString() {

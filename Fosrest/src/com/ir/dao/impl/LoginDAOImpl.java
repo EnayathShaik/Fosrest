@@ -22,6 +22,7 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.TrainingPartner_old;
 import com.ir.util.EncryptionPasswordANDVerification;
@@ -205,6 +206,23 @@ public class LoginDAOImpl implements LoginDAO{
 			personalInformationTrainingPartner11=personalInformationTrainingPartner;
 		}
 		return personalInformationTrainingPartner11;
+	}
+	
+	
+	@Override
+	public PersonalInformationTrainingInstitute fulldetailtainingInstitute(int id) {
+		System.out.println("LogintrainerpartnerDAOImpl full detail process start ");
+		Session session = sessionFactory.getCurrentSession();
+		Integer i = id;
+		
+		Query query = session.createQuery("from PersonalInformationTrainingInstitute where loginDetails = '"+ i +"'");
+		List<PersonalInformationTrainingInstitute> list1 = query.list();
+		
+		PersonalInformationTrainingInstitute personalInformationTrainingInstitute11 = null;
+		for(PersonalInformationTrainingInstitute personalInformationTrainingInstitute:list1){
+			personalInformationTrainingInstitute11=personalInformationTrainingInstitute;
+		}
+		return personalInformationTrainingInstitute11;
 	}
 
 

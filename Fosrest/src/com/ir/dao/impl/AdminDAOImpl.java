@@ -477,14 +477,15 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
-		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
+		String like= " where upper(pitp.firstname) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
-		String select = "pitp.personalInformationTraineeId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
+		String select = "pitp.id,ld.loginid,pitp.firstname,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainee as pitp "+ join + like;
+		System.out.println("sql "+sql);
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationTrainee> list = query.list();
-		new ZLogger("traineeUserManagementSearch", "list  "+ list, "AdminDAOImpl.java");
+		new ZLogger("traineeUserManagementSearch", "list  "+ list.toString(), "AdminDAOImpl.java");
 		if( list.size() > 0){
 			return list;
 		}else{

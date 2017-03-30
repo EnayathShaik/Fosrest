@@ -23,6 +23,7 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.TrainingPartner_old;
 import com.ir.service.LoginService;
@@ -179,15 +180,15 @@ public class LoginController {
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
-				PersonalInformationTrainingPartner personalInformationTrainingPartner ;
-				personalInformationTrainingPartner = loginService.FullDetailtrainingpartner(loginDetails.getId());
-				new ZLogger("loginProcess","in trainer login aadhar is "+personalInformationTrainingPartner.getFirstName(), "LoginController.java");
-				new ZLogger("loginProcess","**************"+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId(), "LoginController.java");
-				session.setAttribute("loginUsertrainingpartner", personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
-				session.setAttribute("logId", personalInformationTrainingPartner.getLoginDetails().getLoginId());
+				PersonalInformationTrainingInstitute persoInformationTrainingInstitute ;
+				persoInformationTrainingInstitute = loginService.FullDetailtrainingInstitute(loginDetails.getId());
+				new ZLogger("loginProcess","in trainer login aadhar is "+persoInformationTrainingInstitute.getFirstName(), "LoginController.java");
+				new ZLogger("loginProcess","**************"+persoInformationTrainingInstitute.getId(), "LoginController.java");
+				session.setAttribute("persoInformationTrainingInstitute", persoInformationTrainingInstitute.getId());
+				session.setAttribute("logId", persoInformationTrainingInstitute.getLoginDetails().getLoginId());
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
-				session.setAttribute("userTableId", personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
+				session.setAttribute("userTableId", persoInformationTrainingInstitute.getId());
 				session.setAttribute("userName", loginDetails.getLoginId());	
 				return "trainingPartnerHomepage";
 			}else{

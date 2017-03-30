@@ -17,6 +17,7 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.TrainingPartner_old;
 import com.ir.service.LoginService;
@@ -89,6 +90,14 @@ public class LoginServiceImpl implements LoginService {
 		// TODO Auto-generated method stub
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = loginDAO.fulldetailtainingpartner(loginId);
 		return personalInformationTrainingPartner;
+	}
+	
+	@Override
+	@Transactional
+	public PersonalInformationTrainingInstitute FullDetailtrainingInstitute(int loginId) {
+		// TODO Auto-generated method stub
+		PersonalInformationTrainingInstitute personalInformationTrainingInstitute = loginDAO.fulldetailtainingInstitute(loginId);
+		return personalInformationTrainingInstitute;
 	}
 	
 }

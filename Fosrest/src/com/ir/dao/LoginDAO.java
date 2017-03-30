@@ -10,6 +10,7 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.TrainingPartner_old;
 
@@ -32,4 +33,6 @@ public interface LoginDAO {
 	public PersonalInformationTrainer fullDetailtrainer(int loginId);
 
 	public PersonalInformationTrainingPartner fulldetailtainingpartner(int id);
+	
+	public PersonalInformationTrainingInstitute fulldetailtainingInstitute(int id);
 }

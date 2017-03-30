@@ -2056,8 +2056,6 @@ public String ListGenerateCertificate(@ModelAttribute("GenerateCertificateForm")
 		Map<String , String> trainingType = lst.trainingTypeMap;
 		Map<String , String> trainingPartner = lst.trainingParterMap;
 	
-		
-		
 		model.addAttribute("trainingType",trainingType);
 		model.addAttribute("trainingPartner",trainingPartner);
 		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
