@@ -162,8 +162,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public List<PersonalInformationTrainingPartner> trainingCenterUserManagementSearch(TrainingCenterUserManagementForm trainingCenterUserManagementForm,Integer profileid,Integer userID) {
-		List<PersonalInformationTrainingPartner> trainingCenterUserManagementSearch = adminDAO.trainingCenterUserManagementSearch(trainingCenterUserManagementForm,profileid,userID);
+	public List<PersonalInformationTrainingInstitute> trainingCenterUserManagementSearch(TrainingCenterUserManagementForm trainingCenterUserManagementForm,Integer profileid,Integer userID) {
+		List<PersonalInformationTrainingInstitute> trainingCenterUserManagementSearch = adminDAO.trainingCenterUserManagementSearch(trainingCenterUserManagementForm,profileid,userID);
 		return trainingCenterUserManagementSearch;
 	}
 	@Override

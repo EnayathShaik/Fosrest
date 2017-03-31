@@ -398,17 +398,16 @@ public class PersonalInformationTrainer {
 		this.expInMonth = expInMonth;
 	}
 
-	private String AssociatedWithAnyTrainingInstitute;
+	private int AssociatedWithAnyTrainingInstitute;
 	
 	
-	
-	
-	public String getAssociatedWithAnyTrainingInstitute() {
+
+	public int getAssociatedWithAnyTrainingInstitute() {
 		return AssociatedWithAnyTrainingInstitute;
 	}
 
 	public void setAssociatedWithAnyTrainingInstitute(
-			String associatedWithAnyTrainingInstitute) {
+			int associatedWithAnyTrainingInstitute) {
 		AssociatedWithAnyTrainingInstitute = associatedWithAnyTrainingInstitute;
 	}
 

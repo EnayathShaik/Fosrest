@@ -300,7 +300,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
                                             <li><a href="trainerUserManagementForm.fssai" class="clr">Trainer</a></li>
-                                            <li><a href="trainingCenterUserManagementForm.fssai" class="clr">Training Center</a></li>
+                                            <li><a href="trainingCenterUserManagementForm.fssai" class="clr">Training Institude</a></li>
                                             <li><a href="assessorUserManagementForm.fssai" class="clr">Assessor</a></li>
                                             <li><a href="adminUserManagementForm.fssai" class="clr">Admin</a></li>
                                         </ul>

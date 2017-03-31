@@ -1,7 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<script src="website/js/jquery-2.1.0.min.js"></script>
 
 <html>
 <!-- <head> -->
@@ -28,12 +28,29 @@
  
  function OnStart(){
 	 var isUpdate = '${isUpdate}';
-	 alert(isUpdate);
-	 var id = '${pwd}';
-	 if(id !== ''){
-		 alert("inside");
-		 $("#success").css("display" , "block");
+	 if(isUpdate !=null && isUpdate== "Y"){
+		 
+		 var name = '${PersonalInformationTrainee.firstName}';
+		$("#correspondenceState").val('${PersonalInformationTrainee.correspondenceState}');
+		$("#correspondenceState").trigger("change");
+        window.setTimeout(function() {
+        	$("#correspondenceDistrict").val('${PersonalInformationTrainee.correspondenceDistrict}');
+            $("#correspondenceDistrict").trigger("change");
+            window.setTimeout(function() {
+            	$("#correspondenceCity").val('${PersonalInformationTrainee.correspondenceCity}');
+            }, 1000);
+        }, 1000);
+		$("#resState").val('');
+        $("#residentialDistrict").val('');
+        $("#resCity").val('');
+        $("#ResidentialLine1").val('');
+        $("#ResidentialLine2").val('');
+		 $("#createUpdateBtn").val("Update");
+		 $("#captcha").css("display" , "none");
+		 
 	 }
+
+	
 		DrawCaptcha();
 		
 		 flatpickr("#dob" ,{});	
@@ -43,8 +60,16 @@
 		 			
 		 			if(this.checked){
 		 				$("#resState").val($("#correspondenceState").val());
-		 				$("#residentialDistrict").val($("#correspondenceDistrict").val());
-		 				$("#resCity").val($("#correspondenceCity").val());
+		 				 $("#resState").trigger("change");
+		                    window.setTimeout(function() {
+		                    	$("#residentialDistrict").val($("#correspondenceDistrict").val());
+		                        $("#residentialDistrict").trigger("change");
+		                        window.setTimeout(function() {
+		                        	$("#resCity").val($("#correspondenceCity").val());
+		                        }, 1000);
+		                    }, 1000);
+		 				
+		 				
 		 				$("#resPincode").val($("#correspondencePincode").val());
 		 				$("#ResidentialLine1").val($("#correspondenceAddress1").val());
 		 				$("#ResidentialLine2").val($("#correspondenceAddress2").val())
@@ -98,7 +123,7 @@
                             <div class="col-md-6 col-xs-12">
 
 
-
+										<cf:input type="hidden" path="id"/>
                                     
                                         <div class="form-group">
                                             <div>
@@ -308,8 +333,7 @@
                                         </ul>
                                     </div>
                                     <cf:select path="correspondenceDistrict" class="form-control" onchange="getCity(this.value , 'correspondenceCity')">
-                                        <%-- <cf:option value="Gbd" label="Ghaziabad" />
-                                         <cf:option value="lkn" label="Lucknow" /> --%>
+                                     
                                     </cf:select>
                                 </div>
 
@@ -321,8 +345,7 @@
                                         </ul>
                                     </div>
                                     <cf:select path="correspondenceCity" class="form-control">
-                                       <cf:option value="jp" label="Jaipur" />
-                                         <cf:option value="al" label="Alwar" />
+                                    
                                     </cf:select>
                                 </div>
 
@@ -433,8 +456,7 @@
                                         </ul>
                                     </div>
                                    <cf:select path="resCity" class="form-control">
-                                       <cf:option value="jp" label="Jaipur" />
-                                         <cf:option value="al" label="Alwar" />
+                                      
                                     </cf:select>
                                 </div>
 
@@ -456,12 +478,12 @@
 
 
                         <!-- captcha -->
-                        <fieldset>
+                        <fieldset id="captcha">
                             <div class="col-md-2 col-xs-12"></div>
-                        <div
+                        <div 
 					style="width: 95%; margin-left: 32px; float: left; height: 100px; border: 1px solid #cecece;"
 					class="form-group">
-					<div style="float: left">
+					<div  style="float: left">
 						<div style="float: left; width: 98%;">
 							<label id="captchaError"
 								style="float: left; width: 99%; font-family: Calibri; margin-left: 0px;">Please
@@ -486,13 +508,14 @@
 						<!-- </a> -->
 					</div>
 				</div>
-
+</fieldset>
                         <!-- button -->
 
                         <div class="row">
                             <div class="col-md-4 col-xs-12"></div>
                             <div class="col-md-4 col-xs-12">
-                                <input type="submit"  style="width: 100%;" class="btn login-btn" value="Register"/>
+                                <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn" value="Register"/>
+                                
                             </div>
                             <div class="col-md-4 col-xs-12"></div>
                         </div>

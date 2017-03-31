@@ -129,9 +129,19 @@ public interface TraineeService {
 	
 	public String addPersonalInfoTrainee(PersonalInformationTrainee p);
 	
+	public String updatePersonalInfoTrainee(PersonalInformationTrainee p);
+	
 	public String addPersonalInfoTrainer(PersonalInformationTrainer p);
 	
+	public String updatePersonalInfoTrainer(PersonalInformationTrainer p);
+	
 	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p );
+	
+	public String updatePersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p );
+	
+	public PersonalInformationTrainer FullDetailTrainer(int loginId);
+	
+	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId);
 	
 	
 }

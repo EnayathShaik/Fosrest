@@ -41,41 +41,27 @@
  
  function OnStart(){
 	 
-	 var id = '${pwd}';
-	 if(id !== ''){
-		 alert("inside");
-		 $("#success").css("display" , "block");
+	 var isUpdate = '${isUpdate}';
+	 if(isUpdate !=null && isUpdate== "Y"){
+		 
+		 var name = '${PersonalInformationTrainingInstitute.firstName}';
+		$("#correspondenceState").val('${PersonalInformationTrainingInstitute.correspondenceState}');
+		$("#correspondenceState").trigger("change");
+        window.setTimeout(function() {
+        	$("#correspondenceDistrict").val('${PersonalInformationTrainingInstitute.correspondenceDistrict}');
+            $("#correspondenceDistrict").trigger("change");
+            window.setTimeout(function() {
+            	$("#correspondenceCity").val('${PersonalInformationTrainingInstitute.correspondenceCity}');
+            }, 1000);
+        }, 1000);
+	
+		 $("#createUpdateBtn").val("Update");
+		 $("#captcha").css("display" , "none");
+		 
 	 }
 		DrawCaptcha();
 		
 		 flatpickr("#dob" ,{});	
-		
-	 		 
-		 		$('#sameAddr').change(function(){
-		 			
-		 			if(this.checked){
-		 				$("#resState").val($("#correspondenceState").val());
-		 				$("#residentialDistrict").val($("#correspondenceDistrict").val());
-		 				$("#resCity").val($("#correspondenceCity").val());
-		 				$("#resPincode").val($("#correspondencePincode").val());
-		 				$("#ResidentialLine1").val($("#correspondenceAddress1").val());
-		 				$("#ResidentialLine2").val($("#correspondenceAddress2").val())
-		 				//
-		 			}else{
-		 				$("#resState").val('');
-		 				$("#residentialDistrict").val('');
-		 				$("#resCity").val('');
-		 				$("#resPincode").val('');
-		 				$("#ResidentialLine1").val('');
-		 				$("#ResidentialLine2").val('');
-		 				
-		 				
-		 			}
-		 		 
-		 		  
-		 		});
-		 		 
-		 	
 		 
 		 
 	}
@@ -102,7 +88,7 @@
                                 Personal Information</legend>
                             <!-- left side -->
                             <div class="col-md-6 col-xs-12">
-                     
+                     		<cf:input type="hidden" path="id"/>
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
@@ -218,10 +204,9 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                      <cf:select path="correspondenceState" class="form-control">
-                                        <cf:option value="Rajasthan" label="Rajasthan" />
-                                        <cf:option value="UP"  label="Uttar Pradesh"/>
-                                        <cf:option value="MH" label="Maharashtra" />
+                                      <cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value , 'correspondenceDistrict')">
+                                   <cf:option value="0" label="Select state Name" />
+									<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
                                     </cf:select>
                                 </div>
                                 <div class="form-group">
@@ -231,9 +216,8 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                     <cf:select path="correspondenceDistrict" class="form-control">
-                                        <cf:option value="Gbd" label="Ghaziabad" />
-                                         <cf:option value="lkn" label="Lucknow" />
+                                     <cf:select path="correspondenceDistrict" class="form-control" onchange="getCity(this.value , 'correspondenceCity')">
+                                
                                     </cf:select>
                                 </div>
                             </div>
@@ -250,8 +234,7 @@
                                         </ul>
                                     </div>
                                     <cf:select path="correspondenceCity" class="form-control">
-                                       <cf:option value="jp" label="Jaipur" />
-                                         <cf:option value="al" label="Alwar" />
+                                   
                                     </cf:select>
                                 </div>
 
@@ -399,7 +382,7 @@
 <!-- Experience end -->
 
                         <!-- captcha -->
-                        
+                        <fieldset id="captcha">
                         <div
 					style="width: 95%; margin-left: 32px; float: left; height: 100px; border: 1px solid #cecece;"
 					class="form-group">
@@ -428,13 +411,13 @@
 						<!-- </a> -->
 					</div>
 				</div>
-
+</fieldset>
                         <!-- button -->
 
                         <div class="row">
                             <div class="col-md-4 col-xs-12"></div>
                             <div class="col-md-4 col-xs-12">
-                                <input type="submit"  style="width: 100%;" class="btn login-btn" value="Register"/>
+                                <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn" value="Register"/>
                             </div>
                             <div class="col-md-4 col-xs-12"></div>
                         </div>

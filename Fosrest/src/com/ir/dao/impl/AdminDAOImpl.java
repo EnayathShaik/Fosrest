@@ -526,7 +526,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
-		String select = "pitp.personalInformationTrainerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
+		String select = "pitp.id,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainer as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
@@ -601,7 +601,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
-	public List<PersonalInformationTrainingPartner> trainingCenterUserManagementSearch(TrainingCenterUserManagementForm trainingCenterUserManagementForm,Integer profileid,Integer userID) {
+	public List<PersonalInformationTrainingInstitute> trainingCenterUserManagementSearch(TrainingCenterUserManagementForm trainingCenterUserManagementForm,Integer profileid,Integer userID) {
 		Session session = sessionFactory.getCurrentSession();
 		String FirstName = trainingCenterUserManagementForm.getFirstName();
 		String MiddleName = trainingCenterUserManagementForm.getMiddleName();
@@ -630,7 +630,8 @@ public class AdminDAOImpl implements AdminDAO {
 			status="%";
 		}
 		StringBuffer userBuffer = new StringBuffer();
-		if(profileid == 7){
+	
+	/*	if(profileid == 7){
 			int perTrainingPartnerID = 0;
 			String sql = "select managetrainingpartnerid from managetrainingpartner where logindetails ="
 					+ userID;
@@ -638,16 +639,16 @@ public class AdminDAOImpl implements AdminDAO {
 			List list = query.list();
 			perTrainingPartnerID = (Integer) list.get(0);
 			userBuffer.append(" AND pitp.trainingpartnername="+perTrainingPartnerID);
-		}
+		}*/
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.PAN like '"+PanNumber +"' and ld.status like '"+ status+"'";
 		like = like + userBuffer.toString();
-		String select = "pitp.personalInformationTrainingPartnerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.PAN,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
+		String select = "pitp.id,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.PAN,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
-		String sql= "Select "+ select + "  from PersonalInformationTrainingPartner as pitp "+ join + like;
+		String sql= "Select "+ select + "  from PersonalInformationTrainingInstitute as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
-		List<PersonalInformationTrainingPartner> list = query.list();
+		List<PersonalInformationTrainingInstitute> list = query.list();
 		if( list.size() > 0){
 			new ZLogger("trainingCenterUserManagementSearch", "list size gt thaan 0", "AdminDAOImpl.java");
 			return list;

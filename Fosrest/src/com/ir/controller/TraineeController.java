@@ -741,19 +741,24 @@ public class TraineeController {
 	@RequestMapping(value = "/PersonalInformationTrainee", method = RequestMethod.GET)
 	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request) {
 			System.out.println("PersonalInformationTrainee ");
-			int userId = Integer.parseInt(request.getParameter("userId"));
-			if(userId > 0){
-				personalInformationTrainee = traineeService.FullDetail(userId);	
-			}
+			String userId = request.getParameter("userId");
 			
 			Map<String , String> userType = lst.userTypeMap;			
 			Map<String , String> titleMap = lst.titleMap;
 			
+			if(userId != null && Integer.parseInt(userId) > 0){
+				personalInformationTrainee = traineeService.FullDetail(Integer.parseInt(userId));	
+				model.addAttribute("PersonalInformationTrainee", personalInformationTrainee);
+				model.addAttribute("isUpdate", "Y");
+			}else{
+				model.addAttribute("PersonalInformationTrainee", new PersonalInformationTrainee());
+			}
+		
 			model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 			model.addAttribute("userType",userType);
 			model.addAttribute("titleMap",titleMap);
-			model.addAttribute("PersonalInformationTrainee", new PersonalInformationTrainee());
-			model.addAttribute("isUpdate", "Y");
+			
+			
 		return "PersonalInformationTrainee";
 	}
 
@@ -761,22 +766,31 @@ public class TraineeController {
 	
 	@RequestMapping(value = "/PersonalInformationTraineeAdd", method = RequestMethod.POST)
 	public String addPersonalInfoTrainee(@Valid @ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee p , BindingResult result, Model model){
-		System.out.println("Add PersonalInformationTrainee");
+		System.out.println("Add PersonalInformationTrainee" + p.getId());
 		String personalInformationTrainee = null;
 
 		try{
-			System.out.println(" city "+p.getCorrespondenceCity());
-			personalInformationTrainee = this.traineeService.addPersonalInfoTrainee(p);
+			
+			if(p.getId() == 0){
+				personalInformationTrainee = this.traineeService.addPersonalInfoTrainee(p);
+			}else{
+				personalInformationTrainee = this.traineeService.updatePersonalInfoTrainee(p);
+			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-
-		if(personalInformationTrainee != null && ! personalInformationTrainee.equalsIgnoreCase("")){
+		System.out.println("personalInformationTrainee "+personalInformationTrainee);
+		if(personalInformationTrainee != null && ! personalInformationTrainee.equalsIgnoreCase("updated")){
 			String[] all = personalInformationTrainee.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
 			new Thread(new Mail("Thanks", p.getEmail(), all[1], all[0], p.getFirstName())).start();
 			return "welcome";
+		}else if(personalInformationTrainee.equalsIgnoreCase("updated")){
+			
+			return "redirect:/traineeUserManagementForm.fssai";
+		
 		}else{
 			return "PersonalInformationTrainee";
 		}

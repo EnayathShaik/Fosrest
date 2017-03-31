@@ -27,11 +27,27 @@
  
  
  function OnStart(){
-	 
-	 var id = '${pwd}';
-	 if(id !== ''){
-		 alert("inside");
-		 $("#success").css("display" , "block");
+	 var isUpdate = '${isUpdate}';
+	 if(isUpdate !=null && isUpdate== "Y"){
+		 
+		 var name = '${PersonalInformationTrainer.firstName}';
+		$("#correspondenceState").val('${PersonalInformationTrainer.correspondenceState}');
+		$("#correspondenceState").trigger("change");
+        window.setTimeout(function() {
+        	$("#correspondenceDistrict").val('${PersonalInformationTrainer.correspondenceDistrict}');
+            $("#correspondenceDistrict").trigger("change");
+            window.setTimeout(function() {
+            	$("#correspondenceCity").val('${PersonalInformationTrainer.correspondenceCity}');
+            }, 1000);
+        }, 1000);
+		$("#resState").val('');
+        $("#residentialDistrict").val('');
+        $("#resCity").val('');
+        $("#ResidentialLine1").val('');
+        $("#ResidentialLine2").val('');
+		 $("#createUpdateBtn").val("Update");
+		 $("#captcha").css("display" , "none");
+		 
 	 }
 		DrawCaptcha();
 		
@@ -42,8 +58,15 @@
 		 			
 		 			if(this.checked){
 		 				$("#resState").val($("#correspondenceState").val());
-		 				$("#residentialDistrict").val($("#correspondenceDistrict").val());
-		 				$("#resCity").val($("#correspondenceCity").val());
+		 				 $("#resState").trigger("change");
+		                    window.setTimeout(function() {
+		                    	$("#residentialDistrict").val($("#correspondenceDistrict").val());
+		                        $("#residentialDistrict").trigger("change");
+		                        window.setTimeout(function() {
+		                        	$("#resCity").val($("#correspondenceCity").val());
+		                        }, 1000);
+		                    }, 1000);
+		 				
 		 				$("#resPincode").val($("#correspondencePincode").val());
 		 				$("#ResidentialLine1").val($("#correspondenceAddress1").val());
 		 				$("#ResidentialLine2").val($("#correspondenceAddress2").val())
@@ -79,7 +102,7 @@
                 <div class="col-md-1 col-xs-12"></div>
 
                 <div class="col-md-10  col-xs-12">
-                    <h3 class="text-capitalize heading-3-padding">Trainee Registration Form</h3>
+                    <h3 class="text-capitalize heading-3-padding">Trainer Registration Form</h3>
 
                     <form>
 
@@ -96,7 +119,7 @@
 
 
 
-                                    
+                                    <cf:input type="hidden" path="id"/>
                                         <div class="form-group">
                                             <div>
                                                 <ul class="lab-no">
@@ -264,10 +287,9 @@
                                             <li class="style-li error-red"> * </li>
                                         </ul>
                                     </div>
-                                    <cf:select path="correspondenceState" class="form-control">
-                                        <cf:option value="Rajasthan" label="Rajasthan" />
-                                        <cf:option value="UP"  label="Uttar Pradesh"/>
-                                        <cf:option value="MH" label="Maharashtra" />
+                                    <cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value , 'correspondenceDistrict')">
+                                     	<cf:option value="0" label="Select state Name" />
+									<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
                                     </cf:select>
                                 </div>
 
@@ -294,9 +316,8 @@
                                             <li class="style-li error-red"> * </li>
                                         </ul>
                                     </div>
-                                    <cf:select path="correspondenceDistrict" class="form-control">
-                                        <cf:option value="Gbd" label="Ghaziabad" />
-                                         <cf:option value="lkn" label="Lucknow" />
+                                    <cf:select path="correspondenceDistrict" class="form-control" onchange="getCity(this.value , 'correspondenceCity')">
+                                     
                                     </cf:select>
                                 </div>
 
@@ -308,8 +329,7 @@
                                         </ul>
                                     </div>
                                     <cf:select path="correspondenceCity" class="form-control">
-                                       <cf:option value="jp" label="Jaipur" />
-                                         <cf:option value="al" label="Alwar" />
+                               
                                     </cf:select>
                                 </div>
 
@@ -387,10 +407,9 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                   <cf:select path="resState" class="form-control">
-                                        <cf:option value="Rajasthan" label="Rajasthan" />
-                                        <cf:option value="UP"  label="Uttar Pradesh"/>
-                                        <cf:option value="MH" label="Maharashtra" />
+                                   <cf:select path="resState" class="form-control" onchange="getDistrict(this.value , 'residentialDistrict')">
+                                         	<cf:option value="0" label="Select state Name" />
+									<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
                                     </cf:select>
                                 </div>
 
@@ -408,9 +427,8 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                   <cf:select path="residentialDistrict" class="form-control">
-                                        <cf:option value="Gbd" label="Ghaziabad" />
-                                         <cf:option value="lkn" label="Lucknow" />
+                                   <cf:select path="residentialDistrict" class="form-control" onchange="getCity(this.value , 'resCity')">
+                                        
                                     </cf:select>
                                 </div>
 
@@ -422,8 +440,7 @@
                                         </ul>
                                     </div>
                                    <cf:select path="resCity" class="form-control">
-                                       <cf:option value="jp" label="Jaipur" />
-                                         <cf:option value="al" label="Alwar" />
+                                       
                                     </cf:select>
                                 </div>
 
@@ -514,14 +531,19 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" class="form-control" path="AssociatedWithAnyTrainingInstitute" placeholder="Partner Name" required=""/> </div>
+                                 
+                                    <cf:select path="AssociatedWithAnyTrainingInstitute" class="form-control"
+													onchange="">
+													<cf:option value="0" label="Select Training Institude" />
+													<cf:options items="${listTrainingInstitude}"   itemValue="id" itemLabel="trainingCenterName" />
+													</cf:select>
                             </div>
                             <!-- right side ends -->
                         </fieldset>
 <!-- Experience end -->
 
                         <!-- captcha -->
-                        
+                        <fieldset id="captcha">
                         <div
 					style="width: 95%; margin-left: 32px; float: left; height: 100px; border: 1px solid #cecece;"
 					class="form-group">
@@ -550,13 +572,13 @@
 						<!-- </a> -->
 					</div>
 				</div>
-
+</fieldset>
                         <!-- button -->
 
                         <div class="row">
                             <div class="col-md-4 col-xs-12"></div>
                             <div class="col-md-4 col-xs-12">
-                                <input type="submit"  style="width: 100%;" class="btn login-btn" value="Register"/>
+                                <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn" value="Register"/>
                             </div>
                             <div class="col-md-4 col-xs-12"></div>
                         </div>

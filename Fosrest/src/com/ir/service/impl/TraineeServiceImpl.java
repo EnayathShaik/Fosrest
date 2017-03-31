@@ -289,10 +289,26 @@ public class TraineeServiceImpl implements TraineeService {
 	
 	@Override
 	@Transactional
+	public String updatePersonalInfoTrainee(PersonalInformationTrainee  p) {
+		// TODO Auto-generated method stub
+		return traineeDAO.updatePersonalInfoTrainee(p);
+	}
+	
+	
+	@Override
+	@Transactional
 	public String addPersonalInfoTrainer(PersonalInformationTrainer  p) {
 		// TODO Auto-generated method stub
 		return traineeDAO.addPersonalInfoTrainer(p);
 	}
+	
+	@Override
+	@Transactional
+	public String updatePersonalInfoTrainer(PersonalInformationTrainer  p) {
+		// TODO Auto-generated method stub
+		return traineeDAO.updatePersonalInfoTrainer(p);
+	}
+	
 	
 //	/addPersonalInfoTrainingInstitute
 	
@@ -301,4 +317,33 @@ public class TraineeServiceImpl implements TraineeService {
 	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute  p) {
 		// TODO Auto-generated method stub
 		return traineeDAO.addPersonalInfoTrainingInstitute(p);
-	}}
+	}
+	
+	//updatePersonalInfoTrainingInstitute
+	
+	@Override
+	@Transactional
+	public String updatePersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute  p) {
+		// TODO Auto-generated method stub
+		return traineeDAO.updatePersonalInfoTrainingInstitute(p);
+	}
+
+	@Override
+	@Transactional
+	public PersonalInformationTrainer FullDetailTrainer(int loginId) {
+		PersonalInformationTrainer personalInformationTrainer = traineeDAO.fullDetailtrainer(loginId);
+		return personalInformationTrainer;
+	}
+	
+	//FullDetailTrainingInstitude
+	
+	@Override
+	@Transactional
+	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId) {
+		PersonalInformationTrainingInstitute personalInformationTraineInstitute = traineeDAO.FullDetailTrainingInstitude(loginId);
+		return personalInformationTraineInstitute;
+	}
+	
+	
+
+}

@@ -3,6 +3,7 @@ package com.ir.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -179,21 +180,29 @@ public class TrainerController {
 	 * @author Jyoti Mekal
 	 */
 	@RequestMapping(value = "/PersonalInformationTrainer", method = RequestMethod.GET)
-	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainer personalInformationTrainer ,Model model) {
+	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainer personalInformationTrainer ,Model model , HttpServletRequest request) {
 			System.out.println("PersonalInformationTrainer");
+			String userId = request.getParameter("userId");
 			Map<String , String> userType = lst.userTypeMap;			
 			Map<String , String> titleMap = lst.titleMap;
 			Map<String , String> ExpBG = lst.expBGMap;
 			Map<String , String> opt = lst.noOfOptionMap;
 			
-			//titleMap
 			model.addAttribute("userType",userType);
 			model.addAttribute("titleMap",titleMap);
 			model.addAttribute("ExpBackgroundMap",ExpBG);
 			model.addAttribute("ExpInYearMap",opt);
 			model.addAttribute("ExpInMonthMap",opt);
-			
-			model.addAttribute("PersonalInformationTrainer", new PersonalInformationTrainer());
+			model.addAttribute("listStateMaster", this.adminService.listStateMaster());
+			model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
+			if(userId != null && Integer.parseInt(userId) > 0){
+				 personalInformationTrainer = this.traineeService.FullDetailTrainer(Integer.parseInt(userId));
+				 model.addAttribute("PersonalInformationTrainer", personalInformationTrainer);
+				model.addAttribute("isUpdate", "Y");
+			}else{
+				model.addAttribute("PersonalInformationTrainer", new PersonalInformationTrainer());	
+			}
+		
 		return "PersonalInformationTrainer";
 	}
 
@@ -205,21 +214,29 @@ public class TrainerController {
 		String personalInformationTrainer = null;
 
 		try{
-			System.out.println(" city "+p.getCorrespondenceCity());
-			personalInformationTrainer = this.traineeService.addPersonalInfoTrainer(p);
+		
+			if(p.getId() == 0){
+				personalInformationTrainer = this.traineeService.addPersonalInfoTrainer(p);	
+			}else{
+				personalInformationTrainer = this.traineeService.updatePersonalInfoTrainer(p);
+			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			
 			return "PersonalInformationTrainer";
 		}
 
-		if(personalInformationTrainer != null && ! personalInformationTrainer.equalsIgnoreCase("")){
+		if(personalInformationTrainer != null && ! personalInformationTrainer.equalsIgnoreCase("updated")){
 			String[] all = personalInformationTrainer.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
 			new Thread(new Mail("Thanks", p.getEmail(), all[1], all[0], p.getFirstName())).start();
 			return "welcome";
-		}else{
+		}else if(personalInformationTrainer.equalsIgnoreCase("updated")){
+			return "redirect:/trainerUserManagementForm.fssai";
+		}
+		else{
 			return "PersonalInformationTrainer";
 		}
 	
@@ -232,12 +249,12 @@ public class TrainerController {
 	 * @author Jyoti Mekal
 	 */
 	@RequestMapping(value = "/PersonalInformationTrainingInstitute", method = RequestMethod.GET)
-	public String PersonalInformationTrainingInst(@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainer personalInformationTrainer ,Model model) {
+	public String PersonalInformationTrainingInst(@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainingInstitute personalInformationTrainingInstitute , HttpServletRequest request,Model model) {
 			System.out.println("PersonalInformationTrainingInstitute");
+			String userId = request.getParameter("userId");
 			Map<String , String> userType = lst.userTypeMap;			
 			Map<String , String> titleMap = lst.titleMap;
 			Map<String , String> opt = lst.noOfOptionMap;
-			Map<String , String> trainingParterMap = lst.trainingParterMap;
 			Map<String , String> trainingTypeMap = lst.trainingTypeMap;
 			
 			//titleMap
@@ -246,9 +263,17 @@ public class TrainerController {
 			model.addAttribute("trainingTypeMap",trainingTypeMap);
 			model.addAttribute("ExpInYearMap",opt);
 			model.addAttribute("ExpInMonthMap",opt);
-			model.addAttribute("trainingParterMap",trainingParterMap);
 			model.addAttribute("listTrainingPartner", adminService.listTrainingPartner());
+			model.addAttribute("listStateMaster", this.adminService.listStateMaster());
+			if(userId != null && Integer.parseInt(userId) > 0){
+				 personalInformationTrainingInstitute = this.traineeService.FullDetailTrainingInstitude(Integer.parseInt(userId));
+				 model.addAttribute("PersonalInformationTrainingInstitute", personalInformationTrainingInstitute);
+				model.addAttribute("isUpdate", "Y");
+			}else{
+			
 			model.addAttribute("PersonalInformationTrainingInstitute", new PersonalInformationTrainingInstitute());
+			
+			}
 		return "PersonalInformationTrainingInstitute";
 	}
 
@@ -260,20 +285,27 @@ public class TrainerController {
 		String personalInformationTrainingInstitute = null;
 
 		try{
-			System.out.println(" city "+p.getCorrespondenceCity());
-			personalInformationTrainingInstitute = this.traineeService.addPersonalInfoTrainingInstitute(p);
+			if(p.getId() == 0){
+				personalInformationTrainingInstitute = this.traineeService.addPersonalInfoTrainingInstitute(p);
+			}else{
+				personalInformationTrainingInstitute = this.traineeService.updatePersonalInfoTrainingInstitute(p);
+			}
+		
 		}catch(Exception e){
 			e.printStackTrace();
 			
 			return "PersonalInformationTrainingInstitute";
 		}
 
-		if(personalInformationTrainingInstitute != null && ! personalInformationTrainingInstitute.equalsIgnoreCase("")){
+		if(personalInformationTrainingInstitute != null && ! personalInformationTrainingInstitute.equalsIgnoreCase("updated")){
 			String[] all = personalInformationTrainingInstitute.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
 			new Thread(new Mail("Thanks", p.getEmail(), all[1], all[0], all[1])).start();
 			return "welcome";
+		}else if(personalInformationTrainingInstitute.equalsIgnoreCase("updated")){
+			return "redirect:/trainingCenterUserManagementForm.fssai";
+		
 		}else{
 			return "PersonalInformationTrainingInstitute";
 		}

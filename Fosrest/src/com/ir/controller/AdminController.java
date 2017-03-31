@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.constantes.TableLink;
@@ -69,6 +70,7 @@ import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
@@ -677,7 +679,7 @@ public class AdminController {
 		try {
 			profileId = (Integer) httpSession.getAttribute("profileId");
 			userId = (Integer) httpSession.getAttribute("userId");
-			List<PersonalInformationTrainingPartner> trainingCetnterUserManagementSearch = adminService
+			List<PersonalInformationTrainingInstitute> trainingCetnterUserManagementSearch = adminService
 					.trainingCenterUserManagementSearch(
 							trainingCenterUserManagementForm, profileId, userId);
 			if (trainingCetnterUserManagementSearch != null

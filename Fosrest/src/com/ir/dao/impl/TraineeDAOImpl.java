@@ -1205,6 +1205,49 @@ public class TraineeDAOImpl implements TraineeDAO {
 		return passwordString+"&"+nextSequenceUserID;
 	}	
 	
+	
+	
+	@Override
+	public  String updatePersonalInfoTrainee(PersonalInformationTrainee p){
+
+		int id =  p.getId();
+		Session session = sessionFactory.getCurrentSession();
+		PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session.load(PersonalInformationTrainee.class, id);
+		personalInformationTrainee.setUserType(p.getUserType());
+		personalInformationTrainee.setTitle(p.getTitle());
+		personalInformationTrainee.setAadharNumber(p.getAadharNumber());
+		personalInformationTrainee.setEmpID(p.getEmpID());
+		personalInformationTrainee.setDob(p.getDob());
+		personalInformationTrainee.setGender(p.getGender());
+		personalInformationTrainee.setFirstName(p.getFirstName());
+		personalInformationTrainee.setFatherName(p.getFatherName());
+		personalInformationTrainee.setLastName(p.getLastName());
+		personalInformationTrainee.setMiddleName(p.getMiddleName());
+		personalInformationTrainee.setEmail(p.getEmail());
+		personalInformationTrainee.setMobile(p.getMobile());
+		personalInformationTrainee.setCorrespondenceAddress1(p.getCorrespondenceAddress1());
+		personalInformationTrainee.setCorrespondenceAddress2(p.getCorrespondenceAddress2());
+		personalInformationTrainee.setCorrespondenceState(p.getCorrespondenceState());
+		personalInformationTrainee.setCorrespondenceDistrict(p.getCorrespondenceDistrict());
+		personalInformationTrainee.setCorrespondenceCity(p.getCorrespondenceCity());
+		personalInformationTrainee.setCorrespondencePincode(p.getCorrespondencePincode());
+		personalInformationTrainee.setResidentialLine1(p.getResidentialLine1());
+		personalInformationTrainee.setResidentialLine2(p.getResidentialLine2());
+		personalInformationTrainee.setResState(p.getResState());
+		personalInformationTrainee.setResidentialDistrict(p.getResidentialDistrict());
+		personalInformationTrainee.setResCity(p.getResCity());
+		personalInformationTrainee.setResPincode(p.getResPincode());
+		session.update(personalInformationTrainee);
+		return "updated";
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public  String addPersonalInfoTrainer(PersonalInformationTrainer p){
 
@@ -1236,6 +1279,77 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}	
 	
 	
+	@Override
+	public  String updatePersonalInfoTrainer(PersonalInformationTrainer p){
+
+		int id =  p.getId();
+		Session session = sessionFactory.getCurrentSession();
+		PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class, id);
+		personalInformationTrainer.setUserType(p.getUserType());
+		personalInformationTrainer.setTitle(p.getTitle());
+		personalInformationTrainer.setAadharNumber(p.getAadharNumber());
+		personalInformationTrainer.setEmpID(p.getEmpID());
+		personalInformationTrainer.setDob(p.getDob());
+		personalInformationTrainer.setGender(p.getGender());
+		personalInformationTrainer.setFirstName(p.getFirstName());
+		personalInformationTrainer.setFatherName(p.getFatherName());
+		personalInformationTrainer.setLastName(p.getLastName());
+		personalInformationTrainer.setMiddleName(p.getMiddleName());
+		personalInformationTrainer.setEmail(p.getEmail());
+		personalInformationTrainer.setMobile(p.getMobile());
+		personalInformationTrainer.setCorrespondenceAddress1(p.getCorrespondenceAddress1());
+		personalInformationTrainer.setCorrespondenceAddress2(p.getCorrespondenceAddress2());
+		personalInformationTrainer.setCorrespondenceState(p.getCorrespondenceState());
+		personalInformationTrainer.setCorrespondenceDistrict(p.getCorrespondenceDistrict());
+		personalInformationTrainer.setCorrespondenceCity(p.getCorrespondenceCity());
+		personalInformationTrainer.setCorrespondencePincode(p.getCorrespondencePincode());
+		personalInformationTrainer.setResidentialLine1(p.getResidentialLine1());
+		personalInformationTrainer.setResidentialLine2(p.getResidentialLine2());
+		personalInformationTrainer.setResState(p.getResState());
+		personalInformationTrainer.setResidentialDistrict(p.getResidentialDistrict());
+		personalInformationTrainer.setResCity(p.getResCity());
+		personalInformationTrainer.setResPincode(p.getResPincode());
+		personalInformationTrainer.setExpBackground(p.getExpBackground());
+		personalInformationTrainer.setExpInMonth(p.getExpInMonth());
+		personalInformationTrainer.setExpInYear(p.getExpInYear());
+		personalInformationTrainer.setSessWishToConduct(p.getSessWishToConduct());
+		personalInformationTrainer.setAssociatedWithAnyTrainingInstitute(p.getAssociatedWithAnyTrainingInstitute());
+		session.update(personalInformationTrainer);
+		return "updated";
+	}	
+	
+	
+	
+	@Override
+	public  String updatePersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p){
+
+		int id =  p.getId();
+		Session session = sessionFactory.getCurrentSession();
+		PersonalInformationTrainingInstitute personalInformationTrainingInstitute = (PersonalInformationTrainingInstitute) session.load(PersonalInformationTrainingInstitute.class, id);
+		personalInformationTrainingInstitute.setUserType(p.getUserType());
+		personalInformationTrainingInstitute.setTitle(p.getTitle());
+		personalInformationTrainingInstitute.setFirstName(p.getFirstName());
+		personalInformationTrainingInstitute.setLastName(p.getLastName());
+		personalInformationTrainingInstitute.setMiddleName(p.getMiddleName());
+		personalInformationTrainingInstitute.setEmail(p.getEmail());
+		personalInformationTrainingInstitute.setMobile(p.getMobile());
+		personalInformationTrainingInstitute.setCorrespondenceAddress1(p.getCorrespondenceAddress1());
+		personalInformationTrainingInstitute.setCorrespondenceAddress2(p.getCorrespondenceAddress2());
+		personalInformationTrainingInstitute.setCorrespondenceState(p.getCorrespondenceState());
+		personalInformationTrainingInstitute.setCorrespondenceDistrict(p.getCorrespondenceDistrict());
+		personalInformationTrainingInstitute.setCorrespondenceCity(p.getCorrespondenceCity());
+		personalInformationTrainingInstitute.setCorrespondencePincode(p.getCorrespondencePincode());
+		personalInformationTrainingInstitute.setTrainingType(p.getTrainingType());
+		personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
+		personalInformationTrainingInstitute.setSeatingCapacity(p.getSeatingCapacity());
+		personalInformationTrainingInstitute.setNoOfInHouseTrainer(p.getNoOfInHouseTrainer());
+		personalInformationTrainingInstitute.setNoOfYearExp(p.getNoOfYearExp());
+		personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
+		session.update(personalInformationTrainingInstitute);
+		return "updated";
+	}	
+	
+
 	
 	@Override
 	public  String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p){
@@ -1269,5 +1383,40 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}	
 	
 	
+	
+	@Override
+	public PersonalInformationTrainer fullDetailtrainer(int loginId) {
+		// TODO Auto-generated method stub
+		System.out.println("LogintrainerDAOImpl full detail process start ");
+		Session session = sessionFactory.getCurrentSession();
+		Integer i = loginId;
+		System.out.println("search " + loginId);
+		Query query = session.createQuery("from PersonalInformationTrainer where loginDetails = '"+ i +"'");
+		List<PersonalInformationTrainer> list = query.list();
+		PersonalInformationTrainer personalInformationTrainer = null;
+		for(PersonalInformationTrainer personalInformationTrainer1: list){
+			personalInformationTrainer=personalInformationTrainer1;
+		}
+		return personalInformationTrainer;
+
+	}
+	
+	
+	@Override
+	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId) {
+		// TODO Auto-generated method stub
+		System.out.println("LogintrainerDAOImpl full detail process start ");
+		Session session = sessionFactory.getCurrentSession();
+		Integer i = loginId;
+		System.out.println("search " + loginId);
+		Query query = session.createQuery("from PersonalInformationTrainingInstitute where loginDetails = '"+ i +"'");
+		List<PersonalInformationTrainingInstitute> list = query.list();
+		PersonalInformationTrainingInstitute personalInformationTrainingInstitute = null;
+		for(PersonalInformationTrainingInstitute personalInformationTrainingInstitute2: list){
+			personalInformationTrainingInstitute=personalInformationTrainingInstitute2;
+		}
+		return personalInformationTrainingInstitute;
+
+	}
 	
 }

@@ -130,7 +130,7 @@
                                         <div class="row" style="height:20px;"></div>
                                         <div class="row">
                                             <div class="col-xs-12 table-overflow-responsive">
-                                                <table class="table-hover table table-bordered table-responsive">
+                                                 <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                     <thead>
                                                         <th>User ID</th>
                                                         <th>First Name</th>
@@ -146,7 +146,7 @@
                                                                 <ct:forEach var="listValue" items="${searchTrainingCenterUsermanagement}" varStatus="loop">
                                                                     <tr>
                                                                         <td>
-                                                                            <label><a href="update-personal-information.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                            <label><a href="PersonalInformationTrainingInstitute.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                         </td>
                                                                         <td>
                                                                             <label>${listValue[2] }</label>
