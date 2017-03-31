@@ -33,6 +33,14 @@ public class TrainingSchedule {
 	private String trainingEndDate;
 	private int trainingPartner;
 	private int trainingInstitude;
+	private int state;
+	private int trainer_id;
+	private int training_institude_id;
+	private String trainer_status;
+	private String training_institude_status;
+	
+	
+	
 	@Column(name="isActive", columnDefinition="character varying(10) default 'A'")
 	private String isActive;
 	
@@ -137,6 +145,46 @@ public class TrainingSchedule {
 
 	public void setTrainingInstitude(int trainingInstitude) {
 		this.trainingInstitude = trainingInstitude;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public int getTrainer_id() {
+		return trainer_id;
+	}
+
+	public void setTrainer_id(int trainer_id) {
+		this.trainer_id = trainer_id;
+	}
+
+	public int getTraining_institude_id() {
+		return training_institude_id;
+	}
+
+	public void setTraining_institude_id(int training_institude_id) {
+		this.training_institude_id = training_institude_id;
+	}
+
+	public String getTrainer_status() {
+		return trainer_status;
+	}
+
+	public void setTrainer_status(String trainer_status) {
+		this.trainer_status = trainer_status;
+	}
+
+	public String getTraining_institude_status() {
+		return training_institude_status;
+	}
+
+	public void setTraining_institude_status(String training_institude_status) {
+		this.training_institude_status = training_institude_status;
 	}
 
 

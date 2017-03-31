@@ -1942,6 +1942,9 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			System.out.println("TrainingSchedule "+p.getTrainingScheduleId() );
 			//getModuleMasterById
+			p.setTrainer_status("N");
+			p.setTraining_institude_status("N");
+			p.setIsActive("A");
 			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(p);
 		}
@@ -1962,16 +1965,30 @@ public class AdminDAOImpl implements AdminDAO {
 		public void removeTrainingSchedule(int id) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
-			/*TrainingSchedule p = (TrainingSchedule) session.load(TrainingSchedule.class, new Integer(id));
-			if (null != p) {
-				session.delete(p);
-			}*/
 			System.out.println(" id  "+id);
 			String sql="update TrainingSchedule set isActive='I' where trainingScheduleId="+id;
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
 			
 		}
+		
+		
+		
+		@Override
+		public void acceptTrainingSchedule(int id , int profileId ) {
+			Session session = this.sessionFactory.getCurrentSession();
+			String sql= null;
+			if(profileId == 4	){
+				sql =	"update TrainingSchedule set trainer_status='Y' where trainingScheduleId="+id;	
+			}else{
+				sql =	"update TrainingSchedule set traininginstitudestatus='Y' where trainingScheduleId="+id;
+			}
+			
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+			
+		}
+		
 		
 		@Override
 		public TrainingSchedule getTrainingScheduleById(int id) {
@@ -2016,6 +2033,19 @@ public class AdminDAOImpl implements AdminDAO {
 			return mccList;
 		}
 	
+		
+		
+		@Override
+		public List<TrainingSchedule> listTrainingSchedule(int id) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTrainingSchedule");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and traininginstitude='"+id+"'  ").list();
+			for (TrainingSchedule p : mccList) {
+				System.out.println("listTrainingSchedule List::" + p);
+			}
+			return mccList;
+		}
 		
 
 		/**

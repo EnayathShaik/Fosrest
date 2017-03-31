@@ -26,6 +26,7 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.TrainingPartner_old;
+import com.ir.service.AdminService;
 import com.ir.service.LoginService;
 import com.ir.service.TrainingPartnerService;
 import com.ir.service.UpdateService;
@@ -44,6 +45,10 @@ public class LoginController {
 	@Autowired
 	@Qualifier("loginService")
 	LoginService loginService; 
+	
+	@Autowired
+	@Qualifier("adminService")
+	AdminService adminService;
 	
 	@Autowired
 	@Qualifier("updateServiceImpl")
@@ -177,6 +182,8 @@ public class LoginController {
 			session.setAttribute("loginUser2", personalInformationTrainer.getId());
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
+			System.out.println("assosiated "+personalInformationTrainer.getAssociatedWithAnyTrainingInstitute());
+			model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(personalInformationTrainer.getAssociatedWithAnyTrainingInstitute()));
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -185,12 +192,13 @@ public class LoginController {
 				new ZLogger("loginProcess","in trainer login aadhar is "+persoInformationTrainingInstitute.getFirstName(), "LoginController.java");
 				new ZLogger("loginProcess","**************"+persoInformationTrainingInstitute.getId(), "LoginController.java");
 				session.setAttribute("persoInformationTrainingInstitute", persoInformationTrainingInstitute.getId());
+				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(persoInformationTrainingInstitute.getId()));
 				session.setAttribute("logId", persoInformationTrainingInstitute.getLoginDetails().getLoginId());
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
 				session.setAttribute("userTableId", persoInformationTrainingInstitute.getId());
 				session.setAttribute("userName", loginDetails.getLoginId());	
-				return "trainingPartnerHomepage";
+				return "trainingInstitudeHomepage";
 			}else{
 				model.addAttribute("error" , "Oops , you are not authorized !!!");
 				return "login";
@@ -273,7 +281,7 @@ public class LoginController {
 			}else if(profileID == 4){
 				return "trainerHomepage";
 			}else if(profileID == 5){
-				return "trainingPartnerHomepage";
+				return "trainingInstitudeHomepage";
 			}else if(profileID == 6){
 				return "AssessorPage";
 			}else if(profileID == 7){
@@ -307,7 +315,7 @@ public class LoginController {
 			}else if(profileID == 4){
 				return "trainerHomepage";
 			}else if(profileID == 5){
-				return "trainingPartnerHomepage";
+				return "trainingInstitudeHomepage";
 			}else if(profileID == 6){
 				return "AssessorPage";
 			}else if(profileID == 7){

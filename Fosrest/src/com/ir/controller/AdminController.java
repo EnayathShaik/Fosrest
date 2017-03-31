@@ -1617,6 +1617,7 @@ public String TrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingS
 		model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
 		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
 		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
+		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		
 		
 		
@@ -1642,6 +1643,15 @@ public String removeTrainingSchedule(@PathVariable("id") int id){
 	
 this.adminService.removeTrainingSchedule(id);
 return "redirect:/TrainingSchedule.fssai";
+}
+
+
+@RequestMapping("/TrainingSchedule/accept/{id}")
+public String acceptTrainingSchedule(@PathVariable("id") int id , HttpServletRequest request){	
+	String profileId = request.getParameter("profileId");
+			System.out.println(" profileId "+profileId);
+this.adminService.acceptTrainingSchedule(id , Integer.parseInt(profileId));
+return "trainingInstitudeHomepage";
 }
 
 
@@ -1679,9 +1689,6 @@ public String ListTrainingSchedule(@ModelAttribute("TrainingScheduleForm") Train
 		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
 	return "TrainingSchedule";
 }
-
-
-
 
 /**
  * @author Jyoti Mekal
@@ -1744,12 +1751,6 @@ public void editStateMaster(@PathVariable("id") int id ,@RequestBody GenerateCou
 	out.flush();
 	
 }
-
-
-
-
-
-
 
 /**
  * @author Jyoti Mekal
@@ -1818,11 +1819,6 @@ public void editDistrictMaster(@PathVariable("id") int id ,@RequestBody Generate
 	
 }
 
-
-
-
-
-
 /**
  * @author Jyoti Mekal
  *
@@ -1890,14 +1886,6 @@ public void editCityMaster(@PathVariable("id") int id ,@RequestBody GenerateCour
 	out.flush();
 	
 }
-
-
-
-
-
-
-
-
 
 /**
  * @author Jyoti Mekal

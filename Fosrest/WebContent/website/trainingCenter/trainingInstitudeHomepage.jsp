@@ -3,9 +3,10 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <%System.out.print("trainee home page jsp"); %>
 
-<!-- horizontal navigation -->
+<script>
+wwindow.profileId = '${profileId}';
 
-
+</script>
 <section>
 <%@include file="../roles/top-menu.jsp"%>
 </section>
@@ -21,7 +22,7 @@
       <div id="page-content-wrapper">
         <div class="container-fluid"> 
           
-            <div class="row">
+                  <div class="row">
                                             <div class="col-xs-12">
                                            <fieldset>
                                            <legend>Training Request</legend>
@@ -53,8 +54,8 @@
 												<td>${TrainingSchedule.trainingEndDate}</td>
 												<td>20</td>
 												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
-												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId });return false;' >Accept</button></td>
-												<td><a  class="btn login-btn" href="<ct:url value='/TrainingSchedule/remove/${TrainingSchedule.trainingScheduleId}.fssai' />" >Reject</a></td>
+												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} ,${profileId} );return false;' >Accept</button></td>
+												<td><a  class="btn login-btn" href="<ct:url value='/TrainingSchedule/accep/${TrainingSchedule.trainingScheduleId}.fssai?profileId=${profileId}' />" >Reject</a></td>
 												
 											</tr>
 										</ct:forEach>
@@ -63,14 +64,12 @@
                                         </fieldset>
                                                     </div>
                                                 </div>
-                 
         </div>
       </div>
     </div>
   </div>
 </section>
 <!-- scripts --> 
-
 <script>
 
 function acceptTrainingRequest(id , profileId){

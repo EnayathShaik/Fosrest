@@ -560,10 +560,10 @@
 
 
 	<!-- Training Partner Starts -->
-	<definition name="trainingPartnerHomepage" extends="base.user.afterLogin">
+	<definition name="trainingInstitudeHomepage" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
-			value="/website/trainingPartner/trainingPartnerHomepage.jsp" />
+			value="/website/trainingCenter/trainingInstitudeHomepage.jsp" />
 	</definition>
 	<definition name="postVacancyTrainingPartner" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />

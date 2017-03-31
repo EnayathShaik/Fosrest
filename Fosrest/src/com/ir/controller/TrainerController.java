@@ -35,6 +35,7 @@ import com.ir.service.AssessmentAgencyService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainerContactService;
+import com.ir.service.TrainerService;
 import com.ir.util.Profiles;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
@@ -51,7 +52,9 @@ public class TrainerController {
 	@Qualifier("pageLoadService")
 	PageLoadService pageLoadService;
 	
-	
+	@Autowired
+	@Qualifier("trainerService")
+	public TrainerService trainerService;
 	
 	//
 	

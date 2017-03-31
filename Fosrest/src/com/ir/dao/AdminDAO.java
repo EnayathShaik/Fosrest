@@ -201,13 +201,14 @@ public interface AdminDAO {
 		public void updateTrainingSchedule(TrainingSchedule p);
 		
 		public void removeTrainingSchedule(int id);
+		public void acceptTrainingSchedule(int id , int profileId);
 		
 		public TrainingSchedule getTrainingScheduleById(int id);
 		public List<TrainingSchedule> listTrainingSchedule();
 		
 		public List<PersonalInformationTrainingInstitute> listTrainingInstitude();
 		
-		
+		public List<TrainingSchedule> listTrainingSchedule(int id);
 		
 		public void addStateMaster(StateMaster p);
 		

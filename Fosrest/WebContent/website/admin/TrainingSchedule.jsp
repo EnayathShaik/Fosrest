@@ -105,6 +105,19 @@
                                                     </div>
                                                  <cf:input class="form-control" path="trainingStartDate"  type="text" placeholder="Training Start Date"/>
                                                 </div>
+                                                
+                                                <div class="form-group">
+                                                <div>
+                                                    <ul class="lab-no">
+                                                        <li class="style-li"><strong> Requested State:</strong></li>
+                                                        <li class="style-li error-red"> </li>
+                                                    </ul>
+                                                </div>
+                                                <cf:select path="state" class="form-control" >
+													<cf:option value="0" label="Select state Name" />
+													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
+													</cf:select>
+                                            </div>
                                             
                                             </div> <!-- left side ends -->
 
@@ -169,16 +182,16 @@
                                             
                                             <!-- button -->
                                             <div class="row">
-                                                <div class="col-md-6 col-xs-12"></div>
-                                                	<input type="submit"  id="updatebtn" style="display:none;float: right;margin-right: 122px;"
+                                                
+                                                	
+                                                <div class="col-md-6 col-xs-12">
+													<input type="submit"  id="updatebtn" style="display:none;float: right;margin-right: 122px;"
 														value="Update" class="btn login-btn"/>
 												
 												
 													<input type="submit" id="createbtn"
 														value="Create"  class="btn login-btn"/>
-                                                <div class="col-md-6 col-xs-12">
-
-                                                    <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Search"/> 
+                                                    <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" style="margin-left: 381px;" data-target="#show-result" aria-expanded="false" value="Search"/> 
                                                
                                                 </div>
                                             </div>
@@ -195,9 +208,9 @@
 
                                                 <!-- table -->
                                                 <div class="row">
-                                                    <div class="col-xs-12">
-                                                            <fieldset>
-                                           <legend>Unit Master</legend>
+                                            <div class="col-xs-12">
+                                           <fieldset>
+                                           <legend>Training Schedule </legend>
                                             <ct:if test="${!empty listTrainingSchedule}">
                                             <table class="table table-bordered table-responsive">
                                                <thead>
@@ -250,7 +263,6 @@
           
                 
                 function editTrainingSchedule(id){
-                alert(id);
                 
                 var name1=JSON.stringify({
             		courseName:0

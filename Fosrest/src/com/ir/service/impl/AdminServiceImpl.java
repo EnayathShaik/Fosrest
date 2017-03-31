@@ -702,7 +702,17 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
-//	/getTrainingScheduleById
+	//acceptTrainingSchedule
+	@Override
+	@Transactional
+	public void acceptTrainingSchedule(int id , int profileId){
+		 this.adminDAO.acceptTrainingSchedule(id , profileId);
+		
+	}
+	
+	
+	
+	//	getTrainingScheduleById
 	@Override
 	@Transactional
 	public TrainingSchedule getTrainingScheduleById(int id){
@@ -718,6 +728,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	
+	@Override
+	@Transactional
+	public List<TrainingSchedule> listTrainingSchedule(int id){
+		return this.adminDAO.listTrainingSchedule(id);
+		
+	}
 	
 	@Override
 	@Transactional
