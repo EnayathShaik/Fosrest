@@ -20,9 +20,16 @@ public class GenerateCertificateForm {
 	private String attendanceStatus;
 	private String certificateStatus;
 	private String generateCertificate;
+	private int id;
 	
 	
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getTraineeName() {
 		return traineeName;
 	}

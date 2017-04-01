@@ -29,6 +29,7 @@ import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
+import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.CityMaster;
@@ -1002,14 +1003,19 @@ public class AdminServiceImpl implements AdminService {
 	
 	//listGenerateCertificate
 	
-	
-		@Override
+	    @Override
 		@Transactional
 		public List<GenerateCertificateForm> listGenerateCertificate() {
 			// TODO Auto-generated method stub
 			return this.adminDAO.listGenerateCertificate();
 		}
 	
-	
+//listTrainingClosure
+	    @Override
+		@Transactional
+		public List<TrainingClosureForm> listTrainingClosure() {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listTrainingClosure();
+		}
 	
 }

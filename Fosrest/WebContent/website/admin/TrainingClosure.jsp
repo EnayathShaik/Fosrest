@@ -1,7 +1,8 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
-   <script>
+
+ <script>
                 function OnStart() {
                    
                 	flatpickr("#trainingDate" , {
@@ -12,7 +13,7 @@
 
             </script>
  
-<cf:form action="ListGenerateCertificate.fssai" name="myForm" method="POST" commandName="GenerateCertificateForm" onsubmit="return validateFields();"> 
+<cf:form action="ListTrainingClosure.fssai" name="myForm" method="POST" commandName="TrainingClosureForm" onsubmit="return validateFields();"> 
 
     <section>
          <%@include file="../roles/top-menu.jsp"%>
@@ -39,7 +40,7 @@
                         <div class="row">
 
                                 <div class="col-xs-12">
-                                    <h1>Generate Certificate</h1>
+                                    <h1>Training Closure Report</h1>
                                     <div class="row">
                                         <div class="col-xs-12">
 
@@ -63,25 +64,6 @@
                                                <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Training Partner:</strong></li>
-                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
-                                                        </ul>
-                                                    </div>
-                                                 <cf:select path="trainingPartner" class="form-control">
-													<cf:option value="" label="Select training partner" />
-													<cf:options items="${trainingPartner}"/>	
-												</cf:select>
-                                                </div>
-                                                
-                                            
-                                            </div> <!-- left side ends -->
-
-                                            <!-- right side -->
-                                            <div class="col-xs-6">
-
-											 <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Institute:</strong></li>
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
                                                         </ul>
@@ -92,7 +74,7 @@
 												</cf:select>
                                                 </div>
                                                 
-                                                <div class="form-group">
+                                                 <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Date:</strong></li>
@@ -101,15 +83,48 @@
                                                             ${created }</li>
                                                         </ul>
                                                     </div>
-												
-                                         		<cf:input path="trainingDate" type="text" class="form-control" />
+												<cf:input path="trainingDate" type="text" class="form-control" />
+                                         
                                                 </div>
                                                 
                                             
+                                            </div> <!-- left side ends -->
+
+                                            <!-- right side -->
+                                            <div class="col-xs-6">
+
+											<div class="form-group">
+												<div>
+													<ul class="lab-no">
+														<li class="style-li"><strong>User Type:</strong></li>
+														<li class="style-li error-red"><span id="name_status">
+														</span><span id="err"> </span> <label id=userTypeError
+															class="error visibility">* Select UserType </label> <cf:errors
+																path="userType" cssClass="error" />${created }</li>
+													</ul>
+												</div>
+												<cf:select path="userType" class="form-control">
+													<cf:option value="" label="Select User Type" />
+													<cf:options items="${userType}" />
+												</cf:select>
+											</div>
+
+											<div class="form-group">
+                                                    <div>
+													<ul class="lab-no">
+														<li class="style-li"><strong>Status:</strong></li>
+														<li class="style-li error-red"><cf:errors
+																path="status" cssClass="error" /></li>
+													</ul>
+												</div>
+  																<cf:select path="status" class="form-control">
+                                                                    <cf:option value="A" label="Active" />
+                                                                    <cf:option value="I" label="In-Active" />
+                                                                </cf:select>
+
+                                                </div>
                                                 
                                          
-                                         
-                                                
                                             </div> <!-- rigth side ends -->
                                             
                                             <!-- button -->
@@ -138,65 +153,40 @@
                                                     <div class="col-xs-12">
                                                             <fieldset>
                                            <legend>Unit Master</legend>
-                                            <ct:if test="${!empty listGenerateCertificate}">
+                                            <ct:if test="${!empty listTrainingClosure}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
                                                     <tr class="background-open-vacancies">
                                                         
-                                                       <th>S.No.</th>
+                                                       <th>Sr.No.</th>
                                                         <th>Training Type</th>
-                                                        <th>Training Date</th>
-                                                        <th>Training Partner</th>
+                                                         <th>User Type</th>
+                                                         <th>Training Date</th>
                                                         <th>Training Institute</th>
-                                                        <th>Trainee name</th>
-                                                        <th>Attendance status</th>
-                                                        <th>Certificate status</th>
-                                                        <th>Generate Certificate</th>
+                                                        <th>Training Status</th>
+                                                         
                                                        
-                                                        
                                                     </tr>
                                                 </thead>
                                                 
-                                                <ct:forEach items="${listGenerateCertificate}" var="GenerateCertificate">
+                                                <ct:forEach items="${listTrainingClosure}" var="TrainingClosure">
                                                 <tr>
-												<td>${GenerateCertificate.id}</td>
-												<td>${GenerateCertificate.trainingType}</td>
-												<td>${GenerateCertificate.trainingDate}</td>
-												<td>${GenerateCertificate.trainingPartner}</td>
-												<td>${GenerateCertificate.trainingInstitute}</td>
-												<td>${GenerateCertificate.traineeName}</td>
-												<td>${GenerateCertificate.attendanceStatus}</td>
-												<td>${GenerateCertificate.certificateStatus}</td>
-												<td>${GenerateCertificate.generateCertificate}
-												  <class="text-center"><input type="checkbox"> 
-                                                        </td>
-                                                            
-                                                       
+											    <td>${TrainingClosure.id}</td>
+												<td>${TrainingClosure.trainingType}</td>
+												<td>${TrainingClosure.userType}</td>
+												<td>${TrainingClosure.trainingDate}</td>
+												<td>${TrainingClosure.trainingInstitute}</td>
+												<td>${TrainingClosure.status}</td>
+												
 												
 											</tr>
 										</ct:forEach>
-										 
                                             </table>
-                                            <div class="col-md-6 col-xs-12"></div>
-                                               
-                                                 <div class="col-md-6 col-xs-12">
-
-                                                    <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Generate Certificate"/> 
-                                               
-                                                </div>
-                                                    </div>
                                            </ct:if>
-                                           
                                         </fieldset>
-                                        
+                                                    </div>
                                                 </div>
-                                                 
-                                           
                                             </div>
-                                             
-                                                                                        
-                                           
-                                        </div>
                              <!-- search div ends -->
                         </div><!-- row ends -->
                     </div>

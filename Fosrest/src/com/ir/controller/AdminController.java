@@ -56,6 +56,7 @@ import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
+import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.model.City;
@@ -2046,6 +2047,8 @@ public String ListGenerateCertificate(@ModelAttribute("GenerateCertificateForm")
 		Map<String , String> trainingType = lst.trainingTypeMap;
 		Map<String , String> trainingPartner = lst.trainingParterMap;
 	
+		
+		
 		model.addAttribute("trainingType",trainingType);
 		model.addAttribute("trainingPartner",trainingPartner);
 		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
@@ -2056,6 +2059,46 @@ public String ListGenerateCertificate(@ModelAttribute("GenerateCertificateForm")
 }
 
 
+
+
+//for training closure
+@RequestMapping(value = "/TrainingClosure", method = RequestMethod.GET)
+public String TrainingClosure(@ModelAttribute("TrainingClosureForm") TrainingClosureForm trainingClosureForm ,Model model) {
+		System.out.println("listTrainingClosure");
+		
+		Map<String , String> userType = lst.userTypeMap;			
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		
+		model.addAttribute("userType",userType);
+		model.addAttribute("trainingType",trainingType);
+		
+		
+		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
+		model.addAttribute("TrainingClosureForm", new TrainingClosureForm());
+
+	return "TrainingClosure";
+}
+
+@RequestMapping(value = "/ListTrainingClosure", method = RequestMethod.POST)
+public String ListTrainingClosure(@ModelAttribute("TrainingClosureForm") TrainingClosureForm trainingClosureForm ,Model model) {
+	
+		System.out.println("listTrainingClosure" + trainingClosureForm.getTrainingType());
+		
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> userType = lst.userTypeMap;	
+		Map<String , String> status = lst.statusMap;	
+		
+		//Map<String , String> trainingInstitute = lst.trainingInstituteMap; //no need
+		//Map<String , String> trainingDate = lst.trainingDateMap;
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("userType",userType);
+		model.addAttribute("status",status);
+		//model.addAttribute("trainingInstitute" , trainingInstitute);
+	 
+		model.addAttribute("TrainingClosureForm", new TrainingClosureForm());
+		model.addAttribute("listTrainingClosure", this.adminService.listTrainingClosure());
+	return "TrainingClosure";
+}
 
 
 

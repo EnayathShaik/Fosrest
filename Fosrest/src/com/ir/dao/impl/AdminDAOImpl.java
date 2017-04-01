@@ -41,6 +41,7 @@ import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
+import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestion;
@@ -2403,19 +2404,43 @@ public class AdminDAOImpl implements AdminDAO {
 			GenerateCertificateForm bean = new GenerateCertificateForm();
 			List<GenerateCertificateForm> list = new ArrayList<GenerateCertificateForm>();
 			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> lst = session.createSQLQuery("select cast('Refresher' as varchar(20)) as trainingType ,cast('26-03-2017' as varchar(40)) as trainingDate, cast('Adlab' as varchar(20)) as trainingPartner , cast('Adlab' as varchar(20) ) as trainingInstitute,cast('Mr.Anuj' as varchar(40)) as traineeName,cast('pending' as varchar(40)) as attendanceStatus,cast('pending' as varchar(40)) as certificateStatus,cast('pending' as varchar(40)) as generateCertificate").list();
+			List<Object[]> lst = session.createSQLQuery("select cast('1' as int) as id,cast('Refresher' as varchar(20)) as trainingType ,cast('26-03-2017' as varchar(40)) as trainingDate, cast('Adlab' as varchar(20)) as trainingPartner , cast('Adlab' as varchar(20) ) as trainingInstitute,cast('Mr.Anuj' as varchar(40)) as traineeName,cast('pending' as varchar(40)) as attendanceStatus,cast('pending' as varchar(40)) as certificateStatus").list();
 			for (Object[] li : lst ) {
 				
-				bean.setTrainingType((String) li[0]);
-				bean.setTrainingDate((String) (li[1]));
-				bean.setTrainingPartner((String) li[2]);
-				bean.setTrainingInstitute((String) li[3]);
-				bean.setTraineeName((String) li[4]);
-				bean.setAttendanceStatus((String) li[5]);
-				bean.setCertificateStatus((String) li[6]);
-				bean.setGenerateCertificate((String) li[7]);
+				bean.setId((int) li[0]);
+				bean.setTrainingType((String) li[1]);
+				bean.setTrainingDate((String) (li[2]));
+				bean.setTrainingPartner((String) li[3]);
+				bean.setTrainingInstitute((String) li[4]);
+				bean.setTraineeName((String) li[5]);
+				bean.setAttendanceStatus((String) li[6]);
+				bean.setCertificateStatus((String) li[7]);
+				
 				
 				list.add(bean);
+			}
+System.out.println("list "+list);
+			return list;
+		}
+		
+		@Override
+		public List<TrainingClosureForm> listTrainingClosure() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTrainingClosureForm");
+			TrainingClosureForm bean = new TrainingClosureForm();
+			List<TrainingClosureForm> list = new ArrayList<TrainingClosureForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> lst = session.createSQLQuery("select  cast('1' as int) as id,cast('Refresher' as varchar(20)) as trainingType , cast('AO' as varchar(20)) as UserType ,cast('26-03-2017' as varchar(40)) as trainingDate, cast('Foundation' as varchar(20) ) as trainingInstitute,cast('Pending' as varchar(20) ) as status").list();
+			for (Object[] li : lst ) {
+				
+				bean.setId((int) li[0]);
+				bean.setTrainingType((String) li[1]);
+				bean.setUserType((String) li[2]);
+				bean.setTrainingDate(((String)li[3]));
+				bean.setTrainingInstitute((String) li[4]);
+				bean.setStatus(((String)li[5]));
+				list.add(bean);
+				
 			}
 System.out.println("list "+list);
 			return list;

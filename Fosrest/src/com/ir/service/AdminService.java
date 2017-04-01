@@ -24,6 +24,7 @@ import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
+import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.CityMaster;
@@ -280,6 +281,8 @@ public interface AdminService {
 	public void removeTrainingPartner(int id);
 	public TrainingPartner getTrainingPartnerById(int id);
 	public List<TrainingPartner> listTrainingPartner();
+
+	public List<TrainingClosureForm> listTrainingClosure();
 	
 }
 
