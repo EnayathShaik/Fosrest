@@ -19,10 +19,14 @@ import com.ir.constantes.Constantes;
 import com.ir.constantes.TableLink;
 import com.ir.dao.AdminDAO;
 import com.ir.dao.TraineeDAO;
+import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.GetScoreCardForm;
+import com.ir.form.MyTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
+import com.ir.form.TrainingClosureForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CheckAadhar;
@@ -1271,7 +1275,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setStatus("A");
-		loginDetails.setProfileId(4);
+		loginDetails.setProfileId(3);
 		p.setLoginDetails(loginDetails);
 		
 		session.save(p);
@@ -1383,7 +1387,75 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}	
 	
 	
+	//@Override
+	public List<MyTrainingForm> listMyTraining() {
+		// TODO Auto-generated method stub
+		System.out.println("inside listMyTrainingForm");
+		MyTrainingForm bean = new MyTrainingForm();
+		List<MyTrainingForm> list = new ArrayList<MyTrainingForm>();
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Object[]> lst = session.createSQLQuery("select  cast('1' as int) as id,cast('Refresher' as varchar(20)) as trainingType , cast('Foundation' as varchar(20)) as trainingPhase ,cast('26-03-2017' as varchar(40)) as startDate,cast('26-06-2017' as varchar(40)) as endDate,cast('online' as varchar(20)) as trainingCenter,cast('Completed' as varchar(20)) as status").list();
+		for (Object[] li : lst ) {
+			bean.setId((int) li[0]);
+			bean.setTrainingType((String) li[1]);
+			bean.setTrainingPhase((String) li[2]);
+			bean.setStartDate((String) li[3]);
+			bean.setEndDate(((String)li[4]));
+			bean.setTrainingCenter(((String)li[5]));
+			bean.setStatus(((String)li[6]));
+			list.add(bean);
+		}
+System.out.println("list "+list);
+		return list;
+	}
 	
+
+	
+	//@Override
+		public List<GetScoreCardForm> listGetScoreCard() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listGetScoreCardForm");
+			GetScoreCardForm bean = new GetScoreCardForm();
+			List<GetScoreCardForm> list = new ArrayList<GetScoreCardForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> lst = session.createSQLQuery("select  cast('1' as int) as id,cast('Test 1' as varchar(20)) as unit , cast('5' as int) as score").list();
+			for (Object[] li : lst ) {
+				bean.setId((int) li[0]);
+				bean.setUnit((String) li[1]);
+				bean.setScore((int) li[2]);
+				
+				list.add(bean);
+			}
+	System.out.println("list "+list);
+			return list;
+		}
+		
+		//@Override
+				public List<CertificateForm> listCertificate() {
+					// TODO Auto-generated method stub
+					System.out.println("inside listCertificateForm");
+					CertificateForm bean = new CertificateForm();
+					List<CertificateForm> list = new ArrayList<CertificateForm>();
+					Session session = this.sessionFactory.getCurrentSession();
+					List<Object[]> lst = session.createSQLQuery("select  cast('1' as int) as id,cast('Refresher' as varchar(20)) as trainingType , cast('Completed' as varchar(20)) as completionStatus ,cast('yes' as varchar(20) ) as certificateAvailable").list();
+					for (Object[] li : lst ) {
+						
+						bean.setId((int) li[0]);
+						bean.setTrainingType((String) li[1]);
+						bean.setCompletionStatus((String) li[2]);
+						bean.setCertificateAvailable((String) li[3]);
+						
+				
+						list.add(bean);
+					}
+			System.out.println("list "+list);
+					return list;
+				}
+		
+				
+				
+			
+
 	@Override
 	public PersonalInformationTrainer fullDetailtrainer(int loginId) {
 		// TODO Auto-generated method stub
@@ -1419,4 +1491,5 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 	}
 	
+
 }

@@ -1016,5 +1016,65 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/GenerateCertificate.jsp" />
 	</definition>
+	
+	<definition name="TrainingClosure" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/TrainingClosure.jsp" />
+	</definition>
+	
+	<definition name="TrainingClosure/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/TrainingClosure.jsp" />
+	</definition>
+	
+	<definition name="MyTraining" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/MyTraining.jsp" />
+	</definition>
+	
+	<definition name="MyTraining/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/MyTraining.jsp" />
+	</definition>
+	
+	<definition name="GetScoreCard" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/GetScoreCard.jsp" />
+	</definition>
+	
+	<definition name="GetScoreCard/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/GetScoreCard.jsp" />
+	</definition>
+	
+	<definition name="OnlineTraining" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/OnlineTraining.jsp" />
+	</definition>
+	
+	<definition name="OnlineTraining/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/OnlineTraining.jsp" />
+	</definition>
+	
+	<definition name="OnlineAssessment" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/OnlineAssessment.jsp" />
+	</definition>
+	
+	<definition name="OnlineAssessment/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/OnlineAssessment.jsp" />
+	</definition>
+	
+	<definition name="Certificate" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/Certificate.jsp" />
+	</definition>
+	
+	<definition name="Certificate/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/Certificate.jsp" />
+	</definition>
 
 </tiles-definitions>

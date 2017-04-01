@@ -103,8 +103,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 		destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 			<property name="url" value="jdbc:postgresql://localhost/fosrest" />
-		<property name="username" value="fosrestadmin" />
-		<property name="password" value="Fss2iZentech" />
+		<property name="username" value="postgres" />
+		<property name="password" value="test@1234" />
+			
 	</bean>
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->

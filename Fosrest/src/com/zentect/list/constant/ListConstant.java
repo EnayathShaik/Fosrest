@@ -48,7 +48,7 @@ public class ListConstant {
     }
     
   //User Type
-    private static final Map<String, String> statusMap;
+    public static final Map<String, String> statusMap;
     static {
         Map<String, String> astatusMap = new HashMap<String, String>();
         astatusMap.put("A", "Active");
@@ -208,5 +208,28 @@ public class ListConstant {
         trainingParterMap = Collections.unmodifiableMap(avacancyMap);
     }
     
+    //User Type
+    public static final Map<String, String> trainingInstituteMap;
+    static {
+        Map<String, String> atrainingInstituteMap = new HashMap<String, String>();
+        atrainingInstituteMap.put("FND", "FOUNDATION");
+        trainingInstituteMap = Collections.unmodifiableMap(atrainingInstituteMap);
+    }
+    //User Type
+    public static final Map<String, String> trainingPartnerMap;
+    static {
+        Map<String, String> atrainingPartnerMap = new HashMap<String, String>();
+        atrainingPartnerMap.put("FND", "FOUNDATION");
+        trainingPartnerMap = Collections.unmodifiableMap(atrainingPartnerMap);
+    }
+    
+    //User Type
+    public static final Map<String, String> trainingCenterMap;
+    static {
+        Map<String, String> atrainingInstituteMap = new HashMap<String, String>();
+        atrainingInstituteMap.put("FND", "FOUNDATION");
+        trainingCenterMap = Collections.unmodifiableMap(atrainingInstituteMap);
+    }
+
 
 }

@@ -31,10 +31,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
+import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GenerateCourseCertificateForm;
+import com.ir.form.GetScoreCardForm;
+import com.ir.form.MyTrainingForm;
+import com.ir.form.OnlineAssessmentForm;
+import com.ir.form.OnlineTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.AdmitCardForm;
@@ -794,16 +800,121 @@ public class TraineeController {
 		}else{
 			return "PersonalInformationTrainee";
 		}
+	}
 		
 		
 		
+		// for Trainee	
+			
+
+		
+		
+		@RequestMapping(value = "/MyTraining", method = RequestMethod.GET)
+		public String MyTraining(@ModelAttribute("MyTrainingForm") MyTrainingForm MyTrainingForm ,Model model){
+			
+				System.out.println("listMyTraining");
+							
+				Map<String , String> trainingType = lst.trainingTypeMap;
+				model.addAttribute("trainingType",trainingType);
+				model.addAttribute("MyTrainingForm", new MyTrainingForm());
+			//	model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
+			
+				return "MyTraining";
+		
+		}
+
+        @RequestMapping(value = "/ListMyTraining", method = RequestMethod.POST)
+		public String ListMyTraining(@ModelAttribute("MyTrainingForm") MyTrainingForm MyTrainingForm ,Model model) {
+			
+				System.out.println("listMyTraining" + MyTrainingForm.getTrainingType());
+						
+				Map<String , String> trainingType = lst.trainingTypeMap;
+				Map<String , String> trainingCenter = lst.trainingCenterMap;
+				model.addAttribute("trainingType",trainingType);
+				
+				model.addAttribute("MyTrainingForm", new MyTrainingForm());
+				model.addAttribute("listMyTraining", this.traineeService.listMyTraining());
+			return "MyTraining";
+		
+	
+	
 	}
 	
+	//for get score card
+        
+        @RequestMapping(value = "/GetScoreCard", method = RequestMethod.GET)
+		public String GetScoreCard(@ModelAttribute("GetScoreCardForm") GetScoreCardForm GetScoreCardForm ,Model model){
+			
+				System.out.println("listGetScoreCard");
+							
+				Map<String , String> trainingType = lst.trainingTypeMap;
+				Map<String , String> trainingPhase = lst.trainingPhaseMap;
+				model.addAttribute("trainingType",trainingType);
+				model.addAttribute("trainingPhase",trainingPhase);
+				model.addAttribute("GetScoreCardForm", new GetScoreCardForm());
+			//	model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
+			
+				return "GetScoreCard";
+		
+		}
+
+        @RequestMapping(value = "/ListGetScoreCard", method = RequestMethod.POST)
+		public String ListGetScoreCard(@ModelAttribute("GetScoreCardForm") GetScoreCardForm GetScoreCardForm ,Model model) {
+			
+				System.out.println("listGetScoreCard" + GetScoreCardForm.getTrainingType());
+						
+				Map<String , String> trainingType = lst.trainingTypeMap;
+				Map<String , String> trainingPhase = lst.trainingPhaseMap;
+				
+				model.addAttribute("trainingType",trainingType);
+				model.addAttribute("trainingPhase",trainingPhase);
+				model.addAttribute("GetScoreCardForm", new GetScoreCardForm());
+				model.addAttribute("listGetScoreCard", this.traineeService.listGetScoreCard());
+			return "GetScoreCard";
+		}
 	
-	
-	
-	
-	
+	//for online training
+
+        @RequestMapping(value = "/OnlineTraining", method = RequestMethod.GET)
+		public String OnlineTraining(@ModelAttribute("OnlineTrainingForm") OnlineTrainingForm OnlineTrainingForm ,Model model){
+			
+				System.out.println("listOnlineTraining");
+			
+				return "OnlineTraining";
+		
+		}
+        
+      //for online Assessment
+
+        @RequestMapping(value = "/OnlineAssessment", method = RequestMethod.GET)
+		public String OnlineTraining(@ModelAttribute("OnlineAssessmentForm") OnlineAssessmentForm OnlineAssessmentForm ,Model model){
+			
+				System.out.println("listOnlineAssessment");
+				
+				return "OnlineAssessment";
+		
+		}
+        
+        
+        
+        //for Certificate
+
+          @RequestMapping(value = "/Certificate", method = RequestMethod.GET)
+  		public String Certificate(@ModelAttribute("CertificateForm") CertificateForm CertificateForm ,Model model){
+  			
+  				System.out.println("listCertificate");
+  				Map<String , String> trainingType = lst.trainingTypeMap;
+  				
+  				model.addAttribute("trainingType",trainingType);
+  				model.addAttribute("CertificateForm", new CertificateForm());
+  				model.addAttribute("listCertificate", this.traineeService.listCertificate());
+  				
+  				
+  			
+  				return "Certificate";
+  		
+  		}
+        
 	
 	
 	

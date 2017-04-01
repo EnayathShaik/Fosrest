@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.ir.dao.TraineeDAO;
+import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.GenerateCertificateForm;
+import com.ir.form.GetScoreCardForm;
+import com.ir.form.MyTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
@@ -317,7 +321,32 @@ public class TraineeServiceImpl implements TraineeService {
 	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute  p) {
 		// TODO Auto-generated method stub
 		return traineeDAO.addPersonalInfoTrainingInstitute(p);
+
 	}
+//my training	
+	@Override
+	@Transactional
+	public List<MyTrainingForm> listMyTraining() {
+		// TODO Auto-generated method stub
+		return this.traineeDAO.listMyTraining();
+	}
+	
+	@Override
+	@Transactional
+	public List<GetScoreCardForm> listGetScoreCard() {
+		// TODO Auto-generated method stub
+		return this.traineeDAO.listGetScoreCard();
+	}
+	
+	@Override
+	@Transactional
+	public List<CertificateForm> listCertificate() {
+		// TODO Auto-generated method stub
+		return this.traineeDAO.listCertificate();
+	}
+	
+
+	
 	
 	//updatePersonalInfoTrainingInstitute
 	
@@ -347,3 +376,4 @@ public class TraineeServiceImpl implements TraineeService {
 	
 
 }
+
