@@ -170,7 +170,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.RegionMaster</value>
 				<value>com.ir.model.TrainingPartner</value>
 				<value>com.ir.model.TrainingSchedule</value>
-				
+				<value>com.ir.model.CustomerMaster</value>
+				<value>com.ir.model.TaxMaster</value>
+				<value>com.ir.model.EmployeeMonthlyCharges</value>
 <!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
 				<!-- 
 				

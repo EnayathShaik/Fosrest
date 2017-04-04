@@ -29,9 +29,10 @@ public class UnitMaster {
 	private String trainingType;
 	private String trainingPhase;
 	private String unitName;
-
+	private String unitCode;
 	private String status;
-	
+	@Column(columnDefinition="int default 0")
+	private int seqNo;
 	
 
 	public UnitMaster() {
@@ -109,6 +110,30 @@ public class UnitMaster {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+
+
+	public String getUnitCode() {
+		return unitCode;
+	}
+
+
+
+	public void setUnitCode(String unitCode) {
+		this.unitCode = unitCode;
+	}
+
+
+
+	public int getSeqNo() {
+		return seqNo;
+	}
+
+
+
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
 	}
 
 

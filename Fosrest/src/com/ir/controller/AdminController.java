@@ -63,8 +63,10 @@ import com.ir.model.City;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
+import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.ModuleMaster;
@@ -77,6 +79,7 @@ import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TaxMaster;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -2101,6 +2104,210 @@ public String ListTrainingClosure(@ModelAttribute("TrainingClosureForm") Trainin
 }
 
 
+
+
+
+/************************************invoice***********************************************************/
+
+
+/**
+ * @author Jyoti Mekal
+ *
+ * All Add Edit delete for Customer Master
+ */
+ 
+	@RequestMapping(value = "/CustomerMaster", method = RequestMethod.GET)
+public String listCustomerMaster(@ModelAttribute("CustomerMaster") CustomerMaster customerMaster ,Model model) {
+	System.out.println("listCustomerMaster");
+	model.addAttribute("listCustomerMaster", this.adminService.listCustomerMaster());
+		model.addAttribute("CustomerMaster", new CustomerMaster());
+		
+	return "CustomerMaster";
+}
+
+
+@RequestMapping(value= "/CustomerMaster/add", method = RequestMethod.POST) 
+public String addCustomerMaster(@Valid @ModelAttribute("CustomerMaster") CustomerMaster p , BindingResult result){
+System.out.println(result.hasErrors());	
+
+	if (result.hasErrors()) {
+		
+		new ZLogger("CustomerMaster", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+		new ZLogger("CustomerMaster", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+		return "redirect:/CustomerMaster.fssai";
+	}
+	
+	System.out.println("p.getId() "+p.getCustomerId());
+	if(p.getCustomerId() == 0){
+		//new person, add it
+		this.adminService.addCustomerMaster(p);
+	}else{
+		//existing person, call update
+		this.adminService.updateCustomerMaster(p);
+	}
+	System.out.println("after insert");
+	return "redirect:/CustomerMaster.fssai";
+}
+
+@RequestMapping("/CustomerMaster/remove/{id}")
+public String removeCustomerMaster(@PathVariable("id") int id){
+	
+ this.adminService.removeCustomerMaster(id);
+ return "redirect:/CustomerMaster.fssai";
+}
+
+
+@RequestMapping(value="/CustomerMaster/edit/{id}" , method=RequestMethod.POST)
+@ResponseBody
+public void editCustomerMaster(@PathVariable("id") int id ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("CustomerMaster/edit","CustomerMaster/edit............" + id  , "AdminController.java");
+	
+	CustomerMaster hm = this.adminService.getCustomerMasterById(id);
+	//List courseList = adminService.searchFeedbackMaster(data);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(hm); 
+	System.out.println("newList "+newList);
+	out.write(newList);
+	out.flush();
+	
+}
+
+
+
+
+/**
+ * @author Jyoti Mekal
+ *
+ * All Add Edit delete for Tax Master
+ */
+ 
+	@RequestMapping(value = "/TaxMaster", method = RequestMethod.GET)
+public String listTaxMaster(@ModelAttribute("TaxMaster") TaxMaster TaxMaster ,Model model) {
+	System.out.println("listTaxMaster");
+	model.addAttribute("listTaxMaster", this.adminService.listTaxMaster());
+		model.addAttribute("TaxMaster", new TaxMaster());
+		
+	return "TaxMaster";
+}
+
+
+@RequestMapping(value= "/TaxMaster/add", method = RequestMethod.POST) 
+public String addTaxMaster(@Valid @ModelAttribute("TaxMaster") TaxMaster p , BindingResult result){
+System.out.println(result.hasErrors());	
+
+	if (result.hasErrors()) {
+		
+		new ZLogger("TaxMaster", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+		new ZLogger("TaxMaster", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+		return "redirect:/TaxMaster.fssai";
+	}
+	
+	System.out.println("p.getId() "+p.getTaxId());
+	if(p.getTaxId() == 0){
+		//new person, add it
+		this.adminService.addTaxMaster(p);
+	}else{
+		//existing person, call update
+		this.adminService.updateTaxMaster(p);
+	}
+	System.out.println("after insert");
+	return "redirect:/TaxMaster.fssai";
+}
+
+@RequestMapping("/TaxMaster/remove/{id}")
+public String removeTaxMaster(@PathVariable("id") int id){
+	
+ this.adminService.removeTaxMaster(id);
+ return "redirect:/TaxMaster.fssai";
+}
+
+
+@RequestMapping(value="/TaxMaster/edit/{id}" , method=RequestMethod.POST)
+@ResponseBody
+public void editTaxMaster(@PathVariable("id") int id ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("TaxMaster/edit","TaxMaster/edit............" + id  , "AdminController.java");
+	
+	TaxMaster hm = this.adminService.getTaxMasterById(id);
+	//List courseList = adminService.searchFeedbackMaster(data);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(hm); 
+	System.out.println("newList "+newList);
+	out.write(newList);
+	out.flush();
+	
+}
+
+
+
+
+
+
+
+/**
+ * @author Jyoti Mekal
+ *
+ * All Add Edit delete for Employee Monthly Charges
+ */
+ 
+	@RequestMapping(value = "/EmployeeMonthlyCharges", method = RequestMethod.GET)
+public String listEmployeeMonthlyCharges(@ModelAttribute("EmployeeMonthlyCharges") EmployeeMonthlyCharges EmployeeMonthlyCharges ,Model model) {
+	System.out.println("listEmployeeMonthlyCharges");
+	model.addAttribute("listEmployeeMonthlyCharges", this.adminService.listEmployeeMonthlyCharges());
+	model.addAttribute("listCustomerMaster", this.adminService.listCustomerMaster());
+		model.addAttribute("EmployeeMonthlyCharges", new EmployeeMonthlyCharges());
+		
+	return "EmployeeMonthlyCharges";
+}
+
+
+@RequestMapping(value= "/EmployeeMonthlyCharges/add", method = RequestMethod.POST) 
+public String addEmployeeMonthlyCharges( @ModelAttribute("EmployeeMonthlyCharges") EmployeeMonthlyCharges p , BindingResult result){
+System.out.println(result.hasErrors());	
+
+/*if (result.hasErrors()) {
+		
+		new ZLogger("EmployeeMonthlyCharges", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+		new ZLogger("EmployeeMonthlyCharges", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+		return "redirect:/EmployeeMonthlyCharges.fssai";
+	}*/
+	
+	System.out.println("p.getId() "+p.getId());
+	if(p.getId() == 0){
+		//new person, add it
+		this.adminService.addEmployeeMonthlyCharges(p);
+	}else{
+		//existing person, call update
+		this.adminService.updateEmployeeMonthlyCharges(p);
+	}
+	System.out.println("after insert");
+	return "redirect:/EmployeeMonthlyCharges.fssai";
+}
+
+@RequestMapping("/EmployeeMonthlyCharges/remove/{id}")
+public String removeEmployeeMonthlyCharges(@PathVariable("id") int id){
+	
+ this.adminService.removeEmployeeMonthlyCharges(id);
+ return "redirect:/EmployeeMonthlyCharges.fssai";
+}
+
+
+@RequestMapping(value="/EmployeeMonthlyCharges/edit/{id}" , method=RequestMethod.POST)
+@ResponseBody
+public void editEmployeeMonthlyCharges(@PathVariable("id") int id ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("EmployeeMonthlyCharges/edit","EmployeeMonthlyCharges/edit............" + id  , "AdminController.java");
+	
+	EmployeeMonthlyCharges hm = this.adminService.getEmployeeMonthlyChargesById(id);
+	//List courseList = adminService.searchFeedbackMaster(data);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(hm); 
+	System.out.println("newList "+newList);
+	out.write(newList);
+	out.flush();
+	
+}
 
 
 

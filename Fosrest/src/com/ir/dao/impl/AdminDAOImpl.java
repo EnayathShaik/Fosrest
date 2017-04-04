@@ -51,8 +51,10 @@ import com.ir.model.CityMaster;
 import com.ir.model.ContactTraineee;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
+import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.LoginDetails;
@@ -70,6 +72,7 @@ import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TaxMaster;
 import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
@@ -2445,6 +2448,221 @@ System.out.println("list "+list);
 System.out.println("list "+list);
 			return list;
 		}
+		
+		
+		
+		
+		
+
+		/*************************************Zinvoice******************************************/
+		
+		
+		
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Customer Master
+		 */
+		
+		@Override
+		public void addCustomerMaster(CustomerMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getCustomerId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateCustomerMaster(CustomerMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeCustomerMaster
+		
+		@Override
+		public void removeCustomerMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			CustomerMaster p = (CustomerMaster) session.load(CustomerMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public CustomerMaster getCustomerMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from CustomerMaster where CustomerId="+id);
+		
+		List<CustomerMaster> CustomerMasterList = query.list();
+		CustomerMaster hm = CustomerMasterList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<CustomerMaster> listCustomerMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listCustomerMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<CustomerMaster> mccList = session.createQuery("from CustomerMaster").list();
+			for (CustomerMaster p : mccList) {
+				System.out.println("Customer List::" + p);
+			}
+			return mccList;
+		}
+		
+		
+		
+	
+		
+		
+	
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Tax Master
+		 */
+		
+		@Override
+		public void addTaxMaster(TaxMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getTaxId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateTaxMaster(TaxMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeTaxMaster
+		
+		@Override
+		public void removeTaxMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			TaxMaster p = (TaxMaster) session.load(TaxMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public TaxMaster getTaxMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from TaxMaster where taxId="+id);
+		
+		List<TaxMaster> TaxMasterList = query.list();
+		TaxMaster hm = TaxMasterList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<TaxMaster> listTaxMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTaxMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<TaxMaster> mccList = session.createQuery("from TaxMaster").list();
+			for (TaxMaster p : mccList) {
+				System.out.println("Tax List::" + p);
+			}
+			return mccList;
+		}
+		
+		
+		
+		
+
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Tax Master
+		 */
+		
+		@Override
+		public void addEmployeeMonthlyCharges(EmployeeMonthlyCharges p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateEmployeeMonthlyCharges(EmployeeMonthlyCharges p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeEmployeeMonthlyCharges
+		
+		@Override
+		public void removeEmployeeMonthlyCharges(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			EmployeeMonthlyCharges p = (EmployeeMonthlyCharges) session.load(EmployeeMonthlyCharges.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public EmployeeMonthlyCharges getEmployeeMonthlyChargesById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from EmployeeMonthlyCharges where taxId="+id);
+		
+		List<EmployeeMonthlyCharges> EmployeeMonthlyChargesList = query.list();
+		EmployeeMonthlyCharges hm = EmployeeMonthlyChargesList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		@Override
+		public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listEmployeeMonthlyCharges");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<EmployeeMonthlyCharges> mccList = session.createQuery("from EmployeeMonthlyCharges").list();
+			for (EmployeeMonthlyCharges p : mccList) {
+				System.out.println("Tax List::" + p);
+			}
+			return mccList;
+		}
+		
 		
 }
 

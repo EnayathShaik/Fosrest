@@ -35,8 +35,10 @@ import com.ir.model.AdminUserManagement;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
+import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.ManageTrainingPartner;
@@ -50,6 +52,7 @@ import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TaxMaster;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -1018,4 +1021,161 @@ public class AdminServiceImpl implements AdminService {
 			return this.adminDAO.listTrainingClosure();
 		}
 	
+	    
+	    
+
+		/******************************************Invoice ************************************/
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * Impl For Customer Master
+		 */
+		
+		@Override
+		@Transactional
+		public void addCustomerMaster(CustomerMaster p){
+			 this.adminDAO.addCustomerMaster(p);
+			
+		}
+		
+		//updateCustomerMaster
+		@Override
+		@Transactional
+		public void updateCustomerMaster(CustomerMaster p){
+			 this.adminDAO.updateCustomerMaster(p);
+			
+		}
+		
+		//removeCustomerMaster
+		
+		@Override
+		@Transactional
+		public void removeCustomerMaster(int id){
+			 this.adminDAO.removeCustomerMaster(id);
+			
+		}
+		
+//		/getCustomerMasterById
+		@Override
+		@Transactional
+		public CustomerMaster getCustomerMasterById(int id){
+			return this.adminDAO.getCustomerMasterById(id);
+			
+		}
+		
+		//listCustomerMaster
+		
+		@Override
+		@Transactional
+		public List<CustomerMaster> listCustomerMaster() {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listCustomerMaster();
+		}
+		
+		
+	
+		
+		
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * Impl For Tax Master
+		 */
+		
+		@Override
+		@Transactional
+		public void addTaxMaster(TaxMaster p){
+			 this.adminDAO.addTaxMaster(p);
+			
+		}
+		
+		//updateTaxMaster
+		@Override
+		@Transactional
+		public void updateTaxMaster(TaxMaster p){
+			 this.adminDAO.updateTaxMaster(p);
+			
+		}
+		
+		//removeTaxMaster
+		
+		@Override
+		@Transactional
+		public void removeTaxMaster(int id){
+			 this.adminDAO.removeTaxMaster(id);
+			
+		}
+		
+//		/getTaxMasterById
+		@Override
+		@Transactional
+		public TaxMaster getTaxMasterById(int id){
+			return this.adminDAO.getTaxMasterById(id);
+			
+		}
+		
+		//listTaxMaster
+		
+		@Override
+		@Transactional
+		public List<TaxMaster> listTaxMaster() {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listTaxMaster();
+		}
+		
+		//EmployeeMonthlyCharges
+		
+		
+		
+		
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * Impl For EmployeeMonthlyCharges
+		 */
+		
+		@Override
+		@Transactional
+		public void addEmployeeMonthlyCharges(EmployeeMonthlyCharges p){
+			 this.adminDAO.addEmployeeMonthlyCharges(p);
+			
+		}
+		
+		//updateEmployeeMonthlyCharges
+		@Override
+		@Transactional
+		public void updateEmployeeMonthlyCharges(EmployeeMonthlyCharges p){
+			 this.adminDAO.updateEmployeeMonthlyCharges(p);
+			
+		}
+		
+		//removeEmployeeMonthlyCharges
+		
+		@Override
+		@Transactional
+		public void removeEmployeeMonthlyCharges(int id){
+			 this.adminDAO.removeEmployeeMonthlyCharges(id);
+			
+		}
+		
+//		/getEmployeeMonthlyChargesById
+		@Override
+		@Transactional
+		public EmployeeMonthlyCharges getEmployeeMonthlyChargesById(int id){
+			return this.adminDAO.getEmployeeMonthlyChargesById(id);
+			
+		}
+		
+		//listEmployeeMonthlyCharges
+		
+		@Override
+		@Transactional
+		public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges() {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listEmployeeMonthlyCharges();
+		}
+		
+	    
 }

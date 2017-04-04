@@ -30,8 +30,10 @@ import com.ir.model.AdminUserManagement;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
+import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.ManageTrainingPartner;
@@ -45,6 +47,7 @@ import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TaxMaster;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -283,6 +286,62 @@ public interface AdminService {
 	public List<TrainingPartner> listTrainingPartner();
 
 	public List<TrainingClosureForm> listTrainingClosure();
+	
+	
+	
+	
+	
+	
+	
+	/******************************Invoice ******************************************************/
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * All Add Edit delete for Customer Master
+	 */
+	
+	
+	public void addCustomerMaster(CustomerMaster p);
+	public void updateCustomerMaster(CustomerMaster p);
+	public void removeCustomerMaster(int id);
+	public CustomerMaster getCustomerMasterById(int id);
+	public List<CustomerMaster> listCustomerMaster();
+	
+	
+	
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * All Add Edit delete for Tax Master
+	 */
+	
+	
+	public void addTaxMaster(TaxMaster p);
+	public void updateTaxMaster(TaxMaster p);
+	public void removeTaxMaster(int id);
+	public TaxMaster getTaxMasterById(int id);
+	public List<TaxMaster> listTaxMaster();
+	
+	
+	
+	
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * All Add Edit delete for Tax Master
+	 */
+	
+	
+	public void addEmployeeMonthlyCharges(EmployeeMonthlyCharges p);
+	public void updateEmployeeMonthlyCharges(EmployeeMonthlyCharges p);
+	public void removeEmployeeMonthlyCharges(int id);
+	public EmployeeMonthlyCharges getEmployeeMonthlyChargesById(int id);
+	public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges();
+	
+	
+	
+	
+	
 	
 }
 

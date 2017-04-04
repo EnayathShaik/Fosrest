@@ -27,8 +27,10 @@ import com.ir.model.City;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
+import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.ManageTrainingPartner;
@@ -42,6 +44,7 @@ import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TaxMaster;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -279,5 +282,49 @@ public interface AdminDAO {
 
 				public List<TrainingClosureForm> listTrainingClosure();
 		
+				
+				 
+				 /********************invoice **************************************************/
+					
+					//Customer Master
+					
+					public void addCustomerMaster(CustomerMaster p);
+					
+					public void updateCustomerMaster(CustomerMaster p);
+					
+					public void removeCustomerMaster(int id);
+					
+					public CustomerMaster getCustomerMasterById(int id);
+					
+					public List<CustomerMaster> listCustomerMaster(); 
+				  
+					
+					
+					
+					//Tax Master
+					
+					public void addTaxMaster(TaxMaster p);
+					
+					public void updateTaxMaster(TaxMaster p);
+					
+					public void removeTaxMaster(int id);
+					
+					public TaxMaster getTaxMasterById(int id);
+					
+					public List<TaxMaster> listTaxMaster(); 
+				   
+				   
+				  //EmployeeMonthlyCharges
+					public void addEmployeeMonthlyCharges(EmployeeMonthlyCharges p);
+					
+					public void updateEmployeeMonthlyCharges(EmployeeMonthlyCharges p);
+					
+					public void removeEmployeeMonthlyCharges(int id);
+					
+					public EmployeeMonthlyCharges getEmployeeMonthlyChargesById(int id);
+					
+					public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges(); 
+				   
+				  
 		
 }

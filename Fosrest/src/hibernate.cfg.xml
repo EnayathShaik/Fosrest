@@ -79,6 +79,8 @@
 		<mapping class="com.ir.model.RegionMaster"/>
 		<mapping class="com.ir.model.TrainingPartner"/>
 		<mapping class="com.ir.model.TrainingSchedule"/>
-		
+		<mapping class="com.ir.model.CustomerMaster"/>
+		<mapping class="com.ir.model.TaxMaster"/>
+		<mapping class="com.ir.model.EmployeeMonthlyCharges"/>
 	</session-factory>
 </hibernate-configuration>
