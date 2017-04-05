@@ -55,7 +55,7 @@
 													<div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Holiday Date:</strong></li>
-                                                        <li > <cf:errors path="holidayDate" style="color:red" ></cf:errors> </li>
+                                                          <li id="holidayDateErr" style="display:none;" class="style-li error-red" > Holiday Date can not be blank.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:input class="form-control" path="holidayDate" id="holidayDate" name="holidayDate" type="text" placeholder="Date"/> </div>
@@ -63,7 +63,7 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Holiday Reason:</strong></li>
-                                                        <li class="style-li error-red"> </li>
+                                                        <li class="style-li error-red" id="holidayReasonErr" style="display:none;">Holiday Reason can not be blank. </li>
                                                     </ul>
                                                 </div>
                                                 <cf:input class="form-control" type="text"  path="holidayReason" id="holidayReason" name="holidayReason" placeholder="Holiday Reason"/> </div>
@@ -157,7 +157,7 @@
                  */
                 
                 function editHoliday(id){
-                alert(id);
+               // alert(id);
                 
                 var name1=JSON.stringify({
             		courseName:0
@@ -179,5 +179,20 @@
             	      });     
                 
                 }
+                 
+
+                 function validateFields(){
+                	 alert($("#holidayDate").val());
+                	 alert($("#holidayReason").val());
+                	 if($("#holidayDate").val() == ''){
+                		 
+                		$("#holidayDateErr").css("display" , "block");
+                		return false;
+                	 } else if($("#holidayReason").val() == ''){
+                		 $("#holidayReasonErr").css("display" , "block");
+                 		return false; 
+                	 }
+
+                 }
 
             </script>
