@@ -699,7 +699,7 @@
 	</definition>
 	<definition name="stateMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/admin/stateMaster.jsp" />
+		<put-attribute name="body" value="/website/admin/State.jsp" />
 	</definition>
 
 	<definition name="master_state" extends="base.user.afterLogin">
@@ -955,34 +955,34 @@
 	
 		<definition name="StateMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/admin/StateMaster.jsp" />
+		<put-attribute name="body" value="/website/admin/State.jsp" />
 	</definition>
 
 	<definition name="StateMaster/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/admin/StateMaster.jsp" />
+		<put-attribute name="body" value="/website/admin/State.jsp" />
 	</definition>
 	
 	
 		<definition name="DistrictMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/admin/DistrictMaster.jsp" />
+		<put-attribute name="body" value="/website/admin/District.jsp" />
 	</definition>
 
 	<definition name="DistrictMaster/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/admin/DistrictMaster.jsp" />
+		<put-attribute name="body" value="/website/admin/District.jsp" />
 	</definition>
 	
 
 		<definition name="CityMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/admin/CityMaster.jsp" />
+		<put-attribute name="body" value="/website/admin/City.jsp" />
 	</definition>
 
 	<definition name="CityMaster/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/admin/CityMaster.jsp" />
+		<put-attribute name="body" value="/website/admin/City.jsp" />
 	</definition>
 	
 		<definition name="RegionMaster" extends="base.user.afterLogin">
