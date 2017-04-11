@@ -1,6 +1,7 @@
 package com.ir.dao.impl;
 
 
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,7 @@ import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingPartnerForm;
+import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
 import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
@@ -62,6 +65,7 @@ import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
+import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
@@ -1739,10 +1743,23 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		@Override
 		public void addUnitMaster(UnitMaster p) {
-			// TODO Auto-generated method stub
-			System.out.println("UnitMaster "+p.getUnitId());
-			
 			Session session = this.sessionFactory.getCurrentSession();
+			
+			String sql = "select coalesce(max(seqNo) + 1,1) from UnitMaster";
+			int maxId = 0 ;
+			Query maxIDList = session.createSQLQuery(sql);
+			List list = maxIDList.list();
+			System.out.println(list.size());
+			new ZLogger("UnitMaster", "list.size() "+list.size(), "AdminDAOImpl.java");
+			if(list.size() > 0){
+				maxId = (int) list.get(0);
+				//eligible = (String) list.get(0);
+			}
+			System.out.println("UnitMaster "+p.getUnitId());
+			System.out.println(p.getUnitName().substring(0, 2).toUpperCase()+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+			
+			p.setUnitCode(p.getUnitName().substring(0, 2).toUpperCase()+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+			p.setSeqNo(maxId);
 			session.persist(p);
 		}
 		
@@ -1809,11 +1826,25 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		@Override
 		public void addModuleMaster(ModuleMaster p) {
-			// TODO Auto-generated method stub
-			System.out.println("ModuleMaster "+p.getModuleId() + " p.getUnitMaster() "+p.getUnitMaster().getUnitId());
-			UnitMaster  um = getUnitMasterById(p.getUnitMaster().getUnitId());
-			p.setUnitMaster(um);
 			Session session = this.sessionFactory.getCurrentSession();
+			String sql = "select coalesce(max(seqNo) + 1,1) from ModuleMaster";
+			int maxId = 0 ;
+			Query maxIDList = session.createSQLQuery(sql);
+			List list = maxIDList.list();
+			System.out.println(list.size());
+			new ZLogger("UnitMaster", "list.size() "+list.size(), "AdminDAOImpl.java");
+			if(list.size() > 0){
+				maxId = (int) list.get(0);
+				//eligible = (String) list.get(0);
+			}
+			System.out.println("ModuleMaster "+p.getModuleId() + " p.getUnitMaster() "+p.getUnitMaster().getUnitId());
+
+			UnitMaster  um = getUnitMasterById(p.getUnitMaster().getUnitId());
+			System.out.println(p.getUnitMaster().getUnitName().substring(0, 2).toUpperCase()+p.getModuleName().substring(0, 2)+StringUtils.leftPad(String.valueOf(maxId), 2, "0"));
+			p.setModuleCode(p.getUnitMaster().getUnitName().substring(0, 2).toUpperCase()+p.getModuleName().toUpperCase().substring(0, 2)+StringUtils.leftPad(String.valueOf(maxId), 2, "0"));
+			p.setSeqNo(maxId);
+			p.setUnitMaster(um);
+			
 			session.persist(p);
 		}
 		
@@ -1866,10 +1897,6 @@ public class AdminDAOImpl implements AdminDAO {
 			return mccList;
 		}
 
-		
-		
-	
-		
 		/**
 		 * @author Jyoti Mekal
 		 *
@@ -1983,7 +2010,7 @@ public class AdminDAOImpl implements AdminDAO {
 			Session session = this.sessionFactory.getCurrentSession();
 			String sql= null;
 			if(profileId == 4	){
-				sql =	"update TrainingSchedule set trainer_status='Y' where trainingScheduleId="+id;	
+				sql =	"update TrainingSchedule set trainer_status='Y'  where trainingScheduleId="+id;	
 			}else{
 				sql =	"update TrainingSchedule set traininginstitudestatus='Y' where trainingScheduleId="+id;
 			}
@@ -2664,6 +2691,128 @@ System.out.println("list "+list);
 		}
 		
 		
+		
+		@Override
+		public List<PersonalInformationTrainee> listEligibleuser(String userType) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listEligibleuser"+userType);
+			List<PersonalInformationTrainee> personalInfoList = new ArrayList<PersonalInformationTrainee>();
+			Session session = this.sessionFactory.getCurrentSession();
+			
+			String sql = "select * from nomineetrainee";
+			Query maxIDList = session.createSQLQuery(sql);
+			List list = maxIDList.list();
+			Query query = null;
+
+			if(list.size() > 0){
+				query = session.createSQLQuery("select pit.id , usertype , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails)  where coalesce(eu.status, '') not in  ('N') and pit.usertype='"+userType+"'");
+				System.out.println("data der "+query);
+			}else{
+				
+				query = session.createSQLQuery("select pit.id , usertype , firstName , pit.loginDetails from PersonalInformationTrainee pit where  pit.usertype='"+userType+"'");
+				System.out.println("data not der "+query);
+				
+			}
+	
+			List<Object[]> list11 = query.list();
+			for(int i = 0 ; i < list11.size() ; i++){
+				PersonalInformationTrainee pit  =  new PersonalInformationTrainee();
+				Object[] obj   = list11.get(i);
+				pit.setId((int) obj[0]);
+				pit.setUserType((String) obj[1]);
+				pit.setFirstName((String) obj[2]);
+				System.out.println(obj[3]);
+				pit.setId((int)obj[3]);
+				personalInfoList.add(pit);
+			}
+			
+			return personalInfoList;
+		}
+		@Override
+		public String enrollUser(String data) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listEligibleuser "+data);
+
+			String[] arrData =  data.split("-");
+			List<String> loginDetails	 = new ArrayList<String>();
+			String[] loginIdName = arrData[0].split(",");
+			String unit = arrData[1];
+			String module = arrData[2];
+			String moduleCode = arrData[3];
+			System.out.println(" unit "+unit + "module  "+module + " moduleCode "+moduleCode+ " loginDetails "+loginIdName);
+			if(arrData[0].contains(",")){	
+				for(int i = 0 ; i <loginIdName.length ; i++ ){
+					System.out.println(" loginIdName[i] "+loginIdName[i]);
+					loginDetails.add(loginIdName[i]);
+				}
+			}else{
+				loginDetails.add(arrData[0]);
+			}
+			
+	
+			
+			
+			for(String s :loginDetails){
+				NomineeTrainee nt = new NomineeTrainee();
+				
+				nt.setModule(Integer.parseInt(module));	
+				nt.setUnit(Integer.parseInt(unit));
+				nt.setStatus("N");
+				 LoginDetails ld =  this.getLoginDetailsById(Integer.parseInt(s.split("@")[0]));
+				nt.setLoginDetails(ld);
+				nt.setTraineeName(s.split("@")[1]);
+				
+				
+				String result = addNomineeTrainee(nt , moduleCode);
+
+			}
+
+			return "created";
+		}
+
+		public LoginDetails getLoginDetailsById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+		/*	Session session = this.sessionFactory.getCurrentSession();*/
+			
+		Query query = session.createQuery("from LoginDetails where id="+id);
+	
+		List<LoginDetails> loginList = query.list();
+		session.close();
+		LoginDetails hm = loginList.get(0);
+			return hm; 
+			
+			
+		}
+		
+		
+		
+		
+		//addNomineeTrainee
+		@Override
+		public String addNomineeTrainee(NomineeTrainee nt , String moduleCode) {
+			// TODO Auto-generated method stub
+			System.out.println(" s "+nt);
+			String sql = "select coalesce(max(rollseqNo) + 1,1) from nomineetrainee";
+			int maxId = 0 ;
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			Query maxIDList = session.createSQLQuery(sql);
+			List list = maxIDList.list();
+			System.out.println(list.size());
+			new ZLogger("manageCourse", "list.size() "+list.size(), "AdminDAOImpl.java");
+			if(list.size() > 0){
+				maxId = (int) list.get(0);
+				System.out.println(" maxId "+maxId);
+			}
+			nt.setRollNo(moduleCode+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+			nt.setRollSeqNo(maxId);
+			session.save(nt);
+			session.close();
+			return "created";
+		}
 }
 
 

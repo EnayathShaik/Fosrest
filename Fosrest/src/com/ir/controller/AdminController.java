@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,6 +50,7 @@ import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.form.ModuleMasterForm;
+import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
 import com.ir.form.RegionMasterForm;
 import com.ir.form.StateForm;
@@ -1483,9 +1485,11 @@ public String listModuleMaster(@ModelAttribute("ModuleMasterForm") ModuleMaster 
 		Map<String , String> userType = lst.userTypeMap;			
 		Map<String , String> trainingType = lst.trainingTypeMap;
 		Map<String , String> trainingPhase = lst.trainingPhaseMap;
+		Map<String , String> contentType = lst.contentType;
 		model.addAttribute("userType",userType);
 		model.addAttribute("trainingType",trainingType);
 		model.addAttribute("trainingPhase",trainingPhase);
+		model.addAttribute("contentType",contentType);
 		model.addAttribute("ModuleMasterForm", new ModuleMasterForm());
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
@@ -1494,7 +1498,19 @@ public String listModuleMaster(@ModelAttribute("ModuleMasterForm") ModuleMaster 
 
 
 @RequestMapping(value= "/ModuleMaster/add", method = RequestMethod.POST) 
-public String addModuleMaster(@ModelAttribute("ModuleMasterForm") ModuleMasterForm p){
+public String addModuleMaster(@Valid @ModelAttribute("ModuleMasterForm") ModuleMasterForm p , BindingResult result , Model model){
+	System.out.println("result "+result.hasErrors());
+	if (result.hasErrors()) {
+		
+		new ZLogger("StateMaster", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+		new ZLogger("StateMaster", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+		//model.addAttribute("error",result.hasErrors() );
+		ValidationUtils.rejectIfEmpty(result, "moduleName", "Name can not be empty.");
+		return "redirect:/ModuleMaster.fssai";
+	//	return "ModuleMaster";
+	}
+	
+	
 	System.out.println("p.getId() "+p.getModuleId() + " " +p.getUnitId());
 	ModuleMaster moduleMaster = new ModuleMaster();
 	moduleMaster.setModuleId(p.getModuleId());
@@ -2309,6 +2325,62 @@ public void editEmployeeMonthlyCharges(@PathVariable("id") int id ,@RequestBody 
 	
 }
 
+
+
+
+
+
+/**
+ * @author Jyoti Mekal.
+ * 
+ * screen for trainee enrollment
+ *
+ */
+
+
+@RequestMapping(value = "/NominateTrainee", method = RequestMethod.GET)
+public String nominateTrainee(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm ,Model model) {
+		System.out.println("NominateTrainee");
+			
+		Map<String , String> userTypeMap = lst.userTypeMap;
+
+		model.addAttribute("userTypeMap",userTypeMap);
+		model.addAttribute("unitList",this.adminService.listUnitMaster());
+		model.addAttribute("moduleList",this.adminService.listModuleMaster());
+		model.addAttribute("NominateTraineeForm", new NominateTraineeForm());
+	
+	return "NominateTrainee";
+}
+
+//ListEligibleUser
+
+@RequestMapping(value = "/ListEligibleUser", method = RequestMethod.POST)
+public String ListEligibleUser(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm ,Model model) {
+		Map<String , String> userTypeMap = lst.userTypeMap;
+		model.addAttribute("userTypeMap",userTypeMap);
+		model.addAttribute("unitList",this.adminService.listUnitMaster());
+		model.addAttribute("moduleList",this.adminService.listModuleMaster());
+		System.out.println("ListEligibleUser" + nominateTraineeForm.getUserType());
+		model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getUserType()));
+	
+	return "NominateTrainee";
+}
+
+
+@RequestMapping(value="/enrollUser" , method=RequestMethod.POST)
+@ResponseBody
+public void enrollUser(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("getModule","getModule............" + data  , "CommonController.java");
+	String courseName =  data;
+	String data1 = adminService.enrollUser(courseName);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(data1); 
+	System.out.println("newList "+newList);
+	out.write(newList);
+	out.flush();
+	
+}
 
 
 	

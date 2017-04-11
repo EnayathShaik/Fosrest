@@ -173,4 +173,19 @@ public class CommonController {
 	}
 	
 	
+	@RequestMapping(value="/getModule" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getModule(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getModule","getModule............" + data  , "CommonController.java");
+		String courseName =  data;
+		List moduleList = commonService.getModule(courseName);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(moduleList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
 }

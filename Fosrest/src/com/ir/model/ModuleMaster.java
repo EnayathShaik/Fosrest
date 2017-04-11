@@ -1,6 +1,8 @@
 package com.ir.model;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.CascadeType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 
@@ -31,7 +38,12 @@ public class ModuleMaster {
 	private int moduleId;
 	private String moduleName;
 	private String status;
-	
+	private String contentType;
+	private String contentName;
+	private String contentLink;
+	private String moduleCode;
+	@Column(columnDefinition="int default 0")
+	private int seqNo;
 	
 	public String getStatus() {
 		return status;
@@ -93,7 +105,99 @@ public class ModuleMaster {
 
 
 
+	public String getContentType() {
+		return contentType;
+	}
+
+
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+
+
+	public String getContentName() {
+		return contentName;
+	}
+
+
+
+	public void setContentName(String contentName) {
+		this.contentName = contentName;
+	}
+
+
+
+	public String getContentLink() {
+		return contentLink;
+	}
+
+
+
+	public void setContentLink(String contentLink) {
+		this.contentLink = contentLink;
+	}
+
+
+
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_date")
+	private Date createDate;
 	
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "modify_date")
+	private Date modifyDate;
+
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+
+
+	public String getModuleCode() {
+		return moduleCode;
+	}
+
+
+
+	public void setModuleCode(String moduleCode) {
+		this.moduleCode = moduleCode;
+	}
+
+
+
+	public int getSeqNo() {
+		return seqNo;
+	}
+
+
+
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
+	}
+
 
 
 

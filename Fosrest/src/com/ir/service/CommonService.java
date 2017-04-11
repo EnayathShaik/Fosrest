@@ -18,4 +18,7 @@ public interface CommonService {
 	public String getCourseTrainingMode(String courseNmae);
 	
 	public List getTrainingInstitude(String data);
+	
+	public List getModule(String data);
+	
 }

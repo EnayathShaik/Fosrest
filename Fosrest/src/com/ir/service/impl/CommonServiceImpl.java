@@ -74,4 +74,10 @@ public class CommonServiceImpl implements CommonService{
 		List  trainingInstitude = commonDao.getTrainingInstitude( trainingPartner);
 		return trainingInstitude;
 	}
+	@Override
+	@Transactional
+	public List getModule(String trainingPartner){
+		List  moduleList = commonDao.getModule( trainingPartner);
+		return moduleList;
+	}
 }

@@ -15,4 +15,6 @@ public interface CommonDao {
 	public String getCourseTrainingMode(String courseName);
 	
 	public List getTrainingInstitude(String trainingPartner);
+	
+	public List getModule(String unit);
 }

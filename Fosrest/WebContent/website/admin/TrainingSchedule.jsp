@@ -12,6 +12,10 @@
                  	flatpickr("#trainingEndDate" , {
                  		enableTime: true
                 	});	
+                 	
+                 	if('${profileId}' == 2){
+                 		$("#createbtn").css("display" , 'none');
+                 	}
                 }
                 window.onload = OnStart;
 

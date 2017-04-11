@@ -215,21 +215,18 @@ public class ListConstant {
         atrainingInstituteMap.put("FND", "FOUNDATION");
         trainingInstituteMap = Collections.unmodifiableMap(atrainingInstituteMap);
     }
+
     //User Type
-    public static final Map<String, String> trainingPartnerMap;
+    public static final Map<String, String> contentType;
     static {
-        Map<String, String> atrainingPartnerMap = new HashMap<String, String>();
-        atrainingPartnerMap.put("FND", "FOUNDATION");
-        trainingPartnerMap = Collections.unmodifiableMap(atrainingPartnerMap);
+    	Map<String, String> atrainingInstituteMap = new HashMap<String, String>();
+    	atrainingInstituteMap.put("PPT", "PPT");
+    	atrainingInstituteMap.put("VIDEO", "VIDEO");
+    	atrainingInstituteMap.put("STUDYMATERIAL", "STUDYMATERIAL");
+    	contentType = Collections.unmodifiableMap(atrainingInstituteMap);
     }
     
-    //User Type
-    public static final Map<String, String> trainingCenterMap;
-    static {
-        Map<String, String> atrainingInstituteMap = new HashMap<String, String>();
-        atrainingInstituteMap.put("FND", "FOUNDATION");
-        trainingCenterMap = Collections.unmodifiableMap(atrainingInstituteMap);
-    }
+    
 
 
 }

@@ -144,6 +144,7 @@
                                                         <th>Training Type</th>
                                                         <th>Training Phase</th>
                                                         <th>Unit Name</th>
+                                                        <th>Unit Code</th>
                                                         <th>Status</th>
                                                         <th>Edit</th>
                                                         <th>Deleet</th>
@@ -157,6 +158,7 @@
 												<td>${UnitMaster.trainingType}</td>
 												<td>${UnitMaster.trainingPhase}</td>
 												<td>${UnitMaster.unitName}</td>
+												<td>${UnitMaster.unitCode}</td>
 												<td><ct:choose><ct:when test="${ UnitMaster.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
 												<td><button onclick='editUnit(${UnitMaster.unitId});return false;' >Edit</button></td>
 												<td><a href="<ct:url value='/UnitMaster/remove/${UnitMaster.unitId}.fssai' />" >Delete</a></td>

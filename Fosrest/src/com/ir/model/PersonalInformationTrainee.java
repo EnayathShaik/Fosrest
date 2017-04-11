@@ -99,6 +99,7 @@ public class PersonalInformationTrainee {
 	
 	@NotNull
 	@Size(min=12, max=12 , message="enter your AadharNumber ")
+	@Column(unique = true)
 	private String  AadharNumber ; 
 	 @Email
 	private String Email;

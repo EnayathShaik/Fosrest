@@ -162,7 +162,7 @@ public class LoginController {
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
-			return "adminHomepage";
+			return "stateAdminHomepage";
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{
 			PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetails.getId() );
@@ -174,6 +174,7 @@ public class LoginController {
 			session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
 			return "traineeHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 4 && loginDetails.getStatus().equalsIgnoreCase("A")){
+		
 			PersonalInformationTrainer personalInformationTrainer = loginService.FullDetailTrainer(loginDetails.getId());
 			session.setAttribute("loginId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
@@ -253,7 +254,18 @@ public class LoginController {
 			session.setAttribute("assessmentId", manageAssessmentAgency.getManageAssessmentAgencyId());
 			session.setAttribute("agencyName", manageAssessmentAgency.getAssessmentAgencyName());
 			return "assessmentAgencyHomepage";
-		}else{
+		}else if(loginDetails!=null && loginDetails.getProfileId() == 10 && loginDetails.getStatus().equalsIgnoreCase("A")){
+			
+			new ZLogger("loginProcess","in admin login" , "LoginController.java");
+			session.setAttribute("loginUser", loginDetails);
+			session.setAttribute("logId",loginDetails.getLoginId());
+			session.setAttribute("profileId", loginDetails.getProfileId());
+			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userName", loginDetails.getLoginId());
+			return "stateAdminHomepage";
+		}
+		
+		else{
 			model.addAttribute("error" , "Oops , wrong Id and password !!!");
 			return "login";
 		}

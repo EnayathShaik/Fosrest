@@ -48,11 +48,11 @@
                                                 </div>
                                                   <cf:select path="unitId" class="form-control">
 													<cf:option value="0" label="Select Unit Name" />
-													<cf:options items="${listUnitMaster}" itemValue="unitId" itemLabel="unitName"/>
+													<cf:options items="${listUnitMaster}" itemValue="unitId" itemLabel="unitCode"/>
 													</cf:select>
                                             </div>
                                             
-                                                     <div class="form-group">
+                                                <div class="form-group">
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> Status:</strong></li>
@@ -64,6 +64,16 @@
                                               <cf:option value="I" label="In-Active" />
                                               </cf:select>
                                             </div>
+                                            
+                                              <div class="form-group">
+                                                <div>
+                                                    <ul class="lab-no">
+                                                        <li class="style-li"><strong>Content Name:</strong></li>
+                                                        <li class="style-li error-red"> </li>
+                                                    </ul>
+                                                </div>
+                                                    <cf:input type="text" path="contentName"  placeholder="Content Name" class="form-control"/>
+                                            </div>
   
                                         </div>
                                         <!-- right side -->
@@ -73,13 +83,37 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Module Name:</strong></li>
-                                                        <li class="style-li error-red"> </li>
+                                                        <li class="style-li error-red"><cf:errors path="moduleName" value=""></cf:errors> </li>
+                                                        
                                                     </ul>
                                                 </div>
                                                     <cf:input type="text" path="moduleName"  placeholder="Module Name" class="form-control"/>
                                             </div>
+                                            
+                                            <div class="form-group">
+                                                <div>
+                                                    <ul class="lab-no">
+                                                        <li class="style-li"><strong> Content Type:</strong></li>
+                                                        <li class="style-li error-red"> </li>
+                                                    </ul>
+                                                </div>
+                                                  <cf:select path="contentType" class="form-control">
+													<cf:option value="0" label="Select Content Type" />
+													<cf:options items="${contentType}" />
+													</cf:select>
+                                            </div>
+                                            
+                                               <div class="form-group">
+                                                <div>
+                                                    <ul class="lab-no">
+                                                        <li class="style-li"><strong>Content Link:</strong></li>
+                                                        <li class="style-li error-red"> </li>
+                                                    </ul>
+                                                </div>
+                                                    <cf:input type="text" path="contentLink"  placeholder="Content Link" class="form-control"/>
+                                            </div>
 
-                                      <div class="row">
+                                      			<div class="row">
                                                 <div class="col-md-6 col-xs-12" style="margin-top: 25px;">
                                                    <input type="submit"  id="updatebtn" style="display:none;float: right;margin-right: 122px;"
 														value="Update" class="btn login-btn"/>
@@ -115,6 +149,7 @@
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>
                                                         <th>Module Name</th>
+                                                        <th>Module Code</th>
                                                         <th>Status</th>
                                                         <th>Edit</th>
                                                         <th>Delete</th>
@@ -124,6 +159,7 @@
                                                 <tr>
 												<td>${ModuleMaster.moduleId}</td>
 												<td>${ModuleMaster.moduleName}</td>
+												<td>${ModuleMaster.moduleCode}</td>
 												<td><ct:choose><ct:when test="${ ModuleMaster.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
 												<td><button onclick='editModule(${ModuleMaster.moduleId});return false;' >Edit</button></td>
 												<td><a href="<ct:url value='/ModuleMaster/remove/${ModuleMaster.moduleId}.fssai' />" >Delete</a></td>

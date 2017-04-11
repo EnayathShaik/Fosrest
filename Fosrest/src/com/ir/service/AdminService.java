@@ -36,8 +36,10 @@ import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
+import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
+import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
@@ -339,6 +341,12 @@ public interface AdminService {
 	public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges();
 	
 	
+	
+	
+	public List<PersonalInformationTrainee> listEligibleuser(String userType); 
+	public String enrollUser(String data);
+	public String addNomineeTrainee(NomineeTrainee nt , String data);
+	public LoginDetails getLoginDetailsById(int id);
 	
 	
 	

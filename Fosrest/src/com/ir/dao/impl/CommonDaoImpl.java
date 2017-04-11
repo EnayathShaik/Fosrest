@@ -134,5 +134,16 @@ public class CommonDaoImpl implements CommonDao{
 		List courseTypeList = query.list();
 		return courseTypeList;
 	}
+	
+	
+	
+	@Override
+	public  List getModule(String data){
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "select moduleid ,  modulecode  from  ModuleMaster where unitId= '"+data+"'";		
+		Query query = session.createSQLQuery(sql);
+		List moduleList = query.list();
+		return moduleList;
+	}
 
 }

@@ -41,8 +41,10 @@ import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
+import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
+import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
@@ -1177,5 +1179,35 @@ public class AdminServiceImpl implements AdminService {
 			return this.adminDAO.listEmployeeMonthlyCharges();
 		}
 		
+		
+		
+		@Override
+		@Transactional
+		public List<PersonalInformationTrainee> listEligibleuser(String userType) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listEligibleuser(userType);
+		}
+		
+		@Override
+		public String enrollUser(String data) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.enrollUser(data);
+		}
+		
+		@Override
+		@Transactional
+		public String addNomineeTrainee(NomineeTrainee data , String moduleCode) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.addNomineeTrainee(data , moduleCode);
+		}
+		
+		//getLoginDetailsById
+		
+		@Override
+		@Transactional
+		public LoginDetails getLoginDetailsById(int id) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.getLoginDetailsById(id);
+		}
 	    
 }

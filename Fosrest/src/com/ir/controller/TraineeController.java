@@ -829,7 +829,7 @@ public class TraineeController {
 				System.out.println("listMyTraining" + MyTrainingForm.getTrainingType());
 						
 				Map<String , String> trainingType = lst.trainingTypeMap;
-				Map<String , String> trainingCenter = lst.trainingCenterMap;
+				//Map<String , String> trainingCenter = lst.trainingCenterMap;
 				model.addAttribute("trainingType",trainingType);
 				
 				model.addAttribute("MyTrainingForm", new MyTrainingForm());

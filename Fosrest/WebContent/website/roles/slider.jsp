@@ -145,7 +145,7 @@
                     <ul class="sidebar-nav">
                         <!-- <li class="sidebar-brand"></li> -->
                         
-         <!--    <li><a href="TrainingSchedule.fssai">Training Schedule Master</a></li>
+             <li><a href="TrainingSchedule.fssai">Training Schedule Master</a></li>
                         <li> <a href="TrainingClosure.fssai">Training Closure Report</a> </li>
                         <li> <a href="GenerateCertificate.fssai">Generate Certificate</a> </li>
                         <li> <a href="UpdateTrainingSchedule.fssai">Update Training Schedule</a> </li>
@@ -154,7 +154,7 @@
                         <li> <a href="ModuleMaster.fssai">Module Master</a> </li>
                         <li> <a href="">Assessment Questions</a> </li>
                         <li> <a href="SubjectMaster.fssai">Subject Master</a> </li>
-                        <li> <a href="">Training Calendar</a> </li> -->
+                        <li> <a href="">Training Calendar</a> </li>
                          <li> <a href="CustomerMaster.fssai">Customer</a> </li>
         				  <li> <a href="TaxMaster.fssai">Tax Master</a> </li>
         				   <li><a href="EmployeeMonthlyCharges.fssai">Employee Monthly Charges</a></li>
@@ -167,12 +167,10 @@
 <div id="sidebar-wrapper">
                     <ul class="sidebar-nav">
                         <!-- <li class="sidebar-brand"></li> -->
-                        <li><a href="manageCourse.fssai">Manage Course</a></li>
-                        <li><a href="manageCourseContent.fssai">Manage Course Content</a></li>
-                        <li> <a href="trainingpartnerassessmentcalendar.fssai">Update Assessor</a> </li>
-                        <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
-                        <!-- <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li> -->
-                        <li> <a href="feedbackMaster.fssai">Feedback Master</a> </li>
+                       <li><a href="traineeUserManagementForm.fssai">User Management</a></li>
+                        <li><a href="NominateTrainee.fssai">Nominate Trainee</a></li>
+                        <li> <a href="TrainingSchedule.fssai">Update Training Schedule</a> </li>
+                     
                     </ul>
                 </div>
 

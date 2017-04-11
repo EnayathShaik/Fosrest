@@ -161,7 +161,7 @@
                                                                             <tr>
                                                                                 <td>
                                                                                     <%-- <label><a href="updateInformation.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label> --%>
-                                                                                    <label><a href="PersonalInformationTrainingInstitute.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                                    <label><a href="PersonalInformationTrainee.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                                 </td>
                                                                                 <td>
                                                                                     <label>${listValue[2] }</label>
