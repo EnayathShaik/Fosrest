@@ -10,9 +10,9 @@
 		<!-- <property name="hibernate.connection.url">jdbc:postgresql://localhost/FSSAI</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">Fss2iZentech</property> -->
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost/fosrest</property>
-		<property name="hibernate.connection.username">fosrestadmin</property>
-		<property name="hibernate.connection.password">Fss2iZentech</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost/FOSREST</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">test@1234</property>
 		
 		<!-- <property name="hibernate.c3p0.min_size">50</property>
   		<property name="hibernate.c3p0.max_size">200</property>
@@ -82,5 +82,11 @@
 		<mapping class="com.ir.model.CustomerMaster"/>
 		<mapping class="com.ir.model.TaxMaster"/>
 		<mapping class="com.ir.model.EmployeeMonthlyCharges"/>
+		<mapping class="com.ir.model.EnrolledTrainee"/>
+		<mapping class="com.ir.model.DummyTable"/>
+		<mapping class="com.ir.model.DumyTble"/>
+		<mapping class="com.ir.model.NomineeTrainee"/>
+		<mapping class="com.ir.model.TraineeEnrolled"/>
+		<mapping class="com.ir.model.CourseEnrollTrainee"/>
 	</session-factory>
 </hibernate-configuration>
