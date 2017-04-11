@@ -1076,5 +1076,53 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee/Certificate.jsp" />
 	</definition>
+	
+	
+	
+	
+	
+		<definition name="CustomerMaster" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/CustomerMaster.jsp" />
+	</definition>
+
+	<definition name="CustomerMaster/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/CustomerMaster.jsp" />
+	</definition>
+
+
+	<definition name="TaxMaster" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/TaxMaster.jsp" />
+	</definition>
+
+	<definition name="TaxMaster/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/TaxMaster.jsp" />
+	</definition>
+
+
+
+
+	<definition name="EmployeeMonthlyCharges" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/EmployeeMonthlyCharges.jsp" />
+	</definition>
+
+	<definition name="EmployeeMonthlyCharges/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/EmployeeMonthlyCharges.jsp" />
+	</definition>
+	
+		<definition name="stateAdminHomepage" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/stateAdminHomepage.jsp" />
+	</definition>
+	
+		<definition name="NominateTrainee" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/NominateTrainee.jsp" />
+	</definition>
 
 </tiles-definitions>

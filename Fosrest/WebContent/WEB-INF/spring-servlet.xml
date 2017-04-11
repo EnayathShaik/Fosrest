@@ -102,7 +102,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-			<property name="url" value="jdbc:postgresql://localhost/fosrest" />
+			<property name="url" value="jdbc:postgresql://localhost/FOSREST" />
 		<property name="username" value="postgres" />
 		<property name="password" value="test@1234" />
 			
@@ -173,6 +173,14 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.CustomerMaster</value>
 				<value>com.ir.model.TaxMaster</value>
 				<value>com.ir.model.EmployeeMonthlyCharges</value>
+				<value>com.ir.model.DummyTable</value>
+				<value>com.ir.model.CourseEnrollTrainee</value>
+				<value>com.ir.model.DumyTble</value>
+				<value>com.ir.model.NomineeTrainee</value>
+				<value>com.ir.model.TraineeEnrolled</value>
+				<value>com.ir.model.CourseEnrollTrainee</value>
+				
+				<value>com.ir.model.EnrolledTrainee</value>
 <!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
 				<!-- 
 				
