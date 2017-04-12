@@ -2791,7 +2791,7 @@ System.out.println("list "+list);
 		
 		
 		//addNomineeTrainee
-		@Override
+	//	@Override
 		public String addNomineeTrainee(NomineeTrainee nt , String moduleCode) {
 			// TODO Auto-generated method stub
 			System.out.println(" s "+nt);

@@ -330,7 +330,7 @@ public interface AdminDAO {
 					 public List<PersonalInformationTrainee> listEligibleuser(String userType);
 					 
 					 public String enrollUser(String data);
-					 public String addNomineeTrainee(NomineeTrainee data , String moduleCode);
+					/* public String addNomineeTrainee(NomineeTrainee data , String moduleCode);
 					 public LoginDetails getLoginDetailsById(int id);
-		
+		*/
 }

@@ -1194,7 +1194,7 @@ public class AdminServiceImpl implements AdminService {
 			return this.adminDAO.enrollUser(data);
 		}
 		
-		@Override
+	/*	@Override
 		@Transactional
 		public String addNomineeTrainee(NomineeTrainee data , String moduleCode) {
 			// TODO Auto-generated method stub
@@ -1208,6 +1208,6 @@ public class AdminServiceImpl implements AdminService {
 		public LoginDetails getLoginDetailsById(int id) {
 			// TODO Auto-generated method stub
 			return this.adminDAO.getLoginDetailsById(id);
-		}
+		}*/
 	    
 }

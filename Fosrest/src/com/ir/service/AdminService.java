@@ -345,8 +345,8 @@ public interface AdminService {
 	
 	public List<PersonalInformationTrainee> listEligibleuser(String userType); 
 	public String enrollUser(String data);
-	public String addNomineeTrainee(NomineeTrainee nt , String data);
-	public LoginDetails getLoginDetailsById(int id);
+/*	public String addNomineeTrainee(NomineeTrainee nt , String data);
+	public LoginDetails getLoginDetailsById(int id);*/
 	
 	
 	
