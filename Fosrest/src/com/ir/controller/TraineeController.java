@@ -877,7 +877,8 @@ public class TraineeController {
 
         @RequestMapping(value = "/OnlineTraining", method = RequestMethod.GET)
 		public String OnlineTraining(@ModelAttribute("OnlineTrainingForm") OnlineTrainingForm OnlineTrainingForm ,Model model){
-			
+        	model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic());
+        	model.addAttribute("listTopicModule", this.traineeService.listTopicModule());
 				System.out.println("listOnlineTraining");
 			
 				return "OnlineTraining";

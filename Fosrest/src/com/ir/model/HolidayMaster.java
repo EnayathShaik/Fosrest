@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -26,6 +28,7 @@ public class HolidayMaster {
 	private String holidayDate;
 	
 	@NotEmpty(message="Holiday Reasons not be blank.")
+	 
 	private String holidayReason;
 	
 

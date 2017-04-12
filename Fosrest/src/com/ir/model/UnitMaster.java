@@ -112,6 +112,19 @@ public class UnitMaster {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return    unitName;
+	}
+
+	
+
+
+
+	
+
+
+
 
 
 	public String getUnitCode() {

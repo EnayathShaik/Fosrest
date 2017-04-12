@@ -11,7 +11,7 @@
  
 
 
- function DrawCaptcha()
+  function DrawCaptcha()
  {
      var a = Math.ceil(Math.random() * 7)+ '';
      var b = Math.ceil(Math.random() * 7)+ '';       
@@ -22,7 +22,7 @@
      var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' '+ f ;
      document.getElementById("txtCaptcha").value = code
  } 
- 
+  
  
  
  
@@ -51,7 +51,7 @@
 	 }
 
 	
-		DrawCaptcha();
+		DrawCaptcha(); 
 		
 		 flatpickr("#dob" ,{});	
 		
@@ -99,7 +99,7 @@
 <body>
 	 
 	<cf:form action="PersonalInformationTraineeAdd.fssai" name="myForm" method="POST"
-		commandName="PersonalInformationTrainee">
+		commandName="PersonalInformationTrainee"  onsubmit="return validateFields();">
 
   <section>
         <div class="container">
@@ -128,8 +128,10 @@
                                         <div class="form-group">
                                             <div>
                                                 <ul class="lab-no">
-                                                    <li class="style-li"><strong>User Type:</strong></li>
-                                                    <li class="style-li error-red"> * </li>
+                                                    <li class="style-li"><strong>User Type:</strong></li> <li class="style-li error-red"> * </li>
+                                                     <!--  valid -->
+                                                            <li id="userTypeErr" style="display:none;" class="style-li error-red" >User Type can not be blank.</li>
+                                                   
                                                 </ul>
                                             </div>
                                           	<cf:select path="userType" class="form-control">
@@ -141,8 +143,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Aadhar Number:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Aadhar Number:</strong></li><li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                            <li id="AadharNumberErr" style="display:none;" class="style-li error-red" >Aadhar Number can not be blank.</li>
+                                            
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="AadharNumber" class="form-control" maxlength="12" placeholder="Aadhar Number"
@@ -153,8 +157,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Emp Id:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Emp Id:</strong></li><li class="style-li error-red"> * </li>
+                                              <!--  valid -->
+                                            <li id="empIDErr" style="display:none;" class="style-li error-red" >Emp Id can not be blank.</li>
+                                            
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="empID" class="form-control" placeholder="Emp ID"/>
@@ -163,8 +169,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Date of Birth:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Date of Birth:</strong></li> <li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                            <li id="dobErr" style="display:none;" class="style-li error-red" >Date of Birth can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="dob" id="dob" name="dob" class="form-control"/>
@@ -176,6 +184,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Gender:</strong></li>
+                                            
                                             <li class="style-li error-red"> * </li>
                                         </ul>
                                     </div>
@@ -207,6 +216,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Title:</strong></li>
+                                            <!--  valid -->
+                                            <li id="titleErr" style="display:none;" class="style-li error-red" >Title can not be blank.</li>
                                             <li class="style-li error-red"> * </li>
                                         </ul>
                                     </div>
@@ -219,8 +230,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>First Name:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>First Name:</strong></li> <li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                                            <li id="firstNameErr" style="display:none;" class="style-li error-red" >First Name can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text"  path="firstName" class="form-control" placeholder="First Name"/>
@@ -229,8 +242,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Middle Name:</strong></li>
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li"><strong>Middle Name:</strong></li> <li class="style-li error-red"> </li>
+                                             <!--  valid -->
+                                                            <li id="MiddleNameErr" style="display:none;" class="style-li error-red" >Middle Name can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="MiddleName" class="form-control" placeholder="Middle Name"/>
@@ -239,8 +254,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Last Name:</strong></li>
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li"><strong>Last Name:</strong></li><li class="style-li error-red"> </li>
+                                             <!--  valid -->
+                                                            <li id="LastNameErr" style="display:none;" class="style-li error-red" >Last Name can not be blank.</li>
+                                            
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="LastName" class="form-control" placeholder="Last Name"/>
@@ -248,8 +265,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Father's Name:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Father's Name:</strong></li> <li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                             <li id="FatherNameErr" style="display:none;" class="style-li error-red" >Father Name can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="FatherName" class="form-control" placeholder="Father's Name"/>
@@ -276,8 +295,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Correspondence Address Line 1:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Correspondence Address Line 1:</strong></li> <li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                             <li id="correspondenceAddress1Err" style="display:none;" class="style-li error-red" >correspondence Address can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="correspondenceAddress1" class="form-control" placeholder="Address" required=""/>
@@ -286,8 +307,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Correspondence Address Line 2:</strong></li>
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li"><strong>Correspondence Address Line 2:</strong></li> <li class="style-li error-red"> </li>
+                                             <!--  valid -->
+                                             <li id="correspondenceAddress2Err" style="display:none;" class="style-li error-red" >correspondence Address can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="correspondenceAddress2" class="form-control" placeholder="Address" required=""/>
@@ -299,8 +322,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>State:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>State:</strong></li><li class="style-li error-red"> * </li>
+                                            <!--  valid -->
+                                             <li id="correspondenceStateErr" style="display:none;" class="style-li error-red" >correspondence State can not be blank.</li>
+                                            
                                         </ul>
                                     </div>
                                     <cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value , 'correspondenceDistrict')">
@@ -312,8 +337,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Email:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Email:</strong></li> <li class="style-li error-red"> * </li>
+                                            <!--  valid -->
+                                            <li id="EmailErr" style="display:none;" class="style-li error-red" >Email can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="Email" class="form-control" placeholder="Email" required=""/>
@@ -328,20 +355,24 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>District:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>District:</strong></li>  <li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                            <li id="correspondenceDistrictErr" style="display:none;" class="style-li error-red" >District can not be blank.</li>
+                                          
                                         </ul>
                                     </div>
                                     <cf:select path="correspondenceDistrict" class="form-control" onchange="getCity(this.value , 'correspondenceCity')">
-                                     
+                                     <cf:option value="0" label="select District"></cf:option>
                                     </cf:select>
                                 </div>
 
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>City:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>City:</strong></li> <li class="style-li error-red"> * </li>
+                                            <!--  valid -->
+                                            <li id="correspondenceCityErr" style="display:none;" class="style-li error-red" >City can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:select path="correspondenceCity" class="form-control">
@@ -354,8 +385,10 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Pin Code:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Pin Code:</strong></li> <li class="style-li error-red"> * </li>
+                                           <!--  valid -->
+                                            <li id="correspondencePincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="correspondencePincode" class="form-control" placeholder="Pin Code" required=""/>
@@ -364,11 +397,15 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Mobile:</strong></li>
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Mobile:</strong></li> <li class="style-li error-red"> * </li>
+                                              <!--  valid -->
+                                            <li id="mobileErr" style="display:none;" class="style-li error-red" >Mobile can not be blank.</li>
+                                           
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="mobile" class="form-control" placeholder="Mobile Number" required=""/>
+                                
+                                     <cf:input type="text" path="mobile" class="form-control" placeholder="Mobile Number" required=""/>
+                                    
                                 </div>
 
 
@@ -478,7 +515,7 @@
 
 
                         <!-- captcha -->
-                        <fieldset id="captcha">
+                       <fieldset id="captcha">
                             <div class="col-md-2 col-xs-12"></div>
                         <div 
 					style="width: 95%; margin-left: 32px; float: left; height: 100px; border: 1px solid #cecece;"
@@ -502,13 +539,13 @@
 					</div>
 					<div style="float: left; width: 99%;">
 						<input type="checkbox" id="check" style="margin-left: 1%;">
-						<!-- <a href="#" target="_blank" class="terms-font-size">  -->
+						<a href="#" target="_blank" class="terms-font-size"> 
 						I have read and understood the Terms & Conditions and the Privacy
 						Policy of FSSAI.
-						<!-- </a> -->
+						</a>
 					</div>
 				</div>
-</fieldset>
+</fieldset> 
                         <!-- button -->
 
                         <div class="row">
@@ -536,5 +573,80 @@
 
 		<div class="col-md-2 hidden-xs"></div>
 	</cf:form>
-	
+	<!--   validation function -->
+   <script>
+   
+   
+   function validateFields(){
+	  
+  
+   	// alert($("#firstName").val());
+   	// alert($("#holidayReason").val());
+   	   if($("#userType").val() == ''){
+   		 
+   		$("#userTypeErr").css("display" , "block");
+   		return false;
+   	 }else if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
+ 		alert("Please Enter 12 digit Adhar number");
+ 		 $("#AadharNumberErr").css("display" , "block");
+ 	     return false;
+   	 }else if($("#empID").val() == ''){
+   		 $("#empIDErr").css("display" , "block");
+ 		return false; 
+   	 }else if($("#dob").val() == ''){
+   		 $("#dobErr").css("display" , "block");
+  		return false;
+   	 }else if($("#title").val() == ''){
+   		 $("#titleErr").css("display" , "block");
+    		return false; 
+   	 }else if($("#firstName").val() == ''){
+   		 $("#firstNameErr").css("display" , "block");
+ 		return false; 
+	 }else if($("#MiddleName").val() == ''){
+   		 $("#MiddleNameErr").css("display" , "block");
+ 		return false; 
+	 } else if($("#LastName").val() == ''){
+   		 $("#LastNameErr").css("display" , "block");
+  		return false; 
+ 	 }else if($("#FatherName").val() == ''){
+   		 $("#FatherNameErr").css("display" , "block");
+   		return false; 
+  	 }else if($("#correspondenceAddress1").val() == ''){
+   		 $("#correspondenceAddress1Err").css("display" , "block");
+    		return false; 
+  	 }else if($("#correspondenceAddress2").val() == ''){
+   		 $("#correspondenceAddress2Err").css("display" , "block");
+ 		return false; 
+	 }else if($("#correspondenceState").val() == 0){
+   		 $("#correspondenceStateErr").css("display" , "block");
+  		return false; 
+ 	 }else if($("#Email").val() == ''){
+   		 $("#EmailErr").css("display" , "block");
+   		return false; 
+  	 }else if($("#correspondenceDistrict").val() == 0){
+   		 $("#correspondenceDistrictErr").css("display" , "block");
+    		return false;
+  	 }else if($("#correspondenceCity").val() == null){
+   		 $("#correspondenceCityErr").css("display" , "block");
+    		return false;
+  	 }else if($("#correspondencePincode").val().match(/^[0-9]{6}$/) == null){
+  		 alert("invalid pin");
+  		 $("#correspondencePincodeErr").css("display" , "block");
+  		return false;
+  	 }else if($("#mobile").val().match(/^[0-9]{10}$/) == null){
+    		alert("Please Enter 10 digit mobile number");
+      		 $("#mobileErr").css("display" , "block");
+      		return false;
+  	 }  
+   	 if($("#sameAddr").is(":checked")== false){
+   		 alert("click on check box");
+   		 return false;
+  	 }
+   	 if($("#check").is(":checked")== false){
+   		 alert("click on check box");
+   		 return false;
+  	 }
+    }
+   
+   </script>
 	

@@ -147,7 +147,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                             <fieldset>
-                                           <legend>Unit Master</legend>
+                                           <legend>My Training Result</legend>
                                             <ct:if test="${!empty listMyTraining}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>

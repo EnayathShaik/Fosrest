@@ -42,12 +42,14 @@ import com.ir.model.FeedbackMaster;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.TrainingCalendar;
+import com.ir.model.UnitMaster;
 import com.ir.model.Utility;
 import com.ir.service.PageLoadService;
 import com.ir.util.ChangePasswordUtility;
@@ -1491,5 +1493,29 @@ System.out.println("list "+list);
 
 	}
 	
-
+//online training topic unit name list
+	@Override
+	public List<UnitMaster> listTrainingTopic() {
+		// TODO Auto-generated method stub
+		System.out.println("inside listUnitMaster");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<UnitMaster> list = session.createQuery("from UnitMaster").list();
+		for (UnitMaster u : list ) {
+			System.out.println("UnitMaster List::" + u);
+		}
+		return list ;
+	}
+	
+	//online training topic module name list
+		@Override
+		public List<ModuleMaster> listTopicModule() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listModuleMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<ModuleMaster> list = session.createQuery("from ModuleMaster").list();
+			for (ModuleMaster m : list ) {
+				System.out.println("ModuleMaster List::" + m);
+			}
+			return list ;
+		}
 }

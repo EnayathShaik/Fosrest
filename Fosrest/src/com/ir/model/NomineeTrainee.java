@@ -33,6 +33,7 @@ public class NomineeTrainee {
 	private String rollNo;
 	private String status;
 	private String traineeName;
+	
 	public int getId() {
 		return id;
 	}

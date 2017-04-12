@@ -22,11 +22,13 @@ import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.UnitMaster;
 import com.ir.model.Utility;
 
 public interface TraineeDAO {
@@ -115,4 +117,9 @@ public interface TraineeDAO {
 	public PersonalInformationTrainer fullDetailtrainer(int loginId);
 	
 	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId);
+	
+	public List<UnitMaster> listTrainingTopic();
+	
+	public List<ModuleMaster> listTopicModule();
+	
 }

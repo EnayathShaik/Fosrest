@@ -50,6 +50,9 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Type:</strong></li>
+                                                          <!--  valid -->
+                                                            <li id="trainingTypeErr" style="display:none;" class="style-li error-red" > Training Type can not be blank.</li>
+                                                            
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
                                                             ${created }</li>
@@ -65,6 +68,9 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Institute:</strong></li>
+                                                           <!--  valid -->
+                                                            <li id="trainingInstituteErr" style="display:none;" class="style-li error-red" > Training Institute can not be blank.</li>
+                                                            
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
                                                         </ul>
                                                     </div>
@@ -78,6 +84,9 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Date:</strong></li>
+                                                             <!--   valid -->
+                                                             <li id="trainingDateErr" style="display:none;" class="style-li error-red" >Training Date can not be blank.</li>
+                                                             
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
                                                             ${created }</li>
@@ -97,6 +106,9 @@
 												<div>
 													<ul class="lab-no">
 														<li class="style-li"><strong>User Type:</strong></li>
+														 <!--   valid -->
+                                                             <li id="userTypeErr" style="display:none;" class="style-li error-red" >User Type can not be blank.</li>
+                                                             
 														<li class="style-li error-red"><span id="name_status">
 														</span><span id="err"> </span> <label id=userTypeError
 															class="error visibility">* Select UserType </label> <cf:errors
@@ -113,6 +125,8 @@
                                                     <div>
 													<ul class="lab-no">
 														<li class="style-li"><strong>Status:</strong></li>
+														<!--   valid -->
+                                                             <li id="statusErr" style="display:none;" class="style-li error-red" >Status can not be blank.</li>
 														<li class="style-li error-red"><cf:errors
 																path="status" cssClass="error" /></li>
 													</ul>
@@ -152,7 +166,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                             <fieldset>
-                                           <legend>Unit Master</legend>
+                                           <legend>Training Closure Search Result</legend>
                                             <ct:if test="${!empty listTrainingClosure}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
@@ -198,3 +212,29 @@
  <input type="hidden" id="idHidden" value="" />
  <input type="hidden" id="hiddenCourseType" value="" />                                             
    </cf:form>
+   
+    <!--   validation function -->
+   <script>
+   
+   function validateFields(){
+   	// alert($("#holidayDate").val());
+   	// alert($("#holidayReason").val());
+   	 if($("#trainingType").val() ==''){
+   		 
+   		$("#trainingTypeErr").css("display" , "block");
+   		return false;
+   	 } else if($("#trainingInstitute").val() == ''){
+   		 $("#trainingInstituteErr").css("display" , "block");
+    		return false; 
+   	 }else if($("#userType").val() == ''){
+   		 $("#userTypeErr").css("display" , "block");
+ 		return false; 
+	 }else if($("#trainingDate").val() == ''){
+   		 $("#trainingDateErr").css("display" , "block");
+ 		return false; 
+	 }else if($("#status").val() == ''){
+   		 $("#statusErr").css("display" , "block");
+  		return false;
+	 }
+   }
+	 </script>

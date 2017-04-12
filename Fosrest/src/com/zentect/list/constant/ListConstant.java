@@ -43,7 +43,8 @@ public class ListConstant {
     public static final Map<String, String> trainingPhaseMap;
     static {
         Map<String, String> atrainingPhaseMap = new HashMap<String, String>();
-        atrainingPhaseMap.put("FND", "FOUNDATION");
+        atrainingPhaseMap.put("cmp", "Completed");
+        atrainingPhaseMap.put("con", "Confirmed");
         trainingPhaseMap = Collections.unmodifiableMap(atrainingPhaseMap);
     }
     
@@ -208,6 +209,7 @@ public class ListConstant {
         trainingParterMap = Collections.unmodifiableMap(avacancyMap);
     }
     
+  
     //User Type
     public static final Map<String, String> trainingInstituteMap;
     static {

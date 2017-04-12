@@ -1,17 +1,8 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
-   <script>
-                function OnStart() {
-                   
-                	flatpickr("#trainingDate" , {
-                		
-                	});	
-                }
-                window.onload = OnStart;
 
-            </script>
- 
+ <%-- <ct:url var="addAction" value="/TrainingSchedule/add.fssai" ></ct:url> --%>
 <cf:form action="ListGenerateCertificate.fssai" name="myForm" method="POST" commandName="GenerateCertificateForm" onsubmit="return validateFields();"> 
 
     <section>
@@ -49,8 +40,6 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Type:</strong></li>
-                                                           <!--  valid -->
-                                                            <li id="trainingTypeErr" style="display:none;" class="style-li error-red" >Training Type can not be blank.</li>
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
                                                             ${created }</li>
@@ -66,9 +55,6 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Partner:</strong></li>
-                                                           <!--  valid -->
-                                                             <li id="trainingPartnerErr" style="display:none;" class="style-li error-red" >Training Partner can not be blank.</li>
-                                                            
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
                                                         </ul>
                                                     </div>
@@ -88,15 +74,12 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Institute:</strong></li>
-                                                           <!--  valid -->
-                                                            <li id="trainingInstituteErr" style="display:none;" class="style-li error-red" >Training Institute can not be blank.</li>
-                                                            <!--  -->
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
                                                         </ul>
                                                     </div>
                                                  <cf:select path="trainingInstitute" class="form-control">
 													<cf:option value="" label="Select training institute" />
-													<cf:options items="${listTrainingInstitude}"/>	
+													<cf:options items="${trainingInstitute}"/>	
 												</cf:select>
                                                 </div>
                                                 
@@ -104,16 +87,16 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Date:</strong></li>
-                                                          <!--   valid -->
-                                                             <li id="trainingDateErr" style="display:none;" class="style-li error-red" >Training Date can not be blank.</li>
-                                                           
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
                                                             ${created }</li>
                                                         </ul>
                                                     </div>
-												
-                                         		<cf:input path="trainingDate" type="text" class="form-control" />
+												<cf:select path="trainingDate" class="form-control">
+													<cf:option value="" label="Select training date" />
+													<cf:options items="${trainingDate}" />
+												</cf:select>
+                                         
                                                 </div>
                                                 
                                             
@@ -148,9 +131,9 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                             <fieldset>
-                                           <legend>GenerateCertificate</legend>
+                                           <legend>Unit Master</legend>
                                             <ct:if test="${!empty listGenerateCertificate}">
-                                            <table id="datatablesfosrest" class="table table-bordered table-responsive">
+                                            <table class="table table-bordered table-responsive">
                                                <thead>
                                                     <tr class="background-open-vacancies">
                                                         
@@ -170,7 +153,7 @@
                                                 
                                                 <ct:forEach items="${listGenerateCertificate}" var="GenerateCertificate">
                                                 <tr>
-												<td>${GenerateCertificate.id}</td>
+												
 												<td>${GenerateCertificate.trainingType}</td>
 												<td>${GenerateCertificate.trainingDate}</td>
 												<td>${GenerateCertificate.trainingPartner}</td>
@@ -178,36 +161,15 @@
 												<td>${GenerateCertificate.traineeName}</td>
 												<td>${GenerateCertificate.attendanceStatus}</td>
 												<td>${GenerateCertificate.certificateStatus}</td>
-												<td>${GenerateCertificate.generateCertificate}
-												  <class="text-center"><input type="checkbox"> 
-                                                        </td>
-                                                            
-                                                       
-												
+												<td>${GenerateCertificate.generateCertificate}</td>
 											</tr>
 										</ct:forEach>
-										 
                                             </table>
-                                            <div class="col-md-6 col-xs-12"></div>
-                                               
-                                                 <div class="col-md-6 col-xs-12">
-
-                                                    <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Generate Certificate"/> 
-                                               
-                                                </div>
-                                                    </div>
                                            </ct:if>
-                                           
                                         </fieldset>
-                                        
+                                                    </div>
                                                 </div>
-                                                 
-                                           
                                             </div>
-                                             
-                                                                                        
-                                           
-                                        </div>
                              <!-- search div ends -->
                         </div><!-- row ends -->
                     </div>
@@ -219,27 +181,3 @@
  <input type="hidden" id="idHidden" value="" />
  <input type="hidden" id="hiddenCourseType" value="" />                                             
    </cf:form>
- <!--   validation function -->
-   <script>
-   
-   function validateFields(){
-   	// alert($("#holidayDate").val());
-   	// alert($("#holidayReason").val());
-   	 if($("#trainingType").val() == ''){
-   		 
-   		$("#trainingTypeErr").css("display" , "block");
-   		return false;
-   	 } else if($("#trainingInstitute").val() == ''){
-   		 $("#trainingInstituteErr").css("display" , "block");
-    		return false; 
-   	 }else if($("#trainingPartner").val() == ''){
-   		 $("#trainingPartnerErr").css("display" , "block");
- 		return false; 
-	 }else if($("#trainingDate").val() == ''){
-   		 $("#trainingDateErr").css("display" , "block");
- 		return false; 
-	 }
-
-    }
-   
-   </script>

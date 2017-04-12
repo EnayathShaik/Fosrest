@@ -101,7 +101,8 @@ window.onload = OnStart;
 													<cf:options items="${unitList}" itemValue="unitId" itemLabel="unitCode" />
 												</cf:select>
 											</div>
-                                            </div> <!-- rigth side ends -->
+                                            </div>
+                                             <!-- rigth side ends -->
                                             
                                             <!-- button -->
                                             <div class="row">

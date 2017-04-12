@@ -38,7 +38,40 @@ public class TrainingScheduleForm {
 	private int training_institude_id;
 	private String trainer_status;
 	private String training_institude_status;
+	private int unitId;
+	private int moduleId;
 	
+	
+	
+	
+	public int getUnitId() {
+		return unitId;
+	}
+
+
+
+
+	public void setUnitId(int unitId) {
+		this.unitId = unitId;
+	}
+
+
+
+
+	public int getModuleId() {
+		return moduleId;
+	}
+
+
+
+
+	public void setModuleId(int moduleId) {
+		this.moduleId = moduleId;
+	}
+
+
+
+
 	public TrainingScheduleForm() {
 		super();
 		// TODO Auto-generated constructor stub

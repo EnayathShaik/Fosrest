@@ -147,7 +147,7 @@
                                                         <th>Unit Code</th>
                                                         <th>Status</th>
                                                         <th>Edit</th>
-                                                        <th>Deleet</th>
+                                                        <th>Delete</th>
                                                     </tr>
                                                 </thead>
                                                 

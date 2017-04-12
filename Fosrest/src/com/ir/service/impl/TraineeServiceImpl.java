@@ -26,10 +26,12 @@ import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
+import com.ir.model.UnitMaster;
 import com.ir.model.Utility;
 import com.ir.service.TraineeService;
 @Service
@@ -374,6 +376,22 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 	
 	
+	//trainee topic from online training
+	@Override
+	@Transactional
+	public List<UnitMaster> listTrainingTopic(){
+		return this.traineeDAO.listTrainingTopic();
+		
+	}
+	
+	//trainee topicmodule from online training
+		@Override
+		@Transactional
+		public List<ModuleMaster> listTopicModule(){
+			return this.traineeDAO.listTopicModule();
+			
+		}
+		
 
 }
 

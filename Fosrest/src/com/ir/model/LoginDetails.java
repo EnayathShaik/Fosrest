@@ -23,8 +23,15 @@ public class LoginDetails {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int id;
+	private String name;
 	
 
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	@NotNull
 	private String loginId;
 	@NotNull

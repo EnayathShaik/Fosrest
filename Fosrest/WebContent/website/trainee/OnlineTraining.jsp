@@ -39,10 +39,14 @@
                                 <!-- legend -->
                                 <div class="col-xs-12">
                                     <fieldset>
+                                    
+                                     
                                         <legend> Online Training</legend>
                                         <h4>Training Type:</h4>
                                         <h4>Training Phase:</h4>
                                         <h4>Training Duration: </h4>
+                                    
+                                    
                                         <br> </fieldset>
                                     <br> </div>
                               
@@ -53,11 +57,61 @@
                                            <div class="col-xs-12">
                                     <fieldset>
                                         <legend> Course Curriculum</legend>
-                                        <h3><span class="f16">Topic 1:</span></h3>
+                                      
+                                      <!--   topic -->
+                                         <ct:forEach items="${listTrainingTopic}" var="topic">
+                                               <ct:out value="${topic}"/><p>
+                                              
+                                         <!--   module  -->
+                                         <ul>
+                                         <ct:forEach var="module" items="${listTopicModule}">
+                                          <li><a href="?">${module}</a></li> 
+                                       </ct:forEach></ul>
+                                        </ct:forEach>
+                                              
+                                                
+                                             
+                                       
+                                              
+                                               
+                                       
+                                             
+                                                 
+                                                 
+                                                  <%-- 
+                                                   <ct:forEach items="${listTopicModule}" var="module">
+                                                    <ct:out value="${module}"/><p> 
+                                              </ct:forEach>
+                                               --%>
+                                              
+                                                <%-- <a href="${module}"></a> --%>
+                                               
+                                               
+                                                 <%--  <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Modules:</strong></li>
+                                                            <li class="style-li error-red">
+                                                            <span id="name_status" class = "clear-label"> </span>
+                                                            ${created }</li>
+                                                        </ul>
+                                                    </div>
+                                                 <cf:select path="TopicModule" class="form-control">
+													<cf:option value="" label="Select Topic Modules" />
+													<cf:options items="${listTopicModule}" />	
+												</cf:select>
+                                                </div>   --%>
+                                      <%--  <ul>
+                                       <ct:forEach var="module" items="${listTopicModule}">
+                                       <li><a href="???">${module}</a></li>
+                                       </ct:forEach>
+                                       </ul> --%>
+                                       
+                                       <!--  <h3><span class="f16">Topic 1:</span></h3>
                                         
                                         <h3><span class="f16">Topic 2:</span></h3>
                                       
-                                        <h3><span class="f16">Topic 3:</span></h3>
+                                        <h3><span class="f16">Topic 3:</span></h3> -->
                                        </fieldset>
                                     <br> </div>
                             </div>

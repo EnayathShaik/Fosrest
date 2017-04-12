@@ -1,6 +1,7 @@
 package com.ir.form;
 
 import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -9,10 +10,12 @@ public class HolidayMasterForm {
 	
 	@NotNull
 	private int holidayId;
-	@NotEmpty
 	
+	
+	@NotEmpty (message = "Please enter holidayDate .")
 	private String holidayDate;
-	@NotNull
+	@NotNull(message="Holiday Reasons not be blank.")
+	
 	private String holidayReason;
 	
 	

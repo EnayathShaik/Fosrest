@@ -45,11 +45,13 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> User Type:</strong></li>
+                                                         <!--   valid -->
+                                                             <li id="userTypeErr" style="display:none;" class="style-li error-red" >User Type can not be blank.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
                                                	<cf:select path="userType" class="form-control">
-												<cf:option value="0" label="Select User Type" />
+												<cf:option value="" label="Select User Type" />
 												<cf:options items="${userType}"/>	
 												</cf:select>
                                             </div>
@@ -57,11 +59,13 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> Training Type:</strong></li>
+                                                         <!--  valid -->
+                                                            <li id="trainingTypeErr" style="display:none;" class="style-li error-red" > Training Type can not be blank.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
                                            			<cf:select path="trainingType" class="form-control">
-													<cf:option value="0" label="Select training" />
+													<cf:option value="" label="Select training" />
 													<cf:options items="${trainingType}"/>	
 													</cf:select>
                                             </div>
@@ -75,6 +79,8 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Subject Name:</strong></li>
+                                                         <!--  valid -->
+                                                            <li id="subjectNameErr" style="display:none;" class="style-li error-red" > Subject Name can not be blank.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -85,6 +91,8 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> Status:</strong></li>
+                                                        <!--   valid -->
+                                                             <li id="statusErr" style="display:none;" class="style-li error-red" >Status can not be blank.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -193,5 +201,29 @@
             	      });     
                 
                 }
+            
+        /*      validation function  */
+            
+            function validateFields(){
+            	// alert($("#holidayDate").val());
+            	// alert($("#holidayReason").val());
+            	
+            	 if($("#userType").val() == ''){
+            		 $("#userTypeErr").css("display" , "block");
+               		return false; 
+            	 } else if($("#trainingType").val() == ''){
+            		 
+              		$("#trainingTypeErr").css("display" , "block");
+              		return false;
+            	 
+         	 }else if($("#subjectName").val() == ''){
+            		 $("#subjectNameErr").css("display" , "block");
+          		return false; 
+         	 }else if($("#status").val() == ''){
+            		 $("#statusErr").css("display" , "block");
+           		return false;
+         	 }
+            }
+         	 
 
             </script>

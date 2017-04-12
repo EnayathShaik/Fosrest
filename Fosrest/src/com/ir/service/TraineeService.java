@@ -18,11 +18,13 @@ import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.TrainingSchedule;
+import com.ir.model.UnitMaster;
 import com.ir.model.Utility;
 
 
@@ -154,6 +156,12 @@ public interface TraineeService {
 	public PersonalInformationTrainer FullDetailTrainer(int loginId);
 	
 	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId);
+
+	public List<UnitMaster> listTrainingTopic();
+
+	public List<ModuleMaster> listTopicModule();
+	
+	
 	
 	
 }

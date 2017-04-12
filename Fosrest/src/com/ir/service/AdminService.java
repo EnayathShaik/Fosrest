@@ -288,6 +288,8 @@ public interface AdminService {
 	public List<TrainingPartner> listTrainingPartner();
 
 	public List<TrainingClosureForm> listTrainingClosure();
+
+	
 	
 	
 	

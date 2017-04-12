@@ -1,20 +1,10 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
-  <script>
-                function OnStart() {
-                   
-                	flatpickr("#holidayDate" , {
-                		
-                	});	
-                }
-                window.onload = OnStart;
+        <!-- @author Jyoti Mekal -->
 
-            </script>
-            
-        
-            <ct:url var="addAction" value="/HolidayMaster/add.fssai" ></ct:url>
-            <cf:form action="${addAction}" name="myForm" method="POST" commandName="HolidayMaster" onsubmit="return validateFields();">
+   			  <ct:url var="addAction" value="/DistrictMaster/add.fssai" ></ct:url>
+            <cf:form action="${addAction}" name="myForm" method="POST" commandName="DistrictMasterForm" onsubmit="return validateFields();">
 
                 <section>
                     <%@include file="../roles/top-menu.jsp"%>
@@ -41,69 +31,68 @@
                                         <div class="row">
 
                                             <div class="col-xs-12">
-                                                <h1>Holiday Master <label id="created">${created }</label></h1>
+                                                <h1>District Master <label id="created">${created }</label></h1>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-													<fieldset>
-                                        <legend>Holiday Master</legend>
+												                           <fieldset>
+                                        <legend>Search District Master</legend>
                                         <!-- table starts here -->
                                         <!-- left side -->
                                         <div class="col-md-6 col-xs-12">
-                                            <div class="form-group">													
-														<cf:input path="holidayId" type="hidden" /> 
-
-													<div>
-                                                    <ul class="lab-no">
-                                                        <li class="style-li"><strong>Holiday Date:</strong></li>
-                                                     <li id="holidayDateErr" style="display:none;" class="style-li error-red" > Holiday Date can not be blank.</li>
-                                                       </ul>
-                                                </div>
-                                                <cf:input class="form-control" path="holidayDate" id="holidayDate" name="holidayDate" type="text" placeholder="Date"/>
-                                                
-                                                 </div>
-           
+                                            
+                                            <cf:input path="districtId" type="hidden" />
                                             <div class="form-group">
                                                 <div>
                                                     <ul class="lab-no">
-
-                                                        <li class="style-li"><strong>Holiday Reason:</strong></li>
-                                                        <li class="style-li error-red" id="holidayReasonErr" style="display:none;">Holiday Reason can not be blank. </li>
-
-                                                  
-
+                                                        <li class="style-li"><strong> State Name:</strong></li>
+                                                        <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                                <cf:input class="form-control" type="text"  path="holidayReason" id="holidayReason" name="holidayReason" placeholder="Holiday Reason"/>
-                                          
-                                                 </div>
-                                            <div class="row">
+                                                <cf:select path="stateId" class="form-control">
+													<cf:option value="0" label="Select state Name" />
+													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
+													</cf:select>
+                                            </div>
+                                              <div class="form-group">
+                                                <div>
+                                                    <ul class="lab-no">
+                                                        <li class="style-li"><strong> Status:</strong></li>
+                                                        <li class="style-li error-red"> </li>
+                                                    </ul>
+                                                </div>
+                                           	<cf:select path="status" class="form-control">
+                                             <cf:option value="A" label="Active" />
+                                              <cf:option value="I" label="In-Active" />
+                                              </cf:select>
+                                            </div>
                                             
-                                               <!-- left -->
-                                          
-												
-													<input type="submit"  id="updatebtn" style="display:none;float: right;margin-right: 122px;"
+                                        </div>
+                                        <!-- right side -->
+                                        <div class="col-md-6 col-xs-12">
+                                            
+                                            <div class="form-group">
+                                                <div>
+                                                    <ul class="lab-no">
+                                                        <li class="style-li"><strong>District Name:</strong></li>
+                                                        <li class="style-li error-red"> </li>
+                                                    </ul>
+                                                </div>
+                                                <cf:input type="text" path="districtName"  placeholder="District Name" class="form-control"/> 
+                                            </div>
+                                        
+                                            <div class="row">
+                                               <input type="submit"  id="updatebtn" style="display:none;float: right;margin-right: 122px;"
 														value="Update" class="btn login-btn"/>
 												
 												
 													<input type="submit" id="createbtn"
 														value="Create"  class="btn login-btn"/>
-												
-                                            
-                                                <!-- <div class="col-md-6 col-xs-12">
-                                                    <input type="submit" class="btn login-btn" value="Add"/>
-                                                </div> -->
-                                                <div class="col-md-6 col-xs-12">
-                                                    <button type="submit" class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button>
-                                                </div> 
-                                                
-                                                
+                                                <div class="col-md-6 col-xs-12" style="margin-top: 25px;">
+                                                   <!--   <button  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button> -->
+                                                </div>
                                             </div>
                                         </div>
-                                        <!-- right side -->
-                                        <div class="col-md-6 hidden-xs"> </div>
                                     </fieldset>
-                         
-
                                                     </div>
 
 
@@ -117,29 +106,28 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                             <fieldset>
-                                            <legend>Training Schedule</legend>
-                                            <ct:if test="${!empty listHolidayMaster}">
+                                           <legend>District Master</legend>
+                                            <ct:if test="${!empty listDistrictMaster}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
-                                                <thead>
+                                               <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>
-                                                        <th>Holiday Date</th>
-                                                        <th>Holiday Reason</th>
+                                                        <th>State Name</th>
+                                                        <th>District Name</th>
+                                                        <th>Status</th>
                                                         <th>Edit</th>
                                                         <th>Delete</th>
-                                                    </tr> 
+                                                    </tr>
                                                 </thead>
                                                 
-                                               	<ct:forEach items="${listHolidayMaster}" var="HolidayMaster">
-										
-										
-											<tr>
-												<td>${HolidayMaster.holidayId}</td>
-												<td>${HolidayMaster.holidayDate}</td>
-												<td>${HolidayMaster.holidayReason}</td>
-												  
-												<td><button onclick='editHoliday(${HolidayMaster.holidayId});return false;' >Edit</button></td>
-												<td><a href="<ct:url value='/HolidayMaster/remove/${HolidayMaster.holidayId}.fssai' />" >Delete</a></td>
+                                                <ct:forEach items="${listDistrictMaster}" var="DistrictMaster">
+                                                <tr>
+												<td>${DistrictMaster.districtId}</td>
+												 <td>${DistrictMaster.stateMaster.stateName}</td> 
+												<td>${DistrictMaster.districtName}</td>
+												<td><ct:choose><ct:when test="${ DistrictMaster.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
+												<td><button onclick='editDistrict(${DistrictMaster.districtId});return false;' >Edit</button></td>
+												<td><a href="<ct:url value='/DistrictMaster/remove/${DistrictMaster.districtId}.fssai' />" >Delete</a></td>
 											</tr>
 										</ct:forEach>
                                             </table>
@@ -161,26 +149,20 @@
                 <input type="hidden" id="idH" value="" />
             </cf:form>
             <script>
-             /*    var id = localStorage.getItem('activeID');
-                document.getElementById(id).className = "active";
-                 */
-                
-                function editHoliday(id){
-               // alert(id);
-                
+            function editDistrict(id){                
                 var name1=JSON.stringify({
             		courseName:0
               })
             	$.ajax({
             	      type: 'post',
-            	      url: 'HolidayMaster/edit/'+id+'.fssai',
+            	      url: 'DistrictMaster/edit/'+id+'.fssai',
             	      contentType : "application/json",
             		  data:name1,
             	      success: function (response) {      
             	      var mainData1 = jQuery.parseJSON(response);
-            	    $("#holidayId").val(mainData1.holidayId);
-            	    $("#holidayDate").val(mainData1.holidayDate);
-            	    $("#holidayReason").val(mainData1.holidayReason);
+            	    $("#districtId").val(mainData1.districtId);
+            	    $("#stateId").val(mainData1.stateMaster.stateId);
+            	    $("#districtName").val(mainData1.districtName);
             	     $("#updatebtn").css("display" , "block");
             	     
             	     $("#createbtn").css("display" , "none");
@@ -188,20 +170,5 @@
             	      });     
                 
                 }
-                 
-
-                 function validateFields(){
-                	// alert($("#holidayDate").val());
-                	// alert($("#holidayReason").val());
-                	 if($("#holidayDate").val() == ''){
-                		 
-                		$("#holidayDateErr").css("display" , "block");
-                		return false;
-                	 } else if($("#holidayReason").val() == ''){
-                		 $("#holidayReasonErr").css("display" , "block");
-                 		return false; 
-                	 }
-
-                 }
 
             </script>

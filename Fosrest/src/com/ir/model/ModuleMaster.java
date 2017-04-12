@@ -103,6 +103,12 @@ public class ModuleMaster {
 		this.moduleName = moduleName;
 	}
 
+	
+	@Override
+	public String toString() {
+		return  moduleName ;
+	}
+
 
 
 	public String getContentType() {
