@@ -90,6 +90,7 @@ import com.ir.util.HibernateUtil;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
+import com.itextpdf.text.log.SysoCounter;
 import com.zentech.logger.ZLogger;
 @Repository
 @Service
@@ -1977,6 +1978,34 @@ public class AdminDAOImpl implements AdminDAO {
 			p.setTraining_institude_status("N");
 			p.setIsActive("A");
 			Session session = this.sessionFactory.getCurrentSession();
+			String sql = "select coalesce(max(seqNo) + 1,1) from TrainingSchedule";
+			int maxId = 0 ;
+			Query maxIDList = session.createSQLQuery(sql);
+			List list = maxIDList.list();
+			System.out.println(list.size());
+			
+			new ZLogger("TrainingSchedule", "list.size() "+list.size(), "AdminDAOImpl.java");
+			
+			if(list.size() > 0){
+				maxId = (int) list.get(0);
+				System.out.println(maxId);
+				//eligible = (String) list.get(0);
+			}
+			
+			
+			System.out.println("ModuleMaster "+p.getModuleId() + " p.getUnitMaster() "+p.getUnitId());
+			
+			
+			UnitMaster  um = getUnitMasterById(p.getUnitId());
+			ModuleMaster mm=getModuleMasterById(p.getModuleId());
+			//System.out.println(" p.getUnitMaster() "+um.getUnitId()+"p.getModuleMaster() "+mm.getModuleId());
+			System.out.println("B"+um.getUnitName().substring(0, 2).toUpperCase()+mm.getModuleName().substring(0, 1)+StringUtils.leftPad(String.valueOf(maxId), 2, "0"));
+			p.setBatchCode("B"+um.getUnitName().substring(0, 2).toUpperCase()+mm.getModuleName().toUpperCase().substring(0, 1)+StringUtils.leftPad(String.valueOf(maxId), 2, "0"));
+			p.setSeqNo(maxId);
+			//p.setUnitMaster(um);
+			//p.setModuleMaster(mm);
+		  
+			
 			session.persist(p);
 		}
 		
@@ -2480,6 +2509,11 @@ System.out.println("list "+list);
 		
 		
 		
+		
+		
+		
+		
+		
 
 		/*************************************Zinvoice******************************************/
 		
@@ -2791,8 +2825,8 @@ System.out.println("list "+list);
 		
 		
 		//addNomineeTrainee
-	//	@Override
-		public String addNomineeTrainee(NomineeTrainee nt , String moduleCode) {
+		//@Override
+		public String addNomineeTrainee(NomineeTrainee nt ,String  moduleCode) {
 			// TODO Auto-generated method stub
 			System.out.println(" s "+nt);
 			String sql = "select coalesce(max(rollseqNo) + 1,1) from nomineetrainee";
@@ -2809,6 +2843,8 @@ System.out.println("list "+list);
 			}
 			nt.setRollNo(moduleCode+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 			nt.setRollSeqNo(maxId);
+			
+			
 			session.save(nt);
 			session.close();
 			return "created";

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -38,8 +40,9 @@ public class TrainingSchedule {
 	private int training_institude_id;
 	private String trainer_status;
 	private String training_institude_status;
-	
-	
+	private String batchCode;
+	@Column(columnDefinition="int default 0")
+	private int seqNo;
 	
 	@Column(name="isActive", columnDefinition="character varying(10) default 'A'")
 	private String isActive;
@@ -187,6 +190,46 @@ public class TrainingSchedule {
 		this.training_institude_status = training_institude_status;
 	}
 
+	
+	private int unitId;
+	private int moduleId;
+  
+
+public String getBatchCode() {
+		return batchCode;
+	}
+public void setBatchCode(String batchCode) {
+	this.batchCode = batchCode;
+}
+	
+
+public int getUnitId() {
+	return unitId;
+}
+
+public void setUnitId(int unitId) {
+	this.unitId = unitId;
+}
+
+public int getModuleId() {
+	return moduleId;
+}
+
+public void setModuleId(int moduleId) {
+	this.moduleId = moduleId;
+}
+
+	
+
+	public int getSeqNo() {
+		return seqNo;
+	}
+
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
+	}
+
+	
 
 
 

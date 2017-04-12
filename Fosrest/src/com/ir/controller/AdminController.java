@@ -89,6 +89,7 @@ import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
 import com.ir.service.PageLoadService;
+import com.itextpdf.text.log.SysoCounter;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 import com.zentect.list.constant.ListConstant;
@@ -1360,18 +1361,23 @@ public class AdminController {
 		return "HolidayMaster";
 	}
  
+  
+  	@RequestMapping(value= "/HolidayMaster/add", method = RequestMethod.POST) 
+  public String addHolidayMaster( @ModelAttribute("HolidayMaster") @Valid HolidayMaster p , BindingResult result,Model model)
 	
-	@RequestMapping(value= "/HolidayMaster/add", method = RequestMethod.POST) 
-	public String addHolidayMaster(@Valid @ModelAttribute("HolidayMaster") HolidayMaster p , BindingResult result){
-	System.out.println(result.hasErrors());	
-	
-		if (result.hasErrors()) {
-			
-			new ZLogger("HolidayMaster", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
-			new ZLogger("HolidayMaster", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
-			return "redirect:/HolidayMaster.fssai";
-		}
+		{
 		
+	System.out.println(result.hasErrors());	
+	       
+		
+if (result.hasErrors()) {
+	        	new ZLogger("HolidayMaster", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+				new ZLogger("HolidayMaster", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+	          return "redirect:/HolidayMaster.fssai";
+	           
+	        }
+		
+
 		System.out.println("p.getId() "+p.getHolidayId());
 		if(p.getHolidayId() == 0){
 			//new person, add it
@@ -1382,13 +1388,17 @@ public class AdminController {
 		}
 		System.out.println("after insert");
 		return "redirect:/HolidayMaster.fssai";
+	
+	 
 	}
+
 	
 	@RequestMapping("/HolidayMaster/remove/{id}")
  public String removeHolidayMaster(@PathVariable("id") int id){
 		
      this.adminService.removeHolidayMaster(id);
      return "redirect:/HolidayMaster.fssai";
+    
  }
 
 
@@ -1629,6 +1639,7 @@ public String TrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingS
 		Map<String , String> trainingType = lst.trainingTypeMap;
 		Map<String , String> trainingPhase = lst.trainingPhaseMap;
 		Map<String , String> userStatusMap = lst.userStatusMap;
+		
 		model.addAttribute("userType",userType);
 		model.addAttribute("trainingType",trainingType);
 		model.addAttribute("trainingPhase" , trainingPhase);
@@ -1638,15 +1649,19 @@ public String TrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingS
 		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
 		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
-		
+		 model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		 model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
+
 		
 		
 	return "TrainingSchedule";
 }
 
 @RequestMapping(value= "/TrainingSchedule/add", method = RequestMethod.POST) 
-public String addTrainingSchedule(@ModelAttribute("TrainingSchedule") TrainingSchedule p){
+public String addTrainingSchedule(@ModelAttribute("TrainingSchedule") TrainingSchedule p, Model model){
 	System.out.println("p.getId() "+p.getTrainingScheduleId());
+	
+	
 	if(p.getTrainingScheduleId() == 0){
 		//new person, add it
 		this.adminService.addTrainingSchedule(p);
@@ -1657,7 +1672,7 @@ public String addTrainingSchedule(@ModelAttribute("TrainingSchedule") TrainingSc
 	System.out.println("after insert");
 	return "redirect:/TrainingSchedule.fssai";
 }
-
+    
 @RequestMapping("/TrainingSchedule/remove/{id}")
 public String removeTrainingSchedule(@PathVariable("id") int id){
 	

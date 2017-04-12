@@ -55,6 +55,20 @@
                                             <!-- left side -->
                                             <div class="col-xs-6">
                                             
+                                            <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Unit Name:</strong></li>
+                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
+                                                        </ul>
+                                                    </div>
+                                                 <cf:select path="unitId" class="form-control" onchange="getModule(this.value , 'Module')">
+													<cf:option value="0" label="Select Unit name" />
+													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />	
+												</cf:select>
+                                                </div>
+			
+											
                                             	<div class="form-group">
 												<div>
 													<ul class="lab-no">
@@ -90,7 +104,7 @@
                                                 <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Training Phase:</strong></li>
+                                                  <li class="style-li"><strong>Training Phase:</strong></li>
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
                                                         </ul>
                                                     </div>
@@ -127,7 +141,19 @@
 
                                             <!-- right side -->
                                             <div class="col-xs-6">
-
+													 <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Module Name:</strong></li>
+                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
+                                                        </ul>
+                                                    </div>
+                                                 <cf:select path="moduleId" class="form-control">
+													<cf:option value="0" label="Select Module name" />
+													<cf:options items="${listModuleMaster}" itemLabel="moduleCode" itemValue="moduleId"/>	
+												</cf:select>
+                                                </div>
+											
 											<div class="form-group">
 												<div>
 													<ul class="lab-no">
@@ -216,7 +242,7 @@
                                            <fieldset>
                                            <legend>Training Schedule </legend>
                                             <ct:if test="${!empty listTrainingSchedule}">
-                                            <table class="table table-bordered table-responsive">
+                                           <table class="table table-bordered table-responsive">
                                                <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>
@@ -225,9 +251,10 @@
                                                         <th>Training Phase</th>
                                                         <th>Training Start Date</th>
                                                         <th>Training End Date</th>
+                                                        <th>Batch code</th>
                                                         <th>Status</th>
                                                         <th>Reschedule</th>
-                                                        <th>Deacivate</th>
+                                                        <th>Deactivate</th>
                                                         
                                                     </tr>
                                                 </thead>
@@ -240,6 +267,7 @@
 												<td>${TrainingSchedule.trainingPhase}</td>
 												<td>${TrainingSchedule.trainingStartDate}</td>
 												<td>${TrainingSchedule.trainingEndDate}</td>
+												<td>${TrainingSchedule.batchCode}</td>
 												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
 												<td><button onclick='editTrainingSchedule(${TrainingSchedule.trainingScheduleId});return false;' >Reschedule</button></td>
 												<td><a href="<ct:url value='/TrainingSchedule/remove/${TrainingSchedule.trainingScheduleId}.fssai' />" >Deactivate</a></td>
