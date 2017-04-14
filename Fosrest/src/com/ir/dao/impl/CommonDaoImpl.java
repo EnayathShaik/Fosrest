@@ -145,5 +145,13 @@ public class CommonDaoImpl implements CommonDao{
 		List moduleList = query.list();
 		return moduleList;
 	}
+	@Override
+	public  List getBatchCode(String data){
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "select batchCode as value ,  batchCode as label  from  trainingschedule where moduleId= '"+data+"'";		
+		Query query = session.createSQLQuery(sql);
+		List batchCodeList = query.list();
+		return batchCodeList;
+	}
 
 }

@@ -173,7 +173,7 @@ function getCourseTrainingType(){
 
 
 function getBatch(val , idName){
-
+console.log("val "+val);
  	var name=JSON.stringify({
 		courseType:0
   })
@@ -189,7 +189,8 @@ function getBatch(val , idName){
 	      $('#'+idName).append('<option value="" label="Select Batch Code" />');
 	        $.each(mainData1 , function(i , obj)
 	  		{
-	  				$('#'+idName).append('<option value='+obj+' >'+obj+'</option>');		
+	        	console.log(obj[0]);
+	  				$('#'+idName).append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
 	  		});  
 	      }
 	      });

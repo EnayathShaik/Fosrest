@@ -33,7 +33,16 @@ public class NomineeTrainee {
 	private String rollNo;
 	private String status;
 	private String traineeName;
+	private String batchCode;
 	
+	
+	
+	public String getBatchCode() {
+		return batchCode;
+	}
+	public void setBatchCode(String batchCode) {
+		this.batchCode = batchCode;
+	}
 	public int getId() {
 		return id;
 	}
@@ -82,6 +91,7 @@ public class NomineeTrainee {
 	public void setTraineeName(String traineeName) {
 		this.traineeName = traineeName;
 	}
+	
 	
 	
 	

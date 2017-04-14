@@ -124,7 +124,7 @@ public class TrainingPartnerController {
 	}
 	
 	
-	@RequestMapping(value="/getBatchCode" , method=RequestMethod.POST)
+	/*@RequestMapping(value="/getBatchCode" , method=RequestMethod.POST)
 	@ResponseBody
 	public void getBatchCode(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
 		new ZLogger("getBatchCode","getBatchCode............" + data  , "TrainingPartnerController.java");
@@ -136,7 +136,7 @@ public class TrainingPartnerController {
 		out.write(newList);
 		out.flush();
 		
-	}
+	}*/
 	
 
 	

@@ -80,4 +80,10 @@ public class CommonServiceImpl implements CommonService{
 		List  moduleList = commonDao.getModule( trainingPartner);
 		return moduleList;
 	}
+	@Override
+	@Transactional
+	public List getBatchCode(String module){
+		List  batchCodeList = commonDao.getBatchCode( module);
+		return batchCodeList;
+	}
 }

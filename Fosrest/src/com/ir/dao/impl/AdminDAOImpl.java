@@ -2762,6 +2762,7 @@ System.out.println("list "+list);
 			
 			return personalInfoList;
 		}
+
 		@Override
 		public String enrollUser(String data) {
 			// TODO Auto-generated method stub
@@ -2773,7 +2774,12 @@ System.out.println("list "+list);
 			String unit = arrData[1];
 			String module = arrData[2];
 			String moduleCode = arrData[3];
-			System.out.println(" unit "+unit + "module  "+module + " moduleCode "+moduleCode+ " loginDetails "+loginIdName);
+			String batchCode=arrData[4];
+			System.out.println(moduleCode);
+			System.out.println(batchCode);
+			System.out.println(unit);
+			System.out.println(" unit "+unit + "module  "+module + " moduleCode "+moduleCode+ "batchCode"+batchCode+" loginDetails "+loginIdName);
+			//unit 500module  510 moduleCode SPIO04batchCodeSelect Batch Code loginDetails [Ljava.lang.String;@7e2cc9c0
 			if(arrData[0].contains(",")){	
 				for(int i = 0 ; i <loginIdName.length ; i++ ){
 					System.out.println(" loginIdName[i] "+loginIdName[i]);
@@ -2782,29 +2788,19 @@ System.out.println("list "+list);
 			}else{
 				loginDetails.add(arrData[0]);
 			}
+			  for(String s :loginDetails){
 			
-	
-			
-			
-			for(String s :loginDetails){
-				NomineeTrainee nt = new NomineeTrainee();
-				
-				nt.setModule(Integer.parseInt(module));	
-				nt.setUnit(Integer.parseInt(unit));
-				nt.setStatus("N");
-				 LoginDetails ld =  this.getLoginDetailsById(Integer.parseInt(s.split("@")[0]));
-				nt.setLoginDetails(ld);
-				nt.setTraineeName(s.split("@")[1]);
+				System.out.println("id "+s.split("@")[0]);
 				
 				
-				String result = addNomineeTrainee(nt , moduleCode);
+				String result = addNomineeTrainee(module , unit ,moduleCode,batchCode,Integer.parseInt(s.split("@")[0]) , s.split("@")[1]);
 
 			}
-
+System.out.println("6:1 st return created");
 			return "created";
 		}
 
-		public LoginDetails getLoginDetailsById(int id) {
+		public LoginDetails getLoginDetailsById(int id ) {
 			// TODO Auto-generated method stub
 			System.out.println(" id " +id);
 			Session session = sessionFactory.openSession();
@@ -2812,10 +2808,12 @@ System.out.println("list "+list);
 		/*	Session session = this.sessionFactory.getCurrentSession();*/
 			
 		Query query = session.createQuery("from LoginDetails where id="+id);
-	
-		List<LoginDetails> loginList = query.list();
-		session.close();
+		System.out.println("1:login details By id function");
+		//List<LoginDetails> loginList = query.list();
+		List<LoginDetails> loginList=query.list();
+		
 		LoginDetails hm = loginList.get(0);
+		//int a=loginList.get(0);
 			return hm; 
 			
 			
@@ -2825,30 +2823,47 @@ System.out.println("list "+list);
 		
 		
 		//addNomineeTrainee
-		//@Override
-		public String addNomineeTrainee(NomineeTrainee nt ,String  moduleCode) {
+	//	@Override
+		public String addNomineeTrainee(String module , String unit , String moduleCode,String batchCode,int loginId , String traineeName) {
 			// TODO Auto-generated method stub
-			System.out.println(" s "+nt);
+		//	System.out.println(" ld "+ld.getId());
+			//System.out.println("3:sssss:"+nt);
+		
 			String sql = "select coalesce(max(rollseqNo) + 1,1) from nomineetrainee";
 			int maxId = 0 ;
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
+			 LoginDetails ld =  this.getLoginDetailsById(loginId  );
+			 System.out.println("ld "+ld);
 			Query maxIDList = session.createSQLQuery(sql);
 			List list = maxIDList.list();
 			System.out.println(list.size());
+		
+		
+		
 			new ZLogger("manageCourse", "list.size() "+list.size(), "AdminDAOImpl.java");
 			if(list.size() > 0){
 				maxId = (int) list.get(0);
 				System.out.println(" maxId "+maxId);
 			}
+			NomineeTrainee nt = new NomineeTrainee();
+			nt.setModule(Integer.parseInt(module));	
+			nt.setUnit(Integer.parseInt(unit));
+			nt.setStatus("N");
 			nt.setRollNo(moduleCode+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 			nt.setRollSeqNo(maxId);
-			
-			
-			session.save(nt);
+			nt.setLoginDetails(ld);
+			nt.setTraineeName(traineeName);
+			nt.setBatchCode(batchCode);
+			System.out.println("5:after set");
+			int id =  (int) session.save(nt);
+			tx.commit();
+			System.out.println("id "+id);
 			session.close();
+			System.out.println("before return");
 			return "created";
 		}
+	
 }
 
 

@@ -12,6 +12,7 @@ function OnStart() {
 		//alert("Y" +userList);
 		$("#moduleDIV").css("display", "block");
 		$("#unitDIV").css("display", "block");
+		$("#batchCodeDIV").css("display", "block");
 	}else{
 
 		
@@ -19,6 +20,7 @@ function OnStart() {
 }
 window.onload = OnStart;
 </script>
+
 <cf:form action="ListEligibleUser.fssai" name="myForm" method="POST" commandName="NominateTraineeForm" > 
 
     <section>
@@ -41,7 +43,12 @@ window.onload = OnStart;
                                 <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Admin</span> </a>
                             </div>
                         </div>
+                       
+
+
                         <!-- add the content here for main body -->
+                        
+                       
                         <!-- timeline  -->
                         <div class="row">
 
@@ -76,8 +83,8 @@ window.onload = OnStart;
                                                             ${created }</li>
                                                         </ul>
                                                     </div>
-												<cf:select path="module" class="form-control">
-													<cf:option value="" label="Select module" />
+												<cf:select path="module" class="form-control" onchange="getBatch(this.value , 'batchCode')">
+													<cf:option value="0" label="Select module" />
 													<cf:options items="${moduleList}" itemValue="moduleId" itemLabel="moduleCode" />
 												</cf:select>
 											</div>
@@ -97,11 +104,27 @@ window.onload = OnStart;
                                                         </ul>
                                                     </div>
 												<cf:select path="unit" class="form-control" onchange="getModule(this.value ,'module' )">
-													<cf:option value="" label="Select Unit" />
+													<cf:option value="0" label="Select Unit" />
 													<cf:options items="${unitList}" itemValue="unitId" itemLabel="unitCode" />
 												</cf:select>
 											</div>
                                             </div>
+                                            
+                                            <div class="col-xs-6">
+                                              <div class="form-group" id="batchCodeDIV" style="display:none">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Batch Code:</strong></li>
+                                                            <li class="style-li error-red">
+                                                            <span id="name_status" class = "clear-label"> </span>
+                                                            ${created }</li>
+                                                        </ul>
+                                                    </div>
+												<cf:select path="batchCode" class="form-control">
+													<cf:option value="0" label="Select Batch Code" />
+													<cf:options items="${batchCodeList}"  />
+												</cf:select>
+											</div></div>
                                              <!-- rigth side ends -->
                                             
                                             <!-- button -->
@@ -210,12 +233,12 @@ window.onload = OnStart;
 	   var unit = $("#unit").val();
 	   var module = $("#module").val();
 	   var moduleCode =  $("#module :selected").text();
-	  
+	   var batchCode =  $("#batchCode :selected").val();
 	   var name=JSON.stringify({
 			courseType:0,
 			courseName:0
 	  });
-	  var result = loginIds+"-"+unit+"-"+module+"-"+moduleCode;
+	  var result = loginIds+"-"+unit+"-"+module+"-"+moduleCode+"-"+batchCode;
 	  alert(result);
 		 $.ajax({
 			type : 'post',
@@ -228,8 +251,8 @@ window.onload = OnStart;
 			}
 		});
 	   
-	    
-	   
+		 
+		 
    }
    
  
