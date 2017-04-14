@@ -51,7 +51,7 @@
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Type:</strong></li>
                                                           <!--  valid -->
-                                                            <li id="trainingTypeErr" style="display:none;" class="style-li error-red" > Training Type can not be blank.</li>
+                                                            <li id="trainingTypeErr" style="display:none;" class="style-li error-red" > Please Select Training Type.</li>
                                                             
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
@@ -69,7 +69,7 @@
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Institute:</strong></li>
                                                            <!--  valid -->
-                                                            <li id="trainingInstituteErr" style="display:none;" class="style-li error-red" > Training Institute can not be blank.</li>
+                                                            <li id="trainingInstituteErr" style="display:none;" class="style-li error-red" >Please Select Training Institute.</li>
                                                             
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
                                                         </ul>
@@ -85,7 +85,7 @@
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Date:</strong></li>
                                                              <!--   valid -->
-                                                             <li id="trainingDateErr" style="display:none;" class="style-li error-red" >Training Date can not be blank.</li>
+                                                             <li id="trainingDateErr" style="display:none;" class="style-li error-red" >Please Select Training Date.</li>
                                                              
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
@@ -107,7 +107,7 @@
 													<ul class="lab-no">
 														<li class="style-li"><strong>User Type:</strong></li>
 														 <!--   valid -->
-                                                             <li id="userTypeErr" style="display:none;" class="style-li error-red" >User Type can not be blank.</li>
+                                                             <li id="userTypeErr" style="display:none;" class="style-li error-red" >Please Select User Type.</li>
                                                              
 														<li class="style-li error-red"><span id="name_status">
 														</span><span id="err"> </span> <label id=userTypeError
@@ -126,7 +126,7 @@
 													<ul class="lab-no">
 														<li class="style-li"><strong>Status:</strong></li>
 														<!--   valid -->
-                                                             <li id="statusErr" style="display:none;" class="style-li error-red" >Status can not be blank.</li>
+                                                             <li id="statusErr" style="display:none;" class="style-li error-red" >Please Select Status.</li>
 														<li class="style-li error-red"><cf:errors
 																path="status" cssClass="error" /></li>
 													</ul>

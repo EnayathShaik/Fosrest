@@ -53,7 +53,7 @@
 												<td>${TrainingSchedule.trainingEndDate}</td>
 												<td>20</td>
 												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
-												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId });return false;' >Accept</button></td>
+												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 });return false;' >Accept</button></td>
 												<td><a  class="btn login-btn" href="<ct:url value='/TrainingSchedule/remove/${TrainingSchedule.trainingScheduleId}.fssai' />" >Reject</a></td>
 												
 											</tr>
@@ -73,14 +73,14 @@
 
 <script>
 
-function acceptTrainingRequest(id , profileId){
-	alert(" id "+id + "profileId  "+profileId);
+function acceptTrainingRequest(id , profileId,loginUser2){
+	alert(" id "+id + "profileId  "+profileId+" userID:"+loginUser2);
 	   var name1=JSON.stringify({
   		courseName:0
     })
   	$.ajax({
   	      type: 'post',
-  	      url: 'TrainingSchedule/accept/'+id+'.fssai?profileId='+profileId,
+  	    url: 'TrainingSchedule/accept/'+id+'.fssai?profileId='+profileId+'&loginUser2='+loginUser2,
   	      contentType : "application/json",
   		  data:name1,
   	      success: function (response) {  

@@ -1277,7 +1277,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setStatus("A");
-		loginDetails.setProfileId(3);
+		loginDetails.setProfileId(4);
 		p.setLoginDetails(loginDetails);
 		
 		session.save(p);

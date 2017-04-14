@@ -20,6 +20,7 @@ public class GenerateCertificateForm {
 	private String attendanceStatus;
 	private String certificateStatus;
 	private String generateCertificate;
+	
 	private int id;
 	
 	

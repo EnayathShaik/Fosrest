@@ -207,9 +207,10 @@ public interface AdminDAO {
 		public void updateTrainingSchedule(TrainingSchedule p);
 		
 		public void removeTrainingSchedule(int id);
-		public void acceptTrainingSchedule(int id , int profileId);
+		public void acceptTrainingSchedule(int id , int profileId,int loginUser2,int userTableId);
 		
 		public TrainingSchedule getTrainingScheduleById(int id);
+		
 		public List<TrainingSchedule> listTrainingSchedule();
 		
 		public List<PersonalInformationTrainingInstitute> listTrainingInstitude();
@@ -330,7 +331,9 @@ public interface AdminDAO {
 					 public List<PersonalInformationTrainee> listEligibleuser(String userType);
 					 
 					 public String enrollUser(String data);
-					/* public String addNomineeTrainee(NomineeTrainee data , String moduleCode);
-					 public LoginDetails getLoginDetailsById(int id);
-		*/
+					 /*public String addNomineeTrainee(NomineeTrainee data , String moduleCode);
+					 public LoginDetails getLoginDetailsById(int id);*/
+
+				
+		
 }

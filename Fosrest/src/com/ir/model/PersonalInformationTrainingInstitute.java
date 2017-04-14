@@ -370,7 +370,9 @@ public class PersonalInformationTrainingInstitute {
 
 	@Override
 	public String toString() {
-		return "PersonalInformationTrainee [id=" + id  + ", mobile=" + mobile +  ", Email="+Email +   "]";
+		return trainingCenterName;
 	}
+
+	
 	
 }

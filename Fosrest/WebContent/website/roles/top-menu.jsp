@@ -75,13 +75,13 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
+							<li class="active hori"><a href="">Home</a></li>
 							<!-- <li class="hori"><a href="search-and-apply.fssai">Search
 									& Apply Vacancy</a></li> -->
-							<li class="hori"><a href="update-profile.fssai?userId=0">Update
-									Profile</a></li>
-							<li class="hori"><a href="contactTrainee.fssai">Contact
-									Us</a></li>
+							<li class="hori"><a href="MyCalendar.fssai">My Calendar
+								</a></li>
+							<!-- <li class="hori"><a href="contactTrainee.fssai">Contact
+									Us</a></li> -->
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown active"><a href="#"

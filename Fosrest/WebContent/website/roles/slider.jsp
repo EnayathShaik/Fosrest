@@ -50,7 +50,8 @@
 %>
 <div id="sidebar-wrapper">
 	<ul class="sidebar-nav">
-	<li><a href="search-and-apply.fssai">Search	& Apply Vacancy</a></li>
+	<!-- <li><a href="search-and-apply.fssai">Search	& Apply Vacancy</a></li> -->
+	<li><a href="TrainerRequest.fssai">Training Request</a></li>
 	
 	<!-- 
 		<li class="dropdown active"><a href="#" class="dropdown-toggle"

@@ -46,7 +46,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> User Type:</strong></li>
                                                          <!--   valid -->
-                                                             <li id="userTypeErr" style="display:none;" class="style-li error-red" >User Type can not be blank.</li>
+                                                             <li id="userTypeErr" style="display:none;" class="style-li error-red" >Please Select User Type.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -60,7 +60,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> Training Type:</strong></li>
                                                          <!--  valid -->
-                                                            <li id="trainingTypeErr" style="display:none;" class="style-li error-red" > Training Type can not be blank.</li>
+                                                            <li id="trainingTypeErr" style="display:none;" class="style-li error-red" >Please Select Training Type.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -80,7 +80,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Subject Name:</strong></li>
                                                          <!--  valid -->
-                                                            <li id="subjectNameErr" style="display:none;" class="style-li error-red" > Subject Name can not be blank.</li>
+                                                            <li id="subjectNameErr" style="display:none;" class="style-li error-red" >Please Enter Subject Name.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>

@@ -5,7 +5,9 @@ import java.util.List;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.MyCalendarForm;
 import com.ir.form.RegistrationFormTrainee;
+import com.ir.form.TrainerRequestForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CheckAadhar;
@@ -26,6 +28,16 @@ import com.ir.model.Title;
 import com.ir.model.Utility;
 
 public interface TrainerDAO {
-	
+	public List<TrainerRequestForm> listTrainerRequest(TrainerRequestForm s);
+
+	public List<MyCalendarForm> listMyCalendar();
+
+
+
+	/*
+	 * public List<UnitMaster> listTrainingType(); public List<UnitMaster>
+	 * listUserType(); 
+	 * public List<UnitMaster> listStatusType();
+	 */
 	
 }

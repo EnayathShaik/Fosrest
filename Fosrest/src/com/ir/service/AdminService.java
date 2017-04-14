@@ -229,7 +229,7 @@ public interface AdminService {
 	public void addTrainingSchedule(TrainingSchedule p);
 	public void updateTrainingSchedule(TrainingSchedule p);
 	public void removeTrainingSchedule(int id);
-	public void acceptTrainingSchedule(int id , int profileid);
+	public void acceptTrainingSchedule(int id , int profileid,int loginUser2,int userTableId);
 	public TrainingSchedule getTrainingScheduleById(int id);
 	public List<PersonalInformationTrainingInstitute> listTrainingInstitude();
 	
@@ -345,6 +345,7 @@ public interface AdminService {
 	
 	
 	
+
 	public List<PersonalInformationTrainee> listEligibleuser(String userType); 
 	public String enrollUser(String data);
 /*	public String addNomineeTrainee(NomineeTrainee nt , String data);

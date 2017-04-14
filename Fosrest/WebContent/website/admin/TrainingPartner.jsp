@@ -44,7 +44,9 @@
 													<div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Training Partner Name:</strong></li>
-                                                        <li > <cf:errors path="trainingPartnerName" style="color:red" ></cf:errors> </li>
+                                                        <li > <cf:errors path="trainingPartnerName" style="color:red" >*</cf:errors> </li>
+                                                         <li id="trainingPartnerNameErr" style="display: none;"
+															class="style-li error-red">Please Enter Partner Name.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:input class="form-control" path="trainingPartnerName" type="text" placeholder="Training Partner Name"/> </div>
@@ -52,7 +54,9 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Training Partner Website Link:</strong></li>
-                                                        <li class="style-li error-red"> </li>
+                                                        <li class="style-li error-red"> *</li>
+                                                         <li id="tpWebLinkErr" style="display: none;"
+															class="style-li error-red">Please Enter Website.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:input class="form-control" type="text"  path="tpWebLink"  placeholder="Training Partner Website Link"/> </div>
@@ -60,7 +64,9 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> Status:</strong></li>
-                                                        <li class="style-li error-red"> </li>
+                                                        <li class="style-li error-red">*</li>
+                                                        <li id="statusErr" style="display: none;"
+															class="style-li error-red">Please Select Status.</li>
                                                     </ul>
                                                 </div>
                                            	<cf:select path="status" class="form-control">
@@ -180,5 +186,22 @@
             	      });     
                 
                 }
+                 function validateFields(){ 
+                 if($("#trainingPartnerName").val() == 0){
+              		 
+              		$("#trainingPartnerNameErr").css("display" , "block");
+              		return false;
+              	 }
+             	if($("#tpWebLink").val() == 0){
+               		 
+              		$("#tpWebLinkErr").css("display" , "block");
+              		return false;
+              	 }
+                 if($("#status").val() == ''){
+                		 $("#statusErr").css("display" , "block");
+                 		return false; 
+                 }
+                 }
+               
 
             </script>

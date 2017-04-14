@@ -59,7 +59,9 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Unit Name:</strong></li>
-                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
+                                                            <li id="unitIdErr" style="display: none;"
+															class="style-li error-red">Please Select Unit Name.</li>
+                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">*</label></li>
                                                         </ul>
                                                     </div>
                                                  <cf:select path="unitId" class="form-control" onchange="getModule(this.value , 'Module')">
@@ -73,6 +75,8 @@
 												<div>
 													<ul class="lab-no">
 														<li class="style-li"><strong>User Type</strong></li>
+														<li id="userTypeErr" style="display: none;"
+															class="style-li error-red">Please Select User Type.</li>
 														<li class="style-li error-red"><span id="name_status">
 														</span><span id="err"> </span> <label id=userTypeError
 															class="error visibility">* Select UserType </label> <cf:errors
@@ -90,6 +94,9 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Type:</strong></li>
+                                                            <li id="trainingTypeErr" style="display: none;"
+															class="style-li error-red">Please Select Training
+															Type.</li>
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
                                                             ${created }</li>
@@ -105,6 +112,9 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                   <li class="style-li"><strong>Training Phase:</strong></li>
+                                                  <li id="trainingPhaseErr" style="display: none;"
+															class="style-li error-red">Please Select Training
+															Phase.</li>
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
                                                         </ul>
                                                     </div>
@@ -118,7 +128,11 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Start Date:</strong></li>
-                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
+                                                            
+                                                            <li id="trainingStartDateErr" style="display: none;"
+															class="style-li error-red">Please Select Training
+															Start Date.</li>
+                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">*</label></li>
                                                         </ul>
                                                     </div>
                                                  <cf:input class="form-control" path="trainingStartDate"  type="text" placeholder="Training Start Date"/>
@@ -128,6 +142,9 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> Requested State:</strong></li>
+                                                        <li id="stateErr" style="display: none;"
+															class="style-li error-red">Please Select 
+															State.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -145,7 +162,8 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Module Name:</strong></li>
-                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
+                                                            <li id="moduleIdErr" style="display: none;" class="style-li error-red">Please Select Module Name.</li>
+                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">*</label></li>
                                                         </ul>
                                                     </div>
                                                  <cf:select path="moduleId" class="form-control">
@@ -159,6 +177,9 @@
 													<ul class="lab-no">
 														<li class="style-li"><strong>Training
 																Partner Name:</strong></li>
+																<li id="trainingPartnerErr" style="display: none;"
+															class="style-li error-red">Please Select Training
+															Partner Name.</li>
 														<li class="style-li error-red"></li>
 													</ul>
 												</div>
@@ -172,6 +193,9 @@
 												<div>
 													<ul class="lab-no">
 														<li class="style-li"><strong>Training Institude:</strong></li>
+														<li id="trainingInstitudeErr" style="display: none;"
+															class="style-li error-red">Please Select Training
+															Institude.</li>
 														<li class="style-li error-red"></li>
 													</ul>
 												</div>
@@ -186,6 +210,9 @@
                                                     <div>
 													<ul class="lab-no">
 														<li class="style-li"><strong>Training Institute's Status:</strong></li>
+														<li id="trainingInstitudeStatusErr" style="display: none;"
+															class="style-li error-red">Please Select Training
+															Institude Status.</li>
 														<li class="style-li error-red"><cf:errors
 																path="trainingInstitudeStatus" cssClass="error" /></li>
 													</ul>
@@ -201,7 +228,10 @@
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training End Date:</strong></li>
-                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
+                                                            <li id="trainingEndDateErr" style="display: none;"
+															class="style-li error-red">Please Select Training
+															End date.</li>
+                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* </label></li>
                                                         </ul>
                                                     </div>
                                                  <cf:input class="form-control" path="trainingEndDate"  type="text" placeholder="Training End Date"/>
@@ -322,5 +352,64 @@
             	      });     
                 
                 }
+                
+                function validateFields(){
+                    //	 alert($("#holidayDate").val());
+                    //	 alert($("#trainingType").val());
+                	if($("#unitId").val() == 0){
+                  		 
+                 		$("#unitIdErr").css("display" , "block");
+                 		return false;
+                 	 }
+                	if($("#moduleId").val() == 0){
+                  		 
+                 		$("#moduleIdErr").css("display" , "block");
+                 		return false;
+                 	 }
+                    if($("#userType").val() == ''){
+                   		 $("#userTypeErr").css("display" , "block");
+                    		return false; 
+                   	 }
+                    if($("#trainingPartner").val() == 0){
+                   		 
+                 		$("#trainingPartnerErr").css("display" , "block");
+                 		return false;
+                 	 }
+                     if($("#trainingType").val() == 0){
+                   		 
+                 		$("#trainingTypeErr").css("display" , "block");
+                 		return false;
+                 	 }
+                    if($("#trainingInstitude").val() == 0){
+                   		 
+                  		$("#trainingInstitudeErr").css("display" , "block");
+                  		return false;
+                  	 }
+                 	 if($("#trainingPhase").val() == 0){
+                  		 
+                 		$("#trainingPhaseErr").css("display" , "block");
+                 		return false;
+                 	 }
+                 	if($("#trainingInstitudeStatus").val() == 0){
+                  		 
+                  		$("#trainingInstitudeStatusErr").css("display" , "block");
+                  		return false;
+                  	 }
+                 	 if($("#trainingStartDate").val() == 0){
+                  		 
+                   		$("#trainingStartDateErr").css("display" , "block");
+                   		return false;
+                   	 }
+                  	if($("#trainingEndDate").val() == 0){
+                   		 
+                  		$("#trainingEndDateErr").css("display" , "block");
+                  		return false;
+                  	 }
+                 	if($("#state").val() == 0){
+                  		 
+                 		$("#stateErr").css("display" , "block");
+                 		return false;
+                 	 }
+                    }
 
             </script>

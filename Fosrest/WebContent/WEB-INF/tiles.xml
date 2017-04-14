@@ -1124,5 +1124,27 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/NominateTrainee.jsp" />
 	</definition>
+	
+	<definition name="TrainerRequest" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body"
+			value="/website/trainer/TrainerRequest.jsp" />
+	</definition>
+
+	<definition name="TrainerRequest/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body"
+			value="/website/trainer/TrainerRequest.jsp" />
+	</definition>
+
+	<definition name="MyCalendar" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainer/MyCalendar.jsp" />
+	</definition>
+
+	<definition name="MyCalendar/edit/{id}" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainer/MyCalendar.jsp" />
+	</definition>
 
 </tiles-definitions>

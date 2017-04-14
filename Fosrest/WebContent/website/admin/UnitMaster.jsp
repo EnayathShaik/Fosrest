@@ -45,6 +45,7 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> User Type:</strong></li>
+                                                         <li id="userTypeErr" style="display:none;" class="style-li error-red" >Please Select User Type.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -57,6 +58,7 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> Training Type:</strong></li>
+                                                        <li id="trainingTypeErr" style="display:none;" class="style-li error-red" > Please Select Training Type.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -69,6 +71,7 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> Training Phase:</strong></li>
+                                                        <li id="trainingPhaseErr" style="display:none;" class="style-li error-red" > Please Select Training Phase.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -86,6 +89,7 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Unit Name:</strong></li>
+                                                           <li id="unitNameErr" style="display:none;" class="style-li error-red" > Please Enter Unit Name.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -149,9 +153,8 @@
                                                         <th>Edit</th>
                                                         <th>Delete</th>
                                                     </tr>
-                                                </thead>
-                                                
-                                                <ct:forEach items="${listUnitMaster}" var="UnitMaster">
+                                                </thead>       
+                                            <ct:forEach items="${listUnitMaster}" var="UnitMaster">
                                                 <tr>
 												<td>${UnitMaster.unitId}</td>
 												<td>${UnitMaster.userType}</td>
@@ -209,4 +212,30 @@
                 
                 }
 
+            function validateFields(){
+                //	 alert($("#holidayDate").val());
+                //	 alert($("#trainingType").val());
+                	if($("#userType").val() == ''){
+               		 $("#userTypeErr").css("display" , "block");
+                		return false; 
+               	 }
+                	else if($("#unitName").val() == ''){
+               		 
+             		$("#unitNameErr").css("display" , "block");
+             		return false;
+             	 }
+                 else if($("#trainingType").val() == 0){
+               		 
+             		$("#trainingTypeErr").css("display" , "block");
+             		return false;
+             	 }
+             	else if($("#trainingPhase").val() == 0){
+              		 
+             		$("#trainingPhaseErr").css("display" , "block");
+             		return false;
+             	 }
+
+                	
+                
+                 }
             </script>

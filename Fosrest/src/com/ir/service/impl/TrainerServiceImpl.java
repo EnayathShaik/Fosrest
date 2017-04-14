@@ -13,7 +13,9 @@ import com.ir.dao.TrainerDAO;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.MyCalendarForm;
 import com.ir.form.RegistrationFormTrainee;
+import com.ir.form.TrainerRequestForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CheckAadhar;
@@ -38,5 +40,39 @@ public class TrainerServiceImpl implements TrainerService {
 	public TrainerDAO trainerDAO;
 	
 	
+	@Override
+	@Transactional
+	public List<TrainerRequestForm> listTrainerRequest(TrainerRequestForm s) {
+		// TODO Auto-generated method stub
+		return this.trainerDAO.listTrainerRequest(s);
+	}
+	
+	@Override
+	@Transactional
+	public List<MyCalendarForm> listMyCalendar() {
+		// TODO Auto-generated method stub
+		return this.trainerDAO.listMyCalendar();
+	}
+
+
+	/*@Override
+	@Transactional
+	public List<UnitMaster> listTrainingType() {
+		return this.trainerDAO.listTrainingType();
+	}
+
+	@Override
+	@Transactional
+	public List<UnitMaster> listUserType() {
+		// TODO Auto-generated method stub
+		return this.trainerDAO.listUserType();
+	}
+	
+	@Override
+	@Transactional
+	public List<UnitMaster> listStatusType() {
+		// TODO Auto-generated method stub
+		return this.trainerDAO.listStatusType();
+	}*/
 
 }

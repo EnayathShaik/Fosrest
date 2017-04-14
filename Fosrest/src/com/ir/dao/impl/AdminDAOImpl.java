@@ -2035,13 +2035,13 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		
 		@Override
-		public void acceptTrainingSchedule(int id , int profileId ) {
+		public void acceptTrainingSchedule(int id , int profileId, int loginUser2,int userTableId ) {
 			Session session = this.sessionFactory.getCurrentSession();
 			String sql= null;
 			if(profileId == 4	){
-				sql =	"update TrainingSchedule set trainer_status='Y'  where trainingScheduleId="+id;	
+				sql =	"update TrainingSchedule set trainer_status='Y',trainer_id="+loginUser2+"where trainingScheduleId="+id;	
 			}else{
-				sql =	"update TrainingSchedule set traininginstitudestatus='Y' where trainingScheduleId="+id;
+				sql =	"update TrainingSchedule set training_institude_status='Y',training_institude_id="+userTableId+" where trainingScheduleId="+id;
 			}
 			
 			Query query = session.createSQLQuery(sql);
@@ -2064,22 +2064,20 @@ public class AdminDAOImpl implements AdminDAO {
 			
 			
 		}
-		
-		
-		
+
 		@Override
 		public List<TrainingSchedule> listTrainingSchedule() {
 			// TODO Auto-generated method stub
-			System.out.println("inside listTrainingSchedule");
+			System.out.println("inside listTrainingSchedule wo parameter");
 			Session session = this.sessionFactory.getCurrentSession();
 			List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' ").list();
+			//List<TrainingSchedule> mccList = session.createSQLQuery("select * from TrainingSchedule where trainer_status='N' ").list();
+			
 			for (TrainingSchedule p : mccList) {
 				System.out.println("TrainingSchedule List::" + p);
 			}
 			return mccList;
 		}
-
-		
 		//listTrainingInstitude
 		@Override
 		public List<PersonalInformationTrainingInstitute> listTrainingInstitude() {
@@ -2098,7 +2096,7 @@ public class AdminDAOImpl implements AdminDAO {
 		@Override
 		public List<TrainingSchedule> listTrainingSchedule(int id) {
 			// TODO Auto-generated method stub
-			System.out.println("inside listTrainingSchedule");
+			System.out.println("inside listTrainingSchedule with parameter");
 			Session session = this.sessionFactory.getCurrentSession();
 			List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and traininginstitude='"+id+"'  ").list();
 			for (TrainingSchedule p : mccList) {
@@ -2724,8 +2722,6 @@ System.out.println("list "+list);
 			return mccList;
 		}
 		
-		
-		
 		@Override
 		public List<PersonalInformationTrainee> listEligibleuser(String userType) {
 			// TODO Auto-generated method stub
@@ -2762,7 +2758,8 @@ System.out.println("list "+list);
 			
 			return personalInfoList;
 		}
-
+		
+		
 		@Override
 		public String enrollUser(String data) {
 			// TODO Auto-generated method stub
@@ -2863,7 +2860,10 @@ System.out.println("6:1 st return created");
 			System.out.println("before return");
 			return "created";
 		}
+		
+		
 	
+		
 }
 
 

@@ -55,7 +55,7 @@
 													<div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Holiday Date:</strong></li>
-                                                     <li id="holidayDateErr" style="display:none;" class="style-li error-red" > Holiday Date can not be blank.</li>
+                                                     <li id="holidayDateErr" style="display:none;" class="style-li error-red" >Please Select Holiday Date.</li>
                                                        </ul>
                                                 </div>
                                                 <cf:input class="form-control" path="holidayDate" id="holidayDate" name="holidayDate" type="text" placeholder="Date"/>
@@ -67,7 +67,7 @@
                                                     <ul class="lab-no">
 
                                                         <li class="style-li"><strong>Holiday Reason:</strong></li>
-                                                        <li class="style-li error-red" id="holidayReasonErr" style="display:none;">Holiday Reason can not be blank. </li>
+                                                        <li class="style-li error-red" id="holidayReasonErr" style="display:none;">Please Select Holiday Reason. </li>
 
                                                   
 

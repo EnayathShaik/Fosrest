@@ -1684,9 +1684,18 @@ return "redirect:/TrainingSchedule.fssai";
 @RequestMapping("/TrainingSchedule/accept/{id}")
 public String acceptTrainingSchedule(@PathVariable("id") int id , HttpServletRequest request){	
 	String profileId = request.getParameter("profileId");
-			System.out.println(" profileId "+profileId);
-this.adminService.acceptTrainingSchedule(id , Integer.parseInt(profileId));
-return "trainingInstitudeHomepage";
+	String loginUser2 = request.getParameter("loginUser2");
+	String userTableId = request.getParameter("userTableId");
+	if (loginUser2 == null) {
+		// Integer.parseInt(loginUser2);
+		loginUser2 = "0";
+	}
+	if (userTableId == null) {
+		// Integer.parseInt(loginUser2);
+		userTableId = "0";
+	}
+	this.adminService.acceptTrainingSchedule(id,Integer.parseInt(profileId), Integer.parseInt(loginUser2),Integer.parseInt(userTableId));
+	return "trainingInstitudeHomepage";
 }
 
 
@@ -2355,14 +2364,16 @@ public void editEmployeeMonthlyCharges(@PathVariable("id") int id ,@RequestBody 
 
 @RequestMapping(value = "/NominateTrainee", method = RequestMethod.GET)
 public String nominateTrainee(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm ,Model model) {
-		System.out.println("NominateTrainee");
+		System.out.println("admin controller NominateTrainee");
 			
 		Map<String , String> userTypeMap = lst.userTypeMap;
 
 		model.addAttribute("userTypeMap",userTypeMap);
 		model.addAttribute("unitList",this.adminService.listUnitMaster());
 		model.addAttribute("moduleList",this.adminService.listModuleMaster());
+		model.addAttribute("batchCodeList",this.adminService.listModuleMaster());
 		model.addAttribute("NominateTraineeForm", new NominateTraineeForm());
+		
 	
 	return "NominateTrainee";
 }
@@ -2375,7 +2386,8 @@ public String ListEligibleUser(@ModelAttribute("NominateTraineeForm") NominateTr
 		model.addAttribute("userTypeMap",userTypeMap);
 		model.addAttribute("unitList",this.adminService.listUnitMaster());
 		model.addAttribute("moduleList",this.adminService.listModuleMaster());
-		System.out.println("ListEligibleUser" + nominateTraineeForm.getUserType());
+		model.addAttribute("batchCodeList",this.adminService.listModuleMaster());
+		System.out.println("admin controller ListEligibleUser" + nominateTraineeForm.getUserType());
 		model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getUserType()));
 	
 	return "NominateTrainee";
@@ -2391,7 +2403,7 @@ public void enrollUser(@RequestParam("data") String data ,@RequestBody GenerateC
 	PrintWriter out = response.getWriter();
 	Gson g =new Gson();
 	String newList = g.toJson(data1); 
-	System.out.println("newList "+newList);
+	System.out.println("admin controller enroll user newList "+newList);
 	out.write(newList);
 	out.flush();
 	

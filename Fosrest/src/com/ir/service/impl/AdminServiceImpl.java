@@ -711,8 +711,8 @@ public class AdminServiceImpl implements AdminService {
 	//acceptTrainingSchedule
 	@Override
 	@Transactional
-	public void acceptTrainingSchedule(int id , int profileId){
-		 this.adminDAO.acceptTrainingSchedule(id , profileId);
+	public void acceptTrainingSchedule(int id , int profileId,int loginUser2,int userTableId){
+		 this.adminDAO.acceptTrainingSchedule(id , profileId,loginUser2,userTableId);
 		
 	}
 	
@@ -1188,26 +1188,14 @@ public class AdminServiceImpl implements AdminService {
 			return this.adminDAO.listEligibleuser(userType);
 		}
 		
+
+		
 		@Override
 		public String enrollUser(String data) {
 			// TODO Auto-generated method stub
 			return this.adminDAO.enrollUser(data);
 		}
 		
-	/*	@Override
-		@Transactional
-		public String addNomineeTrainee(NomineeTrainee data , String moduleCode) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.addNomineeTrainee(data , moduleCode);
-		}
 		
-		//getLoginDetailsById
-		
-		@Override
-		@Transactional
-		public LoginDetails getLoginDetailsById(int id) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.getLoginDetailsById(id);
-		}*/
 	    
 }

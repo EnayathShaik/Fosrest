@@ -173,28 +173,30 @@ function getCourseTrainingType(){
 
 
 function getBatch(val , idName){
-console.log("val "+val);
- 	var name=JSON.stringify({
-		courseType:0
-  })
-	$.ajax({
-	      type: 'post',
-	      url: 'getBatchCode.fssai?data='+val,
-	      contentType : "application/json",
-		  data:name,
-	      success: function (response) {   
+	console.log("val "+val);
+	 	var name=JSON.stringify({
+			courseType:0
+	  })
+		$.ajax({
+		      type: 'post',
+		      url: 'getBatchCode.fssai?data='+val,
+		      contentType : "application/json",
+			  data:name,
+		      success: function (response) {   
 
-	      var mainData1 = jQuery.parseJSON(response);
- 	        $('#'+idName+' option').remove();
-	      $('#'+idName).append('<option value="" label="Select Batch Code" />');
-	        $.each(mainData1 , function(i , obj)
-	  		{
-	        	console.log(obj[0]);
-	  				$('#'+idName).append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
-	  		});  
-	      }
-	      });
-}
+		      var mainData1 = jQuery.parseJSON(response);
+	 	        $('#'+idName+' option').remove();
+		      $('#'+idName).append('<option value="" label="Select Batch Code" />');
+		        $.each(mainData1 , function(i , obj)
+		  		{
+		        	console.log(obj[0]);
+		  				$('#'+idName).append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
+		  		});  
+		      }
+		      });
+	}
+
+
 
 
 function getTrainingInstitude(val , idName) {
