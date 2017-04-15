@@ -3,6 +3,8 @@ package com.ir.service;
 import java.util.List;
 
 import com.ir.bean.common.IntStringBean;
+import com.ir.form.AssessmentQuestionForm;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -43,6 +45,7 @@ public interface PageLoadService {
 	
 	public List<District> loadDistrict(String stateId);
 	public List<City> loadCity(String districtId);
+	public List<AssessmentQuestions> loadModuleName(String val);
 	
 	
 	

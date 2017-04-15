@@ -17,7 +17,7 @@
 		}
 	}
 	window.onload = OnStart;
-	window.onload = OnStart;
+	
 </script>
 
 <cf:form action="ListEligibleUser.fssai" name="myForm" method="POST"

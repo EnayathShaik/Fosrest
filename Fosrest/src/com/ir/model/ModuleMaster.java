@@ -1,3 +1,4 @@
+
 package com.ir.model;
 
 
@@ -14,10 +15,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.CascadeType;
+import javax.validation.constraints.*;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.validator.constraints.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -32,10 +36,26 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name="ModuleMaster")
 public class ModuleMaster {
 	
+/*	@Override
+	public String toString() {
+		return "ModuleMaster [moduleId=" + moduleId + ", moduleName="
+				+ moduleName + ", status=" + status + ", unitMaster="
+				+ unitMaster + "]";
+	}
+
+
+	@Override
+	public String toString() {
+		return moduleName ;
+	}*/
+	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name= "moduleId")
 	private int moduleId;
+	
+	//@NotEmpty(message ="EEEEEEEEEEEEEEEEEEErrorrrrrrrrrrrrrrrrrrrr")
 	private String moduleName;
 	private String status;
 	private String contentType;

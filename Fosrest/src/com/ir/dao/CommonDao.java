@@ -17,5 +17,6 @@ public interface CommonDao {
 	public List getTrainingInstitude(String trainingPartner);
 	
 	public List getModule(String unit);
+
 	public List getBatchCode(String module);
 }

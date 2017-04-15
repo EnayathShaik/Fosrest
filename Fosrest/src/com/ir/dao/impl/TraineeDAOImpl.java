@@ -19,13 +19,18 @@ import com.ir.constantes.Constantes;
 import com.ir.constantes.TableLink;
 import com.ir.dao.AdminDAO;
 import com.ir.dao.TraineeDAO;
+import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
+import com.ir.form.GenerateCertificateForm;
+import com.ir.form.InstituteMyCalendarForm;
+import com.ir.form.MarkAttendanceForm;
 import com.ir.form.RegistrationFormTrainee;
+import com.ir.form.TrainingRequestForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
@@ -1386,8 +1391,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 		
 		session.save(p);
 		return passwordString+"&"+nextSequenceUserID;
-	}	
-	
+	}
+
 	
 	//@Override
 	public List<MyTrainingForm> listMyTraining() {
@@ -1492,7 +1497,7 @@ System.out.println("list "+list);
 		return personalInformationTrainingInstitute;
 
 	}
-	
+
 //online training topic unit name list
 	@Override
 	public List<UnitMaster> listTrainingTopic() {
@@ -1518,4 +1523,57 @@ System.out.println("list "+list);
 			}
 			return list ;
 		}
-}
+
+		
+		//listing online question
+		@Override
+		public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm) {
+			// TODO Auto-generated method stub
+		
+				AssessmentQuestionForm bean;
+				List<AssessmentQuestionForm> list = new ArrayList<AssessmentQuestionForm>();
+				Session session = this.sessionFactory.getCurrentSession();
+	System.out.println("........................."+assesQuestionForm.getModuleCode() );
+		
+	List<Object[]> nomtable  = session.createSQLQuery("select * from nomineetrainee where id=12") .list();	
+	
+	for (Object[] li : nomtable ) { 
+	System.out.println(li[0]);
+	System.out.println(li[1]);
+	System.out.println(li[6]);
+	
+	}
+		List<Object[]> mccList  = session.createSQLQuery("select * from assessmentquestions where modulename='"+"151"+"' and unitcode='"+"20"+"'" ) .list();	
+		System.out.println("aaaaa");
+		for (Object[] li : mccList ) { 
+			 bean= new AssessmentQuestionForm();
+					
+			 //
+			 System.out.println(li[0]);
+			 bean.setId((int) li[0]);
+			 bean.setModuleCode((String) li[2]);
+			 System.out.println(li[12]);
+			 bean.setNoOfOption((int) li[3]);
+			 bean.setUnitCode((String) li[13]);
+			 bean.setQuestionNumber((int) li[11]);
+			 bean.setQuestionHint((String) li[10]);
+			 bean.setQuestionTitle((String) li[12]);
+			 bean.setCorrectAnswer((int) li[1]);
+				
+			 bean.setOptionOne((String) li[6]);
+			 bean.setOptionTwo((String) li[9]);
+			 bean.setOptionThree((String) li[8]);
+			 bean.setOptionFour((String) li[5]);
+			 bean.setOptionFive((String) li[4]);
+			 bean.setOptionSix((String) li[7]);
+			 //
+					
+					System.out.println(bean);
+					list.add(bean);
+				}
+		System.out.println("list "+list);
+				return list;
+				
+				
+			}
+		}

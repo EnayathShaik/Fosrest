@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.ir.dao.TraineeDAO;
+import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
@@ -16,7 +17,10 @@ import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
+import com.ir.form.InstituteMyCalendarForm;
+import com.ir.form.MarkAttendanceForm;
 import com.ir.form.RegistrationFormTrainee;
+import com.ir.form.TrainingRequestForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CheckAadhar;
@@ -323,8 +327,11 @@ public class TraineeServiceImpl implements TraineeService {
 	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute  p) {
 		// TODO Auto-generated method stub
 		return traineeDAO.addPersonalInfoTrainingInstitute(p);
-
 	}
+
+
+
+//listGenerateCertificate
 //my training	
 	@Override
 	@Transactional
@@ -374,8 +381,6 @@ public class TraineeServiceImpl implements TraineeService {
 		PersonalInformationTrainingInstitute personalInformationTraineInstitute = traineeDAO.FullDetailTrainingInstitude(loginId);
 		return personalInformationTraineInstitute;
 	}
-	
-	
 	//trainee topic from online training
 	@Override
 	@Transactional
@@ -391,7 +396,17 @@ public class TraineeServiceImpl implements TraineeService {
 			return this.traineeDAO.listTopicModule();
 			
 		}
+
+		@Override
+		@Transactional
+		public List<AssessmentQuestionForm> listingAssessmentQuestion(
+				AssessmentQuestionForm assesQuestionForm) {
+			// TODO Auto-generated method stub
+			return this.traineeDAO.listingAssessmentQuestion( assesQuestionForm);
+		}
+
+		
 		
 
-}
 
+}

@@ -2,13 +2,18 @@ package com.ir.service;
 
 import java.util.List;
 
+import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
+import com.ir.form.GenerateCertificateForm;
+import com.ir.form.InstituteMyCalendarForm;
+import com.ir.form.MarkAttendanceForm;
 import com.ir.form.RegistrationFormTrainee;
+import com.ir.form.TrainingRequestForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CheckAadhar;
@@ -30,6 +35,8 @@ import com.ir.model.Utility;
 
 public interface TraineeService {
 	
+
+
 	public List<CourseName> courseNameList();
 	
 	
@@ -142,6 +149,10 @@ public interface TraineeService {
 	public String updatePersonalInfoTrainer(PersonalInformationTrainer p);
 	
 	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p );
+
+
+
+
 	
 	public List<MyTrainingForm> listMyTraining();
 
@@ -149,7 +160,7 @@ public interface TraineeService {
 
 	public List<CertificateForm> listCertificate();
 
-
+	
 	
 	public String updatePersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p );
 	
@@ -157,9 +168,16 @@ public interface TraineeService {
 	
 	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId);
 
+/*	dynamic
+ * public List<UnitMaster> dynListTrainingType();
+	public List<UnitMaster> dynListUserType();*/
+
 	public List<UnitMaster> listTrainingTopic();
 
 	public List<ModuleMaster> listTopicModule();
+
+ public List<AssessmentQuestionForm> listingAssessmentQuestion(
+			AssessmentQuestionForm assesQuestionForm);
 	
 	
 	

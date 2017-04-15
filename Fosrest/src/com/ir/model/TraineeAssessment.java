@@ -12,7 +12,7 @@ public class TraineeAssessment {
 	/** Name of the course for which assessment is submitting **/
 	private String courseName;
 	private int courseNameId;
-	private List<AssessmentQuestion> listAssessmentQuestion; 
+	private List<AssessmentQuestion_old> listAssessmentQuestion; 
 	private int totalQuestions;
 	private String loginId;
 	private String trainingCalendar;
@@ -20,14 +20,14 @@ public class TraineeAssessment {
 	/**
 	 * @return the listAssessmentQuestion
 	 */
-	public List<AssessmentQuestion> getListAssessmentQuestion() {
+	public List<AssessmentQuestion_old> getListAssessmentQuestion() {
 		return listAssessmentQuestion;
 	}
 
 	/**
 	 * @param listAssessmentQuestion the listAssessmentQuestion to set
 	 */
-	public void setListAssessmentQuestion(List<AssessmentQuestion> listAssessmentQuestion) {
+	public void setListAssessmentQuestion(List<AssessmentQuestion_old> listAssessmentQuestion) {
 		this.listAssessmentQuestion = listAssessmentQuestion;
 	}
 

@@ -2,14 +2,18 @@ package com.ir.dao;
 
 import java.util.List;
 
+import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GetScoreCardForm;
+import com.ir.form.InstituteMyCalendarForm;
+import com.ir.form.MarkAttendanceForm;
 import com.ir.form.MyTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
+import com.ir.form.TrainingRequestForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CheckAadhar;
@@ -118,8 +122,10 @@ public interface TraineeDAO {
 	
 	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId);
 	
+	
 	public List<UnitMaster> listTrainingTopic();
 	
 	public List<ModuleMaster> listTopicModule();
+	public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm);
 	
 }

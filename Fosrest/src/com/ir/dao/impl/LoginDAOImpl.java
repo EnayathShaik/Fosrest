@@ -198,7 +198,7 @@ public class LoginDAOImpl implements LoginDAO{
 		Session session = sessionFactory.getCurrentSession();
 		Integer i = id;
 		
-		Query query = session.createQuery("from PersonalInformationTrainingPartner where loginDetails = '"+ i +"'");
+		Query query = session.createQuery("from PersonalInformationTraininginstitute where loginDetails = '"+ i +"'");
 		List<PersonalInformationTrainingPartner> list1 = query.list();
 		
 		PersonalInformationTrainingPartner personalInformationTrainingPartner11 = null;

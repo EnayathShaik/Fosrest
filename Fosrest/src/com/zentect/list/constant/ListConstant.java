@@ -210,7 +210,26 @@ public class ListConstant {
     }
     
   
-    //User Type
+  
+    //--------------
+	public static final Map<String, String> instituteStatusMap;
+	 static {
+	        Map<String, String> iStatusMap = new HashMap<String, String>();
+	        iStatusMap.put("1", "Completed");
+	        iStatusMap.put("2", "Accepted");
+	       
+	        instituteStatusMap = Collections.unmodifiableMap(iStatusMap);
+	    }
+	public static Map<String, String> instituteAttendanceMap;
+	 static {
+	        Map<String, String> iAttendanceMap  = new HashMap<String, String>();
+	        iAttendanceMap.put("1", "Present");
+	        iAttendanceMap.put("2", "Absent");
+	       
+	        instituteAttendanceMap = Collections.unmodifiableMap(iAttendanceMap);
+	    }
+	    
+	    //User Type
     public static final Map<String, String> trainingInstituteMap;
     static {
         Map<String, String> atrainingInstituteMap = new HashMap<String, String>();
@@ -229,6 +248,5 @@ public class ListConstant {
     }
     
     
-
 
 }

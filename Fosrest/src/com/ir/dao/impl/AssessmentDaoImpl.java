@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
 import com.ir.form.AssessmentAnswerCriteria;
-import com.ir.model.AssessmentQuestion;
+import com.ir.model.AssessmentQuestion_old;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -35,7 +35,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<AssessmentQuestion> getAssessmentQuestions(int courseType, int courseName) {
+	public List<AssessmentQuestion_old> getAssessmentQuestions(int courseType, int courseName) {
 		System.out.println("AssessmentQuestions");
 //		Criteria criteria = session.createCriteria(AssessmentQuestion.class);
 //		criteria.add(Restrictions.eq("courseName", courseName));
@@ -44,7 +44,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		Session session = sessionFactory.getCurrentSession();
 //		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseName +" and courseType= "+courseType);
 		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseName);
-		List<AssessmentQuestion> assessmentQuestions = query.list();
+		List<AssessmentQuestion_old> assessmentQuestions = query.list();
 		return assessmentQuestions;
 	}
 
@@ -107,14 +107,14 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	}
 
 	@Override
-	public List<AssessmentQuestion> getAssessmentAnswers(int courseType, List<Integer> questions) {
+	public List<AssessmentQuestion_old> getAssessmentAnswers(int courseType, List<Integer> questions) {
 		Session session = sessionFactory.getCurrentSession();
 		String questionIds = questions.toString();
 		if(questionIds.length() >2){
 			questionIds = questionIds.substring(1,questionIds.length()-1);
 		}
 		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseType +" and assessmentquestionid in ("+questionIds+")");
-		List<AssessmentQuestion> listAssessmentQuestions = query.list();
+		List<AssessmentQuestion_old> listAssessmentQuestions = query.list();
 		
 		return listAssessmentQuestions;
 	}

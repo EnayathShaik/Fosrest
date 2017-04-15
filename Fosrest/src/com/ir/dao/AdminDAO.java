@@ -4,6 +4,7 @@ import java.util.List;
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
+import com.ir.form.AssessmentQuestionForm_old;
 import com.ir.form.AssessorUserManagementForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
@@ -21,8 +22,10 @@ import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
+import com.ir.form.TrainingRequestForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
@@ -97,7 +100,7 @@ public interface AdminDAO {
 
 	State getState(int id);
 
-	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm);
+	public String manageAssessmentQuestionsSave(AssessmentQuestionForm_old assessmentQuestionForm);
 
 	CourseType getCourseType(int id);
 
@@ -326,14 +329,23 @@ public interface AdminDAO {
 					
 					public EmployeeMonthlyCharges getEmployeeMonthlyChargesById(int id);
 					
-					public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges(); 
+					public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges();
+
 				   
 					 public List<PersonalInformationTrainee> listEligibleuser(String userType);
 					 
 					 public String enrollUser(String data);
-					 /*public String addNomineeTrainee(NomineeTrainee data , String moduleCode);
-					 public LoginDetails getLoginDetailsById(int id);*/
+					/* public String addNomineeTrainee(NomineeTrainee data , String moduleCode);
+					 public LoginDetails getLoginDetailsById(int id);
+*/
+					public String assessmentQuestionSave(
+							AssessmentQuestionForm assesQuestionForm);
 
-				
-		
+					public List<AssessmentQuestionForm> listAssessmentQuestion(
+							AssessmentQuestionForm assesQuestionForm);
+
+					public void removeAssessmentQuestion(int id);
+
+					public AssessmentQuestions getAssessmentQuestionById(int id);
+					
 }

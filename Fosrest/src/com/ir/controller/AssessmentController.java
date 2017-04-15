@@ -29,7 +29,7 @@ import com.google.gson.Gson;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.common.AssessmentEvaluationForm;
-import com.ir.model.AssessmentQuestion;
+import com.ir.model.AssessmentQuestion_old;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.service.AssessmentService;
 import com.ir.service.TraineeService;
@@ -58,7 +58,7 @@ public class AssessmentController {
 			List<AssessmentAnswerCriteria> listAnswerCriteria = new ArrayList<AssessmentAnswerCriteria>();
 			AssessmentAnswerCriteria assessmentAnswerCriteria = new AssessmentAnswerCriteria();
 
-			List<AssessmentQuestion> answers = assessmentService
+			List<AssessmentQuestion_old> answers = assessmentService
 					.getAssessmentAnswers(
 							assessmentEvaluationForm.getCourseNameId(),
 							assessmentEvaluationForm.getAssessmentQuestionsList());

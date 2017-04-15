@@ -27,6 +27,7 @@ import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
+import com.ir.form.AssessmentQuestionForm_old;
 import com.ir.form.AssessorUserManagementForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
@@ -47,7 +48,9 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
-import com.ir.model.AssessmentQuestion;
+import com.ir.model.AssessmentQuestions;
+import com.ir.model.AssessmentQuestion_old;
+
 import com.ir.model.AssessorUserManagement;
 import com.ir.model.City;
 import com.ir.model.CityMaster;
@@ -855,15 +858,17 @@ public class AdminDAOImpl implements AdminDAO {
 		}	
 	}
 
+
+	
 	@Override
-	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
+	public String manageAssessmentQuestionsSave(AssessmentQuestionForm_old assessmentQuestionForm) {
 		Session session = sessionFactory.getCurrentSession();
-		AssessmentQuestion assessmentQuestion = null;
+		AssessmentQuestion_old assessmentQuestion = null;
 		if(assessmentQuestionForm.getId() <= 0){
-			assessmentQuestion = new AssessmentQuestion();
+			assessmentQuestion = new AssessmentQuestion_old();
 		}else{
-			assessmentQuestion = (AssessmentQuestion) session
-					.load(AssessmentQuestion.class, assessmentQuestionForm.getId());
+			assessmentQuestion = (AssessmentQuestion_old) session
+					.load(AssessmentQuestion_old.class, assessmentQuestionForm.getId());
 		}
 		
 		CourseType ct = getCourseType(assessmentQuestionForm.getCourseTypeId());
@@ -1796,6 +1801,8 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query = session.createQuery("from UnitMaster where UnitId="+id);
 		
 		List<UnitMaster> UnitMasterList = query.list();
+		System.out.println(UnitMasterList.size());
+		System.out.println("error herer" +UnitMasterList.get(0));
 		UnitMaster hm = UnitMasterList.get(0);
 			return hm; 
 			
@@ -2858,12 +2865,184 @@ System.out.println("6:1 st return created");
 			System.out.println("id "+id);
 			session.close();
 			System.out.println("before return");
+		return "created";
+	}
+
+	// niranjan
+
+	@Override
+	public String assessmentQuestionSave(
+			AssessmentQuestionForm assessmentQuestionForm) {
+		Session session = sessionFactory.getCurrentSession();
+		AssessmentQuestions assessmentQuestion = new AssessmentQuestions();
+
+		/*
+		 * if(assessmentQuestionForm.getId() <= 0){ assessmentQuestion = new
+		 * AssessmentQuestions(); }else{ assessmentQuestion =
+		 * (AssessmentQuestions) session .load(AssessmentQuestions.class,
+		 * assessmentQuestionForm.getId()); }
+		 */
+		String uC = assessmentQuestionForm.getunitCode();
+		String mN = assessmentQuestionForm.getModuleCode();
+		//System.out.println("............................");
+		System.out.println("uC " + uC);
+		System.out.println("mN " + mN);
+		System.out.println("......CA "+assessmentQuestionForm.getCorrectAnswer());
+		System.out.println(assessmentQuestionForm.getOptionOne());
+		System.out.println(assessmentQuestionForm.getOptionFive());
+		System.out.println(assessmentQuestionForm.getModuleCode());
+		
+
+		//System.out.println("............................");
+
+		// assessmentQuestion.setAssessmentId(assessmentQuestionForm.getAssessmentId());
+		assessmentQuestion.setCorrectAnswer(assessmentQuestionForm
+				.getCorrectAnswer());
+		System.out.println("**");
+		assessmentQuestion
+				.setModuleCode(assessmentQuestionForm.getModuleCode());
+		assessmentQuestion
+				.setNoOfOption(assessmentQuestionForm.getNoOfOption());
+		assessmentQuestion.setUnitCode(assessmentQuestionForm.getunitCode());
+		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
+		assessmentQuestion.setQuestionHint(assessmentQuestionForm
+				.getQuestionHint());
+		assessmentQuestion.setQuestionTitle(assessmentQuestionForm
+				.getQuestionTitle());
+
+		assessmentQuestion.setOptionOne(assessmentQuestionForm.getOptionOne());
+		assessmentQuestion.setOptionTwo(assessmentQuestionForm.getOptionTwo());
+		assessmentQuestion.setOptionThree(assessmentQuestionForm
+				.getOptionThree());
+		assessmentQuestion
+				.setOptionFour(assessmentQuestionForm.getOptionFour());
+		assessmentQuestion
+				.setOptionFive(assessmentQuestionForm.getOptionFive());
+		assessmentQuestion.setOptionSix(assessmentQuestionForm.getOptionSix());
+		// assessmentQuestion.setAssessmentId(1);
+
+		Integer assessmentQuestionIdd = 0;
+
+		String where = " where modulecode = '"
+				+ assessmentQuestionForm.getModuleCode() + "' and unitcode= '"
+				+ assessmentQuestionForm.getUnitCode()
+				+ "' and questiontitle='"
+				+ assessmentQuestion.getQuestionTitle() + "'";
+		String sql = "select modulecode from assessmentquestions " + where;
+		System.out.println("1**");
+		Query query = session.createSQLQuery(sql);
+		System.out.println("2**");
+		List l = query.list();
+		System.out.println("3**");
+		System.out.println(l.size());
+		System.out.println("id()=" + assessmentQuestionForm.getId());
+		/*
+		 * if(l != null && l.size() > 0 && assessmentQuestionForm.getId() <= 0){
+		 * //session.close(); System.out.println("already1"); return "already";
+		 * }else{ if(assessmentQuestionForm.getId() > 0){
+		 * //assessmentQuestion.setAssessmentQuestionId
+		 * (assessmentQuestionForm.getId()); session.update(assessmentQuestion);
+		 * assessmentQuestionIdd = assessmentQuestionForm.getId(); }else{
+		 * assessmentQuestionIdd = (Integer)session.save(assessmentQuestion); }
+		 * 
+		 * //assessmentQuestionIdd = (Integer)session.save(assessmentQuestion);
+		 * if(assessmentQuestionIdd != 0 ){ System.out.println("created");
+		 * return "created";
+		 * 
+		 * }else{ return "already"; }
+		 * 
+		 * }
+		 */
+
+		assessmentQuestionIdd = (Integer) session.save(assessmentQuestion);
+		if (assessmentQuestionIdd != 0) {
 			return "created";
+		} else {
+			return "already";
 		}
 		
 		
 	
 		
+
+	}
+
+	@Override
+		public List<AssessmentQuestionForm> listAssessmentQuestion(
+				AssessmentQuestionForm assesQuestionForm) {
+			// TODO Auto-generated method stub
+			
+			AssessmentQuestionForm bean;
+			List<AssessmentQuestionForm> list = new ArrayList<AssessmentQuestionForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+System.out.println("........................."+assesQuestionForm.getModuleCode() );
+	List<Object[]> mccList  = session.createSQLQuery("select * from assessmentquestions where modulecode='"+assesQuestionForm.getModuleCode()+"' and unitcode='"+assesQuestionForm.getUnitCode()+"'" ) .list();	
+	System.out.println("aaaaa");
+	for (Object[] li : mccList ) { 
+		 bean= new AssessmentQuestionForm();
+				
+		 //
+		 System.out.println(li[0]);
+		 bean.setId((int) li[0]);
+		 bean.setModuleCode((String) li[2]);
+		 System.out.println(li[12]);
+		 bean.setNoOfOption((int) li[3]);
+		 bean.setUnitCode((String) li[13]);
+		 bean.setQuestionNumber(2);
+		 bean.setQuestionHint((String) li[10]);
+		 bean.setQuestionTitle((String) li[12]);
+		 bean.setCorrectAnswer((int) li[1]);
+			
+		 bean.setOptionOne((String) li[6]);
+		 bean.setOptionTwo((String) li[9]);
+		 bean.setOptionThree((String) li[8]);
+		 bean.setOptionFour((String) li[5]);
+		 bean.setOptionFive((String) li[4]);
+		 bean.setOptionSix((String) li[7]);
+		 //
+				
+				System.out.println(bean);
+				list.add(bean);
+			}
+	System.out.println("list "+list);
+			return list;
+			
+			
+		}
+		
+		
+	
+		
+	/* return "nothing"; */
+
+	@Override
+	public void removeAssessmentQuestion(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		AssessmentQuestions p = (AssessmentQuestions) session.load(AssessmentQuestions.class,
+				new Integer(id));
+		if (null != p) {
+			session.delete(p);
+		}
+
+		
+	}
+
+	@Override
+	public AssessmentQuestions getAssessmentQuestionById(int id) {
+
+			// TODO Auto-generated method stub
+			System.out.println("getAssessmentquestion---- id " + id);
+			Session session = this.sessionFactory.getCurrentSession();
+
+			Query query = session.createQuery("from assessmenyquestion where id="
+					+ id);
+
+			List<AssessmentQuestions> AssessmentQuestionsList = query.list();
+			AssessmentQuestions aq = AssessmentQuestionsList.get(0);
+			System.out.println(aq);
+			return aq;
+
+		
+	}
 }
-
-

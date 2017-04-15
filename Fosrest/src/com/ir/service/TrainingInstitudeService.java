@@ -5,7 +5,10 @@ import java.util.List;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.InstituteMyCalendarForm;
+import com.ir.form.MarkAttendanceForm;
 import com.ir.form.RegistrationFormTrainee;
+import com.ir.form.TrainingRequestForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CheckAadhar;
@@ -24,7 +27,14 @@ import com.ir.model.Utility;
 
 public interface TrainingInstitudeService {
 	
-	
+
+	public List<TrainingRequestForm> listTrainingRequest(TrainingRequestForm s);
+
+
+	public List<MarkAttendanceForm> listMarkAttendance();
+
+
+	public List<InstituteMyCalendarForm> listInstituteMyCalendar();
 	
 	
 }

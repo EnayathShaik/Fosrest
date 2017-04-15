@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -320,6 +321,19 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			List listCity = query.list();
 			System.out.println("city  ************* list dao     :"+ listCity);
 			return listCity;
+		}
+
+		
+		//not working
+		@Override
+		public List<AssessmentQuestions> loadModuleName(String val) {
+			// TODO Auto-generated method stub
+			System.out.println("Page Load DAOImpl process start in district name ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from assessmentquestion where unitcode'"+val+"'");
+			List<AssessmentQuestions> districtList = query.list();
+			System.out.println("district  ************* list dao     :"+ districtList);
+			return districtList;
 		}
 
 }

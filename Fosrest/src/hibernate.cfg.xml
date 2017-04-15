@@ -56,7 +56,7 @@
 		<mapping class="com.ir.model.CourseEnrolled"/>
 		<mapping class="com.ir.model.CourseEnrolledUser"/>
 		<mapping class="com.ir.model.TrainingStatus"/>
-		<mapping class="com.ir.model.AssessmentQuestion"/>
+		
 		<mapping class="com.ir.model.PersonalInformationAssessor"/>
 		<mapping class="com.ir.model.PostVacancyTrainingCenter"/>
 		<mapping class="com.ir.model.ContactTraineee"/>
@@ -81,6 +81,7 @@
 		<mapping class="com.ir.model.TrainingSchedule"/>
 		<mapping class="com.ir.model.CustomerMaster"/>
 		<mapping class="com.ir.model.TaxMaster"/>
+		
 		<mapping class="com.ir.model.EmployeeMonthlyCharges"/>
 		<!-- <mapping class="com.ir.model.EnrolledTrainee"/> -->
 	<!-- 	<mapping class="com.ir.model.DummyTable"/>
@@ -88,5 +89,8 @@
 		<mapping class="com.ir.model.NomineeTrainee"/>
 		<!-- <mapping class="com.ir.model.TraineeEnrolled"/>
 		<mapping class="com.ir.model.CourseEnrollTrainee"/> -->
+	<mapping class="com.ir.model.AssessmentQuestions"/>
+<!-- 	<mapping class="com.ir.model.AssessmentQuestions"/> -->
+	
 	</session-factory>
 </hibernate-configuration>

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
 import com.ir.form.AssessmentAnswerCriteria;
-import com.ir.model.AssessmentQuestion;
+import com.ir.model.AssessmentQuestion_old;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
@@ -30,9 +30,9 @@ public class AssessmentServiceImpl implements AssessmentService {
 	private AssessmentDao assessmentDao;
 	@Override
 	@Transactional
-	public List<AssessmentQuestion> getAssessmentQuestions(int courseType, int courseName) {
+	public List<AssessmentQuestion_old> getAssessmentQuestions(int courseType, int courseName) {
 //		AssessmentDaoImpl assessmentDao = new AssessmentDaoImpl();
-		final List<AssessmentQuestion> listAssessmetQustions = assessmentDao.getAssessmentQuestions(courseType, courseName);
+		final List<AssessmentQuestion_old> listAssessmetQustions = assessmentDao.getAssessmentQuestions(courseType, courseName);
 		return listAssessmetQustions;
 	}
 	@Override
@@ -65,15 +65,15 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 	@Override
 	@Transactional
-	public List<AssessmentQuestion> getAssessmentAnswers(int courseType, List<Integer> questions) {
+	public List<AssessmentQuestion_old> getAssessmentAnswers(int courseType, List<Integer> questions) {
 		// TODO Auto-generated method stub
-		List<AssessmentQuestion> answersList = assessmentDao.getAssessmentAnswers(courseType, questions);
+		List<AssessmentQuestion_old> answersList = assessmentDao.getAssessmentAnswers(courseType, questions);
 		return answersList;
 	}
 
 	@Override
 	@Transactional
-	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestion> answers, int courseNameId){
+	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestion_old> answers, int courseNameId){
 		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
 		//int totalQuestion = answers.size();
 		Map<String, Integer> answersMap = new HashMap<String, Integer>();

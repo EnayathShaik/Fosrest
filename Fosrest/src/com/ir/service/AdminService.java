@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
+import com.ir.form.AssessmentQuestionForm_old;
 import com.ir.form.AssessorUserManagementForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
@@ -27,6 +28,7 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -124,7 +126,7 @@ public interface AdminService {
 	String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
 	
 	
-	String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm);
+	String manageAssessmentQuestionsSave(AssessmentQuestionForm_old assessmentQuestionForm);
 //	boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
 	
 	
@@ -290,6 +292,7 @@ public interface AdminService {
 	public List<TrainingClosureForm> listTrainingClosure();
 
 	
+
 	
 	
 	
@@ -341,18 +344,23 @@ public interface AdminService {
 	public void removeEmployeeMonthlyCharges(int id);
 	public EmployeeMonthlyCharges getEmployeeMonthlyChargesById(int id);
 	public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges();
+
+
+/*	public String addNomineeTrainee(NomineeTrainee nt , String data);
+	public LoginDetails getLoginDetailsById(int id);*/
+	public List<PersonalInformationTrainee> listEligibleuser(String userType); 
+	public String enrollUser(String data);
 	
-	
+	public String  assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm);
+
+	public List<AssessmentQuestionForm> listAssessmentQuestion(AssessmentQuestionForm assesQuestionForm);
+
+	public void removeAssessmentQuestion(int id);
+
+	public AssessmentQuestions getAssessmentQuestionById(int id);
 	
 	
 
-	public List<PersonalInformationTrainee> listEligibleuser(String userType); 
-	public String enrollUser(String data);
-/*	public String addNomineeTrainee(NomineeTrainee nt , String data);
-	public LoginDetails getLoginDetailsById(int id);*/
-	
-	
-	
 	
 }
 

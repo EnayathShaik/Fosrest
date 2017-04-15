@@ -13,6 +13,7 @@ import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
+import com.ir.form.AssessmentQuestionForm_old;
 import com.ir.form.AssessorUserManagementForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
@@ -32,6 +33,7 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -230,7 +232,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
+	public String manageAssessmentQuestionsSave(AssessmentQuestionForm_old assessmentQuestionForm) {
 		String manageAssessmentQuestionsSave = adminDAO.manageAssessmentQuestionsSave(assessmentQuestionForm);
 		return manageAssessmentQuestionsSave;
 	}
@@ -1178,7 +1180,8 @@ public class AdminServiceImpl implements AdminService {
 			// TODO Auto-generated method stub
 			return this.adminDAO.listEmployeeMonthlyCharges();
 		}
-		
+
+	
 		
 		
 		@Override
@@ -1196,6 +1199,37 @@ public class AdminServiceImpl implements AdminService {
 			return this.adminDAO.enrollUser(data);
 		}
 		
+
+		@Override
+		@Transactional
+		public String assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.assessmentQuestionSave( assesQuestionForm);
+		}
+
+		@Override
+		@Transactional
+		public List<AssessmentQuestionForm> listAssessmentQuestion(
+				AssessmentQuestionForm assesQuestionForm) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listAssessmentQuestion( assesQuestionForm);
+		}
+
+		@Override
+		@Transactional
+		public void removeAssessmentQuestion(int id) {
+			// TODO Auto-generated method stub
+			 this.adminDAO.removeAssessmentQuestion(id);
+			
+		}
+
+		@Override
+		public AssessmentQuestions getAssessmentQuestionById(int id) {
+			// TODO Auto-generated method stub
+			 return this.adminDAO.getAssessmentQuestionById(id);
+			
+		}
+
 		
 	    
 }

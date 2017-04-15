@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -190,6 +191,13 @@ public class PageLoadServiceImpl implements PageLoadService {
 		System.out.println("page load service");
 		List<City> cityList = pageLoadDao.loadCity(distId);
 		return cityList;
+	}
+
+	@Override
+	public List<AssessmentQuestions> loadModuleName(String val) {
+		// TODO Auto-generated method stub
+		
+		return pageLoadDao.loadModuleName(val);
 	}
 
 

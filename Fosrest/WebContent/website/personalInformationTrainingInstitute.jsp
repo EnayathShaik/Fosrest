@@ -9,6 +9,162 @@
  <script src="website/js/commonController.js"></script>
  <script>
  
+
+ function validateFields(){
+	
+	 $("#trainingCenterNameErr").css("display" , "none");
+	 $("#trainingPartnerNameErr").css("display" , "none");
+	 $("#titleErr").css("display" , "none");
+	 $("#firstNameErr").css("display" , "none");
+	 $("#middleNameErr").css("display" , "none");
+	 $("#lastNameErr").css("display" , "none");
+	 $("#correspondenceAddress1Err").css("display" , "none");
+	 $("#correspondenceAddress2Err").css("display" , "none");
+	 $("#correspondenceStateErr").css("display" , "none"); 
+	 $("#correspondenceDistrictErr").css("display" , "none");
+	 $("#correspondenceCityErr").css("display" , "none");
+	 $("#correspondencePincodeErr").css("display" , "none");
+	 $("#EmailErr").css("display" , "none");
+	 $("#mobileErr").css("display" , "none");
+	 $("#panErr").css("display" , "none");
+	 
+	 
+	 if($("#trainingCenterName").val() == ''){
+		 
+		$("#trainingCenterNameErr").css("display" , "block");
+		return false;
+	 } 
+	 else if($("#trainingPartnerName").val() == '0'){
+		 
+			$("#trainingPartnerNameErr").css("display" , "block");
+		return false;
+		 }
+	 else  if($("#title").val() == ''){
+		 
+			$("#titleErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#firstName").val() == ''){
+		 
+			$("#firstNameErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#middleName").val() == ''){
+			 
+			$("#middleNameErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#lastName").val() == ''){
+		 
+			$("#lastNameErr").css("display" , "block");
+		return false;
+		 }
+	   
+	 else  if($("#pan").val() == '')
+		 {
+			 $("#panErr").css("display" , "block");
+			 return false; 
+		 }
+	 else if($("#correspondenceAddress1").val() == ''){
+		 
+			$("#correspondenceAddress1Err").css("display" , "block");
+			return false;
+		 }
+	 else if($("#correspondenceAddress2").val() == ''){
+		 
+			$("#correspondenceAddress2Err").css("display" , "block");
+			return false;
+		 }
+	
+	 
+	 else if($("#correspondenceState").val() == 0){
+		 
+			$("#correspondenceStateErr").css("display" , "block");
+			return false;
+		 }
+
+	 else if($("#correspondenceDistrict").val() == 0){
+		 
+			$("#correspondenceDistrictErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#correspondenceCity").val() == 0){
+		 
+			$("#correspondenceCityErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#correspondencePincode").val() == ''){
+		 <%System.out.println("eeeeeeeeeeeeee");%>
+			$("#correspondencePincodeErr").css("display" , "block");
+			return false;
+		 }
+	 else if(($("#correspondencePincode").val()).match(/^[0-9]{6}$/)==null)
+		 {
+		
+		 <%
+		 
+		 System.out.println(" eeeeeeeeeeeeee ");%>
+		 alert("invalid pin	");
+		 return false;
+		 }
+		 
+	 else if($("#Email").val() == ''){
+		 
+			$("#EmailErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#mobile").val() == ''){
+		 
+			$("#mobileErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#mobile").val().match(/^[0-9]{10}$/)==null)
+	 {
+		 alert("Invalid Mobile no");
+		 return false;
+	 }
+	 
+	 else if($("#trainingType").val() == ''){
+		 
+			$("#trainingTypeErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#userType").val() == ''){
+		 
+			$("#userTypeErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#seatingCapacity").val() == 0){
+		 
+			$("#seatingCapacityErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#noOfInHouseTrainer").val() == 0){
+		 
+			$("#noOfInHouseTrainerErr").css("display" , "block");
+			return false;
+		 }
+	 else if($("#noOfYearExp").val() == ''){
+		 
+			$("#noOfYearExpErr").css("display" , "block");
+			return false;
+		 }
+  else if($("#sessWishToConduct").val() == '0' ){
+		 
+			$("#sessWishToConductErr").css("display" , "block");
+			return false;
+		 } 
+	 
+	 else	if($("#check").is(":checked")==false){
+		alert("check the checkbox to agree to term and conditions");
+		return false;
+	 	} 
+	
+	 
+	 
+ }
+ 
+ 
  function AvoidSpace(event) {
 	    var k = event ? event.which : window.event.keyCode;
 	    if (k == 32) return false;
@@ -70,7 +226,7 @@
 
 	 
 	<cf:form action="PersonalInformationTrainingInstituteAdd.fssai" name="myForm" method="POST"
-		commandName="PersonalInformationTrainingInstitute">
+		commandName="PersonalInformationTrainingInstitute" onsubmit='return validateFields();' >
 
   <section>
         <div class="container">
@@ -91,8 +247,11 @@
                      		<cf:input type="hidden" path="id"/>
                                 <div class="form-group">
                                     <div>
+                                    <cf:input path="id" type="hidden" /> 
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Center Name:</strong></li>
+                                              <li id="trainingCenterNameErr" style="display:none;" class="style-li error-red" > Training name can not be blank.</li>
+                                                  
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -103,6 +262,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Partner Name:</strong></li>
+                                             <li id="trainingPartnerNameErr" style="display:none;" class="style-li error-red" > Select a Training Partner.</li>
+                                             
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -115,6 +276,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>PAN:</strong></li>
+                                            <li id="panErr" style="display:none;" class="style-li error-red" > Enter your PAN no.</li>
+                                             
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div> 
@@ -129,6 +292,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Title:(Training Center Head)</strong></li>
+                                            <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
+                                             
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -142,6 +307,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>First Name:(Training Center Head) </strong></li>
+                                             <li id="firstNameErr" style="display:none;" class="style-li error-red" > first Name can not be blank.</li>
+                                           
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -151,6 +318,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Middle Name:(Training Center Head)</strong></li>
+                                             <li id="middleNameErr" style="display:none;" class="style-li error-red" > Middle Name can not be blank.</li>
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -160,6 +328,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Last Name:(Training Center Head)</strong></li>
+                                            <li id="lastNameErr" style="display:none;" class="style-li error-red" > Last Name can not be blank.</li>
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -183,6 +352,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Center Address Line 1:</strong></li>
+                                            <li id="correspondenceAddress1Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
+                                           
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -192,6 +363,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Center Address Line 2:</strong></li>
+                                            <li id="correspondenceAddress2Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
+                                           
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -201,6 +374,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>State:</strong></li>
+                                            <li id="correspondenceStateErr" style="display:none;" class="style-li error-red" > Please select a Correspondence State.</li>
+                                           
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -213,11 +388,13 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>District:</strong></li>
+                                             <li id="correspondenceDistrictErr" style="display:none;" class="style-li error-red" > Please select a Correspondence District.</li>
+                                          
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
                                      <cf:select path="correspondenceDistrict" class="form-control" onchange="getCity(this.value , 'correspondenceCity')">
-                                
+                                 <cf:option value="0" label="Select District" />
                                     </cf:select>
                                 </div>
                             </div>
@@ -230,11 +407,14 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Closest City:</strong></li>
+                                            <li id="correspondenceCityErr" style="display:none;" class="style-li error-red" > Please select a Correspondence City.</li>
+                                          
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
+                                    
                                     <cf:select path="correspondenceCity" class="form-control">
-                                   
+                                   <cf:option value="0" label="Select District" />
                                     </cf:select>
                                 </div>
 
@@ -245,6 +425,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>PIN Code:</strong></li>
+                                            <li id="correspondencePincodeErr" style="display:none;" class="style-li error-red" > Pincode cannot be empty.</li>
+                                          
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -255,6 +437,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Email:</strong></li>
+                                            <li id="EmailErr" style="display:none;" class="style-li error-red" > Email cannot be empty.</li>
+                                          
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -264,6 +448,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Mobile:</strong></li>
+                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile cannot be empty.</li>
+                                          
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -291,6 +477,7 @@
                                             <div>
                                                 <ul class="lab-no">
                                                     <li class="style-li"><strong>Type of Training Conducted</strong></li>
+                                                    <li id="trainingTypeErr" style="display:none;" class="style-li error-red" >Select training type.</li>
                                                     <li class="style-li error-red"> </li>
                                                 </ul>
                                             </div>
@@ -306,6 +493,8 @@
                                             <div>
                                                 <ul class="lab-no">
                                                     <li class="style-li"><strong>User Type</strong></li>
+                                                   <li id="userTypeErr" style="display:none;" class="style-li error-red" > Select User type.</li>
+                                                    
                                                     <li class="style-li error-red"> </li>
                                                 </ul>
                                             </div>
@@ -321,6 +510,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Seating capacity Per session?</strong></li>
+                                             <li id="seatingCapacityErr" style="display:none;" class="style-li error-red" >Seating capacity cannot be empty.</li>
+                                                  
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -351,6 +542,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Number of in-house trainers ?</strong></li>
+                                             <li id="noOfInHouseTrainerErr" style="display:none;" class="style-li error-red" > give the no of trainers.</li>
+                                            
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -359,7 +552,9 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Numbe of years in Business of training ?</strong></li>
+                                            <li class="style-li"><strong>Number of years in Business of training ?</strong></li>
+                                            <li id="noOfYearExpErr" style="display:none;" class="style-li error-red" > Years in business.</li>
+                                            
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -369,6 +564,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>How many training (4hrs) sessions wish to conduct in a month ?</strong></li>
+                                            <li id="sessWishToConductErr" style="display:none;" class="style-li error-red" > Cannot be empty.</li>
+                                            
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
@@ -404,7 +601,7 @@
 						</div>
 					</div>
 					<div style="float: left; width: 99%;">
-						<input type="checkbox" id="check" style="margin-left: 1%;">
+						<input type="checkbox" name="chkName" id="check" style="margin-left: 1%;">
 						<!-- <a href="#" target="_blank" class="terms-font-size">  -->
 						I have read and understood the Terms & Conditions and the Privacy
 						Policy of FSSAI.

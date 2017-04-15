@@ -25,7 +25,7 @@ wwindow.profileId = '${profileId}';
                   <div class="row">
                                             <div class="col-xs-12">
                                            <fieldset>
-                                           <legend>Training Request</legend>
+                                           <legend>Training Requesttt</legend>
                                             <ct:if test="${!empty listTrainingSchedule}">
                                             <table class="table table-bordered table-responsive">
                                                <thead>

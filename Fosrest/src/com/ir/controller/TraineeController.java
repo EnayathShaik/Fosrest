@@ -31,20 +31,25 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
+import com.ir.dao.TrainingInstitudeDAO;
+import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GenerateCourseCertificateForm;
+import com.ir.form.InstituteMyCalendarForm;
+import com.ir.form.MarkAttendanceForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
 import com.ir.form.OnlineAssessmentForm;
 import com.ir.form.OnlineTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.RegistrationFormTrainer;
+import com.ir.form.TrainingRequestForm;
 import com.ir.model.AdmitCardForm;
-import com.ir.model.AssessmentQuestion;
+import com.ir.model.AssessmentQuestion_old;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CourseTrainee;
 import com.ir.model.CourseType;
@@ -88,7 +93,10 @@ public class TraineeController {
 	@Qualifier("adminService")
 	AdminService adminService;
 	
-	
+	//..
+	@Autowired
+	@Qualifier("trainingInstitudeService")
+	TrainingInstitudeDAO trainingInstitudeService;
 	
 	
 	@Autowired
@@ -510,7 +518,7 @@ public class TraineeController {
 			TraineeAssessment traineeAssessment = new TraineeAssessment();
 			int courseType = 1;
 			int courseNameId = 	traineeService.getCurrentCourseId(loginId);
-			List<AssessmentQuestion> assessmentQuestions =  assessmentService.getAssessmentQuestions(courseType, courseNameId);
+			List<AssessmentQuestion_old> assessmentQuestions =  assessmentService.getAssessmentQuestions(courseType, courseNameId);
 			traineeAssessment.setListAssessmentQuestion(assessmentQuestions);
 			traineeAssessment.setCourseNameId(courseNameId);
 			Gson gson=new Gson();
@@ -804,6 +812,9 @@ public class TraineeController {
 		
 		
 		
+	
+	
+			
 		// for Trainee	
 			
 
@@ -915,8 +926,129 @@ public class TraineeController {
   				return "Certificate";
   		
   		}
-        
+	
+	//training Institute
+	
+
+@RequestMapping(value = "/TrainingRequest", method = RequestMethod.GET)
+public String trainingRequest(@ModelAttribute("TrainingRequestForm") TrainingRequestForm trainingRequestForm ,Model model) {
+		System.out.println("start get");
+			
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> userType = lst.userTypeMap;
+		Map<String , String> trainingStatus = lst.userStatusMap;
+		String startDate="";
+		String endDate="";
+		
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("userType",userType);
+		model.addAttribute("startDate",startDate);
+		model.addAttribute("endDate",endDate);
+		model.addAttribute("trainingStatus", trainingStatus);
+		/*model.addAttribute("listTrainingRequest", this.traineeService.listTrainingRequest());
+		model.addAttribute("TrainingRequestForm", new TrainingRequestForm());*/
+		
+	System.out.println("end get");
+	return "TrainingRequest";
+}
+
+@RequestMapping(value = "/ListTrainingRequest", method = RequestMethod.POST)
+public String ListTrainingRequest(@ModelAttribute("TrainingRequestForm") TrainingRequestForm trainingRequestForm ,Model model) {
+	
+		
+	//model.addAttribute("TrainingRequestForm", new TrainingRequestForm());
+		model.addAttribute("listTrainingRequest", this.trainingInstitudeService.listTrainingRequest(trainingRequestForm));
+	
+		
+	
+	return "TrainingRequest";
+}
+
+
+@RequestMapping(value = "/MarkAttendance", method = RequestMethod.GET)
+public String markAttendance(@ModelAttribute("MarkAttendanceForm") MarkAttendanceForm markAttendanceForm ,Model model) {
+		System.out.println("start get");
+			
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> userType = lst.userTypeMap;
+		
+
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("userType",userType);
+			
+	System.out.println("end get");
+	return "MarkAttendance";
+}
+
+	
+@RequestMapping(value = "/ListMarkAttendance", method = RequestMethod.POST)
+public String ListMarkAttendance(@ModelAttribute("MarkAttendanceForm") MarkAttendanceForm  markAttendanceForm ,Model model) {
+	
+		//System.out.println("listTrainingInstitute" + trainingInstituteForm.getTrainingType());
+				System.out.println("start post");
+		
+
+				Map<String , String> attendance1 = lst.instituteAttendanceMap;
+				model.addAttribute("attendance1",attendance1);
+			
+				
+				
+		model.addAttribute("MarkAttendanceForm", new MarkAttendanceForm());
+		model.addAttribute("listMarkAttendance", this.trainingInstitudeService.listMarkAttendance());
+	
+		
+	
+	return "MarkAttendance";
+}
+
+
+@RequestMapping(value = "/mycalendar", method = RequestMethod.GET)
+public String myCalendar(@ModelAttribute("InstituteMyCalendarForm") InstituteMyCalendarForm myCalendarForm ,Model model) {
+		System.out.println("start get");
+			
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> userType = lst.userTypeMap;
+		Map<String , String> status =lst.instituteStatusMap;
+		
+
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("userType",userType);
+		model.addAttribute("status",status);
+			
+	System.out.println("end get");
+	return "mycalendar";
+}
 	
 	
+
+@RequestMapping(value = "/listinstitutemycalendar", method = RequestMethod.POST)
+public String mmyCalendar(@ModelAttribute("InstituteMyCalendarForm") InstituteMyCalendarForm  myCalendarForm ,Model model) {
+
+	//System.out.println("listTrainingInstitute" + trainingInstituteForm.getTrainingType());
+			System.out.println("start post");
 	
+	model.addAttribute("InstituteMyCalendarForm", new InstituteMyCalendarForm());
+	model.addAttribute("listInstituteMyCalendar", this.trainingInstitudeService.listInstituteMyCalendar());
+
+	
+
+return "mycalendar";
+}
+
+//niranjan
+//for onlinelisting
+
+@RequestMapping(value = "/ListOnlineAssessment", method = RequestMethod.POST)
+public String onlinelistassessquestion(@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm ,Model model) {
+		System.out.println("Online Listing get");
+	model.addAttribute("listAssessmentQuestion", this.traineeService.listingAssessmentQuestion(assesQuestionForm));
+	
+	
+	return "listingquestions";
+}
+
+
+
+
+
 }

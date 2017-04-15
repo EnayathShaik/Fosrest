@@ -1,7 +1,6 @@
 package com.ir.form;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -9,6 +8,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class ModuleMasterForm {
 	
 	private int moduleId;
+	
+//	@NotEmpty(message ="EEEEEEEEEEEEEEEEEEErrorrrrrrrrrrrrrrrrrrrr")
 	
 	@NotEmpty(message = " should not be blank.")
 	private String moduleName;
@@ -61,9 +62,6 @@ public class ModuleMasterForm {
 	public void setContentLink(String contentLink) {
 		this.contentLink = contentLink;
 	}
-	
-	
-	
 	
 
 }

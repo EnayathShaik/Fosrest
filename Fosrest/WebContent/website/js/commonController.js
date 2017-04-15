@@ -172,6 +172,7 @@ function getCourseTrainingType(){
 
 
 
+
 function getBatch(val , idName){
 	console.log("val "+val);
 	 	var name=JSON.stringify({
@@ -195,7 +196,6 @@ function getBatch(val , idName){
 		      }
 		      });
 	}
-
 
 
 
@@ -251,5 +251,32 @@ function getModule(val , idName) {
 			});
 		}
 	});
+}
+
+function getmyc(val , idName)
+{
+	alert("1");
+ 	var name1=JSON.stringify({
+		val:val
+  })
+	$.ajax({
+	      type: 'post',
+	      url: 'loadModuleName.fssai?data='+ val,
+	      contentType : "application/json",
+		  data:val,
+	      success: function (response) {      
+	      var mainData1 = jQuery.parseJSON(response);
+	  	alert("2");
+	      $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="0" label="Select District" />');
+	      $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="0" label="Select City" />');
+	  	alert("3");
+	      $.each(mainData1 , function(i , obj)
+	  		{
+  				$('#'+idName).append('<option value='+obj.moduleName+' >'+obj.moduleName+'</option>');	
+	  		});
+	      }
+	});     
 }
 
