@@ -1527,7 +1527,7 @@ System.out.println("list "+list);
 		
 		//listing online question
 		@Override
-		public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm) {
+		public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm, int id) {
 			// TODO Auto-generated method stub
 		
 				AssessmentQuestionForm bean;
@@ -1535,15 +1535,20 @@ System.out.println("list "+list);
 				Session session = this.sessionFactory.getCurrentSession();
 	System.out.println("........................."+assesQuestionForm.getModuleCode() );
 		
-	List<Object[]> nomtable  = session.createSQLQuery("select * from nomineetrainee where id=12") .list();	
+	List<Object[]> nomtable  = session.createSQLQuery("select * from nomineetrainee where logindetails="+id) .list();	
+	
+	int ucode=-99,mcode=-99;
+	
 	
 	for (Object[] li : nomtable ) { 
+		mcode=(int)li[1];
+		ucode=(int)li[6];
 	System.out.println(li[0]);
 	System.out.println(li[1]);
 	System.out.println(li[6]);
 	
 	}
-		List<Object[]> mccList  = session.createSQLQuery("select * from assessmentquestions where modulename='"+"151"+"' and unitcode='"+"20"+"'" ) .list();	
+		List<Object[]> mccList  = session.createSQLQuery("select * from assessmentquestions where unitcode='"+ucode+"' and modulecode='"+mcode+"'" ) .list();	
 		System.out.println("aaaaa");
 		for (Object[] li : mccList ) { 
 			 bean= new AssessmentQuestionForm();

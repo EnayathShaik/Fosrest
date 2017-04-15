@@ -177,7 +177,7 @@ public interface TraineeService {
 	public List<ModuleMaster> listTopicModule();
 
  public List<AssessmentQuestionForm> listingAssessmentQuestion(
-			AssessmentQuestionForm assesQuestionForm);
+			AssessmentQuestionForm assesQuestionForm, int id);
 	
 	
 	

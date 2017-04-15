@@ -1039,10 +1039,10 @@ return "mycalendar";
 //for onlinelisting
 
 @RequestMapping(value = "/ListOnlineAssessment", method = RequestMethod.POST)
-public String onlinelistassessquestion(@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm ,Model model) {
+public String onlinelistassessquestion(@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm ,Model model, HttpSession s) {
 		System.out.println("Online Listing get");
-	model.addAttribute("listAssessmentQuestion", this.traineeService.listingAssessmentQuestion(assesQuestionForm));
-	
+	model.addAttribute("listAssessmentQuestion", this.traineeService.listingAssessmentQuestion(assesQuestionForm,(int)s.getAttribute("userId")));
+	System.out.println("----------------------------------------------"+s.getAttribute("userId"));
 	
 	return "listingquestions";
 }

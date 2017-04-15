@@ -27,7 +27,7 @@ wwindow.profileId = '${profileId}';
                                            <fieldset>
                                            <legend>Training Requesttt</legend>
                                             <ct:if test="${!empty listTrainingSchedule}">
-                                            <table class="table table-bordered table-responsive">
+                                            <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>

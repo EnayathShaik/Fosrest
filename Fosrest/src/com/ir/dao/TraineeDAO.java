@@ -126,6 +126,6 @@ public interface TraineeDAO {
 	public List<UnitMaster> listTrainingTopic();
 	
 	public List<ModuleMaster> listTopicModule();
-	public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm);
+	public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm, int id);
 	
 }
