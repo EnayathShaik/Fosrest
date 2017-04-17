@@ -59,9 +59,17 @@ window.onload = OnStart;
                                     
                                      
                                         <legend> Online Training</legend>
-                                        <h4>Training Type:</h4>
-                                        <h4>Training Phase:</h4>
-                                        <h4>Training Duration: </h4>
+                                        
+                                        <h4> Training Type: ${listOnlineTraining.trainingType}</h4>
+                                        <h4>Training Phase: ${listOnlineTraining.trainingPhase}</h4>
+                                        <h4>Training Duration: ${listOnlineTraining.trainingstartdate} - ${listOnlineTraining.trainingstartdate} </h4>
+                                        <%--  <ct:out value="${listOnlineTraining}"></ct:out> --%>
+                                          
+                                           <%-- <ct:forEach items="${listOnlineTraining}" var="OnlineTraining">
+                                                 ${OnlineTraining.trainingPhase}
+                                                    </ct:forEach>  --%>
+                                                     
+                                       
                                     
                                     
                                         <br> </fieldset>
@@ -75,16 +83,21 @@ window.onload = OnStart;
                                     <fieldset>
                                         <legend> Course Curriculum</legend>
                                       
-                                      <!--   topic -->
-                                         <ct:forEach items="${listTrainingTopic}" var="topic">
+                                      <%-- <!--   topic -->
+                                       <h4>  ${listTrainingTopic.trainingTopic}</h4>
+                                        <!--   module  -->
+                                        <h4> ${listOnlineTraining.moduleName}</h4>
+                                          --%>
+                                         
+                                          <ct:forEach items="${listTrainingTopic}" var="topic">
                                                <ct:out value="${topic}"/><p>
-                                              
-                                         <!--   module  -->
+                                               
+                                        
                                          <ul>
-                                         <ct:forEach var="module" items="${listTopicModule}">
+                                         <ct:forEach var="module" items="${listOnlineTraining.moduleName}">
                                           <li><a href="?">${module}</a></li> 
                                        </ct:forEach></ul>
-                                        </ct:forEach>
+                                        </ct:forEach> 
                                               
                                                 
                                              
@@ -99,7 +112,7 @@ window.onload = OnStart;
                                                    <ct:forEach items="${listTopicModule}" var="module">
                                                     <ct:out value="${module}"/><p> 
                                               </ct:forEach>
-                                               --%>
+                                                --%>
                                               
                                                 <%-- <a href="${module}"></a> --%>
                                                

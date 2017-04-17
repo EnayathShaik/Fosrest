@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -779,9 +780,16 @@ public class TraineeController {
 	//for online training
 
         @RequestMapping(value = "/OnlineTraining", method = RequestMethod.GET)
-		public String OnlineTraining(@ModelAttribute("OnlineTrainingForm") OnlineTrainingForm OnlineTrainingForm ,Model model){
+		public String OnlineTraining(@ModelAttribute("OnlineTrainingForm") OnlineTrainingForm OnlineTrainingForm ,Model model,HttpSession session){
+        	System.out.println( " id " + session.getAttribute("userId") );
+        	
+   			int userId = (int) session.getAttribute("userId");
+   			System.out.println(" list online training "+this.traineeService.listOnlineTraining(userId));
+   			//System.out.println(" list TopicModule "+this.traineeService.listTrainingTopic(userId));
+   			  //this.traineeService.listOnlineTraining(userId)
         	model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic());
         	model.addAttribute("listTopicModule", this.traineeService.listTopicModule());
+        	model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
 				System.out.println("listOnlineTraining");
 			
 				return "OnlineTraining";
@@ -803,22 +811,22 @@ public class TraineeController {
         
         //for Certificate
 
-          @RequestMapping(value = "/Certificate", method = RequestMethod.GET)
-  		public String Certificate(@ModelAttribute("CertificateForm") CertificateForm CertificateForm ,Model model , HttpSession session){
-  			
-        	  int loginId = (int) session.getAttribute("userId");
-  				System.out.println("listCertificate");
-  				Map<String , String> trainingType = lst.trainingTypeMap;
-  				
-  				model.addAttribute("trainingType",trainingType);
-  				model.addAttribute("CertificateForm", new CertificateForm());
-  				model.addAttribute("listCertificate", this.traineeService.listCertificate(loginId));
-  				
-  				
-  			
-  				return "Certificate";
-  		
-  		}
+        @RequestMapping(value = "/Certificate", method = RequestMethod.GET)
+		public String Certificate(@ModelAttribute("CertificateForm") CertificateForm CertificateForm ,Model model , HttpSession session){
+			
+      	  int loginId = (int) session.getAttribute("userId");
+				System.out.println("listCertificate");
+				Map<String , String> trainingType = lst.trainingTypeMap;
+				
+				model.addAttribute("trainingType",trainingType);
+				model.addAttribute("CertificateForm", new CertificateForm());
+				model.addAttribute("listCertificate", this.traineeService.listCertificate(loginId));
+				
+				
+			
+				return "Certificate";
+		
+		}
 	
 	//training Institute
 	

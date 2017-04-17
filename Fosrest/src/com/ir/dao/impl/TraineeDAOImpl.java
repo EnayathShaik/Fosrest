@@ -30,6 +30,7 @@ import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InstituteMyCalendarForm;
 import com.ir.form.MarkAttendanceForm;
 import com.ir.form.NominateTraineeForm;
+import com.ir.form.OnlineTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.TrainingRequestForm;
 import com.ir.form.TrainingClosureForm;
@@ -56,6 +57,7 @@ import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.TrainingCalendar;
+import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.Utility;
 import com.ir.service.PageLoadService;
@@ -1437,33 +1439,34 @@ System.out.println("list "+list);
 	System.out.println("list "+list);
 			return list;
 		}
+
+		
 		
 		//@Override
-				public List<CertificateForm> listCertificate(int loginId) {
-					// TODO Auto-generated method stub
-					System.out.println("inside listCertificateForm");
-					
-					List<CertificateForm> list = new ArrayList<CertificateForm>();
-					Session session = this.sessionFactory.getCurrentSession();
-					StringBuffer sqlQuery  = new StringBuffer();
-					 sqlQuery.append("select ts.trainingtype, case when coalesce(certificateid , '') = '' then cast('Pending' as varchar(20)) else cast('Completed' as varchar(20)) end as status,  case when certificatestatus = 'Y' then cast('YES' as varchar(3)) else cast('NO' as varchar(2)) end as cerificateAvailable  , pit.id from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid)  ");
-					 sqlQuery.append("left join personalinformationtrainee pit on (nt.logindetails = pit.logindetails) where nt.logindetails =  '"+loginId+"'");
-					List<Object[]> lst = session.createSQLQuery(sqlQuery.toString()).list();
-					for (Object[] li : lst ) {
-						CertificateForm bean = new CertificateForm();
-						bean.setTrainingType((String) li[0]);
-						bean.setCompletionStatus((String) li[1]);
-						bean.setCertificateAvailable((String) li[2]);
-						bean.setId((int) li[3]);	
-				
-						list.add(bean);
-					}
-			System.out.println("list "+list);
-					return list;
-				}
+		public List<CertificateForm> listCertificate(int loginId) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listCertificateForm");
+			
+			List<CertificateForm> list = new ArrayList<CertificateForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			StringBuffer sqlQuery  = new StringBuffer();
+			 sqlQuery.append("select ts.trainingtype, case when coalesce(certificateid , '') = '' then cast('Pending' as varchar(20)) else cast('Completed' as varchar(20)) end as status,  case when certificatestatus = 'Y' then cast('YES' as varchar(3)) else cast('NO' as varchar(2)) end as cerificateAvailable  , pit.id from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid)  ");
+			 sqlQuery.append("left join personalinformationtrainee pit on (nt.logindetails = pit.logindetails) where nt.logindetails =  '"+loginId+"'");
+			List<Object[]> lst = session.createSQLQuery(sqlQuery.toString()).list();
+			for (Object[] li : lst ) {
+				CertificateForm bean = new CertificateForm();
+				bean.setTrainingType((String) li[0]);
+				bean.setCompletionStatus((String) li[1]);
+				bean.setCertificateAvailable((String) li[2]);
+				bean.setId((int) li[3]);	
 		
+				list.add(bean);
+			}
+	System.out.println("list "+list);
+			return list;
+		}
 				
-				
+
 			
 
 	@Override
@@ -1500,7 +1503,7 @@ System.out.println("list "+list);
 		return personalInformationTrainingInstitute;
 
 	}
-
+	//Online training-------
 //online training topic unit name list
 	@Override
 	public List<UnitMaster> listTrainingTopic() {
@@ -1526,6 +1529,31 @@ System.out.println("list "+list);
 			}
 			return list ;
 		}
+
+		//@Override
+		public OnlineTrainingForm listOnlineTraining(int id) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listOnlineTrainingForm");
+			OnlineTrainingForm bean = new OnlineTrainingForm();
+		//	List<OnlineTrainingForm> list = new ArrayList<OnlineTrainingForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> lst = session.createSQLQuery("select ts.trainingtype,ts.trainingphase,mm.modulename,ts.trainingstartdate,ts.trainingenddate from modulemaster mm left join trainingschedule ts on (mm.moduleid = ts.moduleid) left join nomineetrainee nt on (nt.trainingscheduleid = ts.trainingscheduleid ) where nt.logindetails ='"+ id +"'").list();
+			
+			if(lst.size() > 0){
+			 Object[] obj=	lst.get(0);
+			 bean.setTrainingType((String)obj[0]);
+			 bean.setTrainingPhase((String)obj[1]);
+			 bean.setModuleName((String)obj[2]);
+			 bean.setTrainingstartdate((String)obj[3]);
+			 bean.setTrainingenddate((String)obj[4]);
+			}
+			    
+		
+			return  bean;
+		}
+
+		
+
 
 		
 		//listing online question

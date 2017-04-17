@@ -12,6 +12,7 @@ import com.ir.form.MyTrainingForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InstituteMyCalendarForm;
 import com.ir.form.MarkAttendanceForm;
+import com.ir.form.OnlineTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.TrainingRequestForm;
 import com.ir.model.AdmitCardForm;
@@ -31,6 +32,7 @@ import com.ir.model.State;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.Utility;
+
 
 
 public interface TraineeService {
@@ -167,6 +169,7 @@ public interface TraineeService {
 	public PersonalInformationTrainer FullDetailTrainer(int loginId);
 	
 	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId);
+	
 
 /*	dynamic
  * public List<UnitMaster> dynListTrainingType();
@@ -179,6 +182,11 @@ public interface TraineeService {
  public List<AssessmentQuestionForm> listingAssessmentQuestion(
 			AssessmentQuestionForm assesQuestionForm, int id);
 	
+	
+	public OnlineTrainingForm listOnlineTraining(int id);
+	
+
+
 	
 	
 	
