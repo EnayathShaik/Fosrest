@@ -67,18 +67,30 @@ public class JavaMail {
 	                emailFromAddress=from.trim();
 	                strCCMail=ccMail.trim();
 	                emailSubjectTxt = "FSSAI Support";
-	                
 	                StringBuffer emailMessage = new StringBuffer("Dear "+username);
-	                emailMessage.append("<br/>");
-	                emailMessage.append("<br/>");
-	                emailMessage.append("Your User ID "+id+" has been created successfully with password : "+pass);
-	                emailMessage.append("<br/>");
-	                emailMessage.append("<br/>");
-	                emailMessage.append("<br/>");
-	                emailMessage.append(" Regards");
-	                emailMsgTxt = "Dear  "+username +", "+" \r\n "+"\n"+System.getProperty("line.separator")+
-	                		" Your User ID "+id+" has been created successfully with password : "+pass+"\r\n "+"\n"+System.getProperty("line.separator")+
-	                		" Regards";
+	                if(!emailMsgTxt.equalsIgnoreCase("Thanks")){
+	                	 emailMessage.append("<br/>");
+		 	                emailMessage.append("<br/>");
+		 	                emailMessage.append("You are enrolled successfully !!!");
+	                	
+	                }else{
+	                	
+	 	                emailMessage.append("<br/>");
+	 	                emailMessage.append("<br/>");
+	 	                emailMessage.append("Your User ID "+id+" has been created successfully with password : "+pass);
+	 	                emailMessage.append("<br/>");
+	 	                emailMessage.append("<br/>");
+	 	                emailMessage.append("<br/>");
+	 	                emailMessage.append(" Regards");
+	 	                emailMsgTxt = "Dear  "+username +", "+" \r\n "+"\n"+System.getProperty("line.separator")+
+	 	                		" Your User ID "+id+" has been created successfully with password : "+pass+"\r\n "+"\n"+System.getProperty("line.separator")+
+	 	                		" Regards";
+	 	                
+	 	                
+	                }
+	               
+	                
+	                
 	                try{
 	                	postMail( mail, emailSubjectTxt, emailMessage.toString(), emailFromAddress,strCCMail);	
 	                }catch(Exception e){
