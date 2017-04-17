@@ -25,20 +25,9 @@
 							<h4 class="timeline-title">Step 1</h4>
 						</div>
 						<div class="timeline-body">
-							<p>Course Enrollment</p>
+							<p>Nominee Trainee</p>
 							<p>
-								<ct:choose>
-									<ct:when
-										test="${traineeSteps < 1}">
-										<a href="basic.fssai">Basic</a> | <a
-											href="basic.fssai">Advance</a> | <a
-											href="basic.fssai">Special</a> | <a
-											href="basic.fssai">TOT</a>
-									</ct:when>
-									<ct:otherwise>
-Basic | Advance | Special | TOT
-</ct:otherwise>
-								</ct:choose>
+		
 							</p>
 						</div>
 					</div></li>
@@ -62,11 +51,10 @@ Basic | Advance | Special | TOT
 								<ct:choose>
 									<ct:when
 										test="${traineeSteps < 2}">
-										<a href="generateAdmitCardtrainee.fssai">Get Your Admit
-											Card</a>
+										<a href="OnlineTraining.fssai">Get Online Training Content</a>
 									</ct:when>
 									<ct:otherwise>
-Get Your Admit Card
+Get Online Training Content
 </ct:otherwise>
 								</ct:choose>
 							</p>
@@ -88,7 +76,7 @@ Get Your Admit Card
 							<h4 class="timeline-title">Step-3</h4>
 						</div>
 						<div class="timeline-body">
-							<p>Attend Training</p>
+							<p>Online Assessment</p>
 							<p>
 								<ct:choose>
 									<ct:when

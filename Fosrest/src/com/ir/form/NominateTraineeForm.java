@@ -4,17 +4,16 @@ public class NominateTraineeForm {
 private String userType;
 private String unit;
 private String module;
-private String batchCode;
+private int batchCode;
 
 
 
 
-
-public String getBatchCode() {
+public int getBatchCode() {
 	return batchCode;
 }
 
-public void setBatchCode(String batchCode) {
+public void setBatchCode(int batchCode) {
 	this.batchCode = batchCode;
 }
 

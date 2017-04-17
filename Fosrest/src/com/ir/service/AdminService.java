@@ -237,7 +237,7 @@ public interface AdminService {
 	
 	public List<TrainingSchedule> listTrainingSchedule(int id );
 	
-	public List<GenerateCertificateForm> listGenerateCertificate();
+	public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) ;
 	
 	
 	
@@ -346,9 +346,9 @@ public interface AdminService {
 	public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges();
 
 
-/*	public String addNomineeTrainee(NomineeTrainee nt , String data);
-	public LoginDetails getLoginDetailsById(int id);*/
-	public List<PersonalInformationTrainee> listEligibleuser(String userType); 
+
+	public List<PersonalInformationTrainee> listEligibleuser(String userType);
+	
 	public String enrollUser(String data);
 	
 	public String  assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm);
@@ -359,7 +359,7 @@ public interface AdminService {
 
 	public AssessmentQuestions getAssessmentQuestionById(int id);
 	
-	
+	public String updateCertificate(String data);
 
 	
 }

@@ -45,7 +45,7 @@ public interface PageLoadService {
 	
 	public List<District> loadDistrict(String stateId);
 	public List<City> loadCity(String districtId);
-	public List<AssessmentQuestions> loadModuleName(String val);
+	//public List<AssessmentQuestions> loadModuleName(String val);
 	
 	
 	

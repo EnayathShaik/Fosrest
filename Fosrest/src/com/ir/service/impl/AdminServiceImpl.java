@@ -1012,9 +1012,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	    @Override
 		@Transactional
-		public List<GenerateCertificateForm> listGenerateCertificate() {
+		public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) {
 			// TODO Auto-generated method stub
-			return this.adminDAO.listGenerateCertificate();
+			return this.adminDAO.listGenerateCertificate(generateCertificateForm);
 		}
 	
 //listTrainingClosure
@@ -1194,10 +1194,12 @@ public class AdminServiceImpl implements AdminService {
 
 		
 		@Override
+		@Transactional
 		public String enrollUser(String data) {
 			// TODO Auto-generated method stub
 			return this.adminDAO.enrollUser(data);
 		}
+	
 		
 
 		@Override
@@ -1230,6 +1232,11 @@ public class AdminServiceImpl implements AdminService {
 			
 		}
 
-		
+		@Override
+		@Transactional
+		public String updateCertificate(String data) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.updateCertificate(data);
+		}	
 	    
 }

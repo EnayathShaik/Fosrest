@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
    <script>
                 function OnStart() {
                    
@@ -72,9 +73,24 @@
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
                                                         </ul>
                                                     </div>
-                                                 <cf:select path="trainingPartner" class="form-control">
+                                                 <cf:select path="trainingPartner" class="form-control" onchange="getTrainingInstitude(this.value , 'trainingInstitute')">
 													<cf:option value="" label="Select training partner" />
-													<cf:options items="${trainingPartner}"/>	
+													<cf:options items="${trainingPartner}" itemValue="trainingPartnerId" itemLabel="trainingPartnerName"/>	
+												</cf:select>
+                                                </div>
+                                               <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Batch Code:</strong></li>
+                                                           <!--  valid -->
+                                                             <li id="batchCodeErr" style="display:none;" class="style-li error-red" >Please Select Batch Code.</li>
+                                                            
+                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
+                                                        </ul>
+                                                    </div>
+                                                <cf:select path="batchCode" class="form-control">
+													<cf:option value="0" label="Select Batch Code" />
+													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingScheduleId" />
 												</cf:select>
                                                 </div>
                                                 
@@ -95,7 +111,7 @@
                                                         </ul>
                                                     </div>
                                                  <cf:select path="trainingInstitute" class="form-control">
-													<cf:option value="" label="Select training institute" />
+													<cf:option value="0" label="Select training institute" />
 													<cf:options items="${listTrainingInstitude}"/>	
 												</cf:select>
                                                 </div>
@@ -103,7 +119,7 @@
                                                 <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Training Date:</strong></li>
+                                                            <li class="style-li"><strong>Training Start Date:</strong></li>
                                                           <!--   valid -->
                                                              <li id="trainingDateErr" style="display:none;" class="style-li error-red" >Please Select Training Date.</li>
                                                            
@@ -179,7 +195,7 @@
 												<td>${GenerateCertificate.attendanceStatus}</td>
 												<td>${GenerateCertificate.certificateStatus}</td>
 												<td>${GenerateCertificate.generateCertificate}
-												  <class="text-center"><input type="checkbox"> 
+												 <class="text-center" ><input id="${GenerateCertificate.id}" type="checkbox"> 
                                                         </td>
                                                             
                                                        
@@ -192,7 +208,7 @@
                                                
                                                  <div class="col-md-6 col-xs-12">
 
-                                                    <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Generate Certificate"/> 
+                                                    <input type="button"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="getTraineeId();return false;" value="Generate Certificate"/> 
                                                
                                                 </div>
                                                     </div>
@@ -222,10 +238,42 @@
  <!--   validation function -->
    <script>
    
+   
+   function getTraineeId(){
+	   var traineeIds = "";
+		$('#datatablesfosrest').find('input[type="checkbox"]').each(
+				function(i) {
+					if (this.checked) {
+					
+					
+					if(traineeIds == ""){
+						traineeIds = $(this).attr("id");
+					}else{
+						traineeIds = traineeIds + ","+ $(this).attr("id");
+					}
+					}
+				});
+		
+		console.log(" traineeIds "+traineeIds);
+		var name = JSON.stringify({
+			courseType : 0
+		});
+		$.ajax({
+			type : 'post',
+			url : 'updateCertificate.fssai?data=' + traineeIds,
+			contentType : "application/json",
+			data : name,
+			success : function(response) {
+				alert(response);
+				location.reload();
+			}
+		});
+   }
+   
    function validateFields(){
    	// alert($("#holidayDate").val());
    	// alert($("#holidayReason").val());
-   	 if($("#trainingType").val() == ''){
+   	/*  if($("#trainingType").val() == ''){
    		 
    		$("#trainingTypeErr").css("display" , "block");
    		return false;
@@ -238,7 +286,7 @@
 	 }else if($("#trainingDate").val() == ''){
    		 $("#trainingDateErr").css("display" , "block");
  		return false; 
-	 }
+	 } */
 
     }
    

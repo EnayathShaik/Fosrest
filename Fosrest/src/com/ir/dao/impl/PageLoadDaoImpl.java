@@ -324,7 +324,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		}
 
 		
-		//not working
+	/*	//not working
 		@Override
 		public List<AssessmentQuestions> loadModuleName(String val) {
 			// TODO Auto-generated method stub
@@ -334,6 +334,6 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			List<AssessmentQuestions> districtList = query.list();
 			System.out.println("district  ************* list dao     :"+ districtList);
 			return districtList;
-		}
+		}*/
 
 }

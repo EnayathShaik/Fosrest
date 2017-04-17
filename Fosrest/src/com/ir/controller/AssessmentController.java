@@ -120,7 +120,7 @@ public class AssessmentController {
 			}
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId,
 					profileID);
-			traineeService.updateSteps(tableID, profileID, 4);
+			//traineeService.updateSteps(tableID, profileID, 4);
 			session.setAttribute("traineeSteps", 4);
 		}catch(Exception e){
 			e.printStackTrace();

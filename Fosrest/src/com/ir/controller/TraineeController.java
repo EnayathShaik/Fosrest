@@ -266,54 +266,8 @@ public class TraineeController {
 		}
 		return "courseTraining12";
 	}
-	@RequestMapping(value="/training" , method=RequestMethod.GET)
-	public String training(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer , HttpSession session)
-	{
-		
-		//update Step
-				Integer profileID = 0;
-				int loginId = 0;
-				try{
-					profileID = (Integer) session.getAttribute("profileId");
-					loginId = (int) session.getAttribute("loginIdUnique");
-					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
-					traineeService.updateSteps(tableID, profileID, 3);
-					session.setAttribute("traineeSteps", 3);
-				}catch(Exception e){
-					e.printStackTrace();
-					new ZLogger("training", "Exception while training  "+e.getMessage() , "TraineeController.java");
-				}
-		return "training";
-	}
-
-	@RequestMapping(value="/basicSave" , method=RequestMethod.POST)
-	public String basicSave(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm,
-			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result , HttpSession httpSession,Model model){
-		int loginId = 0;
-		Integer profileId = 0;
-		try{
-			profileId = (Integer) httpSession.getAttribute("profileId");
-			loginId = (int) httpSession.getAttribute("loginIdUnique");
-			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
-			String basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
-				if(basicEnroll != null && basicEnroll.length()  > 1){
-					Boolean status = traineeService.updateSteps(tableID, profileId, 1);
-					httpSession.setAttribute("traineeSteps", 1);
-					if(status){
-						model.addAttribute("created", "You have successfully enrolled !!!");
-						model.addAttribute("roll", basicEnroll);
-					}else{
-						model.addAttribute("created", "Oops , something went wrong !!!");
-						model.addAttribute("roll", basicEnroll);
-					}
-				}else{
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			new ZLogger("basicSave", "Exception while basicSave  "+e.getMessage() , "TraineeController.java");
-		}
-		 return "traineeHomepage";
-	}
+	
+	
 	@RequestMapping(value="/changePasswordTraineeSave" , method=RequestMethod.POST)
 	public String changePasswordTraineeSave(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm,HttpSession session
 			,BindingResult result , Model model
@@ -457,52 +411,6 @@ public class TraineeController {
 		return "admit-cardtrainee";
 	}
 	
-	@RequestMapping(value="/certificatetrainee" , method=RequestMethod.GET)
-	public String certificatetrainee(HttpSession session, Model model){
-		//update Step
-				Integer profileID = 0;
-				Integer userId = 0;
-				int loginId = 0;
-				String returnResult =null;
-				try{
-					profileID = (Integer) session.getAttribute("profileId");
-					loginId = (int) session.getAttribute("loginIdUnique");
-					userId = (Integer) session.getAttribute("userId");
-					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
-					traineeService.updateSteps(tableID, profileID, 0);
-					CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID,"");
-					new ZLogger("certificatetrainee","Certificate ID = "+certificateInfo.getCertificateID()  , "TraineeController.java");
-					new ZLogger("certificatetrainee","Training Date = "+certificateInfo.getTrainingDate()  , "TraineeController.java");
-					//Close Course
-					if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 5){
-						traineeService.closeCourse(userId, profileID, "Y");
-					}
-					model.addAttribute("certificateID", certificateInfo.getCertificateID());
-					model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
-					model.addAttribute("traineeCertificateName", certificateInfo.getName());
-					model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
-					session.setAttribute("traineeSteps", 0);
-					
-					if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
-						returnResult = "certificatetraineeHRAWI";	
-						}
-						else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
-							returnResult = "certificatetraineeHRANI";
-						}else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("FSSAI")){
-							returnResult ="certificatetraineeFSSAI";
-						}else{
-							returnResult = "certificatetraineeGEN";
-						}
-					
-					
-					
-				}catch(Exception e){
-					e.printStackTrace();
-					new ZLogger("certificatetrainee","Exception while certificatetrainee"+e.getMessage()  , "TraineeController.java");
-				}
-		return returnResult;
-	}
-
 	@RequestMapping(value="/viewTraineeList" , method=RequestMethod.GET)
 	public String viewTraineeList(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
@@ -711,22 +619,6 @@ public class TraineeController {
 		return "feedbackForm";
 	}
 	
-	@RequestMapping(value="/afterFeedbackSubmit" , method=RequestMethod.GET)
-	public String saveFeedbackForm(HttpSession session){
-		//update Step
-				Integer profileID = 0;
-				int loginId = 0;
-				try{
-					profileID = (Integer) session.getAttribute("profileId");
-					loginId = (int) session.getAttribute("loginIdUnique");
-					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
-					traineeService.updateSteps(tableID, profileID, 5);
-					session.setAttribute("traineeSteps", 5);
-				}catch(Exception e){
-					new ZLogger("afterFeedbackSubmit", "Exception while afterFeedbackSubmit  "+e.getMessage() , "TraineeController.java");
-				}
-		return "redirect:/loginProcess.fssai";
-	}
 	
 	
 	@RequestMapping(value="/getCourseDetailss" , method=RequestMethod.POST)
@@ -912,14 +804,15 @@ public class TraineeController {
         //for Certificate
 
           @RequestMapping(value = "/Certificate", method = RequestMethod.GET)
-  		public String Certificate(@ModelAttribute("CertificateForm") CertificateForm CertificateForm ,Model model){
+  		public String Certificate(@ModelAttribute("CertificateForm") CertificateForm CertificateForm ,Model model , HttpSession session){
   			
+        	  int loginId = (int) session.getAttribute("userId");
   				System.out.println("listCertificate");
   				Map<String , String> trainingType = lst.trainingTypeMap;
   				
   				model.addAttribute("trainingType",trainingType);
   				model.addAttribute("CertificateForm", new CertificateForm());
-  				model.addAttribute("listCertificate", this.traineeService.listCertificate());
+  				model.addAttribute("listCertificate", this.traineeService.listCertificate(loginId));
   				
   				
   			
@@ -1048,6 +941,30 @@ public String onlinelistassessquestion(@ModelAttribute("AssessmentQuestionForm")
 }
 
 
+
+
+/**
+ * @author Jyoti Mekal
+ */
+@RequestMapping(value = "/GetCertificate", method = RequestMethod.GET)
+public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request) {
+		System.out.println("GetCertificate ");
+		String userId = request.getParameter("userId");
+		
+		traineeService.updateSteps(Integer.parseInt(userId),  0);
+		CertificateInfo certificateInfo = traineeService.getCertificateID(Integer.parseInt(userId),"");
+		if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 5){
+			traineeService.closeCourse(Integer.parseInt(userId), "Y");
+		}
+		
+		model.addAttribute("certificateID", certificateInfo.getCertificateID());
+		model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
+		model.addAttribute("traineeCertificateName", certificateInfo.getName());
+		model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
+	
+		
+	return "certificatetraineeGEN";
+}
 
 
 

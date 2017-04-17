@@ -2462,12 +2462,11 @@ public class AdminController {
 		System.out.println("listGenerateCertificate");
 
 		Map<String, String> trainingType = lst.trainingTypeMap;
-		Map<String, String> trainingpartner = lst.trainingParterMap;
+
 
 		model.addAttribute("trainingType", trainingType);
-		model.addAttribute("trainingPartner", trainingpartner);
-		model.addAttribute("listTrainingInstitude",
-				this.adminService.listTrainingInstitude());
+		model.addAttribute("trainingPartner", this.adminService.listTrainingPartner());
+		model.addAttribute("batchCodeList",this.adminService.listTrainingSchedule());
 		model.addAttribute("GenerateCertificateForm",
 				new GenerateCertificateForm());
 
@@ -2483,16 +2482,14 @@ public class AdminController {
 				+ generateCertificateForm.getTrainingType());
 
 		Map<String, String> trainingType = lst.trainingTypeMap;
-		Map<String, String> trainingPartner = lst.trainingParterMap;
+	//	Map<String, String> trainingPartner = lst.trainingParterMap;
 
 		model.addAttribute("trainingType", trainingType);
-		model.addAttribute("trainingPartner", trainingPartner);
-		model.addAttribute("listTrainingInstitude",
-				this.adminService.listTrainingInstitude());
+		model.addAttribute("trainingPartner", this.adminService.listTrainingPartner());
 		model.addAttribute("GenerateCertificateForm",
 				new GenerateCertificateForm());
 		model.addAttribute("listGenerateCertificate",
-				this.adminService.listGenerateCertificate());
+				this.adminService.listGenerateCertificate(generateCertificateForm));
 
 		return "GenerateCertificate";
 	}
@@ -2784,10 +2781,6 @@ public class AdminController {
 			Map<String , String> userTypeMap = lst.userTypeMap;
 
 			model.addAttribute("userTypeMap",userTypeMap);
-			model.addAttribute("unitList",this.adminService.listUnitMaster());
-			model.addAttribute("moduleList",this.adminService.listModuleMaster());
-			model.addAttribute("batchCodeList",this.adminService.listModuleMaster());
-	;
 			model.addAttribute("NominateTraineeForm", new NominateTraineeForm());
 			
 		
@@ -2800,9 +2793,7 @@ public class AdminController {
 	public String ListEligibleUser(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm ,Model model) {
 			Map<String , String> userTypeMap = lst.userTypeMap;
 			model.addAttribute("userTypeMap",userTypeMap);
-			model.addAttribute("unitList",this.adminService.listUnitMaster());
-			model.addAttribute("moduleList",this.adminService.listModuleMaster());
-			model.addAttribute("batchCodeList",this.adminService.listModuleMaster());
+			model.addAttribute("batchCodeList",this.adminService.listTrainingSchedule());
 			System.out.println("admin controller ListEligibleUser" + nominateTraineeForm.getUserType());
 			model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getUserType()));
 		
@@ -2825,6 +2816,9 @@ public class AdminController {
 		
 	}
 
+	
+	
+	
 
 	// for Assessment Questions
 
@@ -2891,51 +2885,6 @@ public class AdminController {
 		this.adminService.removeAssessmentQuestion(id);
 		return "redirect:/assessmentquestions.fssai";
 	}
-
-/*	@RequestMapping(value = "/a22ssessmentquestion/edit/{id}", method = RequestMethod.POST)
-	@ResponseBody
-	public void editAssessmentQuest(@PathVariable("id") int id,
-			@RequestBody AssessmentQuestionForm assessmentQuestionForm,
-			HttpServletRequest httpServletRequest, HttpServletResponse response)
-			throws IOException {
-		System.out.println("1............inpost");
-		new ZLogger("assessmentquestion/edit",
-				"assessmentquestion/edit............" + id,
-				"AdminController.java");
-		System.out.println("2............inpost");
-		AssessmentQuestions hm = this.adminService.getAssessmentQuestionById(id);
-		System.out.println("back from admincontroller");
-		// List courseList = adminService.searchFeedbackMaster(data);
-		PrintWriter out = response.getWriter();
-		Gson g = new Gson();
-		String newList = g.toJson(hm);
-		System.out.println("newList " + newList);
-		out.write(newList);
-		out.flush();
-
-	}
-	*/
-	
-/*	@RequestMapping(value = "/loadModuleName", method = RequestMethod.POST)
-	@ResponseBody
-	public void getModuleName(
-			@RequestParam("data") String data,
-			@RequestBody AssessmentQuestionForm aq,
-			HttpServletRequest httpServletRequest, HttpServletResponse response)
-			throws IOException {
-		new ZLogger("loadModuleName", "loadModuleName............" + data,
-				"AdminController.java");
-		String val = data;
-		List<AssessmentQuestions> districtList = pageLoadService.loadModuleName(val);
-		PrintWriter out = response.getWriter();
-		Gson g = new Gson();
-		String newList = g.toJson(districtList);
-		new ZLogger("loadDistrict", "newList " + newList,
-				"AdminController.java");
-		out.write(newList);
-		out.flush();
-
-	}*/
 	
 	// try 2 Assessment questions
 	@RequestMapping(value = "/assessmentquestions2", method = RequestMethod.GET)
@@ -2978,5 +2927,21 @@ public class AdminController {
 		}
 		return "assessmentquestions";
 	}
+	
+	
+	@RequestMapping(value="/updateCertificate" , method=RequestMethod.POST)
+	@ResponseBody
+	public void updateCertificate(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("updateCertificate","updateCertificate............" + data  , "CommonController.java");
+		String data1 = adminService.updateCertificate(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(data1); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+
 
 }

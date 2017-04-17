@@ -72,52 +72,10 @@
 												</cf:select>
 											</div>
 
-											<%-- <div class="form-group" id="moduleDIV" style="display: none">
-												<div>
-													<ul class="lab-no">
-														<li class="style-li"><strong>Module :</strong></li>
-														<li id="moduleErr" style="display: none;"
-															class="style-li error-red">Please Select Module
-															Type.</li>
-														<li class="style-li error-red"><span id="name_status"
-															class="clear-label"> </span> ${created }</li>
-													</ul>
-												</div>
-												<cf:select path="module" class="form-control" onchange="getBatch(this.value , 'batchCode')">
-													<cf:option value="0" label="Select module" />
-													<cf:options items="${moduleList}" itemValue="moduleId"
-														itemLabel="moduleCode" />
-												</cf:select>
-											</div>
- --%>
+
 
 										</div>
-										<!-- left side ends -->
-
-										<!-- right side -->
-										<%-- <div class="col-xs-6">
-											<div class="form-group" id="unitDIV" style="display: none">
-												<div>
-													<ul class="lab-no">
-														<li class="style-li"><strong>Unit :</strong></li>
-														<li class="style-li error-red">
-														<li id="unitErr" style="display: none;"
-															class="style-li error-red">Please Select Unit Type.</li>
-														<span id="name_status" class="clear-label"> </span>
-														${created }
-														</li>
-													</ul>
-												</div>
-												<cf:select path="unit" class="form-control"
-													onchange="getModule(this.value ,'module' )">
-													<cf:option value="0" label="Select Unit" />
-													<cf:options items="${unitList}" itemValue="unitId"
-														itemLabel="unitCode" />
-												</cf:select>
-											</div>
-										</div> --%>
-										<!-- rigth side ends -->
-
+								
 										<!-- button -->
 										<div class="row">
 											<div class="col-md-6 col-xs-12"></div>
@@ -152,26 +110,6 @@
 										</div>
 										<div class="modal-body">
 
-
-											<div class="form-group">
-												<label for="exampleInputEmail1">Unit :</label>
-											</div>
-											<cf:select path="unit" class="form-control"
-												onchange="getModule(this.value ,'module' )">
-												<cf:option value="" label="Select Unit" />
-												<cf:options items="${unitList}" itemValue="unitId"
-													itemLabel="unitCode" />
-											</cf:select>
-											<div class="form-group">
-												<label for="exampleInputEmail1">Module :</label>
-											</div>
-											<cf:select path="module" class="form-control"
-												onchange="getBatch(this.value , 'batchCode')">
-												<cf:option value="" label="Select module" />
-												<cf:options items="${moduleList}" itemValue="moduleId"
-													itemLabel="moduleCode" />
-											</cf:select>
-
 											<div class="form-group" id="batchCodeDIV"
 												style="display: none">
 												<div>
@@ -183,7 +121,7 @@
 												</div>
 												<cf:select path="batchCode" class="form-control">
 													<cf:option value="0" label="Select Batch Code" />
-													<cf:options items="${batchCodeList}" />
+													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingScheduleId" />
 												</cf:select>
 											</div>
 										</div>
@@ -235,7 +173,7 @@
                                                 <ct:set var="count" value="${count + 1}" scope="page"/> --%>
 												<ct:forEach items="${listEligibleuser}" var="EligibleUser"
 													varStatus="loop">
-													<ct:out value="${loop.index}"></ct:out>
+													
 													<td>${loop.index}</td>
 													<td>${EligibleUser.userType}</td>
 													<td id="userName_${loop.index}">${EligibleUser.firstName}
@@ -286,28 +224,22 @@
 					if (this.checked) {
 						// console.log($("#userId_"+i).val());
 						if (loginIds == "") {
-							loginIds = $("#userId_" + i).val() + "@"
-									+ $("#userName_" + i).text();
+							loginIds = $("#userId_" + i).val() + "@"+ $("#userName_" + i).text();
 						} else {
-							loginIds = loginIds + "," + $("#userId_" + i).val()
-									+ "@" + $("#userName_" + i).text();
+							loginIds = loginIds + "," + $("#userId_" + i).val()+ "@" + $("#userName_" + i).text();
 						}
 
 					}
 				});
 
 		console.log(loginIds);
-		var unit = $("#unit").val();
-		var module = $("#module").val();
-		var moduleCode = $("#module :selected").text();
+	
 		var batchCode = $("#batchCode").val();
 		var name = JSON.stringify({
-			courseType : 0,
-			courseName : 0
+			courseType : 0
 		});
-		var result = loginIds + "-" + unit + "-" + module + "-" + moduleCode
-				+ "-" + batchCode;
-		alert(result);
+		var result = loginIds + "-" +batchCode;
+				
 		$.ajax({
 			type : 'post',
 			url : 'enrollUser.fssai?data=' + result,
@@ -323,7 +255,7 @@
 </script>
 <script>
 	function validateFields() {
-		//	 alert($("#holidayDate").val());
+/* 		//	 alert($("#holidayDate").val());
 		//	 alert($("#trainingType").val());
 		if ($("#unit").val() == '') {
 			$("#uniteErr").css("display", "block");
@@ -332,6 +264,6 @@
 
 			$("#moduleErr").css("display", "block");
 			return false;
-		}
+		} */
 	}
 </script>

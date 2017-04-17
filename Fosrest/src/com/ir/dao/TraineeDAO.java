@@ -85,10 +85,10 @@ public interface TraineeDAO {
 	public String getDefaultMailID(int loginId,int profileId);
 	public int getTableIdForEnrolmentID(int loginId,int profileId);
 	public PersonalInformationTrainee fullDetail(int loginId);
-	public Boolean updateSteps(int tableID, int profileID, int steps);
+	public Boolean updateSteps(int tableID,  int steps);
 	public String isCourseOnline(int userID);
-	public Boolean closeCourse(int tableID, int profileID, String status);
-	public CertificateInfo getCertificateID(int userID, int profileID, String certificateID);
+	public Boolean closeCourse(int tableID,  String status);
+	public CertificateInfo getCertificateID(int userID,  String certificateID);
 	public String isAadharExist(CheckAadhar checkAadhar);
 	public List<State> stateList();
 	
@@ -112,7 +112,7 @@ public interface TraineeDAO {
 	public List<MyTrainingForm> listMyTraining();
 	
 	public List<GetScoreCardForm> listGetScoreCard();
-	public List<CertificateForm> listCertificate();
+	public List<CertificateForm> listCertificate(int loginId);
 	
 	
 	public String updatePersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p);

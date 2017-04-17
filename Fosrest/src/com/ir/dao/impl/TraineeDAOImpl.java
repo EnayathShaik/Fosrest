@@ -29,6 +29,7 @@ import com.ir.form.MyTrainingForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InstituteMyCalendarForm;
 import com.ir.form.MarkAttendanceForm;
+import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.TrainingRequestForm;
 import com.ir.form.TrainingClosureForm;
@@ -48,6 +49,7 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
+import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
@@ -856,12 +858,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	@Override
-	public Boolean updateSteps(int tableID, int profileID, int steps) {
+	public Boolean updateSteps(int id , int steps) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
-				.load(PersonalInformationTrainee.class, tableID);
-		new ZLogger("getTableIdForEnrolmentID","tableID :"+tableID + " profileID "+profileID , "TraineeDAOImpl.java");
+				.load(PersonalInformationTrainee.class, id);
+		new ZLogger("updateSteps","tableID :"+id  , "TraineeDAOImpl.java");
 		personalInformationTrainee.setSteps(steps);
 		session.update(personalInformationTrainee);
 		return true;
@@ -885,21 +887,21 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	@Override
-	public Boolean closeCourse(int userId, int profileID, String status) {
+	public Boolean closeCourse(int userId,  String status) {
 		// TODO Auto-generated method stub
-		int courseenrolleduserid = 0;
+		int id = 0;
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select courseenrolleduserid from courseenrolleduser where status = 'N' AND logindetails  = "
+		String sql = "select id from nomineetrainee where status = 'N' AND logindetails  = "
 				+ userId;
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		if(list.size() > 0){
-			courseenrolleduserid = (Integer) (list.get(0) == null ? 0 : list.get(0));
-			if(courseenrolleduserid > 0){
-				CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session
-						.load(CourseEnrolledUser.class, courseenrolleduserid);
-				courseEnrolledUser.setStatus(status);
-				session.update(courseEnrolledUser);
+			id = (Integer) (list.get(0) == null ? 0 : list.get(0));
+			if(id > 0){
+				NomineeTrainee nomineeTrainee = (NomineeTrainee) session
+						.load(NomineeTrainee.class, id);
+				nomineeTrainee.setStatus(status);
+				session.update(nomineeTrainee);
 			}
 		}
 		
@@ -953,7 +955,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 	
 	@Override
-	public CertificateInfo getCertificateID(int userID, int profileID,
+	public CertificateInfo getCertificateID(int userID, 
 			String certificateID) {
 		// TODO Auto-generated method stub
 		CertificateInfo certificateInfo = new CertificateInfo();
@@ -967,7 +969,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				whereCondition = whereCondition + " AND A.certificateid = '"
 						+ certificateID + "'";
 			} else {
-				String sqlSeq = "select coalesce(max(certificateseqno) + 1,1) from courseenrolleduser";
+				String sqlSeq = "select coalesce(max(certificateseqno) + 1,1) from nomineetrainee";
 				Query maxIDListSeq = session.createSQLQuery(sqlSeq);
 				List list = maxIDListSeq.list();
 				new ZLogger("getCertificateID","list.size() "+ list.size(), "TraineeDAOImpl.java");
@@ -975,39 +977,36 @@ public class TraineeDAOImpl implements TraineeDAO {
 					maxIdSeq = (int) list.get(0);
 					// eligible = (String) list.get(0);
 				}
-				whereCondition = "AND A.status='N' AND A.logindetails = "
+				whereCondition = "AND A.status='N' AND D.id = "
 						+ userID;
 			}
 
 			// max SeqNo
-			String sql = "Select C.coursecode,B.trainingdate,"
-					+ "A.courseenrolleduserid ,D.firstname || ' '|| D.middlename ||' '|| D.lastname,A.issueDate,A.certificateid "
-					+
-					// " ,concat(E.trainingpartnerpermanentline1 , ' ' , E.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , ds.districtname , ' ' , ci.cityname) as address"
-					// +
-					" ,concat(E.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address ,  mtp.trainingpartnername  "
-					+ " from courseenrolleduser A "
-					+ " inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) "
-					+"	inner join managetrainingpartner mtp on (B.trainingpartner = mtp.managetrainingpartnerid) "
-					+ " inner join coursename C on(B.coursename=C.coursenameid) "
+			String sql = "Select C.modulecode,B.trainingstartdate,"
+					+ " A.id  as nomineeId , cast(D.firstname || ' '|| D.middlename ||' '|| D.lastname as varchar (50)) ,A.issueDate,A.certificateid "
+					+" , concat(E.trainingcentername , ' ' , s.statename, ' ' , ds.districtname) as address ,  tp.trainingpartnername    "
+					+ " from nomineetrainee A "
+					+ " inner join trainingschedule B on(A.trainingscheduleid=B.trainingscheduleid) "
+					+"	inner join trainingpartner tp on (B.trainingpartner = tp.trainingpartnerid) "
+					+ " inner join modulemaster C on(B.moduleid=C.moduleid) "
 					+ " inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "
-					+ " inner join personalinformationtrainingpartner E on(B.trainingcenter=E.personalinformationtrainingpartnerid) "
-					+ " inner join state as s on s.stateid = E.trainingpartnerpermanentstate "
-					+ " inner join city as ci on ci.cityid = E.trainingpartnerpermanentcity "
-					+ " inner join district as ds on ds.districtid = E.trainingpartnerpermanentdistrict "
+					+ " inner join personalinformationtraininginstitute E on(B.traininginstitude=E.id) "
+					+ " inner join statemaster as s on s.stateid = cast( E.correspondencestate as int) "
+					+ " inner join districtmaster as ds on ds.districtid = cast( E.correspondencedistrict as int)  "
 					+ " " + whereCondition;
-			int courseEnrolledUserID = 0;
-			String courseCode = "";
+			int nomineeTraineeUserID = 0;
+			String moduleCode = "";
+			
 			Query query = session.createSQLQuery(sql);
 			List<Object[]> records = (List<Object[]>) query.list();
 			System.out.println("Record Size == " + records.size());
 			try {
 				if (records.size() > 0) {
 					Object[] obj = records.get(0);
-					courseCode = obj[0] == null ? "" : obj[0].toString();
+					moduleCode = obj[0] == null ? "" : obj[0].toString();
 					certificateInfo.setTrainingDate(obj[1] == null ? ""
 							: obj[1].toString());
-					courseEnrolledUserID = (int) obj[2];
+					nomineeTraineeUserID = (int) obj[2];
 					certificateInfo.setName(obj[3] == null ? "" : obj[3]
 							.toString());
 					certificateInfo.setIssueDate(obj[4] == null ? "" : obj[4]
@@ -1018,6 +1017,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 							: obj[6].toString());
 					certificateInfo.setTrainingPartnerName(obj[7] == null ? ""
 							: obj[6].toString());
+					
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -1027,23 +1027,24 @@ public class TraineeDAOImpl implements TraineeDAO {
 					|| certificateInfo.getCertificateID().trim().length() <= 5
 					|| certificateInfo.getCertificateID().toUpperCase()
 							.equals("NULL")) {
-				if (courseCode != null && courseCode.length() > 0) {
-					certificateID = courseCode
+				if (moduleCode != null && moduleCode.length() > 0) {
+					certificateID = moduleCode
 							+ StringUtils.leftPad(String.valueOf(maxIdSeq), 6,
 									"0") + "17";
 				}
+				System.out.println(" nomineeTraineeUserID "+nomineeTraineeUserID);
 				certificateInfo.setCertificateID(certificateID);
-				if (courseEnrolledUserID > 0) {
-					CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session
-							.load(CourseEnrolledUser.class,
-									courseEnrolledUserID);
-					courseEnrolledUser.setCertificateID(certificateID);
-					courseEnrolledUser.setCertificateSeqNo(maxIdSeq);
+				if (nomineeTraineeUserID > 0) {
+					NomineeTrainee nomineeTrainee = (NomineeTrainee) session
+							.load(NomineeTrainee.class,
+									nomineeTraineeUserID);
+					nomineeTrainee.setCertificateID(certificateID);
+					nomineeTrainee.setCertificateSeqNo(maxIdSeq);
 					DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 					Date dateobj = new Date();
-					courseEnrolledUser.setIssueDate(df.format(dateobj));
+					nomineeTrainee.setIssueDate(df.format(dateobj));
 					certificateInfo.setIssueDate(df.format(dateobj));
-					session.update(courseEnrolledUser);
+					session.update(nomineeTrainee);
 				}
 			}
 
@@ -1153,10 +1154,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public  List getAttendanceDeatilsByID(String data){
 		System.out.println("data "+data);
 		Session session = sessionFactory.getCurrentSession();
-		String sql ="select  loginid as traineeName , batchcode, trainingdate  trainingStartDate , trainingtime trainingEndDate ,D.coursecode, D.coursename , att.attendancedate  from courseenrolleduser ceu inner join trainingcalendar tc on (ceu.trainingcalendarid = tc.trainingcalendarid) "+
-		"inner join logindetails login on  (ceu.logindetails =  login.id)"+
-		"inner join coursename D on(tc.coursename=D.coursenameid)"+
-		"inner join traineedailyattendance att on (att.rollnumber = ceu.rollno)"+
+		String sql ="select  loginid as traineeName , batchcode, trainingstartdate  trainingStartDate , trainingenddate trainingEndDate , D.modulecode , att.attendancedate  from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) "+
+		"inner join logindetails login on  (nt.logindetails =  login.id)"+
+		"inner join modulemaster D on(ts.moduleid=D.moduleid)"+
+		"inner join traineedailyattendance att on (att.rollnumber = nt.rollno)"+
 		"where rollno ='"+data+"'";
 		Query query = session.createSQLQuery(sql);
 		List courseTypeList = query.list();
@@ -1438,20 +1439,22 @@ System.out.println("list "+list);
 		}
 		
 		//@Override
-				public List<CertificateForm> listCertificate() {
+				public List<CertificateForm> listCertificate(int loginId) {
 					// TODO Auto-generated method stub
 					System.out.println("inside listCertificateForm");
-					CertificateForm bean = new CertificateForm();
+					
 					List<CertificateForm> list = new ArrayList<CertificateForm>();
 					Session session = this.sessionFactory.getCurrentSession();
-					List<Object[]> lst = session.createSQLQuery("select  cast('1' as int) as id,cast('Refresher' as varchar(20)) as trainingType , cast('Completed' as varchar(20)) as completionStatus ,cast('yes' as varchar(20) ) as certificateAvailable").list();
+					StringBuffer sqlQuery  = new StringBuffer();
+					 sqlQuery.append("select ts.trainingtype, case when coalesce(certificateid , '') = '' then cast('Pending' as varchar(20)) else cast('Completed' as varchar(20)) end as status,  case when certificatestatus = 'Y' then cast('YES' as varchar(3)) else cast('NO' as varchar(2)) end as cerificateAvailable  , pit.id from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid)  ");
+					 sqlQuery.append("left join personalinformationtrainee pit on (nt.logindetails = pit.logindetails) where nt.logindetails =  '"+loginId+"'");
+					List<Object[]> lst = session.createSQLQuery(sqlQuery.toString()).list();
 					for (Object[] li : lst ) {
-						
-						bean.setId((int) li[0]);
-						bean.setTrainingType((String) li[1]);
-						bean.setCompletionStatus((String) li[2]);
-						bean.setCertificateAvailable((String) li[3]);
-						
+						CertificateForm bean = new CertificateForm();
+						bean.setTrainingType((String) li[0]);
+						bean.setCompletionStatus((String) li[1]);
+						bean.setCertificateAvailable((String) li[2]);
+						bean.setId((int) li[3]);	
 				
 						list.add(bean);
 					}

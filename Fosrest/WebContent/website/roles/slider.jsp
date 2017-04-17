@@ -83,7 +83,8 @@
 		<!-- <li class="sidebar-brand">
                         </li> -->
 		<li><a href="TrainingRequest.fssai">Training Request</a></li>
-		<li><a href="MarkAttendance.fssai">Mark Attendence</a></li>
+		<!-- <li><a href="MarkAttendance.fssai">Mark Attendence</a></li> -->
+		<li> <a href="traineeAttendance.fssai">Mark Attendance</a> </li>
 		<!-- <li> <a href="trainingpartnermarkAttendence.fssai">Mark Attendance</a> </li>
           <li> <a href="postVacancyTrainingPartner.fssai">Post Vacancy for Trainer</a> </li>
           <li> <a href="trainingpartnerapplicationstatus.fssai">Application Status</a> </li>

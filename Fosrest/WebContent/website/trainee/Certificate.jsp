@@ -150,15 +150,16 @@
                                                     </tr>
                                                 </thead>
                                                 
-                                                <ct:forEach items="${listCertificate}" var="Certificate">
+                                                <ct:forEach items="${listCertificate}" var="Certificate" varStatus="loop">
                                                 <tr>
-												     
-												<td>${Certificate.id}</td>
+												<td>${loop.count}</td>
 												<td>${Certificate.trainingType}</td>
 												<td>${Certificate.completionStatus}</td>
 												<td>${Certificate.certificateAvailable}</td>
 												<td>${Certificate.generateCertificate}
-                                                 <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Generate Certificate"/> 												</tr>
+												<a href="GetCertificate.fssai?userId=${Certificate.id}">GET CERTIFICATE</a>
+                                                <!--  <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Get Certificate"/> --> 												
+                                                 </tr>
 												</ct:forEach>
                                             </table>
                                            </ct:if> 

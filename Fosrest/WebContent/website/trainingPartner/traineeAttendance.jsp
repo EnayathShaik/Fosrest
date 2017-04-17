@@ -68,11 +68,11 @@ function getCourseEnrolledDetails(rollNo){
     					batchCode = obj[1];
     					trainingStartDate = obj[2];
     					trainingEndDate = obj[3];
-    					courseCode = obj[4];
-    					courseName = obj[5];
-    					$('#newTable1').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[6]+'</td></tr>');	
+    					modulecode = obj[4];
+    					
+    					$('#newTable1').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[5]+'</td></tr>');	
     				});
-    				$('#newTable').append('<tr id="tableRow"><td>'+traineeId+'</td><td>'+batchCode+'</td><td>'+trainingStartDate+'</td><td>'+trainingEndDate+'</td><td>'+courseCode+'</td><td>'+courseName+'</td></tr>');
+    				$('#newTable').append('<tr id="tableRow"><td>'+traineeId+'</td><td>'+batchCode+'</td><td>'+modulecode+'</td><td>'+trainingStartDate+'</td><td>'+trainingEndDate+'</td></tr>');
     				
     				
     		      }
@@ -183,8 +183,7 @@ function getCourseEnrolledDetails(rollNo){
                           <tr class="background-open-vacancies">
                             <th>Trainee ID</th>
                             <th>Batch Code</th>
-                            <th>Course Code</th>
-                            <th>Course Name</th>
+                            <th>Module Code</th>
                             <th>Training Start Date</th>
                             <th>Training End Date</th>
                           

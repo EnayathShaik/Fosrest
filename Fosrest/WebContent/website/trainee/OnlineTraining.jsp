@@ -2,10 +2,27 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
  
-<!--
+<script type="text/javascript">
 
-//-->
+ function OnStart(){
+	var steps = 1;
+	var traineeSteps =
+		<%=(Integer) session.getAttribute("traineeSteps")%>
+	alert(" steps "+steps + " traineeSteps "+traineeSteps);
+	if(steps >= traineeSteps){
+	}else{
+		if(steps-1 == traineeSteps){
+			alert('Please Complete Your Previous Training First')
+		}else{
+			alert('Please Flow Step By Step..');
+		}
+		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+	}
+}
+window.onload = OnStart; 
+
 </script>
+
 
  <%-- <ct:url var="addAction" value="/TrainingSchedule/add.fssai" ></ct:url> --%>
 <cf:form action="ListOnlineTraining.fssai" name="myForm" method="POST" commandName="OnlineTrainingForm" onsubmit="return validateFields();"> 

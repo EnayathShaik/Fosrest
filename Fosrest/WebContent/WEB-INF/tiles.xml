@@ -1216,4 +1216,10 @@
 	</definition>
 
 
+<!-- 	
+<definition name="traineeAttendance" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingCenter/traineeAttendance.jsp" />
+	</definition> -->
+
 </tiles-definitions>

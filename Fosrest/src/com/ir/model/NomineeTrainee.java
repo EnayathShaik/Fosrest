@@ -24,24 +24,43 @@ public class NomineeTrainee {
 	private int id;
 	
 
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
-	private LoginDetails loginDetails;
+	
+	private int loginDetails;
 	
 	private int rollSeqNo;
-	private int unit;
-	private int module;
 	private String rollNo;
 	private String status;
 	private String traineeName;
-	private String batchCode;
+	private int trainingscheduleid;
+	@Column(columnDefinition="varchar(1) default 'N'")
+	private String certificateStatus;
+	private int score;
+	
+	private String certificateID;
+	
+	@Column(columnDefinition="int default 0")
+	private int certificateSeqNo; 
+	private String issueDate;
 	
 	
-	
-	public String getBatchCode() {
-		return batchCode;
+
+	public String getCertificateID() {
+		return certificateID;
 	}
-	public void setBatchCode(String batchCode) {
-		this.batchCode = batchCode;
+	public void setCertificateID(String certificateID) {
+		this.certificateID = certificateID;
+	}
+	public int getCertificateSeqNo() {
+		return certificateSeqNo;
+	}
+	public void setCertificateSeqNo(int certificateSeqNo) {
+		this.certificateSeqNo = certificateSeqNo;
+	}
+	public String getIssueDate() {
+		return issueDate;
+	}
+	public void setIssueDate(String issueDate) {
+		this.issueDate = issueDate;
 	}
 	public int getId() {
 		return id;
@@ -49,10 +68,17 @@ public class NomineeTrainee {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public LoginDetails getLoginDetails() {
+
+	public String getCertificateStatus() {
+		return certificateStatus;
+	}
+	public void setCertificateStatus(String certificateStatus) {
+		this.certificateStatus = certificateStatus;
+	}
+	public int getLoginDetails() {
 		return loginDetails;
 	}
-	public void setLoginDetails(LoginDetails loginDetails) {
+	public void setLoginDetails(int loginDetails) {
 		this.loginDetails = loginDetails;
 	}
 	public int getRollSeqNo() {
@@ -61,18 +87,7 @@ public class NomineeTrainee {
 	public void setRollSeqNo(int rollSeqNo) {
 		this.rollSeqNo = rollSeqNo;
 	}
-	public int getUnit() {
-		return unit;
-	}
-	public void setUnit(int unit) {
-		this.unit = unit;
-	}
-	public int getModule() {
-		return module;
-	}
-	public void setModule(int module) {
-		this.module = module;
-	}
+
 	public String getRollNo() {
 		return rollNo;
 	}
@@ -90,6 +105,18 @@ public class NomineeTrainee {
 	}
 	public void setTraineeName(String traineeName) {
 		this.traineeName = traineeName;
+	}
+	public int getTrainingscheduleid() {
+		return trainingscheduleid;
+	}
+	public void setTrainingscheduleid(int trainingscheduleid) {
+		this.trainingscheduleid = trainingscheduleid;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
 	}
 	
 	

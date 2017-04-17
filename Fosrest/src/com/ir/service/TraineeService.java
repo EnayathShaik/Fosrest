@@ -114,16 +114,16 @@ public interface TraineeService {
 	public PersonalInformationTrainee FullDetail(int loginId);
 	
 	
-	public Boolean updateSteps(int tableID, int profileID, int steps);
+	public Boolean updateSteps(int tableID,  int steps);
 	
 	
-	public Boolean closeCourse(int userId, int profileID, String status);
+	public Boolean closeCourse(int userId, String status);
 	
 	
 	public String isCourseOnline(int userID);
 	
 	
-	public CertificateInfo getCertificateID(int userID, int profileID, String certificateID);
+	public CertificateInfo getCertificateID(int userID,  String certificateID);
 
 
 	public String isAadharExist(CheckAadhar checkAadhar);
@@ -158,7 +158,7 @@ public interface TraineeService {
 
 	public List<GetScoreCardForm> listGetScoreCard();
 
-	public List<CertificateForm> listCertificate();
+	public List<CertificateForm> listCertificate(int loginId);
 
 	
 	

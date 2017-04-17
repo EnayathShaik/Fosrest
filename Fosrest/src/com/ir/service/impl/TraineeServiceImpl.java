@@ -217,9 +217,9 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 	@Override
 	@Transactional
-	public Boolean updateSteps(int tableID, int profileID, int steps) {
+	public Boolean updateSteps(int tableID,  int steps) {
 		// TODO Auto-generated method stub
-		return traineeDAO.updateSteps(tableID, profileID,steps);
+		return traineeDAO.updateSteps(tableID, steps);
 	}
 	@Override
 	@Transactional
@@ -229,15 +229,15 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 	@Override
 	@Transactional
-	public Boolean closeCourse(int userId, int profileID, String status) {
+	public Boolean closeCourse(int userId, String status) {
 		// TODO Auto-generated method stub
-		return traineeDAO.closeCourse(userId, profileID, status);
+		return traineeDAO.closeCourse(userId, status);
 	}
 	@Override
 	@Transactional
-	public CertificateInfo getCertificateID(int userId, int profileID, String certificateID) {
+	public CertificateInfo getCertificateID(int userId,  String certificateID) {
 		// TODO Auto-generated method stub
-		return traineeDAO.getCertificateID(userId, profileID, certificateID);
+		return traineeDAO.getCertificateID(userId,  certificateID);
 	}
 	
 	@Override
@@ -349,9 +349,9 @@ public class TraineeServiceImpl implements TraineeService {
 	
 	@Override
 	@Transactional
-	public List<CertificateForm> listCertificate() {
+	public List<CertificateForm> listCertificate(int loginId) {
 		// TODO Auto-generated method stub
-		return this.traineeDAO.listCertificate();
+		return this.traineeDAO.listCertificate(loginId);
 	}
 	
 

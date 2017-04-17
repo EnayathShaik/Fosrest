@@ -20,11 +20,18 @@ public class GenerateCertificateForm {
 	private String attendanceStatus;
 	private String certificateStatus;
 	private String generateCertificate;
+	private int batchCode;
 	
 	private int id;
 	
 	
 	
+	public int getBatchCode() {
+		return batchCode;
+	}
+	public void setBatchCode(int batchCode) {
+		this.batchCode = batchCode;
+	}
 	public int getId() {
 		return id;
 	}

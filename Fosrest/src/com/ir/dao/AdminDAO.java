@@ -284,7 +284,7 @@ public interface AdminDAO {
 				
 				public List<TrainingPartner> listTrainingPartner();
 				
-				 public List<GenerateCertificateForm> listGenerateCertificate();
+				 public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm);
 
 				public List<TrainingClosureForm> listTrainingClosure();
 		
@@ -335,9 +335,8 @@ public interface AdminDAO {
 					 public List<PersonalInformationTrainee> listEligibleuser(String userType);
 					 
 					 public String enrollUser(String data);
-					/* public String addNomineeTrainee(NomineeTrainee data , String moduleCode);
-					 public LoginDetails getLoginDetailsById(int id);
-*/
+					
+					
 					public String assessmentQuestionSave(
 							AssessmentQuestionForm assesQuestionForm);
 
@@ -348,4 +347,5 @@ public interface AdminDAO {
 
 					public AssessmentQuestions getAssessmentQuestionById(int id);
 					
+					 public String updateCertificate(String data);
 }

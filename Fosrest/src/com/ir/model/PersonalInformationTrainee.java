@@ -38,7 +38,7 @@ public class PersonalInformationTrainee {
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
 	
-	
+
 	public LoginDetails getLoginDetails() {
 		return loginDetails;
 	}

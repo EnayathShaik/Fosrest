@@ -192,13 +192,13 @@ public class PageLoadServiceImpl implements PageLoadService {
 		List<City> cityList = pageLoadDao.loadCity(distId);
 		return cityList;
 	}
-
+/*
 	@Override
 	public List<AssessmentQuestions> loadModuleName(String val) {
 		// TODO Auto-generated method stub
 		
 		return pageLoadDao.loadModuleName(val);
 	}
-
+*/
 
 }

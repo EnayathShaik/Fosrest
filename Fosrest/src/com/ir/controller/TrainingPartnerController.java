@@ -178,7 +178,7 @@ public class TrainingPartnerController {
 			System.out.println("profileID "+profileID);
 			if(profileID== 3){
 			int userId = (Integer) session.getAttribute("userId");
-			CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID,certificateID);
+			CertificateInfo certificateInfo = traineeService.getCertificateID(userId, certificateID);
 			model.addAttribute("certificateID", certificateInfo.getCertificateID());
 			model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 			model.addAttribute("traineeCertificateName", certificateInfo.getName());
@@ -199,8 +199,8 @@ public class TrainingPartnerController {
 				int loginId =generateCourseCertificateForm.getLoginId();
 				int traineeId = generateCourseCertificateForm.getTraineeId();
 				System.out.println(" traineeId "+traineeId);
-				traineeService.updateSteps(traineeId, profileID, 0);
-				CertificateInfo certificateInfo = traineeService.getCertificateID(loginId, profileID,"");
+			//	traineeService.updateSteps(traineeId, profileID, 0);
+				CertificateInfo certificateInfo = traineeService.getCertificateID(loginId, "");
 				model.addAttribute("certificateID", certificateInfo.getCertificateID());
 				model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 				model.addAttribute("traineeCertificateName", certificateInfo.getName());

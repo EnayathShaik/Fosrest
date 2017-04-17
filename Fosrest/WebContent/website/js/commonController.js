@@ -228,6 +228,7 @@ function getTrainingInstitude(val , idName) {
 
 
 function getModule(val , idName) {
+	
 	$('#'+idName+' option').remove();
  	var name=JSON.stringify({
 		courseType:0,

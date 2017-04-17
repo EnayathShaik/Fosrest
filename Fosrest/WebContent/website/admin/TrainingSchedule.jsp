@@ -64,7 +64,7 @@
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">*</label></li>
                                                         </ul>
                                                     </div>
-                                                 <cf:select path="unitId" class="form-control" onchange="getModule(this.value , 'Module')">
+                                                 <cf:select path="unitId" class="form-control" onchange="getModule(this.value , 'moduleId')">
 													<cf:option value="0" label="Select Unit name" />
 													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />	
 												</cf:select>

@@ -2462,23 +2462,26 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 		@Override
-		public List<GenerateCertificateForm> listGenerateCertificate() {
+		public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) {
 			// TODO Auto-generated method stub
-			System.out.println("inside listGenerateCertificateForm");
-			GenerateCertificateForm bean = new GenerateCertificateForm();
+			System.out.println("inside listGenerateCertificateForm "+generateCertificateForm.getBatchCode());
+			
 			List<GenerateCertificateForm> list = new ArrayList<GenerateCertificateForm>();
 			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> lst = session.createSQLQuery("select cast('1' as int) as id,cast('Refresher' as varchar(20)) as trainingType ,cast('26-03-2017' as varchar(40)) as trainingDate, cast('Adlab' as varchar(20)) as trainingPartner , cast('Adlab' as varchar(20) ) as trainingInstitute,cast('Mr.Anuj' as varchar(40)) as traineeName,cast('pending' as varchar(40)) as attendanceStatus,cast('pending' as varchar(40)) as certificateStatus").list();
+			StringBuffer str = new StringBuffer();
+			str.append("select ts.trainingtype , trainingstartdate  , tp.trainingpartnername , piti.trainingcentername , nt.traineename , case when certificatestatus = 'N' then cast('Pending' as varchar(10)) else cast('Completed' as varchar(10)) end as certificatestatus, nt.id  from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) ");
+			str.append("left join TrainingPartner tp on (tp.trainingpartnerid = ts.trainingpartner) left join personalinformationtraininginstitute piti  on (piti.id = ts.traininginstitude) where ts.trainingscheduleid = '"+generateCertificateForm.getBatchCode()+"'");
+			System.out.println(" str " + str);
+			List<Object[]> lst = session.createSQLQuery(str.toString()).list();
 			for (Object[] li : lst ) {
-				
-				bean.setId((int) li[0]);
-				bean.setTrainingType((String) li[1]);
-				bean.setTrainingDate((String) (li[2]));
-				bean.setTrainingPartner((String) li[3]);
-				bean.setTrainingInstitute((String) li[4]);
-				bean.setTraineeName((String) li[5]);
-				bean.setAttendanceStatus((String) li[6]);
-				bean.setCertificateStatus((String) li[7]);
+				GenerateCertificateForm bean = new GenerateCertificateForm();	
+				bean.setId((int) li[6]);
+				bean.setTrainingType((String) li[0]);
+				bean.setTrainingDate((String) (li[1]));
+				bean.setTrainingPartner((String) li[2]);
+				bean.setTrainingInstitute((String) li[3]);
+				bean.setTraineeName((String) li[4]);
+				bean.setCertificateStatus((String) li[5]);
 				
 				
 				list.add(bean);
@@ -2771,19 +2774,16 @@ System.out.println("list "+list);
 		public String enrollUser(String data) {
 			// TODO Auto-generated method stub
 			System.out.println("inside listEligibleuser "+data);
-
+			Session session = this.sessionFactory.getCurrentSession();
 			String[] arrData =  data.split("-");
 			List<String> loginDetails	 = new ArrayList<String>();
 			String[] loginIdName = arrData[0].split(",");
-			String unit = arrData[1];
-			String module = arrData[2];
-			String moduleCode = arrData[3];
-			String batchCode=arrData[4];
-			System.out.println(moduleCode);
-			System.out.println(batchCode);
-			System.out.println(unit);
-			System.out.println(" unit "+unit + "module  "+module + " moduleCode "+moduleCode+ "batchCode"+batchCode+" loginDetails "+loginIdName);
-			//unit 500module  510 moduleCode SPIO04batchCodeSelect Batch Code loginDetails [Ljava.lang.String;@7e2cc9c0
+			int trainingScheduleId=Integer.parseInt(arrData[1]);
+			TrainingSchedule ts = (TrainingSchedule)session.load(TrainingSchedule.class, trainingScheduleId);
+			int unitCode = ts.getUnitId();
+			int moduleId = ts.getModuleId();
+			ModuleMaster mm=getModuleMasterById(moduleId);
+			String moduleCode = mm.getModuleCode();
 			if(arrData[0].contains(",")){	
 				for(int i = 0 ; i <loginIdName.length ; i++ ){
 					System.out.println(" loginIdName[i] "+loginIdName[i]);
@@ -2797,68 +2797,41 @@ System.out.println("list "+list);
 				System.out.println("id "+s.split("@")[0]);
 				
 				
-				String result = addNomineeTrainee(module , unit ,moduleCode,batchCode,Integer.parseInt(s.split("@")[0]) , s.split("@")[1]);
+				String result = addNomineeTrainee(moduleCode,trainingScheduleId,Integer.parseInt(s.split("@")[0]) , s.split("@")[1]);
 
 			}
-System.out.println("6:1 st return created");
+			  System.out.println("6:1 st return created");
 			return "created";
 		}
+	
 
-		public LoginDetails getLoginDetailsById(int id ) {
-			// TODO Auto-generated method stub
-			System.out.println(" id " +id);
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-		/*	Session session = this.sessionFactory.getCurrentSession();*/
-			
-		Query query = session.createQuery("from LoginDetails where id="+id);
-		System.out.println("1:login details By id function");
-		//List<LoginDetails> loginList = query.list();
-		List<LoginDetails> loginList=query.list();
-		
-		LoginDetails hm = loginList.get(0);
-		//int a=loginList.get(0);
-			return hm; 
-			
-			
-		}
-		
-		
-		
-		
 		//addNomineeTrainee
 	//	@Override
-		public String addNomineeTrainee(String module , String unit , String moduleCode,String batchCode,int loginId , String traineeName) {
-			// TODO Auto-generated method stub
-		//	System.out.println(" ld "+ld.getId());
-			//System.out.println("3:sssss:"+nt);
-		
+		public String addNomineeTrainee( String moduleCode,int trainingScheduleId,int loginId , String traineeName) {
+	
+		System.out.println("moduleCode "+moduleCode  + " trainingScheduleId "+trainingScheduleId + " loginId "+loginId + " traineeName "+traineeName);
 			String sql = "select coalesce(max(rollseqNo) + 1,1) from nomineetrainee";
 			int maxId = 0 ;
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
-			 LoginDetails ld =  this.getLoginDetailsById(loginId  );
-			 System.out.println("ld "+ld);
+		
 			Query maxIDList = session.createSQLQuery(sql);
 			List list = maxIDList.list();
 			System.out.println(list.size());
-		
-		
-		
 			new ZLogger("manageCourse", "list.size() "+list.size(), "AdminDAOImpl.java");
 			if(list.size() > 0){
 				maxId = (int) list.get(0);
 				System.out.println(" maxId "+maxId);
 			}
 			NomineeTrainee nt = new NomineeTrainee();
-			nt.setModule(Integer.parseInt(module));	
-			nt.setUnit(Integer.parseInt(unit));
+		
 			nt.setStatus("N");
 			nt.setRollNo(moduleCode+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 			nt.setRollSeqNo(maxId);
-			nt.setLoginDetails(ld);
+			nt.setLoginDetails(loginId);
 			nt.setTraineeName(traineeName);
-			nt.setBatchCode(batchCode);
+			nt.setTrainingscheduleid(trainingScheduleId);
+			nt.setCertificateStatus("N");
 			System.out.println("5:after set");
 			int id =  (int) session.save(nt);
 			tx.commit();
@@ -2885,12 +2858,7 @@ System.out.println("6:1 st return created");
 		String uC = assessmentQuestionForm.getunitCode();
 		String mN = assessmentQuestionForm.getModuleCode();
 		//System.out.println("............................");
-		System.out.println("uC " + uC);
-		System.out.println("mN " + mN);
-		System.out.println("......CA "+assessmentQuestionForm.getCorrectAnswer());
-		System.out.println(assessmentQuestionForm.getOptionOne());
-		System.out.println(assessmentQuestionForm.getOptionFive());
-		System.out.println(assessmentQuestionForm.getModuleCode());
+
 		
 
 		//System.out.println("............................");
@@ -2929,31 +2897,8 @@ System.out.println("6:1 st return created");
 				+ "' and questiontitle='"
 				+ assessmentQuestion.getQuestionTitle() + "'";
 		String sql = "select modulecode from assessmentquestions " + where;
-		System.out.println("1**");
 		Query query = session.createSQLQuery(sql);
-		System.out.println("2**");
 		List l = query.list();
-		System.out.println("3**");
-		System.out.println(l.size());
-		System.out.println("id()=" + assessmentQuestionForm.getId());
-		/*
-		 * if(l != null && l.size() > 0 && assessmentQuestionForm.getId() <= 0){
-		 * //session.close(); System.out.println("already1"); return "already";
-		 * }else{ if(assessmentQuestionForm.getId() > 0){
-		 * //assessmentQuestion.setAssessmentQuestionId
-		 * (assessmentQuestionForm.getId()); session.update(assessmentQuestion);
-		 * assessmentQuestionIdd = assessmentQuestionForm.getId(); }else{
-		 * assessmentQuestionIdd = (Integer)session.save(assessmentQuestion); }
-		 * 
-		 * //assessmentQuestionIdd = (Integer)session.save(assessmentQuestion);
-		 * if(assessmentQuestionIdd != 0 ){ System.out.println("created");
-		 * return "created";
-		 * 
-		 * }else{ return "already"; }
-		 * 
-		 * }
-		 */
-
 		assessmentQuestionIdd = (Integer) session.save(assessmentQuestion);
 		if (assessmentQuestionIdd != 0) {
 			return "created";
@@ -3045,4 +2990,18 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 
 		
 	}
+	
+	
+	@Override
+	public String updateCertificate(String data) {
+		// TODO Auto-generated method stub
+		System.out.println("inside updateCertificate "+data);
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql="update nomineetrainee set certificatestatus = 'Y' where  id in ("+data+")";
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+				
+		return "created";
+	}
+
 }
