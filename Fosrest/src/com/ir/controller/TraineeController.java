@@ -781,15 +781,14 @@ public class TraineeController {
 
         @RequestMapping(value = "/OnlineTraining", method = RequestMethod.GET)
 		public String OnlineTraining(@ModelAttribute("OnlineTrainingForm") OnlineTrainingForm OnlineTrainingForm ,Model model,HttpSession session){
-        	System.out.println( " id " + session.getAttribute("userId") );
+        	int userId = (int) session.getAttribute("userId");
+        	int personalTraineeId = (int)session.getAttribute("personalTraineeId");
+        	traineeService.updateSteps(personalTraineeId,2);
         	
-   			int userId = (int) session.getAttribute("userId");
-   			System.out.println(" list online training "+this.traineeService.listOnlineTraining(userId));
-   			//System.out.println(" list TopicModule "+this.traineeService.listTrainingTopic(userId));
-   			  //this.traineeService.listOnlineTraining(userId)
         	model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic());
         	model.addAttribute("listTopicModule", this.traineeService.listTopicModule());
         	model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
+        	
 				System.out.println("listOnlineTraining");
 			
 				return "OnlineTraining";
@@ -799,11 +798,12 @@ public class TraineeController {
       //for online Assessment
 
         @RequestMapping(value = "/OnlineAssessment", method = RequestMethod.GET)
-		public String OnlineTraining(@ModelAttribute("OnlineAssessmentForm") OnlineAssessmentForm OnlineAssessmentForm ,Model model){
+		public String OnlineTraining(@ModelAttribute("OnlineAssessmentForm") OnlineAssessmentForm OnlineAssessmentForm ,Model model, HttpSession session){
 			
-				System.out.println("listOnlineAssessment");
-				
-				return "OnlineAssessment";
+        	int personalTraineeId = (int)session.getAttribute("personalTraineeId");
+         	traineeService.updateSteps(personalTraineeId,3);	
+			
+         	return "OnlineAssessment";
 		
 		}
         

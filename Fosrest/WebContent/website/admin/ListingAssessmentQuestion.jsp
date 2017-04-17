@@ -82,7 +82,7 @@
 											 --%>	 
 											 
             									<ct:forEach  begin="0" end="${ti.noOfOption-1}" var="mybean" varStatus="rowCount">
-            								<ct:out value="${rowCount.index}" />
+            								<ct:out value="${rowCount.index+1}) " />
               										 <ct:if test="${rowCount.index==0}" >
               										  <cf:radiobutton path="correctAnswer" name="optradio" /> ${ti.optionOne} <br/> 
               										  </ct:if>

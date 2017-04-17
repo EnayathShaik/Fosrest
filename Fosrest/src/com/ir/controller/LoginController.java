@@ -172,6 +172,8 @@ public class LoginController {
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
 			session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
+			session.setAttribute("personalTraineeId", personalInformationTrainee.getId());
+			
 			return "traineeHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 4 && loginDetails.getStatus().equalsIgnoreCase("A")){
 		

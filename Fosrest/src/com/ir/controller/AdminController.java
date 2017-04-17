@@ -94,6 +94,7 @@ import com.ir.service.PageLoadService;
 import com.itextpdf.text.log.SysoCounter;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
+import com.zentect.list.constant.DropDownListConstants;
 import com.zentect.list.constant.ListConstant;
 
 @Controller
@@ -1699,20 +1700,21 @@ public class AdminController {
 
 	}
 
-
-	@RequestMapping(value = "/Assessmentquestion/edit/{id}", method = RequestMethod.POST,consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
-	//@ResponseBody
-	public void Editassessmentquestion(
-			@PathVariable("id") int id,
+	@RequestMapping(value = "/Assessmentquestion/edit/{id}", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+	// @ResponseBody
+	public void Editassessmentquestion(@PathVariable("id") int id,
 			@RequestBody AssessmentQuestionForm assessmentQuestionForm,
 			HttpServletRequest httpServletRequest, HttpServletResponse response)
 			throws IOException {
-		
-		System.out.println("##########################################################################");
-		new ZLogger("AssessmentQuestionForm/edit",
-				"AssessmentQuestionForm/edit............" + id, "AdminController.java");
 
-		AssessmentQuestions hm = this.adminService.getAssessmentQuestionById(id);
+		System.out
+				.println("##########################################################################");
+		new ZLogger("AssessmentQuestionForm/edit",
+				"AssessmentQuestionForm/edit............" + id,
+				"AdminController.java");
+
+		AssessmentQuestions hm = this.adminService
+				.getAssessmentQuestionById(id);
 		// List courseList = adminService.searchFeedbackMaster(data);
 		PrintWriter out = response.getWriter();
 		Gson g = new Gson();
@@ -1723,7 +1725,6 @@ public class AdminController {
 
 	}
 
-	
 	/**
 	 * @author Jyoti Mekal
 	 *
@@ -1817,7 +1818,7 @@ public class AdminController {
 	public String addModuleMaster(
 			@Valid @ModelAttribute("ModuleMasterForm") ModuleMasterForm p,
 			BindingResult result, Model model) {
-		System.out.println("..............."+p.getUnitId());
+		System.out.println("..............." + p.getUnitId());
 		System.out.println("result " + result.hasErrors());
 		if (result.hasErrors()) {
 
@@ -2007,7 +2008,8 @@ public class AdminController {
 	}
 
 	@RequestMapping("/TrainingSchedule/accept/{id}")
-	public String acceptTrainingSchedule(@PathVariable("id") int id , HttpServletRequest request){	
+	public String acceptTrainingSchedule(@PathVariable("id") int id,
+			HttpServletRequest request) {
 		String profileId = request.getParameter("profileId");
 		String loginUser2 = request.getParameter("loginUser2");
 		String userTableId = request.getParameter("userTableId");
@@ -2019,7 +2021,9 @@ public class AdminController {
 			// Integer.parseInt(loginUser2);
 			userTableId = "0";
 		}
-		this.adminService.acceptTrainingSchedule(id,Integer.parseInt(profileId), Integer.parseInt(loginUser2),Integer.parseInt(userTableId));
+		this.adminService.acceptTrainingSchedule(id,
+				Integer.parseInt(profileId), Integer.parseInt(loginUser2),
+				Integer.parseInt(userTableId));
 		return "trainingInstitudeHomepage";
 	}
 
@@ -2463,10 +2467,11 @@ public class AdminController {
 
 		Map<String, String> trainingType = lst.trainingTypeMap;
 
-
 		model.addAttribute("trainingType", trainingType);
-		model.addAttribute("trainingPartner", this.adminService.listTrainingPartner());
-		model.addAttribute("batchCodeList",this.adminService.listTrainingSchedule());
+		model.addAttribute("trainingPartner",
+				this.adminService.listTrainingPartner());
+		model.addAttribute("batchCodeList",
+				this.adminService.listTrainingSchedule());
 		model.addAttribute("GenerateCertificateForm",
 				new GenerateCertificateForm());
 
@@ -2482,14 +2487,15 @@ public class AdminController {
 				+ generateCertificateForm.getTrainingType());
 
 		Map<String, String> trainingType = lst.trainingTypeMap;
-	//	Map<String, String> trainingPartner = lst.trainingParterMap;
+		// Map<String, String> trainingPartner = lst.trainingParterMap;
 
 		model.addAttribute("trainingType", trainingType);
-		model.addAttribute("trainingPartner", this.adminService.listTrainingPartner());
+		model.addAttribute("trainingPartner",
+				this.adminService.listTrainingPartner());
 		model.addAttribute("GenerateCertificateForm",
 				new GenerateCertificateForm());
-		model.addAttribute("listGenerateCertificate",
-				this.adminService.listGenerateCertificate(generateCertificateForm));
+		model.addAttribute("listGenerateCertificate", this.adminService
+				.listGenerateCertificate(generateCertificateForm));
 
 		return "GenerateCertificate";
 	}
@@ -2775,50 +2781,57 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/NominateTrainee", method = RequestMethod.GET)
-	public String nominateTrainee(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm ,Model model) {
-			System.out.println("admin controller NominateTrainee");
-				
-			Map<String , String> userTypeMap = lst.userTypeMap;
+	public String nominateTrainee(
+			@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm,
+			Model model) {
+		System.out.println("admin controller NominateTrainee");
 
-			model.addAttribute("userTypeMap",userTypeMap);
-			model.addAttribute("NominateTraineeForm", new NominateTraineeForm());
-			
-		
+		Map<String, String> userTypeMap = lst.userTypeMap;
+
+		model.addAttribute("userTypeMap", userTypeMap);
+		model.addAttribute("NominateTraineeForm", new NominateTraineeForm());
+
 		return "NominateTrainee";
 	}
 
-	//ListEligibleUser
+	// ListEligibleUser
 
 	@RequestMapping(value = "/ListEligibleUser", method = RequestMethod.POST)
-	public String ListEligibleUser(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm ,Model model) {
-			Map<String , String> userTypeMap = lst.userTypeMap;
-			model.addAttribute("userTypeMap",userTypeMap);
-			model.addAttribute("batchCodeList",this.adminService.listTrainingSchedule());
-			System.out.println("admin controller ListEligibleUser" + nominateTraineeForm.getUserType());
-			model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getUserType()));
-		
+	public String ListEligibleUser(
+			@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm,
+			Model model) {
+		Map<String, String> userTypeMap = lst.userTypeMap;
+		model.addAttribute("userTypeMap", userTypeMap);
+		model.addAttribute("batchCodeList",
+				this.adminService.listTrainingSchedule());
+		System.out.println("admin controller ListEligibleUser"
+				+ nominateTraineeForm.getUserType());
+		model.addAttribute("listEligibleuser", this.adminService
+				.listEligibleuser(nominateTraineeForm.getUserType()));
+
 		return "NominateTrainee";
 	}
 
-
-	@RequestMapping(value="/enrollUser" , method=RequestMethod.POST)
+	@RequestMapping(value = "/enrollUser", method = RequestMethod.POST)
 	@ResponseBody
-	public void enrollUser(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		new ZLogger("getModule","getModule............" + data  , "CommonController.java");
-		String courseName =  data;
+	public void enrollUser(
+			@RequestParam("data") String data,
+			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse response, HttpSession session)
+			throws IOException {
+		new ZLogger("getModule", "getModule............" + data,
+				"CommonController.java");
+		String courseName = data;
 		String data1 = adminService.enrollUser(courseName);
 		PrintWriter out = response.getWriter();
-		Gson g =new Gson();
-		String newList = g.toJson(data1); 
-		System.out.println("newList "+newList);
+		Gson g = new Gson();
+		String newList = g.toJson(data1);
+		System.out.println("newList " + newList);
 		out.write(newList);
 		out.flush();
-		
-	}
 
-	
-	
-	
+	}
 
 	// for Assessment Questions
 
@@ -2878,70 +2891,70 @@ public class AdminController {
 
 		return "assessmentquestions";
 	}
-//also for try2 assessment question 
+
+	// also for try2 assessment question
 	@RequestMapping("/removeassessmentquestion/remove/{id}")
 	public String removeAssessmentQuestion(@PathVariable("id") int id) {
 
 		this.adminService.removeAssessmentQuestion(id);
 		return "redirect:/assessmentquestions.fssai";
 	}
-	
+
 	// try 2 Assessment questions
 	@RequestMapping(value = "/assessmentquestions2", method = RequestMethod.GET)
 	public String assessquestion2(
 			@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
 			Model model) {
 		System.out.println("assessment questins");
-		
+
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("listModuleMaster",
 				this.adminService.listModuleMaster());
-		
 
 		return "assessmentquestions";
 	}
 
-	
-	
-	
 	@RequestMapping(value = "/assessmentquestions2", method = RequestMethod.POST)
 	public String aassessquestion2(
 			@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
 			Model model) {
-		
-		//displayAll
-		System.out.println(".................................................assesememt  post");
-		//System.out.println(assesQuestionForm.getunitCode());
+
+		// displayAll
+		System.out
+				.println(".................................................assesememt  post");
+		// System.out.println(assesQuestionForm.getunitCode());
 
 		model.addAttribute("listAssessmentQuestion",
 				this.adminService.listAssessmentQuestion(assesQuestionForm));
 
-	
-		//inserting
-		if(!(assesQuestionForm.getCorrectAnswer()==0)){
-		System.out.println("Add  assesememt  post");
-		//System.out.println(assesQuestionForm.getunitCode());
-	
-		this.adminService.assessmentQuestionSave(assesQuestionForm);
-		
+		// inserting
+		if (!(assesQuestionForm.getCorrectAnswer() == 0)) {
+			System.out.println("Add  assesememt  post");
+			// System.out.println(assesQuestionForm.getunitCode());
+
+			this.adminService.assessmentQuestionSave(assesQuestionForm);
+
 		}
 		return "assessmentquestions";
 	}
-	
-	
-	@RequestMapping(value="/updateCertificate" , method=RequestMethod.POST)
+
+	@RequestMapping(value = "/updateCertificate", method = RequestMethod.POST)
 	@ResponseBody
-	public void updateCertificate(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		new ZLogger("updateCertificate","updateCertificate............" + data  , "CommonController.java");
+	public void updateCertificate(
+			@RequestParam("data") String data,
+			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
+			HttpServletRequest httpServletRequest, HttpServletResponse response)
+			throws IOException {
+		new ZLogger("updateCertificate",
+				"updateCertificate............" + data, "CommonController.java");
 		String data1 = adminService.updateCertificate(data);
 		PrintWriter out = response.getWriter();
-		Gson g =new Gson();
-		String newList = g.toJson(data1); 
-		System.out.println("newList "+newList);
+		Gson g = new Gson();
+		String newList = g.toJson(data1);
+		System.out.println("newList " + newList);
 		out.write(newList);
 		out.flush();
-		
-	}
 
+	}
 
 }

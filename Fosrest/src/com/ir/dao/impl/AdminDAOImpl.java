@@ -87,6 +87,7 @@ import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.LoginService;
 import com.ir.service.PageLoadService;
+import com.ir.service.TraineeService;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.HibernateUtil;
@@ -128,7 +129,9 @@ public class AdminDAOImpl implements AdminDAO {
 	@Autowired
 	@Qualifier("loginService")
 	LoginService loginService; 
-
+	@Autowired
+	@Qualifier("traineeService")
+	private TraineeService traineeService;
 
 	@Override
 	public City getCity(int id){
@@ -2855,7 +2858,11 @@ System.out.println("list "+list);
 			int loginDetailsId = ld.getId();
 			PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetailsId );
 			new Thread(new Mail("Enroll", personalInformationTrainee.getEmail(), "", "",traineeName )).start();
+			
+			int personalTraineeId = (int)personalInformationTrainee.getId();
+        	traineeService.updateSteps(personalTraineeId,1);
 		System.out.println("before return");
+						
 		return "created";
 	}
 
@@ -2884,7 +2891,6 @@ System.out.println("list "+list);
 		// assessmentQuestion.setAssessmentId(assessmentQuestionForm.getAssessmentId());
 		assessmentQuestion.setCorrectAnswer(assessmentQuestionForm
 				.getCorrectAnswer());
-		System.out.println("**");
 		assessmentQuestion
 				.setModuleCode(assessmentQuestionForm.getModuleCode());
 		assessmentQuestion
@@ -2908,7 +2914,7 @@ System.out.println("list "+list);
 		// assessmentQuestion.setAssessmentId(1);
 
 		Integer assessmentQuestionIdd = 0;
-
+/*
 		String where = " where modulecode = '"
 				+ assessmentQuestionForm.getModuleCode() + "' and unitcode= '"
 				+ assessmentQuestionForm.getUnitCode()
@@ -2916,7 +2922,7 @@ System.out.println("list "+list);
 				+ assessmentQuestion.getQuestionTitle() + "'";
 		String sql = "select modulecode from assessmentquestions " + where;
 		Query query = session.createSQLQuery(sql);
-		List l = query.list();
+		List l = query.list();*/
 		assessmentQuestionIdd = (Integer) session.save(assessmentQuestion);
 		if (assessmentQuestionIdd != 0) {
 			return "created";
