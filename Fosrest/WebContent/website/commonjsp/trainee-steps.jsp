@@ -2,7 +2,7 @@
 	var traineeSteps =
 <%=(Integer) session.getAttribute("traineeSteps")%>
 	
-</script>
+</script>>
 
 <div class="container-fluid">
 	<div class="row">
@@ -32,8 +32,7 @@
 						</div>
 					</div></li>
 				<li class="timeline-inverted"><ct:choose>
-						<ct:when
-							test="${traineeSteps < 2}">
+						<ct:when test="${traineeSteps < 2}">
 							<ct:set value="timeline-badge primary" var="cssClass"></ct:set>
 							<div class="${cssClass}">2</div>
 						</ct:when>
@@ -49,20 +48,22 @@
 						<div class="timeline-body">
 							<p>
 								<ct:choose>
-									<ct:when
-										test="${traineeSteps < 2}">
+									<ct:when test="${traineeSteps < 2}">
 										<a href="OnlineTraining.fssai">Get Online Training Content</a>
 									</ct:when>
 									<ct:otherwise>
-Get Online Training Content
-</ct:otherwise>
+                  Get Online Training Content
+                      </ct:otherwise>
 								</ct:choose>
 							</p>
 						</div>
 					</div></li>
+
+
+
+
 				<li><ct:choose>
-						<ct:when
-							test="${traineeSteps < 3}">
+						<ct:when test="${traineeSteps < 3}">
 							<ct:set value="timeline-badge primary" var="cssClass"></ct:set>
 							<div class="${cssClass}">3</div>
 						</ct:when>
@@ -70,28 +71,59 @@ Get Online Training Content
 							<ct:set value="timeline-badge success" var="cssClass"></ct:set>
 							<div class="${cssClass}">3</div>
 						</ct:otherwise>
-					</ct:choose> <!-- <div class="timeline-badge success">3</div> -->
+					</ct:choose> <!-- <div class="timeline-badge success">5</div> -->
 					<div class="timeline-panel">
 						<div class="timeline-heading">
 							<h4 class="timeline-title">Step-3</h4>
 						</div>
 						<div class="timeline-body">
-							<p>Online Assessment</p>
 							<p>
 								<ct:choose>
-									<ct:when
-										test="${traineeSteps < 3}">
-										<a href="courseTraining.fssai?courseTypeId=1">Online</a> | <a
-											href="courseTraining.fssai?courseTypeId=2">Classroom</a>
+									<ct:when test="${traineeSteps < 3}">
+										<a href="OnlineAssessment.fssai"> Online Assessment</a>
 									</ct:when>
 									<ct:otherwise>
-Online | Classroom
+Online Assessment
 </ct:otherwise>
 								</ct:choose>
-
 							</p>
 						</div>
 					</div></li>
+
+
+
+				<li class="timeline-inverted"><ct:choose>
+						<ct:when test="${traineeSteps < 4}">
+							<ct:set value="timeline-badge primary" var="cssClass"></ct:set>
+							<div class="${cssClass}">4</div>
+						</ct:when>
+						<ct:otherwise>
+							<ct:set value="timeline-badge success" var="cssClass"></ct:set>
+							<div class="${cssClass}">4</div>
+						</ct:otherwise>
+					</ct:choose> <!-- <div class="timeline-badge success">2</div> -->
+					<div class="timeline-panel">
+						<div class="timeline-heading">
+							<h4 class="timeline-title">Step-4</h4>
+						</div>
+						<div class="timeline-body">
+							<p>
+								<ct:choose>
+									<ct:when test="${traineeSteps < 4}">
+										<a href="GetScoreCard.fssai">Get Your Score Card</a>
+									</ct:when>
+									<ct:otherwise>
+Get Your Score Card
+</ct:otherwise>
+								</ct:choose>
+							</p>
+						</div>
+					</div></li>
+
+
+
+
+				<%-- 	
 				<li class="timeline-inverted"><ct:choose>
 						<ct:when
 							test="${traineeSteps < 4}">
@@ -108,24 +140,25 @@ Online | Classroom
 							<h4 class="timeline-title">Step-4</h4>
 						</div>
 						<div class="timeline-body">
-							<p>Get Your Self Assessed</p>
+							<p>Get Your Score Card</p>
 							<p>
 								<ct:choose>
 									<ct:when
 										test="${traineeSteps < 4}">
-										<a href="traineeAssessmentOnline.fssai">Online</a> | <a
-											href="#">In Physical Center</a>
+										<a href="GetScoreCard.fssai">Get Your Score Card</a>
+										 <!-- | <a href="#">In Physical Center</a> -->
 									</ct:when>
 									<ct:otherwise>
-Online | In Physical Center
+Get Your Score Card
 </ct:otherwise>
 								</ct:choose>
 							</p>
 						</div>
 					</div></li>
+					 --%>
+
 				<li><ct:choose>
-						<ct:when
-							test="${traineeSteps < 5}">
+						<ct:when test="${traineeSteps < 5}">
 							<ct:set value="timeline-badge primary" var="cssClass"></ct:set>
 							<div class="${cssClass}">5</div>
 						</ct:when>
@@ -141,18 +174,17 @@ Online | In Physical Center
 						<div class="timeline-body">
 							<p>
 								<ct:choose>
-									<ct:when
-										test="${traineeSteps < 5}">
-										<a href="#"> Give Your Feedback</a>
+									<ct:when test="${traineeSteps < 5}">
+										<a href="Certificate.fssai"> Certificate</a>
 									</ct:when>
 									<ct:otherwise>
- Give Your Feedback
+ Certificate
 </ct:otherwise>
 								</ct:choose>
 							</p>
 						</div>
 					</div></li>
-				<li class="timeline-inverted"><ct:choose>
+				<%-- <li class="timeline-inverted"><ct:choose>
 						<ct:when
 							test="${traineeSteps < 6}">
 							<ct:set value="timeline-badge primary" var="cssClass"></ct:set>
@@ -180,7 +212,7 @@ Get Your Certificate
 								</ct:choose>
 							</p>
 						</div>
-					</div></li>
+					</div></li> --%>
 			</ul>
 		</div>
 	</div>
