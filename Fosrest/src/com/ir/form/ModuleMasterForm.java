@@ -9,9 +9,6 @@ public class ModuleMasterForm {
 	
 	private int moduleId;
 	
-//	@NotEmpty(message ="EEEEEEEEEEEEEEEEEEErrorrrrrrrrrrrrrrrrrrrr")
-	
-	@NotEmpty(message = " should not be blank.")
 	private String moduleName;
 	private String status;
 	private int unitId;
@@ -26,6 +23,9 @@ public class ModuleMasterForm {
 	public void setModuleId(int moduleId) {
 		this.moduleId = moduleId;
 	}
+	
+	
+
 	public String getModuleName() {
 		return moduleName;
 	}

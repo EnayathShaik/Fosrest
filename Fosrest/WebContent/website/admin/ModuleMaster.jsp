@@ -4,7 +4,7 @@
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
           
         	<ct:url var="addAction" value="/ModuleMaster/add.fssai" ></ct:url>
-            <cf:form action="${addAction}" name="myForm" method="POST" commandName="ModuleMasterForm" onsubmit="return validateFields();">
+            <cf:form action="${addAction}"  method="POST" commandName="ModuleMasterForm" onsubmit="return validateFields();">
 
                 <section>
                     <%@include file="../roles/top-menu.jsp"%>
@@ -94,7 +94,7 @@
                                                                    <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Module Name:</strong></li>
-                                                        <li class="style-li error-red"><cf:errors path="moduleName" value=""></cf:errors> </li>
+                                                        <li class="style-li error-red"> </li>
                                                         
                                                     </ul>
                                                 </div>
@@ -168,7 +168,7 @@
                                                   <ct:forEach items="${listModuleMaster}" var="ModuleMaster">
                                                 <tr>
 												<td>${ModuleMaster.moduleId}</td>
-												<td>${ModuleMaster.moduleName}</td>
+												 <td>${ModuleMaster.moduleName}</td> 
 												<td><ct:choose><ct:when test="${ ModuleMaster.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
 												<td><button onclick='editModule(${ModuleMaster.moduleId});return false;' >Edit</button></td>
 												<td><a href="<ct:url value='/ModuleMaster/remove/${ModuleMaster.moduleId}.fssai' />" >Delete</a></td>
@@ -238,22 +238,4 @@
 
             </script>
 
-            <!--     <div class="form-group">
-                                                <div>
-                                                    <ul class="lab-no">
-                                                        <li class="style-li"><strong>Module Name:<font color="red"><cf:errors path="moduleName" cssClass="form-control" cssStyle="error" /></font></strong>
-                                                        </li>
-                                                        <li class="style-li error-red"> </li>
-                                                    </ul>
-                                                </div>
-                                                	 <div> <cf:input  type="text" class="form-control" path="moduleName" placeholder="Name"/>
-                            						<%-- 	<cf:errors path="moduleName" cssClass="style-li error-red" element="div"/> --%>
-                            							</div>
-                            							${aa}	
-															<ct:if test="${aa}<0" >                         							
-                            								<div id="moduleName.errors" class="style-li error-red">username is required!</div>
-                            								</ct:if> 
-                                                  <%--   <cf:input type="text" path="moduleName"  placeholder="Module Name" cssClass="form-control"/> --%>
-                                            </div> -->
-            
-            
+          

@@ -55,7 +55,6 @@ public class ModuleMaster {
 	@Column(name= "moduleId")
 	private int moduleId;
 	
-	//@NotEmpty(message ="EEEEEEEEEEEEEEEEEEErrorrrrrrrrrrrrrrrrrrrr")
 	private String moduleName;
 	private String status;
 	private String contentType;

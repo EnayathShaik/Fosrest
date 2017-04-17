@@ -50,6 +50,7 @@ import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.AssessmentQuestion_old;
+
 import com.ir.model.AssessorUserManagement;
 import com.ir.model.City;
 import com.ir.model.CityMaster;
@@ -1903,11 +1904,11 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		@Override
 		public List<ModuleMaster> listModuleMaster() {
-			System.out.println("inside listUnitMaster");
+			System.out.println("inside listModuleMaster");
 			Session session = this.sessionFactory.getCurrentSession();
 			List<ModuleMaster> mccList = session.createQuery("from ModuleMaster").list();
 			for (ModuleMaster p : mccList) {
-				System.out.println("Unit List::" + p);
+				System.out.println("module List::" + p);
 			}
 			return mccList;
 		}
@@ -2468,31 +2469,34 @@ public class AdminDAOImpl implements AdminDAO {
 			return mccList;
 		}
 		
-		/*@Override
-		public List<GenerateCertificateForm> listGenerateCertificate() {
+		@Override
+		public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) {
 			// TODO Auto-generated method stub
-			System.out.println("inside listGenerateCertificateForm");
-			GenerateCertificateForm bean = new GenerateCertificateForm();
+			System.out.println("inside listGenerateCertificateForm "+generateCertificateForm.getBatchCode());
+			
 			List<GenerateCertificateForm> list = new ArrayList<GenerateCertificateForm>();
 			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> lst = session.createSQLQuery("select cast('1' as int) as id,cast('Refresher' as varchar(20)) as trainingType ,cast('26-03-2017' as varchar(40)) as trainingDate, cast('Adlab' as varchar(20)) as trainingPartner , cast('Adlab' as varchar(20) ) as trainingInstitute,cast('Mr.Anuj' as varchar(40)) as traineeName,cast('pending' as varchar(40)) as attendanceStatus,cast('pending' as varchar(40)) as certificateStatus").list();
+			StringBuffer str = new StringBuffer();
+			str.append("select ts.trainingtype , trainingstartdate  , tp.trainingpartnername , piti.trainingcentername , nt.traineename , case when certificatestatus = 'N' then cast('Pending' as varchar(10)) else cast('Completed' as varchar(10)) end as certificatestatus, nt.id  from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) ");
+			str.append("left join TrainingPartner tp on (tp.trainingpartnerid = ts.trainingpartner) left join personalinformationtraininginstitute piti  on (piti.id = ts.traininginstitude) where ts.trainingscheduleid = '"+generateCertificateForm.getBatchCode()+"'");
+			System.out.println(" str " + str);
+			List<Object[]> lst = session.createSQLQuery(str.toString()).list();
 			for (Object[] li : lst ) {
-				
-				bean.setId((int) li[0]);
-				bean.setTrainingType((String) li[1]);
-				bean.setTrainingDate((String) (li[2]));
-				bean.setTrainingPartner((String) li[3]);
-				bean.setTrainingInstitute((String) li[4]);
-				bean.setTraineeName((String) li[5]);
-				bean.setAttendanceStatus((String) li[6]);
-				bean.setCertificateStatus((String) li[7]);
+				GenerateCertificateForm bean = new GenerateCertificateForm();	
+				bean.setId((int) li[6]);
+				bean.setTrainingType((String) li[0]);
+				bean.setTrainingDate((String) (li[1]));
+				bean.setTrainingPartner((String) li[2]);
+				bean.setTrainingInstitute((String) li[3]);
+				bean.setTraineeName((String) li[4]);
+				bean.setCertificateStatus((String) li[5]);
 				
 				
 				list.add(bean);
 			}
 System.out.println("list "+list);
 			return list;
-		}*/
+		}
 		
 		@Override
 		public List<TrainingClosureForm> listTrainingClosure() {
@@ -2808,22 +2812,7 @@ System.out.println("list "+list);
 			return "created";
 		}
 	
-		public LoginDetails getLoginDetailsById(int id ) {
-			// TODO Auto-generated method stub
-			System.out.println(" id " +id);
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-		/*	Session session = this.sessionFactory.getCurrentSession();*/
-			
-		Query query = session.createQuery("from LoginDetails where id="+id);
-		System.out.println("1:login details By id function");
-		//List<LoginDetails> loginList = query.list();
-		List<LoginDetails> loginList=query.list();
-		
-		LoginDetails hm = loginList.get(0);
-		//int a=loginList.get(0);
-			return hm; 
-		}
+
 		//addNomineeTrainee
 	//	@Override
 		public String addNomineeTrainee( String moduleCode,int trainingScheduleId,int loginId , String traineeName) {
@@ -2833,7 +2822,7 @@ System.out.println("list "+list);
 			int maxId = 0 ;
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
-			 LoginDetails ld =  this.getLoginDetailsById(loginId);
+		
 			Query maxIDList = session.createSQLQuery(sql);
 			List list = maxIDList.list();
 			System.out.println(list.size());
@@ -2854,15 +2843,9 @@ System.out.println("list "+list);
 			System.out.println("5:after set");
 			int id =  (int) session.save(nt);
 			tx.commit();
+			System.out.println("id "+id);
 			session.close();
-			int loginDetailsId = ld.getId();
-			PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetailsId );
-			new Thread(new Mail("Enroll", personalInformationTrainee.getEmail(), "", "",traineeName )).start();
-			
-			int personalTraineeId = (int)personalInformationTrainee.getId();
-        	traineeService.updateSteps(personalTraineeId,1);
-		System.out.println("before return");
-						
+			System.out.println("before return");
 		return "created";
 	}
 
@@ -2880,7 +2863,7 @@ System.out.println("list "+list);
 		 * (AssessmentQuestions) session .load(AssessmentQuestions.class,
 		 * assessmentQuestionForm.getId()); }
 		 */
-		String uC = assessmentQuestionForm.getUnitCode();
+		String uC = assessmentQuestionForm.getunitCode();
 		String mN = assessmentQuestionForm.getModuleCode();
 		//System.out.println("............................");
 
@@ -2891,11 +2874,12 @@ System.out.println("list "+list);
 		// assessmentQuestion.setAssessmentId(assessmentQuestionForm.getAssessmentId());
 		assessmentQuestion.setCorrectAnswer(assessmentQuestionForm
 				.getCorrectAnswer());
+		System.out.println("**");
 		assessmentQuestion
 				.setModuleCode(assessmentQuestionForm.getModuleCode());
 		assessmentQuestion
 				.setNoOfOption(assessmentQuestionForm.getNoOfOption());
-		assessmentQuestion.setUnitCode(assessmentQuestionForm.getUnitCode());
+		assessmentQuestion.setUnitCode(assessmentQuestionForm.getunitCode());
 		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
 		assessmentQuestion.setQuestionHint(assessmentQuestionForm
 				.getQuestionHint());
@@ -2914,7 +2898,7 @@ System.out.println("list "+list);
 		// assessmentQuestion.setAssessmentId(1);
 
 		Integer assessmentQuestionIdd = 0;
-/*
+
 		String where = " where modulecode = '"
 				+ assessmentQuestionForm.getModuleCode() + "' and unitcode= '"
 				+ assessmentQuestionForm.getUnitCode()
@@ -2922,7 +2906,7 @@ System.out.println("list "+list);
 				+ assessmentQuestion.getQuestionTitle() + "'";
 		String sql = "select modulecode from assessmentquestions " + where;
 		Query query = session.createSQLQuery(sql);
-		List l = query.list();*/
+		List l = query.list();
 		assessmentQuestionIdd = (Integer) session.save(assessmentQuestion);
 		if (assessmentQuestionIdd != 0) {
 			return "created";
@@ -2933,125 +2917,99 @@ System.out.println("list "+list);
 		
 	
 		
-			
 
-		}
+	}
 
-		@Override
-			public List<AssessmentQuestionForm> listAssessmentQuestion(
-					AssessmentQuestionForm assesQuestionForm) {
-				// TODO Auto-generated method stub
-				
-				AssessmentQuestionForm bean;
-				List<AssessmentQuestionForm> list = new ArrayList<AssessmentQuestionForm>();
-				Session session = this.sessionFactory.getCurrentSession();
-	System.out.println("........................."+assesQuestionForm.getModuleCode() );
-		List<Object[]> mccList  = session.createSQLQuery("select * from assessmentquestions where modulecode='"+assesQuestionForm.getModuleCode()+"' and unitcode='"+assesQuestionForm.getUnitCode()+"'" ) .list();	
-		System.out.println("aaaaa");
-		for (Object[] li : mccList ) { 
-			 bean= new AssessmentQuestionForm();
-					
-			 //
-			 System.out.println(li[0]);
-			 bean.setId((int) li[0]);
-			 bean.setModuleCode((String) li[2]);
-			 System.out.println(li[12]);
-			 bean.setNoOfOption((int) li[3]);
-			 bean.setUnitCode((String) li[13]);
-			 bean.setQuestionNumber(2);
-			 bean.setQuestionHint((String) li[10]);
-			 bean.setQuestionTitle((String) li[12]);
-			 bean.setCorrectAnswer((int) li[1]);
-				
-			 bean.setOptionOne((String) li[6]);
-			 bean.setOptionTwo((String) li[9]);
-			 bean.setOptionThree((String) li[8]);
-			 bean.setOptionFour((String) li[5]);
-			 bean.setOptionFive((String) li[4]);
-			 bean.setOptionSix((String) li[7]);
-			 //
-					
-					System.out.println(bean);
-					list.add(bean);
-				}
-		System.out.println("list "+list);
-				return list;
-				
-				
-			}
-			
-			
-		
-			
-		/* return "nothing"; */
-
-		@Override
-		public void removeAssessmentQuestion(int id) {
+	@Override
+		public List<AssessmentQuestionForm> listAssessmentQuestion(
+				AssessmentQuestionForm assesQuestionForm) {
 			// TODO Auto-generated method stub
+			
+			AssessmentQuestionForm bean;
+			List<AssessmentQuestionForm> list = new ArrayList<AssessmentQuestionForm>();
 			Session session = this.sessionFactory.getCurrentSession();
-			AssessmentQuestions p = (AssessmentQuestions) session.load(AssessmentQuestions.class,
-					new Integer(id));
-			if (null != p) {
-				session.delete(p);
-			}
-
-			
-		}
-
-		@Override
-		public AssessmentQuestions getAssessmentQuestionById(int id) {
-
-				// TODO Auto-generated method stub
-				System.out.println("getAssessmentquestion---- id " + id);
-				Session session = this.sessionFactory.getCurrentSession();
-
-				Query query = session.createQuery("from assessmenyquestion where id="
-						+ id);
-
-				List<AssessmentQuestions> AssessmentQuestionsList = query.list();
-				AssessmentQuestions aq = AssessmentQuestionsList.get(0);
-				System.out.println(aq);
-				return aq;
-
-			
-		}
-		@Override
-		public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) {
-			// TODO Auto-generated method stub
-			System.out.println("inside listGenerateCertificateForm "+generateCertificateForm.getBatchCode());
-			
-			List<GenerateCertificateForm> list = new ArrayList<GenerateCertificateForm>();
-			Session session = this.sessionFactory.getCurrentSession();
-			StringBuffer str = new StringBuffer();
-			str.append("select ts.trainingtype , trainingstartdate  , tp.trainingpartnername , piti.trainingcentername , nt.traineename , case when certificatestatus = 'N' then cast('Pending' as varchar(10)) else cast('Completed' as varchar(10)) end as certificatestatus, nt.id  from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) ");
-			str.append("left join TrainingPartner tp on (tp.trainingpartnerid = ts.trainingpartner) left join personalinformationtraininginstitute piti  on (piti.id = ts.traininginstitude) where ts.trainingscheduleid = '"+generateCertificateForm.getBatchCode()+"'");
-			System.out.println(" str " + str);
-			List<Object[]> lst = session.createSQLQuery(str.toString()).list();
-			for (Object[] li : lst ) {
-				GenerateCertificateForm bean = new GenerateCertificateForm();	
-				bean.setId((int) li[6]);
-				bean.setTrainingType((String) li[0]);
-				bean.setTrainingDate((String) (li[1]));
-				bean.setTrainingPartner((String) li[2]);
-				bean.setTrainingInstitute((String) li[3]);
-				bean.setTraineeName((String) li[4]);
-				bean.setCertificateStatus((String) li[5]);
+System.out.println("........................."+assesQuestionForm.getModuleCode() );
+	List<Object[]> mccList  = session.createSQLQuery("select * from assessmentquestions where modulecode='"+assesQuestionForm.getModuleCode()+"' and unitcode='"+assesQuestionForm.getUnitCode()+"'" ) .list();	
+	System.out.println("aaaaa");
+	for (Object[] li : mccList ) { 
+		 bean= new AssessmentQuestionForm();
 				
+		 //
+		 System.out.println(li[0]);
+		 bean.setId((int) li[0]);
+		 bean.setModuleCode((String) li[2]);
+		 System.out.println(li[12]);
+		 bean.setNoOfOption((int) li[3]);
+		 bean.setUnitCode((String) li[13]);
+		 bean.setQuestionNumber(2);
+		 bean.setQuestionHint((String) li[10]);
+		 bean.setQuestionTitle((String) li[12]);
+		 bean.setCorrectAnswer((int) li[1]);
+			
+		 bean.setOptionOne((String) li[6]);
+		 bean.setOptionTwo((String) li[9]);
+		 bean.setOptionThree((String) li[8]);
+		 bean.setOptionFour((String) li[5]);
+		 bean.setOptionFive((String) li[4]);
+		 bean.setOptionSix((String) li[7]);
+		 //
 				
+				System.out.println(bean);
 				list.add(bean);
 			}
-System.out.println("list "+list);
+	System.out.println("list "+list);
 			return list;
-		}
-		@Override
-		public String updateCertificate(String data) {
-			// TODO Auto-generated method stub
-			System.out.println("inside updateCertificate "+data);
-			Session session = this.sessionFactory.getCurrentSession();
-			String sql="update nomineetrainee set certificatestatus = 'Y' where  id in ("+data+")";
-			Query query = session.createSQLQuery(sql);
-			query.executeUpdate();
-			return "created";
+			
+			
 		}
 		
+		
+	
+		
+	/* return "nothing"; */
+
+	@Override
+	public void removeAssessmentQuestion(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		AssessmentQuestions p = (AssessmentQuestions) session.load(AssessmentQuestions.class,
+				new Integer(id));
+		if (null != p) {
+			session.delete(p);
+		}
+
+		
 	}
+
+	@Override
+	public AssessmentQuestions getAssessmentQuestionById(int id) {
+
+			// TODO Auto-generated method stub
+			System.out.println("getAssessmentquestion---- id " + id);
+			Session session = this.sessionFactory.getCurrentSession();
+
+			Query query = session.createQuery("from assessmenyquestion where id="
+					+ id);
+
+			List<AssessmentQuestions> AssessmentQuestionsList = query.list();
+			AssessmentQuestions aq = AssessmentQuestionsList.get(0);
+			System.out.println(aq);
+			return aq;
+
+		
+	}
+	
+	
+	@Override
+	public String updateCertificate(String data) {
+		// TODO Auto-generated method stub
+		System.out.println("inside updateCertificate "+data);
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql="update nomineetrainee set certificatestatus = 'Y' where  id in ("+data+")";
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+				
+		return "created";
+	}
+
+}

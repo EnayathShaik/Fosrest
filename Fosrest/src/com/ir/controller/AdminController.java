@@ -1725,6 +1725,7 @@ public class AdminController {
 
 	}
 
+	
 	/**
 	 * @author Jyoti Mekal
 	 *
@@ -1796,7 +1797,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/ModuleMaster", method = RequestMethod.GET)
 	public String listModuleMaster(
-			@ModelAttribute("ModuleMasterForm") ModuleMaster ModuleMaster,
+			@ModelAttribute("ModuleMasterForm") ModuleMasterForm moduleMasterForm,
 			Model model) {
 		System.out.println("listModuleMaster");
 		Map<String, String> userType = lst.userTypeMap;
@@ -1807,10 +1808,13 @@ public class AdminController {
 		model.addAttribute("trainingType", trainingType);
 		model.addAttribute("trainingPhase", trainingPhase);
 		model.addAttribute("contentType", contentType);
-		model.addAttribute("ModuleMasterForm", new ModuleMasterForm());
+		
+		
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("listModuleMaster",
 				this.adminService.listModuleMaster());
+		
+		model.addAttribute("ModuleMasterForm", moduleMasterForm);
 		return "ModuleMaster";
 	}
 
@@ -1818,7 +1822,7 @@ public class AdminController {
 	public String addModuleMaster(
 			@Valid @ModelAttribute("ModuleMasterForm") ModuleMasterForm p,
 			BindingResult result, Model model) {
-		System.out.println("..............." + p.getUnitId());
+		System.out.println("..............."+p.getUnitId());
 		System.out.println("result " + result.hasErrors());
 		if (result.hasErrors()) {
 
@@ -2812,26 +2816,25 @@ public class AdminController {
 		return "NominateTrainee";
 	}
 
-	@RequestMapping(value = "/enrollUser", method = RequestMethod.POST)
+
+	@RequestMapping(value="/enrollUser" , method=RequestMethod.POST)
 	@ResponseBody
-	public void enrollUser(
-			@RequestParam("data") String data,
-			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse response, HttpSession session)
-			throws IOException {
-		new ZLogger("getModule", "getModule............" + data,
-				"CommonController.java");
-		String courseName = data;
+	public void enrollUser(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getModule","getModule............" + data  , "CommonController.java");
+		String courseName =  data;
 		String data1 = adminService.enrollUser(courseName);
 		PrintWriter out = response.getWriter();
-		Gson g = new Gson();
-		String newList = g.toJson(data1);
-		System.out.println("newList " + newList);
+		Gson g =new Gson();
+		String newList = g.toJson(data1); 
+		System.out.println("newList "+newList);
 		out.write(newList);
 		out.flush();
-
+		
 	}
+
+	
+	
+	
 
 	// for Assessment Questions
 
@@ -2891,70 +2894,70 @@ public class AdminController {
 
 		return "assessmentquestions";
 	}
-
-	// also for try2 assessment question
+//also for try2 assessment question 
 	@RequestMapping("/removeassessmentquestion/remove/{id}")
 	public String removeAssessmentQuestion(@PathVariable("id") int id) {
 
 		this.adminService.removeAssessmentQuestion(id);
 		return "redirect:/assessmentquestions.fssai";
 	}
-
+	
 	// try 2 Assessment questions
 	@RequestMapping(value = "/assessmentquestions2", method = RequestMethod.GET)
 	public String assessquestion2(
 			@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
 			Model model) {
 		System.out.println("assessment questins");
-
+		
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("listModuleMaster",
 				this.adminService.listModuleMaster());
+		
 
 		return "assessmentquestions";
 	}
 
+	
+	
+	
 	@RequestMapping(value = "/assessmentquestions2", method = RequestMethod.POST)
 	public String aassessquestion2(
 			@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
 			Model model) {
-
-		// displayAll
-		System.out
-				.println(".................................................assesememt  post");
-		// System.out.println(assesQuestionForm.getunitCode());
+		
+		//displayAll
+		System.out.println(".................................................assesememt  post");
+		//System.out.println(assesQuestionForm.getunitCode());
 
 		model.addAttribute("listAssessmentQuestion",
 				this.adminService.listAssessmentQuestion(assesQuestionForm));
 
-		// inserting
-		if (!(assesQuestionForm.getCorrectAnswer() == 0)) {
-			System.out.println("Add  assesememt  post");
-			// System.out.println(assesQuestionForm.getunitCode());
-
-			this.adminService.assessmentQuestionSave(assesQuestionForm);
-
+	
+		//inserting
+		if(!(assesQuestionForm.getCorrectAnswer()==0)){
+		System.out.println("Add  assesememt  post");
+		//System.out.println(assesQuestionForm.getunitCode());
+	
+		this.adminService.assessmentQuestionSave(assesQuestionForm);
+		
 		}
 		return "assessmentquestions";
 	}
-
-	@RequestMapping(value = "/updateCertificate", method = RequestMethod.POST)
+	
+	
+	@RequestMapping(value="/updateCertificate" , method=RequestMethod.POST)
 	@ResponseBody
-	public void updateCertificate(
-			@RequestParam("data") String data,
-			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
-			HttpServletRequest httpServletRequest, HttpServletResponse response)
-			throws IOException {
-		new ZLogger("updateCertificate",
-				"updateCertificate............" + data, "CommonController.java");
+	public void updateCertificate(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("updateCertificate","updateCertificate............" + data  , "CommonController.java");
 		String data1 = adminService.updateCertificate(data);
 		PrintWriter out = response.getWriter();
-		Gson g = new Gson();
-		String newList = g.toJson(data1);
-		System.out.println("newList " + newList);
+		Gson g =new Gson();
+		String newList = g.toJson(data1); 
+		System.out.println("newList "+newList);
 		out.write(newList);
 		out.flush();
-
+		
 	}
+
 
 }
