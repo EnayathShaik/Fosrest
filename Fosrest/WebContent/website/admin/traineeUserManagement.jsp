@@ -161,7 +161,7 @@
                                                                             <tr>
                                                                                 <td>
                                                                                     <%-- <label><a href="updateInformation.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label> --%>
-                                                                                    <label><a href="PersonalInformationTrainee.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                                    <label><a href="PersonalInformationTrainee.fssai?userId=${listValue[6]}&logId=${listValue[9]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                                 </td>
                                                                                 <td>
                                                                                     <label>${listValue[2] }</label>
@@ -210,10 +210,10 @@
             <script>
                 /* var id = localStorage.getItem('activeID');
                 document.getElementById(id).className = "active"; */
-                function activateDeActivateUser(loginDetails,status,profileID){
+                function activateDeActivateUser(userId,status,profileID){
                 	if(confirm("Are you Sure ?")){
                 		
-                		$("#logindetails").val(loginDetails);	
+                		$("#logindetails").val(userId);	
                 		$("#status").val((status=="INACTIVE"?"I":"A"));	
                 		$("#traineeUserManagementForm").attr("action" , "activateDeActivateTrainee.fssai");
                     } else{

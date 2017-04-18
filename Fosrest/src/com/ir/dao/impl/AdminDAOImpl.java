@@ -499,7 +499,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.firstname) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
-		String select = "pitp.id,ld.loginid,pitp.firstname,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
+		String select = "pitp.id,ld.loginid,pitp.firstname,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus  , ld.id as loginDetailId";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainee as pitp "+ join + like;
 		System.out.println("sql "+sql);
@@ -1085,6 +1085,8 @@ public class AdminDAOImpl implements AdminDAO {
 			String sql="update "+tableName+" set isActive='"+status+"' where id="+userid;
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
+			
+			
 			
 		}
 		

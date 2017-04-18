@@ -1211,7 +1211,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
-		loginDetails.setStatus("A");
+		loginDetails.setStatus("I");
 		loginDetails.setProfileId(3);
 		p.setLoginDetails(loginDetails);
 		
@@ -1251,6 +1251,14 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainee.setResidentialDistrict(p.getResidentialDistrict());
 		personalInformationTrainee.setResCity(p.getResCity());
 		personalInformationTrainee.setResPincode(p.getResPincode());
+		System.out.println(" status "+p.getStatus());
+		if(p.getStatus() != null){
+			System.out.println(" loginId "+p.getLogId() );
+			int loginId = Integer.parseInt(p.getLogId());
+			String sql = "update logindetails set status ='"+p.getStatus()+"'  where id =("+loginId+")";
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+		}
 		session.update(personalInformationTrainee);
 		return "updated";
 	}	

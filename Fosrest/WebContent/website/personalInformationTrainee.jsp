@@ -28,6 +28,14 @@
  
  function OnStart(){
 	 var isUpdate = '${isUpdate}';
+	 var profileId = '${profileId}';
+	 if(profileId ==2 || profileId == 1 ){
+		 $("#statusDIV").css("display" , "block");
+		 
+		 var loginId = getParameterByName("logId");
+		 $("#logId").val(loginId);
+	 }
+	 
 	 if(isUpdate !=null && isUpdate== "Y"){
 		 
 		 var name = '${PersonalInformationTrainee.firstName}';
@@ -273,6 +281,23 @@
                                     </div>
                                     <cf:input type="text" path="FatherName" class="form-control" placeholder="Father's Name"/>
                                 </div>
+                                
+                                
+                                      <div class="form-group" style="display:none;" id="statusDIV" >
+                                                                <div>
+                                                                    <ul class="lab-no">
+                                                                        <li class="style-li"><strong>Approved Trainee As:</strong></li>
+                                                                        <li class="style-li error-red">
+                                                                            <cf:errors path="status" cssClass="error" />
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <cf:select path="status" class="form-control">
+                                                                    <cf:option value="A" label="Active" />
+                                                                    <cf:option value="I" label="In-Active" />
+                                                                </cf:select>
+
+                                                            </div>
 
 
 
@@ -551,6 +576,7 @@
                         <div class="row">
                             <div class="col-md-4 col-xs-12"></div>
                             <div class="col-md-4 col-xs-12">
+                            <cf:input path="logId" value="0" type="hidden"/>
                                 <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn" value="Register"/>
                                 
                             </div>
@@ -638,14 +664,14 @@
       		 $("#mobileErr").css("display" , "block");
       		return false;
   	 }  
-   	 if($("#sameAddr").is(":checked")== false){
+  /*  	 if($("#sameAddr").is(":checked")== false){
    		 alert("click on check box");
    		 return false;
   	 }
    	 if($("#check").is(":checked")== false){
    		 alert("click on check box");
    		 return false;
-  	 }
+  	 } */
     }
    
    </script>
