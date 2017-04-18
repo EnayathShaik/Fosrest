@@ -785,8 +785,10 @@ public class TraineeController {
         	int personalTraineeId = (int)session.getAttribute("personalTraineeId");
         	traineeService.updateSteps(personalTraineeId,2);
         	
-        	model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic());
-        	model.addAttribute("listTopicModule", this.traineeService.listTopicModule());
+   			
+   			System.out.println(" list online training "+this.traineeService.listOnlineTraining(userId));
+   			
+        	model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic(userId));
         	model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
         	
 				System.out.println("listOnlineTraining");

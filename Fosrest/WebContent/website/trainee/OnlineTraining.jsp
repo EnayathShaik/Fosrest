@@ -1,8 +1,20 @@
-<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+package com.ir.dao;
+import java.util.List;
+
+import com.ir.bean.common.IntStringBean;
+import com.ir.form.AdminUserManagementForm;
+import com.ir.form.AssessmentQuestionForm;
+import com.ir.form.AssessmentQuestionForm_old;
+import com.ir.form.AssessorUserManagementForm;
+import com.ir.form.ChangePasswordForm;
+import com.ir.form.CityForm;
+import com.ir.form.ContactTrainee;
+import com.ir.form.DistrictForm;
+import com.ir.form.GenerateCertificateForm;<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
  
-<script type="text/javascript">
+ <script type="text/javascript">
 
  function OnStart(){
 	var steps = 1;
@@ -21,7 +33,7 @@
 }
 window.onload = OnStart; 
 
-</script>
+</script> 
 
 
  <%-- <ct:url var="addAction" value="/TrainingSchedule/add.fssai" ></ct:url> --%>
@@ -44,7 +56,7 @@ window.onload = OnStart;
                         <!-- vertical button -->
                         <div class="row">
                             <div class="col-lg-12">
-                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Trainee</span> </a>
+                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName}</span> </a>
                             </div>
                         </div>
                         <!-- add the content here for main body -->
@@ -79,75 +91,16 @@ window.onload = OnStart;
                               
                                 
                                 <!-- search Results -->
-                                           <div class="col-xs-12">
+                                          <div class="col-xs-12">
                                     <fieldset>
                                         <legend> Course Curriculum</legend>
-                                      
-                                      <%-- <!--   topic -->
-                                       <h4>  ${listTrainingTopic.trainingTopic}</h4>
-                                        <!--   module  -->
-                                        <h4> ${listOnlineTraining.moduleName}</h4>
-                                          --%>
-                                         
-                                          <ct:forEach items="${listTrainingTopic}" var="topic">
-                                               <ct:out value="${topic}"/><p>
-                                               
                                         
-                                         <ul>
-                                         <ct:forEach var="module" items="${listOnlineTraining.moduleName}">
-                                          <li><a href="?">${module}</a></li> 
-                                       </ct:forEach></ul>
-                                        </ct:forEach> 
-                                              
-                                                
-                                             
-                                       
-                                              
-                                               
-                                       
-                                             
-                                                 
-                                                 
-                                                  <%-- 
-                                                   <ct:forEach items="${listTopicModule}" var="module">
-                                                    <ct:out value="${module}"/><p> 
-                                              </ct:forEach>
-                                                --%>
-                                              
-                                                <%-- <a href="${module}"></a> --%>
-                                               
-                                               
-                                                 <%--  <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>Modules:</strong></li>
-                                                            <li class="style-li error-red">
-                                                            <span id="name_status" class = "clear-label"> </span>
-                                                            ${created }</li>
-                                                        </ul>
-                                                    </div>
-                                                 <cf:select path="TopicModule" class="form-control">
-													<cf:option value="" label="Select Topic Modules" />
-													<cf:options items="${listTopicModule}" />	
-												</cf:select>
-                                                </div>   --%>
-                                      <%--  <ul>
-                                       <ct:forEach var="module" items="${listTopicModule}">
-                                       <li><a href="???">${module}</a></li>
-                                       </ct:forEach>
-                                       </ul> --%>
-                                       
-                                       <!--  <h3><span class="f16">Topic 1:</span></h3>
-                                        
-                                        <h3><span class="f16">Topic 2:</span></h3>
-                                      
-                                        <h3><span class="f16">Topic 3:</span></h3> -->
-                                       </fieldset>
-                                    <br> </div>
-                            </div>
-                                          
-                                          
-                                         
+                                         <h4>${listTrainingTopic.unitName}</h4>
+                                         <ul> <li>${listOnlineTraining.moduleName}
+                                         <ul><li>${listTrainingTopic.contentType}</li></ul>
+                                          <ul> <li>${listTrainingTopic.contentName}</li></ul>
+                                         <ul> <li><a href="">${listTrainingTopic.contentLink}</a></li> 
+                                           </li></ul>
                              <!-- search div ends -->
                         </div><!-- row ends -->
                     </div>

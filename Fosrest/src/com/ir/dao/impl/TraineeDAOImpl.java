@@ -1512,32 +1512,28 @@ System.out.println("list "+list);
 
 	}
 	//Online training-------
-//online training topic unit name list
+
 	@Override
-	public List<UnitMaster> listTrainingTopic() {
+	public UnitMaster listTrainingTopic(int id) {
 		// TODO Auto-generated method stub
 		System.out.println("inside listUnitMaster");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<UnitMaster> list = session.createQuery("from UnitMaster").list();
-		for (UnitMaster u : list ) {
-			System.out.println("UnitMaster List::" + u);
-		}
-		return list ;
+		UnitMaster bean=new UnitMaster();
+		List<Object[]> list = session.createSQLQuery("select um.unitname,mst.contentname,mst.contenttype,mst.contentlink from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) left join modulemaster mst on (ts.moduleid = mst.moduleid)left join unitmaster um on (um.unitid = mst.unitid)where nt.logindetails='"+ id +"'").list();
+		
+		if(list.size() > 0){
+			 Object[] obj=	list.get(0);
+			 bean.setUnitName((String)obj[0]);
+			 bean.setContentName((String)obj[1]);
+			 bean.setContentType((String)obj[2]);
+			 bean.setContentLink((String)obj[3]);
+			
+			}
+		
+		return bean; 
+		
 	}
 	
-	//online training topic module name list
-		@Override
-		public List<ModuleMaster> listTopicModule() {
-			// TODO Auto-generated method stub
-			System.out.println("inside listModuleMaster");
-			Session session = this.sessionFactory.getCurrentSession();
-			List<ModuleMaster> list = session.createQuery("from ModuleMaster").list();
-			for (ModuleMaster m : list ) {
-				System.out.println("ModuleMaster List::" + m);
-			}
-			return list ;
-		}
-
 		//@Override
 		public OnlineTrainingForm listOnlineTraining(int id) {
 			// TODO Auto-generated method stub

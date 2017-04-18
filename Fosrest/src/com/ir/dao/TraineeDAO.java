@@ -125,8 +125,8 @@ public interface TraineeDAO {
 	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId);
 	
 	public OnlineTrainingForm listOnlineTraining(int id);
-	public List<UnitMaster> listTrainingTopic();
-	public List<ModuleMaster> listTopicModule();
+	public UnitMaster listTrainingTopic(int id);
+	
 	
 	public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm, int id);
 	

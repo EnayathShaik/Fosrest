@@ -1844,6 +1844,9 @@ public class AdminController {
 		moduleMaster.setModuleId(p.getModuleId());
 		moduleMaster.setModuleName(p.getModuleName());
 		moduleMaster.setStatus(p.getStatus());
+		moduleMaster.setContentName(p.getContentName());
+		moduleMaster.setContentLink(p.getContentLink());
+		moduleMaster.setContentType(p.getContentType());
 		moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p
 				.getUnitId()));
 

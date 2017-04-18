@@ -390,20 +390,11 @@ public class TraineeServiceImpl implements TraineeService {
 	//trainee topic from online training
 	@Override
 	@Transactional
-	public List<UnitMaster> listTrainingTopic(){
-		return this.traineeDAO.listTrainingTopic();
+	public UnitMaster listTrainingTopic(int id){
+		return this.traineeDAO.listTrainingTopic(id);
 		
 	}
-	
-	//trainee topicmodule from online training
-		@Override
-		@Transactional
-		public List<ModuleMaster> listTopicModule(){
-			return this.traineeDAO.listTopicModule();
-			
-		}
-
-		@Override
+			@Override
 		@Transactional
 		public OnlineTrainingForm listOnlineTraining(int id) {
 			// TODO Auto-generated method stub

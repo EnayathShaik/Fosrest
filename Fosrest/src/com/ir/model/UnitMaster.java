@@ -33,7 +33,49 @@ public class UnitMaster {
 	private String status;
 	@Column(columnDefinition="int default 0")
 	private int seqNo;
+	private String contentType;
+	private String contentName;
+	private String contentLink;
 	
+	
+	
+	
+
+	public String getContentType() {
+		return contentType;
+	}
+
+
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+
+
+	public String getContentName() {
+		return contentName;
+	}
+
+
+
+	public void setContentName(String contentName) {
+		this.contentName = contentName;
+	}
+
+
+
+	public String getContentLink() {
+		return contentLink;
+	}
+
+
+
+	public void setContentLink(String contentLink) {
+		this.contentLink = contentLink;
+	}
+
+
 
 	public UnitMaster() {
 		super();

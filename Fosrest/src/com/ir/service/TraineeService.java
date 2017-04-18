@@ -174,16 +174,16 @@ public interface TraineeService {
 /*	dynamic
  * public List<UnitMaster> dynListTrainingType();
 	public List<UnitMaster> dynListUserType();*/
+	
+	public OnlineTrainingForm listOnlineTraining(int id);
+	public UnitMaster listTrainingTopic(int id);
 
-	public List<UnitMaster> listTrainingTopic();
-
-	public List<ModuleMaster> listTopicModule();
 
  public List<AssessmentQuestionForm> listingAssessmentQuestion(
 			AssessmentQuestionForm assesQuestionForm, int id);
 	
 	
-	public OnlineTrainingForm listOnlineTraining(int id);
+	
 	
 
 
