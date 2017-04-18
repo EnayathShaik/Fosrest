@@ -27,18 +27,22 @@
  
  
  function OnStart(){
+	 
 	 var isUpdate = '${isUpdate}';
 	 var profileId = '${profileId}';
-	 if(profileId ==2 || profileId == 1 ){
+	 if(profileId ==2 || profileId == 1 ){ 
+		
 		 $("#statusDIV").css("display" , "block");
-		 
-		 var loginId = getParameterByName("logId");
-		 $("#logId").val(loginId);
+		
+		/*   var loginId = getParameterByName("logId");
+		 alert("3");
+		 $("#logId").val(loginId);  */
 	 }
-	 
 	 if(isUpdate !=null && isUpdate== "Y"){
-		 
+		 alert("Update Your Details");
 		 var name = '${PersonalInformationTrainee.firstName}';
+		 
+		$("#logId").val('${PersonalInformationTrainee.logId}');
 		$("#correspondenceState").val('${PersonalInformationTrainee.correspondenceState}');
 		$("#correspondenceState").trigger("change");
         window.setTimeout(function() {
@@ -54,8 +58,9 @@
         $("#ResidentialLine1").val('');
         $("#ResidentialLine2").val('');
 		 $("#createUpdateBtn").val("Update");
-		 $("#captcha").css("display" , "none");
-		 
+		
+		 $("#chkunit").css("display" , "none");
+		 $("#check").attr("checked","checked");
 	 }
 
 	
@@ -459,8 +464,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Permanent Address Line 1:</strong></li>
-                                            <li class="style-li error-red"> </li>
-                                        </ul>
+                                            <li id="ResidentialLine1Err" style="display:none;" class="style-li error-red" >Correspondence Address can not be blank.</li>
+                                       </ul>
                                     </div>
                                     <cf:input type="text" path="ResidentialLine1" class="form-control" placeholder="Address" required=""/>
                                 </div>
@@ -469,8 +474,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Permanent Address Line 2:</strong></li>
-                                            <li class="style-li error-red"> </li>
-                                        </ul>
+                                             <li id="ResidentialLine2Err" style="display:none;" class="style-li error-red" >Correspondence Address can not be blank.</li>
+                                       </ul>
                                     </div>
                                     <cf:input type="text" path="ResidentialLine2" class="form-control" placeholder="Address" required=""/>
                                 </div>
@@ -482,8 +487,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>State:</strong></li>
-                                            <li class="style-li error-red"> </li>
-                                        </ul>
+                                            <li id="resStateErr" style="display:none;" class="style-li error-red" >State can not be blank.</li>
+                                       </ul>
                                     </div>
                                    <cf:select path="resState" class="form-control" onchange="getDistrict(this.value , 'residentialDistrict')">
                                         <cf:option value="0" label="Select state Name" />
@@ -502,8 +507,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>District:</strong></li>
-                                            <li class="style-li error-red"> </li>
-                                        </ul>
+                                             <li id="residentialDistrictErr" style="display:none;" class="style-li error-red" >District can not be blank.</li>
+                                       </ul>
                                     </div>
                                    <cf:select path="residentialDistrict" class="form-control" onchange="getCity(this.value , 'resCity')">
                                         
@@ -514,8 +519,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>City:</strong></li>
-                                            <li class="style-li error-red"> </li>
-                                        </ul>
+                                              <li id="resCityErr" style="display:none;" class="style-li error-red" >City can not be blank.</li>
+                                       </ul>
                                     </div>
                                    <cf:select path="resCity" class="form-control">
                                       
@@ -528,8 +533,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Pin Code:</strong></li>
-                                            <li class="style-li error-red"> </li>
-                                        </ul>
+                                                <li id="resPincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
+                                      </ul>
                                     </div>
                                     <cf:input type="text" path="resPincode" class="form-control" placeholder="Pin Code" required=""/>
                                 </div>
@@ -547,6 +552,7 @@
 					class="form-group">
 					<div  style="float: left">
 						<div style="float: left; width: 98%;">
+						             
 							<label id="captchaError"
 								style="float: left; width: 99%; font-family: Calibri; margin-left: 0px;">Please
 								enter captcha in below textbox !!!</label>
@@ -557,13 +563,14 @@
 							<input type="text" id="txtCaptcha"
 								style="background-image: url(1.jpg); text-align: center; border: none; width: 140px; margin-left: 8px; font-weight: bold; font-family: Modern"
 								disabled="disabled" /> <input type="button" id="btnrefresh"
-								value="Refresh" onclick="DrawCaptcha();" /> <input type="text"
-								id="txtInput" placeholder="Captcha" style="width: 140px;"/ >
+								value="Refresh" onclick="DrawCaptcha();" /> 
+								 <div id="txtInputErr" style="display:none;" class="style-li error-red" >Captcha is required.</div>
+                                  <input type="text" id="txtInput" placeholder="Captcha" style="width: 140px;" />
 
 						</div>
 					</div>
-					<div style="float: left; width: 99%;">
-						<input type="checkbox" id="check" style="margin-left: 1%;">
+					<div id="chkunit" style="float: left; width: 99%;">
+						<input type="checkbox" id="check"   style="margin-left: 1%;">
 						<a href="#" target="_blank" class="terms-font-size"> 
 						I have read and understood the Terms & Conditions and the Privacy
 						Policy of FSSAI.
@@ -576,7 +583,7 @@
                         <div class="row">
                             <div class="col-md-4 col-xs-12"></div>
                             <div class="col-md-4 col-xs-12">
-                            <cf:input path="logId" value="0" type="hidden"/>
+                            <cf:input path="logId"  type="hidden"/>
                                 <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn" value="Register"/>
                                 
                             </div>
@@ -608,7 +615,7 @@
   
    	// alert($("#firstName").val());
    	// alert($("#holidayReason").val());
-   	   if($("#userType").val() == ''){
+   	    if($("#userType").val() == ''){
    		 
    		$("#userTypeErr").css("display" , "block");
    		return false;
@@ -663,15 +670,49 @@
     		alert("Please Enter 10 digit mobile number");
       		 $("#mobileErr").css("display" , "block");
       		return false;
-  	 }  
+  	 }
+   	   
+   	
+   	else  if($("#ResidentialLine1").val() == ''){
+  		 $("#ResidentialLine1Err").css("display" , "block");
+   		return false;
+	 }
+   	   
+   	else if($("#ResidentialLine2").val() == ''){
+ 		 $("#ResidentialLine2Err").css("display" , "block");
+  		return false;
+	 }
+	else if($("#resState").val() == 0){
+		 $("#resStateErr").css("display" , "block");
+ 		return false;
+	 }
+	else if($("#residentialDistrict").val() == 0){
+		 $("#residentialDistrictErr").css("display" , "block");
+		return false;
+	 }
+	
+	else if($("#resCity").val() == 0){
+		 $("#resCityErr").css("display" , "block");
+		return false;
+	 }
+	else if($("#resPincode").val().match(/^[0-9]{6}$/) == null){
+		 $("#resPincodeErr").css("display" , "block");
+		return false;
+	}
+		else if($("#txtInput").val() == ''){
+			 $("#txtInputErr").css("display" , "block");
+			return false;
+		
+	 }
   /*  	 if($("#sameAddr").is(":checked")== false){
    		 alert("click on check box");
    		 return false;
   	 }
+  */
    	 if($("#check").is(":checked")== false){
    		 alert("click on check box");
    		 return false;
-  	 } */
+  	 } 
     }
    
    </script>
