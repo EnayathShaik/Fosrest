@@ -104,6 +104,10 @@
 
 	}
 	window.onload = OnStart;
+  // Remove the spaces from the entered and generated code
+    function removeSpaces(string) {
+        return string.split(' ').join('');
+    }
 </script>
 
 
@@ -469,7 +473,9 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>Permanent Address
 													Line 1:</strong></li>
-											<li class="style-li error-red"></li>
+														<li class="style-li error-red"></li>
+													<li id="ResidentialLine1Err" style="display:none;" class="style-li error-red" >Correspondence Address can not be blank.</li>
+										
 										</ul>
 									</div>
 									<cf:input type="text" path="ResidentialLine1"
@@ -481,7 +487,9 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>Permanent Address
 													Line 2:</strong></li>
-											<li class="style-li error-red"></li>
+													<li class="style-li error-red"></li>
+													 <li id="ResidentialLine2Err" style="display:none;" class="style-li error-red" >Correspondence Address can not be blank.</li>
+											
 										</ul>
 									</div>
 									<cf:input type="text" path="ResidentialLine2"
@@ -496,6 +504,7 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>State:</strong></li>
 											<li class="style-li error-red"></li>
+											<li id="resStateErr" style="display:none;" class="style-li error-red" >State can not be blank.</li>
 										</ul>
 									</div>
 									<cf:select path="resState" class="form-control"
@@ -518,6 +527,7 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>District:</strong></li>
 											<li class="style-li error-red"></li>
+											<li id="residentialDistrictErr" style="display:none;" class="style-li error-red" >District can not be blank.</li>
 										</ul>
 									</div>
 									<cf:select path="residentialDistrict" class="form-control"
@@ -531,6 +541,7 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>City:</strong></li>
 											<li class="style-li error-red"></li>
+											 <li id="resCityErr" style="display:none;" class="style-li error-red" >City can not be blank.</li>
 										</ul>
 									</div>
 									<cf:select path="resCity" class="form-control">
@@ -545,6 +556,7 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>Pin Code:</strong></li>
 											<li class="style-li error-red"></li>
+											 <li id="resPincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
 										</ul>
 									</div>
 									<cf:input type="text" path="resPincode" class="form-control"
@@ -567,6 +579,9 @@
 											<li class="style-li"><strong>Experience
 													Background:</strong></li>
 											<li class="style-li error-red"></li>
+											<!-- 
+											 <li id="ExpBackgroundErr" style="display:none;" class="style-li error-red" > Experience Background can not be blank.</li>
+									 -->
 										</ul>
 									</div>
 									<cf:select path="ExpBackground" class="form-control">
@@ -580,6 +595,10 @@
 											<li class="style-li"><strong>Food Safety
 													Experience:</strong></li>
 											<li class="style-li error-red"></li>
+											<!-- 
+											 <li id="expInYearErr" style="display:none;" class="style-li error-red" >Exp in Year can not be blank.</li>
+										     <li id="expInMonthErr" style="display:none;" class="style-li error-red" >Exp in Month can not be blank.</li>
+										 -->
 										</ul>
 									</div>
 									<div class="row">
@@ -604,6 +623,9 @@
 											<li class="style-li"><strong>No. Of Training
 													Sessions Conducted:</strong></li>
 											<li class="style-li error-red"></li>
+											<!-- 
+											 <li id="sessWishToConductErr" style="display:none;" class="style-li error-red" >City can not be blank.</li>
+									 -->
 										</ul>
 									</div>
 									<cf:input type="text" path="sessWishToConduct"
@@ -615,7 +637,9 @@
 							<div class="col-md-6 col-xs-12">
 								<div class="form-group">
 									<label>How Many Trainings (4Hrs) Sessions Wish To
-										Conduct in a Month ?</label> <input type="text" class="form-control"
+										Conduct in a Month ?</label> 
+										
+										<input type="text" class="form-control"
 										placeholder="Session Number">
 								</div>
 								<div class="form-group">
@@ -631,7 +655,10 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>If Yes Training
 													Institute Name:</strong></li>
-											<li class="style-li error-red"></li>
+												<li class="style-li error-red"></li>
+											<!--  
+											 <li id="AssociatedWithAnyTrainingInstituteErr" style="display:none;" class="style-li error-red" >City can not be blank.</li>
+										 -->
 										</ul>
 									</div>
 
@@ -663,10 +690,10 @@
 										<input type="text" id="txtCaptcha"
 											style="background-image: url(1.jpg); text-align: center; border: none; width: 140px; margin-left: 8px; font-weight: bold; font-family: Modern"
 											disabled="disabled" /> <input type="button" id="btnrefresh"
-											value="Refresh" onclick="DrawCaptcha();" /> <input
-											type="text" id="txtInput" placeholder="Captcha"
-											style="width: 140px;"/ >
-
+											value="Refresh" onclick="DrawCaptcha();" /> 
+											 <div id="txtInputErr" style="display:none;" class="style-li error-red" >Captcha is required.</div>
+											 <input type="text" id="txtInput" placeholder="Captcha" style="width: 140px;" />
+											 
 									</div>
 								</div>
 								<div style="float: left; width: 99%;">
@@ -746,6 +773,7 @@
 						.val(mainData1.correspondencePincode);
 				$("#mobile").val(mainData1.mobile);
 				$("#empID").val(mainData1.empID);
+				
 
 				$("#updatebtn").css("display", "block");
 
@@ -773,14 +801,19 @@
 		$("#EmailErr").css("display" , "none");
 		 $("#correspondenceDistrictErr").css("display" , "none");
 		 $("#correspondenceCityErr").css("display" , "none");
+		 $("#txtInputErr").css("display" , "none");
 		 
+		 /* $("#ExpBackgroundErr").css("display" , "none");
+		 $("#sessWishToConductErr").css("display" , "none");
+		 $("#expInYearErr").css("display" , "none");
+		 $("#AssociatedWithAnyTrainingInstituteErr").css("display" , "none"); */
 		 
-		  if($("#userType").val() == ''){
+		 if($("#userType").val() == ''){
 		 $("#userTypeErr").css("display" , "block");
 		 
 			return false; 
 		}
-		if($("#title").val() == 0){
+	 	if($("#title").val() == 0){
 		 
 		$("#titleErr").css("display" , "block");
 		return false;
@@ -844,9 +877,6 @@
 		$("#correspondenceDistrictErr").css("display" , "block");
 		return false;
 		}
-		
-		
-		
 		 if($("#correspondenceCity").val() == 0){
 		 
 		$("#correspondenceCityErr").css("display" , "block");
@@ -875,6 +905,73 @@
 		$("#mobileErr1").css("display" , "block");
 		return false;
 		}
+		 
+		 
+			
+		   if($("#ResidentialLine1").val() == ''){
+		  		 $("#ResidentialLine1Err").css("display" , "block");
+		   		return false;
+			 }
+		   	   
+		   if($("#ResidentialLine2").val() == ''){
+		 		 $("#ResidentialLine2Err").css("display" , "block");
+		  		return false;
+			 }
+			 if($("#resState").val() == 0){
+				 $("#resStateErr").css("display" , "block");
+		 		return false;
+			 }
+		 if($("#residentialDistrict").val() == 0){
+				 $("#residentialDistrictErr").css("display" , "block");
+				return false;
+			 }
+			
+			if($("#resCity").val() == 0){
+				 $("#resCityErr").css("display" , "block");
+				return false;
+			 }
+			 if($("#resPincode").val().match(/^[0-9]{6}$/) == null){
+				 $("#resPincodeErr").css("display" , "block");
+				return false;
+			} 
+			 if($("#txtInput").val() == ''){
+				 $("#txtInputErr").css("display" , "block");
+					return false;
+				 
+		   } 
+	 /* if($("#ExpBackgroundErr").val() == ''){
+			 alert("errrrrrrrer")
+			 $("#ExpBackgroundErr").css("display" , "block");
+			return false;
+		 }	 
+		 if($("#expInYear").val() == 0){
+			 $("#expInYearErr").css("display" , "block");
+			return false;
+		} 
+		 if($("#expInMonth").val() == 0){
+			 $("#expInMonthErr").css("display" , "block");
+			return false;
+		 } 
+		 if($("#sessWishToConduct").val() ==null){
+			 $("#sessWishToConductErr").css("display" , "block");
+				return false;
+			 
+	   } 
+			 if($("#AssociatedWithAnyTrainingInstitute").val() == 0){
+				 $("#AssociatedWithAnyTrainingInstituteErr").css("display" , "block");
+				return false;
+			 }
+	   
+	   */
+	   
+		var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+	        var str2 = removeSpaces(document.getElementById('txtInput').value);
+	        if (!(str1 == str2)) {
+	        	alert("Please Enter correct captcha");
+	            document.getElementById('txtInput').value = "";
+	            return false;
+	        } 
+		 
 		if($("#check").is(":checked")==false){
 			 alert("check the checkbox to agree to term and conditions");
 			 return false;
