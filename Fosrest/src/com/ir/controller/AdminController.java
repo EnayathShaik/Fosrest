@@ -1987,7 +1987,8 @@ public class AdminController {
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("listModuleMaster",
 				this.adminService.listModuleMaster());
-
+		model.addAttribute("listPersonalInfoTrainer",
+				this.adminService.trainingNameList());
 		return "TrainingSchedule";
 	}
 
@@ -2961,6 +2962,29 @@ public class AdminController {
 		out.flush();
 		
 	}
+		//trainer name
+	@RequestMapping(value = "/loadTrainer", method = RequestMethod.POST)
+	@ResponseBody
+	public void getTrainer(
+			@RequestParam("data") String data,
+			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
+			HttpServletRequest httpServletRequest, HttpServletResponse response)
+			throws IOException {
+		new ZLogger("loadDistrict", "loadDistrict............" + data,
+				"AdminController.java");
+		String instituteId = data;
+		List list = pageLoadService.loadTrainer(instituteId);
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		String newList = g.toJson(list);
+		new ZLogger("loadTrainer", "newList " + newList,
+				"AdminController.java");
+		System.out.println(newList);
+		out.write(newList);
+		out.flush();
 
+	}
 
+	
+	
 }

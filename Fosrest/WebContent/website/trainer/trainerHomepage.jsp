@@ -25,7 +25,7 @@
                                             <div class="col-xs-12">
                                            <fieldset>
                                            <legend>Training Request</legend>
-                                            <ct:if test="${!empty listTrainingSchedule}">
+                                            <ct:if test="${!empty listTrainingSchedule_for_trainer}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
                                                     <tr class="background-open-vacancies">
@@ -43,7 +43,7 @@
                                                     </tr>
                                                 </thead>
                                                 
-                                                <ct:forEach items="${listTrainingSchedule}" var="TrainingSchedule">
+                                                <ct:forEach items="${listTrainingSchedule_for_trainer}" var="TrainingSchedule">
                                                 <tr>
 												<td>${TrainingSchedule.trainingScheduleId}</td>
 												<td>${TrainingSchedule.trainingType}</td>

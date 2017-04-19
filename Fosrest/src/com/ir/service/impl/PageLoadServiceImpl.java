@@ -20,6 +20,7 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.Utility;
@@ -200,5 +201,13 @@ public class PageLoadServiceImpl implements PageLoadService {
 		return pageLoadDao.loadModuleName(val);
 	}
 */
+
+	@Override
+	@Transactional
+	public List loadTrainer(String instituteId) {
+		// TODO Auto-generated method stub
+		List<PersonalInformationTrainer> a = pageLoadDao.loadTrainer(instituteId);
+		return a;
+	}
 
 }

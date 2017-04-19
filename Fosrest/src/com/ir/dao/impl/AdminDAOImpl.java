@@ -3013,5 +3013,17 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 				
 		return "created";
 	}
+	@Override
+	public List<TrainingSchedule> listTrainingSchedule_for_trainer(int id) {
+		// TODO Auto-generated method stub
+		System.out.println("inside listTrainingSchedule with parameter");
+		Session session = this.sessionFactory.getCurrentSession(); //coalesce(isactive,'A') <> 'I' and // isactive='A' and 
+		List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and trainer_id='"+id+"'  ").list();
+		for (TrainingSchedule p : mccList) {
+			System.out.println("listTrainingSchedule List::" + p);
+		}
+		return mccList;
+		
+	}
 
 }

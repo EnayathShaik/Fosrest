@@ -348,4 +348,7 @@ public interface AdminDAO {
 					public AssessmentQuestions getAssessmentQuestionById(int id);
 					
 					 public String updateCertificate(String data);
+
+					public List<TrainingSchedule> listTrainingSchedule_for_trainer(
+							int id);
 }

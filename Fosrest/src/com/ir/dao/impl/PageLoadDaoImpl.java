@@ -25,6 +25,7 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.Utility;
@@ -323,6 +324,18 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			return listCity;
 		}
 
+
+		@Override
+		public List<PersonalInformationTrainer> loadTrainer(String instituteId) {
+			// TODO Auto-generated method stub
+			System.out.println("Page Load DAOImpl process start in Trainer888888888888888888888888888 ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery("select * from personalinformationtrainer where associatedwithanytraininginstitute=  '"+instituteId+"'");
+			List list = query.list();
+			System.out.println("district  ************* list dao     :"+ instituteId);
+			return list;
+		}
+	
 		
 	/*	//not working
 		@Override

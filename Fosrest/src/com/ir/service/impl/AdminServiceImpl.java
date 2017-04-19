@@ -1237,6 +1237,13 @@ public class AdminServiceImpl implements AdminService {
 		public String updateCertificate(String data) {
 			// TODO Auto-generated method stub
 			return this.adminDAO.updateCertificate(data);
+		}
+
+		@Override
+		@Transactional
+		public List<TrainingSchedule> listTrainingSchedule_for_trainer(int id) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listTrainingSchedule_for_trainer(id);
 		}	
 	    
 }
