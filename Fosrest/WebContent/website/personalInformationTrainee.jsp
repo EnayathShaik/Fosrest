@@ -98,13 +98,12 @@
 		 				
 		 			}
 		 		 
-		 		  
-		 		});
-		 		 
-		 	
-		 
+		 		}); 		  
+		 		
+ 
 		 
 	}
+		 		
 	window.onload = OnStart;
  </script>
 
@@ -421,7 +420,7 @@
                                            
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="correspondencePincode" class="form-control" placeholder="Pin Code" required=""/>
+                                    <cf:input type="text" path="correspondencePincode" class="form-control"  minlength="6"  maxlength="6" placeholder="Pin Code" required=""/>
                                 </div>
 
                                 <div class="form-group">
@@ -434,7 +433,7 @@
                                         </ul>
                                     </div>
                                 
-                                     <cf:input type="text" path="mobile" class="form-control" placeholder="Mobile Number" required=""/>
+                                     <cf:input type="text" path="mobile" class="form-control" minlength="10"  maxlength="10" placeholder="Mobile Number" required=""/>
                                     
                                 </div>
 
@@ -584,7 +583,7 @@
                             <div class="col-md-4 col-xs-12"></div>
                             <div class="col-md-4 col-xs-12">
                             <cf:input path="logId"  type="hidden"/>
-                                <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn" value="Register"/>
+                                <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn" value="Register" />
                                 
                             </div>
                             <div class="col-md-4 col-xs-12"></div>
@@ -613,13 +612,37 @@
    function validateFields(){
 	  
   
-   	// alert($("#firstName").val());
+   	 //alert($("#userType").val());
    	// alert($("#holidayReason").val());
+   		 $("#userTypeErr").css("display" , "none");
+			$("#titleErr").css("display" , "none");
+		$("#correspondencePincodeErr").css("display", "none");
+		$("#correspondencePincodeErr1").css("display", "none");
+		$("#mobileErr").css("display" , "none");
+		$("#correspondencePincodeErr").css("display" , "none");
+		$("#AadharNumberErr").css("display" , "none");
+		$("#firstNameErr").css("display" , "none");
+		$("#MiddleNameErr").css("display" , "none");
+		$("#LastNameErr").css("display" , "none");
+		$("#FatherNameErr").css("display" , "none");
+		$("#empIDErr").css("display" , "none");
+		$("#dobErr").css("display" , "none");
+		$("#correspondenceAddress1Err").css("display" , "none");
+		$("#correspondenceStateErr").css("display" , "none");
+		$("#EmailErr").css("display" , "none");
+		 $("#correspondenceDistrictErr").css("display" , "none");
+		 $("#correspondenceCityErr").css("display" , "none");
+		 $("#txtInputErr").css("display" , "none");
+		 $("#ResidentialLine1Err").css("display" , "none");
+		 $("#ResidentialLine2Err").css("display" , "none");
+		 
+		 
+		 
    	    if($("#userType").val() == ''){
    		 
    		$("#userTypeErr").css("display" , "block");
    		return false;
-   	 }else if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
+   	 } else if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
  		alert("Please Enter 12 digit Adhar number");
  		 $("#AadharNumberErr").css("display" , "block");
  	     return false;
@@ -698,22 +721,34 @@
 	else if($("#resPincode").val().match(/^[0-9]{6}$/) == null){
 		 $("#resPincodeErr").css("display" , "block");
 		return false;
-	}
+	} 
 		else if($("#txtInput").val() == ''){
 			 $("#txtInputErr").css("display" , "block");
 			return false;
 		
 	 }
-  /*  	 if($("#sameAddr").is(":checked")== false){
-   		 alert("click on check box");
-   		 return false;
-  	 }
-  */
+   	 var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+     var str2 = removeSpaces(document.getElementById('txtInput').value);
+     if (!(str1 == str2)) {
+    	 alert("Please Enter correct captcha");
+         document.getElementById('txtInput').value = "";
+         return false;
+     }
+
    	 if($("#check").is(":checked")== false){
    		 alert("click on check box");
    		 return false;
   	 } 
     }
+   
+
+ 
+
+   // Remove the spaces from the entered and generated code
+   function removeSpaces(string) {
+       return string.split(' ').join('');
+   }
+
    
    </script>
 	
