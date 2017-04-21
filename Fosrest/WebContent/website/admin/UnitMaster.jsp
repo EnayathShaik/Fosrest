@@ -187,7 +187,6 @@
             </cf:form>
             <script>
             function editUnit(id){
-               // alert(id);
                 
                 var name1=JSON.stringify({
             		courseName:0
@@ -213,8 +212,6 @@
                 }
 
             function validateFields(){
-                //	 alert($("#holidayDate").val());
-                //	 alert($("#trainingType").val());
                 	if($("#userType").val() == ''){
                		 $("#userTypeErr").css("display" , "block");
                 		return false; 
