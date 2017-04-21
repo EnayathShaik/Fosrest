@@ -1671,6 +1671,9 @@ public class AdminController {
 
 	}
 
+	
+	
+	
 	@RequestMapping("/HolidayMaster/remove/{id}")
 	public String removeHolidayMaster(@PathVariable("id") int id) {
 
@@ -1699,7 +1702,7 @@ public class AdminController {
 		out.flush();
 
 	}
-
+	
 	@RequestMapping(value = "/Assessmentquestion/edit/{id}", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
 	// @ResponseBody
 	public void Editassessmentquestion(@PathVariable("id") int id,
@@ -2869,7 +2872,7 @@ public class AdminController {
 			Model model) {
 
 		System.out.println("assesememt  post");
-		System.out.println(assesQuestionForm.getunitCode());
+		System.out.println(assesQuestionForm.getUnitCode());
 
 		model.addAttribute("listAssessmentQuestion",
 				this.adminService.listAssessmentQuestion(assesQuestionForm));
@@ -2883,7 +2886,7 @@ public class AdminController {
 			Model model) {
 
 		System.out.println("Add  assesememt  post");
-		System.out.println(assesQuestionForm.getunitCode());
+		System.out.println(assesQuestionForm.getUnitCode());
 		/*
 		 * model.addAttribute("trainingType",trainingType);
 		 * model.addAttribute("trainingPartner",trainingPartner);
@@ -2985,6 +2988,75 @@ public class AdminController {
 
 	}
 
+	@RequestMapping(value="/HolidayMastershowdetails" , method=RequestMethod.POST)
+	@ResponseBody
+	public void HolidayMastershowdetails(@RequestParam("data") String data,
+			@RequestBody  GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException
+	
+	{
+		System.out.println("admin controller");
+		String hm =  data;
+		List<HolidayMaster> data1 = adminService.HolidayMastersearch(hm);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(data1); 
+		System.out.println("newList "+newList);
+		
+		
+		out.write(newList);
+		out.flush();
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/TrainingPartnershowdetails" , method=RequestMethod.POST)
+	@ResponseBody
+	public void TrainingPartnershowdetails(@RequestParam("data") String data,
+			@RequestBody  GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException
+	
+	{
+		System.out.println("admin controller TrainingPartnershowdetails");
+		String a =  data;
+		List<TrainingPartner> data1 = adminService.TrainingPartnershowdetails(a);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(data1); 
+		System.out.println("newList "+newList);
+		
+		
+		out.write(newList);
+		out.flush();
+	}
+	
+	
+	
+	
+	
+
+	@RequestMapping(value="/StateMastershowdetails" , method=RequestMethod.POST)
+	@ResponseBody
+	public void StateMastershowdetails(@RequestParam("data") String data,
+			@RequestBody  GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException
+	
+	{
+		System.out.println("admin controller StateMastershowdetails");
+		String a =  data;
+		List<StateMaster> data1 = adminService.StateMastershowdetails(a);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(data1); 
+		System.out.println("newList "+newList);
+		
+		
+		out.write(newList);
+		out.flush();
+	}
+	
+	
+	
+	
+	
 	
 	
 }
