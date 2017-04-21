@@ -56,7 +56,9 @@
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>State Name:
 														<span style="color:red;">*</span>
+														
 														</strong></li>
+														<li id="stateNameErr" style="display:none;" class="style-li error-red" > State should not be blank.</li>
                                                                         <li class="style-li error-red">
                                                                             <span id="name_status"></span>
                                                                             <label class="error visibility" id="stateNameError">* error</label>
@@ -103,7 +105,7 @@
                                                     <input type="submit" class="btn login-btn" value="Add"/>
                                                 </div> -->
                                                 <div class="col-md-6 col-xs-12">
-                                                    <button type="submit" class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button>
+                                                    <button type="button" class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick='showdetails();return false;'>Show Details</button>
                                                 </div> 
                                                 
                                                 
@@ -187,9 +189,43 @@
             	     $("#updatebtn").css("display" , "block");
             	     
             	     $("#createbtn").css("display" , "none");
+            	     $("#stateNameErr").css("display" , "none");
             	      }
             	      });     
                 
                 }
 
+                 function validateFields(){
+                    
+                     	if($("#stateName").val() == ''){
+                    		 $("#stateNameErr").css("display" , "block");
+                     		return false; 
+                    	 }
+                 }
+                 
+                 
+                 
+                 function showdetails() {
+                	 var stateName =  $("#stateName").val();
+                	 
+                	 	
+                	 	var name = JSON.stringify({
+                	 		courseType : 0
+                	 	});
+                	 alert(stateName);
+                	 	$.ajax({
+                	 		type : 'post',
+                	 		url : 'StateMastershowdetails.fssai?data=' + stateName,
+                	 		contentType : "application/json",
+                	 		data : name,
+                	 		success : function(response) {
+                	 			alert(response);
+                	 			location.reload();
+                	 		}
+                	 	});
+
+                	 }          
+                 
+                 
+                 
             </script>

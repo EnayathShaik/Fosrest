@@ -14,6 +14,7 @@
             
         
             <ct:url var="addAction" value="/HolidayMaster/add.fssai" ></ct:url>
+           
             <cf:form action="${addAction}" name="myForm" method="POST" commandName="HolidayMaster" onsubmit="return validateFields();">
 
                 <section>
@@ -93,7 +94,7 @@
                                                     <input type="submit" class="btn login-btn" value="Add"/>
                                                 </div> -->
                                                 <div class="col-md-6 col-xs-12">
-                                                    <button type="submit" class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button>
+                                                    <button type="button" class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick='showdetails();return false;'>Show Details</button>
                                                 </div> 
                                                 
                                                 
@@ -165,29 +166,7 @@
                 document.getElementById(id).className = "active";
                  */
                 
-                function editHoliday(id){
-               // alert(id);
-                
-                var name1=JSON.stringify({
-            		courseName:0
-              })
-            	$.ajax({
-            	      type: 'post',
-            	      url: 'HolidayMaster/edit/'+id+'.fssai',
-            	      contentType : "application/json",
-            		  data:name1,
-            	      success: function (response) {      
-            	      var mainData1 = jQuery.parseJSON(response);
-            	    $("#holidayId").val(mainData1.holidayId);
-            	    $("#holidayDate").val(mainData1.holidayDate);
-            	    $("#holidayReason").val(mainData1.holidayReason);
-            	     $("#updatebtn").css("display" , "block");
-            	     
-            	     $("#createbtn").css("display" , "none");
-            	      }
-            	      });     
-                
-                }
+              
                  
 
                  function validateFields(){
@@ -205,3 +184,27 @@
                  }
 
             </script>
+<script>
+function showdetails() {
+var holidayReason =  $("#holidayReason").val();
+	var holidayDate = $("#holidayDate").val();
+	
+	var name = JSON.stringify({
+		courseType : 0
+	});
+	var result =  holidayDate+ "@" + holidayReason;
+alert(result);
+	$.ajax({
+		type : 'post',
+		url : 'HolidayMastershowdetails.fssai?data=' + result,
+		contentType : "application/json",
+		data : name,
+		success : function(response) {
+			alert(response);
+			location.reload();
+		}
+	});
+
+}
+
+</script>
