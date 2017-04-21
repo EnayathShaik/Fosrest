@@ -2012,10 +2012,19 @@ public class AdminController {
 	}
 
 	@RequestMapping("/TrainingSchedule/remove/{id}")
-	public String removeTrainingSchedule(@PathVariable("id") int id) {
-
-		this.adminService.removeTrainingSchedule(id);
-		return "redirect:/TrainingSchedule.fssai";
+	public String removeTrainingSchedule(@PathVariable("id") int id,HttpSession session) {
+		
+		int pid=(int)session.getAttribute("profileId");
+		
+		this.adminService.removeTrainingSchedule(id,pid);
+		//return "redirect:/TrainingSchedule.fssai";
+		
+		if(pid==4){
+			//return "redirect:/trainerHomepage.fssai";
+			return "trainerHomepage";
+		}
+		//return "redirect:/trainingInstitudeHomepage.fssai";
+		return "trainingInstitudeHomepage";
 	}
 
 	@RequestMapping("/TrainingSchedule/accept/{id}")
@@ -2035,8 +2044,17 @@ public class AdminController {
 		this.adminService.acceptTrainingSchedule(id,
 				Integer.parseInt(profileId), Integer.parseInt(loginUser2),
 				Integer.parseInt(userTableId));
-		return "trainingInstitudeHomepage";
+		//return "redirect:/TrainingSchedule.fssai";
+
+		if(Integer.parseInt(profileId)==4){
+			return "redirect:/trainerHomepage.fssai";
+			//return "trainerHomepage";
+		}
+		return "redirect:/trainingInstitudeHomepage.fssai";
+		//return "trainingInstitudeHomepage";
 	}
+
+	
 
 	@RequestMapping(value = "/TrainingSchedule/edit/{id}", method = RequestMethod.POST)
 	@ResponseBody

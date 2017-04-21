@@ -25,7 +25,7 @@ wwindow.profileId = '${profileId}';
                   <div class="row">
                                             <div class="col-xs-12">
                                            <fieldset>
-                                           <legend>Training Requesttt</legend>
+                                           <legend>Training Requests for Institute</legend>
                                             <ct:if test="${!empty listTrainingSchedule}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
@@ -55,7 +55,7 @@ wwindow.profileId = '${profileId}';
 												<td>20</td>
 												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
 												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} ,${profileId},${userTableId } );return false;' >Accept</button></td>
-												<td><a  class="btn login-btn" href="<ct:url value='/TrainingSchedule/accep/${TrainingSchedule.trainingScheduleId}.fssai?profileId=${profileId}' />" >Reject</a></td>
+												<td><a  class="btn login-btn" href="<ct:url value='/TrainingSchedule/remove/${TrainingSchedule.trainingScheduleId}.fssai?profileId=${profileId}' />" >Reject</a></td>
 												
 											</tr>
 										</ct:forEach>

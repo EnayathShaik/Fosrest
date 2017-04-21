@@ -194,10 +194,20 @@
 												<td>${GenerateCertificate.traineeName}</td>
 												<td>${GenerateCertificate.attendanceStatus}</td>
 												<td>${GenerateCertificate.certificateStatus}</td>
-												<td>${GenerateCertificate.generateCertificate}
-												 <class="text-center" ><input id="${GenerateCertificate.id}" type="checkbox"> 
+											
+                                                           <ct:choose>
+												<ct:when test="${GenerateCertificate.certificateStatus=='Completed'}">
+												<td> ${GenerateCertificate.generateCertificate}
+												 <input id="${GenerateCertificate.id}" type="checkbox" class="text-center" checked="checked" disabled="disabled"> 
                                                         </td>
+                                                </ct:when>
+                                                <ct:otherwise>
+                                                <td>${GenerateCertificate.generateCertificate}
+												 <input id="${GenerateCertificate.id}" type="checkbox" class="text-center"> 
+                                                        </td>
+                                                </ct:otherwise>
                                                             
+                                                       </ct:choose> 
                                                        
 												
 											</tr>

@@ -195,7 +195,6 @@ public class LoginController {
 				new ZLogger("loginProcess","in trainer login aadhar is "+persoInformationTrainingInstitute.getFirstName(), "LoginController.java");
 				new ZLogger("loginProcess","**************"+persoInformationTrainingInstitute.getId(), "LoginController.java");
 				session.setAttribute("persoInformationTrainingInstitute", persoInformationTrainingInstitute.getId());
-				System.out.println("9999999999999999999999"+persoInformationTrainingInstitute.getId());
 				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(persoInformationTrainingInstitute.getId()));
 				session.setAttribute("logId", persoInformationTrainingInstitute.getLoginDetails().getLoginId());
 				session.setAttribute("profileId", loginDetails.getProfileId());

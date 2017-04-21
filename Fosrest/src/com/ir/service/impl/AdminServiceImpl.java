@@ -705,8 +705,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public void removeTrainingSchedule(int id){
-		 this.adminDAO.removeTrainingSchedule(id);
+	public void removeTrainingSchedule(int id,int profileId){
+		 this.adminDAO.removeTrainingSchedule(id,profileId);
 		
 	}
 	

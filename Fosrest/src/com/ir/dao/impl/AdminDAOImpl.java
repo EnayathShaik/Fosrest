@@ -2200,791 +2200,828 @@ public class AdminDAOImpl implements AdminDAO {
 
 	}
 
-	// removeTrainingSchedule
-
-	@Override
-	public void removeTrainingSchedule(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		System.out.println(" id  " + id);
-		String sql = "update TrainingSchedule set isActive='I' where trainingScheduleId="
-				+ id;
-		Query query = session.createSQLQuery(sql);
-		query.executeUpdate();
-
-	}
-
-	@Override
-	public void acceptTrainingSchedule(int id, int profileId, int loginUser2,
-			int userTableId) {
-		Session session = this.sessionFactory.getCurrentSession();
-		String sql = null;
-		if (profileId == 4) {
-			sql = "update TrainingSchedule set trainer_status='Y',trainer_id="
-					+ loginUser2 + "where trainingScheduleId=" + id;
-		} else {
-			sql = "update TrainingSchedule set training_institude_status='Y',training_institude_id="
-					+ userTableId + " where trainingScheduleId=" + id;
+		
+		
+		//removeTrainingSchedule
+		
+		@Override
+		public void removeTrainingSchedule(int id,int profileId) {
+			// TODO Auto-generated method stub
+			System.out.println("In remove trainingschedule AdminDaoImpl");
+			Session session = this.sessionFactory.getCurrentSession();
+			System.out.println(" id  "+id);
+			String sql=null;
+			if(profileId == 4	){
+				//sql =	"update TrainingSchedule set isActive='I', trainer_status=null where trainingScheduleId="+id;
+				sql =	"update TrainingSchedule set trainer_status=null where trainingScheduleId="+id;
+				
+			}else{
+				sql =	"update TrainingSchedule set training_institude_status=null where trainingScheduleId="+id;
+			}
+			Query query = session.createSQLQuery(sql);			
+			query.executeUpdate();
+			
 		}
-
-		Query query = session.createSQLQuery(sql);
-		query.executeUpdate();
-
-	}
-
-	@Override
-	public TrainingSchedule getTrainingScheduleById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-
-		Query query = session
-				.createQuery("from TrainingSchedule where trainingScheduleId="
-						+ id);
-
+		
+		
+		
+		@Override
+		public void acceptTrainingSchedule(int id , int profileId, int loginUser2,int userTableId ) {
+			Session session = this.sessionFactory.getCurrentSession();
+			String sql= null;
+			if(profileId == 4	){
+				sql =	"update TrainingSchedule set trainer_status='Y',trainer_id="+loginUser2+"where trainingScheduleId="+id;	
+			}else{
+				sql =	"update TrainingSchedule set training_institude_status='Y',training_institude_id="+userTableId+" where trainingScheduleId="+id;
+			}
+			
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+			
+		}
+		
+		
+		@Override
+		public TrainingSchedule getTrainingScheduleById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from TrainingSchedule where trainingScheduleId="+id);
+		
 		List<TrainingSchedule> TrainingScheduleList = query.list();
 		TrainingSchedule hm = TrainingScheduleList.get(0);
-		return hm;
-
-	}
-
-	@Override
-	public List<TrainingSchedule> listTrainingSchedule() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listTrainingSchedule wo parameter");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<TrainingSchedule> mccList = session.createQuery(
-				"from TrainingSchedule where coalesce(isactive,'') <> 'I' ")
-				.list();
-		// List<TrainingSchedule> mccList =
-		// session.createSQLQuery("select * from TrainingSchedule where trainer_status='N' ").list();
-
-		for (TrainingSchedule p : mccList) {
-			System.out.println("TrainingSchedule List::" + p);
-		}
-		return mccList;
-	}
-
-	// listTrainingInstitude
-	@Override
-	public List<PersonalInformationTrainingInstitute> listTrainingInstitude() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listSubjectMaster");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<PersonalInformationTrainingInstitute> mccList = session
-				.createQuery("from PersonalInformationTrainingInstitute")
-				.list();
-		for (PersonalInformationTrainingInstitute p : mccList) {
-			System.out.println("PersonalInformationTrainingInstitute List::"
-					+ p);
-		}
-		return mccList;
-	}
-
-	@Override
-	public List<TrainingSchedule> listTrainingSchedule(int id) {
-		// TODO Auto-generated method stub
-		System.out.println("inside listTrainingSchedule with parameter");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<TrainingSchedule> mccList = session
-				.createQuery(
-						"from TrainingSchedule where coalesce(isactive,'') <> 'I' and traininginstitude='"
-								+ id + "'  ").list();
-		for (TrainingSchedule p : mccList) {
-			System.out.println("listTrainingSchedule List::" + p);
-		}
-		return mccList;
-	}
-
-	/**
-	 * @author Jyoti Mekal
-	 *
-	 *         DAOImpl For State Master
-	 */
-
-	@Override
-	public void addStateMaster(StateMaster p) {
-		// TODO Auto-generated method stub
-		System.out.println("RegionMapping " + p.getStateId());
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-	}
-
-	@Override
-	public void updateStateMaster(StateMaster p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-
-	}
-
-	// removeStateMaster
-
-	@Override
-	public void removeStateMaster(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		StateMaster p = (StateMaster) session.load(StateMaster.class,
-				new Integer(id));
-		if (null != p) {
-			session.delete(p);
+			return hm; 
+			
+			
 		}
 
-	}
+		@Override
+		public List<TrainingSchedule> listTrainingSchedule() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTrainingSchedule wo parameter");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' ").list();
+			//List<TrainingSchedule> mccList = session.createSQLQuery("select * from TrainingSchedule where trainer_status='N' ").list();
+			
+			for (TrainingSchedule p : mccList) {
+				System.out.println("TrainingSchedule List::" + p);
+			}
+			return mccList;
+		}
+		//listTrainingInstitude
+		@Override
+		public List<PersonalInformationTrainingInstitute> listTrainingInstitude() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listSubjectMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<PersonalInformationTrainingInstitute> mccList = session.createQuery("from PersonalInformationTrainingInstitute").list();
+			for (PersonalInformationTrainingInstitute p : mccList) {
+				System.out.println("PersonalInformationTrainingInstitute List::" + p);
+			}
+			return mccList;
+		}
+	
+		
+		
+		@Override
+		public List<TrainingSchedule> listTrainingSchedule(int id) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTrainingSchedule with parameter");						
+			Session session = this.sessionFactory.getCurrentSession();
+			List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(training_institude_status,'') <> 'Y' and traininginstitude='"+id+"'  ").list();
+			for (TrainingSchedule p : mccList) {
+				System.out.println("listTrainingSchedule List::" + p);
+			}
+			return mccList;
+		}
+		
 
-	@Override
-	public StateMaster getStateMasterById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-
-		Query query = session.createQuery("from StateMaster where StateId="
-				+ id);
-
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For State Master
+		 */
+		
+		@Override
+		public void addStateMaster(StateMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getStateId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateStateMaster(StateMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeStateMaster
+		
+		@Override
+		public void removeStateMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			StateMaster p = (StateMaster) session.load(StateMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public StateMaster getStateMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from StateMaster where StateId="+id);
+		
 		List<StateMaster> StateMasterList = query.list();
 		StateMaster hm = StateMasterList.get(0);
-		return hm;
-
-	}
-
-	@Override
-	public List<StateMaster> listStateMaster() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listStateMaster");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<StateMaster> mccList = session.createQuery("from StateMaster")
-				.list();
-		for (StateMaster p : mccList) {
-			System.out.println("State List::" + p);
+			return hm; 
+			
+			
 		}
-		return mccList;
-	}
-
-	/**
-	 * @author Jyoti Mekal
-	 *
-	 *         DAOImpl For District Master
-	 */
-
-	@Override
-	public void addDistrictMaster(DistrictMaster p) {
-		// TODO Auto-generated method stub
-		System.out.println("DistrictMaster " + p.getDistrictId());
-		StateMaster sm = getStateMasterById(p.getStateMaster().getStateId());
-		p.setStateMaster(sm);
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-	}
-
-	@Override
-	public void updateDistrictMaster(DistrictMaster p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-
-	}
-
-	// removeDistrictMaster
-
-	@Override
-	public void removeDistrictMaster(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		DistrictMaster p = (DistrictMaster) session.load(DistrictMaster.class,
-				new Integer(id));
-		if (null != p) {
-			session.delete(p);
+		
+		@Override
+		public List<StateMaster> listStateMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listStateMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<StateMaster> mccList = session.createQuery("from StateMaster").list();
+			for (StateMaster p : mccList) {
+				System.out.println("State List::" + p);
+			}
+			return mccList;
 		}
+		
+		
+		
+		
+		
+		
 
-	}
-
-	@Override
-	public DistrictMaster getDistrictMasterById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-
-		Query query = session
-				.createQuery("from DistrictMaster where DistrictId=" + id);
-
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For District Master
+		 */
+		
+		@Override
+		public void addDistrictMaster(DistrictMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("DistrictMaster "+p.getDistrictId());
+			StateMaster sm =  getStateMasterById(p.getStateMaster().getStateId());
+			p.setStateMaster(sm);
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateDistrictMaster(DistrictMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeDistrictMaster
+		
+		@Override
+		public void removeDistrictMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			DistrictMaster p = (DistrictMaster) session.load(DistrictMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public DistrictMaster getDistrictMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from DistrictMaster where DistrictId="+id);
+		
 		List<DistrictMaster> DistrictMasterList = query.list();
 		DistrictMaster hm = DistrictMasterList.get(0);
-		return hm;
-
-	}
-
-	@Override
-	public List<DistrictMaster> listDistrictMaster() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listDistrictMaster");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<DistrictMaster> mccList = session.createQuery(
-				"from DistrictMaster").list();
-		for (DistrictMaster p : mccList) {
-			System.out.println("District List::" + p);
+			return hm; 
+			
+			
 		}
-		return mccList;
-	}
-
-	/**
-	 * @author Jyoti Mekal
-	 *
-	 *         DAOImpl For City Master
-	 */
-
-	@Override
-	public void addCityMaster(CityMaster p) {
-		// TODO Auto-generated method stub
-		System.out.println("CityMaster " + p.getCityId());
-		DistrictMaster dm = getDistrictMasterById(p.getDistrictMaster()
-				.getDistrictId());
-		p.setDistrictMaster(dm);
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-	}
-
-	@Override
-	public void updateCityMaster(CityMaster p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-
-	}
-
-	// removeCityMaster
-
-	@Override
-	public void removeCityMaster(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		CityMaster p = (CityMaster) session.load(CityMaster.class, new Integer(
-				id));
-		if (null != p) {
-			session.delete(p);
+		
+		@Override
+		public List<DistrictMaster> listDistrictMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listDistrictMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<DistrictMaster> mccList = session.createQuery("from DistrictMaster").list();
+			for (DistrictMaster p : mccList) {
+				System.out.println("District List::" + p);
+			}
+			return mccList;
 		}
+		
+		
+		
+		
+		
+		
+		
 
-	}
-
-	@Override
-	public CityMaster getCityMasterById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-
-		Query query = session.createQuery("from CityMaster where CityId=" + id);
-
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For City Master
+		 */
+		
+		@Override
+		public void addCityMaster(CityMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("CityMaster "+p.getCityId());
+			DistrictMaster dm =  getDistrictMasterById(p.getDistrictMaster().getDistrictId());
+			p.setDistrictMaster(dm);
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateCityMaster(CityMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeCityMaster
+		
+		@Override
+		public void removeCityMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			CityMaster p = (CityMaster) session.load(CityMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public CityMaster getCityMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from CityMaster where CityId="+id);
+		
 		List<CityMaster> CityMasterList = query.list();
 		CityMaster hm = CityMasterList.get(0);
-		return hm;
-
-	}
-
-	@Override
-	public List<CityMaster> listCityMaster() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listCityMaster");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<CityMaster> mccList = session.createQuery("from CityMaster")
-				.list();
-		for (CityMaster p : mccList) {
-			System.out.println("City List::" + p);
+			return hm; 
+			
+			
 		}
-		return mccList;
-	}
-
-	/**
-	 * @author Jyoti Mekal
-	 *
-	 *         DAOImpl For Region Master
-	 */
-
-	@Override
-	public void addRegionMaster(RegionMaster p) {
-		// TODO Auto-generated method stub
-		System.out.println("RegionMaster " + p.getId());
-		CityMaster cm = getCityMasterById(p.getCityMaster().getCityId());
-		p.setCityMaster(cm);
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-	}
-
-	@Override
-	public void updateRegionMaster(RegionMaster p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-
-	}
-
-	// removeRegionMaster
-
-	@Override
-	public void removeRegionMaster(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		RegionMaster p = (RegionMaster) session.load(RegionMaster.class,
-				new Integer(id));
-		if (null != p) {
-			session.delete(p);
+		
+		@Override
+		public List<CityMaster> listCityMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listCityMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<CityMaster> mccList = session.createQuery("from CityMaster").list();
+			for (CityMaster p : mccList) {
+				System.out.println("City List::" + p);
+			}
+			return mccList;
 		}
+		
+		
+		
+		
+		
 
-	}
-
-	@Override
-	public RegionMaster getRegionMasterById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-
-		Query query = session.createQuery("from RegionMaster where id=" + id);
-
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Region Master
+		 */
+		
+		@Override
+		public void addRegionMaster(RegionMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMaster "+p.getId());
+			CityMaster cm =  getCityMasterById(p.getCityMaster().getCityId());
+			p.setCityMaster(cm);
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateRegionMaster(RegionMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeRegionMaster
+		
+		@Override
+		public void removeRegionMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			RegionMaster p = (RegionMaster) session.load(RegionMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public RegionMaster getRegionMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from RegionMaster where id="+id);
+		
 		List<RegionMaster> RegionMasterList = query.list();
 		RegionMaster hm = RegionMasterList.get(0);
-		return hm;
-
-	}
-
-	@Override
-	public List<RegionMaster> listRegionMaster() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listRegionMaster");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<RegionMaster> mccList = session.createQuery("from RegionMaster")
-				.list();
-		for (RegionMaster p : mccList) {
-			System.out.println("Region List::" + p);
+			return hm; 
+			
+			
 		}
-		return mccList;
-	}
-
-	/**
-	 * @author Jyoti Mekal
-	 *
-	 *         DAOImpl For Training Partner Master
-	 */
-
-	@Override
-	public void addTrainingPartner(TrainingPartner p) {
-		// TODO Auto-generated method stub
-		System.out.println("RegionMapping " + p.getTrainingPartnerId());
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-	}
-
-	@Override
-	public void updateTrainingPartner(TrainingPartner p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-
-	}
-
-	// removeTrainingPartner
-
-	@Override
-	public void removeTrainingPartner(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		TrainingPartner p = (TrainingPartner) session.load(
-				TrainingPartner.class, new Integer(id));
-		if (null != p) {
-			session.delete(p);
+		
+		@Override
+		public List<RegionMaster> listRegionMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listRegionMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<RegionMaster> mccList = session.createQuery("from RegionMaster").list();
+			for (RegionMaster p : mccList) {
+				System.out.println("Region List::" + p);
+			}
+			return mccList;
 		}
+		
+	
+		
+		
 
-	}
-
-	@Override
-	public TrainingPartner getTrainingPartnerById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-
-		Query query = session
-				.createQuery("from TrainingPartner where trainingPartnerId="
-						+ id);
-
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Training Partner Master
+		 */
+		
+		@Override
+		public void addTrainingPartner(TrainingPartner p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getTrainingPartnerId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateTrainingPartner(TrainingPartner p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeTrainingPartner
+		
+		@Override
+		public void removeTrainingPartner(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			TrainingPartner p = (TrainingPartner) session.load(TrainingPartner.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public TrainingPartner getTrainingPartnerById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from TrainingPartner where trainingPartnerId="+id);
+		
 		List<TrainingPartner> TrainingPartnerList = query.list();
 		TrainingPartner hm = TrainingPartnerList.get(0);
-		return hm;
-
-	}
-
-	@Override
-	public List<TrainingPartner> listTrainingPartner() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listTrainingPartner");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<TrainingPartner> mccList = session.createQuery(
-				"from TrainingPartner").list();
-		for (TrainingPartner p : mccList) {
-			System.out.println("Holiday List::" + p);
+			return hm; 
+			
+			
 		}
-		return mccList;
-	}
-
-	@Override
-	public List<GenerateCertificateForm> listGenerateCertificate(
-			GenerateCertificateForm generateCertificateForm) {
-		// TODO Auto-generated method stub
-		System.out.println("inside listGenerateCertificateForm "
-				+ generateCertificateForm.getBatchCode());
-
-		List<GenerateCertificateForm> list = new ArrayList<GenerateCertificateForm>();
-		Session session = this.sessionFactory.getCurrentSession();
-		StringBuffer str = new StringBuffer();
-		str.append("select ts.trainingtype , trainingstartdate  , tp.trainingpartnername , piti.trainingcentername , nt.traineename , case when certificatestatus = 'N' then cast('Pending' as varchar(10)) else cast('Completed' as varchar(10)) end as certificatestatus, nt.id  from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) ");
-		str.append("left join TrainingPartner tp on (tp.trainingpartnerid = ts.trainingpartner) left join personalinformationtraininginstitute piti  on (piti.id = ts.traininginstitude) where ts.trainingscheduleid = '"
-				+ generateCertificateForm.getBatchCode() + "'");
-		System.out.println(" str " + str);
-		List<Object[]> lst = session.createSQLQuery(str.toString()).list();
-		for (Object[] li : lst) {
-			GenerateCertificateForm bean = new GenerateCertificateForm();
-			bean.setId((int) li[6]);
-			bean.setTrainingType((String) li[0]);
-			bean.setTrainingDate((String) (li[1]));
-			bean.setTrainingPartner((String) li[2]);
-			bean.setTrainingInstitute((String) li[3]);
-			bean.setTraineeName((String) li[4]);
-			bean.setCertificateStatus((String) li[5]);
-
-			list.add(bean);
+		
+		@Override
+		public List<TrainingPartner> listTrainingPartner() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTrainingPartner");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<TrainingPartner> mccList = session.createQuery("from TrainingPartner").list();
+			for (TrainingPartner p : mccList) {
+				System.out.println("Holiday List::" + p);
+			}
+			return mccList;
 		}
-		System.out.println("list " + list);
-		return list;
-	}
-
-	@Override
-	public List<TrainingClosureForm> listTrainingClosure() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listTrainingClosureForm");
-		TrainingClosureForm bean = new TrainingClosureForm();
-		List<TrainingClosureForm> list = new ArrayList<TrainingClosureForm>();
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Object[]> lst = session
-				.createSQLQuery(
-						"select  cast('1' as int) as id,cast('Refresher' as varchar(20)) as trainingType , cast('AO' as varchar(20)) as UserType ,cast('26-03-2017' as varchar(40)) as trainingDate, cast('Foundation' as varchar(20) ) as trainingInstitute,cast('Pending' as varchar(20) ) as status")
-				.list();
-		for (Object[] li : lst) {
-
-			bean.setId((int) li[0]);
-			bean.setTrainingType((String) li[1]);
-			bean.setUserType((String) li[2]);
-			bean.setTrainingDate(((String) li[3]));
-			bean.setTrainingInstitute((String) li[4]);
-			bean.setStatus(((String) li[5]));
-			list.add(bean);
-
+		
+		@Override
+		public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listGenerateCertificateForm "+generateCertificateForm.getBatchCode());
+			
+			List<GenerateCertificateForm> list = new ArrayList<GenerateCertificateForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			StringBuffer str = new StringBuffer();
+			str.append("select ts.trainingtype , trainingstartdate  , tp.trainingpartnername , piti.trainingcentername , nt.traineename , case when certificatestatus = 'N' then cast('Pending' as varchar(10)) else cast('Completed' as varchar(10)) end as certificatestatus, nt.id  from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) ");
+			str.append("left join TrainingPartner tp on (tp.trainingpartnerid = ts.trainingpartner) left join personalinformationtraininginstitute piti  on (piti.id = ts.traininginstitude) where ts.trainingscheduleid = '"+generateCertificateForm.getBatchCode()+"'");
+			System.out.println(" str " + str);
+			List<Object[]> lst = session.createSQLQuery(str.toString()).list();
+			for (Object[] li : lst ) {
+				GenerateCertificateForm bean = new GenerateCertificateForm();	
+				bean.setId((int) li[6]);
+				bean.setTrainingType((String) li[0]);
+				bean.setTrainingDate((String) (li[1]));
+				bean.setTrainingPartner((String) li[2]);
+				bean.setTrainingInstitute((String) li[3]);
+				bean.setTraineeName((String) li[4]);
+				bean.setCertificateStatus((String) li[5]);
+				
+				
+				list.add(bean);
+			}
+System.out.println("list "+list);
+			return list;
 		}
-		System.out.println("list " + list);
-		return list;
-	}
-
-	/************************************* Zinvoice ******************************************/
-
-	/**
-	 * @author Jyoti Mekal
-	 *
-	 *         DAOImpl For Customer Master
-	 */
-
-	@Override
-	public void addCustomerMaster(CustomerMaster p) {
-		// TODO Auto-generated method stub
-		System.out.println("RegionMapping " + p.getCustomerId());
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-	}
-
-	@Override
-	public void updateCustomerMaster(CustomerMaster p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-
-	}
-
-	// removeCustomerMaster
-
-	@Override
-	public void removeCustomerMaster(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		CustomerMaster p = (CustomerMaster) session.load(CustomerMaster.class,
-				new Integer(id));
-		if (null != p) {
-			session.delete(p);
+		
+		@Override
+		public List<TrainingClosureForm> listTrainingClosure() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTrainingClosureForm");
+			TrainingClosureForm bean = new TrainingClosureForm();
+			List<TrainingClosureForm> list = new ArrayList<TrainingClosureForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> lst = session.createSQLQuery("select  cast('1' as int) as id,cast('Refresher' as varchar(20)) as trainingType , cast('AO' as varchar(20)) as UserType ,cast('26-03-2017' as varchar(40)) as trainingDate, cast('Foundation' as varchar(20) ) as trainingInstitute,cast('Pending' as varchar(20) ) as status").list();
+			for (Object[] li : lst ) {
+				
+				bean.setId((int) li[0]);
+				bean.setTrainingType((String) li[1]);
+				bean.setUserType((String) li[2]);
+				bean.setTrainingDate(((String)li[3]));
+				bean.setTrainingInstitute((String) li[4]);
+				bean.setStatus(((String)li[5]));
+				list.add(bean);
+				
+			}
+System.out.println("list "+list);
+			return list;
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
-	}
-
-	@Override
-	public CustomerMaster getCustomerMasterById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-
-		Query query = session
-				.createQuery("from CustomerMaster where CustomerId=" + id);
-
+		/*************************************Zinvoice******************************************/
+		
+		
+		
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Customer Master
+		 */
+		
+		@Override
+		public void addCustomerMaster(CustomerMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getCustomerId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateCustomerMaster(CustomerMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeCustomerMaster
+		
+		@Override
+		public void removeCustomerMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			CustomerMaster p = (CustomerMaster) session.load(CustomerMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public CustomerMaster getCustomerMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from CustomerMaster where CustomerId="+id);
+		
 		List<CustomerMaster> CustomerMasterList = query.list();
 		CustomerMaster hm = CustomerMasterList.get(0);
-		return hm;
-
-	}
-
-	@Override
-	public List<CustomerMaster> listCustomerMaster() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listCustomerMaster");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<CustomerMaster> mccList = session.createQuery(
-				"from CustomerMaster").list();
-		for (CustomerMaster p : mccList) {
-			System.out.println("Customer List::" + p);
+			return hm; 
+			
+			
 		}
-		return mccList;
-	}
-
-	/**
-	 * @author Jyoti Mekal
-	 *
-	 *         DAOImpl For Tax Master
-	 */
-
-	@Override
-	public void addTaxMaster(TaxMaster p) {
-		// TODO Auto-generated method stub
-		System.out.println("RegionMapping " + p.getTaxId());
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-	}
-
-	@Override
-	public void updateTaxMaster(TaxMaster p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-
-	}
-
-	// removeTaxMaster
-
-	@Override
-	public void removeTaxMaster(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		TaxMaster p = (TaxMaster) session
-				.load(TaxMaster.class, new Integer(id));
-		if (null != p) {
-			session.delete(p);
+		
+		@Override
+		public List<CustomerMaster> listCustomerMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listCustomerMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<CustomerMaster> mccList = session.createQuery("from CustomerMaster").list();
+			for (CustomerMaster p : mccList) {
+				System.out.println("Customer List::" + p);
+			}
+			return mccList;
 		}
-
-	}
-
-	@Override
-	public TaxMaster getTaxMasterById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-
-		Query query = session.createQuery("from TaxMaster where taxId=" + id);
-
+		
+		
+		
+	
+		
+		
+	
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Tax Master
+		 */
+		
+		@Override
+		public void addTaxMaster(TaxMaster p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getTaxId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateTaxMaster(TaxMaster p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeTaxMaster
+		
+		@Override
+		public void removeTaxMaster(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			TaxMaster p = (TaxMaster) session.load(TaxMaster.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public TaxMaster getTaxMasterById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from TaxMaster where taxId="+id);
+		
 		List<TaxMaster> TaxMasterList = query.list();
 		TaxMaster hm = TaxMasterList.get(0);
-		return hm;
-
-	}
-
-	@Override
-	public List<TaxMaster> listTaxMaster() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listTaxMaster");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<TaxMaster> mccList = session.createQuery("from TaxMaster").list();
-		for (TaxMaster p : mccList) {
-			System.out.println("Tax List::" + p);
+			return hm; 
+			
+			
 		}
-		return mccList;
-	}
-
-	/**
-	 * @author Jyoti Mekal
-	 *
-	 *         DAOImpl For Tax Master
-	 */
-
-	@Override
-	public void addEmployeeMonthlyCharges(EmployeeMonthlyCharges p) {
-		// TODO Auto-generated method stub
-		System.out.println("RegionMapping " + p.getId());
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-	}
-
-	@Override
-	public void updateEmployeeMonthlyCharges(EmployeeMonthlyCharges p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-
-	}
-
-	// removeEmployeeMonthlyCharges
-
-	@Override
-	public void removeEmployeeMonthlyCharges(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		EmployeeMonthlyCharges p = (EmployeeMonthlyCharges) session.load(
-				EmployeeMonthlyCharges.class, new Integer(id));
-		if (null != p) {
-			session.delete(p);
+		
+		@Override
+		public List<TaxMaster> listTaxMaster() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listTaxMaster");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<TaxMaster> mccList = session.createQuery("from TaxMaster").list();
+			for (TaxMaster p : mccList) {
+				System.out.println("Tax List::" + p);
+			}
+			return mccList;
 		}
+		
+		
+		
+		
 
-	}
-
-	@Override
-	public EmployeeMonthlyCharges getEmployeeMonthlyChargesById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-
-		Query query = session
-				.createQuery("from EmployeeMonthlyCharges where taxId=" + id);
-
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * DAOImpl For Tax Master
+		 */
+		
+		@Override
+		public void addEmployeeMonthlyCharges(EmployeeMonthlyCharges p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping "+p.getId());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+		}
+		
+		
+		@Override
+		public void updateEmployeeMonthlyCharges(EmployeeMonthlyCharges p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			
+		}
+		
+		
+		//removeEmployeeMonthlyCharges
+		
+		@Override
+		public void removeEmployeeMonthlyCharges(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			EmployeeMonthlyCharges p = (EmployeeMonthlyCharges) session.load(EmployeeMonthlyCharges.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			
+		}
+		
+		@Override
+		public EmployeeMonthlyCharges getEmployeeMonthlyChargesById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " +id);
+			Session session = this.sessionFactory.getCurrentSession();
+			
+		Query query = session.createQuery("from EmployeeMonthlyCharges where taxId="+id);
+		
 		List<EmployeeMonthlyCharges> EmployeeMonthlyChargesList = query.list();
 		EmployeeMonthlyCharges hm = EmployeeMonthlyChargesList.get(0);
-		return hm;
-
-	}
-
-	@Override
-	public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listEmployeeMonthlyCharges");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<EmployeeMonthlyCharges> mccList = session.createQuery(
-				"from EmployeeMonthlyCharges").list();
-		for (EmployeeMonthlyCharges p : mccList) {
-			System.out.println("Tax List::" + p);
+			return hm; 
+			
+			
 		}
-		return mccList;
-	}
-
-	@Override
-	public List<PersonalInformationTrainee> listEligibleuser(String userType) {
-		// TODO Auto-generated method stub
-		System.out.println("inside listEligibleuser" + userType);
-		List<PersonalInformationTrainee> personalInfoList = new ArrayList<PersonalInformationTrainee>();
-		Session session = this.sessionFactory.getCurrentSession();
-
-		String sql = "select * from nomineetrainee";
-		Query maxIDList = session.createSQLQuery(sql);
-		List list = maxIDList.list();
-		Query query = null;
-
-		if (list.size() > 0) {
-			query = session
-					.createSQLQuery("select pit.id , usertype , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails)  where coalesce(eu.status, '') not in  ('N') and pit.usertype='"
-							+ userType + "'");
-			System.out.println("data der " + query);
-		} else {
-
-			query = session
-					.createSQLQuery("select pit.id , usertype , firstName , pit.loginDetails from PersonalInformationTrainee pit where  pit.usertype='"
-							+ userType + "'");
-			System.out.println("data not der " + query);
-
-		}
-
-		List<Object[]> list11 = query.list();
-		for (int i = 0; i < list11.size(); i++) {
-			PersonalInformationTrainee pit = new PersonalInformationTrainee();
-			Object[] obj = list11.get(i);
-			pit.setId((int) obj[0]);
-			pit.setUserType((String) obj[1]);
-			pit.setFirstName((String) obj[2]);
-			System.out.println(obj[3]);
-			pit.setId((int) obj[3]);
-			personalInfoList.add(pit);
-		}
-
-		return personalInfoList;
-	}
-
-	@Override
-	public String enrollUser(String data) {
-		// TODO Auto-generated method stub
-		System.out.println("inside listEligibleuser " + data);
-		Session session = this.sessionFactory.getCurrentSession();
-		String[] arrData = data.split("-");
-		List<String> loginDetails = new ArrayList<String>();
-		String[] loginIdName = arrData[0].split(",");
-		int trainingScheduleId = Integer.parseInt(arrData[1]);
-		TrainingSchedule ts = (TrainingSchedule) session.load(
-				TrainingSchedule.class, trainingScheduleId);
-		int unitCode = ts.getUnitId();
-		int moduleId = ts.getModuleId();
-		ModuleMaster mm = getModuleMasterById(moduleId);
-		String moduleCode = mm.getModuleCode();
-		if (arrData[0].contains(",")) {
-			for (int i = 0; i < loginIdName.length; i++) {
-				System.out.println(" loginIdName[i] " + loginIdName[i]);
-				loginDetails.add(loginIdName[i]);
+		
+		@Override
+		public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listEmployeeMonthlyCharges");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<EmployeeMonthlyCharges> mccList = session.createQuery("from EmployeeMonthlyCharges").list();
+			for (EmployeeMonthlyCharges p : mccList) {
+				System.out.println("Tax List::" + p);
 			}
-		} else {
-			loginDetails.add(arrData[0]);
+			return mccList;
 		}
-		for (String s : loginDetails) {
+		
+		@Override
+		public List<PersonalInformationTrainee> listEligibleuser(String userType) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listEligibleuser"+userType);
+			List<PersonalInformationTrainee> personalInfoList = new ArrayList<PersonalInformationTrainee>();
+			Session session = this.sessionFactory.getCurrentSession();
+			
+			String sql = "select * from nomineetrainee";
+			Query maxIDList = session.createSQLQuery(sql);
+			List list = maxIDList.list();
+			Query query = null;
 
-			System.out.println("id " + s.split("@")[0]);
-
-			String result = addNomineeTrainee(moduleCode, trainingScheduleId,
-					Integer.parseInt(s.split("@")[0]), s.split("@")[1]);
-
+			if(list.size() > 0){
+				query = session.createSQLQuery("select pit.id , usertype , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails)  where coalesce(eu.status, '') not in  ('N') and pit.usertype='"+userType+"'");
+				System.out.println("data der "+query);
+			}else{
+				
+				query = session.createSQLQuery("select pit.id , usertype , firstName , pit.loginDetails from PersonalInformationTrainee pit where  pit.usertype='"+userType+"'");
+				System.out.println("data not der "+query);
+				
+			}
+	
+			List<Object[]> list11 = query.list();
+			for(int i = 0 ; i < list11.size() ; i++){
+				PersonalInformationTrainee pit  =  new PersonalInformationTrainee();
+				Object[] obj   = list11.get(i);
+				pit.setId((int) obj[0]);
+				pit.setUserType((String) obj[1]);
+				pit.setFirstName((String) obj[2]);
+				System.out.println(obj[3]);
+				pit.setId((int)obj[3]);
+				personalInfoList.add(pit);
+			}
+			
+			return personalInfoList;
 		}
-		System.out.println("6:1 st return created");
-		return "created";
-	}
+		
+		
+		@Override
+		public String enrollUser(String data) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listEligibleuser "+data);
+			Session session = this.sessionFactory.getCurrentSession();
+			String[] arrData =  data.split("-");
+			List<String> loginDetails	 = new ArrayList<String>();
+			String[] loginIdName = arrData[0].split(",");
+			int trainingScheduleId=Integer.parseInt(arrData[1]);
+			TrainingSchedule ts = (TrainingSchedule)session.load(TrainingSchedule.class, trainingScheduleId);
+			int unitCode = ts.getUnitId();
+			int moduleId = ts.getModuleId();
+			ModuleMaster mm=getModuleMasterById(moduleId);
+			String moduleCode = mm.getModuleCode();
+			if(arrData[0].contains(",")){	
+				for(int i = 0 ; i <loginIdName.length ; i++ ){
+					System.out.println(" loginIdName[i] "+loginIdName[i]);
+					loginDetails.add(loginIdName[i]);
+				}
+			}else{
+				loginDetails.add(arrData[0]);
+			}
+			  for(String s :loginDetails){
+			
+				System.out.println("id "+s.split("@")[0]);
+				
+				
+				String result = addNomineeTrainee(moduleCode,trainingScheduleId,Integer.parseInt(s.split("@")[0]) , s.split("@")[1]);
 
-	// addNomineeTrainee
-	// @Override
-	public String addNomineeTrainee(String moduleCode, int trainingScheduleId,
-			int loginId, String traineeName) {
-
-		System.out.println("moduleCode " + moduleCode + " trainingScheduleId "
-				+ trainingScheduleId + " loginId " + loginId + " traineeName "
-				+ traineeName);
-		String sql = "select coalesce(max(rollseqNo) + 1,1) from nomineetrainee";
-		int maxId = 0;
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-
-		Query maxIDList = session.createSQLQuery(sql);
-		List list = maxIDList.list();
-		System.out.println(list.size());
-		new ZLogger("manageCourse", "list.size() " + list.size(),
-				"AdminDAOImpl.java");
-		if (list.size() > 0) {
-			maxId = (int) list.get(0);
-			System.out.println(" maxId " + maxId);
+			}
+			  System.out.println("6:1 st return created");
+			return "created";
 		}
-		NomineeTrainee nt = new NomineeTrainee();
+	
 
-		nt.setStatus("N");
-		nt.setRollNo(moduleCode
-				+ StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
-		nt.setRollSeqNo(maxId);
-		nt.setLoginDetails(loginId);
-		nt.setTraineeName(traineeName);
-		nt.setTrainingscheduleid(trainingScheduleId);
-		nt.setCertificateStatus("N");
-		System.out.println("5:after set");
-		int id = (int) session.save(nt);
-		tx.commit();
-		System.out.println("id " + id);
-		session.close();
-		System.out.println("before return");
+		//addNomineeTrainee
+	//	@Override
+		public String addNomineeTrainee( String moduleCode,int trainingScheduleId,int loginId , String traineeName) {
+	
+		System.out.println("moduleCode "+moduleCode  + " trainingScheduleId "+trainingScheduleId + " loginId "+loginId + " traineeName "+traineeName);
+			String sql = "select coalesce(max(rollseqNo) + 1,1) from nomineetrainee";
+			int maxId = 0 ;
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+		
+			Query maxIDList = session.createSQLQuery(sql);
+			List list = maxIDList.list();
+			System.out.println(list.size());
+			new ZLogger("manageCourse", "list.size() "+list.size(), "AdminDAOImpl.java");
+			if(list.size() > 0){
+				maxId = (int) list.get(0);
+				System.out.println(" maxId "+maxId);
+			}
+			NomineeTrainee nt = new NomineeTrainee();
+		
+			nt.setStatus("N");
+			nt.setRollNo(moduleCode+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+			nt.setRollSeqNo(maxId);
+			nt.setLoginDetails(loginId);
+			nt.setTraineeName(traineeName);
+			nt.setTrainingscheduleid(trainingScheduleId);
+			nt.setCertificateStatus("N");
+			System.out.println("5:after set");
+			int id =  (int) session.save(nt);
+			tx.commit();
+			System.out.println("id "+id);
+			session.close();
+			System.out.println("before return");
 		return "created";
 	}
 
@@ -3002,11 +3039,13 @@ public class AdminDAOImpl implements AdminDAO {
 		 * (AssessmentQuestions) session .load(AssessmentQuestions.class,
 		 * assessmentQuestionForm.getId()); }
 		 */
-		String uC = assessmentQuestionForm.getUnitCode();
+		String uC = assessmentQuestionForm.getunitCode();
 		String mN = assessmentQuestionForm.getModuleCode();
-		// System.out.println("............................");
+		//System.out.println("............................");
 
-		// System.out.println("............................");
+		
+
+		//System.out.println("............................");
 
 		// assessmentQuestion.setAssessmentId(assessmentQuestionForm.getAssessmentId());
 		assessmentQuestion.setCorrectAnswer(assessmentQuestionForm
@@ -3016,9 +3055,8 @@ public class AdminDAOImpl implements AdminDAO {
 				.setModuleCode(assessmentQuestionForm.getModuleCode());
 		assessmentQuestion
 				.setNoOfOption(assessmentQuestionForm.getNoOfOption());
-		assessmentQuestion.setUnitCode(assessmentQuestionForm.getUnitCode());
-		assessmentQuestion.setQuestionNumber(assessmentQuestionForm
-				.getQuestionNumber());
+		assessmentQuestion.setUnitCode(assessmentQuestionForm.getunitCode());
+		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
 		assessmentQuestion.setQuestionHint(assessmentQuestionForm
 				.getQuestionHint());
 		assessmentQuestion.setQuestionTitle(assessmentQuestionForm
@@ -3051,117 +3089,117 @@ public class AdminDAOImpl implements AdminDAO {
 		} else {
 			return "already";
 		}
+		
+		
+	
+		
 
 	}
 
 	@Override
-	public List<AssessmentQuestionForm> listAssessmentQuestion(
-			AssessmentQuestionForm assesQuestionForm) {
-		// TODO Auto-generated method stub
-
-		AssessmentQuestionForm bean;
-		List<AssessmentQuestionForm> list = new ArrayList<AssessmentQuestionForm>();
-		Session session = this.sessionFactory.getCurrentSession();
-		System.out.println("........................."
-				+ assesQuestionForm.getModuleCode());
-		List<Object[]> mccList = session.createSQLQuery(
-				"select * from assessmentquestions where modulecode='"
-						+ assesQuestionForm.getModuleCode()
-						+ "' and unitcode='" + assesQuestionForm.getUnitCode()
-						+ "'").list();
-		System.out.println("aaaaa");
-		for (Object[] li : mccList) {
-			bean = new AssessmentQuestionForm();
-
-			//
-			System.out.println(li[0]);
-			bean.setId((int) li[0]);
-			bean.setModuleCode((String) li[2]);
-			System.out.println(li[12]);
-			bean.setNoOfOption((int) li[3]);
-			bean.setUnitCode((String) li[13]);
-			bean.setQuestionNumber(2);
-			bean.setQuestionHint((String) li[10]);
-			bean.setQuestionTitle((String) li[12]);
-			bean.setCorrectAnswer((int) li[1]);
-
-			bean.setOptionOne((String) li[6]);
-			bean.setOptionTwo((String) li[9]);
-			bean.setOptionThree((String) li[8]);
-			bean.setOptionFour((String) li[5]);
-			bean.setOptionFive((String) li[4]);
-			bean.setOptionSix((String) li[7]);
-			//
-
-			System.out.println(bean);
-			list.add(bean);
+		public List<AssessmentQuestionForm> listAssessmentQuestion(
+				AssessmentQuestionForm assesQuestionForm) {
+			// TODO Auto-generated method stub
+			
+			AssessmentQuestionForm bean;
+			List<AssessmentQuestionForm> list = new ArrayList<AssessmentQuestionForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+System.out.println("........................."+assesQuestionForm.getModuleCode() );
+	List<Object[]> mccList  = session.createSQLQuery("select * from assessmentquestions where modulecode='"+assesQuestionForm.getModuleCode()+"' and unitcode='"+assesQuestionForm.getUnitCode()+"'" ) .list();	
+	System.out.println("aaaaa");
+	for (Object[] li : mccList ) { 
+		 bean= new AssessmentQuestionForm();
+				
+		 //
+		 System.out.println(li[0]);
+		 bean.setId((int) li[0]);
+		 bean.setModuleCode((String) li[2]);
+		 System.out.println(li[12]);
+		 bean.setNoOfOption((int) li[3]);
+		 bean.setUnitCode((String) li[13]);
+		 bean.setQuestionNumber(2);
+		 bean.setQuestionHint((String) li[10]);
+		 bean.setQuestionTitle((String) li[12]);
+		 bean.setCorrectAnswer((int) li[1]);
+			
+		 bean.setOptionOne((String) li[6]);
+		 bean.setOptionTwo((String) li[9]);
+		 bean.setOptionThree((String) li[8]);
+		 bean.setOptionFour((String) li[5]);
+		 bean.setOptionFive((String) li[4]);
+		 bean.setOptionSix((String) li[7]);
+		 //
+				
+				System.out.println(bean);
+				list.add(bean);
+			}
+	System.out.println("list "+list);
+			return list;
+			
+			
 		}
-		System.out.println("list " + list);
-		return list;
-
-	}
-
+		
+		
+	
+		
 	/* return "nothing"; */
 
 	@Override
 	public void removeAssessmentQuestion(int id) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		AssessmentQuestions p = (AssessmentQuestions) session.load(
-				AssessmentQuestions.class, new Integer(id));
+		AssessmentQuestions p = (AssessmentQuestions) session.load(AssessmentQuestions.class,
+				new Integer(id));
 		if (null != p) {
 			session.delete(p);
 		}
 
+		
 	}
 
 	@Override
 	public AssessmentQuestions getAssessmentQuestionById(int id) {
 
-		// TODO Auto-generated method stub
-		System.out.println("getAssessmentquestion---- id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
+			// TODO Auto-generated method stub
+			System.out.println("getAssessmentquestion---- id " + id);
+			Session session = this.sessionFactory.getCurrentSession();
 
-		Query query = session.createQuery("from assessmenyquestion where id="
-				+ id);
+			Query query = session.createQuery("from assessmenyquestion where id="
+					+ id);
 
-		List<AssessmentQuestions> AssessmentQuestionsList = query.list();
-		AssessmentQuestions aq = AssessmentQuestionsList.get(0);
-		System.out.println(aq);
-		return aq;
+			List<AssessmentQuestions> AssessmentQuestionsList = query.list();
+			AssessmentQuestions aq = AssessmentQuestionsList.get(0);
+			System.out.println(aq);
+			return aq;
 
+		
 	}
-
+	
+	
 	@Override
 	public String updateCertificate(String data) {
 		// TODO Auto-generated method stub
-		System.out.println("inside updateCertificate " + data);
+		System.out.println("inside updateCertificate "+data);
 		Session session = this.sessionFactory.getCurrentSession();
-		String sql = "update nomineetrainee set certificatestatus = 'Y' where  id in ("
-				+ data + ")";
+		String sql="update nomineetrainee set certificatestatus = 'Y' where  id in ("+data+")";
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
-
+				
 		return "created";
 	}
-
 	@Override
 	public List<TrainingSchedule> listTrainingSchedule_for_trainer(int id) {
 		// TODO Auto-generated method stub
 		System.out.println("inside listTrainingSchedule with parameter");
-		Session session = this.sessionFactory.getCurrentSession(); // coalesce(isactive,'A')
-																	// <> 'I'
-																	// and //
-																	// isactive='A'
-																	// and
-		List<TrainingSchedule> mccList = session.createQuery(
-				"from TrainingSchedule where coalesce(isactive,'') <> 'I' and trainer_id='"
-						+ id + "'  ").list();
+		Session session = this.sessionFactory.getCurrentSession();  
+		//List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and trainer_status='N' and trainer_id='"+id+"'  ").list();
+		List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(trainer_status,'') <> 'Y' and trainer_id='"+id+"'  ").list();
+		
 		for (TrainingSchedule p : mccList) {
 			System.out.println("listTrainingSchedule List::" + p);
 		}
 		return mccList;
-
+		
 	}
 
 	@Override

@@ -24,7 +24,7 @@
             <div class="row">
                                             <div class="col-xs-12">
                                            <fieldset>
-                                           <legend>Training Request</legend>
+                                           <legend>Training Requests for Trainer</legend>
                                             <ct:if test="${!empty listTrainingSchedule_for_trainer}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
