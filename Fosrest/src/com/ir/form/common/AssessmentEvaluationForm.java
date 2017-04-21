@@ -5,23 +5,22 @@ import java.util.List;
 public class AssessmentEvaluationForm {
 
 	/**Course name for which the assessment has been processing */
-	public int courseNameId;
+	public String moduleId;
 	
 	/**List of questions id */
 	public List<Integer> assessmentQuestionsList;
 
-	/**
-	 * @return the courseNameId
-	 */
-	public int getCourseNameId() {
-		return courseNameId;
+
+
+
+
+
+	public String getModuleId() {
+		return moduleId;
 	}
 
-	/**
-	 * @param courseNameId the courseNameId to set
-	 */
-	public void setCourseNameId(int courseNameId) {
-		this.courseNameId = courseNameId;
+	public void setModuleId(String moduleId) {
+		this.moduleId = moduleId;
 	}
 
 	/**

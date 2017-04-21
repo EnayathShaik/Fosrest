@@ -33,13 +33,12 @@
 						Course</a></li>
 			</ul></li>  -->
 		        <li><a href="OnlineTraining.fssai">Online Training </a></li>
-				<li><a href="OnlineAssessment.fssai">Online Assessment</a></li>
+				<li><a href="assessment-instructions-trainee.fssai">Online Assessment</a></li>
 				<li><a href="GetScoreCard.fssai">Get Score Card </a></li>
 				<li><a href="Certificate.fssai">Certificate</a></li>
-		<!-- <li><a href="course-training.fssai?courseTypeId=1">Online Assessment</a></li>
-		<li><a href="assessment-instructions-trainee.fssai">Assessment</a>
-		</li>
-		<li><a href="feedbackForm.fssai">Feedback</a></li>
+		<!-- <li><a href="course-training.fssai?courseTypeId=1">Online Assessment</a></li>-->
+		<!-- <li><a href="assessment-instructions-trainee.fssai">Assessment</a></li> -->
+		<!-- <li><a href="feedbackForm.fssai">Feedback</a></li>
 		<li><a href="generateCertificatetrainee.fssai">Certification</a>
 		<li><a href="generateCourseCertificate.fssai">Past Certificate</a> </li> -->
 		</li>

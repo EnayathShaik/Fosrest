@@ -10,24 +10,24 @@ import java.util.List;
 public class TraineeAssessment {
 	
 	/** Name of the course for which assessment is submitting **/
-	private String courseName;
-	private int courseNameId;
-	private List<AssessmentQuestion_old> listAssessmentQuestion; 
+
+	private int moduleId;
+	private List<AssessmentQuestions> listAssessmentQuestion; 
 	private int totalQuestions;
 	private String loginId;
-	private String trainingCalendar;
+
 	
 	/**
 	 * @return the listAssessmentQuestion
 	 */
-	public List<AssessmentQuestion_old> getListAssessmentQuestion() {
+	public List<AssessmentQuestions> getListAssessmentQuestion() {
 		return listAssessmentQuestion;
 	}
 
 	/**
 	 * @param listAssessmentQuestion the listAssessmentQuestion to set
 	 */
-	public void setListAssessmentQuestion(List<AssessmentQuestion_old> listAssessmentQuestion) {
+	public void setListAssessmentQuestion(List<AssessmentQuestions> listAssessmentQuestion) {
 		this.listAssessmentQuestion = listAssessmentQuestion;
 	}
 
@@ -59,46 +59,14 @@ public class TraineeAssessment {
 		this.loginId = loginId;
 	}
 
-	/**
-	 * @return the trainingCalendar
-	 */
-	public String getTrainingCalendar() {
-		return trainingCalendar;
+
+
+	public int getModuleId() {
+		return moduleId;
 	}
 
-	/**
-	 * @param trainingCalendar the trainingCalendar to set
-	 */
-	public void setTrainingCalendar(String trainingCalendar) {
-		this.trainingCalendar = trainingCalendar;
-	}
-
-	/**
-	 * @return the courseName
-	 */
-	public String getCourseName() {
-		return courseName;
-	}
-
-	/**
-	 * @param courseName the courseName to set
-	 */
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	/**
-	 * @return the courseNameId
-	 */
-	public int getCourseNameId() {
-		return courseNameId;
-	}
-
-	/**
-	 * @param courseNameId the courseNameId to set
-	 */
-	public void setCourseNameId(int courseNameId) {
-		this.courseNameId = courseNameId;
+	public void setModuleId(int moduleId) {
+		this.moduleId = moduleId;
 	}
 
 }

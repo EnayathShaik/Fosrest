@@ -19,6 +19,7 @@ import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion_old;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -35,16 +36,20 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<AssessmentQuestion_old> getAssessmentQuestions(int courseType, int courseName) {
+	public List<AssessmentQuestions> getAssessmentQuestions( int moduleId) {
 		System.out.println("AssessmentQuestions");
-//		Criteria criteria = session.createCriteria(AssessmentQuestion.class);
-//		criteria.add(Restrictions.eq("courseName", courseName));
-//		criteria.add(Restrictions.eq("courseType", courseType));
-//		List <AssessmentQuestion> listAssessmentQuestions = criteria.list();
+		List<AssessmentQuestions> assessmentQuestions = null;
 		Session session = sessionFactory.getCurrentSession();
-//		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseName +" and courseType= "+courseType);
-		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseName);
-		List<AssessmentQuestion_old> assessmentQuestions = query.list();
+		try{
+			Query query = session.createQuery("from AssessmentQuestions where cast(modulecode as int) = "+ moduleId);
+			 assessmentQuestions = query.list();
+			 System.out.println(" assessmentQuestions "+assessmentQuestions);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+			
+	
+		
 		return assessmentQuestions;
 	}
 
@@ -107,14 +112,15 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	}
 
 	@Override
-	public List<AssessmentQuestion_old> getAssessmentAnswers(int courseType, List<Integer> questions) {
+	public List<AssessmentQuestions> getAssessmentAnswers(int modulecode, List<Integer> questions) {
 		Session session = sessionFactory.getCurrentSession();
 		String questionIds = questions.toString();
 		if(questionIds.length() >2){
 			questionIds = questionIds.substring(1,questionIds.length()-1);
 		}
-		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseType +" and assessmentquestionid in ("+questionIds+")");
-		List<AssessmentQuestion_old> listAssessmentQuestions = query.list();
+		System.out.println(" modulecode "+modulecode);
+		Query query = session.createQuery(" from AssessmentQuestions where modulecode = '"+ modulecode +"' and assessmentid in ("+questionIds+")");
+		List<AssessmentQuestions> listAssessmentQuestions = query.list();
 		
 		return listAssessmentQuestions;
 	}

@@ -101,7 +101,7 @@ public interface TraineeService {
 	public List<FeedbackForm> getFeedbackDetails(Utility utility);
 	
 	
-	public int getCurrentCourseId(int loginId);
+	public int getCurrentModuleId(int loginId);
 	
 	
 	public AdmitCardForm generateTrainerAdmitCard(int loginId,int profileId);
@@ -181,6 +181,8 @@ public interface TraineeService {
 
  public List<AssessmentQuestionForm> listingAssessmentQuestion(
 			AssessmentQuestionForm assesQuestionForm, int id);
+	
+	
 	
 	
 	

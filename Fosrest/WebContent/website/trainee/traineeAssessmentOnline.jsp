@@ -23,7 +23,7 @@
         <!-- vertical button -->
 	<div class="row">
             <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> 
-			<span class="orange-font">Welcome Trainee</span> </a>
+			<span class="orange-font">Welcome ${userName}</span> </a>
 			</div>
           </div>
         <!-- vertical button -->
@@ -39,7 +39,7 @@
 			<script >
 			var questionList = ${traineeAssessment};
 			
-			$('#questionsTable').append('<input type="hidden" name="courseNameId" value = "'+questionList.courseNameId+'">');
+			$('#questionsTable').append('<input type="hidden" name="moduleId" value = "'+questionList.moduleId+'">');
 // 			$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "+JSON.stringify(assessmentQuestions)+">');
 			$(window).load(function () {
 				var assessmentQuestions = [];
@@ -48,7 +48,7 @@
 					$('#questionsTable').append('<li><strong>Question No.'+questionList.listAssessmentQuestion[index].questionNumber+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
 					
 					//var noOption=questionList.listAssessmentQuestion[index].noOfOption;
-					assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentQuestionId);
+					assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentId);
 					var noOption=questionList.listAssessmentQuestion[index].noOfOption;
 					$('#questionsTable').append('<table width="200" border="0">');
 					for(var noOptionIndex=1; noOptionIndex<=noOption; noOptionIndex++){
@@ -76,11 +76,12 @@
 						}
 						questionOption += value;
 						var questionListRow = questionList.listAssessmentQuestion[index];
-						$('#questionsTable').append('<tr><td>'+noOptionIndex+')</td> <td><input name="'+questionList.listAssessmentQuestion[index].assessmentQuestionId+'" type="radio" value="'+noOptionIndex+'"></td><td>'+questionListRow[questionOption]+'</td></tr>')
+						$('#questionsTable').append('<tr><td>'+noOptionIndex+')</td> <td><input name="'+questionList.listAssessmentQuestion[index].assessmentId+'" type="radio" value="'+noOptionIndex+'"></td><td>'+questionListRow[questionOption]+'</td></tr>')
 					}
 					$('#questionsTable').append('</table>');
 					$('#questionsTable').append('</ol>')
 				}
+				
 				$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "'+assessmentQuestions+'">');
 				$('#questionsTable').append('<input type="hidden" name = "assessmentQuestions" value = "'+JSON.stringify(assessmentQuestions)+'">');
 			});

@@ -51,6 +51,7 @@ import com.ir.form.RegistrationFormTrainer;
 import com.ir.form.TrainingRequestForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.AssessmentQuestion_old;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CourseTrainee;
 import com.ir.model.CourseType;
@@ -426,10 +427,10 @@ public class TraineeController {
 		if(loginId > 0){
 			TraineeAssessment traineeAssessment = new TraineeAssessment();
 			int courseType = 1;
-			int courseNameId = 	traineeService.getCurrentCourseId(loginId);
-			List<AssessmentQuestion_old> assessmentQuestions =  assessmentService.getAssessmentQuestions(courseType, courseNameId);
+			int moduleId = 	traineeService.getCurrentModuleId(loginId);
+			List<AssessmentQuestions> assessmentQuestions =  assessmentService.getAssessmentQuestions( moduleId);
 			traineeAssessment.setListAssessmentQuestion(assessmentQuestions);
-			traineeAssessment.setCourseNameId(courseNameId);
+			traineeAssessment.setModuleId(moduleId);
 			Gson gson=new Gson();
 			String list=gson.toJson(traineeAssessment);
 			responseText = "traineeAssessmentOnline";
@@ -496,14 +497,10 @@ public class TraineeController {
 		Integer userId = 0;
 		try{
 			userId = (Integer) session.getAttribute("userId");
-			String isOnline=traineeService.isCourseOnline(userId);
-			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
-			model.addAttribute("courseTrainee", courseTrainee);
-			if(isOnline != null && isOnline.toUpperCase().contains("ONLINE")){
-				model.addAttribute("ISONLINE","YES");
-			}else{
-				model.addAttribute("ISONLINE","NO");
-			}
+			OnlineTrainingForm trainingDetails = traineeService.listOnlineTraining(userId);
+			
+			model.addAttribute("trainingDetails", trainingDetails);
+		
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("Exception while course details save : "+ e.getMessage());

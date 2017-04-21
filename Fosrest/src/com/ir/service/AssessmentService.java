@@ -6,13 +6,14 @@ import java.util.Map;
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion_old;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 
 public interface AssessmentService {
 	
-	public List<AssessmentQuestion_old> getAssessmentQuestions(int courseType, int courseName);
+	public List<AssessmentQuestions> getAssessmentQuestions( int moduleId);
 	
 	
 	public String saveAssessment(List<AssessmentAnswerCriteria> assessmentAnswerCriteria);
@@ -26,10 +27,10 @@ public interface AssessmentService {
 	public List<IntStringBean> getTrainingPartners(int assessorId);
 	
 	
-	public List<AssessmentQuestion_old> getAssessmentAnswers(int courseType, List<Integer> questions);
+	public List<AssessmentQuestions> getAssessmentAnswers(int courseType, List<Integer> questions);
 	
 	
-	public TraineeAssessmentEvaluation evaluate(Map<String,String> question,List<AssessmentQuestion_old> answers, int courseNameId);
+	public TraineeAssessmentEvaluation evaluate(Map<String,String> question,List<AssessmentQuestions> answers, int courseNameId);
 	
 	
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation);

@@ -30,6 +30,7 @@ import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.common.AssessmentEvaluationForm;
 import com.ir.model.AssessmentQuestion_old;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.service.AssessmentService;
 import com.ir.service.TraineeService;
@@ -57,18 +58,16 @@ public class AssessmentController {
 			Map<String, String> questionMap = new HashMap<>();
 			List<AssessmentAnswerCriteria> listAnswerCriteria = new ArrayList<AssessmentAnswerCriteria>();
 			AssessmentAnswerCriteria assessmentAnswerCriteria = new AssessmentAnswerCriteria();
-
-			List<AssessmentQuestion_old> answers = assessmentService
-					.getAssessmentAnswers(
-							assessmentEvaluationForm.getCourseNameId(),
-							assessmentEvaluationForm.getAssessmentQuestionsList());
+			System.out.println(" module id "+assessmentEvaluationForm.getModuleId());
+			List<AssessmentQuestions> answers = assessmentService.getAssessmentAnswers(Integer.parseInt(assessmentEvaluationForm.getModuleId()),assessmentEvaluationForm.getAssessmentQuestionsList());
 			Enumeration<String> enumeration = request.getParameterNames();
 			HttpSession httpSession = request.getSession(false);
 			int loginIdUniuqe = (Integer) httpSession.getAttribute("loginIdUnique");
 			int userId = (Integer) httpSession.getAttribute("userId");
 			while (enumeration.hasMoreElements()) {
 				String parameterName = (String) enumeration.nextElement();
-				if (!parameterName.equalsIgnoreCase("courseNameId")
+				System.out.println("parameterName "+parameterName);
+				if (!parameterName.equalsIgnoreCase("moduleId")
 						&& !parameterName.equalsIgnoreCase("assessmentQuestions")
 						&& !parameterName
 								.equalsIgnoreCase("assessmentQuestionsList")) {
@@ -79,8 +78,8 @@ public class AssessmentController {
 					assessmentAnswerCriteria.setSelectedAnswer(Integer
 							.parseInt(request.getParameter(parameterName)));
 
-				} else if (parameterName.equalsIgnoreCase("courseNameId")) {
-					assessmentAnswerCriteria.setCourseNameId(Integer
+				} else if (parameterName.equalsIgnoreCase("moduleId")) {
+					assessmentAnswerCriteria.setModuleId(Integer
 							.parseInt(request.getParameter(parameterName)));
 				}
 				assessmentAnswerCriteria.setLoginId(loginIdUniuqe);
@@ -89,9 +88,7 @@ public class AssessmentController {
 			new ZLogger("submitAssessment","Assessment save begin.."+questionMap, "AssessmentController.java");
 			assessmentService.saveAssessment(listAnswerCriteria);
 
-			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService
-					.evaluate(questionMap, answers,
-							assessmentEvaluationForm.getCourseNameId());
+			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService.evaluate(questionMap, answers,Integer.parseInt(assessmentEvaluationForm.getModuleId()));
 			traineeAssessmentEvaluation.setLogindetails(loginIdUniuqe);
 			assessmentService
 					.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);

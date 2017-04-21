@@ -25,8 +25,8 @@ public class ListConstant {
     public static final Map<String, String> trainingTypeMap;
     static {
         Map<String, String> atrainingTypeMap = new HashMap<String, String>();
-        atrainingTypeMap.put("IND", "Induction");
-        atrainingTypeMap.put("REF", "Refresher");
+        atrainingTypeMap.put("Induction", "Induction");
+        atrainingTypeMap.put("Refresher", "Refresher");
         trainingTypeMap = Collections.unmodifiableMap(atrainingTypeMap);
     }
     
@@ -43,8 +43,9 @@ public class ListConstant {
     public static final Map<String, String> trainingPhaseMap;
     static {
         Map<String, String> atrainingPhaseMap = new HashMap<String, String>();
-        atrainingPhaseMap.put("cmp", "Completed");
-        atrainingPhaseMap.put("con", "Confirmed");
+        atrainingPhaseMap.put("Initial", "Initial");
+        atrainingPhaseMap.put("Completed", "Completed");
+        atrainingPhaseMap.put("Confirmed", "Confirmed");
         trainingPhaseMap = Collections.unmodifiableMap(atrainingPhaseMap);
     }
     

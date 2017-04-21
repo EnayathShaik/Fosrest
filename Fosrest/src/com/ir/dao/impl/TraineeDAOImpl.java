@@ -733,17 +733,15 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	@Override
-	public int getCurrentCourseId(int loginId) {
+	public int getCurrentModuleId(int loginId) {
 		Session session = sessionFactory.getCurrentSession();
 		/**
 		 * TODO - add training status change training status as 'A' while course
 		 * enrollment
 		 **/
-		String sql = "select cn.coursenameid "
-				+ "from courseenrolleduser  ceu "
-				+ "inner join trainingcalendar tc on tc.trainingcalendarid =   ceu.trainingcalendarid "
-				+ "inner join coursename cn on cn.coursenameid = tc.coursename where ceu.status = 'N' and ceu.logindetails = "
-				+ loginId;
+		String sql = "select moduleid from nomineetrainee  nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) "
+				+ " where nt.status='N' and nt.logindetails= "+loginId;
+				
 		Query query = session.createSQLQuery(sql);
 		List listCourseNameId = query.list();
 		if (listCourseNameId.size() > 0) {
@@ -1541,7 +1539,7 @@ System.out.println("list "+list);
 			OnlineTrainingForm bean = new OnlineTrainingForm();
 		//	List<OnlineTrainingForm> list = new ArrayList<OnlineTrainingForm>();
 			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> lst = session.createSQLQuery("select ts.trainingtype,ts.trainingphase,mm.modulename,ts.trainingstartdate,ts.trainingenddate from modulemaster mm left join trainingschedule ts on (mm.moduleid = ts.moduleid) left join nomineetrainee nt on (nt.trainingscheduleid = ts.trainingscheduleid ) where nt.logindetails ='"+ id +"'").list();
+			List<Object[]> lst = session.createSQLQuery("select trainingtype , trainingphase ,mm.modulename,  trainingstartdate , trainingenddate  from nomineetrainee nt  left join trainingschedule ts on  (nt.trainingscheduleid = ts.trainingscheduleid) left join modulemaster mm on (mm.moduleid = ts.moduleid) where nt.logindetails ='"+ id +"'").list();
 			
 			if(lst.size() > 0){
 			 Object[] obj=	lst.get(0);
@@ -1556,10 +1554,7 @@ System.out.println("list "+list);
 			return  bean;
 		}
 
-		
-
-
-		
+			
 		//listing online question
 		@Override
 		public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm, int id) {

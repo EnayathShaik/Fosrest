@@ -17,6 +17,7 @@ import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion_old;
+import com.ir.model.AssessmentQuestions;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
@@ -30,9 +31,9 @@ public class AssessmentServiceImpl implements AssessmentService {
 	private AssessmentDao assessmentDao;
 	@Override
 	@Transactional
-	public List<AssessmentQuestion_old> getAssessmentQuestions(int courseType, int courseName) {
+	public List<AssessmentQuestions> getAssessmentQuestions( int moduleId) {
 //		AssessmentDaoImpl assessmentDao = new AssessmentDaoImpl();
-		final List<AssessmentQuestion_old> listAssessmetQustions = assessmentDao.getAssessmentQuestions(courseType, courseName);
+		final List<AssessmentQuestions> listAssessmetQustions = assessmentDao.getAssessmentQuestions( moduleId);
 		return listAssessmetQustions;
 	}
 	@Override
@@ -65,20 +66,20 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 	@Override
 	@Transactional
-	public List<AssessmentQuestion_old> getAssessmentAnswers(int courseType, List<Integer> questions) {
+	public List<AssessmentQuestions> getAssessmentAnswers(int modulecode, List<Integer> questions) {
 		// TODO Auto-generated method stub
-		List<AssessmentQuestion_old> answersList = assessmentDao.getAssessmentAnswers(courseType, questions);
+		List<AssessmentQuestions> answersList = assessmentDao.getAssessmentAnswers(modulecode, questions);
 		return answersList;
 	}
 
 	@Override
 	@Transactional
-	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestion_old> answers, int courseNameId){
+	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestions> answers, int courseNameId){
 		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
 		//int totalQuestion = answers.size();
 		Map<String, Integer> answersMap = new HashMap<String, Integer>();
 		for (int i = 0; i < answers.size(); i++) {
-			answersMap.put(String.valueOf(answers.get(i).getAssessmentQuestionId()), answers.get(i).getCorrectAnswer());
+			answersMap.put(String.valueOf(answers.get(i).getAssessmentId()), answers.get(i).getCorrectAnswer());
 		}
 		int totalQuestions = answers.size();
 		int correctAnswers = 0;

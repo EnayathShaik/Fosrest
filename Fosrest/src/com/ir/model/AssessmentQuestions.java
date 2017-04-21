@@ -14,11 +14,11 @@ public class AssessmentQuestions {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name= "assessmentId")
-	private int assessmentId;
-String unitCode,moduleCode;
 	
-	int questionNumber;
+	private int assessmentId;
+	private String unitCode,moduleCode;
+	
+	private int questionNumber;
 	private String questionTitle;
 	private String questionHint;
 	private int noOfOption;

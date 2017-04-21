@@ -36,6 +36,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
+import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.Utility;
 import com.ir.service.TraineeService;
@@ -189,8 +190,8 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 	@Override
 	@Transactional
-	public int getCurrentCourseId(int loginId){
-		return traineeDAO.getCurrentCourseId(loginId);
+	public int getCurrentModuleId(int loginId){
+		return traineeDAO.getCurrentModuleId(loginId);
 	}
 	@Override
 	@Transactional
@@ -400,6 +401,8 @@ public class TraineeServiceImpl implements TraineeService {
 			// TODO Auto-generated method stub
 			return this.traineeDAO.listOnlineTraining(id);
 		}
+	
+	
 
 
 		@Override
@@ -410,10 +413,6 @@ public class TraineeServiceImpl implements TraineeService {
 			return this.traineeDAO.listingAssessmentQuestion( assesQuestionForm, id);
 		}
 
-	
-		
-		
-		
 
 
 }
