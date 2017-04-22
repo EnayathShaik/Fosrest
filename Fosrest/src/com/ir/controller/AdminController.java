@@ -1786,20 +1786,14 @@ public class AdminController {
 		System.out.println("result " + result.hasErrors());
 		if (result.hasErrors()) {
 
-			new ZLogger("StateMaster", "bindingResult.hasErrors  "
-					+ result.hasErrors(), "AdminController.java");
-			new ZLogger("StateMaster", "bindingResult.hasErrors  "
-					+ result.getErrorCount() + " All Errors "
-					+ result.getAllErrors(), "AdminController.java");
-			// model.addAttribute("error",result.hasErrors() );
-			ValidationUtils.rejectIfEmpty(result, "moduleName",
-					"Name can not be empty.");
+			new ZLogger("StateMaster", "bindingResult.hasErrors  "+ result.hasErrors(), "AdminController.java");
+			new ZLogger("StateMaster", "bindingResult.hasErrors  "+ result.getErrorCount() + " All Errors "+ result.getAllErrors(), "AdminController.java");
+			ValidationUtils.rejectIfEmpty(result, "moduleName","Name can not be empty.");
 			return "redirect:/ModuleMaster.fssai";
 			// return "ModuleMaster";
 		}
 
-		System.out
-				.println("p.getId() " + p.getModuleId() + " " + p.getUnitId());
+		System.out.println("p.getId() " + p.getModuleId() + " " + p.getUnitId());
 		ModuleMaster moduleMaster = new ModuleMaster();
 		moduleMaster.setModuleId(p.getModuleId());
 		moduleMaster.setModuleName(p.getModuleName());
@@ -1807,8 +1801,7 @@ public class AdminController {
 		moduleMaster.setContentName(p.getContentName());
 		moduleMaster.setContentLink(p.getContentLink());
 		moduleMaster.setContentType(p.getContentType());
-		moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p
-				.getUnitId()));
+		moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p.getUnitId()));
 
 		if (p.getModuleId() == 0) {
 			// new person, add it

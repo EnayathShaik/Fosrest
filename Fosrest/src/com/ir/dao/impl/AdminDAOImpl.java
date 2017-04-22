@@ -1783,7 +1783,13 @@ public class AdminDAOImpl implements AdminDAO {
 		public void updateUnitMaster(UnitMaster p) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
-			session.update(p);
+			UnitMaster unit = (UnitMaster) session.load(UnitMaster.class, p.getUnitId());
+			unit.setUserType(p.getUserType());
+			unit.setUnitName(p.getUnitName());
+			unit.setTrainingPhase(p.getTrainingPhase());
+			unit.setTrainingType(p.getTrainingType());
+			unit.setStatus(p.getStatus());
+			session.update(unit);
 			
 		}
 		
@@ -1808,10 +1814,7 @@ public class AdminDAOImpl implements AdminDAO {
 			Session session = this.sessionFactory.getCurrentSession();
 			
 		Query query = session.createQuery("from UnitMaster where UnitId="+id);
-		
 		List<UnitMaster> UnitMasterList = query.list();
-		System.out.println(UnitMasterList.size());
-		System.out.println("error herer" +UnitMasterList.get(0));
 		UnitMaster hm = UnitMasterList.get(0);
 			return hm; 
 			
@@ -1870,7 +1873,12 @@ public class AdminDAOImpl implements AdminDAO {
 		public void updateModuleMaster(ModuleMaster p) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
-			session.update(p);
+			ModuleMaster mm = (ModuleMaster) session.load(ModuleMaster.class, p.getModuleId());
+			mm.setModuleName(p.getModuleName());
+			mm.setStatus(p.getStatus());
+			mm.setContentLink(p.getContentLink());
+			mm.setContentType(p.getContentType());
+			session.update(mm);
 			
 		}
 		
@@ -2030,7 +2038,20 @@ public class AdminDAOImpl implements AdminDAO {
 		public void updateTrainingSchedule(TrainingSchedule p) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
-			session.update(p);
+			TrainingSchedule trainingSchedule = (TrainingSchedule) session.load(TrainingSchedule.class, p.getTrainingScheduleId());
+			trainingSchedule.setTrainingType(p.getTrainingType());
+			trainingSchedule.setTrainingPhase(p.getTrainingPhase());
+			trainingSchedule.setTrainingStartDate(p.getTrainingStartDate());
+			trainingSchedule.setTrainingEndDate(p.getTrainingEndDate());
+			trainingSchedule.setUnitId(p.getUnitId());
+			trainingSchedule.setModuleId(p.getModuleId());
+			trainingSchedule.setTrainer_id(p.getTrainer_id());
+			trainingSchedule.setTrainingPartner(p.getTrainingPartner());
+			trainingSchedule.setTrainingInstitude(p.getTrainingInstitude());
+			trainingSchedule.setUserType(p.getUserType());
+			trainingSchedule.setState(p.getState());
+			trainingSchedule.setTrainingInstitudeStatus(p.getTrainingInstitudeStatus());
+			session.update(trainingSchedule);
 			
 		}
 		
