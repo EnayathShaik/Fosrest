@@ -1,4 +1,4 @@
-<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+\<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <%System.out.print("trainee home page jsp"); %>
@@ -53,8 +53,8 @@
 												<td>${TrainingSchedule.trainingEndDate}</td>
 												<td>20</td>
 												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
-												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 });return false;' >Accept</button></td>
-												<td><a  class="btn login-btn" href="<ct:url value='/TrainingSchedule/remove/${TrainingSchedule.trainingScheduleId}.fssai' />" >Reject</a></td>
+												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"accept");return false;' >Accept</button></td>
+												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"reject");return false;' >Reject</button></td>
 												
 											</tr>
 										</ct:forEach>
@@ -73,14 +73,14 @@
 
 <script>
 
-function acceptTrainingRequest(id , profileId,loginUser2){
-	alert(" id "+id + "profileId  "+profileId+" userID:"+loginUser2);
+function acceptTrainingRequest(id , profileId,loginUser2,operation){
+	alert(" id "+id + "profileId  "+profileId+" userID:"+loginUser2+" OPer="+operation);
 	   var name1=JSON.stringify({
   		courseName:0
     })
   	$.ajax({
   	      type: 'post',
-  	    url: 'TrainingSchedule/accept/'+id+'.fssai?profileId='+profileId+'&loginUser2='+loginUser2,
+  	    url: 'TrainingSchedule/accept/'+id+'.fssai?profileId='+profileId+'&loginUser2='+loginUser2+'&operation='+operation,
   	      contentType : "application/json",
   		  data:name1,
   	      success: function (response) {  

@@ -230,8 +230,8 @@ public interface AdminService {
 	public List<TrainingSchedule> listTrainingSchedule();
 	public void addTrainingSchedule(TrainingSchedule p);
 	public void updateTrainingSchedule(TrainingSchedule p);
-	public void removeTrainingSchedule(int id ,int profileid);
-	public void acceptTrainingSchedule(int id , int profileid,int loginUser2,int userTableId);
+	public void removeTrainingSchedule(int id );
+	public void acceptTrainingSchedule(int id , int profileid,int loginUser2,int userTableId,String operation);
 	public TrainingSchedule getTrainingScheduleById(int id);
 	public List<PersonalInformationTrainingInstitute> listTrainingInstitude();
 	

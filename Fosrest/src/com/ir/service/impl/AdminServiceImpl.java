@@ -705,16 +705,16 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public void removeTrainingSchedule(int id,int profileId){
-		 this.adminDAO.removeTrainingSchedule(id,profileId);
+	public void removeTrainingSchedule(int id){
+		 this.adminDAO.removeTrainingSchedule(id);
 		
 	}
 	
 	//acceptTrainingSchedule
 	@Override
 	@Transactional
-	public void acceptTrainingSchedule(int id , int profileId,int loginUser2,int userTableId){
-		 this.adminDAO.acceptTrainingSchedule(id , profileId,loginUser2,userTableId);
+	public void acceptTrainingSchedule(int id , int profileId,int loginUser2,int userTableId,String operation){
+		 this.adminDAO.acceptTrainingSchedule(id , profileId,loginUser2,userTableId,operation);
 		
 	}
 	

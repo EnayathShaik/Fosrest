@@ -2012,23 +2012,11 @@ public class AdminController {
 	}
 
 	@RequestMapping("/TrainingSchedule/remove/{id}")
-	public String removeTrainingSchedule(@PathVariable("id") int id,HttpSession session) {
+	public String removeTrainingSchedule(@PathVariable("id") int id) {
 		
-		int pid=(int)session.getAttribute("profileId");
-		
-		this.adminService.removeTrainingSchedule(id,pid);
-		
-		if(pid==1)
-			return "redirect:/TrainingSchedule.fssai";
-		
-		else  if(pid==4){
-			//return "redirect:/trainerHomepage.fssai";
-			return "trainerHomepage";
-		}
+	this.adminService.removeTrainingSchedule(id);
+	return "redirect:/TrainingSchedule.fssai";
 	
-			
-		//return "redirect:/trainingInstitudeHomepage.fssai";
-		return "trainingInstitudeHomepage";
 	}
 
 	@RequestMapping("/TrainingSchedule/accept/{id}")
@@ -2037,6 +2025,8 @@ public class AdminController {
 		String profileId = request.getParameter("profileId");
 		String loginUser2 = request.getParameter("loginUser2");
 		String userTableId = request.getParameter("userTableId");
+		String operation = request.getParameter("operation");
+		System.out.println(operation);
 		if (loginUser2 == null) {
 			// Integer.parseInt(loginUser2);
 			loginUser2 = "0";
@@ -2047,7 +2037,7 @@ public class AdminController {
 		}
 		this.adminService.acceptTrainingSchedule(id,
 				Integer.parseInt(profileId), Integer.parseInt(loginUser2),
-				Integer.parseInt(userTableId));
+				Integer.parseInt(userTableId),operation);
 		//return "redirect:/TrainingSchedule.fssai";
 
 		if(Integer.parseInt(profileId)==4){

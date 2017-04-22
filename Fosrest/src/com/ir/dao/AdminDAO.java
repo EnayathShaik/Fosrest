@@ -209,8 +209,8 @@ public interface AdminDAO {
 		
 		public void updateTrainingSchedule(TrainingSchedule p);
 		
-		public void removeTrainingSchedule(int id,int profileId);
-		public void acceptTrainingSchedule(int id , int profileId,int loginUser2,int userTableId);
+		public void removeTrainingSchedule(int id);
+		public void acceptTrainingSchedule(int id , int profileId,int loginUser2,int userTableId,String operation);
 		
 		public TrainingSchedule getTrainingScheduleById(int id);
 		

@@ -2205,23 +2205,11 @@ public class AdminDAOImpl implements AdminDAO {
 		//removeTrainingSchedule
 		
 		@Override
-		public void removeTrainingSchedule(int id,int profileId) {
+		public void removeTrainingSchedule(int id) {
 			// TODO Auto-generated method stub
-			System.out.println("In remove trainingschedule AdminDaoImpl");
 			Session session = this.sessionFactory.getCurrentSession();
-			System.out.println(" id  "+id);
 			String sql=null;
-			System.out.println(profileId);
-			if(profileId==1)
-				sql =	"update TrainingSchedule set isActive='I' where trainingScheduleId="+id;
-				
-			else if(profileId == 4	){
-				
-				sql =	"update TrainingSchedule set trainer_status=null where trainingScheduleId="+id;
-				
-			}else{
-				sql =	"update TrainingSchedule set training_institude_status=null where trainingScheduleId="+id;
-			}
+			sql =	"update TrainingSchedule set isActive='I' where trainingScheduleId="+id;
 			Query query = session.createSQLQuery(sql);			
 			query.executeUpdate();
 			
@@ -2230,14 +2218,27 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		
 		@Override
-		public void acceptTrainingSchedule(int id , int profileId, int loginUser2,int userTableId ) {
+		public void acceptTrainingSchedule(int id , int profileId, int loginUser2,int userTableId,String operation ) {
 			Session session = this.sessionFactory.getCurrentSession();
 			String sql= null;
-			if(profileId == 4	){
+		
+			if(operation.equals("accept")){
+			
+			if(profileId == 4 ){
 				sql =	"update TrainingSchedule set trainer_status='Y',trainer_id="+loginUser2+"where trainingScheduleId="+id;	
 			}else{
 				sql =	"update TrainingSchedule set training_institude_status='Y',training_institude_id="+userTableId+" where trainingScheduleId="+id;
 			}
+			}
+			else{
+				
+				if(profileId == 4 ){
+					sql =	"update TrainingSchedule set trainer_status=null where trainingScheduleId="+id;	
+				}else{
+					sql =	"update TrainingSchedule set training_institude_status=null where trainingScheduleId="+id;
+				}
+			}
+				
 			
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();

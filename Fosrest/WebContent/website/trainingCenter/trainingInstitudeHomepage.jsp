@@ -54,8 +54,8 @@ wwindow.profileId = '${profileId}';
 												<td>${TrainingSchedule.trainingEndDate}</td>
 												<td>20</td>
 												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
-												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} ,${profileId},${userTableId } );return false;' >Accept</button></td>
-												<td><a  class="btn login-btn" href="<ct:url value='/TrainingSchedule/remove/${TrainingSchedule.trainingScheduleId}.fssai?profileId=${profileId}' />" >Reject</a></td>
+												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} ,${profileId},${userTableId },"accept");return false;' >Accept</button></td>
+												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} ,${profileId},${userTableId },"reject" );return false;' >Reject</button></td>
 												
 											</tr>
 										</ct:forEach>
@@ -72,14 +72,14 @@ wwindow.profileId = '${profileId}';
 <!-- scripts --> 
 <script>
 
-function acceptTrainingRequest(id , profileId,userTableId){
-	alert(" id "+id + "profileId  "+profileId+" userID:"+userTableId);
+function acceptTrainingRequest(id , profileId,userTableId,operation){
+	alert(" id "+id + "profileId  "+profileId+" userID:"+userTableId+"OPeration : "+operation);
 	   var name1=JSON.stringify({
   		courseName:0
     })
   	$.ajax({
   	      type: 'post',
-  	    url: 'TrainingSchedule/accept/'+id+'.fssai?profileId='+profileId+'&userTableId='+userTableId,
+  	    url: 'TrainingSchedule/accept/'+id+'.fssai?profileId='+profileId+'&userTableId='+userTableId+'&operation='+operation,
   	      contentType : "application/json",
   		  data:name1,
   	      success: function (response) {  
