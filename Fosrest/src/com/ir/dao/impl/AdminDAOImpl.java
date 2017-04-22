@@ -2145,6 +2145,7 @@ public class AdminDAOImpl implements AdminDAO {
 		public void addStateMaster(StateMaster p) {
 			// TODO Auto-generated method stub
 			System.out.println("RegionMapping "+p.getStateId());
+			p.setIsActive("Y");
 			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(p);
 		}
@@ -2165,11 +2166,13 @@ public class AdminDAOImpl implements AdminDAO {
 		public void removeStateMaster(int id) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
+			String sql= null;
 			StateMaster p = (StateMaster) session.load(StateMaster.class, new Integer(id));
 			if (null != p) {
-				session.delete(p);
+				sql =	"update StateMaster set isactive='N' where stateid="+id;	
 			}
-			
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
 		}
 		
 		@Override
@@ -2192,7 +2195,7 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			System.out.println("inside listStateMaster");
 			Session session = this.sessionFactory.getCurrentSession();
-			List<StateMaster> mccList = session.createQuery("from StateMaster").list();
+			List<StateMaster> mccList = session.createQuery("from StateMaster where coalesce(isactive,'') <> 'N' ").list();
 			for (StateMaster p : mccList) {
 				System.out.println("State List::" + p);
 			}
@@ -2217,6 +2220,7 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("DistrictMaster "+p.getDistrictId());
 			StateMaster sm =  getStateMasterById(p.getStateMaster().getStateId());
 			p.setStateMaster(sm);
+			p.setIsActive("Y");
 			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(p);
 		}
@@ -2237,11 +2241,13 @@ public class AdminDAOImpl implements AdminDAO {
 		public void removeDistrictMaster(int id) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
+			String sql= null;
 			DistrictMaster p = (DistrictMaster) session.load(DistrictMaster.class, new Integer(id));
 			if (null != p) {
-				session.delete(p);
+				sql =	"update DistrictMaster set isactive='N' where districtId="+id;
 			}
-			
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
 		}
 		
 		@Override
@@ -2264,7 +2270,7 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			System.out.println("inside listDistrictMaster");
 			Session session = this.sessionFactory.getCurrentSession();
-			List<DistrictMaster> mccList = session.createQuery("from DistrictMaster").list();
+			List<DistrictMaster> mccList = session.createQuery("from DistrictMaster where coalesce(isactive,'') <> 'N'").list();
 			for (DistrictMaster p : mccList) {
 				System.out.println("District List::" + p);
 			}
@@ -2290,6 +2296,7 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("CityMaster "+p.getCityId());
 			DistrictMaster dm =  getDistrictMasterById(p.getDistrictMaster().getDistrictId());
 			p.setDistrictMaster(dm);
+			p.setIsActive("Y");
 			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(p);
 		}
@@ -2310,10 +2317,13 @@ public class AdminDAOImpl implements AdminDAO {
 		public void removeCityMaster(int id) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
+			String sql=null;
 			CityMaster p = (CityMaster) session.load(CityMaster.class, new Integer(id));
 			if (null != p) {
-				session.delete(p);
+				sql =	"update CityMaster set isactive='N' where cityId="+id;
 			}
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
 			
 		}
 		
@@ -2337,7 +2347,7 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			System.out.println("inside listCityMaster");
 			Session session = this.sessionFactory.getCurrentSession();
-			List<CityMaster> mccList = session.createQuery("from CityMaster").list();
+			List<CityMaster> mccList = session.createQuery("from CityMaster where coalesce(isactive,'') <> 'N'").list();
 			for (CityMaster p : mccList) {
 				System.out.println("City List::" + p);
 			}
@@ -2361,6 +2371,7 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("RegionMaster "+p.getId());
 			CityMaster cm =  getCityMasterById(p.getCityMaster().getCityId());
 			p.setCityMaster(cm);
+			p.setIsActive("Y");
 			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(p);
 		}
@@ -2381,10 +2392,13 @@ public class AdminDAOImpl implements AdminDAO {
 		public void removeRegionMaster(int id) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
+			String sql=null;
 			RegionMaster p = (RegionMaster) session.load(RegionMaster.class, new Integer(id));
 			if (null != p) {
-				session.delete(p);
+				sql =	"update DistrictMaster set isactive='N' where districtId="+id;
 			}
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
 			
 		}
 		
@@ -2408,7 +2422,7 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			System.out.println("inside listRegionMaster");
 			Session session = this.sessionFactory.getCurrentSession();
-			List<RegionMaster> mccList = session.createQuery("from RegionMaster").list();
+			List<RegionMaster> mccList = session.createQuery("from RegionMaster where coalesce(isactive,'') <> 'N'").list();
 			for (RegionMaster p : mccList) {
 				System.out.println("Region List::" + p);
 			}
