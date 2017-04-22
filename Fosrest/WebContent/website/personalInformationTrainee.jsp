@@ -33,16 +33,13 @@
 	 if(profileId ==2 || profileId == 1 ){ 
 		
 		 $("#statusDIV").css("display" , "block");
-		
-		/*   var loginId = getParameterByName("logId");
-		 alert("3");
-		 $("#logId").val(loginId);  */
+
 	 }
 	 if(isUpdate !=null && isUpdate== "Y"){
 		 alert("Update Your Details");
 		 var name = '${PersonalInformationTrainee.firstName}';
-		 
-		$("#logId").val('${PersonalInformationTrainee.logId}');
+		 alert('${PersonalInformationTrainee.loginDetails.id}');
+		$("#logId").val('${PersonalInformationTrainee.loginDetails.id}');
 		$("#correspondenceState").val('${PersonalInformationTrainee.correspondenceState}');
 		$("#correspondenceState").trigger("change");
         window.setTimeout(function() {

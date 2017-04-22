@@ -162,7 +162,7 @@
 		<li><a href="HolidayMaster.fssai">Holiday Master</a></li>
 		<li><a href="UnitMaster.fssai">Unit Master</a></li>
 		<li><a href="ModuleMaster.fssai">Module Master</a></li>
-		<li><a href="assessmentquestions.fssai">Assessment Questions</a></li>
+		<li><a href="manageAssessmentQuestions.fssai">Assessment Questions</a></li>
 		<li><a href="SubjectMaster.fssai">Subject Master</a></li>
 		<li><a href="">Training Calendar</a></li>
 		<li> <a href="CustomerMaster.fssai">Customer</a> </li>

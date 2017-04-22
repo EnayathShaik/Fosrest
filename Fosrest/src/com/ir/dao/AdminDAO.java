@@ -100,7 +100,7 @@ public interface AdminDAO {
 
 	State getState(int id);
 
-	public String manageAssessmentQuestionsSave(AssessmentQuestionForm_old assessmentQuestionForm);
+	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm);
 
 	CourseType getCourseType(int id);
 

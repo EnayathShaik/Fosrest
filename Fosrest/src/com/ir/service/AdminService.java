@@ -126,7 +126,7 @@ public interface AdminService {
 	String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
 	
 	
-	String manageAssessmentQuestionsSave(AssessmentQuestionForm_old assessmentQuestionForm);
+	String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm);
 //	boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
 	
 	

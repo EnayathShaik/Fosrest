@@ -109,11 +109,6 @@ function generateAnsSeq(){
 													
 													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
 												</cf:select> 
-											<%-- 	  <cf:select path="unitCode" class="form-control" onchange="getmyc(this.value , 'moduleCode')">
-                                         	
-									<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
-									</cf:select> --%>
-												
 											</div>
                                                  
                                             </div> <!-- left side ends -->
@@ -123,8 +118,7 @@ function generateAnsSeq(){
                                                                                           
                                                
                                                 
-                                                         <div class="form-group">
-                                                      
+                                                   <div class="form-group">  
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Module Name:</strong></li>
@@ -138,10 +132,7 @@ function generateAnsSeq(){
 												
 												   <ct:forEach var="twofields" items="${listModuleMaster}">
        												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleId} - ${twofields.moduleName}"/></cf:option>
-    												</ct:forEach> 
-												 
-												 
-												 
+    												</ct:forEach>
 												 </cf:select>
 											</div>
                                                 

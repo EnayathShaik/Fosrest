@@ -843,13 +843,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "";
 		if (profileId == 3) {
-			sql = "select personalinformationtraineeid from "
+			sql = "select id from "
 					+ data.tableName() + " where logindetails = " + loginId;
 		} else if (profileId == 4) {
-			sql = "select personalinformationtrainerid from "
+			sql = "select id from "
 					+ data.tableName() + " where logindetails = " + loginId;
 		} else if (profileId == 5 ) {
-			sql = "select personalinformationtrainingpartnerid from "
+			sql = "select id from "
 					+ data.tableName() + " where logindetails = " + loginId;
 		}
 		Query query = session.createSQLQuery(sql);
@@ -1586,10 +1586,10 @@ System.out.println("list "+list);
 			 //
 			 System.out.println(li[0]);
 			 bean.setId((int) li[0]);
-			 bean.setModuleCode((String) li[2]);
+			 bean.setModuleCode((int) li[2]);
 			 System.out.println(li[12]);
 			 bean.setNoOfOption((int) li[3]);
-			 bean.setUnitCode((String) li[13]);
+			 bean.setUnitCode((int) li[13]);
 			 bean.setQuestionNumber((int) li[11]);
 			 bean.setQuestionHint((String) li[10]);
 			 bean.setQuestionTitle((String) li[12]);

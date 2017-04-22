@@ -23,6 +23,7 @@ import com.ir.model.AssessmentQuestions;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.NomineeTrainee;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.util.HibernateUtil;
 import com.zentech.logger.ZLogger;
@@ -41,7 +42,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		List<AssessmentQuestions> assessmentQuestions = null;
 		Session session = sessionFactory.getCurrentSession();
 		try{
-			Query query = session.createQuery("from AssessmentQuestions where cast(modulecode as int) = "+ moduleId);
+			Query query = session.createQuery("from AssessmentQuestions where modulecode  = "+ moduleId);
 			 assessmentQuestions = query.list();
 			 System.out.println(" assessmentQuestions "+assessmentQuestions);
 		}catch(Exception e){
@@ -119,7 +120,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 			questionIds = questionIds.substring(1,questionIds.length()-1);
 		}
 		System.out.println(" modulecode "+modulecode);
-		Query query = session.createQuery(" from AssessmentQuestions where modulecode = '"+ modulecode +"' and assessmentid in ("+questionIds+")");
+		Query query = session.createQuery(" from AssessmentQuestions where modulecode = "+ modulecode +" and assessmentid in ("+questionIds+")");
 		List<AssessmentQuestions> listAssessmentQuestions = query.list();
 		
 		return listAssessmentQuestions;
@@ -132,13 +133,14 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	}
 
 	@Override
-	public int getElegibilityForAssessment(int coursenameid){
+	public int getElegibilityForAssessment(int moduleid){
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select eligibility from assessmenteligibility where coursenameid="+coursenameid;
+		String sql = "select eligibility from assessmenteligibility where moduleid="+moduleid;
 		Query query = session.createSQLQuery(sql);
 		List listEligibility = query.list();
 		if(listEligibility.size() > 0)
 		{
+			System.out.println(" --->"+(int)listEligibility.get(0));
 			return (int)listEligibility.get(0);
 		}
 		return -1;
@@ -320,21 +322,21 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	public String updateTraineeAssessmentResultOnline(Integer userID,String result,String comment) {
 		int courseenrolledUserID = 0;
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select courseenrolleduserid from courseenrolleduser where  status = 'N' and logindetails = "+userID;
+		String sql = "select id from nomineetrainee where  status = 'N' and logindetails = "+userID;
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		if(list.size() > 0){
 			courseenrolledUserID = (Integer) list.get(0);
 		}
 		if(courseenrolledUserID > 0){
-			CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session.load(CourseEnrolledUser.class, courseenrolledUserID);
+			NomineeTrainee nomineeTraineeUser = (NomineeTrainee) session.load(NomineeTrainee.class, courseenrolledUserID);
 			if(result != null && result.toUpperCase().equals("PASS")){
-				courseEnrolledUser.setResult("P");
+				nomineeTraineeUser.setResult("P");
 			}else{
-				courseEnrolledUser.setResult("F");
+				nomineeTraineeUser.setResult("F");
 			}
-			courseEnrolledUser.setAssessorComment(comment);
-			session.update(courseEnrolledUser);
+		
+			session.update(nomineeTraineeUser);
 		}
 		String newList = "Records successfully updated !!!" ; 
 		return newList;

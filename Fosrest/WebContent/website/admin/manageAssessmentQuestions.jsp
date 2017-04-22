@@ -37,7 +37,7 @@ function getQuestions(){
 	var mainData1 = jQuery.parseJSON(data);
 	var j=1;
 	$('#newTable tr').remove();
-	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Question Number</th></tr>')
+	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Module Code</th><th>Question Number</th></tr>')
 	$.each(mainData1 , function(i , obj)
 	{
 		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[3]+')">'+obj[4]+'</a></td><td>'+obj[2]+'</td></tr>');
@@ -160,42 +160,40 @@ function editAssessmentQuestion(id){
                                             <!-- left side -->
                                             <div class="col-md-6 col-xs-12">
                                                 
-                                                <div class="form-group">
+                                                  <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Course Type:</strong></li>
-                                                            <li class="style-li error-red"> </li>
+                                                            <li class="style-li"><strong>Unit Code:</strong></li>
+                                                            <li class="style-li error-red">
+                                                            <span id="name_status" class = "clear-label"> </span>
+                                                            ${created }</li>
                                                         </ul>
                                                     </div>
-                                                   <cf:select path="courseTypeSearch" class="form-control" onchange="getCourseName(this.value , 'courseNameSearch');">
-														<cf:option value="0" label="Select Course Type" />
-														<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType" />
-                                                      </cf:select>
-                                                </div>
-                                                
-                                                
-                                                
-                                                 
+												<cf:select path="unitCode" class="form-control">
+													
+													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
+												</cf:select> 
+											</div>
+                                                    
                                             </div> <!-- left side ends -->
-
+ 										<div class="col-md-6 col-xs-12">
                                             <!-- right side -->
-                                            <div class="col-md-6 col-xs-12">
-                                                
-                                                <div class="form-group">
+                                                   <div class="form-group">  
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Course Code:</strong></li>
-                                                            <li class="style-li error-red"> </li>
+                                                            <li class="style-li"><strong>Module Name:</strong></li>
+                                                            <li class="style-li error-red">
+                                                            <span id="name_status" class = "clear-label"> </span>
+                                                            ${created }</li>
                                                         </ul>
                                                     </div>
-                                                  <cf:select path="courseNameSearch" class="form-control">
-												<cf:option value="0" label="Select Course Code" />
+												<cf:select path="moduleCode"   class="form-control">
+												   <ct:forEach var="twofields" items="${listModuleMaster}">
+       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleId} - ${twofields.moduleName}"/></cf:option>
+    												</ct:forEach>
 												 </cf:select>
-                                                </div>                                                 
-                                               
-                                                
-                                            </div> <!-- rigth side ends -->
-                                            
+											</div>
+                                             </div> <!-- rigth side ends -->
                                             <!-- button -->
                                             <div class="row">
                                                 <div class="col-md-6 col-xs-12"></div>
@@ -256,20 +254,20 @@ function editAssessmentQuestion(id){
                                                 <!-- left side -->
                                                 <div class="col-md-6 col-xs-12">
                                                     
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Course Type:</strong></li>
-                                                                <li class="style-li error-red">${created }	
-                                                                <cf:errors path="courseTypeId" cssclass="error" />
-                                                                 </li>
-                                                            </ul>
-                                                        </div>
-                                                      <cf:select path="courseTypeId" class="form-control" onchange="getCourseName(this.value , 'courseName');">
-														<cf:option value="0" label="Select Course Type" />
-														<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType" />
-                                                      </cf:select>
+                                                      <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Unit Code:</strong></li>
+                                                            <li class="style-li error-red">
+                                                            <span id="name_status" class = "clear-label"> </span>
+                                                            ${created }</li>
+                                                        </ul>
                                                     </div>
+												<cf:select path="unitCode" class="form-control">
+													
+													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
+												</cf:select> 
+											</div>
                                                     
                                                     <div class="form-group">
                                                         <div>
@@ -298,17 +296,21 @@ function editAssessmentQuestion(id){
                                                 
                                                 <!-- right side -->
                                                 <div class="col-md-6 col-xs-12">
-                                                <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Course Code:</strong></li>
-                                                                <li class="style-li error-red"> </li>
-                                                            </ul>
-                                                        </div>
-                                                      <cf:select path="courseName" class="form-control">
-														<cf:option value="0" label="Select Course Code" />
-													    </cf:select>
+                                                  <div class="form-group">  
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Module Name:</strong></li>
+                                                            <li class="style-li error-red">
+                                                            <span id="name_status" class = "clear-label"> </span>
+                                                            ${created }</li>
+                                                        </ul>
                                                     </div>
+												<cf:select path="moduleCode"   class="form-control">
+												   <ct:forEach var="twofields" items="${listModuleMaster}">
+       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleId} - ${twofields.moduleName}"/></cf:option>
+    												</ct:forEach>
+												 </cf:select>
+											</div> 
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">

@@ -48,6 +48,7 @@ public class NomineeTrainee {
 	private int certificateSeqNo; 
 	private String issueDate;
 	
+	private String result;
 	
 
 	public String getCertificateID() {
@@ -149,6 +150,12 @@ public class NomineeTrainee {
 	}
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
+	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
 	}
 	
 	

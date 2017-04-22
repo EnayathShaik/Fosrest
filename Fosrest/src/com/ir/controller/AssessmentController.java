@@ -59,7 +59,7 @@ public class AssessmentController {
 			List<AssessmentAnswerCriteria> listAnswerCriteria = new ArrayList<AssessmentAnswerCriteria>();
 			AssessmentAnswerCriteria assessmentAnswerCriteria = new AssessmentAnswerCriteria();
 			System.out.println(" module id "+assessmentEvaluationForm.getModuleId());
-			List<AssessmentQuestions> answers = assessmentService.getAssessmentAnswers(Integer.parseInt(assessmentEvaluationForm.getModuleId()),assessmentEvaluationForm.getAssessmentQuestionsList());
+			List<AssessmentQuestions> answers = assessmentService.getAssessmentAnswers(assessmentEvaluationForm.getModuleId(),assessmentEvaluationForm.getAssessmentQuestionsList());
 			Enumeration<String> enumeration = request.getParameterNames();
 			HttpSession httpSession = request.getSession(false);
 			int loginIdUniuqe = (Integer) httpSession.getAttribute("loginIdUnique");
@@ -88,7 +88,7 @@ public class AssessmentController {
 			new ZLogger("submitAssessment","Assessment save begin.."+questionMap, "AssessmentController.java");
 			assessmentService.saveAssessment(listAnswerCriteria);
 
-			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService.evaluate(questionMap, answers,Integer.parseInt(assessmentEvaluationForm.getModuleId()));
+			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService.evaluate(questionMap, answers,assessmentEvaluationForm.getModuleId());
 			traineeAssessmentEvaluation.setLogindetails(loginIdUniuqe);
 			assessmentService
 					.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);

@@ -184,47 +184,7 @@ public class AdminController {
 		return "districtMaster";
 	}
 
-	@RequestMapping(value = "/manageAssessmentQuestions", method = RequestMethod.GET)
-	public String manageAssessmentQuestions(
-			@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm_old assessmentQuestionForm,
-			Model model) {
-		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
-		model.addAttribute("courseTypeList", courseTypeList);
-		return "manageAssessmentQuestions";
-	}
-
-	@RequestMapping(value = "/manageAssessmentQuestionsSave", method = RequestMethod.POST)
-	public String manageAssessmentQuestionsSave(
-			@Valid @ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm_old assessmentQuestionForm,
-			BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			new ZLogger("manageAssessmentQuestionsSave",
-					"bindingResult.hasErrors  " + result.hasErrors(),
-					"AdminController.java");
-			new ZLogger("manageAssessmentQuestionsSave",
-					"bindingResult.hasErrors  " + result.getErrorCount()
-							+ " All Errors " + result.getAllErrors(),
-					"AdminController.java");
-			return "manageAssessmentQuestions";
-		}
-		try {
-			String manageAssessmentQuestionsSave = adminService
-					.manageAssessmentQuestionsSave(assessmentQuestionForm);
-			if (manageAssessmentQuestionsSave.equalsIgnoreCase("created")) {
-				model.addAttribute("created", "Question Saved successfully !!!");
-			} else {
-				model.addAttribute("created",
-						"	n already exists in records !!!");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			new ZLogger("manageAssessmentQuestionsSave",
-					"Exception while manageAssessmentQuestionsSave :  "
-							+ e.getMessage(), "AdminController.java");
-		}
-		return "manageAssessmentQuestions";
-	}
-
+	
 	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.POST)
 	public String districtMasterSave(
 			@Valid @ModelAttribute("districtMaster") DistrictForm districtForm,
@@ -1671,9 +1631,6 @@ public class AdminController {
 
 	}
 
-	
-	
-	
 	@RequestMapping("/HolidayMaster/remove/{id}")
 	public String removeHolidayMaster(@PathVariable("id") int id) {
 
@@ -1702,7 +1659,7 @@ public class AdminController {
 		out.flush();
 
 	}
-	
+
 	@RequestMapping(value = "/Assessmentquestion/edit/{id}", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
 	// @ResponseBody
 	public void Editassessmentquestion(@PathVariable("id") int id,
@@ -2013,10 +1970,9 @@ public class AdminController {
 
 	@RequestMapping("/TrainingSchedule/remove/{id}")
 	public String removeTrainingSchedule(@PathVariable("id") int id) {
-		
-	this.adminService.removeTrainingSchedule(id);
-	return "redirect:/TrainingSchedule.fssai";
-	
+
+		this.adminService.removeTrainingSchedule(id);
+		return "redirect:/TrainingSchedule.fssai";
 	}
 
 	@RequestMapping("/TrainingSchedule/accept/{id}")
@@ -2026,7 +1982,6 @@ public class AdminController {
 		String loginUser2 = request.getParameter("loginUser2");
 		String userTableId = request.getParameter("userTableId");
 		String operation = request.getParameter("operation");
-		System.out.println(operation);
 		if (loginUser2 == null) {
 			// Integer.parseInt(loginUser2);
 			loginUser2 = "0";
@@ -2038,17 +1993,8 @@ public class AdminController {
 		this.adminService.acceptTrainingSchedule(id,
 				Integer.parseInt(profileId), Integer.parseInt(loginUser2),
 				Integer.parseInt(userTableId),operation);
-		//return "redirect:/TrainingSchedule.fssai";
-
-		if(Integer.parseInt(profileId)==4){
-			return "redirect:/trainerHomepage.fssai";
-			//return "trainerHomepage";
-		}
-		return "redirect:/trainingInstitudeHomepage.fssai";
-		//return "trainingInstitudeHomepage";
+		return "trainingInstitudeHomepage";
 	}
-
-	
 
 	@RequestMapping(value = "/TrainingSchedule/edit/{id}", method = RequestMethod.POST)
 	@ResponseBody
@@ -3000,75 +2946,49 @@ public class AdminController {
 
 	}
 
-	@RequestMapping(value="/HolidayMastershowdetails" , method=RequestMethod.POST)
-	@ResponseBody
-	public void HolidayMastershowdetails(@RequestParam("data") String data,
-			@RequestBody  GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException
 	
-	{
-		System.out.println("admin controller");
-		String hm =  data;
-		List<HolidayMaster> data1 = adminService.HolidayMastersearch(hm);
-		PrintWriter out = response.getWriter();
-		Gson g =new Gson();
-		String newList = g.toJson(data1); 
-		System.out.println("newList "+newList);
-		
-		
-		out.write(newList);
-		out.flush();
+	
+	@RequestMapping(value = "/manageAssessmentQuestions", method = RequestMethod.GET)
+	public String manageAssessmentQuestions(
+			@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm,
+			Model model) {
+		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("listModuleMaster",
+				this.adminService.listModuleMaster());
+		return "manageAssessmentQuestions";
 	}
-	
-	
-	
-	
-	@RequestMapping(value="/TrainingPartnershowdetails" , method=RequestMethod.POST)
-	@ResponseBody
-	public void TrainingPartnershowdetails(@RequestParam("data") String data,
-			@RequestBody  GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException
-	
-	{
-		System.out.println("admin controller TrainingPartnershowdetails");
-		String a =  data;
-		List<TrainingPartner> data1 = adminService.TrainingPartnershowdetails(a);
-		PrintWriter out = response.getWriter();
-		Gson g =new Gson();
-		String newList = g.toJson(data1); 
-		System.out.println("newList "+newList);
-		
-		
-		out.write(newList);
-		out.flush();
-	}
-	
-	
-	
-	
-	
 
-	@RequestMapping(value="/StateMastershowdetails" , method=RequestMethod.POST)
-	@ResponseBody
-	public void StateMastershowdetails(@RequestParam("data") String data,
-			@RequestBody  GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException
-	
-	{
-		System.out.println("admin controller StateMastershowdetails");
-		String a =  data;
-		List<StateMaster> data1 = adminService.StateMastershowdetails(a);
-		PrintWriter out = response.getWriter();
-		Gson g =new Gson();
-		String newList = g.toJson(data1); 
-		System.out.println("newList "+newList);
-		
-		
-		out.write(newList);
-		out.flush();
+	@RequestMapping(value = "/manageAssessmentQuestionsSave", method = RequestMethod.POST)
+	public String manageAssessmentQuestionsSave(
+			@Valid @ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm,
+			BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			new ZLogger("manageAssessmentQuestionsSave",
+					"bindingResult.hasErrors  " + result.hasErrors(),
+					"AdminController.java");
+			new ZLogger("manageAssessmentQuestionsSave",
+					"bindingResult.hasErrors  " + result.getErrorCount()
+							+ " All Errors " + result.getAllErrors(),
+					"AdminController.java");
+			return "manageAssessmentQuestions";
+		}
+		try {
+			String manageAssessmentQuestionsSave = adminService
+					.manageAssessmentQuestionsSave(assessmentQuestionForm);
+			if (manageAssessmentQuestionsSave.equalsIgnoreCase("created")) {
+				model.addAttribute("created", "Question Saved successfully !!!");
+			} else {
+				model.addAttribute("created",
+						"	n already exists in records !!!");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			new ZLogger("manageAssessmentQuestionsSave",
+					"Exception while manageAssessmentQuestionsSave :  "
+							+ e.getMessage(), "AdminController.java");
+		}
+		return "manageAssessmentQuestions";
 	}
-	
-	
-	
-	
-	
-	
+
 	
 }

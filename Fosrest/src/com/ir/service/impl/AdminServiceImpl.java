@@ -232,7 +232,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public String manageAssessmentQuestionsSave(AssessmentQuestionForm_old assessmentQuestionForm) {
+	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
 		String manageAssessmentQuestionsSave = adminDAO.manageAssessmentQuestionsSave(assessmentQuestionForm);
 		return manageAssessmentQuestionsSave;
 	}

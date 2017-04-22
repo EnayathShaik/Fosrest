@@ -74,7 +74,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 	@Override
 	@Transactional
-	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestions> answers, int courseNameId){
+	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestions> answers, int moduleid){
 		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
 		//int totalQuestion = answers.size();
 		Map<String, Integer> answersMap = new HashMap<String, Integer>();
@@ -108,8 +108,8 @@ public class AssessmentServiceImpl implements AssessmentService {
 		traineeEvaluation.setCorrectAnswers(correctAnswers);
 		traineeEvaluation.setIncorrectAnswers(wrongAnswers);
 		traineeEvaluation.setTotalScore(totalScore);
-		traineeEvaluation.setCourseNameId(courseNameId);
-		int eligibility = assessmentDao.getElegibilityForAssessment(courseNameId);
+		traineeEvaluation.setCourseNameId(moduleid);
+		int eligibility = assessmentDao.getElegibilityForAssessment(moduleid);
 		if(eligibility > -1){
 			if(totalScore >= eligibility){
 				traineeEvaluation.setResult("Pass");

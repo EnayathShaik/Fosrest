@@ -1,10 +1,13 @@
 package com.ir.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -16,7 +19,12 @@ public class AssessmentQuestions {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	
 	private int assessmentId;
-	private String unitCode,moduleCode;
+	
+	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="UnitMaster")
+	private UnitMaster unitCode;
+	
+	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="ModuleMaster")
+	private ModuleMaster moduleCode;
 	
 	private int questionNumber;
 	private String questionTitle;
@@ -29,27 +37,23 @@ public class AssessmentQuestions {
 	private String optionFour;
 	private String optionFive;
 	private String optionSix;
+	private String assessmentType;
 	
 	private int correctAnswer;
-	
-	
-	
-	
 
-	public String getUnitCode() {
+	public UnitMaster getUnitCode() {
 		return unitCode;
 	}
 
-	public void setUnitCode(String unitCode) {
+	public void setUnitCode(UnitMaster unitCode) {
 		this.unitCode = unitCode;
 	}
 
-
-	public String getModuleCode() {
+	public ModuleMaster getModuleCode() {
 		return moduleCode;
 	}
 
-	public void setModuleCode(String moduleCode) {
+	public void setModuleCode(ModuleMaster moduleCode) {
 		this.moduleCode = moduleCode;
 	}
 
@@ -148,6 +152,14 @@ public class AssessmentQuestions {
 
 	public void setAssessmentId(int assessmentId) {
 		this.assessmentId = assessmentId;
+	}
+
+	public String getAssessmentType() {
+		return assessmentType;
+	}
+
+	public void setAssessmentType(String assessmentType) {
+		this.assessmentType = assessmentType;
 	}
 	
 	

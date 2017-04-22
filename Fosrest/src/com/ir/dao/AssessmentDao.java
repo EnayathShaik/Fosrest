@@ -19,7 +19,7 @@ public interface AssessmentDao {
 	public List<IntStringBean> getTrainingPartners(int assessorId);
 	public List<AssessmentQuestions> getAssessmentAnswers(int modulecode, List<Integer> questions);
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation);
-	public int getElegibilityForAssessment(int coursetypeid);
+	public int getElegibilityForAssessment(int moduleid);
 	public List<CourseType> courseTypeList();
 	public List searchAssessorCalendar(String data);
 	public List viewAssessmentAgencyCalendar(String data);
