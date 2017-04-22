@@ -30,6 +30,19 @@ public class CityMaster {
 	private DistrictMaster districtMaster;
 	@NotEmpty(message="Please select status")
 	private String status;
+	
+	@Column(name="isActive", columnDefinition="character varying(10) default 'Y'")
+	private String isActive;
+	
+	
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+	
+	
 	public int getCityId() {
 		return cityId;
 	}
@@ -82,6 +95,7 @@ public class CityMaster {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+	
 	
 	
 }

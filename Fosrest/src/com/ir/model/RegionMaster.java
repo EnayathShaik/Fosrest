@@ -31,7 +31,16 @@ public class RegionMaster {
 	@OneToOne   @JoinColumn(name="cityId")
 	private CityMaster cityMaster;
 	
+	@Column(name="isActive", columnDefinition="character varying(10) default 'A'")
+	private String isActive;
 	
+	
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 	public CityMaster getCityMaster() {
 		return cityMaster;
 	}
@@ -93,6 +102,7 @@ public class RegionMaster {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+	
 	
 
 }
