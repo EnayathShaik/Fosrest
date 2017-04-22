@@ -36,8 +36,20 @@ public class DistrictMaster {
 	@OneToOne   @JoinColumn(name="stateId")
 	private StateMaster stateMaster;
 	
-	
-	
+	@Column(name="isActive", columnDefinition="character varying(10) default 'Y'")
+	private String isActive;
+
+
+
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+
+
+
 	private String status;
 	public DistrictMaster(){}
 	public int getDistrictId() {
