@@ -2017,12 +2017,16 @@ public class AdminController {
 		int pid=(int)session.getAttribute("profileId");
 		
 		this.adminService.removeTrainingSchedule(id,pid);
-		//return "redirect:/TrainingSchedule.fssai";
 		
-		if(pid==4){
+		if(pid==1)
+			return "redirect:/TrainingSchedule.fssai";
+		
+		else  if(pid==4){
 			//return "redirect:/trainerHomepage.fssai";
 			return "trainerHomepage";
 		}
+	
+			
 		//return "redirect:/trainingInstitudeHomepage.fssai";
 		return "trainingInstitudeHomepage";
 	}

@@ -2211,8 +2211,12 @@ public class AdminDAOImpl implements AdminDAO {
 			Session session = this.sessionFactory.getCurrentSession();
 			System.out.println(" id  "+id);
 			String sql=null;
-			if(profileId == 4	){
-				//sql =	"update TrainingSchedule set isActive='I', trainer_status=null where trainingScheduleId="+id;
+			System.out.println(profileId);
+			if(profileId==1)
+				sql =	"update TrainingSchedule set isActive='I' where trainingScheduleId="+id;
+				
+			else if(profileId == 4	){
+				
 				sql =	"update TrainingSchedule set trainer_status=null where trainingScheduleId="+id;
 				
 			}else{
