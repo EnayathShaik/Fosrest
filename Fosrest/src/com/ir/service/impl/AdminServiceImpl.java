@@ -1247,24 +1247,5 @@ public class AdminServiceImpl implements AdminService {
 		}
 
 	   
-		@Override
-		@Transactional
-		public List<HolidayMaster> HolidayMastersearch(String data) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.HolidayMastersearch(data);
-		}
-
-		@Override
-		@Transactional
-		public List<TrainingPartner> TrainingPartnershowdetails(String data) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.TrainingPartnershowdetails(data);
-		}
-
-		@Override
-		@Transactional
-		public List<StateMaster> StateMastershowdetails(String data) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.StateMastershowdetails(data);
-		}
+		
 }

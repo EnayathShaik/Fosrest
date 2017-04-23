@@ -93,9 +93,9 @@
                                                 <!-- <div class="col-md-6 col-xs-12">
                                                     <input type="submit" class="btn login-btn" value="Add"/>
                                                 </div> -->
-                                                <div class="col-md-6 col-xs-12">
+                                               <!--  <div class="col-md-6 col-xs-12">
                                                     <button type="button" class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick='showdetails();return false;'>Show Details</button>
-                                                </div> 
+                                                </div> --> 
                                                 
                                                 
                                             </div>
@@ -184,27 +184,3 @@
                  }
 
             </script>
-<script>
-function showdetails() {
-var holidayReason =  $("#holidayReason").val();
-	var holidayDate = $("#holidayDate").val();
-	
-	var name = JSON.stringify({
-		courseType : 0
-	});
-	var result =  holidayDate+ "@" + holidayReason;
-alert(result);
-	$.ajax({
-		type : 'post',
-		url : 'HolidayMastershowdetails.fssai?data=' + result,
-		contentType : "application/json",
-		data : name,
-		success : function(response) {
-			alert(response);
-			location.reload();
-		}
-	});
-
-}
-
-</script>

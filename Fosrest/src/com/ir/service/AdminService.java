@@ -365,11 +365,6 @@ public interface AdminService {
 
 	public List<TrainingSchedule> listTrainingSchedule_for_trainer(int id);
 
-	public List<HolidayMaster> HolidayMastersearch(String data);
-
-	public List<TrainingPartner> TrainingPartnershowdetails(String data);
-
-	public List<StateMaster> StateMastershowdetails(String data);
 	
 	//public String HolidayMastersearch();
 

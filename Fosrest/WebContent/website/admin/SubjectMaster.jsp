@@ -133,7 +133,7 @@
                                                             <fieldset>
                                            <legend>Subject Master</legend>
                                             <ct:if test="${!empty listSubjectMaster}">
-                                            <table class="table table-bordered table-responsive">
+                                            <table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>

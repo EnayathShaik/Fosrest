@@ -68,6 +68,7 @@
 
 												</div>
 
+                                           
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -180,7 +181,7 @@
 										<fieldset>
 											<legend>Module Master</legend>
 											<ct:if test="${!empty listModuleMaster}">
-												<table class="table table-bordered table-responsive">
+												<table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>

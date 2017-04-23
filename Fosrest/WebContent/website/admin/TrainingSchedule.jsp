@@ -297,13 +297,15 @@
 											<div class="col-md-6 col-xs-12">
 												<input type="submit" id="updatebtn"
 													style="display: none; float: right; margin-right: 122px;"
-													value="Update" class="btn login-btn" /> <input
+													value="Update" class="btn login-btn" /> 
+													<input
 													type="submit" id="createbtn" value="Create"
-													class="btn login-btn" /> <input type="submit"
+													class="btn login-btn" />
+													<!--  <input type="submit"
 													class="btn login-btn show-details-vacancy collapsed"
 													data-toggle="collapse" style="margin-left: 381px;"
 													data-target="#show-result" aria-expanded="false"
-													value="Search" />
+													value="Search" /> -->
 
 											</div>
 										</div>
@@ -324,7 +326,7 @@
 										<fieldset>
 											<legend>Training Schedule </legend>
 											<ct:if test="${!empty listTrainingSchedule}">
-												<table class="table table-bordered table-responsive">
+												<table  border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
