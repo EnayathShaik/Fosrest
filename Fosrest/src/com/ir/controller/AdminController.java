@@ -2777,9 +2777,10 @@ public class AdminController {
 
 	@RequestMapping(value="/enrollUser" , method=RequestMethod.POST)
 	@ResponseBody
-	public void enrollUser(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	public void enrollUser(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response,HttpSession session) throws IOException{
 		new ZLogger("getModule","getModule............" + data  , "CommonController.java");
 		String courseName =  data;
+		//int id=session.;
 		String data1 = adminService.enrollUser(courseName);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();

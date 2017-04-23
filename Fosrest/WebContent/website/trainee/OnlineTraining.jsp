@@ -74,7 +74,7 @@ window.onload = OnStart;
                                         
                                         <h4> Training Type: ${listOnlineTraining.trainingType}</h4>
                                         <h4>Training Phase: ${listOnlineTraining.trainingPhase}</h4>
-                                        <h4>Training Duration: ${listOnlineTraining.trainingstartdate} - ${listOnlineTraining.trainingstartdate} </h4>
+                                        <h4>Training Duration: ${listOnlineTraining.trainingstartdate} to ${listOnlineTraining.trainingenddate} </h4>
                                         <%--  <ct:out value="${listOnlineTraining}"></ct:out> --%>
                                           
                                            <%-- <ct:forEach items="${listOnlineTraining}" var="OnlineTraining">

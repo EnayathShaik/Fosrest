@@ -2908,8 +2908,14 @@ System.out.println("list "+list);
 			nt.setCertificateStatus("N");
 			System.out.println("5:after set");
 			int id =  (int) session.save(nt);
+			System.out.println("login id333"+loginId);
+			//traineeService.updateSteps(loginId,1);
 			tx.commit();
-			System.out.println("id "+id);
+			
+		    sql="update personalinformationtrainee set steps = 1 where  logindetails ="+loginId;
+		    Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+		    
 			session.close();
 			System.out.println("before return");
 		return "created";
