@@ -392,6 +392,8 @@
             		  data:name1,
             	      success: function (response) {      
             	      var mainData1 = jQuery.parseJSON(response);
+            	    $("#unitId").val(mainData1.unitId);
+            	    $("#moduleId").val(mainData1.moduleId);
             	    $("#trainingScheduleId").val(mainData1.trainingScheduleId);
             	    $("#userType").val(mainData1.userType);
             	    $("#trainingType").val(mainData1.trainingType);
@@ -401,6 +403,7 @@
             	    $("#trainingEndDate").val(mainData1.trainingEndDate);
             	    $("#trainingPartner").val(mainData1.trainingPartner);
             	    $("#trainingInstitude").val(mainData1.trainingInstitude);
+            	    $("#state").val(mainData1.state);
             	     $("#updatebtn").css("display" , "block");
             	     
             	     $("#createbtn").css("display" , "none");
