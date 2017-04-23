@@ -31,6 +31,17 @@ public class HolidayMaster {
 	 
 	private String holidayReason;
 	
+	@Column(name="isActive", columnDefinition="character varying(10) default 'Y'")
+	private String isActive;
+	
+	
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+	
 
 	public HolidayMaster() {
 		super();

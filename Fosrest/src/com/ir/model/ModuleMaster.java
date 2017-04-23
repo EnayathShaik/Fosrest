@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.CascadeType;
 import javax.validation.constraints.*;
-
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -63,6 +62,18 @@ public class ModuleMaster {
 	private String moduleCode;
 	@Column(columnDefinition="int default 0")
 	private int seqNo;
+	
+	@Column(name="isActive", columnDefinition="character varying(10) default 'Y'")
+	private String isActive;
+	
+	
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+	
 	
 	public String getStatus() {
 		return status;

@@ -1695,6 +1695,7 @@ public class AdminDAOImpl implements AdminDAO {
 		public void addHolidayMaster(HolidayMaster p) {
 			// TODO Auto-generated method stub
 			System.out.println("RegionMapping "+p.getHolidayId());
+			p.setIsActive("Y");
 			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(p);
 		}
@@ -1715,11 +1716,15 @@ public class AdminDAOImpl implements AdminDAO {
 		public void removeHolidayMaster(int id) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
+			String sql= null;
 			HolidayMaster p = (HolidayMaster) session.load(HolidayMaster.class, new Integer(id));
 			if (null != p) {
-				session.delete(p);
+				sql =	"update HolidayMaster set isactive='N' where holidayid="+id;	
 			}
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate(); 
 			
+		
 		}
 		
 		@Override
@@ -1742,7 +1747,7 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			System.out.println("inside listHolidayMaster");
 			Session session = this.sessionFactory.getCurrentSession();
-			List<HolidayMaster> mccList = session.createQuery("from HolidayMaster").list();
+			List<HolidayMaster> mccList = session.createQuery("from HolidayMaster where coalesce(isactive,'') <> 'N' ").list();
 			for (HolidayMaster p : mccList) {
 				System.out.println("Holiday List::" + p);
 			}
@@ -1775,6 +1780,7 @@ public class AdminDAOImpl implements AdminDAO {
 			
 			p.setUnitCode(p.getUnitName().substring(0, 2).toUpperCase()+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 			p.setSeqNo(maxId);
+			p.setIsActive("Y");
 			session.persist(p);
 		}
 		
@@ -1801,9 +1807,12 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
 			UnitMaster p = (UnitMaster) session.load(UnitMaster.class, new Integer(id));
+			String sql= null;
 			if (null != p) {
-				session.delete(p);
+				sql =	"update UnitMaster set isactive='N' where unitid="+id;	
 			}
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate(); 
 			
 		}
 		
@@ -1826,7 +1835,7 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			System.out.println("inside listUnitMaster");
 			Session session = this.sessionFactory.getCurrentSession();
-			List<UnitMaster> mccList = session.createQuery("from UnitMaster").list();
+			List<UnitMaster> mccList = session.createQuery("from UnitMaster where coalesce(isactive,'') <> 'N' ").list();
 			for (UnitMaster p : mccList) {
 				System.out.println("Unit List::" + p);
 			}
@@ -1864,6 +1873,7 @@ public class AdminDAOImpl implements AdminDAO {
 			p.setModuleCode(p.getUnitMaster().getUnitName().substring(0, 2).toUpperCase()+p.getModuleName().toUpperCase().substring(0, 2)+StringUtils.leftPad(String.valueOf(maxId), 2, "0"));
 			p.setSeqNo(maxId);
 			p.setUnitMaster(um);
+			p.setIsActive("Y");
 			
 			session.persist(p);
 		}
@@ -1890,9 +1900,12 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
 			ModuleMaster p = (ModuleMaster) session.load(ModuleMaster.class, new Integer(id));
+			String sql= null;
 			if (null != p) {
-				session.delete(p);
+				sql =	"update ModuleMaster set isactive='N' where moduleid="+id;	
 			}
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate(); 
 			
 		}
 		
@@ -1915,7 +1928,7 @@ public class AdminDAOImpl implements AdminDAO {
 		public List<ModuleMaster> listModuleMaster() {
 			System.out.println("inside listModuleMaster");
 			Session session = this.sessionFactory.getCurrentSession();
-			List<ModuleMaster> mccList = session.createQuery("from ModuleMaster").list();
+			List<ModuleMaster> mccList = session.createQuery("from ModuleMaster where coalesce(isactive,'') <> 'N' ").list();
 			for (ModuleMaster p : mccList) {
 				System.out.println("module List::" + p);
 			}
@@ -1934,6 +1947,7 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("SubjectMaster "+p.getSubjectId() + " " + p.getSubjectName());
 			//getModuleMasterById
 			Session session = this.sessionFactory.getCurrentSession();
+			p.setIsActive("Y");
 			session.persist(p);
 		}
 		
@@ -1954,9 +1968,12 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
 			SubjectMaster p = (SubjectMaster) session.load(SubjectMaster.class, new Integer(id));
+			String sql= null;
 			if (null != p) {
-				session.delete(p);
+				sql =	"update SubjectMaster set isactive='N' where subjectid="+id;	
 			}
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate(); 
 			
 		}
 		
@@ -1980,7 +1997,7 @@ public class AdminDAOImpl implements AdminDAO {
 			// TODO Auto-generated method stub
 			System.out.println("inside listSubjectMaster");
 			Session session = this.sessionFactory.getCurrentSession();
-			List<SubjectMaster> mccList = session.createQuery("from SubjectMaster").list();
+			List<SubjectMaster> mccList = session.createQuery("from SubjectMaster where coalesce(isactive,'') <> 'N'").list();
 			for (SubjectMaster p : mccList) {
 				System.out.println("Subject List::" + p);
 			}
