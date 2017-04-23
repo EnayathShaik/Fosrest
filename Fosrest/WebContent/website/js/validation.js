@@ -36,6 +36,16 @@ function pan_validate(id, pan) {
 	
 }
 
+function emailVal(id, email) {
+	var regpan = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	if (regpan.test(email) == false) {
+		document.getElementById(id).value = "";
+		alert('INVALID EMAIL');
+		return false;
+	}
+	
+}
+
 /*$("#btnExport").click(function (e) {
 	alert('sdf');
     window.open('data:application/vnd.ms-excel,' + $('#dvData').html());

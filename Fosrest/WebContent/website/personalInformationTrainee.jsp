@@ -369,7 +369,7 @@
                                            
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="Email" class="form-control" placeholder="Email" required=""/>
+                                    <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="emailVal(this.id,this.value)" required=""/>
                                 </div>
 
                             </div>
