@@ -21,17 +21,6 @@
 %>
 <div id="sidebar-wrapper">
 	<ul class="sidebar-nav">
-		<!--  <li><a href="basic.fssai">Course Enrollment</a></li>  -->
-	<!-- 	<li class="dropdown active"><a href="#" class="dropdown-toggle"
-			data-toggle="dropdown" role="button" aria-haspopup="true"
-			aria-expanded="false">Course Enrollment <span class="caret"></span></a>
-			<ul disabled disa class="dropdown-menu">
-				<li><a href="basic.fssai" class="clr">Basic Course</a></li>
-				<li><a href="advanceTrainee.fssai" class="clr">Advanced
-						Course</a></li>
-				<li><a href="specialTrainee.fssai" class="clr">Special
-						Course</a></li>
-			</ul></li>  -->
 		        <li><a href="OnlineTraining.fssai">Online Training </a></li>
 				<li><a href="assessment-instructions-trainee.fssai">Online Assessment</a></li>
 				<li><a href="GetScoreCard.fssai">Get Score Card </a></li>
@@ -51,26 +40,6 @@
 	<ul class="sidebar-nav">
 		<!-- <li><a href="search-and-apply.fssai">Search	& Apply Vacancy</a></li> -->
 	<li><a href="TrainerRequest.fssai">Training Request</a></li>
-	
-	<!-- 
-		<li class="dropdown active"><a href="#" class="dropdown-toggle"
-			data-toggle="dropdown" role="button" aria-haspopup="true"
-			aria-expanded="false">Course Enrollment <span class="caret"></span></a>
-			<ul class="dropdown-menu">
-				<li><a href="basic.fssai" class="clr">Basic Course</a></li>
-				<li><a href="advanceTrainee.fssai" class="clr">Advanced
-						Course</a></li>
-				<li><a href="specialTrainee.fssai" class="clr">Special
-						Course</a></li>
-			</ul></li>
-		<li><a href="generateAdmitCardtrainee.fssai">Generate Admit
-				Card</a></li>
-		<li><a href="course-training.fssai?courseTypeId=1">Training</a></li>
-		<li><a href="assessment-instructions-trainee.fssai">Assessment</a>
-		</li>
-		<li><a href="feedbackForm.fssai">Feedback</a></li>
-		<li><a href="generateCertificatetrainee.fssai">Certification</a>
-		</li> -->
 	</ul>
 </div>
 
@@ -82,16 +51,8 @@
 		<!-- <li class="sidebar-brand">
                         </li> -->
 		<li><a href="TrainingRequest.fssai">Training Request</a></li>
-		<!-- <li><a href="MarkAttendance.fssai">Mark Attendence</a></li> -->
 		<li> <a href="traineeAttendance.fssai">Mark Attendance</a> </li>
-		<!-- <li> <a href="trainingpartnermarkAttendence.fssai">Mark Attendance</a> </li>
-          <li> <a href="postVacancyTrainingPartner.fssai">Post Vacancy for Trainer</a> </li>
-          <li> <a href="trainingpartnerapplicationstatus.fssai">Application Status</a> </li>
-          <li> <a href="trainingpartnermanagetrainer.fssai">Manage Trainer</a> </li>
-          <li> <a href="trainingpartnerassessmentcalendar.fssai">Assessment Calendar</a></li>
-          <li> <a href="trainingpartnerpaymentconfirmation.fssai">Fees</a> </li>
-          <li> <a href="generateCourseCertificateForTrainee.fssai">Trainee Certificate</a> </li>
-          <li> <a href="traineeAttendance.fssai">Trainee Attendance</a> </li> -->
+	
 	</ul>
 </div>
 
@@ -151,8 +112,6 @@
 %>
 <div id="sidebar-wrapper">
 	<ul class="sidebar-nav">
-		<!-- <li class="sidebar-brand"></li> -->
-
 		<li><a href="TrainingSchedule.fssai">Training Schedule Master</a></li>
 		<li><a href="TrainingClosure.fssai">Training Closure Report</a></li>
 		<li><a href="GenerateCertificate.fssai">Generate Certificate</a>
@@ -165,9 +124,7 @@
 		<li><a href="manageAssessmentQuestions.fssai">Assessment Questions</a></li>
 		<li><a href="SubjectMaster.fssai">Subject Master</a></li>
 		<li><a href="">Training Calendar</a></li>
-		<li> <a href="CustomerMaster.fssai">Customer</a> </li>
-        <li> <a href="TaxMaster.fssai">Tax Master</a> </li>
-        <li><a href="EmployeeMonthlyCharges.fssai">Employee Monthly Charges</a></li>
+		
                    
 	</ul>
 </div>
@@ -185,5 +142,20 @@
 </div>
 
 <%
-	}
+	} else if(session.getAttribute("profileId").equals(20)){
 %>
+
+<div id="sidebar-wrapper">
+	<ul class="sidebar-nav">
+		<li> <a href="CustomerMaster.fssai">Customer</a> </li>
+        <li> <a href="TaxMaster.fssai">Tax Master</a> </li>
+        <li><a href="EmployeeMonthlyCharges.fssai">Employee Monthly Charges</a></li>
+</ul>
+</div>
+
+<%
+	} 
+%>
+
+
+
