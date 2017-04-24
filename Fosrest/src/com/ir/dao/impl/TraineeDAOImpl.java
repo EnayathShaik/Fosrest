@@ -1428,22 +1428,24 @@ System.out.println("list "+list);
 
 	
 	//@Override
-		public List<GetScoreCardForm> listGetScoreCard() {
+		public GetScoreCardForm listGetScoreCard(int id) {
 			// TODO Auto-generated method stub
 			System.out.println("inside listGetScoreCardForm");
 			GetScoreCardForm bean = new GetScoreCardForm();
-			List<GetScoreCardForm> list = new ArrayList<GetScoreCardForm>();
+			/*List<GetScoreCardForm> list = new ArrayList<GetScoreCardForm>();*/
 			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> lst = session.createSQLQuery("select  cast('1' as int) as id,cast('Test 1' as varchar(20)) as unit , cast('5' as int) as score").list();
-			for (Object[] li : lst ) {
-				bean.setId((int) li[0]);
-				bean.setUnit((String) li[1]);
-				bean.setScore((int) li[2]);
+			List<Object[]> lst = session.createSQLQuery("select * from assessmentevaluationtrainee where logindetails='"+ id +"'").list();
+			
+			System.out.println(lst);
+			if(lst.size() >0){
+				 Object[] obj=	lst.get(0);
+				 bean.setScore((Double)obj[7]);
 				
-				list.add(bean);
-			}
-	System.out.println("list "+list);
-			return list;
+				}
+	
+			
+	//System.out.println("list "+list);
+			return bean;
 		}
 
 		

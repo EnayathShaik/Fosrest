@@ -113,7 +113,7 @@ public interface TraineeDAO {
 
 	public List<MyTrainingForm> listMyTraining();
 	
-	public List<GetScoreCardForm> listGetScoreCard();
+	public GetScoreCardForm listGetScoreCard(int id);
 	public List<CertificateForm> listCertificate(int loginId);
 	
 	

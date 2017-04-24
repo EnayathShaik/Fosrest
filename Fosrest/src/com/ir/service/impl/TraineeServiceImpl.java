@@ -344,9 +344,9 @@ public class TraineeServiceImpl implements TraineeService {
 	
 	@Override
 	@Transactional
-	public List<GetScoreCardForm> listGetScoreCard() {
+	public GetScoreCardForm listGetScoreCard(int id) {
 		// TODO Auto-generated method stub
-		return this.traineeDAO.listGetScoreCard();
+		return this.traineeDAO.listGetScoreCard(id);
 	}
 	
 	@Override

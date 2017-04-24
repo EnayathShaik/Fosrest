@@ -744,22 +744,21 @@ public class TraineeController {
 	//for get score card
         
         @RequestMapping(value = "/GetScoreCard", method = RequestMethod.GET)
-		public String GetScoreCard(@ModelAttribute("GetScoreCardForm") GetScoreCardForm GetScoreCardForm ,Model model){
-			
+		public String GetScoreCard(@ModelAttribute("GetScoreCardForm") GetScoreCardForm GetScoreCardForm ,Model model,HttpSession session){
+        	int userId = (int) session.getAttribute("userId");
 				System.out.println("listGetScoreCard");
-							
-				Map<String , String> trainingType = lst.trainingTypeMap;
-				Map<String , String> trainingPhase = lst.trainingPhaseMap;
-				model.addAttribute("trainingType",trainingType);
-				model.addAttribute("trainingPhase",trainingPhase);
+				
 				model.addAttribute("GetScoreCardForm", new GetScoreCardForm());
-			//	model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
+				model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic(userId));
+				model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
+				model.addAttribute("listGetScoreCard", this.traineeService.listGetScoreCard(userId));
+			
 			
 				return "GetScoreCard";
 		
 		}
 
-        @RequestMapping(value = "/ListGetScoreCard", method = RequestMethod.POST)
+      /*  @RequestMapping(value = "/ListGetScoreCard", method = RequestMethod.POST)
 		public String ListGetScoreCard(@ModelAttribute("GetScoreCardForm") GetScoreCardForm GetScoreCardForm ,Model model) {
 			
 				System.out.println("listGetScoreCard" + GetScoreCardForm.getTrainingType());
@@ -770,9 +769,10 @@ public class TraineeController {
 				model.addAttribute("trainingType",trainingType);
 				model.addAttribute("trainingPhase",trainingPhase);
 				model.addAttribute("GetScoreCardForm", new GetScoreCardForm());
-				model.addAttribute("listGetScoreCard", this.traineeService.listGetScoreCard());
+				//model.addAttribute("listGetScoreCard", this.traineeService.listGetScoreCard());
+				
 			return "GetScoreCard";
-		}
+		}*/
 	
 	//for online training
 

@@ -7,21 +7,31 @@ public class GetScoreCardForm {
 	private String trainingPhase;
 	private String trainingDate;
 	private String Unit;
-	private int Score;
+	private Double Score;
+	private String trainingTopic;
 	
 	
+	
+	
+	public Double getScore() {
+		return Score;
+	}
+	public void setScore(Double score) {
+		Score = score;
+	}
+	public String getTrainingTopic() {
+		return trainingTopic;
+	}
+	public void setTrainingTopic(String trainingTopic) {
+		this.trainingTopic = trainingTopic;
+	}
 	public String getUnit() {
 		return Unit;
 	}
 	public void setUnit(String unit) {
 		Unit = unit;
 	}
-	public int getScore() {
-		return Score;
-	}
-	public void setScore(int score) {
-		Score = score;
-	}
+	
 	public int getId() {
 		return id;
 	}
