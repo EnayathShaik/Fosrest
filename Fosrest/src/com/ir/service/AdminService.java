@@ -235,7 +235,7 @@ public interface AdminService {
 	public TrainingSchedule getTrainingScheduleById(int id);
 	public List<PersonalInformationTrainingInstitute> listTrainingInstitude();
 	
-	public List<TrainingSchedule> listTrainingSchedule(int id );
+	public List<TrainingSchedule> listTrainingSchedule(int id, int profileid);
 	
 	public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) ;
 	
@@ -362,10 +362,6 @@ public interface AdminService {
 	public String updateCertificate(String data);
 
 	//public String listGenerateCertificate();
-
-	public List<TrainingSchedule> listTrainingSchedule_for_trainer(int id);
-
-	
 	//public String HolidayMastersearch();
 
 	

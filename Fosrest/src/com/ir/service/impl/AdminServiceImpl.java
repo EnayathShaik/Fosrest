@@ -738,8 +738,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public List<TrainingSchedule> listTrainingSchedule(int id){
-		return this.adminDAO.listTrainingSchedule(id);
+	public List<TrainingSchedule> listTrainingSchedule(int id,int profileId){
+		return this.adminDAO.listTrainingSchedule(id,profileId);
 		
 	}
 	
@@ -1239,13 +1239,6 @@ public class AdminServiceImpl implements AdminService {
 			return this.adminDAO.updateCertificate(data);
 		}
 
-		@Override
-		@Transactional
-		public List<TrainingSchedule> listTrainingSchedule_for_trainer(int id) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.listTrainingSchedule_for_trainer(id);
-		}
-
-	   
+	
 		
 }

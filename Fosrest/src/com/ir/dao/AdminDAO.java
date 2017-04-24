@@ -218,7 +218,7 @@ public interface AdminDAO {
 		
 		public List<PersonalInformationTrainingInstitute> listTrainingInstitude();
 		
-		public List<TrainingSchedule> listTrainingSchedule(int id);
+		public List<TrainingSchedule> listTrainingSchedule(int id,int profileId);
 		
 		public void addStateMaster(StateMaster p);
 		
@@ -349,10 +349,6 @@ public interface AdminDAO {
 					
 					 public String updateCertificate(String data);
 
-					public List<TrainingSchedule> listTrainingSchedule_for_trainer(
-							int id);
-
-				
 					
 				//	public String HolidayMastersearch(String data);
 

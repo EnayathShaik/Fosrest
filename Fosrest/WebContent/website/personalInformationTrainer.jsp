@@ -575,8 +575,8 @@
 											<li class="style-li"><strong>Experience
 													Background:</strong></li>
 											<li class="style-li error-red"></li>
-											<li id="ExpBackgroundErr" style="display:none;" class="style-li error-red" > Experience Background can not be blank.</li>
-											
+											<li id="ExpBackgroundErr" style="display:none;" class="style-li error-red" > Select your Experience Background.</li>
+									 
 										</ul>
 									</div>
 									<cf:select path="ExpBackground" class="form-control">
@@ -591,9 +591,9 @@
 													Experience:</strong></li>
 											<li class="style-li error-red"></li>
 											
-											 <li id="expInYearErr" style="display:none;" class="style-li error-red" >Exp in Year can not be blank.</li>
-										     <li id="expInMonthErr" style="display:none;" class="style-li error-red" >Exp in Month can not be blank.</li>
-										
+											 <li id="expInYearErr" style="display:none;" class="style-li error-red" >Exp. in YEAR can not be blank.</li>
+										     <li id="expInMonthErr" style="display:none;" class="style-li error-red" >Exp. in MONTH can not be blank.</li>
+										 
 										</ul>
 									</div>
 									<div class="row">

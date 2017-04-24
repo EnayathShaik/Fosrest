@@ -186,7 +186,7 @@ public class LoginController {
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
 			System.out.println("assosiated "+personalInformationTrainer.getAssociatedWithAnyTrainingInstitute());
-			model.addAttribute("listTrainingSchedule_for_trainer", this.adminService.listTrainingSchedule_for_trainer(personalInformationTrainer.getId()));
+			model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(personalInformationTrainer.getId(), 4));
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -195,7 +195,7 @@ public class LoginController {
 				new ZLogger("loginProcess","in trainer login aadhar is "+persoInformationTrainingInstitute.getFirstName(), "LoginController.java");
 				new ZLogger("loginProcess","**************"+persoInformationTrainingInstitute.getId(), "LoginController.java");
 				session.setAttribute("persoInformationTrainingInstitute", persoInformationTrainingInstitute.getId());
-				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(persoInformationTrainingInstitute.getId()));
+				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(persoInformationTrainingInstitute.getId(), 5));
 				session.setAttribute("logId", persoInformationTrainingInstitute.getLoginDetails().getLoginId());
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());

@@ -2098,7 +2098,7 @@ public class AdminDAOImpl implements AdminDAO {
 			if(profileId == 4 ){
 				sql =	"update TrainingSchedule set trainer_status='Y',trainer_id="+loginUser2+"where trainingScheduleId="+id;	
 			}else{
-				sql =	"update TrainingSchedule set training_institude_status='Y',training_institude_id="+userTableId+" where trainingScheduleId="+id;
+				sql =	"update TrainingSchedule set training_institude_status='Y',traininginstitude="+userTableId+" where trainingScheduleId="+id;
 			}
 			}
 			else{
@@ -2161,11 +2161,18 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		
 		@Override
-		public List<TrainingSchedule> listTrainingSchedule(int id) {
+		public List<TrainingSchedule> listTrainingSchedule(int id,int profileId) {
 			// TODO Auto-generated method stub
 			System.out.println("inside listTrainingSchedule with parameter");
 			Session session = this.sessionFactory.getCurrentSession();
-			List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and traininginstitude='"+id+"'  ").list();
+			List<TrainingSchedule> mccList=null;
+			if(profileId==5){
+			mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') <> 'Y' and traininginstitude='"+id+"'  ").list();
+			}
+			else{ 
+				
+			mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(trainer_status,'') <> 'Y' and trainer_id='"+id+"'  ").list();
+			}	
 			for (TrainingSchedule p : mccList) {
 				System.out.println("listTrainingSchedule List::" + p);
 			}
@@ -3083,18 +3090,7 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 				
 		return "created";
 	}
-	@Override
-	public List<TrainingSchedule> listTrainingSchedule_for_trainer(int id) {
-		// TODO Auto-generated method stub
-		System.out.println("inside listTrainingSchedule with parameter");
-		Session session = this.sessionFactory.getCurrentSession(); //coalesce(isactive,'A') <> 'I' and // isactive='A' and 
-		List<TrainingSchedule> mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and trainer_id='"+id+"'  ").list();
-		for (TrainingSchedule p : mccList) {
-			System.out.println("listTrainingSchedule List::" + p);
-		}
-		return mccList;
-		
-	}
+	
 
 	
 }
