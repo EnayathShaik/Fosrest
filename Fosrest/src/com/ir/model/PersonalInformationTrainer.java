@@ -105,8 +105,8 @@ public class PersonalInformationTrainer {
 	@NotNull
 	@Size(min=1, max=100 , message="enter your ResidentialAddress1 ")
 	private String ResidentialLine1; 
-	@NotNull 
-	@Size(min=1, max=100 , message="enter your ResidentialAddress2")
+	/*@NotNull 
+	@Size(min=1, max=100 , message="enter your ResidentialAddress2")*/
 	private String ResidentialLine2;
 
 	
@@ -121,8 +121,8 @@ public class PersonalInformationTrainer {
 	@NotNull
 	@Size(min=1, max=100 , message="enter your correspondenceAddress1")
 	private String correspondenceAddress1;
-	@NotNull
-	@Size(min=1, max=100 , message="enter your correspondenceAddress1")
+	/*@NotNull
+	@Size(min=1, max=100 , message="enter your correspondenceAddress1")*/
 	private String correspondenceAddress2;
 
 	

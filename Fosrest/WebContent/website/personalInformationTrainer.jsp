@@ -108,6 +108,7 @@
     function removeSpaces(string) {
         return string.split(' ').join('');
     }
+    
 </script>
 
 
@@ -248,7 +249,7 @@
 										</ul>
 									</div>
 									<cf:input type="text" path="firstName" class="form-control"
-										placeholder="First Name" />
+										placeholder="First Name" onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
 								</div>
 
 								<div class="form-group">
@@ -262,7 +263,7 @@
 										</ul>
 									</div>
 									<cf:input type="text" path="MiddleName" class="form-control"
-										placeholder="Middle Name" />
+										placeholder="Middle Name" onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
 								</div>
 
 								<div class="form-group">
@@ -276,7 +277,7 @@
 										</ul>
 									</div>
 									<cf:input type="text" path="LastName" class="form-control"
-										placeholder="Last Name" />
+										placeholder="Last Name" onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
 								</div>
 								<div class="form-group">
 									<div>
@@ -289,7 +290,7 @@
 										</ul>
 									</div>
 									<cf:input type="text" path="FatherName" class="form-control"
-										placeholder="Father's Name" />
+										placeholder="Father's Name" onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
 								</div>
 
 
@@ -424,7 +425,7 @@
 									</div>
 									<cf:input type="text" path="correspondencePincode"
 										class="form-control" minlength="6" maxlength="6"
-										placeholder="Pin Code" required="" />
+										placeholder="Pin Code" required=""  onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
 								</div>
 
 								<div class="form-group">
@@ -432,16 +433,12 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>Mobile:</strong></li>
 											<li class="style-li error-red">*</li>
-											<li id="mobileErr" style="display: none;"
-												class="style-li error-red">Please Enter Mobile No.</li>
-											<li id="mobileErr1" style="display: none;"
-												class="style-li error-red">Please Enter Valid Mobile
-												No.</li>
+											 <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile cannot be blank</li>
 										</ul>
 									</div>
 									<cf:input type="text" path="mobile" class="form-control"
 										placeholder="Mobile Number" minlength="10" maxlength="10"
-										required="" />
+										required="" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
 								</div>
 
 
@@ -487,8 +484,7 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>Permanent Address
 													Line 2:</strong></li>
-													<li class="style-li error-red"></li>
-													 <li id="ResidentialLine2Err" style="display:none;" class="style-li error-red" >Correspondence Address can not be blank.</li>
+													
 											
 										</ul>
 									</div>
@@ -559,8 +555,8 @@
 											 <li id="resPincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
 										</ul>
 									</div>
-									<cf:input type="text" path="resPincode" class="form-control"
-										placeholder="Pin Code" required="" />
+									<cf:input type="text" path="resPincode" class="form-control" minlength="6"  maxlength="6"
+										placeholder="Pin Code" required=""  onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
 								</div>
 							</div>
 							<!-- right side ends -->
@@ -579,8 +575,8 @@
 											<li class="style-li"><strong>Experience
 													Background:</strong></li>
 											<li class="style-li error-red"></li>
-											<li id="ExpBackgroundErr" style="display:none;" class="style-li error-red" > Select your Experience Background.</li>
-									 
+											<li id="ExpBackgroundErr" style="display:none;" class="style-li error-red" > Experience Background can not be blank.</li>
+											
 										</ul>
 									</div>
 									<cf:select path="ExpBackground" class="form-control">
@@ -595,9 +591,9 @@
 													Experience:</strong></li>
 											<li class="style-li error-red"></li>
 											
-											 <li id="expInYearErr" style="display:none;" class="style-li error-red" >Exp. in YEAR can not be blank.</li>
-										     <li id="expInMonthErr" style="display:none;" class="style-li error-red" >Exp. in MONTH can not be blank.</li>
-										 
+											 <li id="expInYearErr" style="display:none;" class="style-li error-red" >Exp in Year can not be blank.</li>
+										     <li id="expInMonthErr" style="display:none;" class="style-li error-red" >Exp in Month can not be blank.</li>
+										
 										</ul>
 									</div>
 									<div class="row">
@@ -623,10 +619,11 @@
 													Sessions Conducted:</strong></li>
 											<li class="style-li error-red"></li>
 											
-											 <li id="noOfSessionConductedErr" style="display:none;" class="style-li error-red" >No. of session can not be blank.</li>
+											 <li id="noOfSessionConductedErr" style="display:none;" class="style-li error-red" >No. Of Training Sessions Conducted can not be blank.</li>
 									 
 										</ul>
 									</div>
+									
 									<cf:input type="text" path="noOfSessionConducted" class="form-control" placeholder="Session Number" required="" />
 								</div>
 							</div>
@@ -782,12 +779,13 @@
 
 	}
 	function validateFields() {
+	
 		 $("#userTypeErr").css("display" , "none");
 			$("#titleErr").css("display" , "none");
 		$("#correspondencePincodeErr").css("display", "none");
 		$("#correspondencePincodeErr1").css("display", "none");
 		$("#mobileErr").css("display" , "none");
-		$("#mobileErr1").css("display" , "none");
+	/* 	$("#mobileErr1").css("display" , "none"); */
 		$("#AadharNumberErr").css("display" , "none");
 		$("#firstNameErr").css("display" , "none");
 		$("#MiddleNameErr").css("display" , "none");
@@ -811,7 +809,6 @@
 		 $("#resPincodeErr").css("display" , "none");
 		 
 		 $("#txtInputErr").css("display" , "none");
-		 
 		  $("#ExpBackgroundErr").css("display" , "none");
 		 $("#sessWishToConductErr").css("display" , "none");
 		 $("#expInYearErr").css("display" , "none");
@@ -894,27 +891,27 @@
 		}
 		 
 		 if ($("#correspondencePincode").val() == '') {
-			alert("valid1111");
+			
 			$("#correspondencePincodeErr").css("display", "block");
 			return false;
 
 		}
 		if (($("#correspondencePincode").val()).match(/^[0-9]{6}$/) == null) {
-			alert("valid");
+		
 			$("#correspondencePincodeErr1").css("display", "block");
 			return false;
 		}  
 
-		 if($("#mobile").val() == 0){
+		 /* if($("#mobile").val() == 0){
 		
 		$("#mobileErr").css("display" , "block");
 		return false;
-		}
-		 if($("#mobile").val().match(/^[0-9]{10}$/) ==null){
-			 alert("Please Enter Valid Mobile No.");
-		$("#mobileErr1").css("display" , "block");
-		return false;
-		}
+		} */
+		if($("#mobile").val().match(/^[0-9]{10}$/) == null){
+	    	
+     		 $("#mobileErr").css("display" , "block");
+     		return false;
+ 	 }
 		 
 		 
 			
@@ -922,11 +919,7 @@
 		  		 $("#ResidentialLine1Err").css("display" , "block");
 		   		return false;
 			 }
-		   	   
-		   if($("#ResidentialLine2").val() == ''){
-		 		 $("#ResidentialLine2Err").css("display" , "block");
-		  		return false;
-			 }
+		
 			 if($("#resState").val() == 0){
 				 $("#resStateErr").css("display" , "block");
 		 		return false;
@@ -944,12 +937,16 @@
 				 $("#resPincodeErr").css("display" , "block");
 				return false;
 			} 
-			
-	  if($("#ExpBackground").val() == ''){
+			 if($("#txtInput").val() == ''){
+				 $("#txtInputErr").css("display" , "block");
+					return false;
+				 
+		   }  if($("#ExpBackground").val() == ''){
 			$("#ExpBackgroundErr").css("display" , "block");
 			return false;
 		 }	 
-	 	 if($("#expInYear").val() == 0){
+	
+		 if($("#expInYear").val() == 0){
 			 $("#expInYearErr").css("display" , "block");
 			return false;
 		} 
@@ -957,29 +954,22 @@
 			 $("#expInMonthErr").css("display" , "block");
 			return false;
 		 } 
-		 
-		 
 		 if($("#noOfSessionConducted").val()==''){
 			 $("#noOfSessionConductedErr").css("display" , "block");
 				return false;
 			 
 	   }
-		 
 		 if($("#sessWishToConduct").val() < 1){
 			 $("#sessWishToConductErr").css("display" , "block");
 				return false;
 			 
 	   } 
-			 if($("#AssociatedWithAnyTrainingInstitute").val() == 0){
+			  if($("#AssociatedWithAnyTrainingInstitute").val() == 0){
 				 $("#AssociatedWithAnyTrainingInstituteErr").css("display" , "block");
 				return false;
-			 } 
-			 if($("#txtInput").val() == ''){
-				 $("#txtInputErr").css("display" , "block");
-					return false;
-				 
-		   } 
-	   
+			 }
+	    
+	  
 	   
 		var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
 	        var str2 = removeSpaces(document.getElementById('txtInput').value);

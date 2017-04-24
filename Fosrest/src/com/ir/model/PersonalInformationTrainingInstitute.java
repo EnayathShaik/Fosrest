@@ -45,7 +45,7 @@ public class PersonalInformationTrainingInstitute {
 		this.loginDetails = loginDetails;
 	}
 
-	private String empID;
+	/*private String empID;
 	
 	
 	
@@ -55,7 +55,7 @@ public class PersonalInformationTrainingInstitute {
 
 	public void setEmpID(String empID) {
 		this.empID = empID;
-	}
+	}*/
 
 
 
@@ -136,8 +136,8 @@ public class PersonalInformationTrainingInstitute {
 	@NotNull
 	@Size(min=1, max=100 , message="enter your correspondenceAddress1")
 	private String correspondenceAddress1;
-	@NotNull
-	@Size(min=1, max=100 , message="enter your correspondenceAddress1")
+	/*@NotNull
+	@Size(min=1, max=100 , message="enter your correspondenceAddress1")*/
 	private String correspondenceAddress2;
 
 	
@@ -148,7 +148,7 @@ public class PersonalInformationTrainingInstitute {
 	private String correspondencePincode;
 
 
-	private String residentialDistrict;
+	/*private String residentialDistrict;*/
 	@NotNull
 
 
@@ -235,13 +235,13 @@ public class PersonalInformationTrainingInstitute {
 		this.correspondencePincode = correspondencePincode;
 	}
 
-	public String getResidentialDistrict() {
+	/*public String getResidentialDistrict() {
 		return residentialDistrict;
 	}
 
 	public void setResidentialDistrict(String residentialDistrict) {
 		this.residentialDistrict = residentialDistrict;
-	}
+	}*/
 
 	public String getCorrespondenceDistrict() {
 		return correspondenceDistrict;

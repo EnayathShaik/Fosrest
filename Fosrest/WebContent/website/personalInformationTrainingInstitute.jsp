@@ -11,7 +11,7 @@
  
 
  function validateFields(){
-	
+		
 	 $("#trainingCenterNameErr").css("display" , "none");
 	 $("#trainingPartnerNameErr").css("display" , "none");
 	 $("#titleErr").css("display" , "none");
@@ -19,151 +19,179 @@
 	 $("#middleNameErr").css("display" , "none");
 	 $("#lastNameErr").css("display" , "none");
 	 $("#correspondenceAddress1Err").css("display" , "none");
-	 $("#correspondenceAddress2Err").css("display" , "none");
+	/*  $("#correspondenceAddress2Err").css("display" , "none"); */
 	 $("#correspondenceStateErr").css("display" , "none"); 
 	 $("#correspondenceDistrictErr").css("display" , "none");
 	 $("#correspondenceCityErr").css("display" , "none");
 	 $("#correspondencePincodeErr").css("display" , "none");
+	 $("#correspondencePincodeErr2").css("display" , "none");
 	 $("#EmailErr").css("display" , "none");
 	 $("#mobileErr").css("display" , "none");
 	 $("#panErr").css("display" , "none");
+	 $("#trainingTypeErr").css("display" , "none");
+	 $("#userTypeErr").css("display" , "none");
 	 
+	  $("#txtInputErr").css("display" , "none"); 
 	 
 	 if($("#trainingCenterName").val() == ''){
 		 
 		$("#trainingCenterNameErr").css("display" , "block");
 		return false;
 	 } 
-	 else if($("#trainingPartnerName").val() == '0'){
+	  if($("#trainingPartnerName").val() == '0'){
 		 
 			$("#trainingPartnerNameErr").css("display" , "block");
 		return false;
 		 }
-	 else  if($("#title").val() == ''){
+	
+	   if($("#pan").val() == '')
+	 {
+		 $("#panErr").css("display" , "block");
+		 return false; 
+	 }
+	 
+	   if($("#title").val() == ''){
 		 
 			$("#titleErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#firstName").val() == ''){
+	  if($("#firstName").val() == ''){
 		 
 			$("#firstNameErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#middleName").val() == ''){
+	  if($("#middleName").val() == ''){
 			 
 			$("#middleNameErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#lastName").val() == ''){
+	  if($("#lastName").val() == ''){
 		 
 			$("#lastNameErr").css("display" , "block");
 		return false;
 		 }
 	   
-	 else  if($("#pan").val() == '')
-		 {
-			 $("#panErr").css("display" , "block");
-			 return false; 
-		 }
-	 else if($("#correspondenceAddress1").val() == ''){
+		  if($("#correspondenceAddress1").val() == ''){
 		 
 			$("#correspondenceAddress1Err").css("display" , "block");
 			return false;
 		 }
-	 else if($("#correspondenceAddress2").val() == ''){
+	  /* if($("#correspondenceAddress2").val() == ''){
 		 
 			$("#correspondenceAddress2Err").css("display" , "block");
 			return false;
 		 }
+	   */
 	
 	 
-	 else if($("#correspondenceState").val() == 0){
+	  if($("#correspondenceState").val() == 0){
 		 
 			$("#correspondenceStateErr").css("display" , "block");
 			return false;
 		 }
 
-	 else if($("#correspondenceDistrict").val() == 0){
+	  if($("#correspondenceDistrict").val() == 0){
 		 
 			$("#correspondenceDistrictErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#correspondenceCity").val() == 0){
+	  if($("#correspondenceCity").val() == 0){
 		 
 			$("#correspondenceCityErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#correspondencePincode").val() == ''){
-		 <%System.out.println("eeeeeeeeeeeeee");%>
-			$("#correspondencePincodeErr").css("display" , "block");
+	  if($("#correspondencePincode").val() == ''){
+		 $("#correspondencePincodeErr").css("display" , "block");
 			return false;
 		 }
-	 else if(($("#correspondencePincode").val()).match(/^[0-9]{6}$/)==null)
+	  if(($("#correspondencePincode").val()).match(/^[0-9]{6}$/)==null)
 		 {
-		
-		 <%
-		 
-		 System.out.println(" eeeeeeeeeeeeee ");%>
-		 alert("invalid pin	");
+		  $("#correspondencePincodeErr2").css("display" , "block");
 		 return false;
 		 }
 		 
-	 else if($("#Email").val() == ''){
+	  if($("#Email").val() == ''){
 		 
 			$("#EmailErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#mobile").val() == ''){
+	  if($("#mobile").val() == ''){
 		 
 			$("#mobileErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#mobile").val().match(/^[0-9]{10}$/)==null)
+	  if($("#mobile").val().match(/^[0-9]{10}$/)==null)
 	 {
 		 alert("Invalid Mobile no");
 		 return false;
 	 }
 	 
-	 else if($("#trainingType").val() == ''){
+	  if($("#trainingType").val() == ''){
 		 
 			$("#trainingTypeErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#userType").val() == ''){
+	  if($("#userType").val() == ''){
 		 
 			$("#userTypeErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#seatingCapacity").val() == 0){
+	  if($("#seatingCapacity").val() == ''){
 		 
 			$("#seatingCapacityErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#noOfInHouseTrainer").val() == 0){
+	  if($("#noOfInHouseTrainer").val() == ''){
 		 
 			$("#noOfInHouseTrainerErr").css("display" , "block");
 			return false;
 		 }
-	 else if($("#noOfYearExp").val() == ''){
+	  if($("#noOfYearExp").val() == ''){
 		 
 			$("#noOfYearExpErr").css("display" , "block");
 			return false;
 		 }
-  else if($("#sessWishToConduct").val() == '0' ){
+   if($("#sessWishToConduct").val() == '' ){
 		 
 			$("#sessWishToConductErr").css("display" , "block");
 			return false;
-		 } 
+		 }
+  /*  else 	  if(!($("#a").is(":checked"))){
+	   alert("aaaaaaaaaaaaa");
+		$("#radioErr").css("display" , "block");
+		return false;
+	 }  */
 	 
-	 else	if($("#check").is(":checked")==false){
-		alert("check the checkbox to agree to term and conditions");
+	  if($("#txtInput").val() == '' ){
+		 
+			$("#txtInputErr").css("display" , "block");
+			return false;
+		 }
+	 if(true){
+			 //captcha checker from login.jsp
+			 	var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+			     var str2 = removeSpaces(document.getElementById('txtInput').value);
+			     if (!(str1 == str2)) {
+			         alert("Please Enter correct captcha");
+			         document.getElementById('txtInput').value = "";
+			         return false;
+			     }
+			 }
+		 
+		 
+		 if($("#check").is(":checked")==false){
+		alert("Check the checkbox to agree to Term and Conditions");
 		return false;
 	 	} 
+	  	
 	
 	 
-	 
  }
- 
+
+ // Remove the spaces from the entered and generated code
+ function removeSpaces(string) {
+     return string.split(' ').join('');
+ }
  
  function AvoidSpace(event) {
 	    var k = event ? event.which : window.event.keyCode;
@@ -312,7 +340,8 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" class="form-control" path="firstName" placeholder="First Name" required=""/>
+                                    <cf:input type="text" class="form-control" path="firstName" placeholder="First Name" required=""
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
                                 </div>
                                 <div class="form-group">
                                     <div>
@@ -322,7 +351,8 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="middleName" class="form-control" placeholder="Middle Name" required=""/>
+                                    <cf:input type="text" path="middleName" class="form-control" placeholder="Middle Name" required=""
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
                                 </div>
                                 <div class="form-group">
                                     <div>
@@ -332,7 +362,8 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="lastName" class="form-control" placeholder="Last Name" required=""/>
+                                    <cf:input type="text" path="lastName" class="form-control" placeholder="Last Name" required=""
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
                                 </div>
                             </div>
                             <!-- personal information ends -->
@@ -363,9 +394,9 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Center Address Line 2:</strong></li>
-                                            <li id="correspondenceAddress2Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
+                                            
                                            
-                                            <li class="style-li error-red"> </li>
+                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="correspondenceAddress2" class="form-control" placeholder="Training Center Line 2" required=""/>
@@ -430,7 +461,8 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="correspondencePincode" class="form-control" placeholder="Pincode" required=""/>
+                                    <cf:input type="text" path="correspondencePincode" class="form-control" minlength="6"  maxlength="6" placeholder="Pincode" required=""
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
 
                                 <div class="form-group">
@@ -448,12 +480,13 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Mobile:</strong></li>
-                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile cannot be empty.</li>
+                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile cannot be blank</li>
                                           
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="mobile" class="form-control" placeholder="Mobile" required=""/>
+                                    <cf:input type="text" path="mobile" class="form-control" minlength="10" maxlength="10" placeholder="Mobile" required=""
+                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
                                 <!-- right side ends -->
                             </div>
@@ -523,7 +556,7 @@
                                     <label class="radio-inline">
                                         <cf:radiobutton path="availableTVProjector" name="optradio"/> Yes </label>
                                     <label class="radio-inline">
-                                        <cf:radiobutton  path="availableTVProjector" name="optradio"/> No </label>
+                                        <cf:radiobutton  path="availableTVProjector"  checked="checked" name="optradio"/> No </label>
                                 </div>
                                 <div class="form-group">
                                     <label>Availability of in-house trainers in food safety ?</label>
@@ -531,7 +564,7 @@
                                     <label class="radio-inline">
                                         <cf:radiobutton  path="availableInHouseTrainer" name="optradio"/> Yes </label>
                                     <label class="radio-inline">
-                                        <cf:radiobutton  path="availableInHouseTrainer" name="optradio"/> No </label>
+                                        <cf:radiobutton  path="availableInHouseTrainer"   checked="checked" name="optradio"/> No </label>
                                 </div>
                             </div>
                             <!-- left side ends -->
@@ -591,7 +624,7 @@
 						</div>
 
 						<div style="float: left; width: 99%;">
-
+                            <div id="txtInputErr" style="display:none;" class="style-li error-red" > Captcha can not be blank.</div> 
 							<input type="text" id="txtCaptcha"
 								style="background-image: url(1.jpg); text-align: center; border: none; width: 140px; margin-left: 8px; font-weight: bold; font-family: Modern"
 								disabled="disabled" /> <input type="button" id="btnrefresh"

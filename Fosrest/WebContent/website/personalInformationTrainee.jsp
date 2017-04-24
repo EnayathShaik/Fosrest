@@ -7,6 +7,7 @@
 <!-- <head> -->
 
  <script src="website/js/commonController.js"></script>
+ 
  <script>
  
 
@@ -33,7 +34,8 @@
 	 if(profileId ==2 || profileId == 1 ){ 
 		
 		 $("#statusDIV").css("display" , "block");
-
+		
+	 
 	 }
 	 if(isUpdate !=null && isUpdate== "Y"){
 		 alert("Update Your Details");
@@ -102,6 +104,8 @@
 	}
 		 		
 	window.onload = OnStart;
+	
+	
  </script>
 
 <!-- <head> -->
@@ -245,7 +249,8 @@
                                            
                                         </ul>
                                     </div>
-                                    <cf:input type="text"  path="firstName" class="form-control" placeholder="First Name"/>
+                                    <cf:input type="text"  path="firstName" class="form-control"  placeholder="First Name"
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')" />
                                 </div>
 
                                 <div class="form-group">
@@ -257,7 +262,8 @@
                                            
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="MiddleName" class="form-control" placeholder="Middle Name"/>
+                                    <cf:input type="text" path="MiddleName" class="form-control" placeholder="Middle Name"
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')" />
                                 </div>
 
                                 <div class="form-group">
@@ -269,7 +275,8 @@
                                             
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="LastName" class="form-control" placeholder="Last Name"/>
+                                    <cf:input type="text" path="LastName" class="form-control" placeholder="Last Name"
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')" />
                                 </div>
                                 <div class="form-group">
                                     <div>
@@ -280,7 +287,8 @@
                                            
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="FatherName" class="form-control" placeholder="Father's Name"/>
+                                    <cf:input type="text" path="FatherName" class="form-control" placeholder="Father's Name"
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')" />
                                 </div>
                                 
                                 
@@ -335,7 +343,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Correspondence Address Line 2:</strong></li> <li class="style-li error-red"> </li>
                                              <!--  valid -->
-                                             <li id="correspondenceAddress2Err" style="display:none;" class="style-li error-red" >correspondence Address can not be blank.</li>
+                                            <!--  <li id="correspondenceAddress2Err" style="display:none;" class="style-li error-red" >correspondence Address can not be blank.</li> -->
                                            
                                         </ul>
                                     </div>
@@ -369,6 +377,7 @@
                                            
                                         </ul>
                                     </div>
+                  
                                     <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="emailVal(this.id,this.value)" required=""/>
                                 </div>
 
@@ -417,7 +426,8 @@
                                            
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="correspondencePincode" class="form-control"  minlength="6"  maxlength="6" placeholder="Pin Code" required=""/>
+                                    <cf:input type="text" path="correspondencePincode" class="form-control"  minlength="6"  maxlength="6" placeholder="Pin Code" required=""
+                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
 
                                 <div class="form-group">
@@ -430,7 +440,8 @@
                                         </ul>
                                     </div>
                                 
-                                     <cf:input type="text" path="mobile" class="form-control" minlength="10"  maxlength="10" placeholder="Mobile Number" required=""/>
+                                     <cf:input type="text" path="mobile" class="form-control" minlength="10"  maxlength="10" placeholder="Mobile Number" required=""
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                     
                                 </div>
 
@@ -532,7 +543,8 @@
                                                 <li id="resPincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
                                       </ul>
                                     </div>
-                                    <cf:input type="text" path="resPincode" class="form-control" placeholder="Pin Code" required=""/>
+                                    <cf:input type="text" path="resPincode" class="form-control"  minlength="6"  maxlength="6" placeholder="Pin Code" 
+                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" required=""/>
                                 </div>
                             </div>
                             <!-- right side ends -->
@@ -580,7 +592,7 @@
                             <div class="col-md-4 col-xs-12"></div>
                             <div class="col-md-4 col-xs-12">
                             <cf:input path="logId"  type="hidden"/>
-                                <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn" value="Register" />
+                                <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn"  value="Register" />
                                 
                             </div>
                             <div class="col-md-4 col-xs-12"></div>
@@ -616,7 +628,7 @@
 		$("#correspondencePincodeErr").css("display", "none");
 		$("#correspondencePincodeErr1").css("display", "none");
 		$("#mobileErr").css("display" , "none");
-		$("#correspondencePincodeErr").css("display" , "none");
+		/* $("#correspondencePincodeErr").css("display" , "none"); */
 		$("#AadharNumberErr").css("display" , "none");
 		$("#firstNameErr").css("display" , "none");
 		$("#MiddleNameErr").css("display" , "none");
@@ -631,8 +643,9 @@
 		 $("#correspondenceCityErr").css("display" , "none");
 		 $("#txtInputErr").css("display" , "none");
 		 $("#ResidentialLine1Err").css("display" , "none");
-		 $("#ResidentialLine2Err").css("display" , "none");
-		 
+		 $("#resStateErr").css("display" , "none");
+		 $("#residentialDistrictErr").css("display" , "none");
+		 $("#resCityErr").css("display" , "none");
 		 
 		 
    	    if($("#userType").val() == ''){
@@ -640,7 +653,7 @@
    		$("#userTypeErr").css("display" , "block");
    		return false;
    	 } else if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
- 		alert("Please Enter 12 digit Adhar number");
+ 		/* alert("Please Enter 12 digit Adhar number"); */
  		 $("#AadharNumberErr").css("display" , "block");
  	     return false;
    	 }else if($("#empID").val() == ''){
@@ -667,10 +680,8 @@
   	 }else if($("#correspondenceAddress1").val() == ''){
    		 $("#correspondenceAddress1Err").css("display" , "block");
     		return false; 
-  	 }else if($("#correspondenceAddress2").val() == ''){
-   		 $("#correspondenceAddress2Err").css("display" , "block");
- 		return false; 
-	 }else if($("#correspondenceState").val() == 0){
+  	 }
+  	 else if($("#correspondenceState").val() == 0){
    		 $("#correspondenceStateErr").css("display" , "block");
   		return false; 
  	 }else if($("#Email").val() == ''){
@@ -679,7 +690,7 @@
   	 }else if($("#correspondenceDistrict").val() == 0){
    		 $("#correspondenceDistrictErr").css("display" , "block");
     		return false;
-  	 }else if($("#correspondenceCity").val() == null){
+  	 }else if($("#correspondenceCity").val() == 0){
    		 $("#correspondenceCityErr").css("display" , "block");
     		return false;
   	 }else if($("#correspondencePincode").val().match(/^[0-9]{6}$/) == null){
@@ -687,7 +698,7 @@
   		 $("#correspondencePincodeErr").css("display" , "block");
   		return false;
   	 }else if($("#mobile").val().match(/^[0-9]{10}$/) == null){
-    		alert("Please Enter 10 digit mobile number");
+    	
       		 $("#mobileErr").css("display" , "block");
       		return false;
   	 }
@@ -698,10 +709,7 @@
    		return false;
 	 }
    	   
-   	else if($("#ResidentialLine2").val() == ''){
- 		 $("#ResidentialLine2Err").css("display" , "block");
-  		return false;
-	 }
+  
 	else if($("#resState").val() == 0){
 		 $("#resStateErr").css("display" , "block");
  		return false;
@@ -745,6 +753,9 @@
    function removeSpaces(string) {
        return string.split(' ').join('');
    }
+
+ 
+
 
    
    </script>
