@@ -108,7 +108,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 		traineeEvaluation.setCorrectAnswers(correctAnswers);
 		traineeEvaluation.setIncorrectAnswers(wrongAnswers);
 		traineeEvaluation.setTotalScore(totalScore);
-		traineeEvaluation.setCourseNameId(moduleid);
+		traineeEvaluation.setModuleId(moduleid);
 		int eligibility = assessmentDao.getElegibilityForAssessment(moduleid);
 		if(eligibility > -1){
 			if(totalScore >= eligibility){

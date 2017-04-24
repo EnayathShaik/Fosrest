@@ -90,8 +90,7 @@ public class AssessmentController {
 
 			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService.evaluate(questionMap, answers,assessmentEvaluationForm.getModuleId());
 			traineeAssessmentEvaluation.setLogindetails(loginIdUniuqe);
-			assessmentService
-					.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);
+			assessmentService.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);
 			
 			//Update Result in Course Enrolled User
 			if(traineeAssessmentEvaluation != null && traineeAssessmentEvaluation.getResult() != null){
@@ -101,10 +100,8 @@ public class AssessmentController {
 			
 			
 			Gson gson = new Gson();
-			String strTraineeAssessmentEvaluation = gson
-					.toJson(traineeAssessmentEvaluation);
-			model.addAttribute("traineeAssessmentEvaluation",
-					strTraineeAssessmentEvaluation);
+			String strTraineeAssessmentEvaluation = gson.toJson(traineeAssessmentEvaluation);
+			model.addAttribute("traineeAssessmentEvaluation",strTraineeAssessmentEvaluation);
 
 			// update Step
 			Integer profileID = 0;

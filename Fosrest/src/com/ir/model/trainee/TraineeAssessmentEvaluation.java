@@ -16,7 +16,7 @@ public class TraineeAssessmentEvaluation {
 	/**Login id of the trainee */
 	private int logindetails;
 	/**Course Id for which the assessment has been taken */
-	private int courseNameId;
+	private int moduleId;
 	/**Total number of questions provided for assessment*/
 	private int totalQuestions;
 	/**Number of correct answers by trainee */
@@ -111,17 +111,12 @@ public class TraineeAssessmentEvaluation {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	/**
-	 * @return the courseNameId
-	 */
-	public int getCourseNameId() {
-		return courseNameId;
+	public int getModuleId() {
+		return moduleId;
 	}
-	/**
-	 * @param courseNameId the courseNameId to set
-	 */
-	public void setCourseNameId(int courseNameId) {
-		this.courseNameId = courseNameId;
+	public void setModuleId(int moduleId) {
+		this.moduleId = moduleId;
 	}
+
 	
 }
