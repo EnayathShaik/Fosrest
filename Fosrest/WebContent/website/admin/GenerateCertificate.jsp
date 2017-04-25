@@ -281,22 +281,11 @@
    }
    
    function validateFields(){
-   	// alert($("#holidayDate").val());
-   	// alert($("#holidayReason").val());
-   	/*  if($("#trainingType").val() == ''){
+   	 if($("#batchCode").val() == 0){
    		 
-   		$("#trainingTypeErr").css("display" , "block");
+   		$("#batchCodeErr").css("display" , "block");
    		return false;
-   	 } else if($("#trainingInstitute").val() == ''){
-   		 $("#trainingInstituteErr").css("display" , "block");
-    		return false; 
-   	 }else if($("#trainingPartner").val() == ''){
-   		 $("#trainingPartnerErr").css("display" , "block");
- 		return false; 
-	 }else if($("#trainingDate").val() == ''){
-   		 $("#trainingDateErr").css("display" , "block");
- 		return false; 
-	 } */
+   	 } 
 
     }
    
