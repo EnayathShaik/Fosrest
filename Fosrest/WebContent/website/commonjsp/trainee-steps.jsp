@@ -2,7 +2,7 @@
 	var traineeSteps =
 <%=(Integer) session.getAttribute("traineeSteps")%>
 	
-</script>>
+</script>
 
 <div class="container-fluid">
 	<div class="row">
