@@ -2068,6 +2068,15 @@ public class AdminDAOImpl implements AdminDAO {
 			trainingSchedule.setUserType(p.getUserType());
 			trainingSchedule.setState(p.getState());
 			trainingSchedule.setTrainingInstitudeStatus(p.getTrainingInstitudeStatus());
+			if(trainingSchedule.getTrainer_status()== null){
+				System.out.println(" insode trainer");
+				trainingSchedule.setTrainer_status("N");
+			}
+			
+		if(trainingSchedule.getTraining_institude_status()== null){
+			System.out.println(" insode training insti");
+			trainingSchedule.setTraining_institude_status("N");
+		}
 			session.update(trainingSchedule);
 			
 		}
@@ -2104,9 +2113,9 @@ public class AdminDAOImpl implements AdminDAO {
 			else{
 				
 				if(profileId == 4 ){
-					sql =	"update TrainingSchedule set trainer_status=null where trainingScheduleId="+id;	
+					sql =	"update TrainingSchedule set trainer_status=null    where trainingScheduleId="+id;	
 				}else{
-					sql =	"update TrainingSchedule set training_institude_status=null where trainingScheduleId="+id;
+					sql =	"update TrainingSchedule set training_institude_status=null   where trainingScheduleId="+id;
 				}
 			}
 				
@@ -2167,11 +2176,11 @@ public class AdminDAOImpl implements AdminDAO {
 			Session session = this.sessionFactory.getCurrentSession();
 			List<TrainingSchedule> mccList=null;
 			if(profileId==5){
-			mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') <> 'Y' and traininginstitude='"+id+"'  ").list();
+			mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"+id+"'  ").list();
 			}
 			else{ 
 				
-			mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(trainer_status,'') <> 'Y' and trainer_id='"+id+"'  ").list();
+			mccList = session.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(trainer_status,'') not in ( 'Y' , '') and trainer_id='"+id+"'  ").list();
 			}	
 			for (TrainingSchedule p : mccList) {
 				System.out.println("listTrainingSchedule List::" + p);

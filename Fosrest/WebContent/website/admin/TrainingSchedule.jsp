@@ -404,7 +404,17 @@
             	    $("#trainingStartDate").val(mainData1.trainingStartDate);
             	    $("#trainingEndDate").val(mainData1.trainingEndDate);
             	    $("#trainingPartner").val(mainData1.trainingPartner);
-            	    $("#trainingInstitude").val(mainData1.trainingInstitude);
+            		$("#trainingPartner").trigger("change");
+                    window.setTimeout(function() {
+                    	 $("#trainingInstitude").val(mainData1.trainingInstitude);
+                        $("#trainingInstitude").trigger("change");
+                        window.setTimeout(function() {
+                        	$("#trainer_id").val(mainData1.trainer_id);
+                        }, 1000);
+                    }, 1000);
+            	    
+            	    
+            	   
             	    $("#state").val(mainData1.state);
             	     $("#updatebtn").css("display" , "block");
             	     

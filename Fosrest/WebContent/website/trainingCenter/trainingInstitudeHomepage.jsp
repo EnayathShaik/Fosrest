@@ -73,7 +73,8 @@ wwindow.profileId = '${profileId}';
 <script>
 
 function acceptTrainingRequest(id , profileId,userTableId,operation){
-	alert(" id "+id + "profileId  "+profileId+" userID:"+userTableId+"OPeration : "+operation);
+	//alert(" id "+id + "profileId  "+profileId+" userID:"+userTableId+"OPeration : "+operation);
+		if( confirm("Are you sure you want to "+operation + " ? ")){
 	   var name1=JSON.stringify({
   		courseName:0
     })
@@ -83,9 +84,10 @@ function acceptTrainingRequest(id , profileId,userTableId,operation){
   	      contentType : "application/json",
   		  data:name1,
   	      success: function (response) {  
-  	    	  
+  	    	  location.reload();
   	      }
   	}); 
+}
 }
 
 </script>

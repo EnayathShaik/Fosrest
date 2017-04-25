@@ -28,7 +28,7 @@ import com.ir.form.GenerateCertificateForm;<%@ taglib prefix="cf" uri="http://ww
 		}else{
 			alert('Please Flow Step By Step..');
 		}
-		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+		window.location.href ='/Fosrest/loginProcess.fssai';
 	}
 }
 window.onload = OnStart; 
