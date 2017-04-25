@@ -937,11 +937,9 @@
 				 $("#resPincodeErr").css("display" , "block");
 				return false;
 			} 
-			 if($("#txtInput").val() == ''){
-				 $("#txtInputErr").css("display" , "block");
-					return false;
+			 
 				 
-		   }  if($("#ExpBackground").val() == ''){
+		     if($("#ExpBackground").val() == ''){
 			$("#ExpBackgroundErr").css("display" , "block");
 			return false;
 		 }	 
@@ -969,8 +967,10 @@
 				return false;
 			 }
 	    
-	  
-	   
+			  if($("#txtInput").val() == ''){
+					 $("#txtInputErr").css("display" , "block");
+						return false;
+			  }
 		var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
 	        var str2 = removeSpaces(document.getElementById('txtInput').value);
 	        if (!(str1 == str2)) {

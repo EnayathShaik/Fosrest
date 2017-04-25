@@ -187,6 +187,10 @@
                 
                 }
                  function validateFields(){ 
+                	 $("#trainingPartnerNameErr").css("display" , "none");
+                	 $("#tpWebLinkErr").css("display" , "none");
+                	 $("#statusErr").css("display" , "none");
+                	 
                  if($("#trainingPartnerName").val() == 0){
               		 
               		$("#trainingPartnerNameErr").css("display" , "block");

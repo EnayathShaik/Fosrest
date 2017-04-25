@@ -205,6 +205,11 @@
         /*      validation function  */
             
             function validateFields(){
+        	
+            	 $("#userTypeErr").css("display" , "none");
+            	 $("#trainingTypeErr").css("display" , "none");
+            	 $("#subjectNameErr").css("display" , "none");
+            	 $("#statusErr").css("display" , "none");
             
             	 if($("#userType").val() == ''){
             		 $("#userTypeErr").css("display" , "block");

@@ -217,8 +217,13 @@
    <script>
    
    function validateFields(){
-   	// alert($("#holidayDate").val());
-   	// alert($("#holidayReason").val());
+	   $("#userTypeErr").css("display" , "none");
+  	 $("#trainingTypeErr").css("display" , "none");
+  	 $("#trainingInstituteErr").css("display" , "none");
+  	 $("#statusErr").css("display" , "none");
+  	 $("#trainingDateErr").css("display" , "none");
+  	 
+  	 
    	 if($("#trainingType").val() ==''){
    		 
    		$("#trainingTypeErr").css("display" , "block");

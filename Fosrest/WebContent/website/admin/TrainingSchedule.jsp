@@ -233,7 +233,7 @@
 													<ul class="lab-no">
 														<li class="style-li"><strong>Training
 																Trainer:</strong></li>
-														<li id="trainingInstitudeErr" style="display: none;"
+														<li id="trainingTrainerErr" style="display: none;"
 															class="style-li error-red">Please Select a trainer.</li>
 														<li class="style-li error-red"></li>
 													</ul>
@@ -425,8 +425,21 @@
                 }
                 
                 function validateFields(){
-                    //	 alert($("#holidayDate").val());
-                    //	 alert($("#trainingType").val());
+                	  $("#unitIdErr").css("display" , "none");
+                	  	 $("#moduleIdErr").css("display" , "none");
+                	  	 $("#userTypeErr").css("display" , "none");
+                	  	 $("#statusErr").css("display" , "none");
+                	  	 $("#trainingPartnerErr").css("display" , "none");
+                	  	 $("#trainingTypeErr").css("display" , "none");
+                	  	 $("#trainingInstitudeErr").css("display" , "none");
+                	  	 $("#trainingPhaseErr").css("display" , "none");
+                	  	 $("#trainingInstitudeStatusErr").css("display" , "none");
+                	  	 $("#trainingStartDateErr").css("display" , "none");
+                	  	 $("#trainingEndDateErr").css("display" , "none");
+                	  	$("#trainingTrainerErr").css("display" , "none");
+                	  	 $("#stateErr").css("display" , "none");
+                	  	 
+                	  	 
                 	if($("#unitId").val() == 0){
                   		 
                  		$("#unitIdErr").css("display" , "block");
@@ -461,6 +474,11 @@
                  		$("#trainingPhaseErr").css("display" , "block");
                  		return false;
                  	 }
+                 	if($("#trainer_id").val() == 0){
+                		 
+                 		$("#trainingTrainerErr").css("display" , "block");
+                 		return false;
+                 	 }
                  	if($("#trainingInstitudeStatus").val() == 0){
                   		 
                   		$("#trainingInstitudeStatusErr").css("display" , "block");
@@ -481,6 +499,7 @@
                  		$("#stateErr").css("display" , "block");
                  		return false;
                  	 }
+                 	
                     }
                 
                 
