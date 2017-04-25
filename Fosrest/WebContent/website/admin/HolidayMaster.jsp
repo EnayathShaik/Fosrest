@@ -170,8 +170,8 @@
                  
 
                  function validateFields(){
-                	// alert($("#holidayDate").val());
-                	// alert($("#holidayReason").val());
+                		$("#holidayDateErr").css("display" , "none");
+                		$("#holidayReasonErr").css("display" , "none");
                 	 if($("#holidayDate").val() == ''){
                 		 
                 		$("#holidayDateErr").css("display" , "block");

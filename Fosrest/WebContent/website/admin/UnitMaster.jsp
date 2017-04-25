@@ -212,6 +212,10 @@
                 }
 
             function validateFields(){
+            	 $("#userTypeErr").css("display" , "none");
+            	 $("#unitNameErr").css("display" , "none");
+            	 $("#trainingTypeErr").css("display" , "none");
+            	$("#trainingPhaseErr").css("display" , "none");
                 	if($("#userType").val() == ''){
                		 $("#userTypeErr").css("display" , "block");
                 		return false; 
