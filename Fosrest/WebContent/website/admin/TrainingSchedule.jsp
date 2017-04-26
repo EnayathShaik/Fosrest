@@ -344,9 +344,9 @@
 													</thead>
 
 													<ct:forEach items="${listTrainingSchedule}"
-														var="TrainingSchedule">
+														var="TrainingSchedule" varStatus="loop">
 														<tr>
-															<td>${TrainingSchedule.trainingScheduleId}</td>
+															<td>${loop.count}</td>
 															<td>${TrainingSchedule.userType}</td>
 															<td>${TrainingSchedule.trainingType}</td>
 															<td>${TrainingSchedule.trainingPhase}</td>

@@ -154,9 +154,9 @@
                                                         <th>Delete</th>
                                                     </tr>
                                                 </thead>       
-                                            <ct:forEach items="${listUnitMaster}" var="UnitMaster">
+                                            <ct:forEach items="${listUnitMaster}" var="UnitMaster" varStatus="loop">
                                                 <tr>
-												<td>${UnitMaster.unitId}</td>
+												<td>${loop.count}</td>
 												<td>${UnitMaster.userType}</td>
 												<td>${UnitMaster.trainingType}</td>
 												<td>${UnitMaster.trainingPhase}</td>

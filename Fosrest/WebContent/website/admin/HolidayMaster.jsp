@@ -131,11 +131,11 @@
                                                     </tr> 
                                                 </thead>
                                                 
-                                               	<ct:forEach items="${listHolidayMaster}" var="HolidayMaster">
+                                               	<ct:forEach items="${listHolidayMaster}" var="HolidayMaster" varStatus="loop">
 										
 										
 											<tr>
-												<td>${HolidayMaster.holidayId}</td>
+												<td>${loop.count}</td>
 												<td>${HolidayMaster.holidayDate}</td>
 												<td>${HolidayMaster.holidayReason}</td>
 												  

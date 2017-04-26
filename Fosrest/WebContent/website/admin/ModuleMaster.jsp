@@ -191,9 +191,9 @@
 															<th>Delete</th>
 														</tr>
 													</thead>
-													<ct:forEach items="${listModuleMaster}" var="ModuleMaster">
+													<ct:forEach items="${listModuleMaster}" var="ModuleMaster" varStatus="loop">
 														<tr>
-															<td>${ModuleMaster.moduleId}</td>
+															<td>${loop.count}</td>
 															<td>${ModuleMaster.moduleName}</td>
 															<td><ct:choose>
 																	<ct:when test="${ ModuleMaster.status == 'A'}">Active</ct:when>

@@ -128,11 +128,11 @@
                                                     </tr> 
                                                 </thead>
                                                 
-                                               	<ct:forEach items="${listTrainingPartner}" var="TrainingPartner">
+                                               	<ct:forEach items="${listTrainingPartner}" var="TrainingPartner" varStatus="loop">
 										
 										
 											<tr>
-												<td>${TrainingPartner.trainingPartnerId}</td>
+												<td>${loop.count}</td>
 												<td>${TrainingPartner.trainingPartnerName}</td>
 												<td>${TrainingPartner.tpWebLink}</td>
 												 <td><ct:choose><ct:when test="${ TrainingPartner.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td>  
