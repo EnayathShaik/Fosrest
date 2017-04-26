@@ -46,6 +46,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> State Name:</strong></li>
                                                         <li class="style-li error-red"> </li>
+                                                        <li id="stateIdErr" style="display:none;" class="style-li error-red" > State should not be blank.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:select path="stateId" class="form-control">
@@ -75,6 +76,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>District Name:</strong></li>
                                                         <li class="style-li error-red"> </li>
+                                                        <li id="DistrictNameErr" style="display:none;" class="style-li error-red" > District should not be blank.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:input type="text" path="districtName"  placeholder="District Name" class="form-control"/> 
@@ -86,7 +88,7 @@
 												
 												
 													<input type="submit" id="createbtn"
-														value="Create"  class="btn login-btn"/>
+														value="Create"  class="btn login-btn" onclick="return validateFields();"/>
                                                 <div class="col-md-6 col-xs-12" style="margin-top: 25px;">
                                                    <!--   <button  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button> -->
                                                 </div>
@@ -120,9 +122,9 @@
                                                     </tr>
                                                 </thead>
                                                 
-                                                <ct:forEach items="${listDistrictMaster}" var="DistrictMaster">
-                                                <tr>
-												<td>${DistrictMaster.districtId}</td>
+                                                <ct:forEach items="${listDistrictMaster}" var="DistrictMaster" varStatus="loop">
+                                              <tr>
+										<td>${loop.count}</td>
 												 <td>${DistrictMaster.stateMaster.stateName}</td> 
 												<td>${DistrictMaster.districtName}</td>
 												<td><ct:choose><ct:when test="${ DistrictMaster.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
@@ -171,4 +173,18 @@
                 
                 }
 
+            </script>
+             <script>
+            function validateFields(){
+            	$("#stateIdErr").css("display" , "none");
+            	 $("#DistrictNameErr").css("display" , "none");
+             	if($("#stateId").val() == ''){
+            		 $("#stateIdErr").css("display" , "block");
+             		return false; 
+            	 }
+             	if($("#DistrictName").val() == ''){
+           		 $("#DistrictNameErr").css("display" , "block");
+            		return false; 
+           	 }
+         }
             </script>

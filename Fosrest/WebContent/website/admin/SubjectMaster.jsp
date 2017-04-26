@@ -146,9 +146,9 @@
                                                     </tr>
                                                 </thead>
                                                 
-                                                <ct:forEach items="${listSubjectMaster}" var="SubjectMaster">
+                                                <ct:forEach items="${listSubjectMaster}" var="SubjectMaster" varStatus="loop">
                                                 <tr>
-												<td>${SubjectMaster.subjectId}</td>
+												<td>${loop.count}</td>
 												<td>${SubjectMaster.userType}</td>
 												<td>${SubjectMaster.trainingType}</td>
 												<td>${SubjectMaster.subjectName}</td>

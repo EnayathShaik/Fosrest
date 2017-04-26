@@ -184,9 +184,9 @@
                                                     </tr>
                                                 </thead>
                                                 
-                                                <ct:forEach items="${listGenerateCertificate}" var="GenerateCertificate">
+                                                <ct:forEach items="${listGenerateCertificate}" var="GenerateCertificate" varStatus="loop">
                                                 <tr>
-												<td>${GenerateCertificate.id}</td>
+												<td>${loop.count}</td>
 												<td>${GenerateCertificate.trainingType}</td>
 												<td>${GenerateCertificate.trainingDate}</td>
 												<td>${GenerateCertificate.trainingPartner}</td>

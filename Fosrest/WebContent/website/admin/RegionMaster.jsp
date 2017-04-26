@@ -156,9 +156,9 @@
                                                     </tr>
                                                 </thead>
                                                 
-                                                <ct:forEach items="${listRegionMaster}" var="RegionMaster">
+                                                <ct:forEach items="${listRegionMaster}" var="RegionMaster" varStatus="loop">
                                                 <tr>
-												<td>${RegionMaster.id}</td>
+												<td>${loop.count}</td>
 												<td>${RegionMaster.cityMaster.districtMaster.stateMaster.stateName}</td>
 												<td>${RegionMaster.cityMaster.districtMaster.districtName}</td>
 												<td>${RegionMaster.cityMaster.cityName}</td>

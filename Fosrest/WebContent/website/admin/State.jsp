@@ -138,10 +138,10 @@
                                                     </tr> 
                                                 </thead>
                                                 
-                                               	<ct:forEach items="${listStateMaster}" var="StateMaster">
+                                               	<ct:forEach items="${listStateMaster}" var="StateMaster" varStatus="loop">
 										
 												<tr>
-												<td>${StateMaster.stateId}</td>
+												<td>${loop.count}</td>
 												<td>${StateMaster.stateName}</td>
 												 <td><ct:choose><ct:when test="${ StateMaster.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
 												<td><button onclick='editState(${StateMaster.stateId});return false;' >Edit</button></td>
