@@ -2449,7 +2449,7 @@ public class AdminDAOImpl implements AdminDAO {
 			String sql=null;
 			RegionMaster p = (RegionMaster) session.load(RegionMaster.class, new Integer(id));
 			if (null != p) {
-				sql =	"update DistrictMaster set isactive='N' where districtId="+id;
+				sql =	"update RegionMaster set isactive='N' where id="+id;
 			}
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
