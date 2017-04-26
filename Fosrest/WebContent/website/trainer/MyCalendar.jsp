@@ -194,9 +194,9 @@
                                                     </tr>
                                                 </thead>
                                                 
-                                                <ct:forEach items="${listMyCalendar}" var="MyCalendar">
+                                                <ct:forEach items="${listMyCalendar}" var="MyCalendar" varStatus="loop">
                                                 <tr>
-												<td>${MyCalendar.id}</td>
+												<td>${loop.count}</td>
 												<td>${MyCalendar.trainingType}</td>
 												<td>${MyCalendar.userType}</td>
 												<td>${MyCalendar.trainingDate}</td>

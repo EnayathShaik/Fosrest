@@ -87,15 +87,15 @@ public class TrainerDAOImpl implements TrainerDAO {
 		for (Object[] li : lst) {
 			bean = new TrainerRequestForm();
 			bean.setId((int) li[0]);
-			bean.setTrainingType((String) li[14]);
-			bean.setUserType((String) (li[18]));
+			bean.setTrainingType((String) li[16]);
+			bean.setUserType((String) (li[20]));
 			// bean.setUnit((String) li[3]);
 			// bean.setModule((String) li[4]);
 			// bean.setTrainingCenter((String) li[5]);
-			bean.setTrainingStartDate((String) li[13]);
-			bean.setTrainingEndDate((String) li[8]);
+			bean.setTrainingStartDate((String) li[15]);
+			bean.setTrainingEndDate((String) li[10]);
 			// bean.setNop((String) li[9]);
-			bean.setStatus((String) li[10]);
+			bean.setStatus((String) li[12]);
 			// bean.setUpdateHistory((String) li[11]);
 
 			list.add(bean);

@@ -91,13 +91,13 @@ List<Object[]> mccList  = session.createSQLQuery("select * from trainingschedule
 for (Object[] li : mccList ) { 
 	 bean= new TrainingRequestForm();
 			
-			bean.setTrainingType((String) li[14]);
-			bean.setUserType((String) li[18]);
+			bean.setTrainingType((String) li[16]);
+			bean.setUserType((String) li[20]);
 
-			bean.setStartDate((String) li[13]);
-			bean.setEndDate((String) li[8]);
+			bean.setStartDate((String) li[15]);
+			bean.setEndDate((String) li[10]);
 			
-			bean.setTrainingStatus((String) li[10]);
+			bean.setTrainingStatus((String) li[12]);
 			System.out.println(bean);
 			list.add(bean);
 		}

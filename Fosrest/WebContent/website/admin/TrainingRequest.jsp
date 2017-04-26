@@ -157,7 +157,7 @@
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
                                                     <tr class="background-open-vacancies">
-                                                 <th>S.No.</th>
+                                                 <th>S.No</th>
                                                         <th>Training Type</th>
                                                         <th>User Type</th>
                                                       <th>Start Date</th>
@@ -170,10 +170,11 @@
                                                        </tr>
                                                 </thead>
                                                 <ct:set var="i" value="0" />
-                                                <ct:forEach items="${listTrainingRequest}" var="ti">
+                                                <ct:forEach items="${listTrainingRequest}" var="ti" varStatus="loop">
+													
+													
                                                 <tr>
-												  <ct:set var="i" value="${i+1}" />
-												<td>${i}</td>
+                                                <td>${loop.count}</td>
 												<td>${ti.trainingType}</td>
 												<td>${ti.userType}</td>
 				
@@ -181,9 +182,9 @@
 												<td>${ti.endDate}</td>
 												<td>${ti.noE}</td>
 												<td>${ti.trainingStatus}</td>
-												<td><input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Update/Request"/></td>
-												<td><input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Cancel/Reject"/>
-												<td><a href="">no Link</a></td>
+												<td><input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Update"/></td>
+												<td><input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Cancel"/>
+												<td><a href="">see details</a></td>
 												
 				
                                                       

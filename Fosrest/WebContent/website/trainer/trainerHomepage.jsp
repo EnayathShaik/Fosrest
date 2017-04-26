@@ -43,9 +43,9 @@
                                                     </tr>
                                                 </thead>
                                                 
-                                                <ct:forEach items="${listTrainingSchedule}" var="TrainingSchedule">
+                                                <ct:forEach items="${listTrainingSchedule}" var="TrainingSchedule" varStatus="loop">
                                                 <tr>
-												<td>${TrainingSchedule.trainingScheduleId}</td>
+												<td>${loop.count}</td>
 												<td>${TrainingSchedule.trainingType}</td>
 												<td>${TrainingSchedule.userType}</td>
 												<td>${TrainingSchedule.trainingPhase}</td>

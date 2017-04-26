@@ -179,9 +179,9 @@
 														</tr>
 													</thead>
 													<ct:forEach items="${listTrainerRequest}"
-														var="TrainerRequest">
+														var="TrainerRequest" varStatus="loop">
 														<tr>
-															<td>${TrainerRequest.id}</td>
+															<td>${loop.count}</td>
 															<td>${TrainerRequest.trainingType}</td>
 															<td>${TrainerRequest.userType}</td>
 															<%-- <td>${TrainingRequest.unit}</td>
