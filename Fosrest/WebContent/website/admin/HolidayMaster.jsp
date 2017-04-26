@@ -166,7 +166,30 @@
                 document.getElementById(id).className = "active";
                  */
                 
-              
+                 function editHoliday(id){
+                    
+                     
+                     var name1=JSON.stringify({
+                 		courseName:0
+                   })
+                 	$.ajax({
+                 	      type: 'post',
+                 	      url: 'HolidayMaster/edit/'+id+'.fssai',
+                 	      contentType : "application/json",
+                 		  data:name1,
+                 	      success: function (response) {      
+                 	      var mainData1 = jQuery.parseJSON(response);
+                 	    $("#holidayId").val(mainData1.holidayId);
+                 	    $("#holidayDate").val(mainData1.holidayDate);
+                 	    $("#holidayReason").val(mainData1.holidayReason);
+                 	     $("#updatebtn").css("display" , "block");
+                 	     
+                 	     $("#createbtn").css("display" , "none");
+                 	      }
+                 	      });     
+                     
+                     }
+
                  
 
                  function validateFields(){
