@@ -46,7 +46,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> State Name:</strong></li>
                                                         <li class="style-li error-red"> </li>
-                                                        <li id="stateIdErr" style="display:none;" class="style-li error-red" > State should not be blank.</li>
+                                                         <li id="stateIdErr" style="display:none;" class="style-li error-red" > State should not be blank.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:select path="stateId" class="form-control">
@@ -76,7 +76,8 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>District Name:</strong></li>
                                                         <li class="style-li error-red"> </li>
-                                                        <li id="DistrictNameErr" style="display:none;" class="style-li error-red" > District should not be blank.</li>
+                                                       <li id="districtNameErr" style="display:none;" class="style-li error-red" > District should not be blank.</li>
+
                                                     </ul>
                                                 </div>
                                                 <cf:input type="text" path="districtName"  placeholder="District Name" class="form-control"/> 
@@ -173,18 +174,17 @@
                 
                 }
 
-            </script>
-             <script>
             function validateFields(){
-            	$("#stateIdErr").css("display" , "none");
-            	 $("#DistrictNameErr").css("display" , "none");
-             	if($("#stateId").val() == ''){
-            		 $("#stateIdErr").css("display" , "block");
-             		return false; 
-            	 }
-             	if($("#DistrictName").val() == ''){
-           		 $("#DistrictNameErr").css("display" , "block");
-            		return false; 
-           	 }
-         }
+            	  $("#stateIdErr").css("display" , "none");
+            	  $("#districtIdErr").css("display" , "none");
+                     	if($("#stateId").val() == 0){
+                    		 $("#stateIdErr").css("display" , "block");
+                     		return false; 
+                    	 }
+                     	if($("#districtName").val() == 0){
+                   		 $("#districtNameErr").css("display" , "block");
+                    		return false; 
+                   	 }
+              }
+
             </script>

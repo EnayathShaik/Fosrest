@@ -53,9 +53,9 @@
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong> Unit Name:</strong></li>
-															<!-- <li id="unitIdErr" style="display: none;"
-																class="style-li error-red">Please Enter unit Name.</li>
- -->
+														 <li id="unitIdErr" style="display:none;" class="style-li error-red" >Please Select User Name.</li>
+                                                        <li class="style-li error-red"> </li>
+
 
 														</ul>
 													</div>
@@ -74,9 +74,7 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong> Status:</strong></li>
 															<li class="style-li error-red"></li>
-															<!-- <li id="statusErr" style="display: none;"
-																class="style-li error-red">Please Enter content
-																Name.</li> -->
+															
 														</ul>
 													</div>
 													<cf:select path="status" class="form-control">
@@ -90,9 +88,9 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Content Name:</strong></li>
 															<li class="style-li error-red"></li>
-															<!-- <li id="contentNameErr" style="display: none;"
-																class="style-li error-red">Please Enter content
-																Name.</li> -->
+															 <li id="contentNameErr" style="display:none;" class="style-li error-red" >Please Select Content Name.</li>
+                                                        <li class="style-li error-red"> </li>
+															
 														</ul>
 													</div>
 													<cf:input type="text" path="contentName"
@@ -111,10 +109,8 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Module Name:</strong></li>
 															<li class="style-li error-red"></li>
-															<!-- <li id="moduleNameErr" style="display: none;"
-																class="style-li error-red">Please Enterkkkk
-																Name.</li>
- -->
+															<li id="moduleNameErr" style="display:none;" class="style-li error-red" >Please Select module Name.</li>
+
 														</ul>
 													</div>
 													<cf:input type="text" path="moduleName"
@@ -126,9 +122,8 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong> Content Type:</strong></li>
 															<li class="style-li error-red"></li>
-															<!-- <li id="contentTypeErr" style="display: none;"
-																class="style-li error-red">Please Enter content
-																Name.</li> -->
+															<li id="contentTypeErr" style="display:none;" class="style-li error-red" >Please Select Content Type.</li>
+															
 														</ul>
 													</div>
 													<cf:select path="contentType" class="form-control">
@@ -142,9 +137,8 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Content Link:</strong></li>
 															<li class="style-li error-red"></li>
-															<!-- <li id="contentLinkErr" style="display: none;"
-																class="style-li error-red">Please Enter content
-																link.</li> -->
+															<li id="contentLinkErr" style="display:none;" class="style-li error-red" >Please Select Content link.</li>
+															
 														</ul>
 													</div>
 													<cf:input type="text" path="contentLink"
@@ -255,48 +249,41 @@
             
             
             
-            function validateFields() {
-       		
-      /*  			$("#moduleName").css("display" , "none");
-       		$("#status").css("display", "none");
-       		$("#unitId").css("display", "none");
-       		
-       	 
-       	 if($("#unitId").val() == ''){
-     		 $("#unitIdErr").css("display" , "block");
-     		 
-     			return false; 
-     		} 
-       		
-       		if($("#moduleName").val() == 0){
-     		 $("#moduleNameErr").css("display" , "block");
-     		 
-     			return false; 
-     		} 
-     	 	
-       		if($("#status").val() == 0){
-        		 
-         		$("#statusErr").css("display" , "block");
-         		return false;
-         		}
-     		if($("#contentType").val() == 0){
-     		 
-     		$("#contentTypeErr").css("display" , "block");
-     		return false;
-     		}
-     		if($("#contentName").val() == 0){
-          		 
-         		$("#contentNameErr").css("display" , "block");
-         		return false;
-         		}
-      
-     		if($("#contentLink").val() == 0){
-        		 
-         		$("#contentLinkErr").css("display" , "block");
-         		return false;
-         		} */
-         		 
-  }
+            function validateFields(){
+            	
+           	 $("#unitIdErr").css("display" , "none");
+           	 $("#contentNameErr").css("display" , "none");
+           	 $("#moduleNameErr").css("display" , "none");
+           	 $("#contentTypeErr").css("display" , "none"); 
+           	 $("#contentLinkErr").css("display" , "none");
+           
+          
+           	 if($("#unitId").val() == 0){
+           		 $("#unitIdErr").css("display" , "block");
+              		return false; 
+           	 } 
+           	else if($("#moduleName").val() == ''){
+          		 $("#moduleNameErr").css("display" , "block");
+        		return false; 
+       	 }
+            else if($("#contentType").val() == 0){
+          		 $("#contentTypeErr").css("display" , "block");
+         		return false; 
+       	 } 	 
+           	 else if($("#contentName").val() == ''){
+           		 
+             		$("#contentNameErr").css("display" , "block");
+             		return false;
+           	 
+        	 }
+        	
+        	 else if($("#contentLink").val() == ''){
+           		 $("#contentLinkErr").css("display" , "block");
+           		return false;
+        	 }
+        	
+           }
+            
         
 
             </script>
