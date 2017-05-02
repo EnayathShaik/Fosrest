@@ -45,6 +45,7 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> State Name:</strong></li>
+                                                        <li id="stateIdErr" style="display:none;" class="style-li error-red" > State should not be blank.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -75,6 +76,7 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> District Name:</strong></li>
+                                                        <li id="districtIdErr" style="display:none;" class="style-li error-red" > District should not be blank.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -90,6 +92,7 @@
                                                 <div>
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>City Name:</strong></li>
+                                                        <li id="cityNameErr" style="display:none;" class="style-li error-red" >City should not be blank.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -197,4 +200,24 @@
                 
                 }
 
-            </script>
+    
+            
+              function validateFields(){
+            	  $("#stateIdErr").css("display" , "none");
+            	  $("#districtIdErr").css("display" , "none");
+            	  $("#cityNameErr").css("display" , "none");
+                     	if($("#stateId").val() == 0){
+                    		 $("#stateIdErr").css("display" , "block");
+                     		return false; 
+                    	 }
+                     	if($("#districtId").val() == 0){
+                   		 $("#districtIdErr").css("display" , "block");
+                    		return false; 
+                   	 }
+                     	if($("#cityName").val() == 0){
+                      		 $("#cityNameErr").css("display" , "block");
+                       		return false; 
+                      	 }
+                 }
+                 
+        </script>

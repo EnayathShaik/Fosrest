@@ -46,6 +46,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> State Name:</strong></li>
                                                         <li class="style-li error-red"> </li>
+                                                         <li id="stateIdErr" style="display:none;" class="style-li error-red" >State should not be blank.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:select path="stateId" class="form-control" onchange="getDistrict(this.value , 'districtId')">
@@ -59,6 +60,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> City Name:</strong></li>
                                                         <li class="style-li error-red"> </li>
+                                                         <li id="cityIdErr" style="display:none;" class="style-li error-red" >City should not be blank.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:select path="cityId" class="form-control">
@@ -89,6 +91,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong> District Name:</strong></li>
                                                         <li class="style-li error-red"> </li>
+                                                         <li id="districtIdErr" style="display:none;" class="style-li error-red" >District should not be blank.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:select path="districtId" class="form-control" onchange="getCity(this.value , 'cityId')">
@@ -104,6 +107,7 @@
                                                     <ul class="lab-no">
                                                         <li class="style-li"><strong>Region Name:</strong></li>
                                                         <li class="style-li error-red"> </li>
+                                                         <li id="regionNameErr" style="display:none;" class="style-li error-red" >Region should not be blank.</li>
                                                     </ul>
                                                 </div>
                                                 <cf:input type="text" path="regionName"  placeholder="Region Name" class="form-control"/> 
@@ -213,4 +217,29 @@
                 
                 }
 
+          
+            function validateFields(){
+            	 $("#stateIdErr").css("display" , "none");
+            	 $("#districtIdErr").css("display" , "none");
+            	 $("#cityIdErr").css("display" , "none");
+            	 $("#regionNameErr").css("display" , "none");
+            	 
+                   	if($("#stateId").val() == 0){
+                  		 $("#stateIdErr").css("display" , "block");
+                   		return false; 
+                  	 }
+                   	if($("#districtId").val() == 0){
+                 		 $("#districtIdErr").css("display" , "block");
+                  		return false; 
+                 	 }
+                   	if($("#cityId").val() == 0){
+                    		 $("#cityIdErr").css("display" , "block");
+                     		return false; 
+                    	 }
+                	if($("#regionName").val() == 0){
+               		 $("#regionNameErr").css("display" , "block");
+                		return false; 
+               	 }
+               }
+               
             </script>
