@@ -5,7 +5,9 @@
 
 <script>
 function OnStart(){
-	document.getElementById('id').value = 0;
+	if(document.getElementById('correctAnswer').value>0)
+		alert("Question added Sucessfully");	
+document.getElementById('id').value = 0;
 document.getElementById('courseTypeId').value = 0;
 document.getElementById('courseName').value = 0;
 document.getElementById('questionNumber').value = '';
@@ -19,9 +21,9 @@ window.onload = OnStart;
 
 
 function getQuestions(){
-	var courseTypeSearch =  $("#courseTypeSearch").val();
-	var courseNameSearch =  $("#courseNameSearch").val();
-	var total = "courseNameSearch="+courseNameSearch+"-courseTypeSearch="+courseTypeSearch;
+	var unitCodeSearch =  $("#unitCode").val();
+	var moduleCodeSearch =  $("#moduleCode").val();
+	var total = "unitCodeSearch="+unitCodeSearch+"-moduleCodeSearch="+moduleCodeSearch;
 	var result="";
 	var name1=JSON.stringify({
 		courseType:0
@@ -60,10 +62,10 @@ function editAssessmentQuestion(id){
 	$.each(mainData1 , function(i , obj)
 	{
 		document.getElementById('id').value = obj[0];
-		document.getElementById('courseTypeId').value = obj[1];
-		$("#courseTypeId").trigger("change");
+		document.getElementById('unitCode').value = obj[1];
+		$("#unitCode").trigger("change");
 		window.setTimeout(function(){
-			document.getElementById('courseName').value = obj[2];
+			document.getElementById('moduleName').value = obj[2];
 	    }, 3000);
 		document.getElementById('questionNumber').value = obj[3];
 		document.getElementById('questionHint').value = obj[4];
@@ -225,10 +227,10 @@ function editAssessmentQuestion(id){
                                                         <thead>
 
                                                             <tr class="background-open-vacancies">
-                                                                <th class="text-center"><input type="checkbox"> </th>
+ <!--                                                                <th class="text-center"><input type="checkbox"> </th>
                                                                 <th>Course Code</th>
                                                                 <th>Question Number</th>
-                                                            </tr>
+  -->                                                           </tr>
 
                                                         </thead>
 

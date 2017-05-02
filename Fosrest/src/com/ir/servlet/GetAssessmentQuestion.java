@@ -39,9 +39,14 @@ public class GetAssessmentQuestion extends HttpServlet {
 		
 		String sql ="";
 		//sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)inner join coursename C on(A.coursename=C.coursenameid)";
-		sql = "select A.assessmentquestionid,A.coursetype,A.coursename,A.questionnumber,A.questionhint," +
+	/*	sql = "select A.assessmentquestionid,A.coursetype,A.coursename,A.questionnumber,A.questionhint," +
 				" A.questiontitle,A.noofoption,A.correctanswer,A.optionone,A.optiontwo,A.optionthree,A.optionfour, " +
 				" A.optionfive,A.optionsix from assessmentquestion A where A.assessmentquestionid = "+id;
+		*/
+		sql = "select A.assessmentid,A.unitmaster,A.modulemaster,A.questionnumber,A.questionhint," +
+				" A.questiontitle,A.noofoption,A.correctanswer,A.optionone,A.optiontwo,A.optionthree,A.optionfour, " +
+				" A.optionfive,A.optionsix from assessmentquestions A where A.assessmentid = "+id;
+		
 		String newList=null;
 		List list = new AjaxRequest().returnList(sql);
 		System.out.println(list.size());

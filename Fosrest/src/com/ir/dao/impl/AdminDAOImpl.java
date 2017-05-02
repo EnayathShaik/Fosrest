@@ -898,7 +898,7 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		Integer assessmentQuestionIdd = null ;
 		
-		String where = " where unitcode = "+assessmentQuestionForm.getUnitCode()+" and modulecode = '"+assessmentQuestionForm.getModuleCode()+"' and questionTitle = '"+assessmentQuestionForm.getQuestionTitle()+"'";
+		String where = " where unitmaster = "+assessmentQuestionForm.getUnitCode()+" and modulemaster = '"+assessmentQuestionForm.getModuleCode()+"' and questionNumber = '"+assessmentQuestionForm.getQuestionNumber()+"'";
 		String sql = "select assessmenttype from AssessmentQuestions " + where ;
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
@@ -1518,38 +1518,38 @@ public class AdminDAOImpl implements AdminDAO {
 		public List getQuestions(String data){
 			String[] totalConnected = data.split("-");
 			
-			int  courseNameSearch = Integer.parseInt((totalConnected[0].split("="))[1]);
-			int  courseTypeSearch = Integer.parseInt((totalConnected[1].split("="))[1]);
+			int  unitCodeSearch = Integer.parseInt((totalConnected[0].split("="))[1]);
+			int  moduleCodeSearch = Integer.parseInt((totalConnected[1].split("="))[1]);
 			
-			String courseNameSearch1 , courseTypeSearch1;
-			if(courseNameSearch == 0){
-				courseNameSearch1 ="%";
+			String unitCodeSearch1 , moduleCodeSearch1;
+			if(unitCodeSearch == 0){
+				unitCodeSearch1 ="%";
 			}else{
-				courseNameSearch1 = (totalConnected[0].split("="))[1];
+				unitCodeSearch1 = (totalConnected[0].split("="))[1];
 			}
 			
-			if(courseTypeSearch == 0){
-				courseTypeSearch1 ="%";
+			if(moduleCodeSearch == 0){
+				moduleCodeSearch1 ="%";
 			}else{
-				courseTypeSearch1 = (totalConnected[0].split("="))[1];
+				moduleCodeSearch1 = (totalConnected[0].split("="))[1];
 			}
+			 
 			
-			
-			System.out.println("contentLocationInput  "+courseNameSearch + "  "+ courseNameSearch1);
-			System.out.println("courseTypeInput   "+courseTypeSearch + "  "+ courseTypeSearch1);
+			System.out.println("unitcodesearch  "+unitCodeSearch + "  "+ unitCodeSearch1);
+			System.out.println("modulecodesearch   "+moduleCodeSearch + "  "+ moduleCodeSearch1);
 			StringBuffer wherebuffer = new StringBuffer();
 			wherebuffer.append(" WHERE 1=1 ");
-			if(courseTypeSearch > 0){
-				wherebuffer.append(" AND ct.coursetypeid="+courseTypeSearch);
+			if(unitCodeSearch > 0){
+				wherebuffer.append(" AND um.unitid="+unitCodeSearch);
 			}
-			if(courseNameSearch > 0){
-				wherebuffer.append(" AND cn.coursenameid="+courseNameSearch);
+			if(moduleCodeSearch > 0){
+				wherebuffer.append(" AND mm.moduleid="+moduleCodeSearch);
 			}
 			
 			Session session =  sessionFactory.getCurrentSession();
-			String sql = "select ct.coursetype , cn.coursename , aq.questionnumber, aq.assessmentquestionid, cn.coursecode   from assessmentquestion as aq "+
-					" inner join coursetype as ct on ct.coursetypeid = aq.coursetype"+
-					" inner join coursename as cn on cn.coursenameid = aq.coursename";
+			String sql = "select um.unitcode , mm.modulename , aq.questionnumber, aq.assessmentid, mm.modulecode   from assessmentquestions as aq "+
+					" inner join unitmaster as um on um.unitid= aq.unitmaster"+ 
+					" inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
 		sql = sql + wherebuffer.toString();
 			Query query = session.createSQLQuery(sql);
 			List list = query.list();
