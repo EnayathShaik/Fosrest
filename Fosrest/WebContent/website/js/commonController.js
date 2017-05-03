@@ -68,8 +68,8 @@ function ck_aadhar(tableName ) {
     		      contentType : "application/json",
     		      data:name1,
     		      success: function (response) {   
-    		    	$('#aadhar_status').html(response);
-    		    	if (response.trim() == 'Already') {
+    		    	  $('#aadhar_status').html(response+ " EXISTS");
+      		    	if (response.trim() == 'Already') {
     					document.getElementById('AadharNumber').value = "";
     					document.getElementById("register").style.display = 'none';
     					return false;

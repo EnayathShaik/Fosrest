@@ -195,12 +195,12 @@ public class LoginController {
 				new ZLogger("loginProcess","in trainer login aadhar is "+persoInformationTrainingInstitute.getFirstName(), "LoginController.java");
 				new ZLogger("loginProcess","**************"+persoInformationTrainingInstitute.getId(), "LoginController.java");
 				session.setAttribute("persoInformationTrainingInstitute", persoInformationTrainingInstitute.getId());
-				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(persoInformationTrainingInstitute.getId(), 5));
 				session.setAttribute("logId", persoInformationTrainingInstitute.getLoginDetails().getLoginId());
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
 				session.setAttribute("userTableId", persoInformationTrainingInstitute.getId());
 				session.setAttribute("userName", loginDetails.getLoginId());	
+				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(persoInformationTrainingInstitute.getId(), 5));
 				return "trainingInstitudeHomepage";
 			}else{
 				model.addAttribute("error" , "Oops , you are not authorized !!!");
@@ -336,8 +336,10 @@ public class LoginController {
 			}else if(profileID == 3){
 				return "traineeHomepage";
 			}else if(profileID == 4){
+				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule((int)session.getAttribute("loginUser2"),4));
 				return "trainerHomepage";
 			}else if(profileID == 5){
+				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule((int)session.getAttribute("userTableId"), 5));
 				return "trainingInstitudeHomepage";
 			}else if(profileID == 6){
 				return "AssessorPage";

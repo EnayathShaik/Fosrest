@@ -5,8 +5,6 @@
 
 <script>
 function OnStart(){
-	if(document.getElementById('correctAnswer').value>0)
-		alert("Question added Sucessfully");	
 document.getElementById('id').value = 0;
 document.getElementById('courseTypeId').value = 0;
 document.getElementById('courseName').value = 0;
@@ -96,14 +94,78 @@ function editAssessmentQuestion(id){
 	return false;
 }
 
+function validateFields(){
+		
+	$(':focus').blur();// this is required for to call answerno() method
+	 $("#unitCodeErr").css("display" , "none");
+	 $("#moduleCodeErr").css("display" , "none");
+	$("#questionNumberErr").css("display" , "none");
+$("#questionTitleErr").css("display" , "none");
+$("#questionHintErr").css("display" , "none");
+$("#noOfAssesmentQuesErr").css("display" , "none");
+$("#assAnsTableErr").css("display" , "none");
+$("#correctAnswerErr").css("display" , "none");
+
+
+
+
+if($("#unitCode").val() == 0){
+	 
+		$("#unitCodeErr").css("display" , "block");
+		return false;
+	 } 
+if($("#moduleCode").val() == 0){
+	 
+		$("#moduleCodeErr").css("display" , "block");
+		return false;
+	 } 
+if($("#questionNumber").val() == 0){
+	 
+	$("#questionNumberErr").css("display" , "block");
+	return false;
+} 
+if($("#questionTitle").val() == ''){
+	 
+		$("#questionTitleErr").css("display" , "block");
+		return false;
+	 } 
+
+if($("#questionHint").val() == ''){
+	 
+		$("#questionHintErr").css("display" , "block");
+		return false;
+	 } 
+
+if($("#noOfAssesmentQues").val() == -1){
+	 
+		$("#noOfAssesmentQuesErr").css("display" , "block");
+		return false;
+	 } 
+if($("#optionOne").val() == '' || $("#optionTwo").val() == '' || $("#optionThree").val() == '' || $("#optionFour").val() == '' || $("#optionFive").val() == '' || $("#optionSix").val() == '' ){
+	 
+		$("#assAnsTableErr").css("display" , "block");
+		return false;
+	 } 
+
+
+if($("#correctAnswer").val() == 0){
+	 
+		$("#correctAnswerErr").css("display" , "block");
+		return false;
+	 } 
+
+}
 
 
 </script>
+
 <cf:form   action="manageAssessmentQuestionsSave.fssai" name="myForm" method="POST" commandName="assessmentQuestionForm" onsubmit="return validateFields();"> 
 <script>
     function generateAnsSeq(){
     	$('#assAnsTable').html("");
     	var noOfAssmentQ =  $("#noOfAssesmentQues").val();
+    	$('#assAnsTable').append('<tr><th>Sr.no</th><th>options</th></tr>')
+		
     	for(i=1;i<=noOfAssmentQ;i++){
     		if(i==1){
     			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionOne" class="form-control" /></td></tr>')
@@ -131,6 +193,23 @@ function editAssessmentQuestion(id){
     	}
     	}
     }
+    
+
+    function answerno(id,ansno){
+	
+    	var noOfAssmentQ =  $("#noOfAssesmentQues").val();
+       	if(parseInt(ansno) > parseInt(noOfAssmentQ)){
+       		
+    	document.getElementById(id).value="";
+    	$("#correctAnswerErr").css("display" , "block");
+    	 } 
+       	else
+       		$("#correctAnswerErr").css("display" , "none");
+
+       	
+    	}
+    
+
     </script>
     <section>
         <%@include file="../roles/top-menu.jsp"%>
@@ -155,7 +234,10 @@ function editAssessmentQuestion(id){
                         <div class="row">
 
                                 <div class="col-xs-12">
+                                  
                                     <h1>Manage Assessment Questions</h1>
+                                    <span id="name_status" class = "style-li error-red"><h3>${created } </h3></span>
+                                   <BR>                          
                                     <div class="row">
                                         <div class="col-xs-12">
 
@@ -166,9 +248,10 @@ function editAssessmentQuestion(id){
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Unit Code:</strong></li>
+                                                           
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
-                                                            ${created }</li>
+                                                           <%--  ${created } --%></li>
                                                         </ul>
                                                     </div>
 												<cf:select path="unitCode" class="form-control">
@@ -186,7 +269,7 @@ function editAssessmentQuestion(id){
                                                             <li class="style-li"><strong>Module Name:</strong></li>
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
-                                                            ${created }</li>
+                                                           <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
 												<cf:select path="moduleCode"   class="form-control">
@@ -201,8 +284,7 @@ function editAssessmentQuestion(id){
                                                 <div class="col-md-6 col-xs-12"></div>
                                                 
                                                 <div class="col-md-6 col-xs-12">
-<a href="#" OnClick="getQuestions();" >Search</a>                                               
-                                                         </div>
+                                                <input type="button" onclick="getQuestions();"  class="btn login-btn" value="Search">                                                         </div>
                                             </div>
                                            
                                         </div>
@@ -248,7 +330,7 @@ function editAssessmentQuestion(id){
                                         
                                     </div>
                                 </div> <!-- search div ends -->
-								
+								 
 								<div class="col-xs-12 table-overflow-responsive">
                                             <fieldset>
                                                 <legend>Add/ Modify Questions</legend>
@@ -260,9 +342,11 @@ function editAssessmentQuestion(id){
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Unit Code:</strong></li>
+                                                             <li id="unitCodeErr" style="display:none;" class="style-li error-red" > Select Unit Code</li>
+                                            
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
-                                                            ${created }</li>
+                                                            <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
 												<cf:select path="unitCode" class="form-control">
@@ -275,6 +359,8 @@ function editAssessmentQuestion(id){
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Question Number:</strong></li>
+                                                                  <li id="questionNumberErr" style="display:none;" class="style-li error-red" > Enter Question number</li>
+                                            
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
@@ -285,6 +371,8 @@ function editAssessmentQuestion(id){
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Question Title:</strong></li>
+                                                                  <li id="questionTitleErr" style="display:none;" class="style-li error-red" > Enter Question Title</li>
+                                            
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
@@ -302,9 +390,11 @@ function editAssessmentQuestion(id){
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Module Name:</strong></li>
+                                                             <li id="moduleCodeErr" style="display:none;" class="style-li error-red" > Enter Module name</li>
+                                            
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
-                                                            ${created }</li>
+                                                            <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
 												<cf:select path="moduleCode"   class="form-control">
@@ -317,6 +407,8 @@ function editAssessmentQuestion(id){
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Help Text:</strong></li>
+                                                                <li id="questionHintErr" style="display:none;" class="style-li error-red" > Enter Help Text</li>
+                                               
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
@@ -327,6 +419,8 @@ function editAssessmentQuestion(id){
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Number of Options:</strong></li>
+                                                                <li id="noOfAssesmentQuesErr" style="display:none;" class="style-li error-red" >Select number of options</li>
+                                                                
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
@@ -343,30 +437,37 @@ function editAssessmentQuestion(id){
                                                     
                                                 </div>
                                                 
+                                                    <br />
+                                                    <br />
                                                 <div class="col-md-6 col-xs-12">
-                                                    <h3>Correct Answer</h3>
+                                                 <fieldset>  <legend><h3>Options</h3></legend>
+                                                    <div id="assAnsTableErr" style="display:none;" class="style-li error-red" >Fill all the options</div>
+                                                                
                                                     <table id="assAnsTable" class="table table-bordered table-responsive">
-                                                    <thead>
+                                                <!--     <thead>
                                                         <tr class="background-open-vacancies">
                                                             <th>S.No.</th>
                                                             <th>Options</th>
                                                         </tr>
-                                                    </thead>
+                                                    </thead> -->
                                                     <tbody></tbody>
                                                 </table>
-                                                    
+                                                    </fieldset>
+                                                    <br />
+                                                    <br />
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Answer Number:</strong></li>
+                                                                  <li id="correctAnswerErr" style="display:none;" class="style-li error-red" >Invalid Answer number</li>
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <cf:input path="correctAnswer" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
+                                                        <cf:input id="correctAnswer" path="correctAnswer" onblur="answerno(this.id,this.value);" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
                                                         
                                                     </div>
                                                     <cf:input type="hidden" path="id" class="form-control" placeholder="Help Text" />
-                                                    <button class="btn login-btn pull-right">Save</button>
+                                                    <button onlclick="return validateFields();" class="btn login-btn pull-right">Save</button>
                                                 </div> 
                                                 
                                                 <div class="col-md-6 col-xs-12">

@@ -159,12 +159,14 @@
                                             <li class="style-li"><strong>Aadhar Number:</strong></li><li class="style-li error-red"> * </li>
                                              <!--  valid -->
                                             <li id="AadharNumberErr" style="display:none;" class="style-li error-red" >Aadhar Number can not be blank.</li>
-                                            
+                                            <li class="style-li error-red">
+                                            <span id="aadhar_status" ></span>
+									
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="AadharNumber" class="form-control" maxlength="12" placeholder="Aadhar Number"
                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
-                                    />
+                                      onblur="ck_aadhar('personalinformationtrainee');" />
                                 </div>
 
                                 <div class="form-group">
