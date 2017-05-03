@@ -156,9 +156,22 @@
 												<td>${Certificate.trainingType}</td>
 												<td>${Certificate.completionStatus}</td>
 												<td>${Certificate.certificateAvailable}</td>
-												<td>${Certificate.generateCertificate}
-												<a href="GetCertificate.fssai?userId=${Certificate.id}">GET CERTIFICATE</a>
+												
+												<%-- <a href="GetCertificate.fssai?userId=${Certificate.id}">GET CERTIFICATE</a> --%>
                                                 <!--  <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Get Certificate"/> --> 												
+                                                <ct:choose>
+                                                <ct:when test="${Certificate.certificateAvailable=='YES'}">
+                                                <td>${Certificate.generateCertificate}
+                                                <a href="GetCertificate.fssai?userId=${Certificate.id}" >GET CERTIFICATE</a>
+                                                </td>
+                                                </ct:when>
+                                              <ct:otherwise>
+                                                <td>${Certificate.generateCertificate}
+												<a href="">GET CERTIFICATE</a> 
+                                                        </td>
+                                                </ct:otherwise> 
+                                                </ct:choose>
+                                                
                                                  </tr>
 												</ct:forEach>
                                             </table>
