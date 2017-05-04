@@ -150,6 +150,9 @@
 		<li> <a href="CustomerMaster.fssai">Customer</a> </li>
         <li> <a href="TaxMaster.fssai">Tax Master</a> </li>
         <li><a href="EmployeeMonthlyCharges.fssai">Employee Monthly Charges</a></li>
+        <li><a href="CustomerDetails.fssai">Customer Details</a></li>
+        <li><a href="InvoiceMaster.fssai">Invoice Details</a></li>
+     <!--    <li><a href="invoicePrint.fssai">Invoice</a></li> -->
 </ul>
 </div>
 

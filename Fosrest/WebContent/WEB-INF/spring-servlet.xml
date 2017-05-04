@@ -147,7 +147,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.TrainingCalendar</value>
 				<value>com.ir.model.CourseEnrolled</value>
 				<value>com.ir.model.CourseEnrolledUser</value>
-							<value>com.ir.model.AssessorUserManagement</value>
+				<value>com.ir.model.AssessorUserManagement</value>
 				<value>com.ir.model.PostVacancyTrainingCenter</value>
 				<value>com.ir.model.ContactTraineee</value>
 				<value>com.ir.model.assessor.AssessorAttendance</value>
@@ -172,27 +172,10 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.CustomerMaster</value>
 				<value>com.ir.model.TaxMaster</value>
 				<value>com.ir.model.EmployeeMonthlyCharges</value>
-			<!-- 	<value>com.ir.model.DummyTable</value>
-				<value>com.ir.model.CourseEnrollTrainee</value>
-				<value>com.ir.model.DumyTble</value> -->
 				<value>com.ir.model.NomineeTrainee</value>
+				<value>com.ir.model.CustomerDetails</value>
 				<value>com.ir.model.AssessmentQuestions</value>
-				<!-- <value>com.ir.model.TraineeEnrolled</value>
-				<value>com.ir.model.CourseEnrollTrainee</value>
-				
-				<value>com.ir.model.EnrolledTrainee</value> -->
-<!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
-				<!-- 
-				
-				
-				
-				<value>com.ir.model.AssessmentAgency</value>
-				
-				
-				<value>com.ir.model.CourseEnrolledUser</value>
-				<value>com.ir.model.Steps</value>
-				 -->
-			<!-- 	<value>com.ir.model.AssessmentQuestions</value> -->
+				<value>com.ir.model.InvoiceMaster</value>
 			
 			</list>
 		</property>
