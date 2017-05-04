@@ -11,7 +11,10 @@
  
 
  function validateFields(){
-		
+	 var isUpdate = '${isUpdate}';
+	
+
+	
 	 $("#trainingCenterNameErr").css("display" , "none");
 	 $("#trainingPartnerNameErr").css("display" , "none");
 	 $("#titleErr").css("display" , "none");
@@ -31,7 +34,7 @@
 	 $("#trainingTypeErr").css("display" , "none");
 	 $("#userTypeErr").css("display" , "none");
 	 
-	  $("#txtInputErr").css("display" , "none"); 
+	 $("#txtInputErr").css("display" , "none"); 
 	 
 	 if($("#trainingCenterName").val() == ''){
 		 
@@ -76,13 +79,6 @@
 			$("#correspondenceAddress1Err").css("display" , "block");
 			return false;
 		 }
-	  /* if($("#correspondenceAddress2").val() == ''){
-		 
-			$("#correspondenceAddress2Err").css("display" , "block");
-			return false;
-		 }
-	   */
-	
 	 
 	  if($("#correspondenceState").val() == 0){
 		 
@@ -156,12 +152,8 @@
 			$("#sessWishToConductErr").css("display" , "block");
 			return false;
 		 }
-  /*  else 	  if(!($("#a").is(":checked"))){
-	   alert("aaaaaaaaaaaaa");
-		$("#radioErr").css("display" , "block");
-		return false;
-	 }  */
-	 
+	
+	 if(!(isUpdate !=null && isUpdate== "Y")){
 	  if($("#txtInput").val() == '' ){
 		 
 			$("#txtInputErr").css("display" , "block");
@@ -177,14 +169,13 @@
 			         return false;
 			     }
 			 }
-		 
-		 
+		
 		 if($("#check").is(":checked")==false){
 		alert("Check the checkbox to agree to Term and Conditions");
 		return false;
 	 	} 
 	  	
-	
+	 }
 	 
  }
 
