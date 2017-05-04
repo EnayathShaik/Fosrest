@@ -49,6 +49,8 @@
 			$("#ResidentialLine2").val('');
 			$("#createUpdateBtn").val("Update");
 			$("#captcha").css("display", "none");
+			 $("#chkunit").css("display" , "none");
+			 $("#check").attr("checked","checked");
 
 		}
 		DrawCaptcha();
@@ -172,7 +174,7 @@
 									<cf:input type="text" path="AadharNumber" class="form-control"
 										minlength="12" maxlength="12" placeholder="Aadhar Number"
 										onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" 
-										                                      onblur="ck_aadhar('personalinformationtrainee');" 
+										                                      onblur="ck_aadhar('personalinformationtrainer');" 
 										/>
 								</div>
 
@@ -696,7 +698,7 @@
 											 
 									</div>
 								</div>
-								<div style="float: left; width: 99%;">
+								<div id=chkunit style="float: left; width: 99%;">
 									<input type="checkbox" id="check" style="margin-left: 1%;">
 									<!-- <a href="#" target="_blank" class="terms-font-size">  -->
 									I have read and understood the Terms & Conditions and the
@@ -783,13 +785,13 @@
 
 	}
 	function validateFields() {
-	
+		var isUpdate = '${isUpdate}';
+		
 		 $("#userTypeErr").css("display" , "none");
 			$("#titleErr").css("display" , "none");
 		$("#correspondencePincodeErr").css("display", "none");
 		$("#correspondencePincodeErr1").css("display", "none");
 		$("#mobileErr").css("display" , "none");
-	/* 	$("#mobileErr1").css("display" , "none"); */
 		$("#AadharNumberErr").css("display" , "none");
 		$("#firstNameErr").css("display" , "none");
 		$("#MiddleNameErr").css("display" , "none");
@@ -970,23 +972,27 @@
 				 $("#AssociatedWithAnyTrainingInstituteErr").css("display" , "block");
 				return false;
 			 }
-	    
-			  if($("#txtInput").val() == ''){
-					 $("#txtInputErr").css("display" , "block");
-						return false;
-			  }
-		var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
-	        var str2 = removeSpaces(document.getElementById('txtInput').value);
-	        if (!(str1 == str2)) {
-	        	alert("Please Enter correct captcha");
-	            document.getElementById('txtInput').value = "";
-	            return false;
-	        } 
-		 
-		if($("#check").is(":checked")==false){
+	       
+			  if (!(isUpdate != null && isUpdate == "Y")){
+					
+					 if($("#txtInput").val() == ''){
+						 $("#txtInputErr").css("display" , "block");
+							return false;
+				  }
+					var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+			        var str2 = removeSpaces(document.getElementById('txtInput').value);
+			        if (!(str1 == str2)) {
+			        	alert("Please Enter correct captcha");
+			            document.getElementById('txtInput').value = "";
+			            return false;
+			        } 
+			      
+				} 
+ if($("#check").is(":checked")==false){
 			 alert("check the checkbox to agree to term and conditions");
 			 return false;
 		 }
+	
 
 	}
 </script>
