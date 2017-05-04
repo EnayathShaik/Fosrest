@@ -20,6 +20,8 @@ import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
 import com.ir.form.GenerateCertificateForm;
+import com.ir.form.InvoiceInfoForm;
+import com.ir.form.InvoiceMasterForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
@@ -37,12 +39,14 @@ import com.ir.model.AssessmentQuestions;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerDetails;
 import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
+import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
@@ -1238,7 +1242,96 @@ public class AdminServiceImpl implements AdminService {
 			// TODO Auto-generated method stub
 			return this.adminDAO.updateCertificate(data);
 		}
+		@Override
+		@Transactional
+		public List<CustomerDetails> listCustomerDetails() {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listCustomerDetails();
+		}
+		@Override
+		@Transactional
+		public List<CustomerDetails> getCustomerDetailsByInvoice(String invoice) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.getCustomerDetailsByInvoice(invoice);
+		}
 
+		@Override
+		@Transactional
+		public String addCustomerDetails(String[] data1 ,String[] data2, String[] data3, String[] data4  , String customer) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.addCustomerDetails(data1 , data2 , data3 , data4 , customer);
+		}
+
+		@Override
+		@Transactional
+		public void removeCustomerDetails(int id){
+			this.adminDAO.removeCustomerDetails(id);
+			
+		}
+	
+		
+		/**
+		 * @author Jyoti Mekal
+		 *
+		 * Impl For Customer Master
+		 */
+		
+		@Override
+		@Transactional
+		public void addInvoiceMaster(InvoiceMasterForm p){
+			 this.adminDAO.addInvoiceMaster(p);
+			
+		}
+		
+		//updateInvoiceMaster
+		@Override
+		@Transactional
+		public void updateInvoiceMaster(InvoiceMasterForm p){
+			 this.adminDAO.updateInvoiceMaster(p);
+			
+		}
+		
+		//removeInvoiceMaster
+		
+		@Override
+		@Transactional
+		public void removeInvoiceMaster(int id){
+			 this.adminDAO.removeInvoiceMaster(id);
+			
+		}
+		
+
+		
+//		/getInvoiceMasterById
+		@Override
+		@Transactional
+		public InvoiceMaster getInvoiceMasterById(int id){
+			return this.adminDAO.getInvoiceMasterById(id);
+			
+		}
+		@Override
+		@Transactional
+		public InvoiceInfoForm getInvoiceInfo(String invoice){
+			return this.adminDAO.getInvoiceInfo(invoice);
+			
+		}
+		
+		//listInvoiceMaster
+		
+		@Override
+		@Transactional
+		public List<InvoiceMaster> listInvoiceMaster() {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listInvoiceMaster();
+		}
+		@Override
+		@Transactional
+		public List<InvoiceMaster> listCustomCustomerMaster() {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listCustomCustomerMaster();
+		}
+		
+		
 	
 		
 }

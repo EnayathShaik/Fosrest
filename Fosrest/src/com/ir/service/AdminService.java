@@ -15,6 +15,8 @@ import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
 import com.ir.form.GenerateCertificateForm;
+import com.ir.form.InvoiceInfoForm;
+import com.ir.form.InvoiceMasterForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
@@ -32,12 +34,14 @@ import com.ir.model.AssessmentQuestions;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerDetails;
 import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
+import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
@@ -363,7 +367,27 @@ public interface AdminService {
 
 	//public String listGenerateCertificate();
 	//public String HolidayMastersearch();
-
+	
+	public String addCustomerDetails(String[] empName , String[] desc , String[] issueDate , String[] unitPrice ,  String customer);
+	public List<CustomerDetails> listCustomerDetails();
+	public void removeCustomerDetails(int id);
+	public List<CustomerDetails> getCustomerDetailsByInvoice(String invoice);
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * All Add Edit delete for Invoice Master
+	 */
+	
+	
+	public void addInvoiceMaster(InvoiceMasterForm p);
+	public void updateInvoiceMaster(InvoiceMasterForm p);
+	public void removeInvoiceMaster(int id);
+	public InvoiceMaster getInvoiceMasterById(int id);
+	public List<InvoiceMaster> listInvoiceMaster();
+	public List<InvoiceMaster> listCustomCustomerMaster();
+	
+	public InvoiceInfoForm getInvoiceInfo(String invoice);
+	
 	
 }
 

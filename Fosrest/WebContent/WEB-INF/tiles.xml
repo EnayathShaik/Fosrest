@@ -697,10 +697,7 @@
 		<put-attribute name="body"
 			value="/website/admin/dashboardTrainingPartnerPending.jsp" />
 	</definition>
-	<definition name="stateMaster" extends="base.user.afterLogin">
-		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/admin/State.jsp" />
-	</definition>
+
 
 	<definition name="master_state" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
@@ -1158,6 +1155,8 @@
 		<put-attribute name="body" value="/website/admin/EmployeeMonthlyCharges.jsp" />
 	</definition>
 
+
+
 	<definition name="EmployeeMonthlyCharges/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/EmployeeMonthlyCharges.jsp" />
@@ -1207,19 +1206,24 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/AssessmentQuestions2.jsp" />
 	</definition>
-	
 
-	
 		<definition name="Assessmentquestion/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/AssessmentQuestions2.jsp" />
 	</definition>
 
-
-<!-- 	
-<definition name="traineeAttendance" extends="base.user.afterLogin">
+		<definition name="invoicePrint" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/trainingCenter/traineeAttendance.jsp" />
-	</definition> -->
+		<put-attribute name="body" value="/website/trainee/invoice.jsp" />
+	</definition>
+
+	<definition name="CustomerDetails" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/CustomerDetails.jsp" />
+	</definition>
+	<definition name="InvoiceMaster" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/InvoiceDetails.jsp" />
+	</definition>
 
 </tiles-definitions>

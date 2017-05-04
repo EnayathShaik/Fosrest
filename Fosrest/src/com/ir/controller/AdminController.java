@@ -17,6 +17,7 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,6 +47,8 @@ import com.ir.form.DistrictMasterForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.HolidayMasterForm;
+import com.ir.form.InvoiceInfoForm;
+import com.ir.form.InvoiceMasterForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
@@ -67,12 +70,14 @@ import com.ir.model.City;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerDetails;
 import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
+import com.ir.model.InvoiceMaster;
 import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -96,6 +101,7 @@ import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 import com.zentect.list.constant.DropDownListConstants;
 import com.zentect.list.constant.ListConstant;
+import com.ir.model.InvoiceMaster;
 
 @Controller
 public class AdminController {
@@ -2734,6 +2740,9 @@ public class AdminController {
 		out.flush();
 
 	}
+	
+	
+	
 
 	/**
 	 * @author Jyoti Mekal.
@@ -2983,6 +2992,152 @@ public class AdminController {
 		}
 		return "manageAssessmentQuestions";
 	}
+	
+	
+	@RequestMapping(value = "/invoicePrint", method = RequestMethod.GET)
+	public String invoicePrint(
+			Model model , HttpServletRequest request) {
+	String custId = 	request.getParameter("custId");
+	String invoiceNum = 	request.getParameter("invoiceNum");
+		System.out.println(" custId "+custId + " invoiceNum "+invoiceNum);
+		model.addAttribute("InvoiceNum" , invoiceNum);
+		List<CustomerDetails> cd = this.adminService.getCustomerDetailsByInvoice(invoiceNum);
+		InvoiceInfoForm info = this.adminService.getInvoiceInfo(invoiceNum);
+		double subTotal = 0.0;
+		for(CustomerDetails rate :cd ){
+			subTotal = subTotal+ Double.parseDouble(rate.getUnitPrice());
+		}
+		System.out.println(" SubTotal "+subTotal);
+		model.addAttribute("listCustDetails" ,cd);	
+		model.addAttribute("SubTotal" ,subTotal);	
+		model.addAttribute("custAdd" , info.getCustomerAdd());
+		model.addAttribute("custName" ,info.getEmployeeName());
+		TaxMaster tm =this.adminService.listTaxMaster().get(0);
+		model.addAttribute("service", tm.getServiceTaxRate());
+		model.addAttribute("swaccha", tm.getSwacchaBharatCess());
+		model.addAttribute("krishi", tm.getKrishiKalyanCess());
+	
+		double sumTax =(Double.parseDouble(tm.getServiceTaxRate()) + Double.parseDouble(tm.getSwacchaBharatCess()) + Double.parseDouble(tm.getKrishiKalyanCess()));
+		System.out.println( "---- > "+(subTotal)*(sumTax/100 ));
+		model.addAttribute("sumTax", ((subTotal)*(sumTax/100 )) +subTotal);
+		return "invoicePrint";
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/CustomerDetails", method = RequestMethod.GET)
+	public String CustomerDetails(
+			@ModelAttribute("EmployeeMonthlyCharges") CustomerDetails customerDetails,
+			Model model) {
+	
+		model.addAttribute("listCustomerDetails",
+				this.adminService.listCustomerDetails());
+		/*model.addAttribute("listCustomerMaster",
+				this.adminService.listCustomerMaster());*/
+		model.addAttribute("listCustomerMaster",
+				this.adminService.listCustomCustomerMaster());
+		model.addAttribute("CustomerDetails",new CustomerDetails());
+
+		return "CustomerDetails";
+	}
+	@RequestMapping(value = "/InvoiceMaster", method = RequestMethod.GET)
+	public String InvoiceDetails(
+			@ModelAttribute("InvoiceDetails") InvoiceMaster invoiceMaster,
+			Model model) {
+		model.addAttribute("listCustomerMaster",
+				this.adminService.listCustomerMaster());
+		model.addAttribute("listInvoiceMaster",
+				this.adminService.listInvoiceMaster());
+		model.addAttribute("InvoiceMasterForm",new InvoiceMasterForm());
+		
+		return "InvoiceMaster";
+	}
+	
+	@RequestMapping(value = "/CustomerDetailsAdd", method = RequestMethod.POST)
+	public String CustomerDetailsAdd(
+			@ModelAttribute("EmployeeMonthlyCharges") EmployeeMonthlyCharges p,
+			BindingResult result , HttpServletRequest request) {
+		System.out.println(result.hasErrors());
+		
+	String[] empName = request.getParameterValues("employeeName");
+	String[] desc = request.getParameterValues("description");
+	String[] issueDate = request.getParameterValues("issueDate");
+	String[] unitPrice = request.getParameterValues("unitPrice");
+		System.out.println( " names "+unitPrice);
+		System.out.println( " description "+request.getParameterValues("description"));
+		String cust = request.getParameter("invoiceNumber");
+		System.out.println("cust "+cust );
+		this.adminService.addCustomerDetails(empName , desc , issueDate , unitPrice , cust);
+
+		System.out.println("after insert");
+		return "redirect:/CustomerDetails.fssai";
+	}
+
+	@RequestMapping("/removeCustomerDetails/remove/{id}")
+	public String removeCustomerDetails(@PathVariable("id") int id) {
+System.out.println( " ");
+		this.adminService.removeCustomerDetails(id);
+		return "redirect:/CustomerDetails.fssai";
+	}
+	
+	@RequestMapping(value = "/InvoiceMaster/add", method = RequestMethod.POST)
+	public String addInvoiceMaster(
+			@Valid @ModelAttribute("InvoiceMasterForm") InvoiceMasterForm p,
+			BindingResult result) {
+		System.out.println(result.hasErrors());
+
+	if (result.hasErrors()) {
+
+			new ZLogger("InvoiceMaster", "bindingResult.hasErrors  "
+					+ result.hasErrors(), "AdminController.java");
+			new ZLogger("InvoiceMaster", "bindingResult.hasErrors  "
+					+ result.getErrorCount() + " All Errors "
+					+ result.getAllErrors(), "AdminController.java");
+			return "redirect:/InvoiceMaster.fssai";
+		}
+
+		System.out.println("p.getId() " + p.getId());
+		if (p.getId() == 0) {
+			// new person, add it
+			this.adminService.addInvoiceMaster(p);
+		} else {
+			// existing person, call update
+			this.adminService.updateInvoiceMaster(p);
+		}
+		System.out.println("after insert");
+		return "redirect:/InvoiceMaster.fssai";
+	}
+
+	@RequestMapping("/InvoiceMaster/remove/{id}")
+	public String removeInvoiceMaster(@PathVariable("id") int id) {
+
+		this.adminService.removeInvoiceMaster(id);
+		return "redirect:/InvoiceMaster.fssai";
+	}
+
+	@RequestMapping(value = "/InvoiceMaster/edit/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public void editInvoiceMaster(
+			@PathVariable("id") int id,
+			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
+			HttpServletRequest httpServletRequest, HttpServletResponse response)
+			throws IOException {
+		new ZLogger("InvoiceMaster/edit", "InvoiceMaster/edit............"
+				+ id, "AdminController.java");
+
+		InvoiceMaster hm = this.adminService.getInvoiceMasterById(id);
+		// List courseList = adminService.searchFeedbackMaster(data);
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		String newList = g.toJson(hm);
+		System.out.println("newList " + newList);
+		out.write(newList);
+		out.flush();
+
+	}
+
 
 	
 }

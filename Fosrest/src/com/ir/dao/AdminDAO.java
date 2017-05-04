@@ -11,6 +11,8 @@ import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
 import com.ir.form.GenerateCertificateForm;
+import com.ir.form.InvoiceInfoForm;
+import com.ir.form.InvoiceMasterForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
@@ -30,12 +32,14 @@ import com.ir.model.City;
 import com.ir.model.CityMaster;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerDetails;
 import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
+import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
@@ -348,8 +352,31 @@ public interface AdminDAO {
 					public AssessmentQuestions getAssessmentQuestionById(int id);
 					
 					 public String updateCertificate(String data);
+					 
+					 
+					 public String addCustomerDetails(String[] data1 ,String[] data2, String[] data3, String[] data4 , String customer );
 
+					 public void removeCustomerDetails(int id);
 					
-				//	public String HolidayMastersearch(String data);
+					 public List<CustomerDetails> listCustomerDetails();
+					 
+					 public List<CustomerDetails> getCustomerDetailsByInvoice(String invoice);
+					 
 
+						//Invoice Master
+						
+						public void addInvoiceMaster(InvoiceMasterForm p);
+						
+						public void updateInvoiceMaster(InvoiceMasterForm p);
+						
+						public void removeInvoiceMaster(int id);
+						
+						
+						public InvoiceMaster getInvoiceMasterById(int id);
+						
+						
+						public List<InvoiceMaster> listInvoiceMaster(); 
+						public List<InvoiceMaster> listCustomCustomerMaster();
+						
+						public InvoiceInfoForm getInvoiceInfo(String invoice);
 }

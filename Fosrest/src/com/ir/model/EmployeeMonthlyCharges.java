@@ -124,7 +124,7 @@ public class EmployeeMonthlyCharges {
 		this.amount = amount;
 	}
 
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="customer")
+	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="customerid")
 	private CustomerMaster customer;
 
 

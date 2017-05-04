@@ -33,6 +33,8 @@ import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
 import com.ir.form.GenerateCertificateForm;
+import com.ir.form.InvoiceInfoForm;
+import com.ir.form.InvoiceMasterForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
@@ -49,19 +51,20 @@ import com.ir.form.TrainingScheduleForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.AssessmentQuestion_old;
-
 import com.ir.model.AssessorUserManagement;
 import com.ir.model.City;
 import com.ir.model.CityMaster;
 import com.ir.model.ContactTraineee;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.CustomerDetails;
 import com.ir.model.CustomerMaster;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
+import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
@@ -2911,7 +2914,7 @@ System.out.println("list "+list);
 			new ZLogger("manageCourse", "list.size() "+list.size(), "AdminDAOImpl.java");
 			if(list.size() > 0){
 				maxId = (int) list.get(0);
-				System.out.println(" maxId "+maxId);
+				
 			}
 			NomineeTrainee nt = new NomineeTrainee();
 		
@@ -2922,10 +2925,7 @@ System.out.println("list "+list);
 			nt.setTraineeName(traineeName);
 			nt.setTrainingscheduleid(trainingScheduleId);
 			nt.setCertificateStatus("N");
-			System.out.println("5:after set");
 			int id =  (int) session.save(nt);
-			System.out.println("login id333"+loginId);
-			//traineeService.updateSteps(loginId,1);
 			tx.commit();
 			
 		    sql="update personalinformationtrainee set steps = 1 where  logindetails ="+loginId;
@@ -3099,7 +3099,193 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 				
 		return "created";
 	}
+	@Override
+	public String addCustomerDetails(String[] empName , String[] desc , String[] issueDate , String[] unitPrice , String customer) {
+		// TODO Auto-generated method stub
+		System.out.println("inside updateCertificate "+empName);
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		for(int i = 0 ; i < empName.length ; i++){
+			if(!empName[i].equalsIgnoreCase(""))
+			addCustomer(empName[i] , desc[i] , issueDate[i]  , unitPrice[i] , customer);	
+		}
+			
+		
+		return "created";
+	}
 	
+	public void addCustomer(String empName , String desc , String issueDate , String unitPrice , String customer){
+	
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		System.out.println(" customer "+customer + " desc "+desc + " issueDate "+issueDate + " unitPrice "+unitPrice);
+		
+		CustomerDetails custDetails = new CustomerDetails();
+		// CustomerMaster cm =  getCustomerMasterById(Integer.parseInt(customer));
+		//custDetails.setCustomer(cm);
+		System.out.println("empName "+empName);
+	
+		custDetails.setInvoiceNumber(customer);
+		custDetails.setEmployeeName(empName);
+		custDetails.setDescription(desc);
+		custDetails.setIssueDate(issueDate);
+		custDetails.setUnitPrice(unitPrice);
+		int id =  (int) session.save(custDetails);
+		System.out.println(" id "+id);
+		tx.commit();
+		
+	}
+ 
+	@Override
+	public List<CustomerDetails> listCustomerDetails() {
+		// TODO Auto-generated method stub
+		System.out.println("inside listCustomerMaster");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<CustomerDetails> mccList = session.createQuery("from CustomerDetails").list();
+		for (CustomerDetails p : mccList) {
+			System.out.println("Customer List::" + p);
+		}
+		return mccList;
+	}
+	@Override
+	public List<CustomerDetails> getCustomerDetailsByInvoice(String invoice) {
+		// TODO Auto-generated method stub
+		System.out.println("inside getCustomerDetailsByInvoice");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<CustomerDetails> mccList = session.createQuery("from CustomerDetails where invoicenumber='"+invoice+"'").list();
+		for (CustomerDetails p : mccList) {
+			System.out.println("Customer List::" + p);
+		}
+		return mccList;
+	}
+	
+	@Override
+	public void removeCustomerDetails(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		CustomerDetails p = (CustomerDetails) session.load(CustomerDetails.class, new Integer(id));
+		if (null != p) {
+			session.delete(p);
+		}
+		
+	}
+	
+	
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 * DAOImpl For Customer Master
+	 */
+	
+	@Override
+	public void addInvoiceMaster(InvoiceMasterForm p) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = "select coalesce(max(seqNo) + 1,1) from invoiceMaster";
+		int maxId = 0 ;
+		Query maxIDList = session.createSQLQuery(sql);
+		List list = maxIDList.list();
+		System.out.println(list.size());
+		new ZLogger("invoiceMaster", "list.size() "+list.size(), "AdminDAOImpl.java");
+		if(list.size() > 0){
+			maxId = (int) list.get(0);
+			//eligible = (String) list.get(0);
+		}
+		InvoiceMaster im = new InvoiceMaster();
+		System.out.println( " "+ "IN"+StringUtils.leftPad(String.valueOf(maxId), 4, "0") );
+		im.setInvoiceNumber("IN"+StringUtils.leftPad(String.valueOf(maxId), 4, "0"));
+		CustomerMaster cm = this.getCustomerMasterById(p.getCustomerId());
+		im.setDescription(p.getDescription());
+		im.setInvoiceDate(p.getInvoiceDate());
+		im.setCustomer(cm);
+		im.setSeqNo(maxId);
+		session.persist(im);
+	}
+	
+	
+	@Override
+	public void updateInvoiceMaster(InvoiceMasterForm p) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(p);
+		
+	}
+	
+	
+	//removeInvoiceMaster
+	
+	@Override
+	public void removeInvoiceMaster(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		InvoiceMaster p = (InvoiceMaster) session.load(InvoiceMaster.class, new Integer(id));
+		if (null != p) {
+			session.delete(p);
+		}
+		
+	}
+
+	
+	@Override
+	public InvoiceMaster getInvoiceMasterById(int id) {
+		// TODO Auto-generated method stub
+		System.out.println(" id " +id);
+		Session session = this.sessionFactory.getCurrentSession();
+		
+	Query query = session.createQuery("from InvoiceMaster where CustomerId="+id);
+	
+	List<InvoiceMaster> InvoiceMasterList = query.list();
+	InvoiceMaster hm = InvoiceMasterList.get(0);
+		return hm; 	
+	}
+	@Override
+	public InvoiceInfoForm getInvoiceInfo(String invoice) {
+		// TODO Auto-generated method stub
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		InvoiceInfoForm invoiceInfo = new InvoiceInfoForm();
+		List<Object[]> list  = session.createSQLQuery("select im.invoicenumber , cust.name , cust.address from invoicemaster im left join customerdetails cm on  (im.invoicenumber = cm.invoicenumber) left join customermaster cust on (im.customerid = cust.customerid) WHERE im.invoicenumber ='"+invoice+"'").list();
+		
+		if(list !=null){
+			Object[] obj = list.get(0);
+			invoiceInfo.setInvoiceNumber((String)obj[0]);
+			invoiceInfo.setEmployeeName((String) obj[1]);
+			invoiceInfo.setCustomerAdd((String) obj[2]);
+		}
+		return invoiceInfo; 	
+	}
+	
+	@Override
+	public List<InvoiceMaster> listInvoiceMaster() {
+		// TODO Auto-generated method stub
+		System.out.println("inside listInvoiceMaster");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<InvoiceMaster> mccList = session.createQuery("from InvoiceMaster").list();
+		for (InvoiceMaster p : mccList) {
+			System.out.println("Customer List::" + p);
+		}
+		return mccList;
+	}
+	
+	
+	@Override
+	public List<InvoiceMaster> listCustomCustomerMaster() {
+		// TODO Auto-generated method stub
+		System.out.println("inside listInvoiceMaster");
+		List<InvoiceMaster> lst = new ArrayList<InvoiceMaster>();
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Object[]> list =(List<Object[]>) session.createSQLQuery("select invoicenumber, invoicenumber || '-' || name  from invoicemaster im left join customermaster cm on  (im.customerid = cm.customerid)").list();
+		if(list !=null){
+			for(int i = 0 ; i < list.size() ; i++){
+				InvoiceMaster cm = new InvoiceMaster();
+				Object[] obj = list.get(i);
+				cm.setInvoiceNumber((String)obj[0]);
+				cm.setDescription((String)obj[1]);
+				lst.add(cm);
+			}
+		}
+	return lst;
+	}
 
 	
 }
