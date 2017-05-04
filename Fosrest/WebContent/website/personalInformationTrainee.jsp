@@ -40,7 +40,6 @@
 	 if(isUpdate !=null && isUpdate== "Y"){
 		 alert("Update Your Details");
 		 var name = '${PersonalInformationTrainee.firstName}';
-		 alert('${PersonalInformationTrainee.loginDetails.id}');
 		$("#logId").val('${PersonalInformationTrainee.loginDetails.id}');
 		$("#correspondenceState").val('${PersonalInformationTrainee.correspondenceState}');
 		$("#correspondenceState").trigger("change");
@@ -57,7 +56,7 @@
         $("#ResidentialLine1").val('');
         $("#ResidentialLine2").val('');
 		 $("#createUpdateBtn").val("Update");
-		
+		$("#captcha").css("display" , "none");
 		 $("#chkunit").css("display" , "none");
 		 $("#check").attr("checked","checked");
 	 }
@@ -121,10 +120,7 @@
 
                 <div class="col-md-10  col-xs-12">
                     <h3 class="text-capitalize heading-3-padding">Trainee Registration Form</h3>
-
-                    <form>
-
-                        <!-- personal information -->
+	 <!-- personal information -->
                         <fieldset>
                             <legend>Personal Information</legend>
 
@@ -621,8 +617,8 @@
    
    
    function validateFields(){
-	  
-  
+	   var isUpdate = '${isUpdate}';
+
    	 //alert($("#userType").val());
    	// alert($("#holidayReason").val());
    		 $("#userTypeErr").css("display" , "none");
@@ -630,7 +626,6 @@
 		$("#correspondencePincodeErr").css("display", "none");
 		$("#correspondencePincodeErr1").css("display", "none");
 		$("#mobileErr").css("display" , "none");
-		/* $("#correspondencePincodeErr").css("display" , "none"); */
 		$("#AadharNumberErr").css("display" , "none");
 		$("#firstNameErr").css("display" , "none");
 		$("#MiddleNameErr").css("display" , "none");
@@ -729,7 +724,8 @@
 		 $("#resPincodeErr").css("display" , "block");
 		return false;
 	} 
-		else if($("#txtInput").val() == ''){
+		else if(!(isUpdate !=null && isUpdate== "Y")){
+			if($("#txtInput").val() == ''){
 			 $("#txtInputErr").css("display" , "block");
 			return false;
 		
@@ -741,7 +737,7 @@
          document.getElementById('txtInput').value = "";
          return false;
      }
-
+		}
    	 if($("#check").is(":checked")== false){
    		 alert("click on check box");
    		 return false;

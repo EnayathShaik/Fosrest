@@ -42,12 +42,12 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		List<AssessmentQuestions> assessmentQuestions = null;
 		Session session = sessionFactory.getCurrentSession();
 		try{
-			Query query = session.createQuery("from AssessmentQuestions where modulecode  = "+ moduleId);
+			Query query = session.createQuery("from AssessmentQuestions where modulemaster  = "+ moduleId);
 			 assessmentQuestions = query.list();
 			 System.out.println(" assessmentQuestions "+assessmentQuestions);
 		}catch(Exception e){
 			e.printStackTrace();
-		}
+		} 
 			
 	
 		
@@ -120,7 +120,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 			questionIds = questionIds.substring(1,questionIds.length()-1);
 		}
 		System.out.println(" modulecode "+modulecode);
-		Query query = session.createQuery(" from AssessmentQuestions where modulecode = "+ modulecode +" and assessmentid in ("+questionIds+")");
+		Query query = session.createQuery(" from AssessmentQuestions where moduleMaster = "+ modulecode +" and assessmentid in ("+questionIds+")");
 		List<AssessmentQuestions> listAssessmentQuestions = query.list();
 		
 		return listAssessmentQuestions;
