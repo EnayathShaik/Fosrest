@@ -643,7 +643,7 @@ public class TraineeController {
 	 * @author Jyoti Mekal
 	 */
 	@RequestMapping(value = "/PersonalInformationTrainee", method = RequestMethod.GET)
-	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request) {
+	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request,HttpSession session) {
 			System.out.println("PersonalInformationTrainee ");
 			String userId = request.getParameter("userId");
 			
@@ -662,10 +662,12 @@ public class TraineeController {
 			model.addAttribute("userType",userType);
 			model.addAttribute("titleMap",titleMap);
 			
-			
-		return "PersonalInformationTrainee";
-	}
-
+			System.out.println("ttt"+session.getAttribute("profileId"));
+			if(session.getAttribute("profileId")==null)
+				return "PersonalInformationTrainee";
+			return "updatetraineeinfo";
+			}
+	
 	
 	
 	@RequestMapping(value = "/PersonalInformationTraineeAdd", method = RequestMethod.POST)

@@ -12,7 +12,7 @@
 		<property name="hibernate.connection.password">Fss2iZentech</property> -->
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost/fosrest</property>
 		<property name="hibernate.connection.username">postgres</property>
-		<property name="hibernate.connection.password">test@1234</property>
+		<property name="hibernate.connection.password">pass@123</property>
 		
 		<!-- <property name="hibernate.c3p0.min_size">50</property>
   		<property name="hibernate.c3p0.max_size">200</property>
@@ -56,7 +56,7 @@
 		<mapping class="com.ir.model.CourseEnrolled"/>
 		<mapping class="com.ir.model.CourseEnrolledUser"/>
 		<mapping class="com.ir.model.TrainingStatus"/>
-		<mapping class="com.ir.model.AssessmentQuestion"/>
+		<!-- <mapping class="com.ir.model.AssessmentQuestion"/> -->
 		<mapping class="com.ir.model.PersonalInformationAssessor"/>
 		<mapping class="com.ir.model.PostVacancyTrainingCenter"/>
 		<mapping class="com.ir.model.ContactTraineee"/>

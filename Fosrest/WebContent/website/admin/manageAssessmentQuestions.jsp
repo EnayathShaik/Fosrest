@@ -6,8 +6,8 @@
 <script>
 function OnStart(){
 document.getElementById('id').value = 0;
-document.getElementById('courseTypeId').value = 0;
-document.getElementById('courseName').value = 0;
+/* document.getElementById('unitCode').value = 0;
+document.getElementById('moduleCode').value = 0; */
 document.getElementById('questionNumber').value = '';
 document.getElementById('questionHint').value = '';
 document.getElementById('questionTitle').value = '';

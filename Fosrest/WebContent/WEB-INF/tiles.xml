@@ -201,10 +201,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee/special.jsp" />
 	</definition>
-	<definition name="updateInformation" extends="base.user.afterLogin">
+	<definition name="updatetraineeinfo" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
-			value="/website/personalInformationTrainee.jsp" />
+			value="/website/trainee/UpdateTraineeInfo.jsp" />
 	</definition>
 	<definition name="feedbackForm" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />

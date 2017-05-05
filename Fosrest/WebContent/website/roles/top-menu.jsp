@@ -31,7 +31,7 @@
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-							<li class="hori"><a href="MyTraining.fssai?userId=0">My trainings</a></li>
+							<!-- <li class="hori"><a href="MyTraining.fssai?userId=0">My trainings</a></li> -->
 									
 							<li class="hori"><a href="contactTrainee.fssai">Contact
 									Us</a></li>
@@ -78,8 +78,8 @@
 					<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
 							<!-- <li class="hori"><a href="search-and-apply.fssai">Search
 									& Apply Vacancy</a></li> -->
-							<li class="hori"><a href="MyCalendar.fssai">My Calendar
-								</a></li>
+					<!-- 		<li class="hori"><a href="MyCalendar.fssai">My Calendar
+								</a></li> -->
 							<!-- <li class="hori"><a href="contactTrainee.fssai">Contact
 									Us</a></li> -->
 						</ul>
@@ -124,8 +124,8 @@
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 						<%System.out.println("topmenu");%>
-							<li class="hori"><a href="loginProcess.fssai">Home</a></li>
-							<li class="hori"><a href="mycalendar.fssai">My Calendar</a></li>
+							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
+					<!-- 		<li class="hori"><a href="mycalendar.fssai">My Calendar</a></li> -->
 							<!-- <li class="hori"><a href="viewFeedbackDetails.fssai">View
 									Feedback Details</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact
@@ -312,9 +312,9 @@
                                             <li><a href="CityMaster.fssai" class="clr">City</a></li>                                            
                                             <li><a href="RegionMaster.fssai" class="clr">Region Mapping</a></li>
                                         </ul>
-                                    </li>
+                                    </li><!-- 
                                     <li><a href="">Training Partner List</a></li>
-                                    <li><a href="">Activate Trainee ID</a></li>
+                                    <li><a href="">Activate Trainee ID</a></li> -->
                                 </ul>
                                <ul class="nav navbar-nav navbar-right">
 							<li class="dropdown active"><a href="#"
@@ -361,10 +361,10 @@
                                     </li>
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="stateMaster.fssai" class="clr">State</a></li>
-                                            <li><a href="districtMaster.fssai" class="clr">District</a></li>
-                                            <li><a href="cityMaster.fssai" class="clr">City</a></li>                                            
-                                            <li><a href="regionMappingMaster.fssai" class="clr">Region Mapping</a></li>
+                                            <li><a href="StateMaster.fssai" class="clr">State</a></li>
+                                            <li><a href="DistrictMaster.fssai" class="clr">District</a></li>
+                                            <li><a href="CityMaster.fssai" class="clr">City</a></li>                                            
+                                            <li><a href="RegionMaster.fssai" class="clr">Region Mapping</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="manageTrainingPartnerForm.fssai">Manage Training Partner</a></li>
