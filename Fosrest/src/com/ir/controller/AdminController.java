@@ -3012,6 +3012,8 @@ public class AdminController {
 		model.addAttribute("SubTotal" ,subTotal);	
 		model.addAttribute("custAdd" , info.getCustomerAdd());
 		model.addAttribute("custName" ,info.getEmployeeName());
+		model.addAttribute("invoiceDate" ,info.getInvoiceDate());
+		
 		TaxMaster tm =this.adminService.listTaxMaster().get(0);
 		model.addAttribute("service", tm.getServiceTaxRate());
 		model.addAttribute("swaccha", tm.getSwacchaBharatCess());

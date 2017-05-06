@@ -3244,13 +3244,14 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 		
 		Session session = this.sessionFactory.getCurrentSession();
 		InvoiceInfoForm invoiceInfo = new InvoiceInfoForm();
-		List<Object[]> list  = session.createSQLQuery("select im.invoicenumber , cust.name , cust.address from invoicemaster im left join customerdetails cm on  (im.invoicenumber = cm.invoicenumber) left join customermaster cust on (im.customerid = cust.customerid) WHERE im.invoicenumber ='"+invoice+"'").list();
+		List<Object[]> list  = session.createSQLQuery("select im.invoicenumber , cust.name , cust.address , im.invoicedate from invoicemaster im left join customerdetails cm on  (im.invoicenumber = cm.invoicenumber) left join customermaster cust on (im.customerid = cust.customerid) WHERE im.invoicenumber ='"+invoice+"'").list();
 		
 		if(list !=null){
 			Object[] obj = list.get(0);
 			invoiceInfo.setInvoiceNumber((String)obj[0]);
 			invoiceInfo.setEmployeeName((String) obj[1]);
 			invoiceInfo.setCustomerAdd((String) obj[2]);
+			invoiceInfo.setInvoiceDate((String) obj[3]);
 		}
 		return invoiceInfo; 	
 	}

@@ -90,13 +90,17 @@ try{
         <div class="col-xs-5 col-xs-offset-2 text-right">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>To : <a href="#">${custName }</a></h4>
+              <h4>To : <a href="#">${custName }</a></h4>	
             </div>
             <div class="panel-body">
               <p>
-                ${custAdd} <br>
-                 <br>
-                <br>
+              <p> 	INVOICE NUMBER  :${InvoiceNum} </p>
+              <p>  INVOICE DATE   : ${invoiceDate}</p>
+              <p>  CLIENT PO #	4700071686</p>
+              <p>  TERMS	MONTHLY T&M</p>
+              <p>  F.O.B.  	Mumbai Maharashtra</p>
+              <p>${custAdd} </p>
+           
               </p>
             </div>
           </div>
@@ -176,14 +180,12 @@ try{
         <div class="col-xs-5">
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h4>Bank details</h4>
+              <h4>For Zentech Info Solutions Pvt Ltd</h4>
             </div>
             <div class="panel-body">
-              <p>Mr. Sanjay Arora</p>
-              <p>Bank Name :SWIFT</p>
-              <p>SWIFT </p>
-              <p>Account Number : 11111111</p>
-              <p>IBAN : --------</p>
+              <p>Authorised Signatory</p>
+              <p>Email  : accounts@zentechinfo.com</p>
+ 
             </div>
           </div>
         </div>
@@ -191,19 +193,25 @@ try{
           <div class="span7">
             <div class="panel panel-info">
               <div class="panel-heading">
-                <h4>Contact Details</h4>
+                <h4>MAKE ALL AMOUNT PAYABLE TO:</h4>
               </div>
               <div class="panel-body">
                 <p>
-                  Email : jyotimekal3@.com <br><br>
-                  Mobile :9004025360 <br> <br>
-                  Twitter : <a href="https://twitter.com/tahirtaous">@TahirTaous</a>
+                 <p> Zentech Info Solutions Pvt Ltd </p>
+                 <p>
+                  Bank : CANARA BANK </p>
+                   <p>
+                   Br:New MARINE LINES, Mumbai 400020.
+                 </p> 
+                 <p>A/C No: 1389261980019.</p>
+                 <p>IFSC: CNRB0001389</p>
                 </p>
                 <h4>Payment should be made by Bank Transfer</h4>
               </div>
             </div>
           </div>
         </div>
+                  <div>THANK YOU FOR YOUR BUSINESS!</div>
      <!--  </div>
     </div> -->
                                                          <!-- html code ends here -->
@@ -214,6 +222,8 @@ try{
                                     </div>
                     </section>
                     <!-- scripts -->
+                    
+          
                 </form>
             </body>
 

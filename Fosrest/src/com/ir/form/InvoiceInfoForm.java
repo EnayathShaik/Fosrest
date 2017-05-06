@@ -5,6 +5,8 @@ public class InvoiceInfoForm {
 	private String invoiceNumber;
 	private String employeeName;
 	private String customerAdd;
+	private String invoiceDate;
+	
 	public String getInvoiceNumber() {
 		return invoiceNumber;
 	}
@@ -23,6 +25,14 @@ public class InvoiceInfoForm {
 	public void setCustomerAdd(String customerAdd) {
 		this.customerAdd = customerAdd;
 	}
+	public String getInvoiceDate() {
+		return invoiceDate;
+	}
+	public void setInvoiceDate(String invoiceDate) {
+		this.invoiceDate = invoiceDate;
+	}
+	
+	
 	
 	
 }
