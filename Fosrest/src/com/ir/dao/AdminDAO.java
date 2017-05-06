@@ -170,7 +170,7 @@ public interface AdminDAO {
 		public List<HolidayMaster> listHolidayMaster();
 		
 		
-		public void addUnitMaster(UnitMaster p);
+		public String addUnitMaster(UnitMaster p);
 		
 		public void updateUnitMaster(UnitMaster p);
 		
@@ -184,7 +184,7 @@ public interface AdminDAO {
 		
 		
 
-		public void addModuleMaster(ModuleMaster p);
+		public String addModuleMaster(ModuleMaster p);
 		
 		public void updateModuleMaster(ModuleMaster p);
 		

@@ -749,12 +749,15 @@ public class TraineeController {
 		public String GetScoreCard(@ModelAttribute("GetScoreCardForm") GetScoreCardForm GetScoreCardForm ,Model model,HttpSession session){
         	int userId = (int) session.getAttribute("userId");
 				System.out.println("listGetScoreCard");
+				int personalTraineeId=(int)session.getAttribute("personalTraineeId");
 				
 				model.addAttribute("GetScoreCardForm", new GetScoreCardForm());
 				model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic(userId));
 				model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
 				model.addAttribute("listGetScoreCard", this.traineeService.listGetScoreCard(userId));
-			
+				
+				traineeService.updateSteps(personalTraineeId, 4);
+				session.setAttribute("traineeSteps", 4);
 			
 				return "GetScoreCard";
 		
@@ -783,6 +786,7 @@ public class TraineeController {
         	int userId = (int) session.getAttribute("userId");
         	int personalTraineeId = (int)session.getAttribute("personalTraineeId");
         	traineeService.updateSteps(personalTraineeId,2);
+        	session.setAttribute("traineeSteps", 2);
         	
    			
    			System.out.println(" list online training "+this.traineeService.listOnlineTraining(userId));
@@ -956,11 +960,12 @@ public String onlinelistassessquestion(@ModelAttribute("AssessmentQuestionForm")
  * @author Jyoti Mekal
  */
 @RequestMapping(value = "/GetCertificate", method = RequestMethod.GET)
-public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request) {
+public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request, HttpSession session) {
 		System.out.println("GetCertificate ");
 		String userId = request.getParameter("userId");
 		
 		traineeService.updateSteps(Integer.parseInt(userId),  0);
+		session.setAttribute("traineeSteps", 0);
 		CertificateInfo certificateInfo = traineeService.getCertificateID(Integer.parseInt(userId),"");
 		if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 5){
 			traineeService.closeCourse(Integer.parseInt(userId), "Y");

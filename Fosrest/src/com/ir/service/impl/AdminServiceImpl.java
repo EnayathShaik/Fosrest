@@ -535,8 +535,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public void addUnitMaster(UnitMaster p){
-		 this.adminDAO.addUnitMaster(p);
+	public String addUnitMaster(UnitMaster p){
+		return this.adminDAO.addUnitMaster(p);
 		
 	}
 	
@@ -588,8 +588,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public void addModuleMaster(ModuleMaster p){
-		 this.adminDAO.addModuleMaster(p);
+	public String addModuleMaster(ModuleMaster p){
+		return this.adminDAO.addModuleMaster(p);
 		
 	}
 	

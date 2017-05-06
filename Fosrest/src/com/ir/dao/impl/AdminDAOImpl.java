@@ -1710,8 +1710,7 @@ public class AdminDAOImpl implements AdminDAO {
 		if (l != null && l.size() > 0) {
 			return "error";
 		} else {
-		/*	hIdd = (Integer) session.save(h);*/
-			p.setIsActive("Y");
+		p.setIsActive("Y");
 			session.persist(p);
 			return "created";
 		}
@@ -1776,8 +1775,14 @@ public class AdminDAOImpl implements AdminDAO {
 		 */
 		
 		@Override
-		public void addUnitMaster(UnitMaster p) {
+		public String addUnitMaster(UnitMaster p) {
 			Session session = this.sessionFactory.getCurrentSession();
+			Query isempty = session.createSQLQuery("select unitid from UnitMaster where unitname='"+p.getUnitName()+"'");
+			List list1 = isempty.list();
+			System.out.println(list1.size());
+			
+			if(list1.size()>0)
+				return "error";
 			
 			String sql = "select coalesce(max(seqNo) + 1,1) from UnitMaster";
 			int maxId = 0 ;
@@ -1796,6 +1801,7 @@ public class AdminDAOImpl implements AdminDAO {
 			p.setSeqNo(maxId);
 			p.setIsActive("Y");
 			session.persist(p);
+			return "created";
 		}
 		
 		
@@ -1868,8 +1874,17 @@ public class AdminDAOImpl implements AdminDAO {
 		 */
 		
 		@Override
-		public void addModuleMaster(ModuleMaster p) {
+		public String addModuleMaster(ModuleMaster p) {
 			Session session = this.sessionFactory.getCurrentSession();
+			Query isempty = session.createSQLQuery("select moduleid from ModuleMaster where modulename='"+p.getModuleName()+"' and unitid='"+p.getUnitMaster().getUnitId()+"'");
+			List list1 = isempty.list();
+			System.out.println(list1.size());
+			
+			if(list1.size()>0)
+				return "error";
+			
+			
+			
 			String sql = "select coalesce(max(seqNo) + 1,1) from ModuleMaster";
 			int maxId = 0 ;
 			Query maxIDList = session.createSQLQuery(sql);
@@ -1890,6 +1905,7 @@ public class AdminDAOImpl implements AdminDAO {
 			p.setIsActive("Y");
 			
 			session.persist(p);
+			return "created";
 		}
 		
 		
@@ -1980,7 +1996,6 @@ public class AdminDAOImpl implements AdminDAO {
 				}
 			}
 	
-		
 		@Override
 		public void updateSubjectMaster(SubjectMaster p) {
 			// TODO Auto-generated method stub
@@ -2337,8 +2352,6 @@ public class AdminDAOImpl implements AdminDAO {
 
 			return "error";
 		} else {
-			/* dIdd = (Integer) session.save(d); */
-
 			p.setStateMaster(sm);
 			p.setIsActive("Y");
 			session.persist(p);
@@ -2428,7 +2441,6 @@ public class AdminDAOImpl implements AdminDAO {
 		if (l != null && l.size() > 0) {
 			return "error";
 		} else {
-			/* cIdd = (Integer) session.save(c); */
 			p.setDistrictMaster(dm);
 			p.setIsActive("Y");
 			session.persist(p);

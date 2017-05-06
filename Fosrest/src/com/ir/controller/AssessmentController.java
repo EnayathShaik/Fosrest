@@ -106,6 +106,7 @@ public class AssessmentController {
 			// update Step
 			Integer profileID = 0;
 			int loginId = 0;
+			int personalTraineeId=(int)session.getAttribute("personalTraineeId");
 			try {
 				profileID = (Integer) session.getAttribute("profileId");
 				loginId = (int) session.getAttribute("loginIdUnique");
@@ -114,8 +115,8 @@ public class AssessmentController {
 			}
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId,
 					profileID);
-			//traineeService.updateSteps(tableID, profileID, 4);
-			session.setAttribute("traineeSteps", 4);
+			traineeService.updateSteps(personalTraineeId, 3);
+			session.setAttribute("traineeSteps", 3);
 		}catch(Exception e){
 			e.printStackTrace();
 			new ZLogger("submitAssessment"," Exception while submitAssessment "+e.getMessage(), "AssessmentController.java");

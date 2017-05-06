@@ -1723,17 +1723,38 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/UnitMaster/add", method = RequestMethod.POST)
-	public String addUnitMaster(@ModelAttribute("UnitMaster") UnitMaster p) {
+	public String addUnitMaster(@ModelAttribute("UnitMaster") UnitMaster p,Model model) {
 		System.out.println("p.getId() " + p.getUnitId());
 		if (p.getUnitId() == 0) {
 			// new person, add it
-			this.adminService.addUnitMaster(p);
+			String result=this.adminService.addUnitMaster(p);
+			System.out.println("result"+result);
+			
+			try {
+			
+			if (result.equalsIgnoreCase("created")) {
+				System.out.println("a");
+				model.addAttribute("created",
+						" New Unit insertion successful !!!");
+				//model.addAttribute("stateMaster", new StateForm());
+			} else {
+				System.out.println("else");
+				model.addAttribute("created",
+						"Unit already exists in reord !!!");
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+			new ZLogger("addUnitMaster",
+					"Exception while addUnitMaster :  " + e.getMessage(),
+					"AdminController.java");
+		}
 		} else {
 			// existing person, call update
 			this.adminService.updateUnitMaster(p);
 		}
 		System.out.println("after insert");
 		return "redirect:/UnitMaster.fssai";
+		//return "UnitMaster";
 	}
 
 	@RequestMapping("/UnitMaster/remove/{id}")
@@ -1820,8 +1841,25 @@ public class AdminController {
 
 		if (p.getModuleId() == 0) {
 			// new person, add it
-			this.adminService.addModuleMaster(moduleMaster);
-		} else {
+			String result1=this.adminService.addModuleMaster(moduleMaster);
+System.out.println("result1: "+result1);
+			
+			try {
+			
+			if (result1.equalsIgnoreCase("created")) {
+				model.addAttribute("created",
+						" New Unit insertion successful !!!");
+			} else {
+				model.addAttribute("created",
+						"Unit already exists in reord !!!");
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+			new ZLogger("addUnitMaster",
+					"Exception while addUnitMaster :  " + e.getMessage(),
+					"AdminController.java");
+		}
+		}  else {
 			// existing person, call update
 			this.adminService.updateModuleMaster(moduleMaster);
 		}

@@ -31,7 +31,7 @@
                                         <div class="row">
 
                                             <div class="col-xs-12">
-                                                <h1>Unit Master <label id="created">${created }</label></h1>
+                                                <h1>Unit Master <label id="created" class="style-li error-red">${created }</label></h1>
                                                 <div class="row">
                                                     <div class="col-xs-12">
 												                           <fieldset>

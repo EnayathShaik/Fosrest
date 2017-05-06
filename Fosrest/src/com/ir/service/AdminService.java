@@ -209,14 +209,14 @@ public interface AdminService {
 	public List<HolidayMaster> listHolidayMaster();
 	
 	
-	public void addUnitMaster(UnitMaster p);
+	public String addUnitMaster(UnitMaster p);
 	public void updateUnitMaster(UnitMaster p);
 	public void removeUnitMaster(int id);
 	public UnitMaster getUnitMasterById(int id);
 	public List<UnitMaster> listUnitMaster();
 
 	
-	public void addModuleMaster(ModuleMaster p);
+	public String addModuleMaster(ModuleMaster p);
 	public void updateModuleMaster(ModuleMaster p);
 	public void removeModuleMaster(int id);
 	public ModuleMaster getModuleMasterById(int id);
