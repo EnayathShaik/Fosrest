@@ -202,7 +202,7 @@ public interface AdminService {
 	 */
 	
 	
-	public void addHolidayMaster(HolidayMaster p);
+	public String addHolidayMaster(HolidayMaster p);
 	public void updateHolidayMaster(HolidayMaster p);
 	public void removeHolidayMaster(int id);
 	public HolidayMaster getHolidayMasterById(int id);
@@ -246,7 +246,7 @@ public interface AdminService {
 	
 	
 	
-	public void addStateMaster(StateMaster p);
+	public String addStateMaster(StateMaster p);
 	public void updateStateMaster(StateMaster p);
 	public void removeStateMaster(int id);
 	public StateMaster getStateMasterById(int id);
@@ -254,7 +254,7 @@ public interface AdminService {
 
 	
 	
-	public void addDistrictMaster(DistrictMaster p);
+	public String addDistrictMaster(DistrictMaster p);
 	public void updateDistrictMaster(DistrictMaster p);
 	public void removeDistrictMaster(int id);
 	public DistrictMaster getDistrictMasterById(int id);
@@ -263,7 +263,7 @@ public interface AdminService {
 	
 	
 	
-	public void addCityMaster(CityMaster p);
+	public String addCityMaster(CityMaster p);
 	public void updateCityMaster(CityMaster p);
 	public void removeCityMaster(int id);
 	public CityMaster getCityMasterById(int id);

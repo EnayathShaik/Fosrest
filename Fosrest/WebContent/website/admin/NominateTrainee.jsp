@@ -174,7 +174,7 @@
 												<ct:forEach items="${listEligibleuser}" var="EligibleUser"
 													varStatus="loop">
 													
-													<td>${loop.index}</td>
+													<td>${loop.count}</td>
 													<td>${EligibleUser.userType}</td>
 													<td id="userName_${loop.index}">${EligibleUser.firstName}
 														<input type="hidden" id="userId_${loop.index}"

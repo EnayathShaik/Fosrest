@@ -487,8 +487,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public void addHolidayMaster(HolidayMaster p){
-		 this.adminDAO.addHolidayMaster(p);
+	public String addHolidayMaster(HolidayMaster p){
+		 return this.adminDAO.addHolidayMaster(p);
 		
 	}
 	
@@ -764,8 +764,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public void addStateMaster(StateMaster p){
-		 this.adminDAO.addStateMaster(p);
+	public String addStateMaster(StateMaster p){
+		 return this.adminDAO.addStateMaster(p);
 		
 	}
 	
@@ -817,8 +817,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public void addDistrictMaster(DistrictMaster p){
-		 this.adminDAO.addDistrictMaster(p);
+	public String addDistrictMaster(DistrictMaster p){
+		 return this.adminDAO.addDistrictMaster(p);
 		
 	}
 	
@@ -855,13 +855,6 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listDistrictMaster();
 	}
-	
-
-	
-	
-	
-	
-	
 
 	/**
 	 * @author Jyoti Mekal
@@ -871,8 +864,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public void addCityMaster(CityMaster p){
-		 this.adminDAO.addCityMaster(p);
+	public String addCityMaster(CityMaster p){
+		return this.adminDAO.addCityMaster(p);
+	
 		
 	}
 	

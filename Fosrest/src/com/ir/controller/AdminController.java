@@ -1627,7 +1627,16 @@ public class AdminController {
 		System.out.println("p.getId() " + p.getHolidayId());
 		if (p.getHolidayId() == 0) {
 			// new person, add it
-			this.adminService.addHolidayMaster(p);
+		String hm=	this.adminService.addHolidayMaster(p);
+			if (hm.equalsIgnoreCase("created")) {
+				model.addAttribute("created",
+						" State insertion successfull !!!");
+				model.addAttribute("stateMaster", new StateForm());
+			} else {
+				model.addAttribute("created",
+						"State already exists in reord !!!");
+				
+			}
 		} else {
 			// existing person, call update
 			this.adminService.updateHolidayMaster(p);

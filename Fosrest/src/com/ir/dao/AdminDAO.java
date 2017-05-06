@@ -159,7 +159,7 @@ public interface AdminDAO {
 		
 		//Holiday Master
 		
-		public void addHolidayMaster(HolidayMaster p);
+		public String addHolidayMaster(HolidayMaster p);
 		
 		public void updateHolidayMaster(HolidayMaster p);
 		
@@ -224,7 +224,7 @@ public interface AdminDAO {
 		
 		public List<TrainingSchedule> listTrainingSchedule(int id,int profileId);
 		
-		public void addStateMaster(StateMaster p);
+		public String addStateMaster(StateMaster p);
 		
 		public void updateStateMaster(StateMaster p);
 		
@@ -238,7 +238,7 @@ public interface AdminDAO {
 		
 		
 
-		public void addDistrictMaster(DistrictMaster p);
+		public String addDistrictMaster(DistrictMaster p);
 		
 		public void updateDistrictMaster(DistrictMaster p);
 		
@@ -253,7 +253,7 @@ public interface AdminDAO {
 		
 		
 
-		public void addCityMaster(CityMaster p);
+		public String addCityMaster(CityMaster p);
 		
 		public void updateCityMaster(CityMaster p);
 		

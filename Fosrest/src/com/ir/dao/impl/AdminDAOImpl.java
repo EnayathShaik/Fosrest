@@ -30,9 +30,12 @@ import com.ir.form.AssessmentQuestionForm_old;
 import com.ir.form.AssessorUserManagementForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
+import com.ir.form.CityMasterForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
+import com.ir.form.DistrictMasterForm;
 import com.ir.form.GenerateCertificateForm;
+import com.ir.form.HolidayMasterForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
 import com.ir.form.ManageAssessmentAgencyForm;
@@ -1686,60 +1689,66 @@ public class AdminDAOImpl implements AdminDAO {
 					}
 		
 		return newList;
-		}
-		
-		
-		/**
-		 * @author Jyoti Mekal
-		 *
-		 * DAOImpl For Holiday Master
-		 */
-		
-		@Override
-		public void addHolidayMaster(HolidayMaster p) {
-			// TODO Auto-generated method stub
-			System.out.println("RegionMapping "+p.getHolidayId());
+	}
+
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 *         DAOImpl For Holiday Master
+	 */
+
+	@Override
+	public String addHolidayMaster(HolidayMaster p) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		HolidayMasterForm h = new HolidayMasterForm();
+		h.setHolidayDate(p.getHolidayDate());
+		Integer hIdd = null;
+		String sql = "select * from holidaymaster where HolidayDate = '" + p.getHolidayDate() + "'";
+		Query query = session.createSQLQuery(sql);
+		List l = query.list();
+		if (l != null && l.size() > 0) {
+			return "error";
+		} else {
+		/*	hIdd = (Integer) session.save(h);*/
 			p.setIsActive("Y");
-			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(p);
+			return "created";
 		}
-		
-		
-		@Override
-		public void updateHolidayMaster(HolidayMaster p) {
-			// TODO Auto-generated method stub
-			p.setIsActive("Y");
-			Session session = this.sessionFactory.getCurrentSession();
-			session.update(p);
-			
+	}
+
+	@Override
+	public void updateHolidayMaster(HolidayMaster p) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(p);
+
+	}
+
+	// removeHolidayMaster
+
+	@Override
+	public void removeHolidayMaster(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = null;
+		HolidayMaster p = (HolidayMaster) session.load(HolidayMaster.class, new Integer(id));
+		if (null != p) {
+			sql = "update HolidayMaster set isactive='N' where holidayid=" + id;
 		}
-		
-		
-		//removeHolidayMaster
-		
-		@Override
-		public void removeHolidayMaster(int id) {
-			// TODO Auto-generated method stub
-			Session session = this.sessionFactory.getCurrentSession();
-			String sql= null;
-			HolidayMaster p = (HolidayMaster) session.load(HolidayMaster.class, new Integer(id));
-			if (null != p) {
-				sql =	"update HolidayMaster set isactive='N' where holidayid="+id;	
-			}
-			Query query = session.createSQLQuery(sql);
-			query.executeUpdate(); 
-			
-		
-		}
-		
-		@Override
-		public HolidayMaster getHolidayMasterById(int id) {
-			// TODO Auto-generated method stub
-			System.out.println(" id " +id);
-			Session session = this.sessionFactory.getCurrentSession();
-			
-		Query query = session.createQuery("from HolidayMaster where holidayId="+id);
-		
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+
+	}
+
+	@Override
+	public HolidayMaster getHolidayMasterById(int id) {
+		// TODO Auto-generated method stub
+		System.out.println(" id " + id);
+		Session session = this.sessionFactory.getCurrentSession();
+
+		Query query = session.createQuery("from HolidayMaster where holidayId=" + id);
+
 		List<HolidayMaster> HolidayMasterList = query.list();
 		HolidayMaster hm = HolidayMasterList.get(0);
 			return hm; 
@@ -2209,54 +2218,74 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 
-		/**
-		 * @author Jyoti Mekal
-		 *
-		 * DAOImpl For State Master
-		 */
-		
-		@Override
-		public void addStateMaster(StateMaster p) {
-			// TODO Auto-generated method stub
-			System.out.println("RegionMapping "+p.getStateId());
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 *         DAOImpl For State Master
+	 * @return
+	 */
+
+	@Override
+	public String addStateMaster(StateMaster p) {
+		// TODO Auto-generated method stub
+
+		Session session = sessionFactory.getCurrentSession();
+		State state = new State();
+		state.setStateName(p.getStateName().replaceAll("%20", " "));
+		state.setStatus(p.getStatus());
+		Integer stateIdd = null;
+		String sql = "select * from state where upper(stateName) = '"
+				+ p.getStateName().replaceAll("%20", " ").toUpperCase() + "'";
+		Query query = session.createSQLQuery(sql);
+		List l = query.list();
+
+		if (l != null && l.size() > 0) {
+
+			return "error";
+		} else {
+
+			stateIdd = (Integer) session.save(state);
 			p.setIsActive("Y");
-			Session session = this.sessionFactory.getCurrentSession();
+
 			session.persist(p);
+
+			return "created";
 		}
-		
-		
-		@Override
-		public void updateStateMaster(StateMaster p) {
-			// TODO Auto-generated method stub
-			Session session = this.sessionFactory.getCurrentSession();
-			session.update(p);
-			
+
+	}
+
+	@Override
+	public void updateStateMaster(StateMaster p) {
+		// TODO Auto-generated method stub
+		p.setIsActive("Y");
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(p);
+
+	}
+
+	// removeStateMaster
+
+	@Override
+	public void removeStateMaster(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = null;
+		StateMaster p = (StateMaster) session.load(StateMaster.class, new Integer(id));
+		if (null != p) {
+			sql = "update StateMaster set isactive='N' where stateid=" + id;
 		}
-		
-		
-		//removeStateMaster
-		
-		@Override
-		public void removeStateMaster(int id) {
-			// TODO Auto-generated method stub
-			Session session = this.sessionFactory.getCurrentSession();
-			String sql= null;
-			StateMaster p = (StateMaster) session.load(StateMaster.class, new Integer(id));
-			if (null != p) {
-				sql =	"update StateMaster set isactive='N' where stateid="+id;	
-			}
-			Query query = session.createSQLQuery(sql);
-			query.executeUpdate();
-		}
-		
-		@Override
-		public StateMaster getStateMasterById(int id) {
-			// TODO Auto-generated method stub
-			System.out.println(" id " +id);
-			Session session = this.sessionFactory.getCurrentSession();
-			
-		Query query = session.createQuery("from StateMaster where StateId="+id);
-		
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+	}
+
+	@Override
+	public StateMaster getStateMasterById(int id) {
+		// TODO Auto-generated method stub
+		System.out.println(" id " + id);
+		Session session = this.sessionFactory.getCurrentSession();
+
+		Query query = session.createQuery("from StateMaster where StateId=" + id);
+
 		List<StateMaster> StateMasterList = query.list();
 		StateMaster hm = StateMasterList.get(0);
 			return hm; 
@@ -2282,56 +2311,75 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		
 
-		/**
-		 * @author Jyoti Mekal
-		 *
-		 * DAOImpl For District Master
-		 */
-		
-		@Override
-		public void addDistrictMaster(DistrictMaster p) {
-			// TODO Auto-generated method stub
-			System.out.println("DistrictMaster "+p.getDistrictId());
-			StateMaster sm =  getStateMasterById(p.getStateMaster().getStateId());
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 *         DAOImpl For District Master
+	 * @return
+	 */
+
+	@Override
+	public String addDistrictMaster(DistrictMaster p) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		System.out.println("DistrictMaster " + p.getDistrictId());
+		StateMaster sm = getStateMasterById(p.getStateMaster().getStateId());
+		DistrictMasterForm d = new DistrictMasterForm();
+		d.setDistrictName(p.getDistrictName());
+		Integer dIdd = null;
+
+		String sql = "select districtname from districtmaster where districtname = '" + p.getDistrictName()
+				+ "' and stateid = '" + p.getStateMaster().getStateId() + "'";
+		Query query = session.createSQLQuery(sql);
+
+		List l = query.list();
+		if (l != null && l.size() > 0) {
+
+			return "error";
+		} else {
+			/* dIdd = (Integer) session.save(d); */
+
 			p.setStateMaster(sm);
 			p.setIsActive("Y");
-			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(p);
+
+			return "created";
 		}
-		
-		
-		@Override
-		public void updateDistrictMaster(DistrictMaster p) {
-			// TODO Auto-generated method stub
-			Session session = this.sessionFactory.getCurrentSession();
-			session.update(p);
-			
+
+	}
+
+	@Override
+	public void updateDistrictMaster(DistrictMaster p) {
+		// TODO Auto-generated method stub
+		p.setIsActive("Y");
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(p);
+
+	}
+
+	// removeDistrictMaster
+
+	@Override
+	public void removeDistrictMaster(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = null;
+		DistrictMaster p = (DistrictMaster) session.load(DistrictMaster.class, new Integer(id));
+		if (null != p) {
+			sql = "update DistrictMaster set isactive='N' where districtId=" + id;
 		}
-		
-		
-		//removeDistrictMaster
-		
-		@Override
-		public void removeDistrictMaster(int id) {
-			// TODO Auto-generated method stub
-			Session session = this.sessionFactory.getCurrentSession();
-			String sql= null;
-			DistrictMaster p = (DistrictMaster) session.load(DistrictMaster.class, new Integer(id));
-			if (null != p) {
-				sql =	"update DistrictMaster set isactive='N' where districtId="+id;
-			}
-			Query query = session.createSQLQuery(sql);
-			query.executeUpdate();
-		}
-		
-		@Override
-		public DistrictMaster getDistrictMasterById(int id) {
-			// TODO Auto-generated method stub
-			System.out.println(" id " +id);
-			Session session = this.sessionFactory.getCurrentSession();
-			
-		Query query = session.createQuery("from DistrictMaster where DistrictId="+id);
-		
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+	}
+
+	@Override
+	public DistrictMaster getDistrictMasterById(int id) {
+		// TODO Auto-generated method stub
+		System.out.println(" id " + id);
+		Session session = this.sessionFactory.getCurrentSession();
+
+		Query query = session.createQuery("from DistrictMaster where DistrictId=" + id);
+
 		List<DistrictMaster> DistrictMasterList = query.list();
 		DistrictMaster hm = DistrictMasterList.get(0);
 			return hm; 
@@ -2358,57 +2406,68 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		
 
-		/**
-		 * @author Jyoti Mekal
-		 *
-		 * DAOImpl For City Master
-		 */
-		
-		@Override
-		public void addCityMaster(CityMaster p) {
-			// TODO Auto-generated method stub
-			System.out.println("CityMaster "+p.getCityId());
-			DistrictMaster dm =  getDistrictMasterById(p.getDistrictMaster().getDistrictId());
+	/**
+	 * @author Jyoti Mekal
+	 *
+	 *         DAOImpl For City Master
+	 */
+
+	@Override
+	public String addCityMaster(CityMaster p) {
+		// TODO Auto-generated method stub
+		System.out.println("CityMaster " + p.getCityId());
+		DistrictMaster dm = getDistrictMasterById(p.getDistrictMaster().getDistrictId());
+		Session session = this.sessionFactory.getCurrentSession();
+		CityMasterForm c = new CityMasterForm();
+		c.setCityName(p.getCityName().replaceAll("%20", " "));
+		Integer cIdd = null;
+		String sql = "select * from citymaster where cityname like '" + p.getCityName() + "' and districtid = '"
+				+ p.getDistrictMaster().getDistrictId() + "'";
+		Query query = session.createSQLQuery(sql);
+		List l = query.list();
+		if (l != null && l.size() > 0) {
+			return "error";
+		} else {
+			/* cIdd = (Integer) session.save(c); */
 			p.setDistrictMaster(dm);
 			p.setIsActive("Y");
-			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(p);
+			return "created";
 		}
-		
-		
-		@Override
-		public void updateCityMaster(CityMaster p) {
-			// TODO Auto-generated method stub
-			Session session = this.sessionFactory.getCurrentSession();
-			session.update(p);
-			
+
+	}
+
+	@Override
+	public void updateCityMaster(CityMaster p) {
+		// TODO Auto-generated method stub
+		p.setIsActive("Y");
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(p);
+
+	}
+
+	// removeCityMaster
+
+	@Override
+	public void removeCityMaster(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = null;
+		CityMaster p = (CityMaster) session.load(CityMaster.class, new Integer(id));
+		if (null != p) {
+			sql = "update CityMaster set isactive='N' where cityId=" + id;
 		}
-		
-		
-		//removeCityMaster
-		
-		@Override
-		public void removeCityMaster(int id) {
-			// TODO Auto-generated method stub
-			Session session = this.sessionFactory.getCurrentSession();
-			String sql=null;
-			CityMaster p = (CityMaster) session.load(CityMaster.class, new Integer(id));
-			if (null != p) {
-				sql =	"update CityMaster set isactive='N' where cityId="+id;
-			}
-			Query query = session.createSQLQuery(sql);
-			query.executeUpdate();
-			
-		}
-		
-		@Override
-		public CityMaster getCityMasterById(int id) {
-			// TODO Auto-generated method stub
-			System.out.println(" id " +id);
-			Session session = this.sessionFactory.getCurrentSession();
-			
-		Query query = session.createQuery("from CityMaster where CityId="+id);
-		
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+
+	}
+
+	@Override
+	public CityMaster getCityMasterById(int id) {
+		// TODO Auto-generated method stub
+		System.out.println(" id " + id);
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from CityMaster where CityId=" + id);
 		List<CityMaster> CityMasterList = query.list();
 		CityMaster hm = CityMasterList.get(0);
 			return hm; 
