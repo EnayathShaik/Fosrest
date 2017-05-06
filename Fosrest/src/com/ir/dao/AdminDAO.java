@@ -195,7 +195,7 @@ public interface AdminDAO {
 		public List<ModuleMaster> listModuleMaster();
 		
 		
-		public void addSubjectMaster(SubjectMaster p);
+		public String addSubjectMaster(SubjectMaster p);
 		
 		public void updateSubjectMaster(SubjectMaster p);
 		
@@ -265,7 +265,7 @@ public interface AdminDAO {
 		
 		
 		
-		public void addRegionMaster(RegionMaster p);
+		public String addRegionMaster(RegionMaster p);
 		
 		public void updateRegionMaster(RegionMaster p);
 		
@@ -278,7 +278,7 @@ public interface AdminDAO {
 		
 		//Trainingpartner Master
 		
-				public void addTrainingPartner(TrainingPartner p);
+				public String addTrainingPartner(TrainingPartner p);
 				
 				public void updateTrainingPartner(TrainingPartner p);
 				

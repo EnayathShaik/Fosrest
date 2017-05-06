@@ -41,6 +41,7 @@ import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
+import com.ir.form.RegionMasterForm;
 import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
@@ -1707,6 +1708,7 @@ public class AdminDAOImpl implements AdminDAO {
 		@Override
 		public void updateHolidayMaster(HolidayMaster p) {
 			// TODO Auto-generated method stub
+			p.setIsActive("Y");
 			Session session = this.sessionFactory.getCurrentSession();
 			session.update(p);
 			
@@ -1945,15 +1947,30 @@ public class AdminDAOImpl implements AdminDAO {
 		 */
 		
 		@Override
-		public void addSubjectMaster(SubjectMaster p) {
+		public String addSubjectMaster(SubjectMaster p) {
 			// TODO Auto-generated method stub
 			System.out.println("SubjectMaster "+p.getSubjectId() + " " + p.getSubjectName());
 			//getModuleMasterById
 			Session session = this.sessionFactory.getCurrentSession();
-			p.setIsActive("Y");
-			session.persist(p);
-		}
-		
+			SubjectMaster sub=new SubjectMaster();
+			sub.setSubjectName(p.getSubjectName().replaceAll("%20", " "));
+			sub.setStatus(p.getStatus());
+			String sql="select * from subjectmaster where subjectName like '"+p.getSubjectName()+"'";
+			Query query = session.createSQLQuery(sql);
+			List l = query.list();
+			if(l != null && l.size() >0){
+				
+				return "error";
+			}
+			else{
+				
+				p.setIsActive("Y");
+				session.persist(p);
+				
+				return "created";
+				}
+			}
+	
 		
 		@Override
 		public void updateSubjectMaster(SubjectMaster p) {
@@ -2423,15 +2440,30 @@ public class AdminDAOImpl implements AdminDAO {
 		 */
 		
 		@Override
-		public void addRegionMaster(RegionMaster p) {
+		public String addRegionMaster(RegionMaster p) {
 			// TODO Auto-generated method stub
 			System.out.println("RegionMaster "+p.getId());
 			CityMaster cm =  getCityMasterById(p.getCityMaster().getCityId());
 			p.setCityMaster(cm);
 			p.setIsActive("Y");
 			Session session = this.sessionFactory.getCurrentSession();
+			RegionMasterForm rm=new RegionMasterForm();
+			rm.setRegionName(p.getRegionName().replaceAll("%20", " "));
+			rm.setStatus(p.getStatus());
+			String sql="select * from regionmaster where regionName like '"+ p.getRegionName() +  "'and cityId='" +p.getCityMaster().getCityId()+"'"; 
+			Query query = session.createSQLQuery(sql);
+			List l = query.list();
+			if(l != null && l.size() >0){
+				
+				return "error";
+			}
+			else{
+			
 			session.persist(p);
+			return "created";
 		}
+		}
+		
 		
 		
 		@Override
@@ -2494,15 +2526,33 @@ public class AdminDAOImpl implements AdminDAO {
 		 * @author Jyoti Mekal
 		 *
 		 * DAOImpl For Training Partner Master
+		 * @return 
 		 */
 		
 		@Override
-		public void addTrainingPartner(TrainingPartner p) {
+		public String addTrainingPartner(TrainingPartner p) {
 			// TODO Auto-generated method stub
 			System.out.println("RegionMapping "+p.getTrainingPartnerId());
 			Session session = this.sessionFactory.getCurrentSession();
-			session.persist(p);
-		}
+			TrainingPartner tp=new TrainingPartner();
+			tp.setTrainingPartnerName(p.getTrainingPartnerName().replaceAll("%20", " "));
+			tp.setStatus(p.getStatus());
+			String sql="select * from trainingpartner where TrainingPartnerName like '"+p.getTrainingPartnerName()+"'";
+			Query query = session.createSQLQuery(sql);
+			List l = query.list();
+            if(l != null && l.size() >0){
+				
+				return "error";
+			}
+			else{
+				
+				session.persist(p);
+				return "created";
+			}
+		   }
+		
+		
+		
 		
 		
 		@Override

@@ -223,7 +223,7 @@ public interface AdminService {
 	public List<ModuleMaster> listModuleMaster();
 	
 	
-	public void addSubjectMaster(SubjectMaster p);
+	public String addSubjectMaster(SubjectMaster p);
 	public void updateSubjectMaster(SubjectMaster p);
 	public void removeSubjectMaster(int id);
 	public SubjectMaster getSubjectMasterById(int id);
@@ -273,7 +273,7 @@ public interface AdminService {
 	
 	
 
-	public void addRegionMaster(RegionMaster p);
+	public String addRegionMaster(RegionMaster p);
 	public void updateRegionMaster(RegionMaster p);
 	public void removeRegionMaster(int id);
 	public RegionMaster getRegionMasterById(int id);
@@ -287,7 +287,7 @@ public interface AdminService {
 	 */
 	
 	
-	public void addTrainingPartner(TrainingPartner p);
+	public String addTrainingPartner(TrainingPartner p);
 	public void updateTrainingPartner(TrainingPartner p);
 	public void removeTrainingPartner(int id);
 	public TrainingPartner getTrainingPartnerById(int id);

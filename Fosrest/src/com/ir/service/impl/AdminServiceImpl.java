@@ -639,8 +639,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public void addSubjectMaster(SubjectMaster p){
-		 this.adminDAO.addSubjectMaster(p);
+	public String addSubjectMaster(SubjectMaster p){
+		 return this.adminDAO.addSubjectMaster(p);
 		
 	}
 	
@@ -924,8 +924,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public void addRegionMaster(RegionMaster p){
-		 this.adminDAO.addRegionMaster(p);
+	public String addRegionMaster(RegionMaster p){
+		 return this.adminDAO.addRegionMaster(p);
 		
 	}
 	
@@ -973,8 +973,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	@Transactional
-	public void addTrainingPartner(TrainingPartner p){
-		 this.adminDAO.addTrainingPartner(p);
+	public String addTrainingPartner(TrainingPartner p){
+		return this.adminDAO.addTrainingPartner(p);
 		
 	}
 	
