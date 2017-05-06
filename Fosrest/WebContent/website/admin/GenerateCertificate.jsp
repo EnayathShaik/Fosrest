@@ -45,7 +45,7 @@
                                         <div class="col-xs-12">
 
                                             <!-- left side -->
-                                            <div class="col-xs-6">
+                                           <%--  <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
@@ -78,29 +78,15 @@
 													<cf:options items="${trainingPartner}" itemValue="trainingPartnerId" itemLabel="trainingPartnerName"/>	
 												</cf:select>
                                                 </div>
-                                               <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>Batch Code:</strong></li>
-                                                           <!--  valid -->
-                                                             <li id="batchCodeErr" style="display:none;" class="style-li error-red" >Please Select Batch Code.</li>
-                                                            
-                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
-                                                        </ul>
-                                                    </div>
-                                                <cf:select path="batchCode" class="form-control">
-													<cf:option value="0" label="Select Batch Code" />
-													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingScheduleId" />
-												</cf:select>
-                                                </div>
+                                                --%>
                                                 
                                             
                                             </div> <!-- left side ends -->
 
                                             <!-- right side -->
-                                            <div class="col-xs-6">
+                                             <div class="col-xs-6">
 
-											 <div class="form-group">
+										 <%-- <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Training Institute:</strong></li>
@@ -114,7 +100,8 @@
 													<cf:option value="0" label="Select training institute" />
 													<cf:options items="${listTrainingInstitude}"/>	
 												</cf:select>
-                                                </div>
+                                                </div> 
+                                                
                                                 
                                                 <div class="form-group">
                                                     <div>
@@ -130,9 +117,23 @@
                                                     </div>
 												
                                          		<cf:input path="trainingDate" type="text" class="form-control" />
-                                                </div>
+                                                </div> --%>
                                                 
-                                            
+                                            <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Batch Code:</strong></li>
+                                                           <!--  valid -->
+                                                             <li id="batchCodeErr" style="display:none;" class="style-li error-red" >Please Select Batch Code.</li>
+                                                            
+                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
+                                                        </ul>
+                                                    </div>
+                                                <cf:select path="batchCode" class="form-control">
+													<cf:option value="0" label="Select Batch Code" />
+													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingScheduleId" />
+												</cf:select>
+                                                </div>
                                                 
                                          
                                          
@@ -174,7 +175,7 @@
                                                         <th>Training Type</th>
                                                         <th>Training Date</th>
                                                         <th>Training Partner</th>
-                                                        <th>Training Institute</th>
+                                                       <!--  <th>Training Institute</th> -->
                                                         <th>Trainee name</th>
                                                         <th>Attendance status</th>
                                                         <th>Certificate status</th>
@@ -190,7 +191,7 @@
 												<td>${GenerateCertificate.trainingType}</td>
 												<td>${GenerateCertificate.trainingDate}</td>
 												<td>${GenerateCertificate.trainingPartner}</td>
-												<td>${GenerateCertificate.trainingInstitute}</td>
+												<%-- <td>${GenerateCertificate.trainingInstitute}</td> --%>
 												<td>${GenerateCertificate.traineeName}</td>
 												<td>${GenerateCertificate.attendanceStatus}</td>
 												<td>${GenerateCertificate.certificateStatus}</td>

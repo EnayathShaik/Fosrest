@@ -167,7 +167,7 @@
                                                 </ct:when>
                                               <ct:otherwise>
                                                 <td>${Certificate.generateCertificate}
-												<a href="">GET CERTIFICATE</a> 
+												<!-- <a href=""> -->NO CERTIFICATE</a> 
                                                         </td>
                                                 </ct:otherwise> 
                                                 </ct:choose>

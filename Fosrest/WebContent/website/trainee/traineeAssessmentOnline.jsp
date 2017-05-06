@@ -45,7 +45,8 @@
 				var assessmentQuestions = [];
 				for(var index=0;index<questionList.listAssessmentQuestion.length;index++){
 					$('#questionsTable').append('<ol>');
-					$('#questionsTable').append('<li><strong>Question No.'+questionList.listAssessmentQuestion[index].questionNumber+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
+					//$('#questionsTable').append('<li><strong>Question No.'+questionList.listAssessmentQuestion[index].questionNumber+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
+					$('#questionsTable').append('<li><strong>Question No.'+(index+1)+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
 					
 					//var noOption=questionList.listAssessmentQuestion[index].noOfOption;
 					assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentId);
