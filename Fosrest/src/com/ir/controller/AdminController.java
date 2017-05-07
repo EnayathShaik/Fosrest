@@ -3065,8 +3065,16 @@ System.out.println("result1: "+result1);
 		model.addAttribute("service", tm.getServiceTaxRate());
 		model.addAttribute("swaccha", tm.getSwacchaBharatCess());
 		model.addAttribute("krishi", tm.getKrishiKalyanCess());
+		Double serviceTax = Double.parseDouble(tm.getServiceTaxRate());
+		Double swacchaBharat = Double.parseDouble(tm.getSwacchaBharatCess());
+		Double krishiKalyan = Double.parseDouble(tm.getKrishiKalyanCess());
+		
 	
-		double sumTax =(Double.parseDouble(tm.getServiceTaxRate()) + Double.parseDouble(tm.getSwacchaBharatCess()) + Double.parseDouble(tm.getKrishiKalyanCess()));
+		model.addAttribute("serviceVal", (subTotal* serviceTax/100));
+		model.addAttribute("swacchaVal", (subTotal* swacchaBharat/100));
+		model.addAttribute("krishiVal", (subTotal* krishiKalyan/100));
+		
+		double sumTax =(serviceTax + swacchaBharat + krishiKalyan);
 		System.out.println( "---- > "+(subTotal)*(sumTax/100 ));
 		model.addAttribute("sumTax", ((subTotal)*(sumTax/100 )) +subTotal);
 		return "invoicePrint";
@@ -3112,13 +3120,13 @@ System.out.println("result1: "+result1);
 		
 	String[] empName = request.getParameterValues("employeeName");
 	String[] desc = request.getParameterValues("description");
-	String[] issueDate = request.getParameterValues("issueDate");
+	//String[] issueDate = request.getParameterValues("issueDate");
 	String[] unitPrice = request.getParameterValues("unitPrice");
 		System.out.println( " names "+unitPrice);
 		System.out.println( " description "+request.getParameterValues("description"));
 		String cust = request.getParameter("invoiceNumber");
 		System.out.println("cust "+cust );
-		this.adminService.addCustomerDetails(empName , desc , issueDate , unitPrice , cust);
+		this.adminService.addCustomerDetails(empName , desc  , unitPrice , cust);
 
 		System.out.println("after insert");
 		return "redirect:/CustomerDetails.fssai";

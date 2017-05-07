@@ -2536,7 +2536,6 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 		
-		
 		@Override
 		public void updateRegionMaster(RegionMaster p) {
 			// TODO Auto-generated method stub
@@ -3221,25 +3220,25 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 		return "created";
 	}
 	@Override
-	public String addCustomerDetails(String[] empName , String[] desc , String[] issueDate , String[] unitPrice , String customer) {
+	public String addCustomerDetails(String[] empName , String[] desc ,  String[] unitPrice , String customer) {
 		// TODO Auto-generated method stub
 		System.out.println("inside updateCertificate "+empName);
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		for(int i = 0 ; i < empName.length ; i++){
 			if(!empName[i].equalsIgnoreCase(""))
-			addCustomer(empName[i] , desc[i] , issueDate[i]  , unitPrice[i] , customer);	
+			addCustomer(empName[i] , desc[i] ,  unitPrice[i] , customer);	
 		}
 			
 		
 		return "created";
 	}
 	
-	public void addCustomer(String empName , String desc , String issueDate , String unitPrice , String customer){
+	public void addCustomer(String empName , String desc , String unitPrice , String customer){
 	
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		System.out.println(" customer "+customer + " desc "+desc + " issueDate "+issueDate + " unitPrice "+unitPrice);
+		System.out.println(" customer "+customer + " desc "+desc +  " unitPrice "+unitPrice);
 		
 		CustomerDetails custDetails = new CustomerDetails();
 		// CustomerMaster cm =  getCustomerMasterById(Integer.parseInt(customer));
@@ -3249,7 +3248,7 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 		custDetails.setInvoiceNumber(customer);
 		custDetails.setEmployeeName(empName);
 		custDetails.setDescription(desc);
-		custDetails.setIssueDate(issueDate);
+	//	custDetails.setIssueDate(issueDate);
 		custDetails.setUnitPrice(unitPrice);
 		int id =  (int) session.save(custDetails);
 		System.out.println(" id "+id);

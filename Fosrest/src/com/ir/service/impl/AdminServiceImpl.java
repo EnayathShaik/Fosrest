@@ -1251,9 +1251,9 @@ public class AdminServiceImpl implements AdminService {
 
 		@Override
 		@Transactional
-		public String addCustomerDetails(String[] data1 ,String[] data2, String[] data3, String[] data4  , String customer) {
+		public String addCustomerDetails(String[] data1 ,String[] data2,  String[] data4  , String customer) {
 			// TODO Auto-generated method stub
-			return this.adminDAO.addCustomerDetails(data1 , data2 , data3 , data4 , customer);
+			return this.adminDAO.addCustomerDetails(data1 , data2 ,  data4 , customer);
 		}
 
 		@Override

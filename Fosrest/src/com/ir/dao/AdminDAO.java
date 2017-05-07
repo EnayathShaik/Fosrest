@@ -354,7 +354,7 @@ public interface AdminDAO {
 					 public String updateCertificate(String data);
 					 
 					 
-					 public String addCustomerDetails(String[] data1 ,String[] data2, String[] data3, String[] data4 , String customer );
+					 public String addCustomerDetails(String[] data1 ,String[] data2,  String[] data4 , String customer );
 
 					 public void removeCustomerDetails(int id);
 					

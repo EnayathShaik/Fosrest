@@ -368,7 +368,7 @@ public interface AdminService {
 	//public String listGenerateCertificate();
 	//public String HolidayMastersearch();
 	
-	public String addCustomerDetails(String[] empName , String[] desc , String[] issueDate , String[] unitPrice ,  String customer);
+	public String addCustomerDetails(String[] empName , String[] desc ,  String[] unitPrice ,  String customer);
 	public List<CustomerDetails> listCustomerDetails();
 	public void removeCustomerDetails(int id);
 	public List<CustomerDetails> getCustomerDetailsByInvoice(String invoice);
