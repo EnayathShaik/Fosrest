@@ -153,12 +153,12 @@ try{
       </table> -->
       <div class="row text-right">
         <div class="col-xs-2 col-xs-offset-8">
-          <p>
+          <p  style="width: 178px">
             <strong>
             Sub Total : <br>
-           Service TAX : <br>
-           Swaccha Bharat : <br>
-           Krishi TAX : <br>
+           Service TAX - ${ service } % :  <br>
+           Swaccha Bharat  - ${ swaccha } % : <br>
+           Krishi TAX - ${ krishi } %: <br>
             Total : <br>
             </strong>
           </p>
@@ -166,9 +166,9 @@ try{
         <div class="col-xs-2">
           <strong>
           ${SubTotal}  <br>
-          ${ service } %<br>	
-          ${ swaccha } %<br>	
-          ${ krishi } %<br>	
+           ${serviceVal }<br>	
+          ${ swacchaVal }<br>	
+          ${krishiVal }<br>	
         	${sumTax } 
           <%
           %>

@@ -10,9 +10,9 @@
             	$("#deleteRow"+getSrNo).css("display" , "block");
             	console.log("getSrNo "+getSrNo);
             	var nextId = parseInt(getSrNo)+1;
-            	rowString = rowString + "<tr id="+nextId+"><td><input type='text' id='employeeName"+nextId+"' name='employeeName'/></td><td><input type='text' id='description"+nextId+"' name='description'/></td><td><input type='text' id='issueDate"+nextId+"' name='issueDate' class='issueDate'/></td><td><input type='text' id='unitPrice"+nextId+"' name='unitPrice'/></td><td><button id='addRow"+nextId+"' onclick='addRow(this);return false;'>Add</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='deleteRow(this);return false;'>Remove</button></td></tr>";
+            	rowString = rowString + "<tr id="+nextId+"><td><input type='text' id='employeeName"+nextId+"' name='employeeName'/></td><td><input type='text' id='description"+nextId+"' name='description'/></td><td><input type='text' id='unitPrice"+nextId+"' name='unitPrice'/></td><td><button id='addRow"+nextId+"' onclick='addRow(this);return false;'>Add</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='deleteRow(this);return false;'>Remove</button></td></tr>";
             	$("#customerTable").append(rowString);
-            	flatpickr(".issueDate" , {});	
+            	//flatpickr(".issueDate" , {});	
              }
              
              function deleteRow(id){
@@ -23,7 +23,7 @@
             	 
             	 rowString = "";
             	 
-            	 rowString = rowString + "<tr id='1'><td><input type='text' id='employeeName1' name='employeeName'/></td><td><input type='text' id='description1' name='description'/></td><td><input type='text' id='issueDate1' name='issueDate' class='issueDate'/></td><td><input type='text' id='unitPrice1' name='unitPrice'/></td><td><button  id='addRow1' onclick='addRow(this);return false;'>Add</button><button style='display:none;' id='deleteRow1' onclick='deleteRow(this);return false;'>Remove</button></td></tr>";
+            	 rowString = rowString + "<tr id='1'><td><input type='text' id='employeeName1' name='employeeName'/></td><td><input type='text' id='description1' name='description'/></td><td><input type='text' id='unitPrice1' name='unitPrice'/></td><td><button  id='addRow1' onclick='addRow(this);return false;'>Add</button><button style='display:none;' id='deleteRow1' onclick='deleteRow(this);return false;'>Remove</button></td></tr>";
             	$("#customerTable").append(rowString); 
              }
              
@@ -125,7 +125,6 @@
                                       		
                                       		<th>Employee Name</th>
                                       		<th>Description</th>
-                                      		<th>Issue Date</th>
                                       		<th>Unit Price</th>
                                       		<th>Action</th>
                                       		</tr>
@@ -157,7 +156,7 @@
                                                         <th>S.No.</th>          	
 			                                      		<th>Employee Name</th>
 			                                      		<th>Description</th>
-			                                      		<th>Issue Date</th>
+			                                      	<!-- 	<th>Issue Date</th> -->
 			                                      		<th>Unit Price</th>
                                                         <th>Edit</th>
                                                         <th>Delete</th>
@@ -171,7 +170,7 @@
 												<td>${loop.count}</td>
 												<td>${CustomerDetails.employeeName}</td>
 												<td>${CustomerDetails.description}</td>
-												<td>${CustomerDetails.issueDate}</td>
+												<%-- <td>${CustomerDetails.issueDate}</td> --%>
 												<td>${CustomerDetails.unitPrice}</td>
 												
 												  
