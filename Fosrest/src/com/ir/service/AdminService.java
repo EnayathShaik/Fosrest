@@ -43,6 +43,7 @@ import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
+import com.ir.model.ManageTraining;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
@@ -387,6 +388,17 @@ public interface AdminService {
 	public List<InvoiceMaster> listCustomCustomerMaster();
 	
 	public InvoiceInfoForm getInvoiceInfo(String invoice);
+
+	
+
+	
+	/*fotest*/
+	
+	public void addManageTraining(ManageTraining p);
+	public void updateManageTraining(ManageTraining p);
+	public List<ManageTraining> listManageTraining();
+	public ManageTraining getManageTrainingById(int id);
+	public void removeManageTraining(int id);
 	
 	
 }

@@ -72,6 +72,7 @@ import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
+import com.ir.model.ManageTraining;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
@@ -3408,5 +3409,63 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 	return lst;
 	}
 
+	//manage training
+	
+	@Override
+	public void addManageTraining(ManageTraining p) {
+		// TODO Auto-generated method stub
+		System.out.println("getTrainingName "+p.getTrainingName());
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(p);
+
+		new ZLogger("ManageTraining saved successfully"," ManageTraining Details=" + p,"AdminDAOImpl.java");
+		//new ZLogger("ManageTraining", "list.size() "+list.size(), "AdminDAOImpl.java");
+	}
+
+	@Override
+	public void updateManageTraining(ManageTraining p) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(p);
+		new ZLogger("ManageTraining saved successfully"," ManageTraining Details=" + p,"AdminDAOImpl.java");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ManageTraining> listManageTraining() {
+		// TODO Auto-generated method stub
+		System.out.println("inside manageCourseCarrilcullum");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<ManageTraining> mccList = session.createQuery("from ManageTraining").list();
+		for (ManageTraining p : mccList) {
+			//logger.info("ManageTraining List::" + p);
+		}
+		return mccList;
+	}
+
+	@Override
+	public ManageTraining getManageTrainingById(int id) {
+		// TODO Auto-generated method stub
+		System.out.println(" id " +id);
+		Session session = this.sessionFactory.getCurrentSession();
+		/*ManageTraining p = (ManageTraining) session.load(ManageTraining.class, new Integer(id));
+		logger.info("ManageTraining loaded successfully, ManageTraining details=" + p);
+		return p;*/
+		Query query = session.createQuery("from ManageTraining where id="+id);
+		List<ManageTraining> manageTraining = query.list();
+		ManageTraining mt = manageTraining.get(0);
+			return mt; 
+	}
+
+	@Override
+	public void removeManageTraining(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		ManageTraining p = (ManageTraining) session.load(ManageTraining.class, new Integer(id));
+		if (null != p) {
+			session.delete(p);
+		}
+		new ZLogger("ManageTraining saved successfully"," ManageTraining Details=" + p,"AdminDAOImpl.java");
+	}
 	
 }

@@ -65,6 +65,7 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
+import com.ir.form.manageTrainingForm;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CityMaster;
@@ -78,6 +79,7 @@ import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
+import com.ir.model.ManageTraining;
 import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -3194,6 +3196,55 @@ System.out.println( " ");
 		out.flush();
 
 	}
+	
+	
+	/*-----------------------<fotest>-----------------*/
+	
+	//Manage Training
+	
+	@RequestMapping(value = "/manageTraining", method = RequestMethod.GET)
+	public String listmanageTraining(Model model) {
+		System.out.println("listmanageTraining");
+		
+		model.addAttribute("manageTrainingForm", new manageTrainingForm());
+		model.addAttribute("listmanageTraining", this.adminService.listManageTraining());
+		return "manageTraining";
+	}
+	
+	//For add and update state both
+	@RequestMapping(value= "/manageTraining/add", method = RequestMethod.POST) 
+	public String addmanageTraining(@ModelAttribute("manageTrainingForm") ManageTraining p){
+		System.out.println("id1"+p.getId());
+		if(p.getId() == 0){
+			//new person, add it
+			this.adminService.addManageTraining(p);
+		}else{
+			//existing person, call update
+			this.adminService.updateManageTraining(p);
+		}
+		return "redirect:/manageTraining.fssai";
+	}
+	
+	@RequestMapping("/manageTraining/remove/{id}")
+    public String removeManageTraining(@PathVariable("id") int id){
+		
+        this.adminService.removeManageTraining(id);
+        return "redirect:/manageTraining.fssai";
+    }
+ 
+ 
+		@RequestMapping("/manageTraining/edit/{id}")
+		public void editManageTraining(@PathVariable("id") int id, Model model, HttpServletRequest httpServletRequest,
+				HttpServletResponse response) throws IOException {
+			System.out.println("id2"+id);
+			ManageTraining mt=this.adminService.getManageTrainingById(id);
+			PrintWriter out = response.getWriter();
+			Gson g = new Gson();
+			String newList = g.toJson(mt);
+			System.out.println("newList " + newList);
+			out.write(newList);
+			out.flush();
+		}
 
 
 	

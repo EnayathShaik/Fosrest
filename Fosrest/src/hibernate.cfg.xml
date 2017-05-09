@@ -88,6 +88,7 @@
 		<mapping class="com.ir.model.CustomerDetails"/>
 		<mapping class="com.ir.model.InvoiceMaster"/>
 		<mapping class="com.ir.model.AssessmentQuestions"/>
+		<mapping class="com.ir.model.ManageTraining"/>
 	
 	
 	</session-factory>

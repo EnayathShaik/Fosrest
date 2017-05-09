@@ -48,6 +48,7 @@ import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
+import com.ir.model.ManageTraining;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
@@ -1325,7 +1326,41 @@ public class AdminServiceImpl implements AdminService {
 			return this.adminDAO.listCustomCustomerMaster();
 		}
 		
-		
+	//managetraining	
+		@Override
+		@Transactional
+		public void addManageTraining(ManageTraining p) {
+			// TODO Auto-generated method stub
+		this.adminDAO.addManageTraining(p);
+		}
+
+		@Override
+		@Transactional
+		public void updateManageTraining(ManageTraining p) {
+			// TODO Auto-generated method stub
+			this.adminDAO.updateManageTraining(p);
+		}
+
+		@Override
+		@Transactional
+		public List<ManageTraining> listManageTraining() {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listManageTraining();
+		}
+
+		@Override
+		@Transactional
+		public ManageTraining getManageTrainingById(int id) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.getManageTrainingById(id);
+		}
+
+		@Override
+		@Transactional
+		public void removeManageTraining(int id) {
+			// TODO Auto-generated method stub
+			this.adminDAO.removeManageTraining(id);
+		}
 	
 		
 }
