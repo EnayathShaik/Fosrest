@@ -157,28 +157,30 @@
 </div>
 
 <%
-	}  else if(session.getAttribute("profileId").equals(30)){
+	} else if(session.getAttribute("profileId").equals(30)){
 %>
+
 <div id="sidebar-wrapper">
-	<ul class="sidebar-nav">
-		<li><a href="RegionMapping.fssai">Region Mapping</a></li>
-                        <li><a href="manageTraining.fssai">Manage Training</a></li>
-                        <li> <a href="trainingCalendarForm.fssai">Manage Course Curricullum</a> </li>
-                        <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
-                        <li> <a href="feedbackMaster.fssai">Feedback Master</a> </li>
+                    <ul class="sidebar-nav">
+                        <!-- <li class="sidebar-brand"></li> -->
+                        <li><a href="RegionMapping.fssai">Region Mapping</a></li>
+                        <li><a href="manageCourseContent.fssai">Manage Training</a></li>
+                        <li> <a href="managecoursecurriculum.fssai">Manage Course Curricullum</a> </li>
+                        <li> <a href="assessmentquestions.fssai">Assessment Questions</a> </li>
+                        <li> <a href="manageAssessmentQuestions.fssai">Feedback Master</a> </li>
                         <li> <a href="updateTrainerAssessmentForm.fssai">Verify Trainee Enrollment</a> </li>
                         <li> <a href="feedbackMaster.fssai">Manage Training Calendar</a> </li>
-                        <li> <a href="activateTrainingOfTrainee.fssai">Activate Training</a> </li>
-                        <li> <a href="activateAssessmentOfTrainee.fssai">Activate Assessment</a> </li>
-                        <li> <a href="feedbackMaster.fssai"> View Training Calendar</a> </li>
+                        <li> <a href="feedbackMaster.fssai">Activate Training</a> </li>
+                        <li> <a href="feedbackMaster.fssai">Activate Assessment</a> </li>
+                        <li> <a href="viewtrainingcalendar.fssai"> View Training Calendar</a> </li>
                         <li> <a href="feedbackMaster.fssai"> View Enrolled Courses</a> </li>
                         <li> <a href="feedbackMaster.fssai">Generate Certificate</a> </li>
-</ul>
-</div>
+                    </ul>
+                </div>
+
 <%
 	} 
 %>
-
 
 
 

@@ -71,6 +71,7 @@ import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTraining;
 import com.ir.model.ManageTrainingPartner;
@@ -3411,7 +3412,6 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 	}
 
 	//manage training
-	
 	@Override
 	public void addManageTraining(ManageTraining p) {
 		// TODO Auto-generated method stub
@@ -3523,4 +3523,60 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 			}
 		/*	logger.info("RegionMapping deleted successfully, RegionMapping details=" + p);*/
 		}
+	//managecurriculum
+	@Override
+	public void addManageCourseCarricullum(ManageCourseCarricullum p) {
+		// TODO Auto-generated method stub
+		System.out.println("getTrainingName "+p.getTrainingName());
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(p);
+
+	//	new ZLogger("ManageCourseCarricullum saved successfully","", "ManageCourseCarricullum Details=" + p);
+	}
+
+	@Override
+	public void updateManageCourseCarricullum(ManageCourseCarricullum p) {
+		// TODO Auto-generated method stub
+		System.out.println("aaaaaa");
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(p);
+		//new ZLogger("ManageCourseCarricullum updated successfully", "","ManageCourseCarricullum Details=" + p);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ManageCourseCarricullum> listManageCourseCarricullum() {
+		// TODO Auto-generated method stub
+		System.out.println("inside manageCourseCarrilcullum");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<ManageCourseCarricullum> mccList = session.createQuery("from ManageCourseCarricullum").list();
+		for (ManageCourseCarricullum p : mccList) {
+			//new ZLogger("","","ManageCourseCarricullum List::" + p);
+		}
+		return mccList;
+	}
+
+	@Override
+	public ManageCourseCarricullum getManageCourseCarricullumById(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		//ManageCourseCarricullum p = (ManageCourseCarricullum) session.load(ManageCourseCarricullum.class, new Integer(id));
+		Query query = session.createQuery("from ManageCourseCarricullum where id=" + id);
+		List<ManageCourseCarricullum> ManageCourseCarricullumList = query.list();
+		ManageCourseCarricullum p = ManageCourseCarricullumList.get(0);
+		//new ZLogger("ManageCourseCarricullum loaded successfully", "","ManageCourseCarricullum details=" + p);
+		return p;
+	}
+
+	@Override
+	public void removeManageCourseCarricullum(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		ManageCourseCarricullum p = (ManageCourseCarricullum) session.load(ManageCourseCarricullum.class, new Integer(id));
+		if (null != p) {
+			session.delete(p);
+		}
+		//new ZLogger("ManageCourseCarricullum deleted successfully", "","ManageCourseCarricullum details=" + p);
+	}
+	
 }

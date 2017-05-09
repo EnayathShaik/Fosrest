@@ -42,6 +42,7 @@ import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTraining;
+import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
@@ -383,10 +384,7 @@ public interface AdminDAO {
 						public InvoiceInfoForm getInvoiceInfo(String invoice);
 						
 						
-						
-						
-						
-						//region Mapping
+	//region Mapping
 						
 						//public void addRegionMapping(RegionMapping p);
 						public void updateRegionMapping(RegionMapping p);
@@ -404,4 +402,10 @@ public interface AdminDAO {
 						public List<ManageTraining> listManageTraining();
 						public ManageTraining getManageTrainingById(int id);
 						public void removeManageTraining(int id);
+						//Manage course carricullum
+						public void addManageCourseCarricullum(ManageCourseCarricullum p);
+						public void updateManageCourseCarricullum(ManageCourseCarricullum p);
+						public List<ManageCourseCarricullum> listManageCourseCarricullum();
+						public ManageCourseCarricullum getManageCourseCarricullumById(int id);
+						public void removeManageCourseCarricullum(int id);
 }

@@ -81,6 +81,7 @@ import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.ManageTraining;
+import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -3262,7 +3263,6 @@ System.out.println( " ");
 
 		@RequestMapping(value = "/regionMapping/add", method = RequestMethod.POST)
 		public String addRegionMapping(@ModelAttribute("RegionMappingForm") RegionMapping p) {
-
 			System.out.println("p.getId() " + p.getId());
 			if (p.getId() == 0) {
 				// new person, add it
@@ -3292,4 +3292,55 @@ System.out.println( " ");
 			out.flush();
 		}
 	
+	//manage course carriculum
+	
+  	@RequestMapping(value = "/managecoursecurriculum", method = RequestMethod.GET)
+	public String listmanageCourseCarricullum(Model model) {
+		System.out.println("listmanageCourseCarricullum");
+		model.addAttribute("manageCourseCarricullum", new ManageCourseCarricullum());
+		model.addAttribute("listmanageCourseCarricullum", this.adminService.listManageCourseCarricullum());
+		return "managecoursecurriculum";
+	}
+	
+	//For add and update state both
+	@RequestMapping(value= "/manageCourseCarricullum/add", method = RequestMethod.POST) 
+	public String addmanageCourseCarricullum(@ModelAttribute("manageCourseCarricullum") ManageCourseCarricullum p){
+		System.out.println(p.getId());
+		if(p.getId() == 0){
+			//new person, add it
+			this.adminService.addManageCourseCarricullum(p);
+		}else{
+			//existing person, call update
+			this.adminService.updateManageCourseCarricullum(p);
+		}
+		return "redirect:/managecoursecurriculum.fssai";
+	}
+	
+	@RequestMapping("/manageCourseCarricullum/remove/{id}")
+    public String removeManageCourseCarricullum(@PathVariable("id") int id){
+		
+        this.adminService.removeManageCourseCarricullum(id);
+        return "redirect:/managecoursecurriculum.fssai";
+    }
+ 
+    @RequestMapping("/manageCourseCarricullum/edit/{id}")
+    @ResponseBody
+    public void editManageCourseCarricullum(@PathVariable("id") int id,
+    		HttpServletRequest httpServletRequest,HttpServletResponse response) throws IOException{
+    	/* model.addAttribute("manageCourseCarricullum", this.adminService.getManageCourseCarricullumById(id));
+        model.addAttribute("listManageCourseCarricullum", this.adminService.listManageCourseCarricullum());
+        return "temp1	";*/
+    	
+        ManageCourseCarricullum p = this.adminService.getManageCourseCarricullumById(id);
+       	PrintWriter out = response.getWriter();
+       	Gson g = new Gson();
+    	String newList = g.toJson(p);
+    	out.write(newList);
+    	out.flush();
+    
+   
+    }
+ 
+    
+   
 }

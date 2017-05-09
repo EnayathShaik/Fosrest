@@ -275,6 +275,7 @@ public class LoginController {
 			session.setAttribute("userName", loginDetails.getLoginId());
 			return "AssessorPage";
 		}
+	
 else if(loginDetails!=null && loginDetails.getProfileId() == 30 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			
 			new ZLogger("loginProcess","in admin login" , "LoginController.java");
@@ -286,7 +287,7 @@ else if(loginDetails!=null && loginDetails.getProfileId() == 30 && loginDetails.
 			return "AssessorPage";
 		}
 		
-		else{
+		else {
 			model.addAttribute("error" , "Oops , wrong Id and password !!!");
 			return "login";
 		}

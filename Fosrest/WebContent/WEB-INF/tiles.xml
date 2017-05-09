@@ -1242,10 +1242,22 @@
 		<put-attribute name="body" value="/website/fotest/manageTraining.jsp" />
 	</definition>
 	
-
-
 <definition name="RegionMapping" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/fotest/RegionMapping.jsp" />
 	</definition>
+
+	<definition name="managecoursecurriculum" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/fotest/ManageCourseCurriculum.jsp" />
+	</definition>
+	<definition name="assessmentquestions" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/fotest/temp2.jsp" />
+	</definition>
+	<definition name="viewtrainingcalendar" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/fotest/temp3.jsp" />
+	</definition>
+
 </tiles-definitions>
