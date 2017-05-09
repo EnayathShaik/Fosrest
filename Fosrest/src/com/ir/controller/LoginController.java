@@ -275,6 +275,16 @@ public class LoginController {
 			session.setAttribute("userName", loginDetails.getLoginId());
 			return "AssessorPage";
 		}
+else if(loginDetails!=null && loginDetails.getProfileId() == 30 && loginDetails.getStatus().equalsIgnoreCase("A")){
+			
+			new ZLogger("loginProcess","in admin login" , "LoginController.java");
+			session.setAttribute("loginUser", loginDetails);
+			session.setAttribute("logId",loginDetails.getLoginId());
+			session.setAttribute("profileId", loginDetails.getProfileId());
+			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userName", loginDetails.getLoginId());
+			return "AssessorPage";
+		}
 		
 		else{
 			model.addAttribute("error" , "Oops , wrong Id and password !!!");

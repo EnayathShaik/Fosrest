@@ -67,7 +67,9 @@ public class LoginDAOImpl implements LoginDAO{
 			{
 				return loginDetailsinforation;
 			}
-		}else{
+		}
+		else
+		{
 			Criteria criteria = session.createCriteria(LoginDetails.class);
 			criteria.add(Restrictions.eq("loginId", loginForm.getUserId()));
 			//criteria.add(Restrictions.eq("Password", loginForm.getPassword()));
