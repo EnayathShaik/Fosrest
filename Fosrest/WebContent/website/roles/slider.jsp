@@ -164,7 +164,7 @@
                     <ul class="sidebar-nav">
                         <!-- <li class="sidebar-brand"></li> -->
                         <li><a href="RegionMapping.fssai">Region Mapping</a></li>
-                        <li><a href="manageCourseContent.fssai">Manage Training</a></li>
+                        <li><a href="manageTraining.fssai">Manage Training</a></li>
                         <li> <a href="managecoursecurriculum.fssai">Manage Course Curricullum</a> </li>
                         <li> <a href="assessmentquestions.fssai">Assessment Questions</a> </li>
                         <li> <a href="manageAssessmentQuestions.fssai">Feedback Master</a> </li>
