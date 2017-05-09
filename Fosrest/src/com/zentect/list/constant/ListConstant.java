@@ -249,5 +249,19 @@ public class ListConstant {
     }
     
     
+    
+    
+    
+
+    // District 
+    
+    public static final Map<String, String> DistrictMap;
+    static {
+        Map<String, String> auserTypeMap = new HashMap<String, String>();
+        auserTypeMap.put("Aurangabad", "Aurangabad");
+        auserTypeMap.put("Kurla", "Kurla");
+        auserTypeMap.put("Thane", "Thane");
+        DistrictMap = Collections.unmodifiableMap(auserTypeMap);
+    }
 
 }

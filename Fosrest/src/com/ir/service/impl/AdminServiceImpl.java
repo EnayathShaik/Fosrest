@@ -57,6 +57,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
@@ -1361,6 +1362,45 @@ public class AdminServiceImpl implements AdminService {
 			// TODO Auto-generated method stub
 			this.adminDAO.removeManageTraining(id);
 		}
+		
+		
+		// RegionMapping
+		@Override
+			@Transactional
+			public void addRegionMapping(RegionMapping p) {
+				// TODO Auto-generated method stub
+			this.adminDAO.addRegionMapping(p);
+			}
+
+			@Override
+			@Transactional
+			public void updateRegionMapping(RegionMapping p) {
+				// TODO Auto-generated method stub
+				this.adminDAO.updateRegionMapping(p);
+			}
+
+			@Override
+			@Transactional
+			public List<RegionMapping> listRegionMapping() {
+				// TODO Auto-generated method stub
+				return this.adminDAO.listRegionMapping();
+			}
+
+			@Override
+			@Transactional
+			public RegionMapping getRegionMappingById(int id) {
+				// TODO Auto-generated method stub
+				return this.adminDAO.getRegionMappingById(id);
+			}
+
+			@Override
+			@Transactional
+			public void removeRegionMapping(int id) {
+				// TODO Auto-generated method stub
+				this.adminDAO.removeRegionMapping(id);
+			}
+			
+		
 	
 		
 }

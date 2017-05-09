@@ -52,6 +52,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
@@ -400,6 +401,16 @@ public interface AdminService {
 	public ManageTraining getManageTrainingById(int id);
 	public void removeManageTraining(int id);
 	
+	
+	
+//	//Region Mapping
+		//public void addRegionMapping(RegionMapping p);
+		public void updateRegionMapping(RegionMapping p);
+		public List<RegionMapping> listRegionMapping();
+		public RegionMapping getRegionMappingById(int id);
+		public void removeRegionMapping(int id);
+
+		public void addRegionMapping(RegionMapping p);
 	
 }
 

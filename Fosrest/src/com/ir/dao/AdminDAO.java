@@ -50,6 +50,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
@@ -380,6 +381,21 @@ public interface AdminDAO {
 						public List<InvoiceMaster> listCustomCustomerMaster();
 						
 						public InvoiceInfoForm getInvoiceInfo(String invoice);
+						
+						
+						
+						
+						
+						//region Mapping
+						
+						//public void addRegionMapping(RegionMapping p);
+						public void updateRegionMapping(RegionMapping p);
+						public List<RegionMapping> listRegionMapping();
+						public RegionMapping getRegionMappingById(int id);
+						public void removeRegionMapping(int id);
+
+						public void addRegionMapping(RegionMapping p);
+
 						
 						
 						//managetraining---

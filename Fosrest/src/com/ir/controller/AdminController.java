@@ -56,6 +56,7 @@ import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.form.ModuleMasterForm;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
+import com.ir.form.RegionMappingForm;
 import com.ir.form.RegionMasterForm;
 import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
@@ -86,6 +87,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
@@ -3246,6 +3248,48 @@ System.out.println( " ");
 			out.flush();
 		}
 
+	// For add and update region mapping both
 
+		@RequestMapping(value = "/RegionMapping", method = RequestMethod.GET)
+		public String listRegionMapping(Model model) {
+			System.out.println("listRegionMapping");
+			model.addAttribute("RegionMappingForm", new RegionMappingForm());
+			Map<String, String> DistrictMap = lst.DistrictMap;
+			model.addAttribute("DistrictMap", DistrictMap);
+			model.addAttribute("listRegionMapping", this.adminService.listRegionMapping());
+			return "RegionMapping";
+		}
+
+		@RequestMapping(value = "/regionMapping/add", method = RequestMethod.POST)
+		public String addRegionMapping(@ModelAttribute("RegionMappingForm") RegionMapping p) {
+
+			System.out.println("p.getId() " + p.getId());
+			if (p.getId() == 0) {
+				// new person, add it
+				this.adminService.addRegionMapping(p);
+			} else {
+				// existing person, call update
+				this.adminService.updateRegionMapping(p);
+			}
+			return "redirect:/RegionMapping.fssai";
+		}
+
+		@RequestMapping("/RegionMapping/remove/{id}")
+		public String removeRegionMapping(@PathVariable("id") int id) {
+			this.adminService.removeRegionMapping(id);
+			return "redirect:/RegionMapping.fssai";
+		}
+
+		@RequestMapping("/RegionMapping/edit/{id}")
+		public void editRegionMapping(@PathVariable("id") int id, Model model, HttpServletRequest httpServletRequest,
+				HttpServletResponse response) throws IOException {
+			RegionMapping p = this.adminService.getRegionMappingById(id);
+			PrintWriter out = response.getWriter();
+			Gson g = new Gson();
+			String newList = g.toJson(p);
+			System.out.println("newList " + newList);
+			out.write(newList);
+			out.flush();
+		}
 	
 }

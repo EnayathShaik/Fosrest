@@ -176,6 +176,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.CustomerDetails</value>
 				<value>com.ir.model.AssessmentQuestions</value>
 				<value>com.ir.model.InvoiceMaster</value>
+				<value>com.ir.model.RegionMapping</value>
 				<value>com.ir.model.ManageTraining</value>
 			
 			</list>

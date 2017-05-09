@@ -82,6 +82,7 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.Region;
+import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateMaster;
@@ -3467,5 +3468,59 @@ System.out.println("........................."+assesQuestionForm.getModuleCode()
 		}
 		new ZLogger("ManageTraining saved successfully"," ManageTraining Details=" + p,"AdminDAOImpl.java");
 	}
-	
+	// Region Mapping
+
+		@Override
+		public void addRegionMapping(RegionMapping p) {
+			// TODO Auto-generated method stub
+			System.out.println("RegionMapping " + p.getRegionName());
+			Session session = this.sessionFactory.getCurrentSession();
+			session.persist(p);
+			new ZLogger("RegionMapping", " RegionMapping Details= "+p, "AdminDAOImpl.java");
+			/*logger.info("RegionMapping saved successfully, RegionMapping Details=" + p);*/
+		}
+
+		@Override
+		public void updateRegionMapping(RegionMapping p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			session.update(p);
+			/*logger.info("RegionMapping updated successfully, RegionMapping Details=" + p);*/
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public List<RegionMapping> listRegionMapping() {
+			// TODO Auto-generated method stub
+			System.out.println("inside RegionMapping");
+			Session session = this.sessionFactory.getCurrentSession();
+			List<RegionMapping> mccList = session.createQuery("from RegionMapping ").list();
+			for (RegionMapping p : mccList) {
+				
+				new ZLogger("RegionMapping", "list.size() "+p, "AdminDAOImpl.java");
+			}
+
+			return mccList;
+		}
+
+		@Override
+		public RegionMapping getRegionMappingById(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from RegionMapping where id=" + id);
+			List<RegionMapping> RegionMappingList = query.list();
+			RegionMapping p = RegionMappingList.get(0);
+			return p;
+		}
+
+		@Override
+		public void removeRegionMapping(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			RegionMapping p = (RegionMapping) session.load(RegionMapping.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+		/*	logger.info("RegionMapping deleted successfully, RegionMapping details=" + p);*/
+		}
 }

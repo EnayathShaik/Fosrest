@@ -83,11 +83,11 @@
 		<mapping class="com.ir.model.TaxMaster"/>
 		
 		<mapping class="com.ir.model.EmployeeMonthlyCharges"/>
-		
 		<mapping class="com.ir.model.NomineeTrainee"/>
 		<mapping class="com.ir.model.CustomerDetails"/>
 		<mapping class="com.ir.model.InvoiceMaster"/>
 		<mapping class="com.ir.model.AssessmentQuestions"/>
+		<mapping class="com.ir.model.RegionMapping"/>
 		<mapping class="com.ir.model.ManageTraining"/>
 	
 	
