@@ -155,8 +155,8 @@ public class ListConstant {
     public static final Map<String, String> feedbackUserTypeMap;
     static {
         Map<String, String> auserTypeMap = new HashMap<String, String>();
-        auserTypeMap.put("Trainer", "Trainer");
-        auserTypeMap.put("Trainer", "Trainer");
+        auserTypeMap.put("Traineru1", "Traineru1");
+        auserTypeMap.put("Traineru2", "Traineru2");
         feedbackUserTypeMap = Collections.unmodifiableMap(auserTypeMap);
     }
     
@@ -165,11 +165,19 @@ public class ListConstant {
     public static final Map<String, String> feedbackCategoryMap;
     static {
         Map<String, String> auserTypeMap = new HashMap<String, String>();
-        auserTypeMap.put("Trainer", "Trainer");
-        auserTypeMap.put("Trainer", "Trainer");
+        auserTypeMap.put("Trainerc1", "Trainerc1");
+        auserTypeMap.put("Trainerc2", "Trainerc2");
         feedbackCategoryMap = Collections.unmodifiableMap(auserTypeMap);
     }
     
+    /*//User Type
+    public static final Map<String, String> UserTypeMap;
+    static {
+        Map<String, String> auserTypeMap = new HashMap<String, String>();
+        auserTypeMap.put("Trainer", "Trainer");
+        auserTypeMap.put("Trainee", "Trainee");
+        UserTypeMap = Collections.unmodifiableMap(auserTypeMap);
+    }*/
     // course 
     
     public static final Map<String, String> courseNameMap;

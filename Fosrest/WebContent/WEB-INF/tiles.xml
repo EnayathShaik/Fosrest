@@ -1259,6 +1259,14 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/fotest/temp3.jsp" />
 	</definition>
+<definition name="activateAssessmentOfTrainee" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/fotest/activateAssessmentOfTrainee.jsp" />
+	</definition>
+ <definition name="fotestFeedbackMaster" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/fotest/fotestFeedbackMaster.jsp" />
+	</definition> 
 	<definition name="verifyTraineeEnrollment" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/fotest/verifyTraineeEnrollment.jsp" />
