@@ -168,12 +168,12 @@
                         <li> <a href="managecoursecurriculum.fssai">Manage Course Curricullum</a> </li>
                         <li> <a href="assessmentquestions.fssai">Assessment Questions</a> </li>
                         <li> <a href="manageAssessmentQuestions.fssai">Feedback Master</a> </li>
-                        <li> <a href="updateTrainerAssessmentForm.fssai">Verify Trainee Enrollment</a> </li>
+                        <li> <a href="verifyTraineeEnrollment.fssai">Verify Trainee Enrollment</a> </li>
                         <li> <a href="feedbackMaster.fssai">Manage Training Calendar</a> </li>
                         <li> <a href="feedbackMaster.fssai">Activate Training</a> </li>
                         <li> <a href="feedbackMaster.fssai">Activate Assessment</a> </li>
                         <li> <a href="viewtrainingcalendar.fssai"> View Training Calendar</a> </li>
-                        <li> <a href="feedbackMaster.fssai"> View Enrolled Courses</a> </li>
+                        <li> <a href="viewEnrolledCourses.fssai"> View Enrolled Courses</a> </li>
                         <li> <a href="feedbackMaster.fssai">Generate Certificate</a> </li>
                     </ul>
                 </div>

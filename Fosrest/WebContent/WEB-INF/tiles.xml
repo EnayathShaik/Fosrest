@@ -1259,5 +1259,12 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/fotest/temp3.jsp" />
 	</definition>
-
+	<definition name="verifyTraineeEnrollment" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/fotest/verifyTraineeEnrollment.jsp" />
+	</definition>
+    <definition name="viewEnrolledCourses" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/fotest/viewEnrolledCourses.jsp" />
+	</definition>
 </tiles-definitions>

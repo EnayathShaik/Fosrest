@@ -26,6 +26,8 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingRequestForm;
 import com.ir.form.TrainingScheduleForm;
+import com.ir.form.verifyTraineeEnrollmentForm;
+import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
@@ -402,10 +404,18 @@ public interface AdminDAO {
 						public List<ManageTraining> listManageTraining();
 						public ManageTraining getManageTrainingById(int id);
 						public void removeManageTraining(int id);
+						
 						//Manage course carricullum
 						public void addManageCourseCarricullum(ManageCourseCarricullum p);
 						public void updateManageCourseCarricullum(ManageCourseCarricullum p);
 						public List<ManageCourseCarricullum> listManageCourseCarricullum();
 						public ManageCourseCarricullum getManageCourseCarricullumById(int id);
 						public void removeManageCourseCarricullum(int id);
+						
+						//verifyTraineeEnrollment
+						public List<verifyTraineeEnrollmentForm> listVerifyTraineeEnrollment(verifyTraineeEnrollmentForm p);
+						
+						//View Enrolled Courses
+						public List<viewEnrolledCoursesForm> listviewEnrolledCourses(viewEnrolledCoursesForm p);
+						
 }

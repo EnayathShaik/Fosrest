@@ -29,6 +29,8 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
+import com.ir.form.verifyTraineeEnrollmentForm;
+import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.CityMaster;
@@ -420,5 +422,11 @@ public interface AdminService {
 	public List<ManageCourseCarricullum> listManageCourseCarricullum();
 	public ManageCourseCarricullum getManageCourseCarricullumById(int id);
 	public void removeManageCourseCarricullum(int id);
+	
+	//verifyTraineeEnrollment
+	public List<verifyTraineeEnrollmentForm> listVerifyTraineeEnrollment(verifyTraineeEnrollmentForm p);
+	
+	//View Enrolled Courses
+	public List<viewEnrolledCoursesForm> listviewEnrolledCourses(viewEnrolledCoursesForm p);
 }
 

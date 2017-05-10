@@ -34,6 +34,8 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
+import com.ir.form.verifyTraineeEnrollmentForm;
+import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.CityMaster;
@@ -1439,7 +1441,19 @@ public class AdminServiceImpl implements AdminService {
 			this.adminDAO.removeManageCourseCarricullum(id);
 		}
 
-		
+	//verifyTraineeEnrollment	
+		@Override
+		@Transactional
+		public List<verifyTraineeEnrollmentForm> listVerifyTraineeEnrollment(verifyTraineeEnrollmentForm p ) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listVerifyTraineeEnrollment(p);
+		}
 	
-		
+		//View Enrolled Courses
+		@Override
+		@Transactional
+		public List<viewEnrolledCoursesForm> listviewEnrolledCourses(viewEnrolledCoursesForm p ) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listviewEnrolledCourses(p);
+		}
 }

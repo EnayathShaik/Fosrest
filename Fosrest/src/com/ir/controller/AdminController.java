@@ -67,6 +67,8 @@ import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.form.manageTrainingForm;
+import com.ir.form.verifyTraineeEnrollmentForm;
+import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CityMaster;
@@ -3340,7 +3342,51 @@ System.out.println( " ");
     
    
     }
- 
     
+    //Verify Trainee Course Enrollment
+    
+  	@RequestMapping(value = "/verifyTraineeEnrollment", method = RequestMethod.GET)
+ 	public String verifyTraineeEnrollment(Model model) {
+ 		System.out.println("verifyTraineeEnrollment");
+ 		Map<String , String> courseNameMap = lst.courseNameMap;
+ 		
+ 		model.addAttribute("verifyTraineeEnrollmentForm" , new verifyTraineeEnrollmentForm());
+ 		model.addAttribute("courseNameMap", courseNameMap);
+ 		
+ 		return "verifyTraineeEnrollment";
+ 	}
+  	
+    @RequestMapping(value="/verifyTraineeEnrollmentlist" , method = RequestMethod.POST)
+    public String listVerifyTraineeEnrollment(@ModelAttribute("verifyTraineeEnrollmentForm") verifyTraineeEnrollmentForm p , Model model){
+       
+    	System.out.println("111111111");
+    	//model.addAttribute("verifyTraineeEnrollmentForm", new verifyTraineeEnrollmentForm());
+    	model.addAttribute("listVerifyTraineeEnrollment", this.adminService.listVerifyTraineeEnrollment(p));
+        List<verifyTraineeEnrollmentForm> list = this.adminService.listVerifyTraineeEnrollment(p);
+        /* for( verifyTraineeEnrollmentForm li :   list){
+        	System.out.println("li "+li.getCourseName());
+        }*/
+        System.out.println("enddddd");
+        return "verifyTraineeEnrollment";
+    }
    
+  //View Enrolled Courses
+    
+    @RequestMapping(value = "/viewEnrolledCourses", method = RequestMethod.GET)
+ 	public String viewEnrolledCourses(Model model) {
+ 		System.out.println("viewEnrolledCourses");
+ 		Map<String , String> courseNameMap = lst.courseNameMap;
+ 		
+ 		model.addAttribute("viewEnrolledCoursesForm" , new viewEnrolledCoursesForm());
+ 		model.addAttribute("courseNameMap", courseNameMap);
+ 		
+ 		return "viewEnrolledCourses";
+ 	}
+  	
+	 @RequestMapping(value="/viewEnrolledCourseslist" , method = RequestMethod.POST)
+ public String listviewEnrolledCourses(@ModelAttribute("viewEnrolledCoursesForm") viewEnrolledCoursesForm p , Model model){
+	 // model.addAttribute("viewTrainingCalendar" , new viewTrainingCalendarForm());
+     model.addAttribute("listviewEnrolledCourses", this.adminService.listviewEnrolledCourses(p));
+     return "viewEnrolledCourses";
+ } 
 }
