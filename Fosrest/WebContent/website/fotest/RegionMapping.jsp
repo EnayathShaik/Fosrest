@@ -132,7 +132,7 @@
 															<td>${loop.count}</td>
 															<td>${RegionMapping.regionName}</td>
 															<td>${RegionMapping.district}</td>
-															<td><button
+														 <td><button
 																	onclick='editRegion(${RegionMapping.id});return false;'>Edit</button></td>
 															<td><a
 																href="<ct:url value='/RegionMapping/remove/${RegionMapping.id}.fssai' />">Delete</a></td>
@@ -169,7 +169,7 @@ function editRegion(id){
               })
             	$.ajax({
             	      type: 'post',
-            	      url: 'RegionMapping/edit/'+id+'.fssai',
+            	      url: 'regionMapping/edit/'+id+'.fssai',
             	      contentType : "application/json",
             		  data:name1,
             	      success: function (response) {      
