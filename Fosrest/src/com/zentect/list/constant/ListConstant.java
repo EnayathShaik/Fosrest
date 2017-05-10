@@ -272,4 +272,16 @@ public class ListConstant {
         DistrictMap = Collections.unmodifiableMap(auserTypeMap);
     }
 
+    //FOTEST TRainer
+    
+  //Trainer 
+    
+    public static final Map<String, String> TrainerMap;
+    static {
+        Map<String, String> auserTypeMap = new HashMap<String, String>();
+        auserTypeMap.put("Mr.Anuj", "Mr.Anuj");
+        auserTypeMap.put("Mr.mnuj", "Mr.mnuj");
+        TrainerMap = Collections.unmodifiableMap(auserTypeMap);
+    }
+    
 }

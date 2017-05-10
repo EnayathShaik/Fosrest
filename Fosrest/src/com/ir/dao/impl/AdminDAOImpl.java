@@ -42,6 +42,7 @@ import com.ir.form.InvoiceMasterForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
+import com.ir.form.ManageTrainingCalendarForm;
 import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
@@ -53,8 +54,14 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
+
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
+import com.ir.form.ViewTrainingCalendarForm;
+
+import com.ir.form.verifyTraineeEnrollmentForm;
+import com.ir.form.viewEnrolledCoursesForm;
+
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.AssessmentQuestion_old;
@@ -3658,4 +3665,56 @@ public class AdminDAOImpl implements AdminDAO {
 		return resulList;
 	}
 
+	//viewTrainingCalendar
+	@Override
+	public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm form) {
+		// TODO Auto-generated method stub
+		System.out.println("inside listviewTrainingCalendar");
+		String courseName = form.getCourseName();
+		String traineeName = form.getTrainingDate();
+		ViewTrainingCalendarForm bean = new ViewTrainingCalendarForm();
+		List<ViewTrainingCalendarForm> resulList = new ArrayList<ViewTrainingCalendarForm>();
+		System.out.println("courseName "+courseName + " traineeName "+traineeName);
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Object[]> list = session.createSQLQuery("select  cast('Manidra' as varchar(20) ) as trainerName ,  cast('Java' as varchar(20)) as CourseName , cast('2016-12-16 12:00' as varchar(20)) as TrainingDate , cast('Mahape' as varchar(20) ) as TrainingLab , cast('25'  as varchar(20)) as NoOfSeats , cast('15' as  varchar(20)) as NoOfEnrollment   ").list();
+		for (Object[] li : list ) {
+			
+			//bean.setTrainerName( (String) li[0]);
+			bean.setCourseName((String) li[1]);
+			bean.setTrainingDate((String) li[2]);
+			bean.setTrainingLab((String) li[3]);
+			//bean.setNoOfSeats((String) li[4]);
+			//bean.setNoOfEnrollment((String) li[5]);
+
+			//new ZLogger("listviewTrainingCalendar List::" + li,"","");
+			resulList.add(bean);
+		}
+		return resulList;
+	}
+	
+	//listmanageTrainingCalendar
+	@Override
+	public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm form) {
+		// TODO Auto-generated method stub
+		System.out.println("inside manageTrainingCalendarForm");
+		String courseName = form.getCourseName();
+		String traineeName = form.getTrainingDate();
+				ManageTrainingCalendarForm bean = new ManageTrainingCalendarForm();
+		List<ManageTrainingCalendarForm> resulList = new ArrayList<ManageTrainingCalendarForm>();
+		System.out.println("courseName "+courseName + " traineeName "+traineeName);
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Object[]> list = session.createSQLQuery("select cast('Java' as varchar(20)) as CourseName , cast('2016-12-16 12:00' as varchar(20)) as TrainingDate , cast('Mahape' as varchar(20) ) as TrainingLab , cast('Update' as varchar(20)) as status , cast('Test Comments' as varchar(20)) as comments  ").list();
+		for (Object[] li : list ) {
+			
+			bean.setCourseName((String) li[0]);
+			bean.setTrainingDate((String) li[1]);
+			bean.setTrainingLab((String) li[2]);
+			bean.setStatus((String) li[3]);
+			bean.setComments((String) li[4]);
+
+			//new ZLogger("listmanageTrainingCalendar List::" + li,"","");
+			resulList.add(bean);
+		}
+		return resulList;
+	}
 }

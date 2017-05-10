@@ -169,7 +169,7 @@
                         <li> <a href="assessmentquestions.fssai">Assessment Questions</a> </li>
                         <li> <a href="fotestFeedbackMaster.fssai">Feedback Master</a> </li>
                         <li> <a href="verifyTraineeEnrollment.fssai">Verify Trainee Enrollment</a> </li>
-                        <li> <a href="feedbackMaster.fssai">Manage Training Calendar</a> </li>
+                        <li> <a href="managetrainingcalendar.fssai">Manage Training Calendar</a> </li>
                         <li> <a href="feedbackMaster.fssai">Activate Training</a> </li>
                         <li> <a href="activateAssessmentOfTrainee.fssai">Activate Assessment</a> </li>
                         <li> <a href="viewtrainingcalendar.fssai"> View Training Calendar</a> </li>

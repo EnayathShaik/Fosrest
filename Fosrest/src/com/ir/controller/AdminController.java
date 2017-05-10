@@ -54,6 +54,7 @@ import com.ir.form.InvoiceMasterForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
+import com.ir.form.ManageTrainingCalendarForm;
 import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.form.ModuleMasterForm;
 import com.ir.form.MyCalendarForm;
@@ -69,6 +70,7 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
+import com.ir.form.ViewTrainingCalendarForm;
 import com.ir.form.manageTrainingForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
@@ -103,6 +105,7 @@ import com.ir.model.TaxMaster;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
+import com.ir.model.ViewTrainingCalendar;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
@@ -2879,7 +2882,7 @@ public class AdminController {
 		return "redirect:/RegionMapping.fssai";
 	}
 
-	@RequestMapping("/regionMapping/edit/{id}")
+	@RequestMapping("/RegionMapping/edit/{id}")
 	public void editRegionMapping(@PathVariable("id") int id, Model model, HttpServletRequest httpServletRequest,
 			HttpServletResponse response) throws IOException {
 		RegionMapping p = this.adminService.getRegionMappingById(id);
@@ -2926,6 +2929,13 @@ public class AdminController {
 	@ResponseBody
 	public void editManageCourseCarricullum(@PathVariable("id") int id, HttpServletRequest httpServletRequest,
 			HttpServletResponse response) throws IOException {
+		/*
+		 * model.addAttribute("manageCourseCarricullum",
+		 * this.adminService.getManageCourseCarricullumById(id));
+		 * model.addAttribute("listManageCourseCarricullum",
+		 * this.adminService.listManageCourseCarricullum()); return "temp1	";
+		 */
+
 		ManageCourseCarricullum p = this.adminService.getManageCourseCarricullumById(id);
 		PrintWriter out = response.getWriter();
 		Gson g = new Gson();
@@ -2934,104 +2944,149 @@ public class AdminController {
 		out.flush();
 
 	}
-
+	
 	// Activate Assessment of Trainer
 
-	@RequestMapping(value = "/activateAssessmentOfTrainee", method = RequestMethod.GET)
-	public String activateAssessmentOfTrainee(Model model) {
-		System.out.println("activateAssessmentOfTrainee");
-		model.addAttribute("ActivateAssessmentOfTraineeForm", new ActivateAssessmentOfTraineeForm());
-		Map<String, String> courseNameMap = lst.courseNameMap;
-		model.addAttribute("courseNameMap", courseNameMap);
-		return "activateAssessmentOfTrainee";
-	}
-
-	@RequestMapping(value = "/activateAssessmentOfTraineelist", method = RequestMethod.POST)
-	public String listactivateAssessmentOfTrainee(
-			@ModelAttribute("ActivateAssessmentOfTraineeForm") ActivateAssessmentOfTraineeForm p, Model model) {
-		model.addAttribute("listactivateAssessmentOfTrainee", this.adminService.listactivateAssessmentOfTrainee(p));
-		return "activateAssessmentOfTrainee";
-	}
-
-	// Feedback Master
-
-	@RequestMapping(value = "/fotestFeedbackMaster", method = RequestMethod.GET)
-	public String listFeedbackMaster(Model model) {
-		System.out.println("listFeedbackMaster");
-		model.addAttribute("FotestFeedbackMasterForm", new FotestFeedbackMasterForm());
-		Map<String, String> userTypeMap = lst.feedbackUserTypeMap;
-		Map<String, String> feedbackCategoryMap = lst.feedbackCategoryMap;
-		model.addAttribute("listFotestFeedbackMaster", this.adminService.listFotestFeedbackMasterForm());
-		model.addAttribute("userTypeMap", userTypeMap);
-		model.addAttribute("feedbackCategoryMap", feedbackCategoryMap);
-		return "fotestFeedbackMaster";
-	}
-
-	// For add and update state both
-	@RequestMapping(value = "/fotestfeedbackMasteradd", method = RequestMethod.POST)
-	public String addFeedbackMaster(@ModelAttribute("FotestFeedbackMasterForm") FotestFeedbackMaster p) {
-		if (p.getId() == 0) {
-			// new person, add it
-			this.adminService.addFeedbackMaster(p);
-		} else {
-			// existing person, call update
-			this.adminService.updateFeedbackMaster(p);
+		@RequestMapping(value = "/activateAssessmentOfTrainee", method = RequestMethod.GET)
+		public String activateAssessmentOfTrainee(Model model) {
+			System.out.println("activateAssessmentOfTrainee");
+			model.addAttribute("ActivateAssessmentOfTraineeForm", new ActivateAssessmentOfTraineeForm());
+			Map<String, String> courseNameMap = lst.courseNameMap;
+			model.addAttribute("courseNameMap", courseNameMap);
+			return "activateAssessmentOfTrainee";
 		}
-		return "redirect:/fotestFeedbackMaster.fssai";
+
+		@RequestMapping(value = "/activateAssessmentOfTraineelist", method = RequestMethod.POST)
+		public String listactivateAssessmentOfTrainee(
+				@ModelAttribute("ActivateAssessmentOfTraineeForm") ActivateAssessmentOfTraineeForm p, Model model) {
+			model.addAttribute("listactivateAssessmentOfTrainee", this.adminService.listactivateAssessmentOfTrainee(p));
+			return "activateAssessmentOfTrainee";
+		}
+
+		// Feedback Master
+
+		@RequestMapping(value = "/fotestFeedbackMaster", method = RequestMethod.GET)
+		public String listFeedbackMaster(Model model) {
+			System.out.println("listFeedbackMaster");
+			model.addAttribute("FotestFeedbackMasterForm", new FotestFeedbackMasterForm());
+			Map<String, String> userTypeMap = lst.feedbackUserTypeMap;
+			Map<String, String> feedbackCategoryMap = lst.feedbackCategoryMap;
+			model.addAttribute("listFotestFeedbackMaster", this.adminService.listFotestFeedbackMasterForm());
+			model.addAttribute("userTypeMap", userTypeMap);
+			model.addAttribute("feedbackCategoryMap", feedbackCategoryMap);
+			return "fotestFeedbackMaster";
+		}
+
+		// For add and update state both
+		@RequestMapping(value = "/fotestfeedbackMasteradd", method = RequestMethod.POST)
+		public String addFeedbackMaster(@ModelAttribute("FotestFeedbackMasterForm") FotestFeedbackMaster p) {
+			if (p.getId() == 0) {
+				// new person, add it
+				this.adminService.addFeedbackMaster(p);
+			} else {
+				// existing person, call update
+				this.adminService.updateFeedbackMaster(p);
+			}
+			return "redirect:/fotestFeedbackMaster.fssai";
+		}
+
+		@RequestMapping("/FotestFeedbackMasterRemove/{id}")
+		public String removeFeedbackMaster(@PathVariable("id") int id) {
+			this.adminService.removeFeedbackMaster(id);
+			return "redirect:/fotestFeedbackMaster.fssai";
+		}
+
+		@RequestMapping("/fotestFeedbackMaster/edit/{id}")
+		public void editFeedbackMaster(@PathVariable("id") int id, Model model, HttpServletRequest httpServletRequest,
+				HttpServletResponse response) throws IOException {
+			FotestFeedbackMaster p = this.adminService.getFeedbackMasterById(id);
+			PrintWriter out = response.getWriter();
+			Gson g = new Gson();
+			String newList = g.toJson(p);
+			System.out.println("newList " + newList);
+			out.write(newList);
+
+		}
+
+		// Verify Trainee Course Enrollment
+
+		@RequestMapping(value = "/verifyTraineeEnrollment", method = RequestMethod.GET)
+		public String verifyTraineeEnrollment(Model model) {
+			System.out.println("verifyTraineeEnrollment");
+			Map<String, String> courseNameMap = lst.courseNameMap;
+			model.addAttribute("verifyTraineeEnrollmentForm", new verifyTraineeEnrollmentForm());
+			model.addAttribute("courseNameMap", courseNameMap);
+			return "verifyTraineeEnrollment";
+		}
+
+		@RequestMapping(value = "/verifyTraineeEnrollmentlist", method = RequestMethod.POST)
+		public String listVerifyTraineeEnrollment(
+				@ModelAttribute("verifyTraineeEnrollmentForm") verifyTraineeEnrollmentForm p, Model model) {
+			model.addAttribute("listVerifyTraineeEnrollment", this.adminService.listVerifyTraineeEnrollment(p));
+			List<verifyTraineeEnrollmentForm> list = this.adminService.listVerifyTraineeEnrollment(p);
+			return "verifyTraineeEnrollment";
+		}
+
+		// View Enrolled Courses
+
+		@RequestMapping(value = "/viewEnrolledCourses", method = RequestMethod.GET)
+		public String viewEnrolledCourses(Model model) {
+			System.out.println("viewEnrolledCourses");
+			Map<String, String> courseNameMap = lst.courseNameMap;
+			model.addAttribute("viewEnrolledCoursesForm", new viewEnrolledCoursesForm());
+			model.addAttribute("courseNameMap", courseNameMap);
+			return "viewEnrolledCourses";
+		}
+
+		@RequestMapping(value = "/viewEnrolledCourseslist", method = RequestMethod.POST)
+		public String listviewEnrolledCourses(@ModelAttribute("viewEnrolledCoursesForm") viewEnrolledCoursesForm p,
+				Model model) {
+			model.addAttribute("listviewEnrolledCourses", this.adminService.listviewEnrolledCourses(p));
+			return "viewEnrolledCourses";
+		}
+
+	@RequestMapping(value = "/viewtrainingcalendar", method = RequestMethod.GET)
+	public String viewTrainingCalendar(Model model) {
+		System.out.println("viewTrainingCalendar");
+		Map<String, String> TypeMap = lst.TypeMap;
+
+		model.addAttribute("viewTrainingCalendar", new ViewTrainingCalendar());
+
+		model.addAttribute("TypeMap", TypeMap);
+		model.addAttribute("courseNameMap", lst.courseNameMap);
+
+		return "viewtrainingcalendar";
 	}
 
-	@RequestMapping("/FotestFeedbackMasterRemove/{id}")
-	public String removeFeedbackMaster(@PathVariable("id") int id) {
-		this.adminService.removeFeedbackMaster(id);
-		return "redirect:/fotestFeedbackMaster.fssai";
-	}
-
-	@RequestMapping("/fotestFeedbackMaster/edit/{id}")
-	public void editFeedbackMaster(@PathVariable("id") int id, Model model, HttpServletRequest httpServletRequest,
-			HttpServletResponse response) throws IOException {
-		FotestFeedbackMaster p = this.adminService.getFeedbackMasterById(id);
-		PrintWriter out = response.getWriter();
-		Gson g = new Gson();
-		String newList = g.toJson(p);
-		System.out.println("newList " + newList);
-		out.write(newList);
-
-	}
-
-	// Verify Trainee Course Enrollment
-
-	@RequestMapping(value = "/verifyTraineeEnrollment", method = RequestMethod.GET)
-	public String verifyTraineeEnrollment(Model model) {
-		System.out.println("verifyTraineeEnrollment");
-		Map<String, String> courseNameMap = lst.courseNameMap;
-		model.addAttribute("verifyTraineeEnrollmentForm", new verifyTraineeEnrollmentForm());
-		model.addAttribute("courseNameMap", courseNameMap);
-		return "verifyTraineeEnrollment";
-	}
-
-	@RequestMapping(value = "/verifyTraineeEnrollmentlist", method = RequestMethod.POST)
-	public String listVerifyTraineeEnrollment(
-			@ModelAttribute("verifyTraineeEnrollmentForm") verifyTraineeEnrollmentForm p, Model model) {
-		model.addAttribute("listVerifyTraineeEnrollment", this.adminService.listVerifyTraineeEnrollment(p));
-		List<verifyTraineeEnrollmentForm> list = this.adminService.listVerifyTraineeEnrollment(p);
-		return "verifyTraineeEnrollment";
-	}
-
-	// View Enrolled Courses
-
-	@RequestMapping(value = "/viewEnrolledCourses", method = RequestMethod.GET)
-	public String viewEnrolledCourses(Model model) {
-		System.out.println("viewEnrolledCourses");
-		Map<String, String> courseNameMap = lst.courseNameMap;
-		model.addAttribute("viewEnrolledCoursesForm", new viewEnrolledCoursesForm());
-		model.addAttribute("courseNameMap", courseNameMap);
-		return "viewEnrolledCourses";
-	}
-
-	@RequestMapping(value = "/viewEnrolledCourseslist", method = RequestMethod.POST)
-	public String listviewEnrolledCourses(@ModelAttribute("viewEnrolledCoursesForm") viewEnrolledCoursesForm p,
+	@RequestMapping(value = "/viewTrainingCalendarlist", method = RequestMethod.POST)
+	public String listviewTrainingCalendar(@ModelAttribute("viewTrainingCalendar") ViewTrainingCalendarForm p,
 			Model model) {
-		model.addAttribute("listviewEnrolledCourses", this.adminService.listviewEnrolledCourses(p));
-		return "viewEnrolledCourses";
+		System.out.println("aaaa");
+		model.addAttribute("viewTrainingCalendar", new ViewTrainingCalendar());
+		model.addAttribute("listviewTrainingCalendar", this.adminService.listviewTrainingCalendar(p));
+
+		return "viewtrainingcalendar";
 	}
+
+	@RequestMapping(value = "/managetrainingcalendar", method = RequestMethod.GET)
+	public String manageTrainingCalendar(Model model) {
+		System.out.println("manageTrainingCalendar");
+		Map<String, String> TypeMap = lst.TypeMap;
+
+		model.addAttribute("manageTrainingCalendar", new ManageTrainingCalendarForm());
+		model.addAttribute("TypeMap", TypeMap);
+		model.addAttribute("courseNameMap", lst.courseNameMap);
+		return "managetrainingcalendar";
+	}
+
+	@RequestMapping(value = "/managetrainingcalendarlist", method = RequestMethod.POST)
+	public String listmanageTrainingCalendar(@ModelAttribute("manageTrainingCalendar") ManageTrainingCalendarForm p,
+			Model model) {
+		model.addAttribute("manageTrainingCalendar", new ManageTrainingCalendarForm());
+		model.addAttribute("listManageTrainingCalendar", this.adminService.listmanageTrainingCalendar(p));
+		Map<String, String> TrainerMap = lst.TrainerMap;
+		model.addAttribute("TrainerMap", TrainerMap);
+		return "managetrainingcalendar";
+	}
+
 }

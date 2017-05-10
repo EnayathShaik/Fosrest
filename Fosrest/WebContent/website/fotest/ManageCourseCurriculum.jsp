@@ -62,7 +62,7 @@
  -->                                                        <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                               	<cf:input id="trainingName" path="trainingName" />
+                                               	<cf:input id="trainingName" path="trainingName" class="form-control"/>
                                             </div>
                                             <div class="form-group">
                                                 <div>
@@ -72,7 +72,7 @@
  -->                                                        <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                           		<cf:input id="curricullumDuratiuon" path="curricullumDuratiuon" />
+                                           		<cf:input id="curricullumDuratiuon" path="curricullumDuratiuon" class="form-control"/>
                                             </div>
                                       
                                         </div>
@@ -87,7 +87,7 @@
  -->                                                        <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                           <cf:input id="curricullumnTopic" path="curricullumnTopic" /> </div>
+                                           <cf:input id="curricullumnTopic" path="curricullumnTopic" class="form-control" /> </div>
                                            <ct:if test="${!empty manageCourseCarricullum.trainingName}">
 				<input type="submit"
 					value="Edit" />

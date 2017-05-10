@@ -1251,13 +1251,13 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/fotest/ManageCourseCurriculum.jsp" />
 	</definition>
-	<definition name="assessmentquestions" extends="base.user.afterLogin">
+	<definition name="managetrainingcalendar" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/fotest/temp2.jsp" />
+		<put-attribute name="body" value="/website/fotest/ManageTrainingCalendar.jsp" />
 	</definition>
 	<definition name="viewtrainingcalendar" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/fotest/temp3.jsp" />
+		<put-attribute name="body" value="/website/fotest/ViewTrainingCalendar.jsp" />
 	</definition>
 <definition name="activateAssessmentOfTrainee" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
