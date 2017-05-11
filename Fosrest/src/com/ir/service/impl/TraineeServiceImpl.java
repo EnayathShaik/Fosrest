@@ -14,6 +14,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestCertificationForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
@@ -412,6 +413,15 @@ public class TraineeServiceImpl implements TraineeService {
 			// TODO Auto-generated method stub
 			return this.traineeDAO.listingAssessmentQuestion( assesQuestionForm, id);
 		}
+		
+		//certification
+		@Override
+		@Transactional
+		public List<FotestCertificationForm> listcertification() {
+			// TODO Auto-generated method stub
+			return this.traineeDAO.listcertification();
+		}
+		
 
 
 

@@ -460,6 +460,9 @@ public interface AdminService {
 	public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p);
 	//listmanageTrainingCalendar
 	public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p);
+	
+	//namage assessment question
+	List fotestGetQuestions(String data);
 }
 
 

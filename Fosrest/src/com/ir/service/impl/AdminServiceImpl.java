@@ -1476,6 +1476,14 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 
+		// fotestGetQuestions
+		@Override
+		@Transactional	
+		public List fotestGetQuestions(String data) {
+			List list = adminDAO.fotestGetQuestions(data);
+			return list;
+		}
+
 		
 		
 	

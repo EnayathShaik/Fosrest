@@ -45,6 +45,7 @@ import com.ir.form.CityMasterForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
 import com.ir.form.DistrictMasterForm;
+import com.ir.form.FotestAssessmentQuestionsForm;
 import com.ir.form.FotestFeedbackMasterForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GenerateCourseCertificateForm;
@@ -3089,4 +3090,36 @@ public class AdminController {
 		return "managetrainingcalendar";
 	}
 
+	
+	// manage Assessment    
+    
+ 	@RequestMapping(value = "/fotestassessmentquestions", method = RequestMethod.GET)
+	public String assessmentQuestion(Model model) {
+		System.out.println("assessmentQuestions");
+		Map<String , String> assessMap = lst.AssesmentTypeMap;
+		model.addAttribute("assessmentQuestionsForm" , new FotestAssessmentQuestionsForm());
+		model.addAttribute("listmanageTraining", this.adminService.listManageTraining());
+		model.addAttribute("listAssessmentType", assessMap);
+		
+		return "fotestassessmentquestions";
+	}
+ 	@RequestMapping(value = "/fotestGetQuestions", method = RequestMethod.POST)
+	@ResponseBody
+	public void fotestGetQuestions(@RequestParam("data") String data,
+			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
+			HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {
+		new ZLogger("traineeAssessmentCalender", "traineeAssessmentCalender............" + data,
+				"AdminController.java");
+		System.out.println("fotestGetQuestions");
+		List courseList = adminService.fotestGetQuestions(data);
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		String newList = g.toJson(courseList);
+		System.out.println("newList " + newList);
+		out.write(newList);
+		out.flush();
+
+	}
+  
+	
 }

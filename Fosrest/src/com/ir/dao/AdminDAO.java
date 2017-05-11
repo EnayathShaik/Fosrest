@@ -442,10 +442,11 @@ public interface AdminDAO {
 	// View Enrolled Courses
 	public List<viewEnrolledCoursesForm> listviewEnrolledCourses(viewEnrolledCoursesForm p);
 
+	//listviewTrainingCalendar
+	public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p);
 						
-						//listviewTrainingCalendar
-						public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p);
+	//listmanageTrainingCalendar
+	public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p);
 						
-						//listmanageTrainingCalendar
-						public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p);
+	public List fotestGetQuestions(String data);
 }

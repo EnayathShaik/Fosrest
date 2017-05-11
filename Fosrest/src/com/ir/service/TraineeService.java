@@ -7,6 +7,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestCertificationForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
 import com.ir.form.GenerateCertificateForm;
@@ -183,7 +184,7 @@ public interface TraineeService {
 			AssessmentQuestionForm assesQuestionForm, int id);
 	
 	
-	
+	public List<FotestCertificationForm> listcertification();
 	
 	
 	

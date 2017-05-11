@@ -108,18 +108,21 @@
                                                             			<input type="hidden" path="logindetails" name="logindetails" id="logindetails" value=""/> -->
 												</div>
 											</div>
-
+								
+									<div class="col-md-12 col-xs-12">
+									
+													<input type="submit" 
+														style=" float: right; "
+														value="Search" class="btn login-btn" />
+										
+									</div>
 										</fieldset>
 									</div>
 
 									<div class="row" style="height: 20px;"></div>
 									<!-- captcha -->
 									<!-- buttons -->
-									<div class="col-md-4 hidden-xs"></div>
-									<div class="col-md-4 col-xs-12">
-										<input type="submit" class="form-control login-btn"
-											value="Search">
-									</div>
+									
 
 									<!--  </form> -->
 									<br> <br> <br>
@@ -131,16 +134,20 @@
 									<!-- fostac logo -->
 									<!-- login form -->
 
-									<div class="row">
+														
+								
+												<ct:choose>
+												<ct:when test="${not empty listManageTrainingCalendar }">
+													<div class="row">
 										<div class="col-xs-12">
 											<table id="datatablesfosrest"
 												class="table table-bordered table-responsive">
 												<!--    <table class="table table-hover table-bordered table-responsive"> -->
 												<thead>
 													<th>S.No</th>
-													<th>Sr.No</th>
 													<th>Course Name</th>
 													<th>Training LAB</th>
+													<th>Training Date</th>
 													<th>Training Time</th>
 													<th>No. Of Seats</th>
 													<th>Applied Trainer</th>
@@ -150,8 +157,7 @@
 													<th>Comments</th>
 												</thead>
 												<tbody>
-													<ct:choose>
-														<ct:when test="${not empty listManageTrainingCalendar }">
+													
 															<ct:forEach var="listManageTrainingCalendar"
 																items="${listManageTrainingCalendar}" varStatus="loop">
 																<tr>
@@ -178,28 +184,35 @@
 
 																</tr>
 															</ct:forEach>
-														</ct:when>
-														<ct:otherwise>
-															<tr>
-																<td colspan="6"><label>No records available</label>
-																</td>
-															</tr>
-														</ct:otherwise>
-													</ct:choose>
 												</tbody>
 											</table>
-
-
-
-										</div>
-										<div class="col-md-2 hidden-xs"></div>
-									</div>
-									<br /> <br />
-									<div class="col-md-4 hidden-xs"></div>
-									<div class="col-md-4 col-xs-2">
-										<input type="button" class="form-control login-btn"
+											
+										
+											</div>
+											</div>
+																<div class="col-md-4 hidden-xs"></div>
+									<div  class="col-md-12 col-xs-2"  >
+										<input type="button"style=" float: right; "   class="btn login-btn"
 											value="Save">
 									</div>
+														</ct:when>
+												
+<ct:otherwise>
+													Nothing to show
+														</ct:otherwise>
+														
+													
+											
+</ct:choose>
+
+										
+										<div class="col-md-2 hidden-xs"></div>
+									
+									
+									
+								
+									<br /> <br />
+											
 								</section>
 							</fieldset>
 						</div>

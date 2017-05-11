@@ -24,6 +24,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestCertificationForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
 import com.ir.form.GenerateCertificateForm;
@@ -1613,4 +1614,30 @@ System.out.println("list "+list);
 				
 				
 			}
+		
+		
+		//certification
+		
+		
+		
+		@Override
+		public List<FotestCertificationForm> listcertification() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listprintAdmitCard");
+			FotestCertificationForm bean = new FotestCertificationForm();
+			List<FotestCertificationForm> resulList = new ArrayList<FotestCertificationForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> list = session.createSQLQuery("select cast('ICP-MS' as varchar(20)) as courseName , cast('02/05/2017' as varchar(20)) as trainingDate ,  cast('02:00 PM' as varchar(20)) as trainingTime , cast('Adlabs' as varchar(20)) as trainingLab    ").list();
+			for (Object[] li : list ) {
+				
+				bean.setCourseName((String) li[0]);
+				bean.setTrainingDate((String) li[1]);
+				bean.setTrainingTime((String) li[2]);
+				bean.setTrainingLab((String) li[3]);
+				resulList.add(bean);
+			}
+			return resulList;
+		}
+		
+		
 		}

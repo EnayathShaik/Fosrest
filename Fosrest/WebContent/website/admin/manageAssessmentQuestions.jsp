@@ -18,9 +18,10 @@ document.getElementById('correctAnswer').value = '';
 window.onload = OnStart;
 
 
+
 function getQuestions(){
 	var unitCodeSearch =  $("#unitCode").val();
-	var moduleCodeSearch =  $("#moduleCode").val();
+	var moduleCodeSearch =  $("#moduleCode1").val();
 	var total = "unitCodeSearch="+unitCodeSearch+"-moduleCodeSearch="+moduleCodeSearch;
 	var result="";
 	var name1=JSON.stringify({
@@ -63,7 +64,7 @@ function editAssessmentQuestion(id){
 		document.getElementById('unitCode').value = obj[1];
 		$("#unitCode").trigger("change");
 		window.setTimeout(function(){
-			document.getElementById('moduleName').value = obj[2];
+			document.getElementById('moduleName2').value = obj[2];
 	    }, 3000);
 		document.getElementById('questionNumber').value = obj[3];
 		document.getElementById('questionHint').value = obj[4];
@@ -254,7 +255,7 @@ if($("#correctAnswer").val() == 0){
                                                            <%--  ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select path="unitCode" class="form-control">
+												<cf:select path="unitCode" class="form-control" onchange="getModule(this.value,'moduleCode1')">
 													
 													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
 												</cf:select> 
@@ -272,9 +273,9 @@ if($("#correctAnswer").val() == 0){
                                                            <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select path="moduleCode"   class="form-control">
+												<cf:select id="moduleCode1" path="moduleCode"   class="form-control">
 												   <ct:forEach var="twofields" items="${listModuleMaster}">
-       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleId} - ${twofields.moduleName}"/></cf:option>
+       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleId} - ${twofields.moduleCode}"/></cf:option>
     												</ct:forEach>
 												 </cf:select>
 											</div>
@@ -349,7 +350,7 @@ if($("#correctAnswer").val() == 0){
                                                             <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select path="unitCode" class="form-control">
+												<cf:select path="unitCode" class="form-control" onchange="getModule(this.value,'moduleCode2')" >
 													
 													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
 												</cf:select> 
@@ -397,9 +398,9 @@ if($("#correctAnswer").val() == 0){
                                                             <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select path="moduleCode"   class="form-control">
+												<cf:select id="moduleCode2" path="moduleCode"   class="form-control">
 												   <ct:forEach var="twofields" items="${listModuleMaster}">
-       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleId} - ${twofields.moduleName}"/></cf:option>
+       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleId} - ${twofields.moduleCode}"/></cf:option>
     												</ct:forEach>
 												 </cf:select>
 											</div> 

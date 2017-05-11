@@ -7,6 +7,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestCertificationForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.InstituteMyCalendarForm;
@@ -130,5 +131,6 @@ public interface TraineeDAO {
 	
 	public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm, int id);
 	
+	public List<FotestCertificationForm> listcertification();
 	
 }

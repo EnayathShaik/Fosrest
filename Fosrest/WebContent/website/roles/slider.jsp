@@ -166,7 +166,7 @@
                         <li><a href="RegionMapping.fssai">Region Mapping</a></li>
                         <li><a href="manageTraining.fssai">Manage Training</a></li>
                         <li> <a href="managecoursecurriculum.fssai">Manage Course Curricullum</a> </li>
-                        <li> <a href="assessmentquestions.fssai">Assessment Questions</a> </li>
+                        <li> <a href="fotestassessmentquestions.fssai">Assessment Questions</a> </li>
                         <li> <a href="fotestFeedbackMaster.fssai">Feedback Master</a> </li>
                         <li> <a href="verifyTraineeEnrollment.fssai">Verify Trainee Enrollment</a> </li>
                         <li> <a href="managetrainingcalendar.fssai">Manage Training Calendar</a> </li>
@@ -193,7 +193,7 @@
 		        <li><a href="OnlineTraining.fssai">Online Training </a></li>
 				<li><a href="assessment-instructions-trainee.fssai">Online Assessment</a></li>
 				<li><a href="GetScoreCard.fssai">Get Score Card </a></li>
-				<li><a href="Certificate.fssai">Certificate</a></li>
+				<li><a href="fotestcertification.fssai">Certification</a></li>
 		<!-- <li><a href="course-training.fssai?courseTypeId=1">Online Assessment</a></li>-->
 		<!-- <li><a href="assessment-instructions-trainee.fssai">Assessment</a></li> -->
 		<!-- <li><a href="feedbackForm.fssai">Feedback</a></li>

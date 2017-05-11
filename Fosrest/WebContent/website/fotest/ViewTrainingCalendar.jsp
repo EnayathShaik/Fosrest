@@ -115,7 +115,16 @@
                                                             			<input type="hidden" path="logindetails" name="logindetails" id="logindetails" value=""/> -->
 												</div>
 											</div>
-
+											<div class="col-md-12 col-xs-12">
+<div class="btn-group" style="float:right;">
+  <button type="submit" value="Search" class="btn login-btn" style="margin-right:15px;">Search</button>
+  <button type="button" value="Download" class="btn login-btn" style="margin-right:15px;">Download</button>
+</div>
+	
+		</div>							
+												
+										
+									
 										</fieldset>
 									</div>
 
@@ -132,14 +141,7 @@
 														<br> <br> <br>
 													
 										</div> -->
-									<div class="col-md-4 col-xs-12">
-										<input type="submit" class="form-control login-btn"
-											value="Search">
-									</div>
-									<div class="col-md-4 col-xs-12">
-										<input type="button" class="form-control login-btn"
-											value="Download">
-									</div>
+									
 									<div class="col-md-4 hidden-xs"></div>
 
 

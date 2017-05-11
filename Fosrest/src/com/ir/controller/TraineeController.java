@@ -38,6 +38,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestCertificationForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.InstituteMyCalendarForm;
@@ -980,6 +981,19 @@ public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") Perso
 	return "certificatetraineeGEN";
 }
 
+
+
+//fotestcertification
+
+
+@RequestMapping(value="/fotestcertification" , method = RequestMethod.GET )
+public String listcertification( Model model){
+	  model.addAttribute("certification",  new FotestCertificationForm());
+    model.addAttribute("listcertification", this.traineeService.listcertification());
+    System.out.println(this.traineeService.listcertification());
+
+    return "fotestcertification";
+}
 
 
 }

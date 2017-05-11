@@ -35,6 +35,7 @@ import com.ir.form.CityMasterForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
 import com.ir.form.DistrictMasterForm;
+import com.ir.form.FotestAssessmentQuestionsForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.HolidayMasterForm;
 import com.ir.form.InvoiceInfoForm;
@@ -3679,12 +3680,12 @@ public class AdminDAOImpl implements AdminDAO {
 		List<Object[]> list = session.createSQLQuery("select  cast('Manidra' as varchar(20) ) as trainerName ,  cast('Java' as varchar(20)) as CourseName , cast('2016-12-16 12:00' as varchar(20)) as TrainingDate , cast('Mahape' as varchar(20) ) as TrainingLab , cast('25'  as varchar(20)) as NoOfSeats , cast('15' as  varchar(20)) as NoOfEnrollment   ").list();
 		for (Object[] li : list ) {
 			
-			//bean.setTrainerName( (String) li[0]);
+			bean.setTrainerName( (String) li[0]);
 			bean.setCourseName((String) li[1]);
 			bean.setTrainingDate((String) li[2]);
 			bean.setTrainingLab((String) li[3]);
-			//bean.setNoOfSeats((String) li[4]);
-			//bean.setNoOfEnrollment((String) li[5]);
+			bean.setNoOfSeats((String) li[4]);
+			bean.setNoOfEnrollment((String) li[5]);
 
 			//new ZLogger("listviewTrainingCalendar List::" + li,"","");
 			resulList.add(bean);
@@ -3717,4 +3718,65 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		return resulList;
 	}
+	
+
+	// fotestGetQuestions
+
+	@Override
+	public List fotestGetQuestions(String data) {
+		System.out.println("fotest dao questions "+data);
+		String[] totalConnected = data.split("-");
+
+		String assesmentTypeSearch = (totalConnected[0].split("="))[1];
+		String trainingNameSearch = (totalConnected[1].split("="))[1];
+		System.out.println(assesmentTypeSearch+trainingNameSearch);
+/*
+		String unitCodeSearch1, moduleCodeSearch1;
+		if (unitCodeSearch == 0) {
+			unitCodeSearch1 = "%";
+		} else {
+			unitCodeSearch1 = (totalConnected[0].split("="))[1];
+		}
+
+		if (moduleCodeSearch == 0) {
+			moduleCodeSearch1 = "%";
+		} else {
+			moduleCodeSearch1 = (totalConnected[0].split("="))[1];
+		}
+
+		System.out.println("unitcodesearch  " + unitCodeSearch + "  " + unitCodeSearch1);
+		System.out.println("modulecodesearch   " + moduleCodeSearch + "  " + moduleCodeSearch1);
+		StringBuffer wherebuffer = new StringBuffer();
+		wherebuffer.append(" WHERE 1=1 ");
+		if (unitCodeSearch > 0) {
+			wherebuffer.append(" AND um.unitid=" + unitCodeSearch);
+		}
+		if (moduleCodeSearch > 0) {
+			wherebuffer.append(" AND mm.moduleid=" + moduleCodeSearch);
+		}
+
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "select um.unitcode , mm.modulename , aq.questionnumber, aq.assessmentid, mm.modulecode   from assessmentquestions as aq "
+				+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
+				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
+		sql = sql + wherebuffer.toString();
+		Query query = session.createSQLQuery(sql);
+		List list = query.list();
+		System.out.println(list.size());
+		return list;*/
+		
+		System.out.println("inside assessmentQuestionsForm");
+		
+		FotestAssessmentQuestionsForm bean = new FotestAssessmentQuestionsForm();
+		List<FotestAssessmentQuestionsForm> resulList = new ArrayList<FotestAssessmentQuestionsForm>();
+		Session session = this.sessionFactory.getCurrentSession();
+		/*List<Object[]> list = session.createSQLQuery("select cast('Training' as varchar(20)) as assesmentType , cast('SCCC' as varchar(20)) as trainingName").list();
+		*/
+		Query query = session.createSQLQuery("select cast('Training' as varchar(20)) as assesmentType , cast('SCCC' as varchar(20)) as trainingName");
+		List list = query.list();
+		System.out.println(list.size());
+		return list;
+		
+	}
+
 }

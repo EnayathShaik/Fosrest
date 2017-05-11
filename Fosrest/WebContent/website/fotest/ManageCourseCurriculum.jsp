@@ -88,14 +88,13 @@
                                                     </ul>
                                                 </div>
                                            <cf:input id="curricullumnTopic" path="curricullumnTopic" class="form-control" /> </div>
-                                           <ct:if test="${!empty manageCourseCarricullum.trainingName}">
-				<input type="submit"
-					value="Edit" />
-			</ct:if>
-			<ct:if test="${empty manageCourseCarricullum.trainingName}">
-				<input type="submit"
-					value="Add" />
-			</ct:if>
+                                           <div style="padding: 27px">
+													<input type="submit" id="updatebtn"
+														style="display: none; float: right; margin-right: 122px;"
+														value="Update" class="btn login-btn" /> <input
+														type="submit" id="createbtn" value="Create"
+														class="btn login-btn" />
+														</div>
                                      </div>
                                     </fieldset>
                                                     </div>
@@ -122,8 +121,8 @@
 			<td>${manageCourseCarricullum.id}</td>
 			<td>${manageCourseCarricullum.trainingName}</td>
 			<td>${manageCourseCarricullum.curricullumnTopic}</td>
-			<td><button onclick='editCC(${manageCourseCarricullum.id});return false;' >Edit</button></td>
-												<td><a href="<ct:url value='/manageCourseCarricullum/remove/${manageCourseCarricullum.id}.fssai' />" >Delete</a></td>
+			<td><button onclick='editCC(${manageCourseCarricullum.id});return false;'  class="btn login-btn" style="float:right; margin-right: 210px;" >Edit</button></td>
+			<td><a href="<ct:url value='/manageCourseCarricullum/remove/${manageCourseCarricullum.id}.fssai' />" >Delete</a></td>
 		</tr>
 	</ct:forEach>
 	</table>
@@ -164,10 +163,10 @@
             	    $("#curricullumDuratiuon").val(mainData1.curricullumDuratiuon);
             	    $("#curricullumnTopic").val(mainData1.curricullumnTopic);
             	   /*  $("#trainingPhase").val(mainData1.trainingPhase);
-            	    $("#unitName").val(mainData1.unitName);
+            	    $("#unitName").val(mainData1.unitName);*/
             	     $("#updatebtn").css("display" , "block");
             	     
-            	     $("#createbtn").css("display" , "none"); */
+            	     $("#createbtn").css("display" , "none"); 
             	      }
             	      });     
             
