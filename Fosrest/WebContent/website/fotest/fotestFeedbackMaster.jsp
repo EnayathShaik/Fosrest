@@ -125,11 +125,13 @@
 													</div>
 
 
-													<input type="submit" id="updatebtn"
-														style="display: none; float: right; margin-right: 122px;"
-														value="Update" class="btn login-btn" /> <input
-														type="submit" id="createbtn" value="Create"
-														class="btn login-btn" />
+														<div
+														style="float: right;">
+														<input type="submit" id="updatebtn" style="display: none;"
+															value="Update" class="btn login-btn" /> <input
+															type="submit" id="createbtn" value="Create"
+															class="btn login-btn" />
+													</div>
 												</div>
 											</div>
 

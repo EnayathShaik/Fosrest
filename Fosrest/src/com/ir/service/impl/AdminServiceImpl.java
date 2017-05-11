@@ -39,6 +39,7 @@ import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 
 import com.ir.form.ViewTrainingCalendarForm;
+import com.ir.form.activateTrainingOfTraineeForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 
@@ -1476,21 +1477,29 @@ public class AdminServiceImpl implements AdminService {
 			return this.adminDAO.listmanageTrainingCalendar(p);
 		}
 		
-		//listfotestGenerateCertificate
+		//listactivateTrainingOfTrainee
+		
 		@Override
 		@Transactional
-		public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p ) {
+		public List<activateTrainingOfTraineeForm> listactivateTrainingOfTrainee(activateTrainingOfTraineeForm p ) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listactivateTrainingOfTrainee(p);
+		}
+
+		@Override
+		@Transactional
+		public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p) {
 			// TODO Auto-generated method stub
 			return this.adminDAO.listfotestGenerateCertificate(p);
 		}
-		
-		// fotestGetQuestions
-				@Override
-				@Transactional	
-				public List fotestGetQuestions(String data) {
-					List list = adminDAO.fotestGetQuestions(data);
-					return list;
-				}
+
+		@Override
+		@Transactional
+		public List fotestGetQuestions(String data) {
+			// TODO Auto-generated method stub
+			List list=adminDAO.fotestGetQuestions(data);
+			return list;
+		}
 		
 		
 	

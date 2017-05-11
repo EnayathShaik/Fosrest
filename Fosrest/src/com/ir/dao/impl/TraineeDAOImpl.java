@@ -24,6 +24,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestFeedbackForm;
 import com.ir.form.FotestCertificationForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
@@ -1605,9 +1606,7 @@ System.out.println("list "+list);
 			 bean.setOptionFour((String) li[5]);
 			 bean.setOptionFive((String) li[4]);
 			 bean.setOptionSix((String) li[7]);
-			 //
-					
-					System.out.println(bean);
+			System.out.println(bean);
 					list.add(bean);
 				}
 		System.out.println("list "+list);
@@ -1615,8 +1614,27 @@ System.out.println("list "+list);
 				
 				
 			}
-	
-		//FOTEST TRAINEE MODULE----
+		
+		//traineeFeedback
+		@Override
+		public List<FotestFeedbackForm> listFotestFeedback() {
+			System.out.println("inside listprintAdmitCard");
+			FotestFeedbackForm bean = new FotestFeedbackForm();
+			List<FotestFeedbackForm> resulList = new ArrayList<FotestFeedbackForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> list = session.createSQLQuery("select cast('ICP-MS' as varchar(20)) as courseName , cast('02/05/2017' as varchar(20)) as trainingDate ,  cast('02:00 PM' as varchar(20)) as trainingTime , cast('Adlabs' as varchar(20)) as trainingLab    ").list();
+			for (Object[] li : list ) {
+				
+				bean.setCourseName((String) li[0]);
+				bean.setTrainingDate((String) li[1]);
+				bean.setTrainingTime((String) li[2]);
+				bean.setTrainingLab((String) li[3]);
+				new ZLogger("traineeFeedback", "List:" + li, "TraineeDAOImpl.java");
+				//logger.info("traineeFeedback List::" + li);
+				resulList.add(bean);
+			}
+			return resulList;
+		}
 		// online training
 		@Override
 		public List<fotestonlineTrainingForm> listfotestonlineTraining() {
@@ -1663,3 +1681,30 @@ System.out.println("list "+list);
 		}
 		
 		}
+		
+		
+		
+		
+		
+		/*
+		@Override
+		public List<traineeFeedbackForm> listtraineeFeedback() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listprintAdmitCard");
+			traineeFeedbackForm bean = new traineeFeedbackForm();
+			List<traineeFeedbackForm> resulList = new ArrayList<traineeFeedbackForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> list = session.createSQLQuery("select cast('ICP-MS' as varchar(20)) as courseName , cast('02/05/2017' as varchar(20)) as trainingDate ,  cast('02:00 PM' as varchar(20)) as trainingTime , cast('Adlabs' as varchar(20)) as trainingLab    ").list();
+			for (Object[] li : list ) {
+				
+				bean.setCourseName((String) li[0]);
+				bean.setTrainingDate((String) li[1]);
+				bean.setTrainingTime((String) li[2]);
+				bean.setTrainingLab((String) li[3]);
+				logger.info("traineeFeedback List::" + li);
+				resulList.add(bean);
+			}
+			return resulList;
+		}*/
+		
+

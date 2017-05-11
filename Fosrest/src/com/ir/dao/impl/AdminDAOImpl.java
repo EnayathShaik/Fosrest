@@ -60,7 +60,7 @@ import com.ir.form.TrainingScheduleForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.form.ViewTrainingCalendarForm;
-
+import com.ir.form.activateTrainingOfTraineeForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 
@@ -3719,6 +3719,33 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		return resulList;
 	}
+	
+	// listactivateTrainingOfTrainee
+		@Override
+		public List<activateTrainingOfTraineeForm> listactivateTrainingOfTrainee(activateTrainingOfTraineeForm form) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listactivaaaaaaaaaaateTrainingOfTrainee");
+			activateTrainingOfTraineeForm bean = new activateTrainingOfTraineeForm();
+			List<activateTrainingOfTraineeForm> resulList = new ArrayList<activateTrainingOfTraineeForm>();
+
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> list = session
+					.createSQLQuery(
+							"select cast('Java' as varchar(20)) as CourseName , cast('2016-12-16 12:00' as varchar(20)) as TrainingDate , cast('Mahape' as varchar(20) ) as TrainingLab , cast('Jyoti' as varchar(20)) as traineeName , cast('Present' as varchar(20)) as attendance  ")
+					.list();
+			for (Object[] li : list) {
+
+				bean.setCourseName((String) li[0]);
+				bean.setTrainingDate((String) li[1]);
+				bean.setTrainingLab((String) li[2]);
+				bean.setTraineeName((String) li[3]);
+				bean.setAttendance((String) li[4]);
+				new ZLogger("listactivateTrainingOfTrainee List::" + li,"","");
+				//logger.info("listactivateTrainingOfTrainee List::" + li);
+				resulList.add(bean);
+			}
+			return resulList;
+		}
 	
 	//listgenerateCertificate
 		@Override

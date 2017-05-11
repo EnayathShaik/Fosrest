@@ -1,23 +1,26 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 
+
 <script type="text/javascript"
 	src="website/js/jquery-toaster/jquery.toaster.js"></script>
 
- -->
 <script>
-	function OnStart() {
+                function OnStart() {
+                   
+                	flatpickr("#trainingDate" , {
+                		enableTime: true
+                	});	
+                	
+                 
+                }
+                window.onload = OnStart;
 
-		flatpickr("#trainingDate", {
+            </script>
 
-		});
-	}
-	window.onload = OnStart;
-</script>
-<%-- <ct:url var="addAction" value="/activateAssessmentOfTraineelist.fssai"></ct:url> --%>
-<cf:form action="activateAssessmentOfTraineelist.fssai" name="myForm"
-	method="POST" commandName="ActivateAssessmentOfTraineeForm">
+<ct:url var="addAction" value="activateTrainingOfTraineelist.fssai"></ct:url>
+<cf:form action="${addAction}" name="myForm" method="POST"
+	commandName="activateTrainingOfTraineeForm" onsubmit="return validateFields();">
 
 	<section>
 		<%@include file="/website/roles/top-menu.jsp"%>
@@ -53,6 +56,8 @@
 									<div class="col-xs-12">
 										<fieldset>
 											<legend>Activate Training of Trainee</legend>
+										<%-- 	<cf:input path="id" type="hidden" /> --%>
+
 											<!-- left side -->
 											<div class="col-xs-6">
 												<div class="form-group">
@@ -62,87 +67,86 @@
 																	style="color: red;">*</span>
 
 															</strong></li>
-															<!-- <li id="courseNameErr" style="display: none;"
-																class="style-li error-red">Course Name should not
-																be blank.</li> -->
+															<li id="courseNameErr" style="display: none;"
+																class="style-li error-red">Course Name should not be
+																blank.</li>
 
 														</ul>
 													</div>
 
 													<cf:select path="courseName" class="form-control">
-														<cf:option value="" label="Select Course Name" />
+														<cf:option value="" label="Select userType" />
 														<cf:options items="${courseNameMap}" />
 													</cf:select>
 												</div>
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Training Date:</strong></li>
-															<li class="style-li error-red"></li>
-															<!-- <li id="trainingDateErr" style="display: none;"
-																class="style-li error-red">Training Date should not
-																be blank.</li> -->
-														</ul>
+													<div class="form-group">
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Training
+																		Date:</strong></li>
+																<li class="style-li error-red"></li>
+																<li id="trainingDateErr" style="display: none;"
+																	class="style-li error-red">Training Date should not be
+																	blank.</li>
+															</ul>
+														</div>
+														<cf:input path="trainingDate"
+															placeholder="Training Date" class="form-control" />
 													</div>
-													<cf:input path="trainingDate" placeholder="Training Date"
-														class="form-control" />
-												</div>
-
-
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Trainee Name:</strong></li>
-															<li class="style-li error-red"></li>
-															<!-- <li id="traineeNameErr" style="display: none;"
-																class="style-li error-red">Trainee Name should not
-																be blank.</li> -->
-														</ul>
+													<div class="form-group">
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Trainee Name:</strong></li>
+																<li class="style-li error-red"></li>
+																<li id="traineeNameErr" style="display: none;"
+																	class="style-li error-red">Trainee Name should not be
+																	blank.</li>
+															</ul>
+														</div>
+														<cf:input path="traineeName"
+															placeholder="Trainee Name" class="form-control" />
 													</div>
-													<cf:input path="traineeName" placeholder="Trainee Name"
-														class="form-control" />
-												</div>
-
 											</div>
 											<!-- right side -->
 											<div class="row">
 
 												<!-- left -->
 												<div class="col-xs-6">
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training Lab:
+																	<span style="color: red;">*</span>
 
-													<div class="form-group">
-														<div>
-															<ul class="lab-no">
-																<li class="style-li"><strong>Training Lab:
-																		<span style="color: red;">*</span>
+															</strong></li>
+															<li id="trainingLabErr" style="display: none;"
+																class="style-li error-red">Training Lab should not be
+																blank.</li>
 
-																</strong></li>
-																<!-- <li id="trainingLabErr" style="display: none;"
-																	class="style-li error-red">Training Lab should not
-																	be blank.</li> -->
-
-															</ul>
-														</div>
-														<cf:input path="trainingLab" placeholder="Training Lab"
-															class="form-control" />
+														</ul>
 													</div>
-
-
+													<cf:input path="trainingLab" placeholder="Training Lab"
+														class="form-control" />
+												</div>
+												
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
 																<li class="style-li"><strong> Training
 																		Time:</strong></li>
 																<li class="style-li error-red"></li>
+																<li id="trainingTimeErr" style="display: none;"
+																	class="style-li error-red">Training Time should not be
+																	blank.</li>
 															</ul>
 														</div>
-														<cf:input path="trainingTime" placeholder="Training Time"
-															class="form-control" />
+														<cf:input path="trainingTime"
+															placeholder="Training Time" class="form-control" />
 													</div>
-													<div class="col-md-06 col-xs-12" style="margin-top: 39px;">
-														<input type="submit" id="searchbtn" value="Search"
-															style="float: right; padding: 10px 50px 10px 50px"
-															class="btn login-btn" />
+													<div class="col-md-06 col-xs-12" style="margin-top:39px;">
+												<input type="submit" id="searchbtn" value="Search"
+													style=" float: right; padding:10px  50px 10px 50px"
+													 class="btn login-btn" /> 
 													</div>
 												</div>
 											</div>
@@ -156,8 +160,8 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<fieldset>
-											<legend>Activate Assessment Of Trainee</legend>
-											<ct:if test="${!empty listactivateAssessmentOfTrainee}">
+											<legend>Activate Training Of Trainee</legend>
+											<ct:if test="${!empty listActivateTrainingOfTrainee}">
 												<table id="datatablesfosrest"
 													class="table table-bordered table-responsive">
 													<thead>
@@ -171,23 +175,25 @@
 															<th>Activate Training</th>
 														</tr>
 													</thead>
-													<ct:forEach items="${listactivateAssessmentOfTrainee}"
-														var="listactivateAssessmentOfTrainee">
+													 <ct:forEach items="${listActivateTrainingOfTrainee}"
+														var="listActivateTrainingOfTrainee" varStatus="loop">
 														<tr>
 															<td>1</td>
-															<td>${listactivateAssessmentOfTrainee.courseName}</td>
-															<td>${listactivateAssessmentOfTrainee.trainingDate}</td>
-															<td>${listactivateAssessmentOfTrainee.trainingLab}</td>
-															<td>${listactivateAssessmentOfTrainee.traineeName}</td>
-															<td>${listactivateAssessmentOfTrainee.attendance}</td>
+															<td>${listActivateTrainingOfTrainee.courseName}</td>
+															<td>${listActivateTrainingOfTrainee.trainingDate}</td>
+															<td>${listActivateTrainingOfTrainee.trainingLab}</td>
+															<td>${listActivateTrainingOfTrainee.traineeName}</td>
+															<td>${listActivateTrainingOfTrainee.attendance}</td>
 															<td><input type="checkbox"></td>
 														</tr>
-													</ct:forEach>
+												 	</ct:forEach> 
+												 	
 												</table>
 												<div class="col-md-06 col-xs-12" style="margin-top: -72px;">
 												<input type="button" id="savebtn" value="Save"
 													style=" float: right;"
 													 class="btn login-btn" /> 
+													</div>
 											</ct:if>
 										</fieldset>
 									</div>
@@ -205,25 +211,3 @@
 </cf:form>
 </body>
 </html>
-
-<!-- <script>
-	function validateFields() {
-
-		if ($("#courseName").val() == '') {
-			$("#courseNameErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainingDate").val() == 0) {
-			$("#trainingDateErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainingLab").val() == '') {
-			$("#courseNameErr").css("display", "block");
-			return false;
-		}
-		if ($("#traineeName").val() == 0) {
-			$("#trainingDateErr").css("display", "block");
-			return false;
-		}
-	}
-</script> -->

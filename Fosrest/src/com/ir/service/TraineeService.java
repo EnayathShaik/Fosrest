@@ -7,6 +7,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestFeedbackForm;
 import com.ir.form.FotestCertificationForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
@@ -183,8 +184,12 @@ public interface TraineeService {
 
  public List<AssessmentQuestionForm> listingAssessmentQuestion(
 			AssessmentQuestionForm assesQuestionForm, int id);
+
+
+//public Object listFotestFeedback();
 	
 	
+public List<FotestFeedbackForm> listFotestFeedback();
 	//FOTEST TRAINEE MODULE--
  
  //fotest online training
@@ -192,6 +197,7 @@ public interface TraineeService {
  public List<fotestonlineTrainingForm> listfotestonlineTraining();
 
  public List<FotestCertificationForm> listcertification();
+	
 	
 	
 

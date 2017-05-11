@@ -7,6 +7,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestFeedbackForm;
 import com.ir.form.FotestCertificationForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GetScoreCardForm;
@@ -131,6 +132,9 @@ public interface TraineeDAO {
 	
 	
 	public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm, int id);
+	//traineeFeedback
+	
+	public List<FotestFeedbackForm> listFotestFeedback();
 	
 	
 	//FOTEST TRAINEE MODULE---

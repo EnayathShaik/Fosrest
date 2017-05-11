@@ -73,6 +73,7 @@ import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.form.ViewTrainingCalendarForm;
+import com.ir.form.activateTrainingOfTraineeForm;
 import com.ir.form.manageTrainingForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
@@ -3141,8 +3142,25 @@ public class AdminController {
 		System.out.println("newList " + newList);
 		out.write(newList);
 		out.flush();
+ 	}
 
-	}
-  
-	
+	// Activate Training of Trainee
+
+		@RequestMapping(value = "/activateTrainingOfTrainee", method = RequestMethod.GET)
+		public String activateTrainingOfTrainee(Model model) {
+			System.out.println("viewEnrolledCourses");
+			Map<String, String> courseNameMap = lst.courseNameMap;
+            model.addAttribute("activateTrainingOfTraineeForm", new activateTrainingOfTraineeForm());
+			model.addAttribute("courseNameMap", courseNameMap);
+			return "activateTrainingOfTrainee";
+		}
+
+		@RequestMapping(value = "/activateTrainingOfTraineelist", method = RequestMethod.POST)
+		public String listactivateTrainingOfTrainee(
+				@ModelAttribute("activateTrainingOfTraineeForm") activateTrainingOfTraineeForm p, Model model) {
+			model.addAttribute("activateTrainingOfTraineeForm", new activateTrainingOfTraineeForm());
+			model.addAttribute("listActivateTrainingOfTrainee", this.adminService.listactivateTrainingOfTrainee(p));
+			return "activateTrainingOfTrainee";
+		}
+
 }

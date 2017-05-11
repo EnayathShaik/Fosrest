@@ -14,6 +14,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestFeedbackForm;
 import com.ir.form.FotestCertificationForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GetScoreCardForm;
@@ -414,7 +415,26 @@ public class TraineeServiceImpl implements TraineeService {
 			// TODO Auto-generated method stub
 			return this.traineeDAO.listingAssessmentQuestion( assesQuestionForm, id);
 		}
+		
+		//traineeFeedback
+		@Override
+		@Transactional
+		public List<FotestFeedbackForm> listFotestFeedback() {
+			// TODO Auto-generated method stub
+			return this.traineeDAO.listFotestFeedback();
+		}
 
+		
+		
+		
+/*
+		@Override
+		@Transactional
+		public List<traineeFeedbackForm> listtraineeFeedback() {
+			// TODO Auto-generated method stub
+			return this.traineeDAO.listtraineeFeedback();
+		}*/
+		
 		//FOTEST TRAINEE MODULE--
 		
 		//fotest online training
@@ -432,6 +452,5 @@ public class TraineeServiceImpl implements TraineeService {
 			// TODO Auto-generated method stub
 			return this.traineeDAO.listcertification();
 		}
-
 
 }

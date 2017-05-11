@@ -470,8 +470,16 @@
                                                                         <li><a href="stateMaster.fssai" class="clr">Trainee</a></li>
                                                                         <li><a href="districtMaster.fssai" class="clr">Trainer</a></li>
                                                                         <li><a href="cityMaster.fssai" class="clr">Training Partner</a></li>
-                                                                    </ul>
-                                                                </li>
+                                                                        
+                                                                         </ul>
+                                          <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="StateMaster.fssai" class="clr">State</a></li>
+                                            <li><a href="DistrictMaster.fssai" class="clr">District</a></li>
+                                            <li><a href="CityMaster.fssai" class="clr">City</a></li>                                            
+                                            <li><a href="RegionMaster.fssai" class="clr">Region Mapping</a></li>
+                                        </ul>
+                                                      </li>
                                                                
                                                             </ul>
                                                             <ul class="nav navbar-nav navbar-right">

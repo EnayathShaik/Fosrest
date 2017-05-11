@@ -91,12 +91,13 @@
 														</cf:select>
 													</div>
 
-
-													<input type="submit" id="updatebtn"
-														style="display: none; /* float: right; */ margin-right: 122px;"
-														value="Update" class="btn login-btn" /> <input
-														type="submit" id="createbtn" value="Create"
-														class="btn login-btn" />
+													<div
+														style="float: right;">
+														<input type="submit" id="updatebtn" style="display: none;"
+															value="Update" class="btn login-btn" /> <input
+															type="submit" id="createbtn" value="Create"
+															class="btn login-btn" />
+													</div>
 												</div>
 											</div>
 
@@ -114,7 +115,8 @@
 										<fieldset>
 											<legend>Region Mapping</legend>
 											<ct:if test="${!empty listRegionMapping}">
-												 <table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
+												<table border="1" id="datatablesfosrest"
+													class="table table-bordered table-responsive">
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
@@ -132,7 +134,7 @@
 															<td>${loop.count}</td>
 															<td>${RegionMapping.regionName}</td>
 															<td>${RegionMapping.district}</td>
-														 <td><button
+															<td><button
 																	onclick='editRegion(${RegionMapping.id});return false;'>Edit</button></td>
 															<td><a
 																href="<ct:url value='/RegionMapping/remove/${RegionMapping.id}.fssai' />">Delete</a></td>
@@ -169,7 +171,7 @@ function editRegion(id){
               })
             	$.ajax({
             	      type: 'post',
-            	      url: 'regionMapping/edit/'+id+'.fssai',
+            	      url: 'RegionMapping/edit/'+id+'.fssai',
             	      contentType : "application/json",
             		  data:name1,
             	      success: function (response) {      

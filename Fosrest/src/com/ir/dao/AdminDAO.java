@@ -34,7 +34,7 @@ import com.ir.form.TrainingScheduleForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.form.ViewTrainingCalendarForm;
-
+import com.ir.form.activateTrainingOfTraineeForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 
@@ -443,9 +443,9 @@ public interface AdminDAO {
 	// View Enrolled Courses
 	public List<viewEnrolledCoursesForm> listviewEnrolledCourses(viewEnrolledCoursesForm p);
 
-	//listviewTrainingCalendar
-	public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p);
 						
+	//listviewTrainingCalendar
+		public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p);
 						
 						
 	public List fotestGetQuestions(String data);
@@ -454,4 +454,6 @@ public interface AdminDAO {
 						public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p);
 
 						public	List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p);
+						
+						public List<activateTrainingOfTraineeForm> listactivateTrainingOfTrainee(activateTrainingOfTraineeForm p);
 }

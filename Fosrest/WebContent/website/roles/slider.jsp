@@ -206,8 +206,8 @@
                                         </ul>
                 </li> 
 		        <li><a href="fotestonlinetraining.fssai">Online Training </a></li>
-				<li><a href="assessment-instructions-trainee.fssai">Feedback</a></li>
-				<li><a href="fotestcertification.fssai">Certificate</a></li>
+				<li><a href="fotestFeedback.fssai">Feedback</a></li>
+				<li><a href="fotestcertification.fssai">Certification</a></li>
 	</ul>
 </div>
 <%

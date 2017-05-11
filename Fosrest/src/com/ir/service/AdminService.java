@@ -36,7 +36,7 @@ import com.ir.form.TrainingScheduleForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.form.ViewTrainingCalendarForm;
-
+import com.ir.form.activateTrainingOfTraineeForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.model.AdminUserManagement;
@@ -461,6 +461,11 @@ public interface AdminService {
 	public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p);
 	//listmanageTrainingCalendar
 	public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p);
+	
+	
+	//listactivateTrainingOfTrainee
+		
+		public List<activateTrainingOfTraineeForm> listactivateTrainingOfTrainee(activateTrainingOfTraineeForm p);
 	
 	//FotestGenerateCertificate
 	public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p);

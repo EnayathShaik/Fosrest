@@ -38,6 +38,7 @@ import com.ir.form.CertificateForm;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.FotestFeedbackForm;
 import com.ir.form.FotestCertificationForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GenerateCourseCertificateForm;
@@ -1005,6 +1006,15 @@ public String listcertification( Model model){
 
   return "fotestcertification";
 }
+
+//trainee Feedback
+@RequestMapping(value="/fotestFeedback" , method = { RequestMethod.POST , RequestMethod.GET })
+public String listtraineeFeddback( Model model){
+	  model.addAttribute("fotestFeedbackForm",  new FotestFeedbackForm());
+    model.addAttribute("listtraineeFeedback", this.traineeService.listFotestFeedback());
+
+    return "fotestFeedback";
+} 
 
 
 }
