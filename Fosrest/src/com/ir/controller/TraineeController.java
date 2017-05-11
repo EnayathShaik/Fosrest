@@ -50,6 +50,7 @@ import com.ir.form.OnlineTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.form.TrainingRequestForm;
+import com.ir.form.fotestonlineTrainingForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.AssessmentQuestion_old;
 import com.ir.model.AssessmentQuestions;
@@ -981,7 +982,17 @@ public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") Perso
 	return "certificatetraineeGEN";
 }
 
+//FOTEST TRAINEE MODULE----
 
+//online training
+
+@RequestMapping(value="/fotestonlinetraining" , method = { RequestMethod.POST , RequestMethod.GET })
+public String listonlineTraining( Model model){
+	  model.addAttribute("fotestonlineTrainingForm",  new fotestonlineTrainingForm());
+    model.addAttribute("listfotestonlineTraining", this.traineeService.listfotestonlineTraining());
+
+    return "fotestonlinetraining";
+} 
 
 //fotestcertification
 
@@ -989,10 +1000,10 @@ public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") Perso
 @RequestMapping(value="/fotestcertification" , method = RequestMethod.GET )
 public String listcertification( Model model){
 	  model.addAttribute("certification",  new FotestCertificationForm());
-    model.addAttribute("listcertification", this.traineeService.listcertification());
-    System.out.println(this.traineeService.listcertification());
+  model.addAttribute("listcertification", this.traineeService.listcertification());
+  System.out.println(this.traineeService.listcertification());
 
-    return "fotestcertification";
+  return "fotestcertification";
 }
 
 

@@ -16,6 +16,7 @@ import com.ir.form.MyTrainingForm;
 import com.ir.form.OnlineTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.TrainingRequestForm;
+import com.ir.form.fotestonlineTrainingForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CheckAadhar;
@@ -131,6 +132,11 @@ public interface TraineeDAO {
 	
 	public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm, int id);
 	
-	public List<FotestCertificationForm> listcertification();
 	
+	//FOTEST TRAINEE MODULE---
+	
+	// fotest online training-
+	public List<fotestonlineTrainingForm> listfotestonlineTraining();
+	
+	public List<FotestCertificationForm> listcertification();
 }

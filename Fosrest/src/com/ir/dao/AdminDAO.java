@@ -12,6 +12,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
+import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
@@ -445,8 +446,12 @@ public interface AdminDAO {
 	//listviewTrainingCalendar
 	public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p);
 						
-	//listmanageTrainingCalendar
-	public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p);
+						
 						
 	public List fotestGetQuestions(String data);
+						
+						//listfotestGenerateCertificate
+						public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p);
+
+						public	List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p);
 }

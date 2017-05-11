@@ -190,16 +190,24 @@
 %>
 <div id="sidebar-wrapper">
 	<ul class="sidebar-nav">
-		        <li><a href="OnlineTraining.fssai">Online Training </a></li>
-				<li><a href="assessment-instructions-trainee.fssai">Online Assessment</a></li>
-				<li><a href="GetScoreCard.fssai">Get Score Card </a></li>
-				<li><a href="fotestcertification.fssai">Certification</a></li>
-		<!-- <li><a href="course-training.fssai?courseTypeId=1">Online Assessment</a></li>-->
-		<!-- <li><a href="assessment-instructions-trainee.fssai">Assessment</a></li> -->
-		<!-- <li><a href="feedbackForm.fssai">Feedback</a></li>
-		<li><a href="generateCertificatetrainee.fssai">Certification</a>
-		<li><a href="generateCourseCertificate.fssai">Past Certificate</a> </li> -->
-		</li>
+	            <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Course Enrollment<span class="caret"></span></a>
+                                        <ul class="dropdown-menu" > 
+                                            <li class="hov"><a href="traineeUserManagementForm.fssai" class="clr">General</a></li>
+                                            <li class="hov"><a href="trainerUserManagementForm.fssai" class="clr">LC-MS/MS</a></li>
+                                            <li class="hov"><a href="trainingCenterUserManagementForm.fssai" class="clr">GC-MS/MS</a></li>
+                                            <li class="hov"><a href="assessorUserManagementForm.fssai" class="clr" style="margin-bottom: 1px;">ICP-MS</a></li>
+                                        </ul>
+               </li> 
+                <li><a href="fotestonlinetraining.fssai">Print Admit Card </a></li>
+                <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Assessment<span class="caret"></span></a>
+                                        <ul class="dropdown-menu" ><!-- style="position:relative; float:none;" --> 
+                                            <li class="hov"><a href="traineeUserManagementForm.fssai" class="clr">Before Training</a></li>
+                                            <li class="hov"><a href="trainerUserManagementForm.fssai" class="clr">After Training</a></li>
+                                        </ul>
+                </li> 
+		        <li><a href="fotestonlinetraining.fssai">Online Training </a></li>
+				<li><a href="assessment-instructions-trainee.fssai">Feedback</a></li>
+				<li><a href="fotestcertification.fssai">Certificate</a></li>
 	</ul>
 </div>
 <%

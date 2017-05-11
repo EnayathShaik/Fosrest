@@ -1279,10 +1279,16 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/fotest/fotestGenerateCertificate.jsp" />
 	</definition>
+<!-- FOTEST-TRAINEE-MODULE -->	
 	<definition name="fotestTraineeHome" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
 			value="/website/fotestTrainee/fotestTraineeHome.jsp" />
+	</definition>
+	<definition name="fotestonlinetraining" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body"
+			value="/website/fotestTrainee/fotestonlinetraining.jsp" />
 	</definition>
 	<definition name="fotestassessmentquestions" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
@@ -1293,5 +1299,4 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/fotest/FotestCertification.jsp" />
 	</definition>
-	
 </tiles-definitions>

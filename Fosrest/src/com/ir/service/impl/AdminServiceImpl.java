@@ -20,6 +20,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
+import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
@@ -1475,15 +1476,21 @@ public class AdminServiceImpl implements AdminService {
 			return this.adminDAO.listmanageTrainingCalendar(p);
 		}
 		
-
-		// fotestGetQuestions
+		//listfotestGenerateCertificate
 		@Override
-		@Transactional	
-		public List fotestGetQuestions(String data) {
-			List list = adminDAO.fotestGetQuestions(data);
-			return list;
+		@Transactional
+		public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p ) {
+			// TODO Auto-generated method stub
+			return this.adminDAO.listfotestGenerateCertificate(p);
 		}
-
+		
+		// fotestGetQuestions
+				@Override
+				@Transactional	
+				public List fotestGetQuestions(String data) {
+					List list = adminDAO.fotestGetQuestions(data);
+					return list;
+				}
 		
 		
 	

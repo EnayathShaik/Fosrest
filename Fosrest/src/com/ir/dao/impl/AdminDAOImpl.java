@@ -36,6 +36,7 @@ import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
 import com.ir.form.DistrictMasterForm;
 import com.ir.form.FotestAssessmentQuestionsForm;
+import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.HolidayMasterForm;
 import com.ir.form.InvoiceInfoForm;
@@ -3719,64 +3720,89 @@ public class AdminDAOImpl implements AdminDAO {
 		return resulList;
 	}
 	
+	//listgenerateCertificate
+		@Override
+		public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm form) {
+			// TODO Auto-generated method stub
+			System.out.println("inside listfotestGenerateCertificate");
+			String courseName = form.getCourseName();
+			String traineeName = form.getTrainingDate();
+			FotestGenerateCertificateForm bean = new FotestGenerateCertificateForm();
+			List<FotestGenerateCertificateForm> resulList = new ArrayList<FotestGenerateCertificateForm>();
+			System.out.println("courseName "+courseName + " traineeName "+traineeName);
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> list = session.createSQLQuery("select  cast('Jyoti' as varchar(20) ) as traineeName ,  cast('Java' as varchar(20)) as CourseName ,cast('Mahape' as varchar(20) ) as TrainingLab , cast('2016-12-16' as varchar(20)) as TrainingDate ,cast('12:00' as varchar(20)) as TrainingTime , cast('Present' as varchar(20)) as status   ").list();
+			for (Object[] li : list ) {
+				
+				bean.setTraineeName( (String) li[0]);
+				bean.setCourseName((String) li[1]);
+				bean.setTrainingLab((String) li[2]);
+				bean.setTrainingDate((String) li[3]);
+				bean.setTrainingTime((String) li[4]);
+				bean.setAttendance( (String)li[5]);
 
-	// fotestGetQuestions
-
-	@Override
-	public List fotestGetQuestions(String data) {
-		System.out.println("fotest dao questions "+data);
-		String[] totalConnected = data.split("-");
-
-		String assesmentTypeSearch = (totalConnected[0].split("="))[1];
-		String trainingNameSearch = (totalConnected[1].split("="))[1];
-		System.out.println(assesmentTypeSearch+trainingNameSearch);
-/*
-		String unitCodeSearch1, moduleCodeSearch1;
-		if (unitCodeSearch == 0) {
-			unitCodeSearch1 = "%";
-		} else {
-			unitCodeSearch1 = (totalConnected[0].split("="))[1];
+				//logger.info("generateCertificateForm List::" + li);
+				resulList.add(bean);
+			}
+			return resulList;
 		}
-
-		if (moduleCodeSearch == 0) {
-			moduleCodeSearch1 = "%";
-		} else {
-			moduleCodeSearch1 = (totalConnected[0].split("="))[1];
-		}
-
-		System.out.println("unitcodesearch  " + unitCodeSearch + "  " + unitCodeSearch1);
-		System.out.println("modulecodesearch   " + moduleCodeSearch + "  " + moduleCodeSearch1);
-		StringBuffer wherebuffer = new StringBuffer();
-		wherebuffer.append(" WHERE 1=1 ");
-		if (unitCodeSearch > 0) {
-			wherebuffer.append(" AND um.unitid=" + unitCodeSearch);
-		}
-		if (moduleCodeSearch > 0) {
-			wherebuffer.append(" AND mm.moduleid=" + moduleCodeSearch);
-		}
-
-		Session session = sessionFactory.getCurrentSession();
-		String sql = "select um.unitcode , mm.modulename , aq.questionnumber, aq.assessmentid, mm.modulecode   from assessmentquestions as aq "
-				+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
-				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
-		sql = sql + wherebuffer.toString();
-		Query query = session.createSQLQuery(sql);
-		List list = query.list();
-		System.out.println(list.size());
-		return list;*/
 		
-		System.out.println("inside assessmentQuestionsForm");
-		
-		FotestAssessmentQuestionsForm bean = new FotestAssessmentQuestionsForm();
-		List<FotestAssessmentQuestionsForm> resulList = new ArrayList<FotestAssessmentQuestionsForm>();
-		Session session = this.sessionFactory.getCurrentSession();
-		/*List<Object[]> list = session.createSQLQuery("select cast('Training' as varchar(20)) as assesmentType , cast('SCCC' as varchar(20)) as trainingName").list();
-		*/
-		Query query = session.createSQLQuery("select cast('Training' as varchar(20)) as assesmentType , cast('SCCC' as varchar(20)) as trainingName");
-		List list = query.list();
-		System.out.println(list.size());
-		return list;
-		
-	}
+		// fotestGetQuestions
 
+		@Override
+		public List fotestGetQuestions(String data) {
+			System.out.println("fotest dao questions "+data);
+			String[] totalConnected = data.split("-");
+
+			String assesmentTypeSearch = (totalConnected[0].split("="))[1];
+			String trainingNameSearch = (totalConnected[1].split("="))[1];
+			System.out.println(assesmentTypeSearch+trainingNameSearch);
+	/*
+			String unitCodeSearch1, moduleCodeSearch1;
+			if (unitCodeSearch == 0) {
+				unitCodeSearch1 = "%";
+			} else {
+				unitCodeSearch1 = (totalConnected[0].split("="))[1];
+			}
+
+			if (moduleCodeSearch == 0) {
+				moduleCodeSearch1 = "%";
+			} else {
+				moduleCodeSearch1 = (totalConnected[0].split("="))[1];
+			}
+
+			System.out.println("unitcodesearch  " + unitCodeSearch + "  " + unitCodeSearch1);
+			System.out.println("modulecodesearch   " + moduleCodeSearch + "  " + moduleCodeSearch1);
+			StringBuffer wherebuffer = new StringBuffer();
+			wherebuffer.append(" WHERE 1=1 ");
+			if (unitCodeSearch > 0) {
+				wherebuffer.append(" AND um.unitid=" + unitCodeSearch);
+			}
+			if (moduleCodeSearch > 0) {
+				wherebuffer.append(" AND mm.moduleid=" + moduleCodeSearch);
+			}
+
+			Session session = sessionFactory.getCurrentSession();
+			String sql = "select um.unitcode , mm.modulename , aq.questionnumber, aq.assessmentid, mm.modulecode   from assessmentquestions as aq "
+					+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
+					+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
+			sql = sql + wherebuffer.toString();
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			System.out.println(list.size());
+			return list;*/
+			
+			System.out.println("inside assessmentQuestionsForm");
+			
+			FotestAssessmentQuestionsForm bean = new FotestAssessmentQuestionsForm();
+			List<FotestAssessmentQuestionsForm> resulList = new ArrayList<FotestAssessmentQuestionsForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			/*List<Object[]> list = session.createSQLQuery("select cast('Training' as varchar(20)) as assesmentType , cast('SCCC' as varchar(20)) as trainingName").list();
+			*/
+			Query query = session.createSQLQuery("select cast('Training' as varchar(20)) as assesmentType , cast('SCCC' as varchar(20)) as trainingName");
+			List list = query.list();
+			System.out.println(list.size());
+			return list;
+			
+		}
 }

@@ -34,6 +34,7 @@ import com.ir.form.NominateTraineeForm;
 import com.ir.form.OnlineTrainingForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.TrainingRequestForm;
+import com.ir.form.fotestonlineTrainingForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
@@ -1614,8 +1615,30 @@ System.out.println("list "+list);
 				
 				
 			}
+	
+		//FOTEST TRAINEE MODULE----
+		// online training
+		@Override
+		public List<fotestonlineTrainingForm> listfotestonlineTraining() {
+			// TODO Auto-generated method stub
+			System.out.println("inside listfotestonlineTraining");
+			fotestonlineTrainingForm bean = new fotestonlineTrainingForm();
+			List<fotestonlineTrainingForm> resulList = new ArrayList<fotestonlineTrainingForm>();
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Object[]> list = session.createSQLQuery("select cast('ICP-MS' as varchar(20)) as courseName , cast('02/05/2017' as varchar(20)) as trainingDate ,  cast('02:00 PM' as varchar(20)) as trainingTime , cast('Adlabs' as varchar(20)) as trainingLab    ").list();
+			for (Object[] li : list ) {
+				
+				bean.setCourseName((String) li[0]);
+				bean.setTrainingDate((String) li[1]);
+				bean.setTrainingTime((String) li[2]);
+				bean.setTrainingLab((String) li[3]);
+				//logger.info("fotestonlineTrainingForm List::" + li);
+				resulList.add(bean);
+			}
+			return resulList;
+		}
 		
-		
+
 		//certification
 		
 		
@@ -1638,6 +1661,5 @@ System.out.println("list "+list);
 			}
 			return resulList;
 		}
-		
 		
 		}

@@ -23,6 +23,7 @@ import com.ir.form.InstituteMyCalendarForm;
 import com.ir.form.MarkAttendanceForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.TrainingRequestForm;
+import com.ir.form.fotestonlineTrainingForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CheckAadhar;
@@ -413,6 +414,16 @@ public class TraineeServiceImpl implements TraineeService {
 			// TODO Auto-generated method stub
 			return this.traineeDAO.listingAssessmentQuestion( assesQuestionForm, id);
 		}
+
+		//FOTEST TRAINEE MODULE--
+		
+		//fotest online training
+		@Override
+		@Transactional
+		public List<fotestonlineTrainingForm> listfotestonlineTraining() {
+			// TODO Auto-generated method stub
+			return this.traineeDAO.listfotestonlineTraining();
+		}
 		
 		//certification
 		@Override
@@ -421,8 +432,6 @@ public class TraineeServiceImpl implements TraineeService {
 			// TODO Auto-generated method stub
 			return this.traineeDAO.listcertification();
 		}
-		
-
 
 
 }

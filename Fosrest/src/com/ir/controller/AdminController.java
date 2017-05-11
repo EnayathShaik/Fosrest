@@ -47,6 +47,7 @@ import com.ir.form.DistrictForm;
 import com.ir.form.DistrictMasterForm;
 import com.ir.form.FotestAssessmentQuestionsForm;
 import com.ir.form.FotestFeedbackMasterForm;
+import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.HolidayMasterForm;
@@ -3089,6 +3090,28 @@ public class AdminController {
 		model.addAttribute("TrainerMap", TrainerMap);
 		return "managetrainingcalendar";
 	}
+	
+	 //Generate Certificate
+    
+    @RequestMapping(value = "/fotestGenerateCertificate", method = RequestMethod.GET)
+ 	public String generateCertificate(Model model) {
+ 		System.out.println("fotestGenerateCertificate");
+ 		Map<String , String> courseNameMap = lst.courseNameMap;
+ 		
+ 		model.addAttribute("FotestGenerateCertificateForm" , new FotestGenerateCertificateForm());
+ 		model.addAttribute("courseNameMap", courseNameMap);
+ 		
+ 		return "fotestGenerateCertificate";
+ 	}
+  	
+   
+    
+	 @RequestMapping(value="/fotestGenerateCertificatelist" , method = RequestMethod.POST)
+    public String listgenerateCertificate(@ModelAttribute("FotestGenerateCertificateForm") FotestGenerateCertificateForm p , Model model){
+  	  model.addAttribute("FotestGenerateCertificateForm" , new FotestGenerateCertificateForm());
+        model.addAttribute("listfotestGenerateCertificate", this.adminService.listfotestGenerateCertificate(p));
+        return "fotestGenerateCertificate";
+    } 
 
 	
 	// manage Assessment    

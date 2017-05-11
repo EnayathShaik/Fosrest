@@ -15,6 +15,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
+import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
@@ -461,8 +462,11 @@ public interface AdminService {
 	//listmanageTrainingCalendar
 	public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p);
 	
+	//FotestGenerateCertificate
+	public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p);
+	
 	//namage assessment question
-	List fotestGetQuestions(String data);
+		List fotestGetQuestions(String data);
 }
 
 
