@@ -276,7 +276,7 @@ public class LoginController {
 			return "AssessorPage";
 		}
 	
-else if(loginDetails!=null && loginDetails.getProfileId() == 30 && loginDetails.getStatus().equalsIgnoreCase("A")){
+        else if(loginDetails!=null && loginDetails.getProfileId() == 30 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			
 			new ZLogger("loginProcess","in admin login" , "LoginController.java");
 			session.setAttribute("loginUser", loginDetails);
@@ -285,6 +285,19 @@ else if(loginDetails!=null && loginDetails.getProfileId() == 30 && loginDetails.
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
 			return "AssessorPage";
+		}
+        else if(loginDetails !=null && loginDetails.getProfileId() == 33 && loginDetails.getStatus().equalsIgnoreCase("A"))
+		{
+			//PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetails.getId() );
+			//new ZLogger("loginProcess","in trainee login  "+ personalInformationTrainee.getFirstName(), "LoginController.java");
+			//session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());
+			session.setAttribute("profileId", loginDetails.getProfileId());
+			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userName", loginDetails.getLoginId());
+			//session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
+			//session.setAttribute("personalTraineeId", personalInformationTrainee.getId());
+			
+			return "fotestTraineeHome";
 		}
 		
 		else {

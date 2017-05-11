@@ -174,13 +174,35 @@
                         <li> <a href="activateAssessmentOfTrainee.fssai">Activate Assessment</a> </li>
                         <li> <a href="viewtrainingcalendar.fssai"> View Training Calendar</a> </li>
                         <li> <a href="viewEnrolledCourses.fssai"> View Enrolled Courses</a> </li>
-                        <li> <a href="feedbackMaster.fssai">Generate Certificate</a> </li>
+                        <li> <a href="fotestGenerateCertificate.fssai">Generate Certificate</a> </li>
                     </ul>
                 </div>
 
 <%
 	} 
 %>
-
-
+<%
+	System.out.println("Profile ID : "
+			+ session.getAttribute("profileId"));
+	if (session.getAttribute("profileId").equals(33)) {
+		System.out.println("Profile ID : "
+				+ session.getAttribute("profileId"));
+%>
+<div id="sidebar-wrapper">
+	<ul class="sidebar-nav">
+		        <li><a href="OnlineTraining.fssai">Online Training </a></li>
+				<li><a href="assessment-instructions-trainee.fssai">Online Assessment</a></li>
+				<li><a href="GetScoreCard.fssai">Get Score Card </a></li>
+				<li><a href="Certificate.fssai">Certificate</a></li>
+		<!-- <li><a href="course-training.fssai?courseTypeId=1">Online Assessment</a></li>-->
+		<!-- <li><a href="assessment-instructions-trainee.fssai">Assessment</a></li> -->
+		<!-- <li><a href="feedbackForm.fssai">Feedback</a></li>
+		<li><a href="generateCertificatetrainee.fssai">Certification</a>
+		<li><a href="generateCourseCertificate.fssai">Past Certificate</a> </li> -->
+		</li>
+	</ul>
+</div>
+<%
+	}
+	%>	
 
