@@ -4,8 +4,8 @@
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
         <!-- @author Jyoti Mekal -->
 
-   			  <ct:url var="addAction" value="/UnitMaster/add.fssai" ></ct:url>
-            <cf:form action="fotestcertification.fssai" name="myForm" method="POST" commandName="certification">
+   			  
+            <cf:form commandName="certification">
 
                 <section>
                     <%@include file="../roles/top-menu.jsp"%>
@@ -28,18 +28,20 @@
                                             </div>
                                         </div>
             
-<fieldset><legend><h3>certification</h3></legend>
+<fieldset><legend>Certification</legend>
 <ct:if test="${!empty listcertification}">
-	 <table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
+	  <table id="datatablesfosrest" class="table table-bordered table-responsive">
+	<thead>
 	<tr>
 	<th width="80">Sr. No</th>
 		<th width="80">Course Name</th>
-		<th width="120">Training Date & Time</th>
+		<th width="120">Training Date and Time</th>
 		<th width="120">Training LAB Name</th>
 		<th width="120">certification</th>
 
 	
 	</tr>
+	</thead>
 	<ct:forEach items="${listcertification}" var="listcertification">
 	
 	

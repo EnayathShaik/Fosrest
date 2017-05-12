@@ -20,7 +20,7 @@ window.onload = OnStart;
 
 
 function getQuestions(){
-	var unitCodeSearch =  $("#unitCode").val();
+	var unitCodeSearch =  $("#unitCode1").val();
 	var moduleCodeSearch =  $("#moduleCode1").val();
 	var total = "unitCodeSearch="+unitCodeSearch+"-moduleCodeSearch="+moduleCodeSearch;
 	var result="";
@@ -61,10 +61,10 @@ function editAssessmentQuestion(id){
 	$.each(mainData1 , function(i , obj)
 	{
 		document.getElementById('id').value = obj[0];
-		document.getElementById('unitCode').value = obj[1];
-		$("#unitCode").trigger("change");
+		document.getElementById('unitCode2').value = obj[1];
+		$("#unitCode2").trigger("change");
 		window.setTimeout(function(){
-			document.getElementById('moduleName2').value = obj[2];
+			document.getElementById('moduleCode2').value = obj[2];
 	    }, 3000);
 		document.getElementById('questionNumber').value = obj[3];
 		document.getElementById('questionHint').value = obj[4];
@@ -110,12 +110,12 @@ $("#correctAnswerErr").css("display" , "none");
 
 
 
-if($("#unitCode").val() == 0){
+if($("#unitCode2").val() == 0){
 	 
 		$("#unitCodeErr").css("display" , "block");
 		return false;
 	 } 
-if($("#moduleCode").val() == 0){
+if($("#moduleCode2").val() == 0){
 	 
 		$("#moduleCodeErr").css("display" , "block");
 		return false;
@@ -255,7 +255,7 @@ if($("#correctAnswer").val() == 0){
                                                            <%--  ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select path="unitCode" class="form-control" onchange="getModule(this.value,'moduleCode1')">
+												<cf:select id="unitCode1" path="unitCode" class="form-control" onchange="getModule(this.value,'moduleCode1')">
 													
 													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
 												</cf:select> 
@@ -267,7 +267,7 @@ if($("#correctAnswer").val() == 0){
                                                    <div class="form-group">  
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Module Name:</strong></li>
+                                                            <li class="style-li"><strong>Module Code:</strong></li>
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
                                                            <%-- ${created } --%></li>
@@ -350,7 +350,7 @@ if($("#correctAnswer").val() == 0){
                                                             <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select path="unitCode" class="form-control" onchange="getModule(this.value,'moduleCode2')" >
+												<cf:select id="unitCode2" path="unitCode" class="form-control" onchange="getModule(this.value,'moduleCode2')" >
 													
 													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
 												</cf:select> 
@@ -390,8 +390,8 @@ if($("#correctAnswer").val() == 0){
                                                   <div class="form-group">  
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Module Name:</strong></li>
-                                                             <li id="moduleCodeErr" style="display:none;" class="style-li error-red" > Enter Module name</li>
+                                                            <li class="style-li"><strong>Module Code:</strong></li>
+                                                             <li id="moduleCodeErr" style="display:none;" class="style-li error-red" > Enter Module Code</li>
                                             
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>

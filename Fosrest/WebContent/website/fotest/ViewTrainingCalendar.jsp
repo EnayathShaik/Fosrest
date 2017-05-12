@@ -116,15 +116,16 @@
 												</div>
 											</div>
 											<div class="col-md-12 col-xs-12">
-<div class="btn-group" style="float:right;">
-  <button type="submit" value="Search" class="btn login-btn" style="margin-right:15px;">Search</button>
-  <button type="button" value="Download" class="btn login-btn" style="margin-right:15px;">Download</button>
-</div>
-	
-		</div>							
-												
-										
-									
+
+												<div class="col-md-12 col-xs-12">
+													<input type="button" style="float: right;" value="Download" class="btn login-btn" />
+													 <input type="submit" style="float: right; margin-right: 20px;" value="Search" class="btn login-btn" />
+
+												</div>
+											</div>
+
+
+
 										</fieldset>
 									</div>
 
@@ -141,7 +142,7 @@
 														<br> <br> <br>
 													
 										</div> -->
-									
+
 									<div class="col-md-4 hidden-xs"></div>
 
 
