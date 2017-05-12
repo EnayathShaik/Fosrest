@@ -41,7 +41,6 @@ import com.ir.form.GenerateCertificateForm;
 import com.ir.form.HolidayMasterForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
-import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
@@ -395,7 +394,7 @@ public class AdminDAOImpl implements AdminDAO {
 		return courseTypeList;
 	}
 
-	@Override
+	/*@Override
 	public String manageTrainingPartnerSave(ManageTrainingPartnerForm manageTrainingPartnerForm) {
 		Session session = sessionFactory.getCurrentSession();
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
@@ -451,9 +450,9 @@ public class AdminDAOImpl implements AdminDAO {
 
 		new ZLogger("manageTrainingPartnerSave", "all insert done", "AdminDAOImpl.java");
 		return passwordString + "&" + nextSequenceUserID;
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public String manageAssessmentAgencySave(ManageAssessmentAgencyForm manageAssessmentAgencyForm) {
 		Session session = sessionFactory.getCurrentSession();
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
@@ -505,7 +504,7 @@ public class AdminDAOImpl implements AdminDAO {
 		manageAssessmentAgency.setState(s);
 		session.save(manageAssessmentAgency);
 		return passwordString + "&" + nextSequenceUserID;
-	}
+	}*/
 
 	@Override
 	public List<PersonalInformationTrainee> traineeUserManagementSearch(

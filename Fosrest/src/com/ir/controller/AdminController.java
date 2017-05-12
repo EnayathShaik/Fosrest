@@ -53,13 +53,11 @@ import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.HolidayMasterForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
-import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
 import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.form.ModuleMasterForm;
-import com.ir.form.MyCalendarForm;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
 import com.ir.form.RegionMappingForm;
@@ -354,7 +352,7 @@ public class AdminController {
 		return "redirect:manageCourse.fssai";
 	}
 
-	@RequestMapping(value = "/manageTrainingPartnerForm", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/manageTrainingPartnerForm", method = RequestMethod.GET)
 	public String manageTrainingPartnerForm(
 			@ModelAttribute("manageTrainingPartnerForm") ManageTrainingPartnerForm manageTrainingPartnerForm,
 			Model model) {
@@ -392,8 +390,8 @@ public class AdminController {
 			return "redirect:manageTrainingPartnerForm";
 		}
 	}
-
-	@RequestMapping(value = "/manageAssessmentAgencyForm", method = RequestMethod.GET)
+*/
+	/*@RequestMapping(value = "/manageAssessmentAgencyForm", method = RequestMethod.GET)
 	public String manageAssessmentAgencyForm(
 			@ModelAttribute("manageAssessmentAgencyForm") ManageAssessmentAgencyForm manageAssessmentAgencyForm,
 			Model model) {
@@ -431,7 +429,7 @@ public class AdminController {
 			model.addAttribute("pwd", "User id created successfully !!");
 			return "redirect:manageAssessmentAgencyForm";
 		}
-	}
+	}*/
 
 	@RequestMapping(value = "/traineeUserManagementForm", method = RequestMethod.GET)
 	public String traineeUserManagementForm(

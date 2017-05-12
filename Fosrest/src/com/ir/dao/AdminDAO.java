@@ -16,7 +16,6 @@ import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
-import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
@@ -95,9 +94,9 @@ public interface AdminDAO {
 
 	public List<CourseType> courseTypeList();
 
-	public String manageTrainingPartnerSave(ManageTrainingPartnerForm manageTrainingPartnerForm);
+	//public String manageTrainingPartnerSave(ManageTrainingPartnerForm manageTrainingPartnerForm);
 
-	public String manageAssessmentAgencySave(ManageAssessmentAgencyForm manageAssessmentAgencyForm);
+	//public String manageAssessmentAgencySave(ManageAssessmentAgencyForm manageAssessmentAgencyForm);
 
 	public List<PersonalInformationTrainee> traineeUserManagementSearch(
 			TraineeUserManagementForm traineeUserManagementForm);
@@ -250,8 +249,8 @@ public interface AdminDAO {
 
 	public SubjectMaster getSubjectMasterById(int id);
 
-	public List<SubjectMaster> listSubjectMaster();*/
-
+	public List<SubjectMaster> listSubjectMaster();
+*/
 	public void addTrainingSchedule(TrainingSchedule p);
 
 	public void updateTrainingSchedule(TrainingSchedule p);

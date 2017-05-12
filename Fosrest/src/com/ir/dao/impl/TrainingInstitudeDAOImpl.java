@@ -24,7 +24,6 @@ import com.ir.dao.TrainingInstitudeDAO;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
-import com.ir.form.InstituteMyCalendarForm;
 import com.ir.form.MarkAttendanceForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.TrainingRequestForm;
@@ -136,7 +135,7 @@ System.out.println("list "+list);
 		return list;
 	}
 
-	@Override
+	/*@Override
 	public List<InstituteMyCalendarForm> listInstituteMyCalendar() {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
@@ -169,7 +168,7 @@ System.out.println("list "+list);
 		//System.out.println("list "+list);
 				return list;
 	}
-
+*/
 	
 	/*//Dynamic
 		@Override

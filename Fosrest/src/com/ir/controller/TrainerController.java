@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
-import com.ir.form.MyCalendarForm;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.form.TrainerRequestForm;
 import com.ir.model.AdmitCardForm;
@@ -414,7 +413,7 @@ public class TrainerController {
 		return "TrainerRequest";
 	}
 
-	@RequestMapping(value = "/MyCalendar", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/MyCalendar", method = RequestMethod.GET)
 	public String MyCalendar(
 			@ModelAttribute("MyCalendarForm") MyCalendarForm MyCalendarForm,
 			Model model) {
@@ -465,7 +464,7 @@ public class TrainerController {
 		model.addAttribute("MyCalendarForm", new MyCalendarForm());
 
 		return "MyCalendar";
-	}
+	}*/
 
 	/*
 	 * @RequestMapping(value = "/TrainerHome", method = RequestMethod.GET)

@@ -42,7 +42,6 @@ import com.ir.form.FotestFeedbackForm;
 import com.ir.form.FotestCertificationForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.GenerateCourseCertificateForm;
-import com.ir.form.InstituteMyCalendarForm;
 import com.ir.form.MarkAttendanceForm;
 import com.ir.form.GetScoreCardForm;
 import com.ir.form.MyTrainingForm;
@@ -911,7 +910,7 @@ public String ListMarkAttendance(@ModelAttribute("MarkAttendanceForm") MarkAtten
 }
 
 
-@RequestMapping(value = "/mycalendar", method = RequestMethod.GET)
+/*@RequestMapping(value = "/mycalendar", method = RequestMethod.GET)
 public String myCalendar(@ModelAttribute("InstituteMyCalendarForm") InstituteMyCalendarForm myCalendarForm ,Model model) {
 		System.out.println("start get");
 			
@@ -943,7 +942,7 @@ public String mmyCalendar(@ModelAttribute("InstituteMyCalendarForm") InstituteMy
 
 return "mycalendar";
 }
-
+*/
 //niranjan
 //for onlinelisting
 

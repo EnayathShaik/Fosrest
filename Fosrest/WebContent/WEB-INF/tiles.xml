@@ -709,12 +709,12 @@
 	</definition>
 
 
-	<definition name="master_state" extends="base.user.afterLogin">
+	<!-- <definition name="master_state" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/users/superadmin/stateMaster.jsp" />
 	</definition>
 
-	<definition name="districtMaster" extends="base.user.afterLogin">
+	 <definition name="districtMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/districtMaster.jsp" />
 	</definition>
@@ -726,7 +726,7 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
 			value="/website/admin/regionMappingMaster.jsp" />
-	</definition>
+	</definition>  -->
 	<definition name="manageCourse" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/manageCourse.jsp" />
@@ -736,21 +736,21 @@
 		<put-attribute name="body"
 			value="/website/admin/manageCourseContent.jsp" />
 	</definition>
-	<definition name="manageTrainingPartnerForm" extends="base.user.afterLogin">
+	<!-- <definition name="manageTrainingPartnerForm" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
 			value="/website/admin/manageTrainingPartner.jsp" />
-	</definition>
+	</definition> -->
 	<definition name="traineeUserManagementForm" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
 			value="/website/admin/traineeUserManagement.jsp" />
 	</definition>
-	<definition name="manageAssessmentAgencyForm" extends="base.user.afterLogin">
+	<!-- <definition name="manageAssessmentAgencyForm" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
 			value="/website/admin/manageAssessmentAgency.jsp" />
-	</definition>
+	</definition> -->
 	<definition name="welcomeManageTrainingPartner" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/welcomeRegister.jsp" />
@@ -976,10 +976,10 @@
 		<put-attribute name="body" value="/website/admin/State.jsp" />
 	</definition>
 
-	<definition name="StateMaster/edit/{id}" extends="base.user.afterLogin">
+	<!-- <definition name="StateMaster/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/State.jsp" />
-	</definition>
+	</definition> -->
 	
 	
 		<definition name="DistrictMaster" extends="base.user.afterLogin">
@@ -987,10 +987,10 @@
 		<put-attribute name="body" value="/website/admin/District.jsp" />
 	</definition>
 
-	<definition name="DistrictMaster/edit/{id}" extends="base.user.afterLogin">
+	<!-- <definition name="DistrictMaster/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/District.jsp" />
-	</definition>
+	</definition> -->
 	
 
 		<definition name="CityMaster" extends="base.user.afterLogin">
@@ -998,20 +998,20 @@
 		<put-attribute name="body" value="/website/admin/City.jsp" />
 	</definition>
 
-	<definition name="CityMaster/edit/{id}" extends="base.user.afterLogin">
+	<!-- <definition name="CityMaster/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/City.jsp" />
-	</definition>
+	</definition> -->
 	
 		<definition name="RegionMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/RegionMaster.jsp" />
 	</definition>
 
-	<definition name="RegionMaster/edit/{id}" extends="base.user.afterLogin">
+	<!-- <definition name="RegionMaster/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/RegionMaster.jsp" />
-	</definition>
+	</definition> -->
 	
 	
 	
@@ -1117,7 +1117,7 @@
 		<put-attribute name="body" value="/website/admin/MarkAttendance.jsp" />
 	</definition>
 	
-		<definition name="mycalendar" extends="base.user.afterLogin">
+		<!-- <definition name="mycalendar" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/InstituteMyCalendar.jsp" />
 	</definition>
@@ -1125,7 +1125,7 @@
  	<definition name="mycalendar/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/InstituteMyCalendar.jsp" />
-	</definition>
+	</definition> -->
 	
 	
 	<!-- 	<definition name="assessmentquestions" extends="base.user.afterLogin">
@@ -1200,7 +1200,7 @@
 			value="/website/trainer/TrainerRequest.jsp" />
 	</definition>
 
-	<definition name="MyCalendar" extends="base.user.afterLogin">
+	<!-- <definition name="MyCalendar" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainer/MyCalendar.jsp" />
 	</definition>
@@ -1208,7 +1208,7 @@
 	<definition name="MyCalendar/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainer/MyCalendar.jsp" />
-	</definition>
+	</definition> -->
 	
 	<!-- for tainee online question listing -->
 		<definition name="listingquestions" extends="base.user.afterLogin">

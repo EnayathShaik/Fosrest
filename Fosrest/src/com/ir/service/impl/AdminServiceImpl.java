@@ -24,7 +24,6 @@ import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
-import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
@@ -152,20 +151,20 @@ public class AdminServiceImpl implements AdminService {
 		return courseTypeList;
 	}
 
-	@Override
+	/*@Override
 	@Transactional
 	public String manageTrainingPartnerSave(ManageTrainingPartnerForm manageTrainingPartnerForm) {
 		// TODO Auto-generated method stub
 		String manageTrainingPartnerSave = adminDAO.manageTrainingPartnerSave(manageTrainingPartnerForm);
 		return manageTrainingPartnerSave;
-	}
+	}*/
 
-	@Override
+	/*@Override
 	@Transactional
 	public String manageAssessmentAgencySave(ManageAssessmentAgencyForm manageAssessmentAgencyForm) {
 		String manageAssessmentAgencySave = adminDAO.manageAssessmentAgencySave(manageAssessmentAgencyForm);
 		return manageAssessmentAgencySave;
-	}
+	}*/
 
 	@Override
 	@Transactional

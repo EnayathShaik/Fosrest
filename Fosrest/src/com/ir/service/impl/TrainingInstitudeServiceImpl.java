@@ -9,17 +9,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import com.ir.dao.TrainerDAO;
-
-
 import com.ir.dao.TrainingInstitudeDAO;
-import com.ir.form.InstituteMyCalendarForm;
 import com.ir.form.MarkAttendanceForm;
 import com.ir.form.TrainingRequestForm;
-import com.ir.service.TrainerService;
-import com.ir.form.MyCalendarForm;
-import com.ir.form.TrainerRequestForm;
+
 
 @Service
 public class TrainingInstitudeServiceImpl implements TrainingInstitudeDAO {
@@ -58,12 +51,12 @@ public class TrainingInstitudeServiceImpl implements TrainingInstitudeDAO {
 		return this.trainingInstitudeDAO.listMarkAttendance();
 	}
 
-	@Override
+	/*@Override
 	@Transactional
 	public List<InstituteMyCalendarForm> listInstituteMyCalendar() {
 		// TODO Auto-generated method stub
 		return this.trainingInstitudeDAO.listInstituteMyCalendar();
-	}
+	}*/
 	/*	
 	@Override
 	@Transactional

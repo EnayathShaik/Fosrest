@@ -19,7 +19,6 @@ import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
-import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
@@ -96,9 +95,9 @@ public interface AdminService {
 
 	List<CourseType> courseTypeList();
 
-	String manageTrainingPartnerSave(ManageTrainingPartnerForm manageTrainingPartnerForm);
+	//String manageTrainingPartnerSave(ManageTrainingPartnerForm manageTrainingPartnerForm);
 
-	String manageAssessmentAgencySave(ManageAssessmentAgencyForm manageAssessmentAgencyForm);
+	//String manageAssessmentAgencySave(ManageAssessmentAgencyForm manageAssessmentAgencyForm);
 
 	List<PersonalInformationTrainee> traineeUserManagementSearch(TraineeUserManagementForm traineeUserManagementForm);
 
@@ -240,8 +239,8 @@ public interface AdminService {
 
 	public SubjectMaster getSubjectMasterById(int id);
 
-	public List<SubjectMaster> listSubjectMaster();*/
-
+	public List<SubjectMaster> listSubjectMaster();
+*/
 	public List<TrainingSchedule> listTrainingSchedule();
 
 	public void addTrainingSchedule(TrainingSchedule p);
@@ -483,6 +482,8 @@ public interface AdminService {
 	
 	//namage assessment question
 		List fotestGetQuestions(String data);
+
+		
 }
 
 

@@ -5,7 +5,6 @@ import java.util.List;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
-import com.ir.form.InstituteMyCalendarForm;
 import com.ir.form.MarkAttendanceForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.TrainingRequestForm;
@@ -34,7 +33,7 @@ public interface TrainingInstitudeService {
 	public List<MarkAttendanceForm> listMarkAttendance();
 
 
-	public List<InstituteMyCalendarForm> listInstituteMyCalendar();
+	//public List<InstituteMyCalendarForm> listInstituteMyCalendar();
 	
 	
 }
