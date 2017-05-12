@@ -75,6 +75,7 @@ import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.form.ViewTrainingCalendarForm;
 import com.ir.form.activateTrainingOfTraineeForm;
 import com.ir.form.manageTrainingForm;
+import com.ir.form.stateAdminForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.model.AssessmentQuestions;
@@ -102,6 +103,7 @@ import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
+import com.ir.model.StateAdmin;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
@@ -540,6 +542,52 @@ public class AdminController {
 		}
 		return "adminUserManagementForm";
 	}
+	
+	//state admin
+	@RequestMapping(value = "/stateadmin", method = RequestMethod.GET)
+	public String liststateadmin(Model model) {
+		System.out.println("listmanageTraining");
+
+		model.addAttribute("stateAdminForm", new stateAdminForm());
+		model.addAttribute("liststateadmin", this.adminService.liststateadmin());
+		return "stateadmin";
+	}
+
+	// For add and update state both
+	@RequestMapping(value = "/stateadminadd", method = RequestMethod.POST)
+	public String addstateadmin(@ModelAttribute("stateAdminForm") StateAdmin p) {
+		System.out.println("id1" + p.getId());
+		if (p.getId() == 0) {
+			// new person, add it
+			this.adminService.addstateadmin(p);
+		} else {
+			// existing person, call update
+			
+			this.adminService.updatestateadmin(p);
+		}
+		return "redirect:/stateadmin.fssai";
+	}
+
+	@RequestMapping("/stateadmin/remove/{id}")
+	public String removestateadmin(@PathVariable("id") int id) {
+
+		this.adminService.removestateadmin(id);
+		return "redirect:/stateadmin.fssai";
+	}
+
+	@RequestMapping("/stateadmin/edit/{id}")
+	public void editstateadmin(@PathVariable("id") int id, Model model, HttpServletRequest httpServletRequest,
+			HttpServletResponse response) throws IOException {
+		System.out.println("id2" + id);
+		StateAdmin mt = this.adminService.getstateadminById(id);
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		String newList = g.toJson(mt);
+		System.out.println("newList " + newList);
+		out.write(newList);
+		out.flush();
+	}
+
 
 	@RequestMapping(value = "/assessorUserManagementSave", method = RequestMethod.POST)
 	public String assessorUserManagementSave(
@@ -1674,7 +1722,7 @@ public class AdminController {
 	 *         All Add Edit delete for Subject Master
 	 */
 
-	@RequestMapping(value = "/SubjectMaster", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/SubjectMaster", method = RequestMethod.GET)
 	public String listSubjectMaster(@ModelAttribute("SubjectMaster") SubjectMaster SubjectMaster, Model model) {
 		System.out.println("listSubjectMaster");
 		Map<String, String> userType = lst.userTypeMap;
@@ -1725,7 +1773,7 @@ public class AdminController {
 		out.flush();
 
 	}
-
+*/
 	/**
 	 * @author Jyoti Mekal
 	 *

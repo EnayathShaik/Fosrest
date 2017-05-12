@@ -99,6 +99,7 @@ import com.ir.model.Region;
 import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
+import com.ir.model.StateAdmin;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
@@ -753,6 +754,99 @@ public class AdminDAOImpl implements AdminDAO {
 			}
 		}
 	}
+	
+	//state Admin
+	
+		@Override
+		public void addstateadmin(StateAdmin p) {
+			// TODO Auto-generated method stub
+			//System.out.println("getTrainingName " + p.getTrainingName());
+			PasswordGenerator passwordGenerator = new PasswordGenerator(6);
+			char[] pass = passwordGenerator.get();
+			String passwordString = String.valueOf(pass);
+			
+			Session session = this.sessionFactory.getCurrentSession();
+			String encryprPassword = null;
+			try{
+				EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
+				encryprPassword = encryptionPasswordANDVerification.encryptPass(passwordString);
+				
+			}catch(NoSuchAlgorithmException e){
+				System.out.println( " no such algo exception error catch ");
+			}
+			
+			String nextSequenceUserID = pageLoadService.getNextCombinationId("ST", "StateAdmin" , "000000");
+			LoginDetails loginDetails = new LoginDetails();
+			//StateAdmin s=new StateAdmin();
+			loginDetails.setLoginId(nextSequenceUserID);
+			loginDetails.setPassword(passwordString);
+			loginDetails.setEncrypted_Password(encryprPassword);
+			loginDetails.setStatus("A");
+			loginDetails.setProfileId(2);
+			//s.setUserId(nextSequenceUserID);
+			p.setLoginDetails(loginDetails);
+			p.setUserId(nextSequenceUserID);
+			session.save(p);
+			//session.persist(s);
+			//return passwordString+"&"+nextSequenceUserID;
+		}	
+			
+
+			//new ZLogger("ManageTraining saved successfully", " ManageTraining Details=" + p, "AdminDAOImpl.java");
+			// new ZLogger("ManageTraining", "list.size() "+list.size(),
+			// "AdminDAOImpl.java");
+		
+
+		@Override
+		public void updatestateadmin(StateAdmin p) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			String u=p.getUserId();
+			p.setUserId(u);
+			session.update(p);
+			//new ZLogger("ManageTraining saved successfully", " ManageTraining Details=" + p, "AdminDAOImpl.java");
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public List<StateAdmin> liststateadmin() {
+			// TODO Auto-generated method stub
+			System.out.println("inside liststateadmin");
+			Session session = this.sessionFactory.getCurrentSession();
+				List<StateAdmin> mccList = session.createQuery("from StateAdmin").list();
+			for (StateAdmin p : mccList) {
+				// logger.info("ManageTraining List::" + p);
+			}
+			return mccList;
+		}
+
+		@Override
+		public StateAdmin getstateadminById(int id) {
+			// TODO Auto-generated method stub
+			System.out.println(" id " + id);
+			Session session = this.sessionFactory.getCurrentSession();
+			/*
+			 * ManageTraining p = (ManageTraining)
+			 * session.load(ManageTraining.class, new Integer(id)); logger.info(
+			 * "ManageTraining loaded successfully, ManageTraining details=" + p);
+			 * return p;
+			 */
+			Query query = session.createQuery("from StateAdmin where id=" + id);
+			List<StateAdmin> StateAdmin = query.list();
+			StateAdmin mt = StateAdmin.get(0);
+			return mt;
+		}
+
+		@Override
+		public void removestateadmin(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			StateAdmin p = (StateAdmin) session.load(StateAdmin.class, new Integer(id));
+			if (null != p) {
+				session.delete(p);
+			}
+			new ZLogger("StateAdmin saved successfully", " StateAdmin Details=" + p, "AdminDAOImpl.java");
+		}
 
 	@Override
 	public String manageCourseContentSearch(ManageCourseContentForm manageCourseContentForm) {
@@ -1966,7 +2060,7 @@ public class AdminDAOImpl implements AdminDAO {
 	 *         DAOImpl For Subject Master
 	 */
 
-	@Override
+	/*@Override
 	public String addSubjectMaster(SubjectMaster p) {
 		// TODO Auto-generated method stub
 		System.out.println("SubjectMaster " + p.getSubjectId() + " " + p.getSubjectName());
@@ -2040,7 +2134,7 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		return mccList;
 	}
-
+*/
 	/**
 	 * @author Jyoti Mekal
 	 *

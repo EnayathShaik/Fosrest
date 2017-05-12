@@ -170,11 +170,13 @@
 				<value>com.ir.model.CustomerDetails</value>
 				<value>com.ir.model.AssessmentQuestions</value>
 				<value>com.ir.model.InvoiceMaster</value>
-				<value>com.ir.model.RegionMapping</value>
+			    <value>com.ir.model.RegionMapping</value>
 				<value>com.ir.model.ManageTraining</value>
-				<value>com.ir.model.ManageCourseCarricullum</value>
-				<value>com.ir.model.FotestFeedbackMaster</value>
+			    <value>com.ir.model.ManageCourseCarricullum</value>
+			   <value>com.ir.model.FotestFeedbackMaster</value>
+			
 				<value>com.ir.model.FotestAssessmentQuestions</value>
+				 <value>com.ir.model.StateAdmin</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

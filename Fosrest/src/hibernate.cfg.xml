@@ -5,11 +5,11 @@
 
 <hibernate-configuration>
 	<session-factory>
-		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-
-		<!-- <property name="hibernate.connection.url">jdbc:postgresql://localhost/FSSAI</property> 
-			<property name="hibernate.connection.username">postgres</property> <property 
-			name="hibernate.connection.password">Fss2iZentech</property> -->
+	 	<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+	 	
+		<!-- <property name="hibernate.connection.url">jdbc:postgresql://localhost/FSSAI</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">Fss2iZentech</property> -->
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost/fosrest</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">pass@123</property>
@@ -51,6 +51,42 @@
 		<mapping class="com.ir.model.CourseEnrolledUser" />
 		<mapping class="com.ir.model.TrainingStatus" />
 		<!-- <mapping class="com.ir.model.AssessmentQuestion"/> -->
+		<mapping class="com.ir.model.PersonalInformationAssessor"/>
+		<mapping class="com.ir.model.PostVacancyTrainingCenter"/>
+		<mapping class="com.ir.model.ContactTraineee"/>
+		<mapping class= "com.ir.model.Steps"/>
+		<mapping class="com.ir.model.assessor.AssessorAttendance"/>
+		<mapping class="com.ir.model.assessor.AssessmentResult"/>
+		<mapping class="com.ir.model.PostVacancyTrainingCenterBean"/>
+		<mapping class="com.ir.model.assessor.AssessmentResult"/>
+		<mapping class="com.ir.model.trainee.TraineeAssessmentEvaluation"/>
+		<mapping class="com.ir.trainingcenter.model.AssesmentCalender"/>
+		<mapping class="com.ir.model.TrainingCalendarHistoryLogs"/>
+		<mapping class="com.ir.model.TraineeDailyAttendance"/>
+		<mapping class="com.ir.model.HolidayMaster"/>
+		<mapping class="com.ir.model.UnitMaster"/>
+		<mapping class="com.ir.model.ModuleMaster"/>
+		<mapping class="com.ir.model.SubjectMaster"/>
+		<mapping class="com.ir.model.StateMaster"/>
+		<mapping class="com.ir.model.DistrictMaster"/>
+		<mapping class="com.ir.model.CityMaster"/>
+		<mapping class="com.ir.model.RegionMaster"/>
+		<mapping class="com.ir.model.TrainingPartner"/>
+		<mapping class="com.ir.model.TrainingSchedule"/>
+		<mapping class="com.ir.model.CustomerMaster"/>
+		<mapping class="com.ir.model.TaxMaster"/>
+		
+		<mapping class="com.ir.model.EmployeeMonthlyCharges"/>
+		<mapping class="com.ir.model.NomineeTrainee"/>
+		<mapping class="com.ir.model.CustomerDetails"/>
+		<mapping class="com.ir.model.InvoiceMaster"/>
+		<mapping class="com.ir.model.AssessmentQuestions"/>
+				<mapping class="com.ir.model.RegionMapping"/>
+		<mapping class="com.ir.model.ManageTraining"/>
+			<mapping class="com.ir.model.ManageCourseCarricullum"/>
+			
+	
+	
 		<mapping class="com.ir.model.PersonalInformationAssessor" />
 		<mapping class="com.ir.model.PostVacancyTrainingCenter" />
 		<mapping class="com.ir.model.ContactTraineee" />
@@ -85,6 +121,7 @@
 		<mapping class="com.ir.model.ManageCourseCarricullum" />
 		<mapping class="com.ir.model.FotestFeedbackMaster" />
 		<mapping class="com.ir.model.FotestAssessmentQuestions" />
+		<mapping class="com.ir.model.StateAdmin" />
 
 
 	</session-factory>

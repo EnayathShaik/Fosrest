@@ -303,6 +303,7 @@
                                             <li><a href="trainingCenterUserManagementForm.fssai" class="clr">Training Institude</a></li>
                                             <li><a href="assessorUserManagementForm.fssai" class="clr">Assessor</a></li>
                                             <li><a href="adminUserManagementForm.fssai" class="clr">Admin</a></li>
+                                             <li><a href="stateadmin.fssai" class="clr">StateAdmin</a></li>
                                         </ul>
                                     </li>
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>

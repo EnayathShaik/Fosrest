@@ -67,6 +67,7 @@ import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
+import com.ir.model.StateAdmin;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
@@ -112,6 +113,16 @@ public interface AdminService {
 	List<AdminUserManagement> adminUserManagementSearch();
 
 	String adminUserManagementSave(AdminUserManagementForm adminUserManagementForm);
+	//stateadmin
+	public void addstateadmin(StateAdmin p);
+
+	public void updatestateadmin(StateAdmin p);
+
+	public List<StateAdmin> liststateadmin();
+
+	public StateAdmin getstateadminById(int id);
+
+	public void removestateadmin(int id);
 
 	String manageCourseContentSearch(ManageCourseContentForm manageCourseContentForm);
 
@@ -221,7 +232,7 @@ public interface AdminService {
 
 	public List<ModuleMaster> listModuleMaster();
 
-	public String addSubjectMaster(SubjectMaster p);
+	/*public String addSubjectMaster(SubjectMaster p);
 
 	public void updateSubjectMaster(SubjectMaster p);
 
@@ -229,7 +240,7 @@ public interface AdminService {
 
 	public SubjectMaster getSubjectMasterById(int id);
 
-	public List<SubjectMaster> listSubjectMaster();
+	public List<SubjectMaster> listSubjectMaster();*/
 
 	public List<TrainingSchedule> listTrainingSchedule();
 

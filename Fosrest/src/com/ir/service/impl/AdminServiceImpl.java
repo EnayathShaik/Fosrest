@@ -74,6 +74,7 @@ import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
+import com.ir.model.StateAdmin;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
@@ -216,6 +217,43 @@ public class AdminServiceImpl implements AdminService {
 		return adminUserManagementSave;
 	}
 
+	//stateAdmin
+	@Override
+	@Transactional
+	public void addstateadmin(StateAdmin p) {
+		// TODO Auto-generated method stub
+		this.adminDAO.addstateadmin(p);
+	}
+
+	@Override
+	@Transactional
+	public void updatestateadmin(StateAdmin p) {
+		// TODO Auto-generated method stub
+		this.adminDAO.updatestateadmin(p);
+	}
+
+	@Override
+	@Transactional
+	public List<StateAdmin> liststateadmin() {
+		// TODO Auto-generated method stub
+		return this.adminDAO.liststateadmin();
+	}
+
+	@Override
+	@Transactional
+	public StateAdmin getstateadminById(int id) {
+		// TODO Auto-generated method stub
+		return this.adminDAO.getstateadminById(id);
+	}
+
+	@Override
+	@Transactional
+	public void removestateadmin(int id) {
+		// TODO Auto-generated method stub
+		this.adminDAO.removestateadmin(id);
+	}
+
+	
 	@Override
 	@Transactional
 	public String manageCourseContentSearch(ManageCourseContentForm manageCourseContentForm) {
@@ -649,7 +687,7 @@ public class AdminServiceImpl implements AdminService {
 	 *         Impl For Subject Master
 	 */
 
-	@Override
+	/*@Override
 	@Transactional
 	public String addSubjectMaster(SubjectMaster p) {
 		return this.adminDAO.addSubjectMaster(p);
@@ -688,7 +726,7 @@ public class AdminServiceImpl implements AdminService {
 	public List<SubjectMaster> listSubjectMaster() {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listSubjectMaster();
-	}
+	}*/
 
 	/**
 	 * @author Jyoti Mekal

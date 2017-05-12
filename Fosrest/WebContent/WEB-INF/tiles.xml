@@ -765,6 +765,11 @@
 		<put-attribute name="body"
 			value="/website/admin/adminUserManagement.jsp" />
 	</definition>
+	<definition name="stateadmin" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body"
+			value="/website/admin/stateadmin.jsp" />
+	</definition>
 	<definition name="feedbackMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/feedbackMaster.jsp" />
@@ -929,7 +934,7 @@
 		<put-attribute name="body" value="/website/admin/ModuleMaster.jsp" />
 	</definition>
 
-	<definition name="SubjectMaster" extends="base.user.afterLogin">
+	<!-- <definition name="SubjectMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/SubjectMaster.jsp" />
 	</definition>
@@ -937,7 +942,7 @@
 	<definition name="SubjectMaster/edit/{id}" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/SubjectMaster.jsp" />
-	</definition>
+	</definition> -->
 
 <definition name="TrainingSchedule" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
