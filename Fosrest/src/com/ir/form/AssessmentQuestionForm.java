@@ -5,9 +5,9 @@ import javax.validation.constraints.Size;
 
 public class AssessmentQuestionForm {
 
-	private int unitCode,moduleCode;
+	private int unitCode1,moduleCode1,unitCode2,moduleCode2;
 	
-	int questionNumber;
+	//int questionNumber;
 	@NotNull @Size(min=0 , max = 500 , message="Please enter question")
 	private String questionTitle;
 	@NotNull @Size(min=0 , max = 500 , message="Please enter question hint")
@@ -28,9 +28,71 @@ public class AssessmentQuestionForm {
 	
 	@NotNull
 	private int correctAnswer;
-	
-	
 
+	public int getUnitCode1() {
+		return unitCode1;
+	}
+
+	public void setUnitCode1(int unitCode1) {
+		this.unitCode1 = unitCode1;
+	}
+
+	public int getModuleCode1() {
+		return moduleCode1;
+	}
+
+	public void setModuleCode1(int moduleCode1) {
+		this.moduleCode1 = moduleCode1;
+	}
+
+	public int getUnitCode2() {
+		return unitCode2;
+	}
+
+	public void setUnitCode2(int unitCode2) {
+		this.unitCode2 = unitCode2;
+	}
+
+	public int getModuleCode2() {
+		return moduleCode2;
+	}
+
+	public void setModuleCode2(int moduleCode2) {
+		this.moduleCode2 = moduleCode2;
+	}
+
+
+	public String getQuestionTitle() {
+		return questionTitle;
+	}
+
+	public void setQuestionTitle(String questionTitle) {
+		this.questionTitle = questionTitle;
+	}
+
+	public String getQuestionHint() {
+		return questionHint;
+	}
+
+	public void setQuestionHint(String questionHint) {
+		this.questionHint = questionHint;
+	}
+
+	public int getNoOfOption() {
+		return noOfOption;
+	}
+
+	public void setNoOfOption(int noOfOption) {
+		this.noOfOption = noOfOption;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getOptionOne() {
 		return optionOne;
@@ -80,84 +142,6 @@ public class AssessmentQuestionForm {
 		this.optionSix = optionSix;
 	}
 
-
-	
-
-
-	public int getCourseNameSearch() {
-		return courseNameSearch;
-	}
-
-	public void setCourseNameSearch(int courseNameSearch) {
-		this.courseNameSearch = courseNameSearch;
-	}
-
-
-	
-	public int getQuestionNumber() {
-		return questionNumber;
-	}
-
-	public void setQuestionNumber(int questionNumber) {
-		this.questionNumber = questionNumber;
-	}
-
-	
-
-	private int courseNameSearch;
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-public int getUnitCode() {
-		return unitCode;
-	}
-
-	public void setUnitCode(int unitCode) {
-		this.unitCode = unitCode;
-	}
-
-	public int getModuleCode() {
-		return moduleCode;
-	}
-
-	public void setModuleCode(int moduleCode) {
-		this.moduleCode = moduleCode;
-	}
-
-	/*	
-	public String toString(){
-		return unitCode;
-	}
-*/
-	public int getNoOfOption() {
-		return noOfOption;
-	}
-
-	public void setNoOfOption(int noOfOption) {
-		this.noOfOption = noOfOption;
-	}
-
-	public String getQuestionTitle() {
-		return questionTitle;
-	}
-
-	public void setQuestionTitle(String questionTitle) {
-		this.questionTitle = questionTitle;
-	}
-
-	public String getQuestionHint() {
-		return questionHint;
-	}
-
-	public void setQuestionHint(String questionHint) {
-		this.questionHint = questionHint;
-	}
-
 	public int getCorrectAnswer() {
 		return correctAnswer;
 	}
@@ -165,6 +149,8 @@ public int getUnitCode() {
 	public void setCorrectAnswer(int correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
+	
+	
 
 
 	

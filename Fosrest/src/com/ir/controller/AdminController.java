@@ -2571,80 +2571,7 @@ public class AdminController {
 		return "assessmentquestions";
 	}
 
-	@RequestMapping(value = "/listassessmentquestions", method = RequestMethod.POST)
-	public String listassessquestion(@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
-			Model model) {
-
-		System.out.println("assesememt  post");
-		System.out.println(assesQuestionForm.getUnitCode());
-
-		model.addAttribute("listAssessmentQuestion", this.adminService.listAssessmentQuestion(assesQuestionForm));
-
-		return "assessmentquestions";
-	}
-
-	@RequestMapping(value = "/addassessmentquestions", method = RequestMethod.POST)
-	public String addassessquestion(@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
-			Model model) {
-
-		System.out.println("Add  assesememt  post");
-		System.out.println(assesQuestionForm.getUnitCode());
-		/*
-		 * model.addAttribute("trainingType",trainingType);
-		 * model.addAttribute("trainingPartner",trainingPartner);
-		 * model.addAttribute("listTrainingInstitude",
-		 * this.adminService.listTrainingInstitude());
-		 * model.addAttribute("GenerateCertificateForm", new
-		 * GenerateCertificateForm());
-		 * model.addAttribute("listGenerateCertificate",
-		 * this.adminService.listGenerateCertificate());
-		 */
-		this.adminService.assessmentQuestionSave(assesQuestionForm);
-
-		return "assessmentquestions";
-	}
-
-	// also for try2 assessment question
-	@RequestMapping("/removeassessmentquestion/remove/{id}")
-	public String removeAssessmentQuestion(@PathVariable("id") int id) {
-
-		this.adminService.removeAssessmentQuestion(id);
-		return "redirect:/assessmentquestions.fssai";
-	}
-
-	// try 2 Assessment questions
-	@RequestMapping(value = "/assessmentquestions2", method = RequestMethod.GET)
-	public String assessquestion2(@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
-			Model model) {
-		System.out.println("assessment questins");
-
-		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
-		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
-
-		return "assessmentquestions";
-	}
-
-	@RequestMapping(value = "/assessmentquestions2", method = RequestMethod.POST)
-	public String aassessquestion2(@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
-			Model model) {
-
-		// displayAll
-		System.out.println(".................................................assesememt  post");
-		// System.out.println(assesQuestionForm.getunitCode());
-
-		model.addAttribute("listAssessmentQuestion", this.adminService.listAssessmentQuestion(assesQuestionForm));
-
-		// inserting
-		if (!(assesQuestionForm.getCorrectAnswer() == 0)) {
-			System.out.println("Add  assesememt  post");
-			// System.out.println(assesQuestionForm.getunitCode());
-
-			this.adminService.assessmentQuestionSave(assesQuestionForm);
-
-		}
-		return "assessmentquestions";
-	}
-
+	
 	@RequestMapping(value = "/updateCertificate", method = RequestMethod.POST)
 	@ResponseBody
 	public void updateCertificate(@RequestParam("data") String data,
@@ -2712,6 +2639,8 @@ public class AdminController {
 			new ZLogger("manageAssessmentQuestionsSave",
 					"Exception while manageAssessmentQuestionsSave :  " + e.getMessage(), "AdminController.java");
 		}
+		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 		return "manageAssessmentQuestions";
 	}
 

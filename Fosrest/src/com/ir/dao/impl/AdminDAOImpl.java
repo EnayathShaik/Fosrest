@@ -991,12 +991,12 @@ public class AdminDAOImpl implements AdminDAO {
 					assessmentQuestionForm.getId());
 		}
 
-		UnitMaster uc = getUnitMasterById(assessmentQuestionForm.getUnitCode());
-		ModuleMaster mm = getModuleMasterById(assessmentQuestionForm.getModuleCode());
+		UnitMaster uc = getUnitMasterById(assessmentQuestionForm.getUnitCode2());
+		ModuleMaster mm = getModuleMasterById(assessmentQuestionForm.getModuleCode2());
 
 		assessmentQuestion.setUnitCode(uc);
 		assessmentQuestion.setModuleCode(mm);
-		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
+		//assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
 		assessmentQuestion.setQuestionHint(assessmentQuestionForm.getQuestionHint());
 		assessmentQuestion.setQuestionTitle(assessmentQuestionForm.getQuestionTitle());
 		assessmentQuestion.setNoOfOption(assessmentQuestionForm.getNoOfOption());
@@ -1011,9 +1011,14 @@ public class AdminDAOImpl implements AdminDAO {
 
 		Integer assessmentQuestionIdd = null;
 
-		String where = " where unitmaster = " + assessmentQuestionForm.getUnitCode() + " and modulemaster = '"
-				+ assessmentQuestionForm.getModuleCode() + "' and questionNumber = '"
-				+ assessmentQuestionForm.getQuestionNumber() + "'";
+		/*String where = " where unitmaster = " + assessmentQuestionForm.getUnitCode2() + " and modulemaster = '"
+				+ assessmentQuestionForm.getModuleCode2() + "' and questionNumber = '"
+				+ assessmentQuestionForm.getQuestionNumber() + "'";*/
+		
+		String where = " where unitmaster = " + assessmentQuestionForm.getUnitCode2() + " and modulemaster = '"
+				+ assessmentQuestionForm.getModuleCode2() + "' and questiontitle = '"
+				+ assessmentQuestionForm.getQuestionTitle() + "'";
+		
 		String sql = "select assessmenttype from AssessmentQuestions " + where;
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
@@ -1650,9 +1655,16 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select um.unitcode , mm.modulename , aq.questionnumber, aq.assessmentid, mm.modulecode   from assessmentquestions as aq "
+		
+		//commented query contains questionnumber
+/*		String sql = "select um.unitcode , mm.modulename , aq.questionnumber, aq.assessmentid, mm.modulecode ,aq.questiontitle  from assessmentquestions as aq "
+				+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
+				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";*/
+		
+		String sql = "select um.unitcode , mm.modulename ,  aq.assessmentid, mm.modulecode ,aq.questiontitle  from assessmentquestions as aq "
 				+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
 				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
+		
 		sql = sql + wherebuffer.toString();
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
@@ -3086,116 +3098,6 @@ public class AdminDAOImpl implements AdminDAO {
 		return "created";
 	}
 
-	// niranjan
-
-	@Override
-	public String assessmentQuestionSave(AssessmentQuestionForm assessmentQuestionForm) {
-		/*
-		 * Session session = sessionFactory.getCurrentSession();
-		 * AssessmentQuestions assessmentQuestion = new AssessmentQuestions();
-		 * 
-		 * 
-		 * if(assessmentQuestionForm.getId() <= 0){ assessmentQuestion = new
-		 * AssessmentQuestions(); }else{ assessmentQuestion =
-		 * (AssessmentQuestions) session .load(AssessmentQuestions.class,
-		 * assessmentQuestionForm.getId()); }
-		 * 
-		 * int uC = assessmentQuestionForm.getUnitCode(); int mN =
-		 * assessmentQuestionForm.getModuleCode();
-		 * //System.out.println("............................");
-		 * 
-		 * 
-		 * 
-		 * //System.out.println("............................");
-		 * 
-		 * // assessmentQuestion.setAssessmentId(assessmentQuestionForm.
-		 * getAssessmentId());
-		 * assessmentQuestion.setCorrectAnswer(assessmentQuestionForm
-		 * .getCorrectAnswer()); System.out.println("**"); assessmentQuestion
-		 * .setModuleCode(assessmentQuestionForm.getModuleCode());
-		 * assessmentQuestion
-		 * .setNoOfOption(assessmentQuestionForm.getNoOfOption());
-		 * assessmentQuestion.setUnitCode(assessmentQuestionForm.getUnitCode());
-		 * assessmentQuestion.setQuestionNumber(assessmentQuestionForm.
-		 * getQuestionNumber());
-		 * assessmentQuestion.setQuestionHint(assessmentQuestionForm
-		 * .getQuestionHint());
-		 * assessmentQuestion.setQuestionTitle(assessmentQuestionForm
-		 * .getQuestionTitle());
-		 * 
-		 * assessmentQuestion.setOptionOne(assessmentQuestionForm.getOptionOne()
-		 * );
-		 * assessmentQuestion.setOptionTwo(assessmentQuestionForm.getOptionTwo()
-		 * ); assessmentQuestion.setOptionThree(assessmentQuestionForm
-		 * .getOptionThree()); assessmentQuestion
-		 * .setOptionFour(assessmentQuestionForm.getOptionFour());
-		 * assessmentQuestion
-		 * .setOptionFive(assessmentQuestionForm.getOptionFive());
-		 * assessmentQuestion.setOptionSix(assessmentQuestionForm.getOptionSix()
-		 * ); // assessmentQuestion.setAssessmentId(1);
-		 * 
-		 * Integer assessmentQuestionIdd = 0;
-		 * 
-		 * String where = " where modulecode = '" +
-		 * assessmentQuestionForm.getModuleCode() + "' and unitcode= '" +
-		 * assessmentQuestionForm.getUnitCode() + "' and questiontitle='" +
-		 * assessmentQuestion.getQuestionTitle() + "'"; String sql =
-		 * "select modulecode from assessmentquestions " + where; Query query =
-		 * session.createSQLQuery(sql); List l = query.list();
-		 * assessmentQuestionIdd = (Integer) session.save(assessmentQuestion);
-		 * if (assessmentQuestionIdd != 0) { return "created"; } else { return
-		 * "already"; }
-		 * 
-		 */
-
-		return null;
-	}
-
-	@Override
-	public List<AssessmentQuestionForm> listAssessmentQuestion(AssessmentQuestionForm assesQuestionForm) {
-		// TODO Auto-generated method stub
-
-		AssessmentQuestionForm bean;
-		List<AssessmentQuestionForm> list = new ArrayList<AssessmentQuestionForm>();
-		Session session = this.sessionFactory.getCurrentSession();
-		System.out.println("........................." + assesQuestionForm.getModuleCode());
-		List<Object[]> mccList = session.createSQLQuery("select * from assessmentquestions where modulecode='"
-				+ assesQuestionForm.getModuleCode() + "' and unitcode='" + assesQuestionForm.getUnitCode() + "'")
-				.list();
-		System.out.println("aaaaa");
-		for (Object[] li : mccList) {
-			bean = new AssessmentQuestionForm();
-
-			//
-			System.out.println(li[0]);
-			bean.setId((int) li[0]);
-			bean.setModuleCode((int) li[2]);
-			System.out.println(li[12]);
-			bean.setNoOfOption((int) li[3]);
-			bean.setUnitCode((int) li[13]);
-			bean.setQuestionNumber(2);
-			bean.setQuestionHint((String) li[10]);
-			bean.setQuestionTitle((String) li[12]);
-			bean.setCorrectAnswer((int) li[1]);
-
-			bean.setOptionOne((String) li[6]);
-			bean.setOptionTwo((String) li[9]);
-			bean.setOptionThree((String) li[8]);
-			bean.setOptionFour((String) li[5]);
-			bean.setOptionFive((String) li[4]);
-			bean.setOptionSix((String) li[7]);
-			//
-
-			System.out.println(bean);
-			list.add(bean);
-		}
-		System.out.println("list " + list);
-		return list;
-
-	}
-
-	/* return "nothing"; */
-
 	@Override
 	public void removeAssessmentQuestion(int id) {
 		// TODO Auto-generated method stub
@@ -3924,5 +3826,17 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println(list.size());
 			return list;
 			
+		}
+
+		@Override
+		public String assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<AssessmentQuestionForm> listAssessmentQuestion(AssessmentQuestionForm assesQuestionForm) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }

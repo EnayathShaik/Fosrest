@@ -407,13 +407,6 @@ public class TraineeServiceImpl implements TraineeService {
 	
 
 
-		@Override
-		@Transactional
-		public List<AssessmentQuestionForm> listingAssessmentQuestion(
-				AssessmentQuestionForm assesQuestionForm , int id) {
-			// TODO Auto-generated method stub
-			return this.traineeDAO.listingAssessmentQuestion( assesQuestionForm, id);
-		}
 		
 		//traineeFeedback
 		@Override

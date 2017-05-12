@@ -130,7 +130,7 @@ public interface TraineeDAO {
 	public UnitMaster listTrainingTopic(int id);
 	
 	
-	public List<AssessmentQuestionForm> listingAssessmentQuestion(AssessmentQuestionForm assesQuestionForm, int id);
+	
 	//traineeFeedback
 	
 	public List<FotestFeedbackForm> listFotestFeedback();

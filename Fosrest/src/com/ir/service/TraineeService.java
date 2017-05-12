@@ -181,9 +181,6 @@ public interface TraineeService {
 	public UnitMaster listTrainingTopic(int id);
 
 
- public List<AssessmentQuestionForm> listingAssessmentQuestion(
-			AssessmentQuestionForm assesQuestionForm, int id);
-
 
 //public Object listFotestFeedback();
 	

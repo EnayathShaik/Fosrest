@@ -7,8 +7,8 @@
 function OnStart(){
 document.getElementById('id').value = 0;
 /* document.getElementById('unitCode').value = 0;
-document.getElementById('moduleCode').value = 0; */
-document.getElementById('questionNumber').value = '';
+document.getElementById('moduleCode').value = 0; 
+document.getElementById('questionNumber').value = '';*/
 document.getElementById('questionHint').value = '';
 document.getElementById('questionTitle').value = '';
 document.getElementById('noOfAssesmentQues').value = 0;
@@ -18,7 +18,7 @@ document.getElementById('correctAnswer').value = '';
 window.onload = OnStart;
 
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function getQuestions(){
 	var unitCodeSearch =  $("#unitCode1").val();
 	var moduleCodeSearch =  $("#moduleCode1").val();
@@ -38,10 +38,10 @@ function getQuestions(){
 	var mainData1 = jQuery.parseJSON(data);
 	var j=1;
 	$('#newTable tr').remove();
-	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Module Code</th><th>Question Number</th></tr>')
+	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Assessment ID - Module Code</th><th>Question Title</th></tr>')
 	$.each(mainData1 , function(i , obj)
 	{
-		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[3]+')">'+obj[4]+'</a></td><td>'+obj[2]+'</td></tr>');
+		$('#newTable').append('<tr  id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[2]+' - '+obj[3]+'</a></td><td>'+obj[4]+'</td></tr>');
 		
 	});
 	}
@@ -66,29 +66,29 @@ function editAssessmentQuestion(id){
 		window.setTimeout(function(){
 			document.getElementById('moduleCode2').value = obj[2];
 	    }, 3000);
-		document.getElementById('questionNumber').value = obj[3];
-		document.getElementById('questionHint').value = obj[4];
-		document.getElementById('questionTitle').value = obj[5];
-		document.getElementById('noOfAssesmentQues').value = obj[6];
+	//	document.getElementById('questionNumber').value = obj[3];
+		document.getElementById('questionHint').value = obj[3];
+		document.getElementById('questionTitle').value = obj[4];
+		document.getElementById('noOfAssesmentQues').value = obj[5];
 		$("#noOfAssesmentQues").trigger("change");
 		window.setTimeout(function(){
-			for(j=1;j<=obj[6];j++){
+			for(j=1;j<=obj[5];j++){
 				if(j==1){
-					document.getElementById('optionOne').value = obj[8];
+					document.getElementById('optionOne').value = obj[7];
 				}else if(j==2){
-					document.getElementById('optionTwo').value = obj[9];
+					document.getElementById('optionTwo').value = obj[8];
 				}else if(j==3){
-					document.getElementById('optionThree').value = obj[10];
+					document.getElementById('optionThree').value = obj[9];
 				}else if(j==4){
-					document.getElementById('optionFour').value = obj[11];
+					document.getElementById('optionFour').value = obj[10];
 				}else if(j==5){
-					document.getElementById('optionFive').value = obj[12];
+					document.getElementById('optionFive').value = obj[11];
 				}else if(j==6){
-					document.getElementById('optionSix').value = obj[13];
+					document.getElementById('optionSix').value = obj[12];
 				}
 			}
 	    }, 1000);
-		document.getElementById('correctAnswer').value = obj[7];
+		document.getElementById('correctAnswer').value = obj[6];
 	});
 	}
 	});
@@ -100,7 +100,7 @@ function validateFields(){
 	$(':focus').blur();// this is required for to call answerno() method
 	 $("#unitCodeErr").css("display" , "none");
 	 $("#moduleCodeErr").css("display" , "none");
-	$("#questionNumberErr").css("display" , "none");
+//	$("#questionNumberErr").css("display" , "none");
 $("#questionTitleErr").css("display" , "none");
 $("#questionHintErr").css("display" , "none");
 $("#noOfAssesmentQuesErr").css("display" , "none");
@@ -120,11 +120,11 @@ if($("#moduleCode2").val() == 0){
 		$("#moduleCodeErr").css("display" , "block");
 		return false;
 	 } 
-if($("#questionNumber").val() == 0){
+/* if($("#questionNumber").val() == 0){
 	 
 	$("#questionNumberErr").css("display" , "block");
 	return false;
-} 
+}  */
 if($("#questionTitle").val() == ''){
 	 
 		$("#questionTitleErr").css("display" , "block");
@@ -137,7 +137,7 @@ if($("#questionHint").val() == ''){
 		return false;
 	 } 
 
-if($("#noOfAssesmentQues").val() == -1){
+if($("#noOfAssesmentQues").val() < 1){
 	 
 		$("#noOfAssesmentQuesErr").css("display" , "block");
 		return false;
@@ -169,7 +169,7 @@ if($("#correctAnswer").val() == 0){
 		
     	for(i=1;i<=noOfAssmentQ;i++){
     		if(i==1){
-    			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionOne" class="form-control" /></td></tr>')
+    			$('#assAnsTable').append("<tr><td style='text-align:center;'>"+i+'</td><td><cf:input path="optionOne" class="form-control" /></td></tr>')
     			document.getElementById('optionOne').value = '';
     			
     		}else if(i==2){
@@ -236,7 +236,7 @@ if($("#correctAnswer").val() == 0){
 
                                 <div class="col-xs-12">
                                   
-                                    <h1>Manage Assessment Questions</h1>
+                                   <fieldset> <legend>Manage Assessment Questions</legend>
                                     <span id="name_status" class = "style-li error-red"><h3>${created } </h3></span>
                                    <BR>                          
                                     <div class="row">
@@ -255,7 +255,7 @@ if($("#correctAnswer").val() == 0){
                                                            <%--  ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select id="unitCode1" path="unitCode" class="form-control" onchange="getModule(this.value,'moduleCode1')">
+												<cf:select path="unitCode1" class="form-control" onchange="getModule(this.value,'moduleCode1')">
 													
 													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
 												</cf:select> 
@@ -273,9 +273,9 @@ if($("#correctAnswer").val() == 0){
                                                            <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select id="moduleCode1" path="moduleCode"   class="form-control">
+												<cf:select  path="moduleCode1"   class="form-control">
 												   <ct:forEach var="twofields" items="${listModuleMaster}">
-       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleId} - ${twofields.moduleCode}"/></cf:option>
+       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleCode} - ${twofields.moduleName}"/></cf:option>
     												</ct:forEach>
 												 </cf:select>
 											</div>
@@ -292,7 +292,9 @@ if($("#correctAnswer").val() == 0){
 
                                        
                                     </div>
+                                </fieldset>
                                 </div>
+                                
 
                                 <!-- search Results -->
                                 <div class="col-xs-12">
@@ -306,7 +308,7 @@ if($("#correctAnswer").val() == 0){
                                             <fieldset>
                                                 <legend>Question List</legend>
                                                 
-                                                <table id="newTable" class="table table-responsive table-bordered table-hover">
+                                                <table style='text-align:center;' id="newTable" class="table table-responsive table-bordered table-hover">
                                                         <thead>
 
                                                             <tr class="background-open-vacancies">
@@ -350,12 +352,12 @@ if($("#correctAnswer").val() == 0){
                                                             <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select id="unitCode2" path="unitCode" class="form-control" onchange="getModule(this.value,'moduleCode2')" >
+												<cf:select  path="unitCode2" class="form-control" onchange="getModule(this.value,'moduleCode2')" >
 													
 													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
 												</cf:select> 
 											</div>
-                                                    
+                      <%--                               
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
@@ -366,7 +368,7 @@ if($("#correctAnswer").val() == 0){
                                                             </ul>
                                                         </div>
                                                       <cf:input path="questionNumber" class="form-control" placeholder="Question Number" />
-                                                    </div>
+                                                    </div> --%>
                                                     
                                                     <div class="form-group">
                                                         <div>
@@ -398,9 +400,9 @@ if($("#correctAnswer").val() == 0){
                                                             <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select id="moduleCode2" path="moduleCode"   class="form-control">
+												<cf:select  path="moduleCode2"   class="form-control">
 												   <ct:forEach var="twofields" items="${listModuleMaster}">
-       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleId} - ${twofields.moduleCode}"/></cf:option>
+       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleCode} - ${twofields.moduleName}"/></cf:option>
     												</ct:forEach>
 												 </cf:select>
 											</div> 
@@ -444,7 +446,7 @@ if($("#correctAnswer").val() == 0){
                                                  <fieldset>  <legend><h3>Options</h3></legend>
                                                     <div id="assAnsTableErr" style="display:none;" class="style-li error-red" >Fill all the options</div>
                                                                 
-                                                    <table id="assAnsTable" class="table table-bordered table-responsive">
+                                                    <table id="assAnsTable"  style='text-align:center;' class="table table-bordered table-responsive">
                                                 <!--     <thead>
                                                         <tr class="background-open-vacancies">
                                                             <th>S.No.</th>
