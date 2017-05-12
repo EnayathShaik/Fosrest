@@ -1306,6 +1306,6 @@
 	
 	<definition name="fotestcertification" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/fotest/FotestCertification.jsp" />
+		<put-attribute name="body" value="/website/fotestTrainee/FotestCertification.jsp" />
 	</definition>
 </tiles-definitions>
