@@ -113,7 +113,7 @@ public interface AdminService {
 
 	String adminUserManagementSave(AdminUserManagementForm adminUserManagementForm);
 	//stateadmin
-	public void addstateadmin(StateAdmin p);
+	public String addstateadmin(StateAdmin p);
 
 	public void updatestateadmin(StateAdmin p);
 

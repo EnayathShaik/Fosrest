@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
+import com.ir.form.ActivateAssessmentOfTraineeForm;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.AssessmentQuestionForm_old;
@@ -19,6 +20,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
+import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
@@ -34,6 +36,10 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
+import com.ir.form.ViewTrainingCalendarForm;
+import com.ir.form.activateTrainingOfTraineeForm;
+import com.ir.form.verifyTraineeEnrollmentForm;
+import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.CityMaster;
@@ -45,9 +51,12 @@ import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
+import com.ir.model.FotestFeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
+import com.ir.model.ManageCourseCarricullum;
+import com.ir.model.ManageTraining;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
@@ -56,6 +65,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateAdmin;
@@ -1312,6 +1322,174 @@ public class AdminServiceImpl implements AdminService {
 	public List<InvoiceMaster> listCustomCustomerMaster() {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listCustomCustomerMaster();
+	}
+
+	@Override
+	public void addManageTraining(ManageTraining p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateManageTraining(ManageTraining p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<ManageTraining> listManageTraining() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ManageTraining getManageTrainingById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeManageTraining(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateRegionMapping(RegionMapping p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<RegionMapping> listRegionMapping() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RegionMapping getRegionMappingById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeRegionMapping(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addRegionMapping(RegionMapping p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addManageCourseCarricullum(ManageCourseCarricullum p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateManageCourseCarricullum(ManageCourseCarricullum p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<ManageCourseCarricullum> listManageCourseCarricullum() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ManageCourseCarricullum getManageCourseCarricullumById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeManageCourseCarricullum(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<ActivateAssessmentOfTraineeForm> listactivateAssessmentOfTrainee(ActivateAssessmentOfTraineeForm p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addFeedbackMaster(FotestFeedbackMaster p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateFeedbackMaster(FotestFeedbackMaster p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<FotestFeedbackMaster> listFotestFeedbackMasterForm() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FotestFeedbackMaster getFeedbackMasterById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeFeedbackMaster(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<verifyTraineeEnrollmentForm> listVerifyTraineeEnrollment(verifyTraineeEnrollmentForm p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<viewEnrolledCoursesForm> listviewEnrolledCourses(viewEnrolledCoursesForm p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<activateTrainingOfTraineeForm> listactivateTrainingOfTrainee(activateTrainingOfTraineeForm p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List fotestGetQuestions(String data) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
