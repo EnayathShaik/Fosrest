@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
-import com.ir.form.ActivateAssessmentOfTraineeForm;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.AssessmentQuestionForm_old;
@@ -20,7 +19,6 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
-import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
@@ -36,15 +34,6 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
-
-import com.ir.form.ViewTrainingCalendarForm;
-import com.ir.form.activateTrainingOfTraineeForm;
-import com.ir.form.verifyTraineeEnrollmentForm;
-import com.ir.form.viewEnrolledCoursesForm;
-
-import com.ir.form.verifyTraineeEnrollmentForm;
-import com.ir.form.viewEnrolledCoursesForm;
-
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.CityMaster;
@@ -56,12 +45,9 @@ import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
-import com.ir.model.FotestFeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
-import com.ir.model.ManageTraining;
-import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
@@ -70,7 +56,6 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateAdmin;
@@ -219,9 +204,9 @@ public class AdminServiceImpl implements AdminService {
 	//stateAdmin
 	@Override
 	@Transactional
-	public void addstateadmin(StateAdmin p) {
+	public String addstateadmin(StateAdmin p) {
 		// TODO Auto-generated method stub
-		this.adminDAO.addstateadmin(p);
+		return this.adminDAO.addstateadmin(p);
 	}
 
 	@Override
@@ -1328,217 +1313,5 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listCustomCustomerMaster();
 	}
-
-	// managetraining
-	@Override
-	@Transactional
-	public void addManageTraining(ManageTraining p) {
-		// TODO Auto-generated method stub
-		this.adminDAO.addManageTraining(p);
-	}
-
-	@Override
-	@Transactional
-	public void updateManageTraining(ManageTraining p) {
-		// TODO Auto-generated method stub
-		this.adminDAO.updateManageTraining(p);
-	}
-
-	@Override
-	@Transactional
-	public List<ManageTraining> listManageTraining() {
-		// TODO Auto-generated method stub
-		return this.adminDAO.listManageTraining();
-	}
-
-	@Override
-	@Transactional
-	public ManageTraining getManageTrainingById(int id) {
-		// TODO Auto-generated method stub
-		return this.adminDAO.getManageTrainingById(id);
-	}
-
-	@Override
-	@Transactional
-	public void removeManageTraining(int id) {
-		// TODO Auto-generated method stub
-		this.adminDAO.removeManageTraining(id);
-	}
-
-	// RegionMapping
-	@Override
-	@Transactional
-	public void addRegionMapping(RegionMapping p) {
-		// TODO Auto-generated method stub
-		this.adminDAO.addRegionMapping(p);
-	}
-
-	@Override
-	@Transactional
-	public void updateRegionMapping(RegionMapping p) {
-		// TODO Auto-generated method stub
-		this.adminDAO.updateRegionMapping(p);
-	}
-
-	@Override
-	@Transactional
-	public List<RegionMapping> listRegionMapping() {
-		// TODO Auto-generated method stub
-		return this.adminDAO.listRegionMapping();
-	}
-
-	@Override
-	@Transactional
-	public RegionMapping getRegionMappingById(int id) {
-		// TODO Auto-generated method stub
-		return this.adminDAO.getRegionMappingById(id);
-	}
-
-	@Override
-	@Transactional
-	public void removeRegionMapping(int id) {
-		// TODO Auto-generated method stub
-		this.adminDAO.removeRegionMapping(id);
-	}
-
-	// Manage course Carriculum
-
-	@Override
-	@Transactional
-	public void addManageCourseCarricullum(ManageCourseCarricullum p) {
-		// TODO Auto-generated method stub
-		this.adminDAO.addManageCourseCarricullum(p);
-	}
-
-	@Override
-	@Transactional
-	public void updateManageCourseCarricullum(ManageCourseCarricullum p) {
-		// TODO Auto-generated method stub
-		this.adminDAO.updateManageCourseCarricullum(p);
-	}
-
-	@Override
-	@Transactional
-	public List<ManageCourseCarricullum> listManageCourseCarricullum() {
-		// TODO Auto-generated method stub
-		return this.adminDAO.listManageCourseCarricullum();
-	}
-
-	@Override
-	@Transactional
-	public ManageCourseCarricullum getManageCourseCarricullumById(int id) {
-		// TODO Auto-generated method stub
-		return this.adminDAO.getManageCourseCarricullumById(id);
-	}
-
-	@Override
-	@Transactional
-	public void removeManageCourseCarricullum(int id) {
-		// TODO Auto-generated method stub
-		this.adminDAO.removeManageCourseCarricullum(id);
-	}
-
-	@Override
-	@Transactional
-	public List<ActivateAssessmentOfTraineeForm> listactivateAssessmentOfTrainee(ActivateAssessmentOfTraineeForm p) {
-		// TODO Auto-generated method stub
-		return this.adminDAO.listactivateAssessmentOfTrainee(p);
-	}
-
-	// Feedback Master
-	@Override
-	@Transactional
-	public void addFeedbackMaster(FotestFeedbackMaster p) {
-		// TODO Auto-generated method stub
-		this.adminDAO.addFeedbackMaster(p);
-	}
-
-	@Override
-	@Transactional
-	public void updateFeedbackMaster(FotestFeedbackMaster p) {
-		// TODO Auto-generated method stub
-		this.adminDAO.updateFeedbackMaster(p);
-	}
-
-	@Override
-	@Transactional
-	public List<FotestFeedbackMaster> listFotestFeedbackMasterForm() {
-		// TODO Auto-generated method stub
-		return this.adminDAO.listFotestFeedbackMasterForm();
-	}
-
-	@Override
-	@Transactional
-	public FotestFeedbackMaster getFeedbackMasterById(int id) {
-		// TODO Auto-generated method stub
-		return this.adminDAO.getFeedbackMasterById(id);
-	}
-
-	@Override
-	@Transactional
-	public void removeFeedbackMaster(int id) {
-		// TODO Auto-generated method stub
-		this.adminDAO.removeFeedbackMaster(id);
-	}
-
-
-	//verifyTraineeEnrollment	
-		@Override
-		@Transactional
-		public List<verifyTraineeEnrollmentForm> listVerifyTraineeEnrollment(verifyTraineeEnrollmentForm p ) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.listVerifyTraineeEnrollment(p);
-		}
-	
-		//View Enrolled Courses
-		@Override
-		@Transactional
-		public List<viewEnrolledCoursesForm> listviewEnrolledCourses(viewEnrolledCoursesForm p ) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.listviewEnrolledCourses(p);
-		}
-
-		//listviewTrainingCalendar
-		@Override
-		@Transactional
-		public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p ) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.listviewTrainingCalendar(p);
-		}
-		
-		//listmanageTrainingCalendar
-		@Override
-		@Transactional
-		public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p ) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.listmanageTrainingCalendar(p);
-		}
-		
-		//listactivateTrainingOfTrainee
-		
-		@Override
-		@Transactional
-		public List<activateTrainingOfTraineeForm> listactivateTrainingOfTrainee(activateTrainingOfTraineeForm p ) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.listactivateTrainingOfTrainee(p);
-		}
-
-		@Override
-		@Transactional
-		public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p) {
-			// TODO Auto-generated method stub
-			return this.adminDAO.listfotestGenerateCertificate(p);
-		}
-
-		@Override
-		@Transactional
-		public List fotestGetQuestions(String data) {
-			// TODO Auto-generated method stub
-			List list=adminDAO.fotestGetQuestions(data);
-			return list;
-		}
-		
-		
-	
 
 }

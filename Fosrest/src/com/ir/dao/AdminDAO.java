@@ -3,7 +3,6 @@ package com.ir.dao;
 import java.util.List;
 
 import com.ir.bean.common.IntStringBean;
-import com.ir.form.ActivateAssessmentOfTraineeForm;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.AssessmentQuestionForm_old;
@@ -12,7 +11,6 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
-import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.InvoiceInfoForm;
 import com.ir.form.InvoiceMasterForm;
@@ -29,14 +27,6 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingRequestForm;
 import com.ir.form.TrainingScheduleForm;
-
-import com.ir.form.verifyTraineeEnrollmentForm;
-import com.ir.form.viewEnrolledCoursesForm;
-import com.ir.form.ViewTrainingCalendarForm;
-import com.ir.form.activateTrainingOfTraineeForm;
-import com.ir.form.verifyTraineeEnrollmentForm;
-import com.ir.form.viewEnrolledCoursesForm;
-
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
@@ -49,12 +39,10 @@ import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
-import com.ir.model.FotestFeedbackMaster;
+
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
-import com.ir.model.ManageTraining;
-import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
@@ -63,7 +51,6 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateAdmin;
@@ -114,7 +101,7 @@ public interface AdminDAO {
 
 	public String adminUserManagementSave(AdminUserManagementForm adminUserManagementForm);
 	//stateadmin
-	public void addstateadmin(StateAdmin p);
+	public String addstateadmin(StateAdmin p);
 
 	public void updatestateadmin(StateAdmin p);
 
@@ -398,72 +385,5 @@ public interface AdminDAO {
 
 	public InvoiceInfoForm getInvoiceInfo(String invoice);
 
-	// region Mapping
-
-	// public void addRegionMapping(RegionMapping p);
-	public void updateRegionMapping(RegionMapping p);
-
-	public List<RegionMapping> listRegionMapping();
-
-	public RegionMapping getRegionMappingById(int id);
-
-	public void removeRegionMapping(int id);
-
-	public void addRegionMapping(RegionMapping p);
-
-	// managetraining---
-	public void addManageTraining(ManageTraining p);
-
-	public void updateManageTraining(ManageTraining p);
-
-	public List<ManageTraining> listManageTraining();
-
-	public ManageTraining getManageTrainingById(int id);
-
-	public void removeManageTraining(int id);
-
-	// Manage course carricullum
-	public void addManageCourseCarricullum(ManageCourseCarricullum p);
-
-	public void updateManageCourseCarricullum(ManageCourseCarricullum p);
-
-	public List<ManageCourseCarricullum> listManageCourseCarricullum();
-
-	public ManageCourseCarricullum getManageCourseCarricullumById(int id);
-
-	public void removeManageCourseCarricullum(int id);
-
-	// listactivateAssessmentOfTrainee
-	public List<ActivateAssessmentOfTraineeForm> listactivateAssessmentOfTrainee(ActivateAssessmentOfTraineeForm p);
-
-	// Feedback Master
-	public void addFeedbackMaster(FotestFeedbackMaster p);
-
-	public void updateFeedbackMaster(FotestFeedbackMaster p);
-
-	public List<FotestFeedbackMaster> listFotestFeedbackMasterForm();
-
-	public FotestFeedbackMaster getFeedbackMasterById(int id);
-
-	public void removeFeedbackMaster(int id);
-
-	// verifyTraineeEnrollment
-	public List<verifyTraineeEnrollmentForm> listVerifyTraineeEnrollment(verifyTraineeEnrollmentForm p);
-
-	// View Enrolled Courses
-	public List<viewEnrolledCoursesForm> listviewEnrolledCourses(viewEnrolledCoursesForm p);
-
-						
-	//listviewTrainingCalendar
-		public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm p);
-						
-						
-	public List fotestGetQuestions(String data);
-						
-						//listfotestGenerateCertificate
-						public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm p);
-
-						public	List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm p);
-						
-						public List<activateTrainingOfTraineeForm> listactivateTrainingOfTrainee(activateTrainingOfTraineeForm p);
+	
 }

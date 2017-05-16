@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
-import com.ir.form.ActivateAssessmentOfTraineeForm;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.AssessmentQuestionForm_old;
@@ -35,8 +34,6 @@ import com.ir.form.CityMasterForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
 import com.ir.form.DistrictMasterForm;
-import com.ir.form.FotestAssessmentQuestionsForm;
-import com.ir.form.FotestGenerateCertificateForm;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.HolidayMasterForm;
 import com.ir.form.InvoiceInfoForm;
@@ -56,13 +53,6 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 
-import com.ir.form.verifyTraineeEnrollmentForm;
-import com.ir.form.viewEnrolledCoursesForm;
-import com.ir.form.ViewTrainingCalendarForm;
-import com.ir.form.activateTrainingOfTraineeForm;
-import com.ir.form.verifyTraineeEnrollmentForm;
-import com.ir.form.viewEnrolledCoursesForm;
-
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.AssessmentQuestion_old;
@@ -78,14 +68,12 @@ import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
-import com.ir.model.FotestFeedbackMaster;
+
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
-import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ManageCourseContent;
-import com.ir.model.ManageTraining;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
@@ -95,7 +83,6 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.Region;
-import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateAdmin;
@@ -757,7 +744,7 @@ public class AdminDAOImpl implements AdminDAO {
 	//state Admin
 	
 		@Override
-		public void addstateadmin(StateAdmin p) {
+		public String addstateadmin(StateAdmin p) {
 			// TODO Auto-generated method stub
 			//System.out.println("getTrainingName " + p.getTrainingName());
 			PasswordGenerator passwordGenerator = new PasswordGenerator(6);
@@ -788,6 +775,7 @@ public class AdminDAOImpl implements AdminDAO {
 			session.save(p);
 			//session.persist(s);
 			//return passwordString+"&"+nextSequenceUserID;
+			return passwordString+"&"+nextSequenceUserID;
 		}	
 			
 
@@ -3330,513 +3318,17 @@ public class AdminDAOImpl implements AdminDAO {
 		return lst;
 	}
 
-	// manage training
 	@Override
-	public void addManageTraining(ManageTraining p) {
+	public String assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm) {
 		// TODO Auto-generated method stub
-		System.out.println("getTrainingName " + p.getTrainingName());
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-
-		new ZLogger("ManageTraining saved successfully", " ManageTraining Details=" + p, "AdminDAOImpl.java");
-		// new ZLogger("ManageTraining", "list.size() "+list.size(),
-		// "AdminDAOImpl.java");
+		return null;
 	}
 
 	@Override
-	public void updateManageTraining(ManageTraining p) {
+	public List<AssessmentQuestionForm> listAssessmentQuestion(AssessmentQuestionForm assesQuestionForm) {
 		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-		new ZLogger("ManageTraining saved successfully", " ManageTraining Details=" + p, "AdminDAOImpl.java");
+		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ManageTraining> listManageTraining() {
-		// TODO Auto-generated method stub
-		System.out.println("inside manageCourseCarrilcullum");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<ManageTraining> mccList = session.createQuery("from ManageTraining").list();
-		for (ManageTraining p : mccList) {
-			// logger.info("ManageTraining List::" + p);
-		}
-		return mccList;
-	}
-
-	@Override
-	public ManageTraining getManageTrainingById(int id) {
-		// TODO Auto-generated method stub
-		System.out.println(" id " + id);
-		Session session = this.sessionFactory.getCurrentSession();
-		/*
-		 * ManageTraining p = (ManageTraining)
-		 * session.load(ManageTraining.class, new Integer(id)); logger.info(
-		 * "ManageTraining loaded successfully, ManageTraining details=" + p);
-		 * return p;
-		 */
-		Query query = session.createQuery("from ManageTraining where id=" + id);
-		List<ManageTraining> manageTraining = query.list();
-		ManageTraining mt = manageTraining.get(0);
-		return mt;
-	}
-
-	@Override
-	public void removeManageTraining(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		ManageTraining p = (ManageTraining) session.load(ManageTraining.class, new Integer(id));
-		if (null != p) {
-			session.delete(p);
-		}
-		new ZLogger("ManageTraining saved successfully", " ManageTraining Details=" + p, "AdminDAOImpl.java");
-	}
-	// Region Mapping
-
-	@Override
-	public void addRegionMapping(RegionMapping p) {
-		// TODO Auto-generated method stub
-		System.out.println("RegionMapping " + p.getRegionName());
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-		new ZLogger("RegionMapping", " RegionMapping Details= " + p, "AdminDAOImpl.java");
-		/*
-		 * logger.info(
-		 * "RegionMapping saved successfully, RegionMapping Details=" + p);
-		 */
-	}
-
-	@Override
-	public void updateRegionMapping(RegionMapping p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-		/*
-		 * logger.info(
-		 * "RegionMapping updated successfully, RegionMapping Details=" + p);
-		 */
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<RegionMapping> listRegionMapping() {
-		// TODO Auto-generated method stub
-		System.out.println("inside RegionMapping");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<RegionMapping> mccList = session.createQuery("from RegionMapping ").list();
-		for (RegionMapping p : mccList) {
-
-			new ZLogger("RegionMapping", "list.size() " + p, "AdminDAOImpl.java");
-		}
-
-		return mccList;
-	}
-
-	@Override
-	public RegionMapping getRegionMappingById(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from RegionMapping where id=" + id);
-		List<RegionMapping> RegionMappingList = query.list();
-		RegionMapping p = RegionMappingList.get(0);
-		return p;
-	}
-
-	@Override
-	public void removeRegionMapping(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		RegionMapping p = (RegionMapping) session.load(RegionMapping.class, new Integer(id));
-		if (null != p) {
-			session.delete(p);
-		}
-		/*
-		 * logger.info(
-		 * "RegionMapping deleted successfully, RegionMapping details=" + p);
-		 */
-	}
-
-	// managecurriculum
-	@Override
-	public void addManageCourseCarricullum(ManageCourseCarricullum p) {
-		// TODO Auto-generated method stub
-		System.out.println("getTrainingName " + p.getTrainingName());
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-
-		// new ZLogger("ManageCourseCarricullum saved successfully","",
-		// "ManageCourseCarricullum Details=" + p);
-	}
-
-	@Override
-	public void updateManageCourseCarricullum(ManageCourseCarricullum p) {
-		// TODO Auto-generated method stub
-		System.out.println("aaaaaa");
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-		// new ZLogger("ManageCourseCarricullum updated successfully",
-		// "","ManageCourseCarricullum Details=" + p);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ManageCourseCarricullum> listManageCourseCarricullum() {
-		// TODO Auto-generated method stub
-		System.out.println("inside manageCourseCarrilcullum");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<ManageCourseCarricullum> mccList = session.createQuery("from ManageCourseCarricullum").list();
-		for (ManageCourseCarricullum p : mccList) {
-			// new ZLogger("","","ManageCourseCarricullum List::" + p);
-		}
-		return mccList;
-	}
-
-	@Override
-	public ManageCourseCarricullum getManageCourseCarricullumById(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		// ManageCourseCarricullum p = (ManageCourseCarricullum)
-		// session.load(ManageCourseCarricullum.class, new Integer(id));
-		Query query = session.createQuery("from ManageCourseCarricullum where id=" + id);
-		List<ManageCourseCarricullum> ManageCourseCarricullumList = query.list();
-		ManageCourseCarricullum p = ManageCourseCarricullumList.get(0);
-		// new ZLogger("ManageCourseCarricullum loaded successfully",
-		// "","ManageCourseCarricullum details=" + p);
-		return p;
-	}
-
-	@Override
-	public void removeManageCourseCarricullum(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		ManageCourseCarricullum p = (ManageCourseCarricullum) session.load(ManageCourseCarricullum.class,
-				new Integer(id));
-		if (null != p) {
-			session.delete(p);
-		}
-	}
-
-	@Override
-	public List<ActivateAssessmentOfTraineeForm> listactivateAssessmentOfTrainee(ActivateAssessmentOfTraineeForm p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		System.out.println("inside listactivateTrainingOfTrainee");
-		String courseName = p.getCourseName();
-		String traineeName = p.getTrainingDate();
-		ActivateAssessmentOfTraineeForm bean = new ActivateAssessmentOfTraineeForm();
-		List<ActivateAssessmentOfTraineeForm> resulList = new ArrayList<ActivateAssessmentOfTraineeForm>();
-		System.out.println("courseName " + courseName + " traineeName " + traineeName);
-
-		List<Object[]> list = session
-				.createSQLQuery(
-						"select cast('Java' as varchar(20)) as CourseName , cast('2016-12-16 12:00' as varchar(20)) as TrainingDate , cast('Mahape' as varchar(20) ) as TrainingLab , cast('Jyoti' as varchar(20)) as traineeName , cast('Present' as varchar(20)) as attendance  ")
-				.list();
-		for (Object[] li : list) {
-
-			bean.setCourseName((String) li[0]);
-			bean.setTrainingDate((String) li[1]);
-			bean.setTrainingLab((String) li[2]);
-			bean.setTraineeName((String) li[3]);
-			bean.setAttendance((String) li[4]);
-			new ZLogger("listactivateTrainingOfTrainee", "", "List:" + li);
-			// logger.info("listactivateTrainingOfTrainee List::" + li);
-			resulList.add(bean);
-		}
-		return resulList;
-	}
-
-	// Feedback Master
-
-	@Override
-	public void addFeedbackMaster(FotestFeedbackMaster p) {
-		// TODO Auto-generated method stub
-		System.out.println("feedback " + p.getFeedback());
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-		new ZLogger("FeedbackMaster saved successfully", "", "FeedbackMaster Details=" + p);
-
-	}
-
-	@Override
-	public void updateFeedbackMaster(FotestFeedbackMaster p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-		new ZLogger("FeedbackMaster updated successfully", "", "FeedbackMaster Details=" + p);
-		// logger.info("FeedbackMaster updated successfully, FeedbackMaster
-		// Details=" + p);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<FotestFeedbackMaster> listFotestFeedbackMasterForm() {
-		// TODO Auto-generated method stub
-		System.out.println("inside listFotestFeedbackMasterForm");
-		Session session = this.sessionFactory.getCurrentSession();
-		List<FotestFeedbackMaster> mccList = session.createQuery("from FotestFeedbackMaster").list();
-		for (FotestFeedbackMaster p : mccList) {
-			new ZLogger("FeedbackMaster list", "", "FeedbackMaster Details=" + p);
-		}
-		return mccList;
-	}
-
-	@Override
-	public FotestFeedbackMaster getFeedbackMasterById(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from FotestFeedbackMaster where id=" + id);
-		List<FotestFeedbackMaster> FeedbackMasterList = query.list();
-		FotestFeedbackMaster p = FeedbackMasterList.get(0);
-		return p;
-	}
-
-	@Override
-	public void removeFeedbackMaster(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		FotestFeedbackMaster p = (FotestFeedbackMaster) session.load(FotestFeedbackMaster.class, new Integer(id));
-		if (null != p) {
-			session.delete(p);
-		}
-		new ZLogger("FeedbackMaster deleted successfully", "", "FeedbackMaster Details=" + p);
-		// logger.info("FeedbackMaster deleted successfully, FeedbackMaster
-		// details=" + p);
-	}
-
-	// verifyTraineeEnrollment
-
-	@Override
-	public List<verifyTraineeEnrollmentForm> listVerifyTraineeEnrollment(verifyTraineeEnrollmentForm form) {
-		// TODO Auto-generated method stub
-		System.out.println("inside verifyTraineeEnrollmentForm");
-		List<verifyTraineeEnrollmentForm> list = new ArrayList<verifyTraineeEnrollmentForm>();
-		System.out.println("courseName " + form.getCourseName() + " trainingName " + form.getTraineeName());
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Object[]> lst = session
-				.createSQLQuery(
-						"select cast('Java' as varchar(20)) as CourseName , cast('2016-12-16 12:00' as varchar(20)) as TrainingDate,cast('12:00' as varchar(20)) as TrainingTime , cast('Mahape' as varchar(20) ) as TrainingLab , cast('jyoti' as varchar(20)) as tarineeName  ")
-				.list();
-		for (Object[] li : lst) {
-			verifyTraineeEnrollmentForm bean = new verifyTraineeEnrollmentForm();
-			bean.setCourseName((String) li[0]);
-			bean.setTrainingDate((String) li[1]);
-			bean.setTrainingTime((String) li[2]);
-			bean.setTrainingLab((String) li[3]);
-			bean.setTraineeName((String) li[4]);
-			// new ZLogger.info("listVerifyTraineeEnrollment List::" + li);
-			list.add(bean);
-		}
-		System.out.println("list " + list);
-		return list;
-	}
-
-	// View Enrolled Courses
-	@Override
-	public List<viewEnrolledCoursesForm> listviewEnrolledCourses(viewEnrolledCoursesForm form) {
-		// TODO Auto-generated method stub
-		System.out.println("inside listviewEnrolledCourses");
-		String courseName = form.getCourseName();
-		String traineeName = form.getTrainingDate();
-		viewEnrolledCoursesForm bean = new viewEnrolledCoursesForm();
-		List<viewEnrolledCoursesForm> resulList = new ArrayList<viewEnrolledCoursesForm>();
-		System.out.println("courseName " + courseName + " traineeName " + traineeName);
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Object[]> list = session
-				.createSQLQuery(
-						"select  cast('Manidra' as varchar(20) ) as trainerName ,  cast('Java' as varchar(20)) as CourseName , cast('2016-12-16' as varchar(20)) as TrainingDate , cast('12:00' as varchar(20)) as TrainingTime, cast('Mahape' as varchar(20) ) as TrainingLab , cast('25'  as varchar(20)) as NoOfSeats , cast('Jyoti' as  varchar(20)) as traineeName , cast('Present' as varchar(20)) as status   ")
-				.list();
-		for (Object[] li : list) {
-
-			bean.setTrainerName((String) li[0]);
-			bean.setCourseName((String) li[1]);
-			bean.setTrainingDate((String) li[2]);
-			bean.setTrainingTime((String) li[3]);
-			bean.setTrainingLab((String) li[4]);
-			bean.setNoOfSeats((String) li[5]);
-			bean.setTraineeName((String) li[6]);
-			bean.setStatus((String) li[7]);
-
-			// logger.info("listviewEnrolledCourses List::" + li);
-			resulList.add(bean);
-		}
-		return resulList;
-	}
-
-	//viewTrainingCalendar
-	@Override
-	public List<ViewTrainingCalendarForm> listviewTrainingCalendar(ViewTrainingCalendarForm form) {
-		// TODO Auto-generated method stub
-		System.out.println("inside listviewTrainingCalendar");
-		String courseName = form.getCourseName();
-		String traineeName = form.getTrainingDate();
-		ViewTrainingCalendarForm bean = new ViewTrainingCalendarForm();
-		List<ViewTrainingCalendarForm> resulList = new ArrayList<ViewTrainingCalendarForm>();
-		System.out.println("courseName "+courseName + " traineeName "+traineeName);
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Object[]> list = session.createSQLQuery("select  cast('Manidra' as varchar(20) ) as trainerName ,  cast('Java' as varchar(20)) as CourseName , cast('2016-12-16 12:00' as varchar(20)) as TrainingDate , cast('Mahape' as varchar(20) ) as TrainingLab , cast('25'  as varchar(20)) as NoOfSeats , cast('15' as  varchar(20)) as NoOfEnrollment   ").list();
-		for (Object[] li : list ) {
-			
-			bean.setTrainerName( (String) li[0]);
-			bean.setCourseName((String) li[1]);
-			bean.setTrainingDate((String) li[2]);
-			bean.setTrainingLab((String) li[3]);
-			bean.setNoOfSeats((String) li[4]);
-			bean.setNoOfEnrollment((String) li[5]);
-
-			//new ZLogger("listviewTrainingCalendar List::" + li,"","");
-			resulList.add(bean);
-		}
-		return resulList;
-	}
 	
-	//listmanageTrainingCalendar
-	@Override
-	public List<ManageTrainingCalendarForm> listmanageTrainingCalendar(ManageTrainingCalendarForm form) {
-		// TODO Auto-generated method stub
-		System.out.println("inside manageTrainingCalendarForm");
-		String courseName = form.getCourseName();
-		String traineeName = form.getTrainingDate();
-				ManageTrainingCalendarForm bean = new ManageTrainingCalendarForm();
-		List<ManageTrainingCalendarForm> resulList = new ArrayList<ManageTrainingCalendarForm>();
-		System.out.println("courseName "+courseName + " traineeName "+traineeName);
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Object[]> list = session.createSQLQuery("select cast('Java' as varchar(20)) as CourseName , cast('2016-12-16 12:00' as varchar(20)) as TrainingDate , cast('Mahape' as varchar(20) ) as TrainingLab , cast('Update' as varchar(20)) as status , cast('Test Comments' as varchar(20)) as comments  ").list();
-		for (Object[] li : list ) {
-			
-			bean.setCourseName((String) li[0]);
-			bean.setTrainingDate((String) li[1]);
-			bean.setTrainingLab((String) li[2]);
-			bean.setStatus((String) li[3]);
-			bean.setComments((String) li[4]);
-
-			//new ZLogger("listmanageTrainingCalendar List::" + li,"","");
-			resulList.add(bean);
-		}
-		return resulList;
-	}
-	
-	// listactivateTrainingOfTrainee
-		@Override
-		public List<activateTrainingOfTraineeForm> listactivateTrainingOfTrainee(activateTrainingOfTraineeForm form) {
-			// TODO Auto-generated method stub
-			System.out.println("inside listactivaaaaaaaaaaateTrainingOfTrainee");
-			activateTrainingOfTraineeForm bean = new activateTrainingOfTraineeForm();
-			List<activateTrainingOfTraineeForm> resulList = new ArrayList<activateTrainingOfTraineeForm>();
-
-			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> list = session
-					.createSQLQuery(
-							"select cast('Java' as varchar(20)) as CourseName , cast('2016-12-16 12:00' as varchar(20)) as TrainingDate , cast('Mahape' as varchar(20) ) as TrainingLab , cast('Jyoti' as varchar(20)) as traineeName , cast('Present' as varchar(20)) as attendance  ")
-					.list();
-			for (Object[] li : list) {
-
-				bean.setCourseName((String) li[0]);
-				bean.setTrainingDate((String) li[1]);
-				bean.setTrainingLab((String) li[2]);
-				bean.setTraineeName((String) li[3]);
-				bean.setAttendance((String) li[4]);
-				new ZLogger("listactivateTrainingOfTrainee List::" + li,"","");
-				//logger.info("listactivateTrainingOfTrainee List::" + li);
-				resulList.add(bean);
-			}
-			return resulList;
-		}
-	
-	//listgenerateCertificate
-		@Override
-		public List<FotestGenerateCertificateForm> listfotestGenerateCertificate(FotestGenerateCertificateForm form) {
-			// TODO Auto-generated method stub
-			System.out.println("inside listfotestGenerateCertificate");
-			String courseName = form.getCourseName();
-			String traineeName = form.getTrainingDate();
-			FotestGenerateCertificateForm bean = new FotestGenerateCertificateForm();
-			List<FotestGenerateCertificateForm> resulList = new ArrayList<FotestGenerateCertificateForm>();
-			System.out.println("courseName "+courseName + " traineeName "+traineeName);
-			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> list = session.createSQLQuery("select  cast('Jyoti' as varchar(20) ) as traineeName ,  cast('Java' as varchar(20)) as CourseName ,cast('Mahape' as varchar(20) ) as TrainingLab , cast('2016-12-16' as varchar(20)) as TrainingDate ,cast('12:00' as varchar(20)) as TrainingTime , cast('Present' as varchar(20)) as status   ").list();
-			for (Object[] li : list ) {
-				
-				bean.setTraineeName( (String) li[0]);
-				bean.setCourseName((String) li[1]);
-				bean.setTrainingLab((String) li[2]);
-				bean.setTrainingDate((String) li[3]);
-				bean.setTrainingTime((String) li[4]);
-				bean.setAttendance( (String)li[5]);
-
-				//logger.info("generateCertificateForm List::" + li);
-				resulList.add(bean);
-			}
-			return resulList;
-		}
-		
-		// fotestGetQuestions
-
-		@Override
-		public List fotestGetQuestions(String data) {
-			System.out.println("fotest dao questions "+data);
-			String[] totalConnected = data.split("-");
-
-			String assesmentTypeSearch = (totalConnected[0].split("="))[1];
-			String trainingNameSearch = (totalConnected[1].split("="))[1];
-			System.out.println(assesmentTypeSearch+trainingNameSearch);
-	/*
-			String unitCodeSearch1, moduleCodeSearch1;
-			if (unitCodeSearch == 0) {
-				unitCodeSearch1 = "%";
-			} else {
-				unitCodeSearch1 = (totalConnected[0].split("="))[1];
-			}
-
-			if (moduleCodeSearch == 0) {
-				moduleCodeSearch1 = "%";
-			} else {
-				moduleCodeSearch1 = (totalConnected[0].split("="))[1];
-			}
-
-			System.out.println("unitcodesearch  " + unitCodeSearch + "  " + unitCodeSearch1);
-			System.out.println("modulecodesearch   " + moduleCodeSearch + "  " + moduleCodeSearch1);
-			StringBuffer wherebuffer = new StringBuffer();
-			wherebuffer.append(" WHERE 1=1 ");
-			if (unitCodeSearch > 0) {
-				wherebuffer.append(" AND um.unitid=" + unitCodeSearch);
-			}
-			if (moduleCodeSearch > 0) {
-				wherebuffer.append(" AND mm.moduleid=" + moduleCodeSearch);
-			}
-
-			Session session = sessionFactory.getCurrentSession();
-			String sql = "select um.unitcode , mm.modulename , aq.questionnumber, aq.assessmentid, mm.modulecode   from assessmentquestions as aq "
-					+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
-					+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
-			sql = sql + wherebuffer.toString();
-			Query query = session.createSQLQuery(sql);
-			List list = query.list();
-			System.out.println(list.size());
-			return list;*/
-			
-			System.out.println("inside assessmentQuestionsForm");
-			
-			FotestAssessmentQuestionsForm bean = new FotestAssessmentQuestionsForm();
-			List<FotestAssessmentQuestionsForm> resulList = new ArrayList<FotestAssessmentQuestionsForm>();
-			Session session = this.sessionFactory.getCurrentSession();
-			/*List<Object[]> list = session.createSQLQuery("select cast('Training' as varchar(20)) as assesmentType , cast('SCCC' as varchar(20)) as trainingName").list();
-			*/
-			Query query = session.createSQLQuery("select cast('Training' as varchar(20)) as assesmentType , cast('SCCC' as varchar(20)) as trainingName");
-			List list = query.list();
-			System.out.println(list.size());
-			return list;
-			
-		}
-
-		@Override
-		public String assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public List<AssessmentQuestionForm> listAssessmentQuestion(AssessmentQuestionForm assesQuestionForm) {
-			// TODO Auto-generated method stub
-			return null;
-		}
 }

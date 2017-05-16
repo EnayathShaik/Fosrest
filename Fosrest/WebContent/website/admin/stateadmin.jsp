@@ -45,8 +45,8 @@
 									<div class="col-xs-12">
 										<fieldset>
 											<legend>State Admin</legend>
-										<cf:input path="id" type="hidden" /> 
-                                     <cf:input path="userId" type="hidden" /> 
+											<cf:input path="id" type="hidden" />
+											<cf:input path="userId" type="hidden" />
 											<!-- left side -->
 											<div class="col-xs-6">
 												<div class="form-group">
@@ -56,15 +56,17 @@
 																	style="color: red;">*</span>
 
 															</strong></li>
-															<li id="firstNameErr" style="display:none;" class="style-li error-red" > First Name should not be blank.</li>
+															<li id="firstNameErr" style="display: none;"
+																class="style-li error-red">First Name should not
+																be blank.</li>
 
 														</ul>
 													</div>
 													<cf:input path="firstName" placeholder="First Name"
 														class="form-control" />
-													
+
 												</div>
-												
+
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -72,15 +74,17 @@
 																	style="color: red;">*</span>
 
 															</strong></li>
-															<li id="middleNameErr" style="display:none;" class="style-li error-red" >Middle Name should not be blank.</li>
+															<li id="middleNameErr" style="display: none;"
+																class="style-li error-red">Middle Name should not
+																be blank.</li>
 
 														</ul>
 													</div>
 													<cf:input path="middleName" placeholder="Middle Name"
 														class="form-control" />
-													
+
 												</div>
-												
+
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -88,13 +92,15 @@
 																	style="color: red;">*</span>
 
 															</strong></li>
-															<li id="lastNameErr" style="display:none;" class="style-li error-red" >Last Name should not be blank.</li>
+															<li id="lastNameErr" style="display: none;"
+																class="style-li error-red">Last Name should not be
+																blank.</li>
 
 														</ul>
 													</div>
 													<cf:input path="lastName" placeholder="Last Name"
 														class="form-control" />
-													
+
 												</div>
 
 											</div>
@@ -105,20 +111,37 @@
 												<div class="col-xs-6">
 
 													<div class="form-group">
-                                                                            <div>
-                                                                                <ul class="lab-no">
-                                                                                    <li class="style-li"><strong>Aadhar Number:</strong></li>
-                                                                                    <li class="style-li error-red">
-                                                                                        <cf:errors path="aadharNumber" cssClass="error" />
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                            <cf:input path="aadharNumber" maxlength="12" 
-                                                                            onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" 
-                                                                            placeholder="Aadhar Number" class="form-control" required="required" /> 
-                                                                            </div>
-												
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Aadhar
+																		Number:</strong></li>
+																<li class="style-li error-red"><cf:errors
+																		path="aadharNumber" cssClass="error" /></li>
+															</ul>
+														</div>
+														<cf:input path="aadharNumber" maxlength="12"
+															onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
+															placeholder="Aadhar Number" class="form-control"
+															required="required" />
+													</div>
 
+													<div class="form-group">
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Email:</strong></li>
+																<li class="style-li error-red">*</li>
+																<!--  valid -->
+																<li id="EmailErr" style="display: none;"
+																	class="style-li error-red">Email can not be
+																	blank.</li>
+
+															</ul>
+														</div>
+
+														<cf:input type="text" path="email" class="form-control"
+															placeholder="Email" onblur="emailVal(this.id,this.value)"
+															required="" />
+													</div>
 
 													<input type="submit" id="updatebtn"
 														style="display: none; float: right; margin-right: 122px;"
@@ -142,8 +165,9 @@
 										<fieldset>
 											<legend>State Admin List</legend>
 											<ct:if test="${!empty liststateadmin}">
-												<table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
-													
+												<table border="1" id="datatablesfosrest"
+													class="table table-bordered table-responsive">
+
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
@@ -154,7 +178,7 @@
 															<th>Aadhar number</th>
 															<th>Edit</th>
 															<th>Delete</th>
-															
+
 														</tr>
 													</thead>
 
@@ -163,13 +187,15 @@
 
 														<tr>
 															<td>${loop.count}</td>
-														<td>${stateadmin.userId}</td>
+															<td>${stateadmin.userId}</td>
 															<td>${stateadmin.firstName}</td>
 															<td>${stateadmin.middleName}</td>
 															<td>${stateadmin.lastName}</td>
 															<td>${stateadmin.aadharNumber}</td>
-															 <td><button onclick='editstateadmin(${stateadmin.id});return false;' >Edit</button></td>
-														<td><a href="<ct:url value='/stateadmin/remove/${stateadmin.id}.fssai' />" >Delete</a></td>
+															<td><button
+																	onclick='editstateadmin(${stateadmin.id});return false;'>Edit</button></td>
+															<td><a
+																href="<ct:url value='/stateadmin/remove/${stateadmin.id}.fssai' />">Delete</a></td>
 														</tr>
 													</ct:forEach>
 												</table>
@@ -191,7 +217,7 @@
 	</section>
 	<input type="hidden" id="idH" value="" />
 </cf:form>
-  <script>
+<script>
              /*  var id = localStorage.getItem('activeID');
                 document.getElementById(id).className = "active";
                */
@@ -241,4 +267,4 @@
                 		return false; 
                	 }
               }  */
-                </script>  
+                </script>
