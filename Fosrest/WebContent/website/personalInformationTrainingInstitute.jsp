@@ -268,7 +268,7 @@
                                     <div>
                                     <cf:input path="id" type="hidden" /> 
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Training Center Name:</strong></li>
+                                            <li class="style-li"><strong>Training Institude Name:</strong></li>
                                               <li id="trainingCenterNameErr" style="display:none;" class="style-li error-red" > Training name can not be blank.</li>
                                                   
                                             <li class="style-li error-red"> </li>
@@ -310,7 +310,7 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Title:(Training Center Head)</strong></li>
+                                            <li class="style-li"><strong>Title:(Training Institude Head)</strong></li>
                                             <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
                                              
                                             <li class="style-li error-red"> </li>

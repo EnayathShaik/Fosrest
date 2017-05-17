@@ -288,7 +288,7 @@
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
-											<li class="style-li"><strong>Father's Name:</strong></li>
+											<li class="style-li"><strong>Father's Name/ Mother's Name:</strong></li>
 											<li class="style-li error-red">*</li>
 											<li id="FatherNameErr" style="display: none;"
 												class="style-li error-red">Please Enter Father's Name.</li>
@@ -636,13 +636,13 @@
 							<!-- left side ends -->
 							<!-- right side -->
 							<div class="col-md-6 col-xs-12">
-								<div class="form-group">
+							<%-- 	<div class="form-group">
 									<label>How Many Trainings (4Hrs) Sessions Wish To
 										Conduct in a Month ?</label> 
 										 <div id="sessWishToConductErr" style="display:none;" class="style-li error-red" >Session hrs cannot be 0 or blank	 .</div>
 										
 										<cf:input type="text" path="sessWishToConduct" class="form-control" placeholder="Hours" />
-								</div>
+								</div> --%>
 								<div class="form-group">
 									<label>Associated with any Training Institute ?</label> <br>
 									<label class="radio-inline"> <input type="radio"

@@ -277,7 +277,7 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Father's Name:</strong></li> <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Father's Name/Mother's Name:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
                                              <li id="FatherNameErr" style="display:none;" class="style-li error-red" >Father Name can not be blank.</li>
                                            

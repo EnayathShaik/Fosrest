@@ -54,7 +54,7 @@
 					<div class="col-sm-6 col-xs-4">
 						<div class="top-logo">
 							<a href="loginProcess.fssai"><img class="img-responsive"
-								src="website/images/fostac-logo.png"
+								src="website/images/fssai.png"
 								alt="Food Safety Training and Certification"
 								title="Food Safety Training and Certification"></a>
 						</div>
