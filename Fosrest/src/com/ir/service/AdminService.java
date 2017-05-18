@@ -36,6 +36,7 @@ import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.form.ViewTrainingCalendarForm;
 import com.ir.form.activateTrainingOfTraineeForm;
+import com.ir.form.stateAdminForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.model.AdminUserManagement;
@@ -483,6 +484,14 @@ public interface AdminService {
 	//namage assessment question
 		List fotestGetQuestions(String data);
 
+		List<StateAdmin> stateAdminsearch(stateAdminForm stateAdminForm);
+
+		/*//stateadmin
+		public StateAdmin FullDetailStateAdmin(int loginId);*/
+		
+
+		
+		
 		
 }
 

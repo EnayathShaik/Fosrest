@@ -159,9 +159,14 @@
 										<a href="PersonalInformationTrainingInstitute.fssai"><img
 											src="website/images/assessor.png"></a>
 									</div>
+									<div class="col-md-4 col-xs-12" align="center" style="margin-right:-1062px; margine-top:-140px;">
+										<a href="stateAdminPersonalInformation.fssai"><img
+											src="website/images/training-partner_bk.png"></a>
+									</div>
 
 								</div>
 								<div class="col-md-3 xs-hidden"></div>
+								
 
 								<!--  <li>
                                                         <a href="trainingPartner.fssai"><img src="website/images/training-partner.png"></a>

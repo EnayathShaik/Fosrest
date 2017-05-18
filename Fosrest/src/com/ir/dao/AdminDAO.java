@@ -27,6 +27,7 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingRequestForm;
 import com.ir.form.TrainingScheduleForm;
+import com.ir.form.stateAdminForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
@@ -385,5 +386,7 @@ public interface AdminDAO {
 
 	public InvoiceInfoForm getInvoiceInfo(String invoice);
 
-	
+	public List<StateAdmin> stateAdminsearch(stateAdminForm stateAdminForm);
+
+	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

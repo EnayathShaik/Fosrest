@@ -9,6 +9,16 @@ public class stateAdminForm {
 	private String aadharNumber;
 	private String userId;
 	private String email;
+	private String logindetails;
+	
+	
+	
+	public String getLogindetails() {
+		return logindetails;
+	}
+	public void setLogindetails(String logindetails) {
+		this.logindetails = logindetails;
+	}
 	public String getEmail() {
 		return email;
 	}

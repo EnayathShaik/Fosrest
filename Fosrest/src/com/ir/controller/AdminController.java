@@ -54,6 +54,7 @@ import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
 import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.form.ModuleMasterForm;
+import com.ir.form.MyTrainingForm;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
 import com.ir.form.RegionMasterForm;
@@ -532,17 +533,43 @@ public class AdminController {
 	}
 	
 	//state admin
-	@RequestMapping(value = "/stateadmin", method = RequestMethod.GET)
-	public String liststateadmin(Model model) {
-		System.out.println("listmanageTraining");
-
+	
+	@RequestMapping(value = "/stateAdminPersonalInformation", method = RequestMethod.GET)
+	public String stateAdminPersonalInformation(StateAdmin StateAdmin ,Model model,HttpServletRequest request) {
+		System.out.println("stateAdminPersonalInformation");
+		String userId = request.getParameter("userId");
 		model.addAttribute("stateAdminForm", new stateAdminForm());
-		model.addAttribute("liststateadmin", this.adminService.liststateadmin());
-		return "stateadmin";
+		//model.addAttribute("liststateadmin", this.adminService.liststateadmin());
+		/*if (userId != null && Integer.parseInt(userId) > 0) {
+			StateAdmin = this.adminService
+					.FullDetailStateAdmin(Integer.parseInt(userId));
+			System.out.println("aalaaaaaaaaaaaaaa");
+			model.addAttribute("StateAdmin",
+					StateAdmin);
+			model.addAttribute("isUpdate", "Y");
+			
+		} else {
+			model.addAttribute("StateAdmin",
+					new StateAdmin());
+		}
+		System.out.println("aalaaaaaaaaagggggggggggggaaaaa");*/
+		return "stateAdminPersonalInformation";
 		
 	
 	}
 
+	
+	@RequestMapping(value = "/stateadmin", method = RequestMethod.GET)
+	public String stateadmin(@ModelAttribute("stateAdminForm") StateAdmin StateAdmin ,Model model,HttpServletRequest request) {
+		System.out.println("stateadmin");
+		
+		model.addAttribute("stateAdminForm", new stateAdminForm());
+		model.addAttribute("liststateadmin", this.adminService.liststateadmin());
+		
+		return "stateadmin";
+		
+	
+	}
 	// For add and update state both
 	@RequestMapping(value = "/stateadminadd", method = RequestMethod.POST)
 	public String addstateadmin(@ModelAttribute("stateAdminForm") StateAdmin p,Model model) {
@@ -564,14 +591,50 @@ public class AdminController {
 			new Thread(new Mail("Thanks", p.getEmail(), all[1], all[0], p.getFirstName())).start();
 			return "welcome";
 		}
-		else if(stateadmin.equalsIgnoreCase("updated")){
+		/*else if(stateadmin.equalsIgnoreCase("updated")){
 			
 			return "redirect:/adminUserManagementForm.fssai";
 		
-		}
+		}*/
 		return "redirect:/stateadmin.fssai";
 	}
 
+	/*@RequestMapping(value ="/stateadminsearch", method = RequestMethod.POST)
+	public String stateAdmin(
+			@Valid @ModelAttribute("stateAdminForm") stateAdminForm stateAdminForm,
+			BindingResult result, Model model) {
+		
+		System.out.println("sssssssssssss");
+		if (result.hasErrors()) {
+			new ZLogger("traineeUserManagementSearch", "bindingResult.hasErrors  " + result.hasErrors(),
+					"AdminController.java");
+			new ZLogger("traineeUserManagementSearch",
+					"bindingResult.hasErrors  " + result.getErrorCount() + " All Errors " + result.getAllErrors(),
+					"AdminController.java");
+			return "stateadmin";
+		}
+		try {
+			List<StateAdmin> stateAdminsearch = adminService
+					.stateAdminsearch(stateAdminForm);
+			if (stateAdminsearch != null && stateAdminsearch.size() > 0) {
+				model.addAttribute("searchstateAdmin", stateAdminsearch);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			new ZLogger("traineeUserManagementSearch",
+					"Exception while traineeUserManagementSearch :  " + e.getMessage(), "AdminController.java");
+		}
+		return "stateadmin";
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/stateadmin/remove/{id}")
 	public String removestateadmin(@PathVariable("id") int id) {
 
@@ -2787,6 +2850,8 @@ public class AdminController {
 		out.flush();
 
 	}
+	
+	
 
 	
 }

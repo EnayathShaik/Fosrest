@@ -38,6 +38,7 @@ import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.form.ViewTrainingCalendarForm;
 import com.ir.form.activateTrainingOfTraineeForm;
+import com.ir.form.stateAdminForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.model.AdminUserManagement;
@@ -222,8 +223,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transactional
 	public void updatestateadmin(StateAdmin p) {
-		// TODO Auto-generated method stub
-		this.adminDAO.updatestateadmin(p);
+		 this.adminDAO.updatestateadmin(p);
 	}
 
 	@Override
@@ -1491,5 +1491,21 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	@Transactional
+	public List<StateAdmin> stateAdminsearch(
+			stateAdminForm stateAdminForm) {
+		List<StateAdmin> stateAdminsearch = adminDAO
+				.stateAdminsearch(stateAdminForm);
+		return stateAdminsearch;
+	}
+	/*//fulldetailsstateadmin
+	@Override
+	@Transactional
+	public StateAdmin FullDetailStateAdmin(int loginId) {
+		StateAdmin StateAdmin = adminDAO.FullDetailStateAdmin(loginId);
+		return StateAdmin;
+	}*/
 
 }

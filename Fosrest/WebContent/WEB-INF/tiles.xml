@@ -765,11 +765,11 @@
 		<put-attribute name="body"
 			value="/website/admin/adminUserManagement.jsp" />
 	</definition>
-	<definition name="stateadmin" extends="base.user.afterLogin">
+	 <definition name="stateadmin" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
 			value="/website/admin/stateadmin.jsp" />
-	</definition>
+	</definition> 
 	<definition name="feedbackMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/feedbackMaster.jsp" />
@@ -1313,4 +1313,12 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/fotestTrainee/FotestCertification.jsp" />
 	</definition>
+	 <definition name="stateAdminPersonalInformation" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/stateAdminPersonalInformation.jsp" />
+	</definition> 
+	<!-- <definition name="stateadmin" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/stateadmin.jsp" />
+	</definition> -->
 </tiles-definitions>

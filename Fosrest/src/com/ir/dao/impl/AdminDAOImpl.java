@@ -52,7 +52,7 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
-
+import com.ir.form.stateAdminForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.AssessmentQuestion_old;
@@ -793,7 +793,21 @@ public class AdminDAOImpl implements AdminDAO {
 			session.update(p);
 			//new ZLogger("ManageTraining saved successfully", " ManageTraining Details=" + p, "AdminDAOImpl.java");
 		}
+		/*@Override
+		public  String updatestateadmin(StateAdmin p){
 
+			int id =  p.getId();
+			System.out.println("bbbbbbbbbbbbbbbbbb");
+			Session session = sessionFactory.getCurrentSession();
+			StateAdmin StateAdmin = (StateAdmin) session.load(StateAdmin.class, id);
+			StateAdmin.setFirstName(p.getFirstName());
+			StateAdmin.setMiddleName(p.getMiddleName());
+			StateAdmin.setAadharNumber(p.getAadharNumber());
+			StateAdmin.setEmail(p.getEmail());
+			session.update(StateAdmin);
+			return "updated";
+		}	*/
+		
 		@SuppressWarnings("unchecked")
 		@Override
 		public List<StateAdmin> liststateadmin() {
@@ -3330,5 +3344,66 @@ public class AdminDAOImpl implements AdminDAO {
 		return null;
 	}
 
-	
+	@Override
+	public List<StateAdmin> stateAdminsearch(
+			stateAdminForm stateAdminForm) {
+		Session session = sessionFactory.getCurrentSession();
+		String FirstName = stateAdminForm.getFirstName();
+		String MiddleName = stateAdminForm.getMiddleName();
+		String LastName = stateAdminForm.getLastName();
+		String AadharNumber = stateAdminForm.getAadharNumber();
+		//String status = trainerUserManagementForm.getStatus();
+
+		if (FirstName.length() == 0) {
+			FirstName = "%";
+		}
+		if (MiddleName.length() == 0) {
+			MiddleName = "%";
+		}
+		if (LastName.length() == 0) {
+			LastName = "%";
+		}
+		if (AadharNumber.length() == 0) {
+			AadharNumber = "%";
+		}
+		/*if (status.equals("0")) {
+			status = "%";
+		}*/
+
+		String join = " inner join loginDetails as ld on st.loginDetails = ld.id";
+		String like = " where upper(st.FirstName) like '" + FirstName.toUpperCase() + "' and st.MiddleName like '"
+				+ MiddleName + "' and st.LastName like '" + LastName + "' and " + "st.AadharNumber like '"
+				+ AadharNumber +  "'";
+		String select = "st.id,ld.loginid,st.FirstName,st.MiddleName,st.LastName,st.AadharNumber,st.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
+
+		String sql = "Select " + select + "  from StateAdmin as st " + join + like;
+		Query query = session.createSQLQuery(sql);
+		List<StateAdmin> list = query.list();
+		new ZLogger("trainerUserManagementSearch", "list  " + list, "AdminDAOImpl.java");
+		if (list.size() > 0) {
+			return list;
+		} else {
+			new ZLogger("trainerUserManagementSearch", "list size null", "AdminDAOImpl.java");
+			list = null;
+			return list;
+		}
+	}
+	/*@Override
+	public StateAdmin FullDetailStateAdmin(int loginId) {
+		// TODO Auto-generated method stub
+		System.out.println("LogintrainerDAOImpl full detail process start ");
+		Session session = sessionFactory.getCurrentSession();
+		Integer i = loginId;
+		System.out.println("search " + loginId);
+		Query query = session.createQuery("from StateAdmin where loginDetails = '"+ i +"'");
+		List<StateAdmin> list = query.list();
+		StateAdmin StateAdmin = null;
+		for(StateAdmin stateAdminForm1: list){
+			
+			StateAdmin=stateAdminForm1;
+		}
+		return StateAdmin;
+
+	}*/
+
 }
