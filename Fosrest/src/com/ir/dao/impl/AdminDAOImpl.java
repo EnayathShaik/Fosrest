@@ -1010,6 +1010,7 @@ public class AdminDAOImpl implements AdminDAO {
 		assessmentQuestion.setOptionSix(assessmentQuestionForm.getOptionSix());
 		assessmentQuestion.setCorrectAnswer(assessmentQuestionForm.getCorrectAnswer());
 		assessmentQuestion.setAssessmentType("Post");
+		assessmentQuestion.setIsActive("Y");
 
 		Integer assessmentQuestionIdd = null;
 
@@ -1655,7 +1656,9 @@ public class AdminDAOImpl implements AdminDAO {
 		if (moduleCodeSearch > 0) {
 			wherebuffer.append(" AND mm.moduleid=" + moduleCodeSearch);
 		}
-
+		
+		wherebuffer.append(" AND coalesce(aq.isactive,'') <> 'N' ");
+		 
 		Session session = sessionFactory.getCurrentSession();
 		
 		//commented query contains questionnumber
@@ -3100,16 +3103,7 @@ public class AdminDAOImpl implements AdminDAO {
 		return "created";
 	}
 
-	@Override
-	public void removeAssessmentQuestion(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		AssessmentQuestions p = (AssessmentQuestions) session.load(AssessmentQuestions.class, new Integer(id));
-		if (null != p) {
-			session.delete(p);
-		}
-
-	}
+	
 
 	@Override
 	public AssessmentQuestions getAssessmentQuestionById(int id) {
@@ -3333,16 +3327,26 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public String assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm) {
+	public void deleteAssessmentQuestion(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println("delete AQ daoimpl");
+		Session session = this.sessionFactory.getCurrentSession();
+		AssessmentQuestions p = (AssessmentQuestions) session.load(AssessmentQuestions.class, new Integer(id));
+		String sql = null;
+		if (null != p) {
+			sql = "update AssessmentQuestions set isactive='N' where assessmentid=" + id;
+		}
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+		
+		/*System.out.println("delete AQ dao");
+		Session session = this.sessionFactory.getCurrentSession();
+		AssessmentQuestions p = (AssessmentQuestions) session.load(AssessmentQuestions.class, new Integer(id));
+		if (null != p) {
+			session.delete(p);
+		}*/
 	}
-
-	@Override
-	public List<AssessmentQuestionForm> listAssessmentQuestion(AssessmentQuestionForm assesQuestionForm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public List<StateAdmin> stateAdminsearch(

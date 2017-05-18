@@ -416,7 +416,11 @@ public class TrainerController {
 	/*@RequestMapping(value = "/MyCalendar", method = RequestMethod.GET)
 	public String MyCalendar(
 			@ModelAttribute("MyCalendarForm") MyCalendarForm MyCalendarForm,
-			Model model) {
+			Model model,HttpSession session) {
+		
+		System.out.println(session.getAttribute("profileId"));
+		if((int)session.getAttribute("profileId")!=4)
+			return "redirect:login.fssai";
 		System.out.println("listMyCalendar");
 
 		Map<String, String> trainingType = lst.trainingTypeMap;

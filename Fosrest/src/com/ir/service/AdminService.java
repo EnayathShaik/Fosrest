@@ -371,12 +371,6 @@ public interface AdminService {
 
 	public String enrollUser(String data);
 
-	public String assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm);
-
-	public List<AssessmentQuestionForm> listAssessmentQuestion(AssessmentQuestionForm assesQuestionForm);
-
-	public void removeAssessmentQuestion(int id);
-
 	public AssessmentQuestions getAssessmentQuestionById(int id);
 
 	public String updateCertificate(String data);
@@ -492,7 +486,8 @@ public interface AdminService {
 
 		
 		
-		
+
+public void deleteAssessmentQuestion(int id);
 }
 
 

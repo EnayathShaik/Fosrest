@@ -41,6 +41,21 @@ public class AssessmentQuestions {
 	
 	private int correctAnswer;
 
+
+	@Column(name="isActive", columnDefinition="character varying(10) default 'Y'")
+	private String isActive;
+	
+	
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+	
+	
+	
+	
 	public UnitMaster getUnitCode() {
 		return unitCode;
 	}

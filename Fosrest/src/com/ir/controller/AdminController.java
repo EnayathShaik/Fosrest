@@ -2680,7 +2680,6 @@ public class AdminController {
 	public String manageAssessmentQuestions(
 			@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model) {
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
-		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 		return "manageAssessmentQuestions";
 	}
 
@@ -2709,7 +2708,6 @@ public class AdminController {
 					"Exception while manageAssessmentQuestionsSave :  " + e.getMessage(), "AdminController.java");
 		}
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
-		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 		return "manageAssessmentQuestions";
 	}
 
@@ -2850,8 +2848,13 @@ public class AdminController {
 		out.flush();
 
 	}
-	
-	
+   @RequestMapping("/deleteassessmentquestion/{id}")
+	public String deleteAssessmentQuestion(@PathVariable("id") int id) {
+System.out.println("in delete "+id);
+
+		this.adminService.deleteAssessmentQuestion(id);
+		return "redirect:/manageAssessmentQuestions.fssai";
+	}
 
 	
 }

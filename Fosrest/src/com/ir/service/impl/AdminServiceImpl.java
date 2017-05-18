@@ -1199,27 +1199,6 @@ public class AdminServiceImpl implements AdminService {
 		return this.adminDAO.enrollUser(data);
 	}
 
-	@Override
-	@Transactional
-	public String assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm) {
-		// TODO Auto-generated method stub
-		return this.adminDAO.assessmentQuestionSave(assesQuestionForm);
-	}
-
-	@Override
-	@Transactional
-	public List<AssessmentQuestionForm> listAssessmentQuestion(AssessmentQuestionForm assesQuestionForm) {
-		// TODO Auto-generated method stub
-		return this.adminDAO.listAssessmentQuestion(assesQuestionForm);
-	}
-
-	@Override
-	@Transactional
-	public void removeAssessmentQuestion(int id) {
-		// TODO Auto-generated method stub
-		this.adminDAO.removeAssessmentQuestion(id);
-
-	}
 
 	@Override
 	public AssessmentQuestions getAssessmentQuestionById(int id) {
@@ -1508,4 +1487,11 @@ public class AdminServiceImpl implements AdminService {
 		return StateAdmin;
 	}*/
 
+	
+@Override
+	@Transactional
+	public void deleteAssessmentQuestion(int id) {
+		this.adminDAO.deleteAssessmentQuestion(id);
+
+	}
 }

@@ -14,6 +14,9 @@ document.getElementById('questionTitle').value = '';
 document.getElementById('noOfAssesmentQues').value = 0;
 document.getElementById('correctAnswer').value = '';
 
+getModule(document.getElementById('unitCode1').value,'moduleCode1');
+getModule(document.getElementById('unitCode2').value,'moduleCode2');
+
 }
 window.onload = OnStart;
 
@@ -38,17 +41,54 @@ function getQuestions(){
 	var mainData1 = jQuery.parseJSON(data);
 	var j=1;
 	$('#newTable tr').remove();
-	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Assessment ID - Module Code</th><th>Question Title</th></tr>')
-	$.each(mainData1 , function(i , obj)
-	{
-		$('#newTable').append('<tr  id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[2]+' - '+obj[3]+'</a></td><td>'+obj[4]+'</td></tr>');
-		
-	});
+	if(data=="[]"){ 
+	    //alert("What follows is blank: " + data);
+	    $('#newTable').append('<tr><th>Empty</th></tr>')
 	}
+	if(!(data=="[]")){ 
+	    //alert("What follows is NOT blank: " + data);
+		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Assessment ID - Module Code</th><th>Question Title</th><th>Delete</th></tr>')
+		$.each(mainData1 , function(i , obj)
+		{
+			//$('#newTable').append('<tr  id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[2]+' - '+obj[3]+'</a></td><td>'+obj[4]+'</td></tr>');
+			/* var a=obj[2];
+			alert(a);
+			$('#newTable').append('<tr  id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[2]+' - '+obj[3]+'</a></td><td>'+obj[4]+'</td><td><a href="<ct:url value='/rr/remove/${a}.fssai' />" >Delete</a></td></tr>');
+			 */
+	/* 																																											
+	 */		
+	 	$('#newTable').append('<tr  id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[2]+' - '+obj[3]+'</a></td><td>'+obj[4]+'</td><td><a href="" onClick="return deleteAQ('+obj[2]+')" >Delete</a></td></tr>');
+
 	});
+
+	}
+	
+}
+});
 return result;
 }
 
+//
+
+//
+function deleteAQ(id){   
+//alert(id);
+var name1=JSON.stringify({
+	courseName:0
+})
+$.ajax({
+      type: 'post',
+      url: 'deleteassessmentquestion/'+id+'.fssai',
+      contentType : "application/json",
+	  data:name1,
+      success: function (response) {      
+     }
+      });   
+
+location.reload();
+return false;
+
+}
 
 function editAssessmentQuestion(id){
 	var result="";
@@ -470,7 +510,7 @@ if($("#correctAnswer").val() == 0){
                                                         
                                                     </div>
                                                     <cf:input type="hidden" path="id" class="form-control" placeholder="Help Text" />
-                                                    <button onlclick="return validateFields();" class="btn login-btn pull-right">Save</button>
+                                                    <button onClick="return validateFields();" class="btn login-btn pull-right">Save</button>
                                                 </div> 
                                                 
                                                 <div class="col-md-6 col-xs-12">

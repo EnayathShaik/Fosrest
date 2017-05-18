@@ -352,12 +352,6 @@ public interface AdminDAO {
 
 	public String enrollUser(String data);
 
-	public String assessmentQuestionSave(AssessmentQuestionForm assesQuestionForm);
-
-	public List<AssessmentQuestionForm> listAssessmentQuestion(AssessmentQuestionForm assesQuestionForm);
-
-	public void removeAssessmentQuestion(int id);
-
 	public AssessmentQuestions getAssessmentQuestionById(int id);
 
 	public String updateCertificate(String data);
@@ -385,6 +379,8 @@ public interface AdminDAO {
 	public List<InvoiceMaster> listCustomCustomerMaster();
 
 	public InvoiceInfoForm getInvoiceInfo(String invoice);
+
+	public void deleteAssessmentQuestion(int id);
 
 	public List<StateAdmin> stateAdminsearch(stateAdminForm stateAdminForm);
 
