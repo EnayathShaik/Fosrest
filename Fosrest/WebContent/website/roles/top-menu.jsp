@@ -288,7 +288,7 @@
                                 <ul class="nav navbar-nav">
                                     <li></li>
                                     <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-                                    <li ><a href="TrsainingPartner.fssai">Training Partner List</a></li>
+                                    <li ><a href="TrainingPartner.fssai">Training Partner List</a></li>
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
@@ -418,114 +418,7 @@
                 </div>
             </nav>
         </div>
-        <%
-		} else if (session.getAttribute("profileId").equals(30)) {
-	%>
-	<div class="container-fluid">
-		<nav
-			class="navbar navbar-default navbar-fixed-top horizontal-nav-top horizontal-top-nav-border">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed"
-							data-toggle="collapse" data-target="#navbar"
-							aria-expanded="false" aria-controls="navbar">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-					</div>
-					<div id="navbar" class="navbar-collapse collapse">
-						<ul class="nav navbar-nav">
-							<li></li>
-							 <li id="homepagefssai" class="hori"><a onclick="setID('homepagefssai')" href="adminHomePage.fssai">Home</a></li>
-                                                                <li id="managepagefssai"><a onclick="setID('managepagefssai')" href="trainingPartnerMaster.fssai">Activate User ID</a></li>
-                                                                <li id="masterpagefssai"> <a onclick="setID('masterpagefssai')" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a href="stateMaster.fssai" class="clr">Trainee</a></li>
-                                                                        <li><a href="districtMaster.fssai" class="clr">Trainer</a></li>
-                                                                        <li><a href="cityMaster.fssai" class="clr">Training Partner</a></li>
-                                                                        
-                                                                         </ul>
-                                          <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="StateMaster.fssai" class="clr">State</a></li>
-                                            <li><a href="DistrictMaster.fssai" class="clr">District</a></li>
-                                            <li><a href="CityMaster.fssai" class="clr">City</a></li>                                            
-                                            <li><a href="RegionMaster.fssai" class="clr">Region Mapping</a></li>
-                                        </ul>
-                                                      </li>
-                                                               
-                                                            </ul>
-                                                            <ul class="nav navbar-nav navbar-right">
-                                                                <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i
-									class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a href="changePasswordTrainee.fssai">Change
-											Password</a></li>
-                                                                        <li><a href="fotest.fssai">Logout</a></li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <!--/.nav-collapse -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </nav>
-                                    </div>
-
-	  <%
-		}else if (session.getAttribute("profileId").equals(33)) {
-	%>
-	<div class="container-fluid">
-		<nav
-			class="navbar navbar-default navbar-fixed-top horizontal-nav-top horizontal-top-nav-border">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed"
-							data-toggle="collapse" data-target="#navbar"
-							aria-expanded="false" aria-controls="navbar">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-					</div>
-					<div id="navbar" class="navbar-collapse collapse">
-						<ul class="nav navbar-nav">
-							<li id="homepagefssai" class="hori"><a onclick="setID('homepagefssai')" href="adminHomePage.fssai">Home</a></li>
-                                                                <li id="managepagefssai"><a onclick="setID('managepagefssai')" href="trainingPartnerMaster.fssai">My courses</a></li>
-                                                                 <li id="homepagefssai" class="hori"><a onclick="setID('homepagefssai')" href="adminHomePage.fssai">Update Information</a></li>
-                                                                <li id="managepagefssai"><a onclick="setID('managepagefssai')" href="trainingPartnerMaster.fssai">Contact Us</a></li>
-                                                                <!-- <li id="masterpagefssai"> <a onclick="setID('masterpagefssai')" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a href="stateMaster.fssai" class="clr">Trainee</a></li>
-                                                                        <li><a href="districtMaster.fssai" class="clr">Trainer</a></li>
-                                                                        <li><a href="cityMaster.fssai" class="clr">Training Partner</a></li>
-                                                                    </ul>
-                                                                </li> -->
-                                                               
-                                                            </ul>
-                                                            <ul class="nav navbar-nav navbar-right">
-                                                                <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i
-									class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a href="changePasswordTrainee.fssai">Change
-											Password</a></li>
-                                                                        <li><a href="fotest.fssai">Logout</a></li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <!--/.nav-collapse -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </nav>
-                                    </div>
+       
 	<%
 		}
 	%>
