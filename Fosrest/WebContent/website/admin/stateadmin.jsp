@@ -1,11 +1,20 @@
-<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+ <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script type="text/javascript"
 	src="website/js/jquery-toaster/jquery.toaster.js"></script>
 
-
+<!--  <script>
+ 
+ function OnStart(){
+	$("#state").val('${stateAdminForm.state}');
+	}
+		 		
+	window.onload = OnStart;
+	
+	
+ </script> -->
 
 <ct:url var="addAction" value="/stateadminadd.fssai"></ct:url>
 <cf:form action="${addAction}" name="myForm" method="POST"
@@ -49,68 +58,19 @@
 											<cf:input path="userId" type="hidden" />
 											<!-- left side -->
 											<div class="col-xs-6">
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>First Name: <span
-																	style="color: red;">*</span>
-
-															</strong></li>
-															<li id="firstNameErr" style="display: none;"
-																class="style-li error-red">First Name should not
-																be blank.</li>
-
-														</ul>
-													</div>
-													<cf:input path="firstName" placeholder="First Name"
-														class="form-control" />
-
-												</div>
-
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Middle Name: <span
-																	style="color: red;">*</span>
-
-															</strong></li>
-															<li id="middleNameErr" style="display: none;"
-																class="style-li error-red">Middle Name should not
-																be blank.</li>
-
-														</ul>
-													</div>
-													<cf:input path="middleName" placeholder="Middle Name"
-														class="form-control" />
-
-												</div>
-
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Last Name: <span
-																	style="color: red;">*</span>
-
-															</strong></li>
-															<li id="lastNameErr" style="display: none;"
-																class="style-li error-red">Last Name should not be
-																blank.</li>
-
-														</ul>
-													</div>
-													<cf:input path="lastName" placeholder="Last Name"
-														class="form-control" />
-
-												</div>
-
-											</div>
-											<!-- right side -->
-											<div class="row">
-
-												<!-- left -->
-												<div class="col-xs-6">
-
-													<div class="form-group">
+												 <div class="form-group">
+				                                    <div>
+				                                        <ul class="lab-no">
+				                                            <li class="style-li"><strong>Emp Id:</strong></li><li class="style-li error-red"> * </li>
+				                                              <!--  valid -->
+				                                            <li id="empIDErr1" style="display:none;" class="style-li error-red" >Emp Id can not be blank.</li>
+				                                            
+				                                        </ul>
+				                                    </div>
+                                             <cf:input type="text" path="empID" class="form-control" placeholder="Emp ID"/>
+                                            </div>
+                                            
+                                                     <div class="form-group">
 														<div>
 															<ul class="lab-no">
 																<li class="style-li"><strong>Aadhar
@@ -124,7 +84,6 @@
 															placeholder="Aadhar Number" class="form-control"
 															required="required" />
 													</div>
-
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
@@ -142,6 +101,133 @@
 															placeholder="Email" onblur="emailVal(this.id,this.value)"
 															required="" />
 													</div>
+												 <div class="form-group">
+					                                    <div>
+					                                        <ul class="lab-no">
+					                                            <li class="style-li"><strong>Address Line 1:</strong></li> <li class="style-li error-red"> * </li>
+					                                             <!--  valid -->
+					                                             <li id="address1Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
+					                                           
+					                                        </ul>
+					                                    </div>
+                                                     <cf:input type="text" path="address1" class="form-control" placeholder="Address" required=""/>
+                                                  </div>
+												<div class="form-group">
+					                                    <div>
+					                                        <ul class="lab-no">
+					                                            <li class="style-li"><strong>Address Line 2:</strong></li> <li class="style-li error-red"> * </li>
+					                                             <!--  valid -->
+					                                             <li id="address2Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
+					                                           
+					                                        </ul>
+					                                    </div>
+                                                     <cf:input type="text" path="address2" class="form-control" placeholder="Address" required=""/>
+                                                  </div>
+												 <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Pin Code:</strong></li> <li class="style-li error-red"> * </li>
+                                           <!--  valid -->
+                                            <li id="pincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
+                                           
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="pincode" class="form-control"  minlength="6"  maxlength="6" placeholder="Pin Code" 
+                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>
+
+												
+
+											</div>
+											<!-- right side -->
+											<div class="row">
+
+												<!-- left -->
+												<div class="col-xs-6">
+
+													<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>First Name: <span
+																	style="color: red;">*</span>
+
+															</strong></li>
+															<li id="firstNameErr" style="display: none;"
+																class="style-li error-red">First Name should not
+																be blank.</li>
+
+														</ul>
+													</div>
+													<cf:input path="firstName" placeholder="First Name"
+														class="form-control" />
+
+												</div>
+
+													<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Middle Name: <span
+																	style="color: red;">*</span>
+
+															</strong></li>
+															<li id="middleNameErr" style="display: none;"
+																class="style-li error-red">Middle Name should not
+																be blank.</li>
+
+														</ul>
+													</div>
+													<cf:input path="middleName" placeholder="Middle Name"
+														class="form-control" />
+
+												</div>
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Last Name: <span
+																	style="color: red;">*</span>
+
+															</strong></li>
+															<li id="LastNameErr" style="display: none;"
+																class="style-li error-red">Last Name should not be
+																blank.</li>
+
+														</ul>
+													</div>
+													<cf:input path="lastName" placeholder="Last Name"
+														class="form-control" />
+
+												</div>
+												<div class="form-group">
+				                                    <div>
+				                                        <ul class="lab-no">
+				                                            <li class="style-li"><strong>State:</strong></li><li class="style-li error-red"> * </li>
+				                                            <!--  valid -->
+				                                             <li id="stateErr" style="display:none;" class="style-li error-red" >correspondence State can not be blank.</li>
+				                                            
+				                                        </ul>
+				                                    </div>
+				                                    <cf:select path="state" class="form-control" >
+				                                	<cf:option value="0" label="Select state Name" />
+													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
+				                                    </cf:select>
+                                               </div>
+                                               <div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Designation: <span
+																	style="color: red;">*</span>
+
+															</strong></li>
+															<li id="designationErr" style="display: none;"
+																class="style-li error-red">designation should not
+																be blank.</li>
+
+														</ul>
+													</div>
+													<cf:input path="designation" placeholder="designation"
+														class="form-control" />
+
+												</div>
 
 													<input type="submit" id="updatebtn"
 														style="display: none; float: right; margin-right: 122px;"
@@ -240,6 +326,13 @@
         		    $("#aadharNumber").val(mainData1.aadharNumber);
         		    $("#userId").val(mainData1.userId);
         		    $("#email").val(mainData1.email);
+        		   $("#state").val(mainData1.state);
+        		    $("#empID").val(mainData1.empID);
+        		    $("#designation").val(mainData1.designation);
+        		    $("#address1").val(mainData1.address1);
+        		    $("#address2").val(mainData1.address2);
+        		    $("#pincode").val(mainData1.pincode);
+        		 
         		    $("#updatebtn").css("display" , "block");
             	     
             	     $("#createbtn").css("display" , "none");
@@ -270,7 +363,7 @@
               }  */
                 </script>
 
-<%-- <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+<%--  <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -470,4 +563,4 @@
                     }
                 }
             </script>
- --%>
+  --%>
