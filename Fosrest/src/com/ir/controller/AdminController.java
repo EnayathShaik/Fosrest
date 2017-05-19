@@ -537,7 +537,8 @@ public class AdminController {
 	@RequestMapping(value = "/stateAdminPersonalInformation", method = RequestMethod.GET)
 	public String stateAdminPersonalInformation(StateAdmin StateAdmin ,Model model,HttpServletRequest request) {
 		System.out.println("stateAdminPersonalInformation");
-		String userId = request.getParameter("userId");
+		//String userId = request.getParameter("userId");
+		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("stateAdminForm", new stateAdminForm());
 		//model.addAttribute("liststateadmin", this.adminService.liststateadmin());
 		/*if (userId != null && Integer.parseInt(userId) > 0) {
@@ -564,6 +565,7 @@ public class AdminController {
 		System.out.println("stateadmin");
 		
 		model.addAttribute("stateAdminForm", new stateAdminForm());
+		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("liststateadmin", this.adminService.liststateadmin());
 		
 		return "stateadmin";

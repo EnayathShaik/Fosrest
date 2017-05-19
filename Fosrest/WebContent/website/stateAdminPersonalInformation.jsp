@@ -3,23 +3,6 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<!--  <script>
-	function OnStart() {
-		var isUpdate = '${isUpdate}';
-		alert("isUpdate "+isUpdate);
-		if(isUpdate !=null &&isUpdate == 'Y' )
-			{
-			$("#firstName").val('');
-			$("#lastName").val('');
-			$("#middleName").val('');
-			$("#email").val(''); 
-			}		
-		$("#createbtn").val("Update");
-	}
-	window.onload = OnStart;
-    
-</script>  -->
- 
 
 
 <ct:url var="addAction" value="/stateadminadd.fssai"></ct:url>
@@ -46,68 +29,20 @@
 	
 											<!-- left side -->
 											<div class="col-xs-6">
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>First Name: <span
-																	style="color: red;">*</span>
-
-															</strong></li>
-															<li id="firstNameErr" style="display: none;"
-																class="style-li error-red">First Name should not
-																be blank.</li>
-
-														</ul>
-													</div>
-													<cf:input path="firstName" placeholder="First Name"
-														class="form-control" />
-
-												</div>
-
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Middle Name: <span
-																	style="color: red;">*</span>
-
-															</strong></li>
-															<li id="middleNameErr" style="display: none;"
-																class="style-li error-red">Middle Name should not
-																be blank.</li>
-
-														</ul>
-													</div>
-													<cf:input path="middleName" placeholder="Middle Name"
-														class="form-control" />
-
-												</div>
-
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Last Name: <span
-																	style="color: red;">*</span>
-
-															</strong></li>
-															<li id="LastNameErr" style="display: none;"
-																class="style-li error-red">Last Name should not be
-																blank.</li>
-
-														</ul>
-													</div>
-													<cf:input path="lastName" placeholder="Last Name"
-														class="form-control" />
-
-												</div>
-
-											</div>
-											<!-- right side -->
-											<div class="row">
-
-												<!-- left -->
-												<div class="col-xs-6">
-
-													<div class="form-group">
+											
+											 <div class="form-group">
+				                                    <div>
+				                                        <ul class="lab-no">
+				                                            <li class="style-li"><strong>Emp Id:</strong></li><li class="style-li error-red"> * </li>
+				                                              <!--  valid -->
+				                                            <li id="empIDErr1" style="display:none;" class="style-li error-red" >Emp Id can not be blank.</li>
+				                                            
+				                                        </ul>
+				                                    </div>
+                                             <cf:input type="text" path="empID" class="form-control" placeholder="Emp ID"/>
+                                            </div>
+                                            
+                                                     <div class="form-group">
 														<div>
 															<ul class="lab-no">
 																<li class="style-li"><strong>Aadhar
@@ -121,7 +56,6 @@
 															placeholder="Aadhar Number" class="form-control"
 															required="required" />
 													</div>
-
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
@@ -139,6 +73,134 @@
 															placeholder="Email" onblur="emailVal(this.id,this.value)"
 															required="" />
 													</div>
+												 <div class="form-group">
+					                                    <div>
+					                                        <ul class="lab-no">
+					                                            <li class="style-li"><strong>Address Line 1:</strong></li> <li class="style-li error-red"> * </li>
+					                                             <!--  valid -->
+					                                             <li id="address1Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
+					                                           
+					                                        </ul>
+					                                    </div>
+                                                     <cf:input type="text" path="address1" class="form-control" placeholder="Address" required=""/>
+                                                  </div>
+												<div class="form-group">
+					                                    <div>
+					                                        <ul class="lab-no">
+					                                            <li class="style-li"><strong>Address Line 2:</strong></li> <li class="style-li error-red"> * </li>
+					                                             <!--  valid -->
+					                                             <li id="address2Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
+					                                           
+					                                        </ul>
+					                                    </div>
+                                                     <cf:input type="text" path="address2" class="form-control" placeholder="Address" required=""/>
+                                                  </div>
+												 <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Pin Code:</strong></li> <li class="style-li error-red"> * </li>
+                                           <!--  valid -->
+                                            <li id="pincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
+                                           
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="pincode" class="form-control"  minlength="6"  maxlength="6" placeholder="Pin Code" 
+                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>
+
+												
+
+											</div>
+											<!-- right side -->
+											<div class="row">
+
+												<!-- left -->
+												<div class="col-xs-6">
+
+													<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>First Name: <span
+																	style="color: red;">*</span>
+
+															</strong></li>
+															<li id="firstNameErr" style="display: none;"
+																class="style-li error-red">First Name should not
+																be blank.</li>
+
+														</ul>
+													</div>
+													<cf:input path="firstName" placeholder="First Name"
+														class="form-control" />
+
+												</div>
+
+													<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Middle Name: <span
+																	style="color: red;">*</span>
+
+															</strong></li>
+															<li id="middleNameErr" style="display: none;"
+																class="style-li error-red">Middle Name should not
+																be blank.</li>
+
+														</ul>
+													</div>
+													<cf:input path="middleName" placeholder="Middle Name"
+														class="form-control" />
+
+												</div>
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Last Name: <span
+																	style="color: red;">*</span>
+
+															</strong></li>
+															<li id="LastNameErr" style="display: none;"
+																class="style-li error-red">Last Name should not be
+																blank.</li>
+
+														</ul>
+													</div>
+													<cf:input path="lastName" placeholder="Last Name"
+														class="form-control" />
+
+												</div>
+												<div class="form-group">
+				                                    <div>
+				                                        <ul class="lab-no">
+				                                            <li class="style-li"><strong>State:</strong></li><li class="style-li error-red"> * </li>
+				                                            <!--  valid -->
+				                                             <li id="stateErr" style="display:none;" class="style-li error-red" >correspondence State can not be blank.</li>
+				                                            
+				                                        </ul>
+				                                    </div>
+				                                    <cf:select path="state" class="form-control" >
+				                                	<cf:option value="0" label="Select state Name" />
+													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
+				                                    </cf:select>
+                                               </div>
+                                               <div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Designation: <span
+																	style="color: red;">*</span>
+
+															</strong></li>
+															<li id="designationErr" style="display: none;"
+																class="style-li error-red">designation should not
+																be blank.</li>
+
+														</ul>
+													</div>
+													<cf:input path="designation" placeholder="designation"
+														class="form-control" />
+
+												</div>
+												
 
 													<input type="submit" id="updatebtn"
 														style="display: none; float: right; margin-right: 122px;"
@@ -174,17 +236,27 @@
                 	$("#MiddleNameErr").css("display" , "none");
                 	$("#LastNameErr").css("display" , "none");
                 	$("#EmailErr").css("display" , "none");
+                	$("#empIdErr1").css("display" , "none");
+                	$("#address1Err").css("display" , "none");
+                	$("#address2Err").css("display" , "none");
+                	$("#designationErr").css("display" , "none");
+                	$("#stateErr").css("display" , "none");
+                	$("#pincodeErr").css("display" , "none");
                 	
+                	if($("#empID").val() == ''){
+    				$("#empIDErr1").css("display" , "block");
+    				return false;
+    				}
                 	if($("#firstName").val() == 0){
 					$("#firstNameErr").css("display" , "block");
 					return false;
 					}
-					if($("#middleName").val() == 0){
+					if($("#middleName").val() == ''){
 					 
 					$("#middleNameErr").css("display" , "block");
 					return false;
 					}
-					if($("#lastName").val() == 0){
+					if($("#lastName").val() == ''){
 					 
 					$("#LastNameErr").css("display" , "block");
 					return false;
@@ -194,6 +266,31 @@
 					$("#EmailErr").css("display" , "block");
 					return false;
 					}
+					if($("#address1").val() == 0){
+						 
+						$("#address1Err").css("display" , "block");
+						return false;
+						}
+					if($("#address2").val() == 0){
+						 
+						$("#address2Err").css("display" , "block");
+						return false;
+						}
+					if($("#state").val() == 0){
+						 
+						$("#stateErr").css("display" , "block");
+						return false;
+						}
+					if($("#designation").val() == 0){
+						 
+						$("#designationErr").css("display" , "block");
+						return false;
+						}
+					if($("#pincode").val() == 0){
+						 
+						$("#pincodeErr").css("display" , "block");
+						return false;
+						}
               }  
                 </script>
               
