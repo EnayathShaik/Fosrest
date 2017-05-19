@@ -17,7 +17,7 @@ function googleTranslateElementInit() {
             <nav class="navbar navbar-default navbar-fixed-top top-logo-background">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xs-6 fostac-logo-left">
+                        <div class="col-xs-12 fostac-logo-left">
                             <a href="#"><img src="website/afterLogin/img/fosrest-logo.png" class="img-responsive fostac-logo-top-padding" alt="logo" /></a>
                         </div>
                        <%--  <div class="col-xs-6 fssai-logo-right">

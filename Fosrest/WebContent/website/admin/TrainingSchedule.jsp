@@ -294,7 +294,7 @@
 										<div class="row">
 
 
-											<div class="col-md-6 col-xs-12">
+											<div class="col-md-12 col-xs-12 text-center">
 												<input type="submit" id="updatebtn"
 													style="display: none; float: right; margin-right: 122px;"
 													value="Update" class="btn login-btn" /> 
