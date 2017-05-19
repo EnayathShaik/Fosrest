@@ -144,7 +144,7 @@
 								<div class="slider-img"></div>
 							</div>
 							<!-- re update the index design -->
-							<div class="col-xs-12">
+							<div class="col-xs-12" style="right: 93px;">
 								<div class="col-md-3 xs-hidden"></div>
 								<div class="col-md-6 col-xs-12">
 									<div class="col-md-4 col-xs-12" align="center">
@@ -161,7 +161,7 @@
 									</div>
 									<div class="col-md-4 col-xs-12" align="center" style="margin-right:-1062px; margine-top:-140px;">
 										<a href="stateAdminPersonalInformation.fssai"><img
-											src="website/images/training-partner_bk.png"></a>
+											src="website/images/specific-training.png"></a>
 									</div>
 
 								</div>
