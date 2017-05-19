@@ -163,7 +163,7 @@
 									</div>
 									<div class="col-md-4 col-xs-12" align="center" style="margin-right:-1062px; margine-top:-140px;">
 										<a href="stateAdminPersonalInformation.fssai"><img
-											src="website/images/specific-training.png"></a>
+											src="website/images/training-partner_bk.png"></a>
 									</div>
 
 								</div>
