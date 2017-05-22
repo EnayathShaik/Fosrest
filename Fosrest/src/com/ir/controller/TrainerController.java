@@ -292,7 +292,7 @@ public class TrainerController {
 	@RequestMapping(value = "/PersonalInformationTrainingInstitute", method = RequestMethod.GET)
 	public String PersonalInformationTrainingInst(
 			@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainingInstitute personalInformationTrainingInstitute,
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, Model model,HttpSession session) {
 		System.out.println("PersonalInformationTrainingInstitute");
 		String userId = request.getParameter("userId");
 		Map<String, String> userType = lst.userTypeMap;
@@ -322,7 +322,14 @@ public class TrainerController {
 					new PersonalInformationTrainingInstitute());
 
 		}
+		System.out.println("dfgfdfdf"+session.getAttribute("profileId"));
+		if(session.getAttribute("profileId")==null)
+		{
 		return "PersonalInformationTrainingInstitute";
+		}
+		else{
+			return "updateinstituteinfo";
+		}
 	}
 
 	@RequestMapping(value = "/PersonalInformationTrainingInstituteAdd", method = RequestMethod.POST)
@@ -416,11 +423,7 @@ public class TrainerController {
 	/*@RequestMapping(value = "/MyCalendar", method = RequestMethod.GET)
 	public String MyCalendar(
 			@ModelAttribute("MyCalendarForm") MyCalendarForm MyCalendarForm,
-			Model model,HttpSession session) {
-		
-		System.out.println(session.getAttribute("profileId"));
-		if((int)session.getAttribute("profileId")!=4)
-			return "redirect:login.fssai";
+			Model model) {
 		System.out.println("listMyCalendar");
 
 		Map<String, String> trainingType = lst.trainingTypeMap;
@@ -485,5 +488,6 @@ public class TrainerController {
 	 * 
 	 * }
 	 */
-
+	
+	
 }
