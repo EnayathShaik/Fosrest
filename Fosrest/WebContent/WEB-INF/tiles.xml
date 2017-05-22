@@ -1321,4 +1321,9 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/stateadmin.jsp" />
 	</definition> -->
+	<definition name="updatetrainerinfo" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body"
+			value="/website/trainer/UpdateTrainerInfo.jsp" />
+	</definition>
 </tiles-definitions>

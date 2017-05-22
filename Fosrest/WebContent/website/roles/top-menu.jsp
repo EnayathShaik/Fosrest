@@ -287,8 +287,10 @@
                              <div id="navbar" class="navbar-collapse collapse" style="margin-left:113px;">
                                 <ul class="nav navbar-nav">
                                     <li></li>
+                                      
                                     <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
                                     <li ><a href="TrainingPartner.fssai">Training Partner List</a></li>
+                                     
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
@@ -306,7 +308,9 @@
                                             <li><a href="CityMaster.fssai" class="clr">City</a></li>                                            
                                             <li><a href="RegionMaster.fssai" class="clr">Region Mapping</a></li>
                                         </ul>
-                                    </li><!-- 
+                                    </li>
+                                    <li ><a href="stateAdminPersonalInformation.fssai">State Admin</a></li>
+                                    <!-- 
                                     <li><a href="">Training Partner List</a></li>
                                     <li><a href="">Activate Trainee ID</a></li> -->
                                 </ul>

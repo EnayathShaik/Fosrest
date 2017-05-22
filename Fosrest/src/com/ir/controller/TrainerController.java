@@ -216,7 +216,7 @@ public class TrainerController {
 	@RequestMapping(value = "/PersonalInformationTrainer", method = RequestMethod.GET)
 	public String listSubjectMaster(
 			@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainer personalInformationTrainer,
-			Model model, HttpServletRequest request) {
+			Model model, HttpServletRequest request,HttpSession session) {
 		System.out.println("PersonalInformationTrainer");
 		String userId = request.getParameter("userId");
 		Map<String, String> userType = lst.userTypeMap;
@@ -244,7 +244,13 @@ public class TrainerController {
 					new PersonalInformationTrainer());
 		}
 
-		return "PersonalInformationTrainer";
+		if(session.getAttribute("profileId")==null)
+		{
+			return "PersonalInformationTrainer";
+		}
+		else{
+			return "updatetrainerinfo";
+		}
 	}
 
 	@RequestMapping(value = "/PersonalInformationTrainerAdd", method = RequestMethod.POST)
@@ -322,7 +328,6 @@ public class TrainerController {
 					new PersonalInformationTrainingInstitute());
 
 		}
-		System.out.println("dfgfdfdf"+session.getAttribute("profileId"));
 		if(session.getAttribute("profileId")==null)
 		{
 		return "PersonalInformationTrainingInstitute";
