@@ -1313,7 +1313,7 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/fotestTrainee/FotestCertification.jsp" />
 	</definition>
-	 <definition name="stateAdminPersonalInformation" extends="base.before.login">
+	 <definition name="stateAdminPersonalInformation" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/stateAdminPersonalInformation.jsp" />
 	</definition> 

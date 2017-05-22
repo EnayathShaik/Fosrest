@@ -8,19 +8,34 @@
 <ct:url var="addAction" value="/stateadminadd.fssai"></ct:url>
 <cf:form action="${addAction}" name="myForm" method="POST"
 	commandName="stateAdminForm" onsubmit="return validateFields();">
-
+ 				<section>
+                    <%@include file="/website/roles/top-menu.jsp"%>
+                </section>
 	<!-- main body -->
-	<section>
-		<div class="container">
-			<div class="row mar-top-aadhar">
-				<div class="col-md-1 col-xs-12"></div>
+	<section class="main-section-margine-top">
+		<div class="container-fluid">
+		<div id="wrapper">
+	
+          <%@include file="/website/roles/slider.jsp" %>
+              <div id="page-content-wrapper">
+                     <div class="container-fluid">
+                       <div class="row">
+                                            <div class="col-lg-12">
+                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Admin</span>
+                                                </a>
+                                            </div>
+                                        </div> 
+                                         <div class="row">
 
-				<div class="col-md-10  col-xs-12">
+                                            <div class="col-xs-12">  
+			
+					
 					<h3 class="text-capitalize heading-3-padding">State Admin
 						Registration Form</h3>
 
 					
-
+                                         <div class="row">
+                                                    <div class="col-xs-12">
 						<!-- personal information -->
 						<fieldset>
 							<legend>Personal Information</legend>
@@ -212,9 +227,10 @@
 
 										</fieldset>
 									</div>
+									</div>
 								</div>
 							</div>
-
+</div></div></div></div>
 							
 							
 
