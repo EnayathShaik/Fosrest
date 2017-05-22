@@ -1,138 +1,148 @@
-<section id="main-slider" class="no-margin">
-    <div class="carousel-inner innerpage">
-        <div class="container">
-            <div class="row slide-margin">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOSREST- About</title>
+    <!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <!--/head-->
+
+    <body class="homepage">
+    </header>
+    <!--/header-->
+
+    <section id="main-slider" class="no-margin">
+      <div class="carousel slide">
+        <div class="carousel-inner">
+          <div class="item active header-bg" style="background-image: url(website/images/slider/bg1.jpg)">
+            <div class="container">
+              <div class="row slide-margin">
                 <div class="col-sm-12">
-                    <h1 class="animation animated-item-1" style="padding-bottom:10px;">ABOUT FOSTAC</h1>
+                  <div class="carousel-content">
+                    <h1 class="animation animated-item-1">Food Safety Regulatory Staff Training</h1>
+                    <h2 class="animation animated-item-2">
+                      <a class="btn topbtn" href="login.fssai">Login</a>
+                    </h2>
+                  </div>
                 </div>
-
+                <div class="col-sm-6 hidden-xs animation animated-item-4">
+                  <div class="slider-img"> </div>
+                </div>
+                <div class="circle-wrap center-block">
+                  <ul>
+                    <li><a href="induction-training.html"><img src="website/images/induction.png"></a></li>
+                    <li><a href="refresher-training.html"><img src="website/images/refresher-training.png"></a></li>
+                    <li><a href="training-of-trainers.html"><img src="website/images/training-of-trainers.png"></a></li>
+                    <li><a href="specific-training.html"><img src="website/images/specific-training.png"></a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
+          </div>
+          <!--/.item--> 
+
+          <!--/.item--> 
+
+          <!--/.item--> 
         </div>
-        <!--/.item-->
-        <!--/.item-->
-        <!--/.item-->
-    </div>
-    <!--/.carousel-inner-->
-    <!--/.carousel-->
-</section>
-<!--/#main-slider-->
-
-
-+<section id="feature" class="tp-mrg">
-    <div class="container">
+        <!--/.carousel-inner--> 
+      </div>
+      <!--/.carousel--> 
+    </section>
+    <!--/#main-slider--> 
+    <section>
         <div class="row">
-            <div class="features">
-                <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                    <div class="feature-wrap">
-                        <a href="free-food-safety-certification.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
-                        <h3><a href="free-food-safety-certification.fssai">Awareness on <br> Food Safety</a></h3>
-                    </div>
-                </div>
-                <!--/.col-md-4-->
-                <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                    <div class="feature-wrap feature-wrapbasic">
-                        <a href="basic-level.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
-                        <h3><a href="basic-level.fssai">Basic Food Safety <br>
-              Certification</a></h3>
-                    </div>
-                </div>
-                <!--/.col-md-4-->
-                <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                    <div class="feature-wrap feature-wrapadvance">
-                        <a href="advance-level.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
-                        <h3><a href="advance-level.fssai">Advance Food Safety <br>
-              Certification</a></h3>
-                    </div>
-                </div>
-                <!--/.col-md-4-->
-                <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                    <div class="feature-wrap">
-                        <a href="special-level.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
-                        <h3><a href="special-level.fssai">Special Food Safety <br>
-              Certification</a></h3>
-                    </div>
-                </div>
-                <!--/.col-md-4-->
+        <div class="col-md-8">
+            <h1>About FOSREST</h1>        
+            </div>    
+        </div>
+        </section>    
+    <!--/#feature-->
+        <section id="bottom">
+      <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <div class="widget center-block">
+              <ul>
+                <li><a href="fostac.fssai">Home</a></li>
+                <li><a href="about.fssai">About</a></li>
+                <li class="dropdown"> <a href="courses.html" class="dropdown-toggle" data-toggle="dropdown">Training<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                <li><a href="induction-training.html">Induction Training</a></li>
+             	<li><a href="refresher-training.html">Refresher Training</a></li>
+              	<li><a href="training-of-trainers.html">Training of Trainers</a></li>
+              	<li><a href="specific-training.html">Specific Training</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Risk & Solutions</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
             </div>
-            <!--/.services-->
-        </div>
-        <!--/.row-->
-    </div>
-    <!--/.container-->
-</section>
-<!--/#feature-->
-<section id="study">
-    <div class="row">
-        <div class="col-md-12">
-            <h2 style="border-bottom:1px #0b0c84 solid; padding-bottom:10px;">FoSTaC- Food Safety Training & Certification</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-xs-12">
-            <h2 class="pull-left" style="padding-left:90px; padding-bottom:10px; ">Let's ensure safe food everywhere</h2>
-            <ul style="float:left; margin-left:63px;">
-                <li>Each Food Business Operator needs to have at least one trained & certified person in their business premises to ensure food safety. Regulation to make it mandatory expected soon.</li>
-                <li>FSSAI brings an easy solution of Training & Certification through its new initiative of Food Safety Training & Certification Portal (FoSTaC) portal.</li>
-                <li>FoSTaC offers nine different types of courses meant for different types of food business on different competency level.</li>
-            </ul>
-        </div>
-        <div class="col-md-6 col-xs-12">
-            <div id="news" class="owl-carousel" style="margin-top:79px;">
-                <div class="item item-bg">
-                    <p class="txt-ellip" style=" text-align:center;">
-                        <h3>Do you need Certificate on Food Safety?</h3>
-                        <p></p>
-                        <br>
-                        <div class=" text-center"><a href="#" class="btn btn-primary" target="_blank">Read More</a></div>
-                </div>
-                <div class="item item-bg">
-                    <p class="txt-ellip" style="text-align:center;">
-                        <h3>Do you need trainers on Food Safety?</h3>
-                        <p></p>
-                        <br>
-                        <div class="text-center"><a href="#" class="btn btn-primary" target="_blank">Read More</a></div>
-                </div>
-                <div class="item item-bg">
-                    <p class="txt-ellip" style="text-align:center;">
-                        <h3>Do you want to be a Training Partner?</h3>
-                        <p></p>
-                        <br>
-                        <div class="text-center"><a href="#" class="btn btn-primary" target="_blank">Read More</a></div>
-                </div>
-                <div class="item item-bg">
-                    <p class="txt-ellip" style="text-align:center;">
-                        <h3>Do you want to be a Trainer?</h3>
-                        <p></p>
-                        <br>
-                        <div class="text-center"><a href="#" class="btn btn-primary" target="_blank">Read More</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-xs-12">
-            <h3 style="padding-right:55px;">4 easy steps to Food Safety Certification</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-1 hidden-xs animation animated-item-4"></div>
-        <div class="col-md-6 col-sm-12">
-            <ol style="line-height:25px;">
-                <li>Online Registration</li>
-                <li>
- to be provided by Training Partner</li>
-                <li>Assessment by FSSAI accredited Assessment Agency</li>
-                <li>Certification validated by FSSAI</li>
-            </ol>
-        </div>
-    </div>
+          </div>
+          <!--/.col-md-3-->
 
-    <div class="row">
-        <div class="col-sm-1 hidden-xs animation animated-item-4"></div>
-        <div class="col-md-8 col-sm-12">&nbsp;</div>
-    </div>
-</section>
-<!-- <script>
-var id = localStorage.getItem('activeID');
-document.getElementById(id).className = "active";
-</script> -->
+          <div class="col-md-3 col-sm-6">
+            <div class="widget center-block">
+              <ul>
+                <li><a href="#">Sitemap</a></li>
+                <li><a href="disclaimer.html">Disclaimer</a></li>
+                <li><a href="#">Archives</a></li>
+                <li><a href="#">Useful Links</a></li>
+                <li><a href="#">Faqs</a></li>
+                <li><a href="#">Feedback</a></li>
+              </ul>
+            </div>
+          </div>
+          <!--/.col-md-3-->
+
+          <div class="col-md-3 col-sm-6">
+            <div class="widget center-block text-center" style="border-right: none;">
+              <ul>
+                <li class="subscribe">Sign up for our mailing list to get latest updates and offers.
+                  <form action="#" id="form-subscribe">
+                    <div class="form-field">
+                      <input type="email" placeholder="Email Address" id="email">
+                      <input class="btn" type="submit" id="submit" value="Subscribe">
+                    </div>
+                  </form>
+                </li>
+                <li class="pd-top"> <a href="#" target="_blank"><img src="website/images/facebook.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/twitter.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/linkedin.png" width="30" height="30"></a> &nbsp;<a href="#" target="_blank"><img src="website/images/google-plus.png" width="32" height="32"></a></li>
+              </ul>
+            </div>
+          </div>
+          <!--/.col-md-3-->
+
+          <div class="col-md-3 col-sm-6">
+            <div class="widget center-block text-center" style="border-right:none;">
+              <ul>
+                <li><a href="http://www.fssai.gov.in/" target="_blank"><img src="website/images/fssai.png" alt="FSSAI" width="151" height="86"></a></li>
+              </ul>
+            </div>
+          </div>
+          <!--/.col-md-3--> 
+        </div>
+      </div>
+    </section>
+    <!--/#bottom-->
+
+    <footer id="footer" class="midnight-blue">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">Design and Developed by &nbsp;<a href="http://www.zentechinfo.com/" target="_blank" style="color:#1c1b1b; text-decoration:underline;">Zentech Info Solutions Pvt. Ltd.</a> &copy; FSSAI 2016- All Right Reserved.</div>
+        </div>
+      </div>
+    </footer>
+    <!--/#footer--> 
+    </body>
+    </html>

@@ -20,7 +20,7 @@ function googleTranslateElementInit() {
         </div>
         <div class="col-sm-6 col-xs-8">
           <div class="social">
-            <div class="social-share"><a href="http://www.fssai.gov.in/" target="_blank"><img class="img-responsive" src="website/images/fosrest-logo.png"></a></div>
+            <div class="social-share"><a href="http://www.fssai.gov.in/" target="_blank"><img class="img-responsive" src="website/images/fssai.png"></a></div>
           </div>
         </div>
       </div>
@@ -38,12 +38,12 @@ function googleTranslateElementInit() {
         <ul class="nav navbar-nav">
           <li id="homepagefssai"><a onclick="setID('homepagefssai')" href="fostac.fssai">HOME</a></li>
           <li id="aboutpagefssai"><a onclick="setID('aboutpagefssai')" href="about.fssai">ABOUT</a></li>
-          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">COURSES <i class="fa fa-angle-down"></i></a>
+          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Training <i class="fa fa-angle-down"></i></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Induction Training</a></li>
-              <li><a href="#">Refresher Training</a></li>
-              <li><a href="#">Training of Trainers</a></li>
-              <li><a href="#">Specific Training</a></li>
+       			<li><a href="induction-training.html">Induction Training</a></li>
+              <li><a href="refresher-training.html">Refresher Training</a></li>
+              <li><a href="training-of-trainers.html">Training of Trainers</a></li>
+              <li><a href="specific-training.html">Specific Training</a></li>
             </ul>
           </li>
           <li><a href="#">Useful Links</a></li>

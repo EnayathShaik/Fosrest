@@ -1,35 +1,9 @@
-<%@page import="com.ir.form.common.EventsCreater"%>
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
-
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+<!DOCTYPE html>
 <html lang="en">
-<script type="text/javascript">
-	function preventBack() {
-		window.history.forward();
-	}
-	setTimeout("preventBack()", 10);
-	window.onunload = function() {
-		null
-	};
-</script>
-
 <head>
-<base href="<%=basePath%>">
-
-<title>Fosrest</title>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FOSTAC - Food Safety Training and Certification</title>
+<title>FOSREST - Food Safety Regulatory Staff Training</title>
 <!-- core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -40,14 +14,12 @@
 <link href="css/owl.transitions.css" rel="stylesheet">
 <link href="css/owl.carousel.css" rel="stylesheet">
 <link href="css/monthly.css" rel="stylesheet">
-
-
 <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-    
-   <style>
+
+<style>
 #news .item img {
 	display: block;
 	width: 100%;
@@ -65,14 +37,11 @@
 7
 }
 </style>
-
 </head>
 <!--/head-->
-
 <body class="homepage">
-
-	<header id="header">
- <div class="top-bar">
+<header id="header">
+  <div class="top-bar">
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-xs-4">
@@ -80,25 +49,25 @@
         </div>
         <div class="col-sm-6 col-xs-8">
           <div class="social">
-            <div class="social-share"><a href="http://www.fssai.gov.in/" target="_blank"><img class="img-responsive" src="website/images/fssai.png"></a></div>
+            <div class="social-share"><a href="http://www.fssai.gov.in/" target="_blank"><img class="img-responsive" src="website/images/fssai-logo.jpg"></a></div>
           </div>
         </div>
       </div>
     </div>
     <!--/.container--> 
   </div>
-		<!--/.top-bar-->
-
-<nav class="navbar navbar-inverse" role="banner">
+  <!--/.top-bar-->
+  
+  <nav class="navbar navbar-inverse" role="banner">
     <div class="container">
       <div class="navbar-header">
         <button style="background:#000070;" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
       </div>
       <div class="collapse navbar-collapse navbar-left text-center">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="fostac.fssai">HOME</a></li>
+          <li><a href="fostac.fssai">HOME</a></li>
           <li><a href="about.fssai">ABOUT</a></li>
-          <li class="dropdown"> <a href="courses.html" class="dropdown-toggle" data-toggle="dropdown">Training<i class="fa fa-angle-down"></i></a>
+          <li class="dropdown active"> <a href="courses.html" class="dropdown-toggle" data-toggle="dropdown">Training<i class="fa fa-angle-down"></i></a>
             <ul class="dropdown-menu">
               <li><a href="induction-training.html">Induction Training</a></li>
               <li><a href="refresher-training.html">Refresher Training</a></li>
@@ -122,10 +91,9 @@
     <!--/.container--> 
   </nav>
   <!--/nav--> 
-
-	</header>
-	<!--/header-->
-
+  
+</header>
+<!--/header-->
 
 <section id="main-slider" class="no-margin">
   <div class="carousel slide">
@@ -137,7 +105,7 @@
               <div class="carousel-content">
                 <h1 class="animation animated-item-1">Food Safety Regulatory Staff Training</h1>
                 <h2 class="animation animated-item-2">
-                  <a class="btn topbtn" href="login.fssai">Login</a>
+                  <input class="btn topbtn" name="" type="button" value="Login">
                 </h2>
               </div>
             </div>
@@ -165,125 +133,129 @@
   </div>
   <!--/.carousel--> 
 </section>
-<!--/#main-slider--> 
-
-	<!--/#feature-->
-<section id="feature" >
-  <div class="container">
-    <div class="row pdtop">
-      <div class="features">
-        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="training-partner.html">
-          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/training-partner-icon.png">
-            <h3 class="industry-heading">Training Partner</h3>
-          </div>
-          </a> </div>
-        <!--/.col-md-4-->
-        
-        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="trainer.html">
-          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/trainer-icon.png">
-            <h3 class="industry-heading">Trainer</h3>
-          </div>
-          </a> </div>
-        <!--/.col-md-4-->
-        
-        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="#">
-          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/learning-resource-icon.png">
-            <h3 class="industry-heading">Learning resource</h3>
-          </div>
-          </a> </div>
-        <!--/.col-md-4-->
-        
-        <div class="col-md-3 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="page">
-            <div style="display:inline-block;">
-              <div class="monthly" id="mycalendar"></div>
-            </div>
-          </div>
-        </div>
-        <!--/.col-md-4--> 
-        
+<!--/#main-slider-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <h1 class="pull-left">About Induction Training</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p class="clearfix">Induction Training has been structured for newly recruited officers. Newly recruited food safety officers will undergo the induction training as specified by the food authority. Total duration of Induction training is of 40 days, which is divided into three phase:-</p>
+        <ul>
+        <li>Foundation Phase: - The foundation phase is online.</li>
+        <li>Learning Phase: - Learning Phase will be at classroom.</li>
+        <li>Application Phase: - Application Phase will be on job.</li>        
+        </ul>
       </div>
-      <!--/.services--> 
-    </div>
-    <!--/.row--> 
-  </div>
-  <!--/.container--> 
-</section>
-<section id="feature" style="margin:0px; padding:0px;" >
-  <div class="container">
-    <div class="row">
-      <div class="features">
-        <div class="col-md-6 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="row">
-            <div class="course-heading">Photo Gallery</div>
-          </div>
-          <div class="feature-wrap training-box">
-            <div id="gallery" class="owl-carousel">
-              <div class="item"> <a href="website/images/photo-gallery.jpg" class="swipebox" title="Event Name"> <img src="website/images/photo-gallery.jpg" alt="image"> </a> </div>
-              <div class="item"> <a href="website/images/photo-gallery.jpg" class="swipebox" title="Event Name"> <img src="website/images/photo-gallery.jpg" alt="image"> </a> </div>
-              <div class="item"> <a href="website/images/photo-gallery.jpg" class="swipebox" title="Event Name"> <img src="website/images/photo-gallery.jpg" alt="image"> </a> </div>
-              <div class="item"> <a href="website/images/photo-gallery.jpg" class="swipebox" title="Event Name"> <img src="website/images/photo-gallery.jpg" alt="image"> </a> </div>
-            </div>
-          </div>
+      <br>
+      <div class="row">
+        <div class="col-md-4 col-xs-12">&nbsp;</div>
+        <div class="col-md-4 col-xs-12 col-xs-push-2">
+          <button class="btn" type="button"><strong>Welcome Address</strong></button>
         </div>
-        <!--/.col-md-4-->
-        
-        <div class="col-md-6 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="course-heading">News and Updates</div>
-          <div id="news" class="owl-carousel">
-            <div class="item">
-              <p class="txt-ellip" style="padding:20px;">FSSAI vide Gazette notification number S.O 2428 (E) dated the 13th July, 2016 notified 112 NABL accredited food testing laboratories for the purpose of carrying out Analysis of samples taken under Section 47 of the Food Safety and Standard Act, 2006.</p>
-              <div class=" text-center"><a href="#" class="btn btn-default" target="_blank">Read More</a></div>
-            </div>
-            <div class="item">
-              <p class="txt-ellip" style="padding:20px;">FSSAI vide Gazette notification number S.O 2428 (E) dated the 13th July, 2016 notified 112 NABL accredited food testing laboratories for the purpose of carrying out Analysis of samples taken under Section 47 of the Food Safety and Standard Act, 2006.</p>
-              <div class="text-center"><a href="#" class="btn btn-default" target="_blank">Read More</a></div>
-            </div>
-          </div>
-        </div>
-        <!--/.col-md-4--> 
-        
+        <br><br>
+        <div class="col-md-4 col-xs-12">&nbsp;</div>
       </div>
-      <!--/.services--> 
-    </div>
-    <!--/.row--> 
-  </div>
-  <!--/.container--> 
-</section>
-<section id="feature" style="margin:0px; padding:0px;" >
-  <div class="container">
-    <div class="row">
-      <div class="features">
-        <div class="col-md-6 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="feature-wrap training-box center-block">
-            <div style="margin-top:10px; padding:0px;"><a href="#"><img src="website/images/share-intitiave.jpg"></a></div>
-          </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <ul class="timeline">
+            <li>
+              <div class="timeline-badge success">
+                <h3>1</h3>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4 class="timeline-title">Step-1</h4>
+                </div>
+                <div class="timeline-body">
+                  <p>Foundation Phase</p>
+                </div>
+              </div>
+            </li>
+            <li class="timeline-inverted">
+              <div class="timeline-badge success">
+                <h3>2</h3>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4 class="timeline-title">Step-2</h4>
+                </div>
+                <div class="timeline-body">
+                  <p>Get Your Score Card</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="timeline-badge success">
+                <h3>3</h3>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4 class="timeline-title">Step-3</h4>
+                </div>
+                <div class="timeline-body">
+                  <p>Learning Phase</p>
+                  <p><a href="#">View Calendar</a> &nbsp;&nbsp;&nbsp;<a href="#">Download Learning Resource</a></p>
+                </div>
+              </div>
+            </li>
+            <li class="timeline-inverted">
+              <div class="timeline-badge success">
+                <h3>4</h3>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4 class="timeline-title">Step-4</h4>
+                </div>
+                <div class="timeline-body">
+                  <p>Get your Score</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="timeline-badge success">
+                <h3>5</h3>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4 class="timeline-title">Step-5</h4>
+                </div>
+                <div class="timeline-body">
+                  <p>On Job Training</p>
+                  <p><a href="#">Calendar</a></p>
+                </div>
+              </div>
+            </li>
+            <li class="timeline-inverted">
+              <div class="timeline-badge success">
+                <h3>6</h3>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4 class="timeline-title">Step-6</h4>
+                </div>
+                <div class="timeline-body">
+                  <p>Get Your Certificate</p>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
-        <!--/.col-md-4-->
-        
-        <div class="col-md-6 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="feature-wrap training-box center-block">
-            <div style="margin-top:10px; padding:0px;"><a href="#"><img src="website/images/fssai-blog.jpg"></a></div>
-          </div>
-        </div>
-        <!--/.col-md-4--> 
-        
       </div>
-      <!--/.services--> 
     </div>
-    <!--/.row--> 
   </div>
-  <!--/.container--> 
-</section>
-
+</div>
 <section id="bottom">
   <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
     <div class="row">
       <div class="col-md-3 col-sm-6">
         <div class="widget center-block">
           <ul>
-            <li><a href="fostac.fssai">Home</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="fostac.fssai">HOME</a></li>
+          <li><a href="about.fssai">ABOUT</a></li>
             <li class="dropdown"> <a href="courses.html" class="dropdown-toggle" data-toggle="dropdown">Courses<i class="fa fa-angle-down"></i></a>
               <ul class="dropdown-menu">
                 <li><a href="basic-level.html">Basic Level</a></li>
@@ -341,7 +313,7 @@
     </div>
   </div>
 </section>
-	<!--/#bottom-->
+<!--/#bottom-->
 
 <footer id="footer" class="midnight-blue">
   <div class="container">
@@ -444,4 +416,3 @@
     </script>
 </body>
 </html>
-	

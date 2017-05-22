@@ -955,18 +955,18 @@
 	</definition>
 	
 	
-		<definition name="PersonalInformationTrainee" extends="base.before.login">
+		<definition name="PersonalInformationTrainee" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/personalInformationTrainee.jsp" />
 	</definition>
 	
 	
-		<definition name="PersonalInformationTrainer" extends="base.before.login">
+		<definition name="PersonalInformationTrainer" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/personalInformationTrainer.jsp" />
 	</definition>
 
-	<definition name="PersonalInformationTrainingInstitute" extends="base.before.login">
+	<definition name="PersonalInformationTrainingInstitute" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/personalInformationTrainingInstitute.jsp" />
 	</definition>
