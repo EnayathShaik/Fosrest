@@ -37,7 +37,7 @@
 		<put-attribute name="body" value="/website/aadhar-verification.jsp" />
 	</definition>
 
-	<definition name="welcome" extends="base.before.login">
+	<definition name="welcome" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/welcomeRegister.jsp" />
 	</definition>
