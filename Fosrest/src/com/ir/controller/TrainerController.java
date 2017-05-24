@@ -21,6 +21,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
+import com.ir.form.StateForm;
 import com.ir.form.TrainerRequestForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CourseName;
@@ -72,10 +73,23 @@ public class TrainerController {
 
 	ListConstant lst = new ListConstant();
 
+	public boolean checkAccess(HttpSession session){
+		if((int)session.getAttribute("profileId")!=4){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	
+	
 	@RequestMapping(value = "/assessment-instructions-trainer", method = RequestMethod.GET)
 	public String assessmentinstructionstrainer(
 			@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer,
 			BindingResult bindingResult, HttpSession session, Model model) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		int loginId = Integer.parseInt(session.getAttribute("loginIdUnique")
 				.toString());
 		CourseName courseName = traineeService.getCourseDetails(loginId);
@@ -90,6 +104,8 @@ public class TrainerController {
 	public String feedback(
 			@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm,
 			BindingResult bindingResult, HttpSession session, Model model) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		int loginId = Integer.parseInt(session.getAttribute("loginIdUnique")
 				.toString());
 		CourseName courseName = traineeService.getCourseDetails(loginId);
@@ -104,6 +120,8 @@ public class TrainerController {
 	public String generateCertificatetraineer(
 			@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm,
 			BindingResult bindingResult, HttpSession session, Model model) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		int loginId = Integer.parseInt(session.getAttribute("loginIdUnique")
 				.toString());
 		CourseName courseName = traineeService.getCourseDetails(loginId);
@@ -113,7 +131,9 @@ public class TrainerController {
 
 	@RequestMapping(value = "/contactTrainer", method = RequestMethod.GET)
 	public String contactTrainee(
-			@ModelAttribute("contactTrainee") ContactTrainee contactTrainee) {
+			@ModelAttribute("contactTrainee") ContactTrainee contactTrainee, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "contactTrainer";
 	}
 
@@ -121,6 +141,8 @@ public class TrainerController {
 	public String generateAdmitCardTrainer(
 			@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm,
 			BindingResult bindingResult, HttpSession httpSession, Model model) {
+		if(checkAccess(httpSession))
+			return "redirect:login.fssai";
 		String responseText = "";
 		int loginId = -1;
 		try {
@@ -143,6 +165,8 @@ public class TrainerController {
 			@ModelAttribute("state") State state,
 			@ModelAttribute("tp") TrainingPartner_old tp, BindingResult result,
 			HttpSession session, Model model) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		if (session.getAttribute("loginIdUnique") != null) {
 			String loginid = session.getAttribute("loginIdUnique").toString();
 			AdmitCardForm admitCardForm = traineeService
@@ -155,7 +179,9 @@ public class TrainerController {
 
 	@RequestMapping(value = "/course-training-trainer", method = RequestMethod.GET)
 	public String coursetraining(
-			@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer) {
+			@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "course-training-trainer";
 	}
 
@@ -179,7 +205,9 @@ public class TrainerController {
 
 	@RequestMapping(value = "/changePasswordTrainer", method = RequestMethod.GET)
 	public String contactTrainee(
-			@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm) {
+			@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "changePasswordTrainer";
 	}
 
@@ -218,6 +246,12 @@ public class TrainerController {
 			@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainer personalInformationTrainer,
 			Model model, HttpServletRequest request,HttpSession session) {
 		System.out.println("PersonalInformationTrainer");
+
+			if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
+			return "redirect:login.fssai";
+			}
+
 		String userId = request.getParameter("userId");
 		Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> titleMap = lst.titleMap;
@@ -300,6 +334,13 @@ public class TrainerController {
 			@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainingInstitute personalInformationTrainingInstitute,
 			HttpServletRequest request, Model model,HttpSession session) {
 		System.out.println("PersonalInformationTrainingInstitute");
+
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
+		return "redirect:login.fssai";
+		}
+
+		
 		String userId = request.getParameter("userId");
 		Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> titleMap = lst.titleMap;
@@ -381,9 +422,12 @@ public class TrainerController {
 	@RequestMapping(value = "/TrainerRequest", method = RequestMethod.GET)
 	public String TrainerRequest(
 			@ModelAttribute("TrainerRequestForm") TrainerRequestForm trainerRequestForm,
-			Model model) {
+			Model model, HttpSession session) {
+		
 		System.out.println("listTrainerRequest");
 
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		// Map<String, String> trainingType = lst.trainingTypeMap;
 		// Map<String, String> usertype = lst.userTypeMap;
 		// Map<String, String> status = lst.userStatusMap;
@@ -496,3 +540,4 @@ public class TrainerController {
 	
 	
 }
+ 

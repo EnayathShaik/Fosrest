@@ -107,9 +107,23 @@ public class TraineeController {
 	@Qualifier("assessmentService")
 	public AssessmentService assessmentService;
 	ListConstant lst =  new ListConstant();  
+	
+	
+	public boolean checkAccess(HttpSession session){
+		if((int)session.getAttribute("profileId")!=3){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TraineeController.java");
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	
 	// Rishi 
 	@RequestMapping(value="/contactTrainee" , method=RequestMethod.GET)
 	public String contactTrainee(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee, Model model , HttpSession session){
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		try{
 			Integer userId = (Integer) session.getAttribute("userId");
 			Integer profileId = (Integer) session.getAttribute("profileId");
@@ -132,7 +146,9 @@ public class TraineeController {
 	
 	@RequestMapping(value="/basic" , method=RequestMethod.GET)
 	public String basic(Model model,@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){// , Model modal , HttpSession session ){
+		 @ModelAttribute("loginUser") PersonalInformationTrainee pit , HttpSession session){// , Model modal , HttpSession session ){
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 
 		List<CourseType>  courseTypeList = traineeService.courseTypeList();
 		List<ManageTrainingPartner> trainingPartnerList = trainingPartnerList = traineeService.trainingPartnerList();
@@ -144,17 +160,23 @@ public class TraineeController {
 		return "basic";
 	}
 	
-	
+	//for trainee
 	@RequestMapping(value="/uploadImage" , method=RequestMethod.GET)
 	public String uploadImage(@ModelAttribute("uploadImage") CourseEnrolledUserForm courseEnrolledUserForm ,
-		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
+		 @ModelAttribute("loginUser") PersonalInformationTrainee pit , HttpSession session){
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "upload-image";
 	}
 	
-	
+	//for trainer
 	@RequestMapping(value="/uploadProfile" , method=RequestMethod.GET)
 	public String uploadProfiles(@ModelAttribute("uploadImage") CourseEnrolledUserForm courseEnrolledUserForm ,
-		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
+		 @ModelAttribute("loginUser") PersonalInformationTrainee pit , HttpSession session){
+		if((int)session.getAttribute("profileId")!=4){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TraineeController.java");
+			return "redirect:login.fssai";
+		};
 		return "upload-image";
 	}
 	
@@ -219,6 +241,8 @@ public class TraineeController {
 
 	@RequestMapping(value="/courseTraining" , method=RequestMethod.GET)
 	public String courseTraining(@RequestParam(value = "courseTypeId", required = true)  String courseTypeId , Model model, HttpSession session){
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
 		try{
 				String docPath = "";
@@ -323,6 +347,8 @@ public class TraineeController {
 
 	@RequestMapping(value="/updateInformation" , method=RequestMethod.GET)
 	public String updateInformation(@RequestParam(value = "userId", required = true)  Integer userId ,@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee, HttpSession session, Model model ){		
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Integer profileID = 0;
 		try{
 			profileID = (Integer) session.getAttribute("profileId");
@@ -376,6 +402,8 @@ public class TraineeController {
 	
 	@RequestMapping(value="/generateAdmitCardtrainee" , method=RequestMethod.GET)
 	public String generateAdmitCardtrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model ){
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		try{
 			
 			Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
@@ -394,6 +422,8 @@ public class TraineeController {
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner_old tp,BindingResult result ,HttpSession session, Model model ){
 		new ZLogger("admit-cardtrainee","Generate Admit Card .........................."  , "TraineeController.java");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		String imagePath = "";
 		String userName = "";
 		try{
@@ -417,11 +447,15 @@ public class TraineeController {
 	
 	@RequestMapping(value="/viewTraineeList" , method=RequestMethod.GET)
 	public String viewTraineeList(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,
-			@ModelAttribute("state") State state , @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
+			@ModelAttribute("state") State state , @ModelAttribute("loginUser") PersonalInformationTrainee pit , HttpSession session){
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "viewTraineeList";
 	}
 	@RequestMapping(value ="/traineeAssessmentOnline", method = RequestMethod.GET)
 	public String traineeAssessmentOnline(@ModelAttribute ("courseEnrolledUserForm")CourseEnrolledUserForm courseEnroledUserForm, Model model, HttpSession httpSession){
+		if(checkAccess(httpSession))
+			return "redirect:login.fssai";
 		String responseText = "";
 		int loginId = -1;
 		try{
@@ -447,6 +481,8 @@ public class TraineeController {
 	}
 	@RequestMapping(value="/feedbackForm" , method=RequestMethod.GET)
 	public String feedback(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Integer profileId = (Integer) session.getAttribute("profileId");
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
 		try{
@@ -465,6 +501,8 @@ public class TraineeController {
 	}
 	@RequestMapping(value="/generateCertificatetrainee" , method=RequestMethod.GET)
 	public String generateCertificatetrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
 		try{
 			if(userId>0){
@@ -493,6 +531,8 @@ public class TraineeController {
 	@RequestMapping(value="/assessment-instructions-trainee" , method=RequestMethod.GET)
 	public String assessmentinstructionstrainee(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer,BindingResult bindingResult, HttpSession session , Model model )
 	{
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Utility utility=new Utility();
 		//Need to write service for AsssessorAgency 
 		model.addAttribute("utility",utility);
@@ -510,14 +550,20 @@ public class TraineeController {
 		}
 		return "assessment-instructions-trainee";
 	}
+	
 	@RequestMapping(value="/feedback-form" , method=RequestMethod.GET)
-	public String feedbackform(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
-	{
+	public String feedbackform(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer , HttpSession session)
+	{	
+		if(checkAccess(session))
+		return "redirect:login.fssai";
 		return "feedback-form-trainee";
 	}
+	
 	@RequestMapping(value="/course-training" , method=RequestMethod.GET)
 	public String coursetraining(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer, HttpSession session, Model model )
 	{
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Integer userId = 0;
 		try{
 			userId = (Integer) session.getAttribute("userId");
@@ -647,6 +693,12 @@ public class TraineeController {
 	@RequestMapping(value = "/PersonalInformationTrainee", method = RequestMethod.GET)
 	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request,HttpSession session) {
 			System.out.println("PersonalInformationTrainee ");
+
+			if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TraineeController.java");
+			return "redirect:login.fssai";
+			}
+
 			String userId = request.getParameter("userId");
 			
 			Map<String , String> userType = lst.userTypeMap;			
@@ -715,10 +767,11 @@ public class TraineeController {
 		
 		
 		@RequestMapping(value = "/MyTraining", method = RequestMethod.GET)
-		public String MyTraining(@ModelAttribute("MyTrainingForm") MyTrainingForm MyTrainingForm ,Model model){
+		public String MyTraining(@ModelAttribute("MyTrainingForm") MyTrainingForm MyTrainingForm ,Model model, HttpSession session){
 			
 				System.out.println("listMyTraining");
-							
+				if(checkAccess(session))
+					return "redirect:login.fssai";		
 				Map<String , String> trainingType = lst.trainingTypeMap;
 				model.addAttribute("trainingType",trainingType);
 				model.addAttribute("MyTrainingForm", new MyTrainingForm());
@@ -751,6 +804,8 @@ public class TraineeController {
 		public String GetScoreCard(@ModelAttribute("GetScoreCardForm") GetScoreCardForm GetScoreCardForm ,Model model,HttpSession session){
         	int userId = (int) session.getAttribute("userId");
 				System.out.println("listGetScoreCard");
+				if(checkAccess(session))
+					return "redirect:login.fssai";
 				int personalTraineeId=(int)session.getAttribute("personalTraineeId");
 				
 				model.addAttribute("GetScoreCardForm", new GetScoreCardForm());
@@ -785,6 +840,8 @@ public class TraineeController {
 
         @RequestMapping(value = "/OnlineTraining", method = RequestMethod.GET)
 		public String OnlineTraining(@ModelAttribute("OnlineTrainingForm") OnlineTrainingForm OnlineTrainingForm ,Model model,HttpSession session){
+        	if(checkAccess(session))
+    			return "redirect:login.fssai";
         	int userId = (int) session.getAttribute("userId");
         	int personalTraineeId = (int)session.getAttribute("personalTraineeId");
         	traineeService.updateSteps(personalTraineeId,2);
@@ -806,7 +863,8 @@ public class TraineeController {
 
         @RequestMapping(value = "/OnlineAssessment", method = RequestMethod.GET)
 		public String OnlineTraining(@ModelAttribute("OnlineAssessmentForm") OnlineAssessmentForm OnlineAssessmentForm ,Model model, HttpSession session){
-			
+        	if(checkAccess(session))
+    			return "redirect:login.fssai";
         	int personalTraineeId = (int)session.getAttribute("personalTraineeId");
          	traineeService.updateSteps(personalTraineeId,3);	
 			
@@ -823,6 +881,8 @@ public class TraineeController {
 			
       	  int loginId = (int) session.getAttribute("userId");
 				System.out.println("listCertificate");
+				if(checkAccess(session))
+					return "redirect:login.fssai";
 				Map<String , String> trainingType = lst.trainingTypeMap;
 				
 				model.addAttribute("trainingType",trainingType);
@@ -839,9 +899,10 @@ public class TraineeController {
 	
 
 @RequestMapping(value = "/TrainingRequest", method = RequestMethod.GET)
-public String trainingRequest(@ModelAttribute("TrainingRequestForm") TrainingRequestForm trainingRequestForm ,Model model) {
+public String trainingRequest(@ModelAttribute("TrainingRequestForm") TrainingRequestForm trainingRequestForm ,Model model, HttpSession session) {
 		System.out.println("start get");
-			
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Map<String , String> trainingType = lst.trainingTypeMap;
 		Map<String , String> userType = lst.userTypeMap;
 		Map<String , String> trainingStatus = lst.userStatusMap;
@@ -874,9 +935,10 @@ public String ListTrainingRequest(@ModelAttribute("TrainingRequestForm") Trainin
 
 
 @RequestMapping(value = "/MarkAttendance", method = RequestMethod.GET)
-public String markAttendance(@ModelAttribute("MarkAttendanceForm") MarkAttendanceForm markAttendanceForm ,Model model) {
+public String markAttendance(@ModelAttribute("MarkAttendanceForm") MarkAttendanceForm markAttendanceForm ,Model model, HttpSession session) {
 		System.out.println("start get");
-			
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Map<String , String> trainingType = lst.trainingTypeMap;
 		Map<String , String> userType = lst.userTypeMap;
 		
@@ -950,6 +1012,8 @@ return "mycalendar";
 @RequestMapping(value = "/GetCertificate", method = RequestMethod.GET)
 public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request, HttpSession session) {
 		System.out.println("GetCertificate ");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		String userId = request.getParameter("userId");
 		
 		traineeService.updateSteps(Integer.parseInt(userId),  0);
@@ -974,6 +1038,7 @@ public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") Perso
 
 @RequestMapping(value="/fotestonlinetraining" , method = { RequestMethod.POST , RequestMethod.GET })
 public String listonlineTraining( Model model){
+	
 	  model.addAttribute("fotestonlineTrainingForm",  new fotestonlineTrainingForm());
     model.addAttribute("listfotestonlineTraining", this.traineeService.listfotestonlineTraining());
 

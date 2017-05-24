@@ -124,8 +124,20 @@ public class AdminController {
 
 	ListConstant lst = new ListConstant();
 
+	public boolean checkAccess(HttpSession session){
+		if((int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	
 	@RequestMapping(value = "/stateMaster", method = RequestMethod.GET)
 	public String stateMaster(@ModelAttribute("stateMaster") StateForm stateForm, Model model, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		try {
 			model.addAttribute("created", " ");
 			session.setAttribute("created", " ");
@@ -167,7 +179,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/stateMasterSave", method = RequestMethod.GET)
-	public String showForm() {
+	public String showForm(HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 
 		return "redirect:stateMaster.fssai";
 	}
@@ -175,6 +189,8 @@ public class AdminController {
 	@RequestMapping(value = "/districtMaster", method = RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("districtMaster") DistrictForm districtForm, Model model,
 			HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		List<State> stateList = null;
 		try {
 			stateList = adminService.stateList();
@@ -217,13 +233,16 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.GET)
-	public String showDistrctForm() {
-
+	public String showDistrctForm(HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "redirect:districtMaster.fssai";
 	}
 
 	@RequestMapping(value = "/cityMaster", method = RequestMethod.GET)
-	public String districtMaster(@ModelAttribute("cityMaster") CityForm cityForm, Model model) {
+	public String districtMaster(@ModelAttribute("cityMaster") CityForm cityForm, Model model, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		List<State> stateList = adminService.stateList();
 		List<District> districtList = adminService.districtList();
 		model.addAttribute("districtList", districtList);
@@ -260,14 +279,17 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/cityMasterSave", method = RequestMethod.GET)
-	public String showCityForm() {
-
+	public String showCityForm(HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "redirect:cityMaster.fssai";
 
 	}
 
 	@RequestMapping(value = "/regionMappingMaster", method = RequestMethod.GET)
-	public String districtMaster(@ModelAttribute("regionMappingMaster") RegionForm regionForm, Model model) {
+	public String districtMaster(@ModelAttribute("regionMappingMaster") RegionForm regionForm, Model model, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		List<State> stateList = adminService.stateList();
 		model.addAttribute("stateList", stateList);
 		return "regionMappingMaster";
@@ -302,15 +324,18 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/regionMasterSave", method = RequestMethod.GET)
-	public String showregionForm() {
-
+	public String showregionForm( HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "redirect:regionMappingMaster.fssai";
 
 	}
 
 	@RequestMapping(value = "/manageCourse", method = RequestMethod.GET)
-	public String districtMaster(@ModelAttribute("manageCourse") ManageCourse manageCourse, Model model)
+	public String districtMaster(@ModelAttribute("manageCourse") ManageCourse manageCourse, Model model, HttpSession session)
 			throws JsonGenerationException, JsonMappingException, IOException {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
 		model.addAttribute("courseTypeList", courseTypeList);
 		return "manageCourse";
@@ -424,7 +449,9 @@ public class AdminController {
 
 	@RequestMapping(value = "/traineeUserManagementForm", method = RequestMethod.GET)
 	public String traineeUserManagementForm(
-			@ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm) {
+			@ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "traineeUserManagementForm";
 	}
 
@@ -456,18 +483,24 @@ public class AdminController {
 
 	@RequestMapping(value = "/trainerUserManagementForm", method = RequestMethod.GET)
 	public String trainerUserManagementForm(
-			@ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm) {
+			@ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "trainerUserManagementForm";
 	}
 
 	@RequestMapping(value = "/trainingCenterUserManagementForm", method = RequestMethod.GET)
 	public String adminUserManagementForm(
-			@ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainerUserManagementForm) {
+			@ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainerUserManagementForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "trainingCenterUserManagementForm";
 	}
 
 	@RequestMapping(value = "/assessorUserManagementForm", method = RequestMethod.GET)
-	public String assessorUserManagementForm(Model model) {
+	public String assessorUserManagementForm(Model model, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		try {
 			AssessorUserManagementForm assessorUserManagementForm = new AssessorUserManagementForm();
 			model.addAttribute("assessorUserManagementForm", assessorUserManagementForm);
@@ -480,7 +513,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/traineeRegistration", method = RequestMethod.GET)
-	public String traineeRegistration(Model model) {
+	public String traineeRegistration(Model model, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		try {
 			PersonalInformationTrainee personalInformationTrainee = new PersonalInformationTrainee();
 			model.addAttribute("traineeRegistration", personalInformationTrainee);
@@ -493,7 +528,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/adminUserManagementForm", method = RequestMethod.GET)
-	public String adminUserManagementForm(Model model) {
+	public String adminUserManagementForm(Model model, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		try {
 			AdminUserManagementForm adminUserManagementForm = new AdminUserManagementForm();
 			model.addAttribute("adminUserManagementForm", adminUserManagementForm);
@@ -535,8 +572,10 @@ public class AdminController {
 	//state admin
 	
 	@RequestMapping(value = "/stateAdminPersonalInformation", method = RequestMethod.GET)
-	public String stateAdminPersonalInformation(StateAdmin StateAdmin ,Model model,HttpServletRequest request) {
+	public String stateAdminPersonalInformation(StateAdmin StateAdmin ,Model model,HttpServletRequest request, HttpSession session) {
 		System.out.println("stateAdminPersonalInformation");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		//String userId = request.getParameter("userId");
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("stateAdminForm", new stateAdminForm());
@@ -561,9 +600,10 @@ public class AdminController {
 
 	
 	@RequestMapping(value = "/stateadmin", method = RequestMethod.GET)
-	public String stateadmin(@ModelAttribute("stateAdminForm") StateAdmin StateAdmin ,Model model,HttpServletRequest request) {
+	public String stateadmin(@ModelAttribute("stateAdminForm") StateAdmin StateAdmin ,Model model,HttpServletRequest request, HttpSession session) {
 		System.out.println("stateadmin");
-		
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("stateAdminForm", new stateAdminForm());
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("liststateadmin", this.adminService.liststateadmin());
@@ -639,7 +679,6 @@ public class AdminController {
 	
 	@RequestMapping("/stateadmin/remove/{id}")
 	public String removestateadmin(@PathVariable("id") int id) {
-
 		this.adminService.removestateadmin(id);
 		return "redirect:/stateadmin.fssai";
 	}
@@ -647,6 +686,7 @@ public class AdminController {
 	@RequestMapping("/stateadmin/edit/{id}")
 	public void editstateadmin(@PathVariable("id") int id, Model model, HttpServletRequest httpServletRequest,
 			HttpServletResponse response) throws IOException {
+		
 		System.out.println("id2" + id);
 		StateAdmin mt = this.adminService.getstateadminById(id);
 		PrintWriter out = response.getWriter();
@@ -688,9 +728,13 @@ public class AdminController {
 
 	@RequestMapping(value = "/manageCourseContent", method = RequestMethod.GET)
 	public String manageCourseContent(
-			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm, Model model) {
+			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm, Model model, HttpSession session) {
+		
 		new ZLogger("manageCourseContent", "admin Controller manage course content form begin .",
 				"AdminController.java");
+
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
 		model.addAttribute("courseTypeList", courseTypeList);
 		return "manageCourseContent";
@@ -726,7 +770,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/trainingCalendarForm", method = RequestMethod.GET)
-	public String trainingCalendarForm(Model model) {
+	public String trainingCalendarForm(Model model, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		try {
 			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
 			model.addAttribute("trainingCalendarForm", trainingCalendarForm);
@@ -876,7 +922,9 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/onLoadTrainingPartnerCenterId")
 	public String onLoadTrainingPartnerCenterId(@RequestParam("id") int id, HttpServletRequest req,
-			HttpServletResponse res) throws ServletException, IOException {
+			HttpServletResponse res, HttpSession session) throws ServletException, IOException {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		new ZLogger("onLoadTrainingPartnerCenterId", "id   ::::  " + id, "AdminController.java");
 		req.getRequestDispatcher("onLoadTrainingPartnerCenterId?id=" + id).forward(req, res);
 		return "dashboardTrainingPartnerPending";
@@ -884,7 +932,9 @@ public class AdminController {
 
 	// Rishi
 	@RequestMapping(value = "/changePasswordAdminPage", method = RequestMethod.GET)
-	public String changePasswordAdminPage(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm) {
+	public String changePasswordAdminPage(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "changePasswordAdminPage";
 	}
 
@@ -917,7 +967,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/changePasswordTp", method = RequestMethod.GET)
-	public String changePasswordTp(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm) {
+	public String changePasswordTp(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "changePasswordTp";
 	}
 
@@ -949,7 +1001,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/contactTPartner", method = RequestMethod.GET)
-	public String contactTPP(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee) {
+	public String contactTPP(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "contactTPartner";
 
 	}
@@ -957,6 +1011,8 @@ public class AdminController {
 	@RequestMapping(value = "/feedbackMaster", method = RequestMethod.GET)
 	public String feedbackMaster(@ModelAttribute("feedbackMaster") FeedbackMaster feedbackMaster, HttpSession session,
 			BindingResult result, Model model) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "feedbackMaster";
 
 	}
@@ -985,8 +1041,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/saveFeedbackMaster", method = RequestMethod.GET)
-	public String showFeedbackMaster() {
-
+	public String showFeedbackMaster(HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "redirect:feedbackMaster.fssai";
 	}
 
@@ -1022,7 +1079,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/updateTrainerAssessmentForm", method = RequestMethod.GET)
-	public String updateTrainerAssessment(Model model, HttpServletRequest request) {
+	public String updateTrainerAssessment(Model model, HttpServletRequest request, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		try {
 			UpdateTrainerAssessmentForm updateTrainerAssessmentForm = new UpdateTrainerAssessmentForm();
 			model.addAttribute("updateTrainerAssessment", updateTrainerAssessmentForm);
@@ -1103,14 +1162,18 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/getSingleAssessmentQuestion", method = RequestMethod.GET)
-	public String getSingleAssessmentQuestion(Model model, HttpServletRequest request) {
+	public String getSingleAssessmentQuestion(Model model, HttpServletRequest request, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("updateTrainerAssessment", "Test Ajax");
 		return "updateTrainerAssessment";
 	}
 
 	@RequestMapping("/activateDeActivateTrainer")
 	public String activateDeActivateTrainer(
-			@Valid @ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm) {
+			@Valid @ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		String status = (trainerUserManagementForm.getStatus().equalsIgnoreCase("I") ? "N" : "Y");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(trainerUserManagementForm.getProfileID()))
 				.tableName();
@@ -1120,7 +1183,9 @@ public class AdminController {
 
 	@RequestMapping("/activateDeActivateTrainee")
 	public String activateDeActivateTrainee(
-			@Valid @ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm) {
+			@Valid @ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		String status = (traineeUserManagementForm.getStatus().equalsIgnoreCase("I") ? "N" : "Y");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(traineeUserManagementForm.getProfileID()))
 				.tableName();
@@ -1130,8 +1195,9 @@ public class AdminController {
 
 	@RequestMapping("/activateDeActivateTrainingCenter")
 	public String activateDeActivateTrainingCenter(
-			@Valid @ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainingCenterUserManagementForm) {
-
+			@Valid @ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainingCenterUserManagementForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		String status = (trainingCenterUserManagementForm.getStatus().equalsIgnoreCase("I") ? "N" : "Y");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(trainingCenterUserManagementForm.getProfileID()))
 				.tableName();
@@ -1141,7 +1207,9 @@ public class AdminController {
 
 	@RequestMapping("/activateDeActivateAssessor")
 	public String activateDeActivateAssessor(
-			@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm) {
+			@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		new ZLogger("activateDeActivateAssessor", "status " + assessorUserManagementForm.getStatus() + "  profileid "
 				+ assessorUserManagementForm.getProfileID(), "AdminController.java");
 		new ZLogger("activateDeActivateAssessor", "Login ID Details :  " + assessorUserManagementForm.getLogindetails(),
@@ -1515,8 +1583,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/HolidayMaster", method = RequestMethod.GET)
-	public String listHolidayMaster(@ModelAttribute("HolidayMaster") HolidayMaster holidayMaster, Model model) {
+	public String listHolidayMaster(@ModelAttribute("HolidayMaster") HolidayMaster holidayMaster, Model model, HttpSession session) {
 		System.out.println("listHolidayMaster");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("HolidayMaster", new HolidayMaster());
 		model.addAttribute("listHolidayMaster", this.adminService.listHolidayMaster());
 		return "HolidayMaster";
@@ -1561,7 +1631,6 @@ public class AdminController {
 
 	@RequestMapping("/HolidayMaster/remove/{id}")
 	public String removeHolidayMaster(@PathVariable("id") int id) {
-
 		this.adminService.removeHolidayMaster(id);
 		return "redirect:/HolidayMaster.fssai";
 
@@ -1613,8 +1682,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/UnitMaster", method = RequestMethod.GET)
-	public String listUnitMaster(@ModelAttribute("UnitMaster") UnitMaster UnitMaster, Model model) {
+	public String listUnitMaster(@ModelAttribute("UnitMaster") UnitMaster UnitMaster, Model model, HttpSession session) {
 		System.out.println("listUnitMaster");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> trainingType = lst.trainingTypeMap;
 		Map<String, String> trainingPhase = lst.trainingPhaseMap;
@@ -1660,7 +1731,6 @@ public class AdminController {
 
 	@RequestMapping("/UnitMaster/remove/{id}")
 	public String removeUnitMaster(@PathVariable("id") int id) {
-
 		this.adminService.removeUnitMaster(id);
 		return "redirect:/UnitMaster.fssai";
 	}
@@ -1690,8 +1760,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/ModuleMaster", method = RequestMethod.GET)
-	public String listModuleMaster(@ModelAttribute("ModuleMasterForm") ModuleMasterForm moduleMasterForm, Model model) {
+	public String listModuleMaster(@ModelAttribute("ModuleMasterForm") ModuleMasterForm moduleMasterForm, Model model, HttpSession session) {
 		System.out.println("listModuleMaster");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> trainingType = lst.trainingTypeMap;
 		Map<String, String> trainingPhase = lst.trainingPhaseMap;
@@ -1762,7 +1834,6 @@ public class AdminController {
 
 	@RequestMapping("/ModuleMaster/remove/{id}")
 	public String removeModuleMaster(@PathVariable("id") int id) {
-
 		this.adminService.removeModuleMaster(id);
 		return "redirect:/ModuleMaster.fssai";
 	}
@@ -1851,7 +1922,11 @@ public class AdminController {
 
 	@RequestMapping(value = "/TrainingSchedule", method = RequestMethod.GET)
 	public String TrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule,
-			Model model) {
+			Model model, HttpSession session) {
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+		return "redirect:login.fssai";
+		}
 		System.out.println("listTrainingSchedule");
 		Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> trainingType = lst.trainingTypeMap;
@@ -1890,7 +1965,6 @@ public class AdminController {
 
 	@RequestMapping("/TrainingSchedule/remove/{id}")
 	public String removeTrainingSchedule(@PathVariable("id") int id) {
-
 		this.adminService.removeTrainingSchedule(id);
 		return "redirect:/TrainingSchedule.fssai";
 	}
@@ -1919,6 +1993,7 @@ public class AdminController {
 	public void editTrainingSchedule(@PathVariable("id") int id,
 			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
 			HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {
+	
 		new ZLogger("/TrainingSchedule/edit", "/TrainingSchedule/edit............" + id, "AdminController.java");
 
 		TrainingSchedule hm = this.adminService.getTrainingScheduleById(id);
@@ -1955,8 +2030,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/StateMaster", method = RequestMethod.GET)
-	public String listStateMaster(@ModelAttribute("StateMaster") StateMaster StateMaster, Model model) {
+	public String listStateMaster(@ModelAttribute("StateMaster") StateMaster StateMaster, Model model, HttpSession session) {
 		System.out.println("listStateMaster");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("StateMaster", new StateMaster());
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		return "StateMaster";
@@ -1989,7 +2066,6 @@ public class AdminController {
 
 	@RequestMapping("/StateMaster/remove/{id}")
 	public String removeStateMaster(@PathVariable("id") int id) {
-
 		this.adminService.removeStateMaster(id);
 		return "redirect:/StateMaster.fssai";
 	}
@@ -2019,8 +2095,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/DistrictMaster", method = RequestMethod.GET)
-	public String listDistrictMaster(@ModelAttribute("DistrictMasterForm") DistrictMaster DistrictMaster, Model model) {
+	public String listDistrictMaster(@ModelAttribute("DistrictMasterForm") DistrictMaster DistrictMaster, Model model, HttpSession session) {
 		System.out.println("listDistrictMaster");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("DistrictMasterForm", new DistrictMasterForm());
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("listDistrictMaster", this.adminService.listDistrictMaster());
@@ -2058,8 +2136,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/DistrictMaster/remove/{id}")
-	public String removeDistrictMaster(@PathVariable("id") int id) {
-
+	public String removeDistrictMaster(@PathVariable("id") int id, HttpSession session) {
 		this.adminService.removeDistrictMaster(id);
 		return "redirect:/DistrictMaster.fssai";
 	}
@@ -2089,8 +2166,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/CityMaster", method = RequestMethod.GET)
-	public String listCityMaster(@ModelAttribute("CityMasterForm") CityMaster CityMaster, Model model) {
+	public String listCityMaster(@ModelAttribute("CityMasterForm") CityMaster CityMaster, Model model, HttpSession session) {
 		System.out.println("listCityMaster");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("CityMasterForm", new CityMasterForm());
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("listDistrictMaster", this.adminService.listDistrictMaster());
@@ -2129,7 +2208,6 @@ public class AdminController {
 
 	@RequestMapping("/CityMaster/remove/{id}")
 	public String removeCityMaster(@PathVariable("id") int id) {
-
 		this.adminService.removeCityMaster(id);
 		return "redirect:/CityMaster.fssai";
 	}
@@ -2159,8 +2237,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/RegionMaster", method = RequestMethod.GET)
-	public String listRegionMaster(@ModelAttribute("RegionMasterForm") RegionMaster RegionMaster, Model model) {
+	public String listRegionMaster(@ModelAttribute("RegionMasterForm") RegionMaster RegionMaster, Model model, HttpSession session) {
 		System.out.println("listRegionMaster");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("RegionMasterForm", new RegionMasterForm());
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("listDistrictMaster", this.adminService.listDistrictMaster());
@@ -2200,7 +2280,6 @@ public class AdminController {
 
 	@RequestMapping("/RegionMaster/remove/{id}")
 	public String removeRegionMaster(@PathVariable("id") int id) {
-
 		this.adminService.removeRegionMaster(id);
 		return "redirect:/RegionMaster.fssai";
 	}
@@ -2230,8 +2309,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/TrainingPartner", method = RequestMethod.GET)
-	public String listTrainingPartner(@ModelAttribute("TrainingPartner") TrainingPartner trainingPartner, Model model) {
+	public String listTrainingPartner(@ModelAttribute("TrainingPartner") TrainingPartner trainingPartner, Model model, HttpSession session) {
 		System.out.println("listTrainingPartner");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("TrainingPartner", new TrainingPartner());
 		model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
 		return "TrainingPartner";
@@ -2266,7 +2347,6 @@ public class AdminController {
 
 	@RequestMapping("/TrainingPartner/remove/{id}")
 	public String removeTrainingPartnerMaster(@PathVariable("id") int id) {
-
 		this.adminService.removeTrainingPartner(id);
 		return "redirect:/TrainingPartner.fssai";
 	}
@@ -2293,9 +2373,11 @@ public class AdminController {
 
 	@RequestMapping(value = "/GenerateCertificate", method = RequestMethod.GET)
 	public String GenerateCertificate(
-			@ModelAttribute("GenerateCertificateForm") GenerateCertificateForm generateCertificateForm, Model model) {
+			@ModelAttribute("GenerateCertificateForm") GenerateCertificateForm generateCertificateForm, Model model, HttpSession session) {
 		System.out.println("listGenerateCertificate");
 
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Map<String, String> trainingType = lst.trainingTypeMap;
 
 		model.addAttribute("trainingType", trainingType);
@@ -2327,9 +2409,10 @@ public class AdminController {
 	// for training closure
 	@RequestMapping(value = "/TrainingClosure", method = RequestMethod.GET)
 	public String TrainingClosure(@ModelAttribute("TrainingClosureForm") TrainingClosureForm trainingClosureForm,
-			Model model) {
+			Model model, HttpSession session) {
 		System.out.println("listTrainingClosure");
-
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> trainingType = lst.trainingTypeMap;
 
@@ -2374,8 +2457,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/CustomerMaster", method = RequestMethod.GET)
-	public String listCustomerMaster(@ModelAttribute("CustomerMaster") CustomerMaster customerMaster, Model model) {
+	public String listCustomerMaster(@ModelAttribute("CustomerMaster") CustomerMaster customerMaster, Model model, HttpSession session) {
 		System.out.println("listCustomerMaster");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("listCustomerMaster", this.adminService.listCustomerMaster());
 		model.addAttribute("CustomerMaster", new CustomerMaster());
 
@@ -2439,8 +2524,10 @@ public class AdminController {
 	 */
 
 	@RequestMapping(value = "/TaxMaster", method = RequestMethod.GET)
-	public String listTaxMaster(@ModelAttribute("TaxMaster") TaxMaster TaxMaster, Model model) {
+	public String listTaxMaster(@ModelAttribute("TaxMaster") TaxMaster TaxMaster, Model model, HttpSession session) {
 		System.out.println("listTaxMaster");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("listTaxMaster", this.adminService.listTaxMaster());
 		model.addAttribute("TaxMaster", new TaxMaster());
 
@@ -2474,7 +2561,6 @@ public class AdminController {
 
 	@RequestMapping("/TaxMaster/remove/{id}")
 	public String removeTaxMaster(@PathVariable("id") int id) {
-
 		this.adminService.removeTaxMaster(id);
 		return "redirect:/TaxMaster.fssai";
 	}
@@ -2505,8 +2591,10 @@ public class AdminController {
 
 	@RequestMapping(value = "/EmployeeMonthlyCharges", method = RequestMethod.GET)
 	public String listEmployeeMonthlyCharges(
-			@ModelAttribute("EmployeeMonthlyCharges") EmployeeMonthlyCharges EmployeeMonthlyCharges, Model model) {
+			@ModelAttribute("EmployeeMonthlyCharges") EmployeeMonthlyCharges EmployeeMonthlyCharges, Model model, HttpSession session) {
 		System.out.println("listEmployeeMonthlyCharges");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("listEmployeeMonthlyCharges", this.adminService.listEmployeeMonthlyCharges());
 		model.addAttribute("listCustomerMaster", this.adminService.listCustomerMaster());
 		model.addAttribute("EmployeeMonthlyCharges", new EmployeeMonthlyCharges());
@@ -2544,7 +2632,6 @@ public class AdminController {
 
 	@RequestMapping("/EmployeeMonthlyCharges/remove/{id}")
 	public String removeEmployeeMonthlyCharges(@PathVariable("id") int id) {
-
 		this.adminService.removeEmployeeMonthlyCharges(id);
 		return "redirect:/EmployeeMonthlyCharges.fssai";
 	}
@@ -2577,8 +2664,13 @@ public class AdminController {
 
 	@RequestMapping(value = "/NominateTrainee", method = RequestMethod.GET)
 	public String nominateTrainee(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm,
-			Model model) {
+			Model model, HttpSession session) {
 		System.out.println("admin controller NominateTrainee");
+
+		if((int)session.getAttribute("profileId")!=2){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
+		return "redirect:login.fssai";
+		}
 
 		Map<String, String> userTypeMap = lst.userTypeMap;
 
@@ -2625,8 +2717,10 @@ public class AdminController {
 
 	@RequestMapping(value = "/assessmentquestions", method = RequestMethod.GET)
 	public String assessquestion(@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
-			Model model) {
+			Model model, HttpSession session) {
 		System.out.println("assessment questins");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		/*
 		 * model.addAttribute("listCourseName",
 		 * this.adminService.courseNameList());
@@ -2680,7 +2774,9 @@ public class AdminController {
 
 	@RequestMapping(value = "/manageAssessmentQuestions", method = RequestMethod.GET)
 	public String manageAssessmentQuestions(
-			@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model) {
+			@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		return "manageAssessmentQuestions";
 	}
@@ -2714,7 +2810,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/invoicePrint", method = RequestMethod.GET)
-	public String invoicePrint(Model model, HttpServletRequest request) {
+	public String invoicePrint(Model model, HttpServletRequest request, HttpSession session) {
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		String custId = request.getParameter("custId");
 		String invoiceNum = request.getParameter("invoiceNum");
 		System.out.println(" custId " + custId + " invoiceNum " + invoiceNum);
@@ -2752,8 +2850,10 @@ public class AdminController {
 
 	@RequestMapping(value = "/CustomerDetails", method = RequestMethod.GET)
 	public String CustomerDetails(@ModelAttribute("EmployeeMonthlyCharges") CustomerDetails customerDetails,
-			Model model) {
+			Model model, HttpSession session) {
 
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("listCustomerDetails", this.adminService.listCustomerDetails());
 		/*
 		 * model.addAttribute("listCustomerMaster",
@@ -2766,7 +2866,10 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/InvoiceMaster", method = RequestMethod.GET)
-	public String InvoiceDetails(@ModelAttribute("InvoiceDetails") InvoiceMaster invoiceMaster, Model model) {
+	public String InvoiceDetails(@ModelAttribute("InvoiceDetails") InvoiceMaster invoiceMaster, Model model, HttpSession session) {
+		
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		model.addAttribute("listCustomerMaster", this.adminService.listCustomerMaster());
 		model.addAttribute("listInvoiceMaster", this.adminService.listInvoiceMaster());
 		model.addAttribute("InvoiceMasterForm", new InvoiceMasterForm());
@@ -2852,8 +2955,7 @@ public class AdminController {
 	}
    @RequestMapping("/deleteassessmentquestion/{id}")
 	public String deleteAssessmentQuestion(@PathVariable("id") int id) {
-System.out.println("in delete "+id);
-
+	   	System.out.println("in delete "+id);
 		this.adminService.deleteAssessmentQuestion(id);
 		return "redirect:/manageAssessmentQuestions.fssai";
 	}
