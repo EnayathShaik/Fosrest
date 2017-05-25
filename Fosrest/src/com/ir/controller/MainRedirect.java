@@ -218,4 +218,13 @@ public class MainRedirect {
 		   return "assessor";
 	   }
 	  
+	   @RequestMapping(value="/learningresource" ,method = RequestMethod.GET)
+	   public String learningResource(Model model) {
+		   System.out.println("aaaaaa");
+		  
+		   System.out.println( pageLoadService.learningResource());
+		   model.addAttribute("learningResourceList",pageLoadService.learningResource());
+		   return "learningresource";
+	   }
+	  
 }

@@ -186,7 +186,7 @@
           </a> </div>
         <!--/.col-md-4-->
         
-        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="#">
+        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="learningresource.fssai">
           <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/learning-resource-icon.png">
             <h3 class="industry-heading">Learning resource</h3>
           </div>

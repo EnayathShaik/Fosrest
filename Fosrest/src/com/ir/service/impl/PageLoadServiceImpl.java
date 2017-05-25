@@ -21,6 +21,7 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
@@ -225,5 +226,13 @@ public class PageLoadServiceImpl implements PageLoadService {
 		List<TrainerForm> listTrainer = pageLoadDao.listTrainer();
 		return listTrainer;
 	}
+	@Override
+	@Transactional
+	public List<ModuleMaster> learningResource() {
+		// TODO Auto-generated method stub
+		return  pageLoadDao.learningResource();
+	}
+
+
 
 }

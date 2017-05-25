@@ -246,12 +246,14 @@ public class TrainerController {
 			@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainer personalInformationTrainer,
 			Model model, HttpServletRequest request,HttpSession session) {
 		System.out.println("PersonalInformationTrainer");
-		//int idd=request.getParameter("id");
-		
-			/*if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+		int idd=0;//for tainer-registeraion without login.
+		if(request.getParameter("id")!=null)
+		idd=Integer.parseInt(request.getParameter("id"));
+		System.out.println("idd "+idd);
+			if(idd!=4 && (int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
 				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
 			return "redirect:login.fssai";
-			}*/
+			}
 	
 		String userId = request.getParameter("userId");
 		Map<String, String> userType = lst.userTypeMap;

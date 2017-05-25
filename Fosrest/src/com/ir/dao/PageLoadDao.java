@@ -13,6 +13,7 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
@@ -45,5 +46,5 @@ public interface PageLoadDao {
 	public List<PersonalInformationTrainer> loadTrainer(String instituteId);
 	public List<PersonalInformationTrainingInstitute> trainingInstituteList();
 	public List<TrainerForm> listTrainer();
-	
+	public List<ModuleMaster> learningResource();
 }

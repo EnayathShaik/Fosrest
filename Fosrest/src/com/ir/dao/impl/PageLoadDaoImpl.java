@@ -27,6 +27,7 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
@@ -358,16 +359,16 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		}
 	
 		
-	/*	//not working
 		@Override
-		public List<AssessmentQuestions> loadModuleName(String val) {
+		public List<ModuleMaster> learningResource() {
 			// TODO Auto-generated method stub
-			System.out.println("Page Load DAOImpl process start in district name ");
-			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from assessmentquestion where unitcode'"+val+"'");
-			List<AssessmentQuestions> districtList = query.list();
-			System.out.println("district  ************* list dao     :"+ districtList);
-			return districtList;
-		}*/
+			System.out.println("inside learningResourceDaoimpl");
+			Session session = this.sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery("select moduleName,contentName,contentType,contentLink from ModuleMaster ");
+			List list = query.list();
+			System.out.println(list);
+			return list; 
+			
+		}
 
 }
