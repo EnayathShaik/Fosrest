@@ -19,7 +19,6 @@
 
 	function OnStart() {
 		 url = window.location.href;
-		 alert(url);
 		// p=url.length;
 		c = url.charAt(66);
 		if(c!=4){

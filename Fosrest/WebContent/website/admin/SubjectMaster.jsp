@@ -194,6 +194,7 @@
             	    $("#trainingType").val(mainData1.trainingType);
             	   
             	    $("#subjectName").val(mainData1.subjectName);
+            	    $("#status").val(mainData1.status);
             	     $("#updatebtn").css("display" , "block");
             	     
             	     $("#createbtn").css("display" , "none");

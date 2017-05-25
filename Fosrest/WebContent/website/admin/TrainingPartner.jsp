@@ -179,6 +179,7 @@
             	    $("#trainingPartnerId").val(mainData1.trainingPartnerId);
             	    $("#trainingPartnerName").val(mainData1.trainingPartnerName);
             	    $("#tpWebLink").val(mainData1.tpWebLink);
+            	    $("#status").val(mainData1.status);
             	     $("#updatebtn").css("display" , "block");
             	     
             	     $("#createbtn").css("display" , "none");

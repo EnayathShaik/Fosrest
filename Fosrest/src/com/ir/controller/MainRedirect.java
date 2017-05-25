@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,12 +26,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.PropertyUtils;
+import com.ir.form.GenerateCertificateForm;
 import com.ir.form.LoginForm;
 import com.ir.form.TrainerForm;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.HolidayMaster;
 import com.ir.model.ManageCourseContent;
+import com.ir.model.PersonalInformationTrainee;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
 import com.ir.model.Utility;
@@ -197,10 +201,18 @@ public class MainRedirect {
 	   public String trainerform() {
 		   return "PersonalInformationTrainerOUT";
 	   }
-	   @RequestMapping(value="/trainingPartner" ,method = RequestMethod.GET)
-	   public String trainingPartner() {
-		   return "trainingPartner";
+	   
+	   @RequestMapping(value = "/trainingInstitute", method = RequestMethod.GET)
+		public String trainingInstitute(
+				@ModelAttribute("PersonalInformationTrainingInstitute") PersonalInformationTrainingInstitute PersonalInformationTrainingInstitute, Model model, HttpSession session) {
+		   System.out.println("trainingInstitute");
+		   model.addAttribute("trainingInstituteList", this.pageLoadService.trainingInstituteList());
+		   model.addAttribute("PersonalInformationTrainingInstitute", new PersonalInformationTrainingInstitute());
+		   
+		   
+		   return "trainingInstitute";
 	   }
+	  
 	   @RequestMapping(value="/assessor" ,method = RequestMethod.GET)
 	   public String assessor() {
 		   return "assessor";

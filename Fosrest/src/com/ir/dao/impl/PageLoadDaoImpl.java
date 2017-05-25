@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
+import com.ir.form.TrainingInstituteForm;
 import com.ir.form.TrainerForm;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
@@ -28,6 +29,7 @@ import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.Utility;
@@ -339,11 +341,34 @@ public class PageLoadDaoImpl implements PageLoadDao {
 
 
 		@Override
+		public List<TrainingInstituteForm> trainingInstituteList() {
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery("select st.stateName,pit.trainingCenterName,pit.seatingCapacity from PersonalInformationTrainingInstitute pit inner join statemaster st on cast(pit.correspondencestate as numeric)=st.stateid");
+			List trainingInstituteList = query.list();
+			
+			System.out.println("CourseName  ************* list dao     :"+ trainingInstituteList);
+			return trainingInstituteList;
+		}
+
+
+		@Override
 		public List<TrainerForm> listTrainer() {
 			Session session = this.sessionFactory.getCurrentSession();
 			List<TrainerForm> mccList = session.createSQLQuery("select pit.firstName,pit.Email,pit.mobile,pit.correspondenceAddress1,c.cityname,d.districtname,s.statename,pit.specialisedArea,pit.orgName,pit.noOfTrainings from personalinformationtrainer pit inner join StateMaster s on cast(pit.correspondencestate as numeric ) =s.stateid inner join DistrictMaster d on cast(pit.correspondencedistrict as numeric ) =d.districtid inner join CityMaster c on cast(pit.correspondencecity as numeric ) =c.cityid where pit.createdBy=4").list();
 			return mccList;
 		}
 	
+		
+	/*	//not working
+		@Override
+		public List<AssessmentQuestions> loadModuleName(String val) {
+			// TODO Auto-generated method stub
+			System.out.println("Page Load DAOImpl process start in district name ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from assessmentquestion where unitcode'"+val+"'");
+			List<AssessmentQuestions> districtList = query.list();
+			System.out.println("district  ************* list dao     :"+ districtList);
+			return districtList;
+		}*/
 
 }

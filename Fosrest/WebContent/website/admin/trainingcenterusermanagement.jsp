@@ -2,6 +2,7 @@
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script src="website/js/commonController.js"></script>
             <cf:form action="trainingCetnterUserManagementSearch.fssai" name="myForm" method="POST" commandName="trainingCenterUserManagementForm">
 
                 <!-- horizontal navigation -->

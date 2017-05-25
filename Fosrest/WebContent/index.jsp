@@ -172,7 +172,7 @@
   <div class="container">
     <div class="row pdtop">
       <div class="features">
-        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="training-partner.html">
+        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="trainingInstitute.fssai">
           <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/training-partner-icon.png">
             <h3 class="industry-heading">Training Partner</h3>
           </div>
