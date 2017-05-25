@@ -1271,13 +1271,14 @@ public class TraineeDAOImpl implements TraineeDAO {
 	
 	
 	@Override
-	public  String addPersonalInfoTrainer(PersonalInformationTrainer p){
+	public  String addPersonalInfoTrainer(PersonalInformationTrainer p,String pid){
 
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 		char[] pass = passwordGenerator.get();
 		String passwordString = String.valueOf(pass);
 		
 		Session session = sessionFactory.getCurrentSession();
+	
 		String encryprPassword = null;
 		try{
 			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
@@ -1294,6 +1295,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setStatus("A");
 		loginDetails.setProfileId(4);
+		if(pid==null){
+			p.setCreatedBy(4);
+		}
+		else{
+			p.setCreatedBy(2);
+		}
 		p.setLoginDetails(loginDetails);
 		
 		session.save(p);

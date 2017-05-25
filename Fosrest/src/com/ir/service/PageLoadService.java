@@ -47,7 +47,7 @@ public interface PageLoadService {
 	public List<City> loadCity(String districtId);
 	//public List<AssessmentQuestions> loadModuleName(String val);
 	public List loadTrainer(String instituteId);
-	
+	public List listTrainer();
 	
 	
 	 

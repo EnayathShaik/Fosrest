@@ -29,6 +29,7 @@ public class PersonalInformationTrainer {
 	private int id;
 	
 
+
 	private String userType;
 	
 
@@ -423,7 +424,41 @@ public class PersonalInformationTrainer {
 	public void setNoOfSessionConducted(int noOfSessionConducted) {
 		this.noOfSessionConducted = noOfSessionConducted;
 	}
+	private int createdBy;
+	public int getCreatedBy() {
+	return createdBy;
+}
 
+public void setCreatedBy(int createdBy) {
+	this.createdBy = createdBy;
+}
+	public String getSpecialisedArea() {
+	return specialisedArea;
+}
+
+public void setSpecialisedArea(String specialisedArea) {
+	this.specialisedArea = specialisedArea;
+}
+
+public String getOrgName() {
+	return orgName;
+}
+
+public void setOrgName(String orgName) {
+	this.orgName = orgName;
+}
+
+public String getNoOfTrainings() {
+	return noOfTrainings;
+}
+
+public void setNoOfTrainings(String noOfTrainings) {
+	this.noOfTrainings = noOfTrainings;
+}
+
+	private String specialisedArea;
+	private String orgName;
+	private String noOfTrainings;
 	@Override
 	public String toString() {
 		return "PersonalInformationTrainee [id=" + id + ", FirstName=" + firstName + ", mobile=" + mobile +  ", Email="+Email +" , AadharNumber="+AadharNumber+   "]";

@@ -246,12 +246,13 @@ public class TrainerController {
 			@ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainer personalInformationTrainer,
 			Model model, HttpServletRequest request,HttpSession session) {
 		System.out.println("PersonalInformationTrainer");
-
-			if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+		//int idd=request.getParameter("id");
+		
+			/*if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
 				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
 			return "redirect:login.fssai";
-			}
-
+			}*/
+	
 		String userId = request.getParameter("userId");
 		Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> titleMap = lst.titleMap;
@@ -290,15 +291,17 @@ public class TrainerController {
 	@RequestMapping(value = "/PersonalInformationTrainerAdd", method = RequestMethod.POST)
 	public String addPersonalInfoTrainer(
 			@Valid @ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainer p,
-			BindingResult result, Model model) {
-		System.out.println("Add PersonalInformationTrainer");
+			BindingResult result, Model model,HttpServletRequest request,HttpSession session) {
+		
 		String personalInformationTrainer = null;
-
+		String pid="";
+		if(session.getAttribute("profileId")==null)
+			pid=(String) session.getAttribute("profileId");
 		try {
 
 			if (p.getId() == 0) {
 				personalInformationTrainer = this.traineeService
-						.addPersonalInfoTrainer(p);
+						.addPersonalInfoTrainer(p,pid);
 			} else {
 				personalInformationTrainer = this.traineeService
 						.updatePersonalInfoTrainer(p);
@@ -317,6 +320,9 @@ public class TrainerController {
 			model.addAttribute("pwd", all[0]);
 			new Thread(new Mail("Thanks", p.getEmail(), all[1], all[0],
 					p.getFirstName())).start();
+			if(pid==null){
+				return "welcomeTrainer";
+			}
 			return "welcome";
 		} else if (personalInformationTrainer.equalsIgnoreCase("updated")) {
 			return "redirect:/trainerUserManagementForm.fssai";
@@ -537,7 +543,6 @@ public class TrainerController {
 	 * 
 	 * }
 	 */
-	
 	
 }
  

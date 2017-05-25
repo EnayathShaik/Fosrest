@@ -148,7 +148,7 @@ public interface TraineeService {
 	
 	public String updatePersonalInfoTrainee(PersonalInformationTrainee p);
 	
-	public String addPersonalInfoTrainer(PersonalInformationTrainer p);
+	public String addPersonalInfoTrainer(PersonalInformationTrainer p,String pid);
 	
 	public String updatePersonalInfoTrainer(PersonalInformationTrainer p);
 	

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -24,9 +26,12 @@ import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.PropertyUtils;
 import com.ir.form.LoginForm;
+import com.ir.form.TrainerForm;
 import com.ir.model.City;
 import com.ir.model.CourseName;
+import com.ir.model.HolidayMaster;
 import com.ir.model.ManageCourseContent;
+import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
 import com.ir.model.Utility;
 import com.ir.service.PageLoadService;
@@ -183,8 +188,14 @@ public class MainRedirect {
 	   }
 	   
 	   @RequestMapping(value="/trainer" ,method = RequestMethod.GET)
-	   public String trainer() {
+	   public String trainer(@ModelAttribute("TrainerForm") TrainerForm trainerForm, Model model) {
+		   model.addAttribute("trainerForm", new TrainerForm());
+		   model.addAttribute("listTrainer", this.pageLoadService.listTrainer());
 		   return "trainer";
+	   }
+	   @RequestMapping(value="/PersonalInformationTrainer" ,method = RequestMethod.POST)
+	   public String trainerform() {
+		   return "PersonalInformationTrainerOUT";
 	   }
 	   @RequestMapping(value="/trainingPartner" ,method = RequestMethod.GET)
 	   public String trainingPartner() {
@@ -194,5 +205,5 @@ public class MainRedirect {
 	   public String assessor() {
 		   return "assessor";
 	   }
-	
+	  
 }

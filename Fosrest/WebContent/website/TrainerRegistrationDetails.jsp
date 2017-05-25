@@ -18,6 +18,15 @@
 	}
 
 	function OnStart() {
+		 url = window.location.href;
+		 alert(url);
+		// p=url.length;
+		c = url.charAt(66);
+		if(c!=4){
+			$("#sa").css("display", "none");
+			$("#on").css("display", "none");
+			$("#tc").css("display", "none");
+		}
 		var isUpdate = '${isUpdate}';
 		if (isUpdate != null && isUpdate == "Y") {
 
@@ -302,7 +311,6 @@
 							</div>
 							<!-- right side ends -->
 						</fieldset>
-
 
 
 
@@ -630,6 +638,33 @@
 									
 									<cf:input type="text" path="noOfSessionConducted" class="form-control" placeholder="Session Number" required="" />
 								</div>
+								<div class="form-group" id="sa">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Specialised Area:</strong></li>
+											<li class="style-li error-red"></li>
+											
+											 <li id="s1" style="display:none;" class="style-li error-red" >No. Of Training Sessions Conducted can not be blank.</li>
+									 
+										</ul>
+									</div>
+									
+									<cf:input type="text" path="specialisedArea" class="form-control" placeholder="Specialised Area" required="" />
+								</div>
+								<div class="form-group" id="on">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Organization Name:</strong></li>
+											<li class="style-li error-red"></li>
+											
+											 <li id="s1" style="display:none;" class="style-li error-red" >No. Of Training Sessions Conducted can not be blank.</li>
+									 
+										</ul>
+									</div>
+									
+									<cf:input type="text" path="orgName" class="form-control" placeholder="Organization Name" required="" />
+								</div>
+								
 							</div>
 							<!-- left side ends -->
 							<!-- right side -->
@@ -667,6 +702,19 @@
 										<cf:options items="${listTrainingInstitude}" itemValue="id"
 											itemLabel="trainingCenterName" />
 									</cf:select>
+								</div>
+								<div class="form-group" id="tc">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>No. of Trainings Conducted:</strong></li>
+											<li class="style-li error-red"></li>
+											
+											 <li id="s1" style="display:none;" class="style-li error-red" >No. Of Training Sessions Conducted can not be blank.</li>
+									 
+										</ul>
+									</div>
+									
+									<cf:input type="text" path="noOfTrainings" class="form-control" placeholder="No of Trainings Conducted" required="" />
 								</div>
 								</div>
 								<!-- right side ends -->

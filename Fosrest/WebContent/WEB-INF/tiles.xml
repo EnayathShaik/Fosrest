@@ -104,7 +104,7 @@
 	</definition>
 	<definition name="trainer" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/trainer.html" />
+		<put-attribute name="body" value="/WEB-INF/addOrUpdate/trainer.jsp" />
 	</definition>
 	<definition name="registrationFormTrainer" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
@@ -205,11 +205,6 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
 			value="/website/trainee/UpdateTraineeInfo.jsp" />
-	</definition>
-	<definition name="updatetrainerinfo" extends="base.user.afterLogin">
-		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body"
-			value="/website/trainer/UpdateTrainerInfo.jsp" />
 	</definition>
 	<definition name="updateinstituteinfo" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
@@ -965,6 +960,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/personalInformationTrainer.jsp" />
 	</definition>
+<definition name="PersonalInformationTrainerOUT" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/personalInformationTrainer.jsp" />
+	</definition>
 
 	<definition name="PersonalInformationTrainingInstitute" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
@@ -1325,5 +1324,9 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
 			value="/website/trainer/UpdateTrainerInfo.jsp" />
+	</definition>
+	<definition name="welcomeTrainer" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/welcomeRegisterTrainer.jsp" />
 	</definition>
 </tiles-definitions>

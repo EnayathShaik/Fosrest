@@ -17,10 +17,12 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
+import com.ir.form.TrainerForm;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.HolidayMaster;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
@@ -328,25 +330,20 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		@Override
 		public List<PersonalInformationTrainer> loadTrainer(String instituteId) {
 			// TODO Auto-generated method stub
-			System.out.println("Page Load DAOImpl process start in Trainer888888888888888888888888888 ");
 			Session session = sessionFactory.getCurrentSession();
 			Query query = session.createSQLQuery("select * from personalinformationtrainer where associatedwithanytraininginstitute=  '"+instituteId+"'");
 			List list = query.list();
 			System.out.println("district  ************* list dao     :"+ instituteId);
 			return list;
 		}
-	
-		
-	/*	//not working
+
+
 		@Override
-		public List<AssessmentQuestions> loadModuleName(String val) {
-			// TODO Auto-generated method stub
-			System.out.println("Page Load DAOImpl process start in district name ");
-			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from assessmentquestion where unitcode'"+val+"'");
-			List<AssessmentQuestions> districtList = query.list();
-			System.out.println("district  ************* list dao     :"+ districtList);
-			return districtList;
-		}*/
+		public List<TrainerForm> listTrainer() {
+			Session session = this.sessionFactory.getCurrentSession();
+			List<TrainerForm> mccList = session.createSQLQuery("select pit.firstName,pit.Email,pit.mobile,pit.correspondenceAddress1,c.cityname,d.districtname,s.statename,pit.specialisedArea,pit.orgName,pit.noOfTrainings from personalinformationtrainer pit inner join StateMaster s on cast(pit.correspondencestate as numeric ) =s.stateid inner join DistrictMaster d on cast(pit.correspondencedistrict as numeric ) =d.districtid inner join CityMaster c on cast(pit.correspondencecity as numeric ) =c.cityid where pit.createdBy=4").list();
+			return mccList;
+		}
+	
 
 }
