@@ -3,7 +3,6 @@ package com.ir.dao;
 import java.util.List;
 
 import com.ir.bean.common.IntStringBean;
-import com.ir.form.TrainingInstituteForm;
 import com.ir.form.TrainerForm;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
@@ -44,7 +43,7 @@ public interface PageLoadDao {
 	public List<District> District(String stateId);
 	public List<City> loadCity(String distId);
 	public List<PersonalInformationTrainer> loadTrainer(String instituteId);
-	public List<TrainingInstituteForm> trainingInstituteList();
+	public List<PersonalInformationTrainingInstitute> trainingInstituteList();
 	public List<TrainerForm> listTrainer();
 	
 }

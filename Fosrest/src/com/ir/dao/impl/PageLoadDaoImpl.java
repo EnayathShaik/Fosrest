@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
-import com.ir.form.TrainingInstituteForm;
 import com.ir.form.TrainerForm;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
@@ -341,7 +340,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 
 
 		@Override
-		public List<TrainingInstituteForm> trainingInstituteList() {
+		public List<PersonalInformationTrainingInstitute> trainingInstituteList() {
 			Session session = sessionFactory.getCurrentSession();
 			Query query = session.createSQLQuery("select st.stateName,pit.trainingCenterName,pit.seatingCapacity from PersonalInformationTrainingInstitute pit inner join statemaster st on cast(pit.correspondencestate as numeric)=st.stateid");
 			List trainingInstituteList = query.list();
