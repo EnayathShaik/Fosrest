@@ -68,7 +68,7 @@
         </div>
         </section>    
     <!--/#feature-->
-        <section id="bottom">
+      <!--   <section id="bottom">
       <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
         <div class="row">
           <div class="col-md-3 col-sm-6">
@@ -90,7 +90,7 @@
               </ul>
             </div>
           </div>
-          <!--/.col-md-3-->
+          /.col-md-3
 
           <div class="col-md-3 col-sm-6">
             <div class="widget center-block">
@@ -104,7 +104,7 @@
               </ul>
             </div>
           </div>
-          <!--/.col-md-3-->
+          /.col-md-3
 
           <div class="col-md-3 col-sm-6">
             <div class="widget center-block text-center" style="border-right: none;">
@@ -121,7 +121,7 @@
               </ul>
             </div>
           </div>
-          <!--/.col-md-3-->
+          /.col-md-3
 
           <div class="col-md-3 col-sm-6">
             <div class="widget center-block text-center" style="border-right:none;">
@@ -130,13 +130,13 @@
               </ul>
             </div>
           </div>
-          <!--/.col-md-3--> 
+          /.col-md-3 
         </div>
       </div>
     </section>
     <!--/#bottom-->
 
-    <footer id="footer" class="midnight-blue">
+      <!-- <footer id="footer" class="midnight-blue">
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">Design and Developed by &nbsp;<a href="http://www.zentechinfo.com/" target="_blank" style="color:#1c1b1b; text-decoration:underline;">Zentech Info Solutions Pvt. Ltd.</a> &copy; FSSAI 2016- All Right Reserved.</div>

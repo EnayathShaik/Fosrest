@@ -193,13 +193,7 @@
           </a> </div>
         <!--/.col-md-4-->
         
-        <div class="col-md-3 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="page">
-            <div style="display:inline-block;">
-              <div class="monthly" id="mycalendar"></div>
-            </div>
-          </div>
-        </div>
+       
         <!--/.col-md-4--> 
         
       </div>
@@ -228,7 +222,7 @@
         </div>
         <!--/.col-md-4-->
         
-        <div class="col-md-6 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+      <!--   <div class="col-md-6 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
           <div class="course-heading">News and Updates</div>
           <div id="news" class="owl-carousel">
             <div class="item">
@@ -238,6 +232,13 @@
             <div class="item">
               <p class="txt-ellip" style="padding:20px;">FSSAI vide Gazette notification number S.O 2428 (E) dated the 13th July, 2016 notified 112 NABL accredited food testing laboratories for the purpose of carrying out Analysis of samples taken under Section 47 of the Food Safety and Standard Act, 2006.</p>
               <div class="text-center"><a href="#" class="btn btn-default" target="_blank">Read More</a></div>
+            </div>
+          </div>
+        </div> -->
+         <div class="col-md-3 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+          <div class="page">
+            <div style="display:inline-block;">
+              <div class="monthly" id="mycalendar"></div>
             </div>
           </div>
         </div>
@@ -283,7 +284,7 @@
         <div class="widget center-block">
           <ul>
             <li><a href="fostac.fssai">Home</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="about.fssai">About</a></li>
             <li class="dropdown"> <a href="courses.html" class="dropdown-toggle" data-toggle="dropdown">Courses<i class="fa fa-angle-down"></i></a>
               <ul class="dropdown-menu">
                 <li><a href="basic-level.html">Basic Level</a></li>
@@ -293,7 +294,7 @@
             </li>
             <li><a href="#">Risk & Solutions</a></li>
             <li><a href="#">Help</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="contact.fssai">Contact</a></li>
           </ul>
         </div>
       </div>
