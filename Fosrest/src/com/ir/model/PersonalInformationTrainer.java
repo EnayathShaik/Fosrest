@@ -459,9 +459,32 @@ public void setNoOfTrainings(String noOfTrainings) {
 	private String specialisedArea;
 	private String orgName;
 	private String noOfTrainings;
+	
+private String Status;
+	
+	
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+private String logId;
+	public String getLogId() {
+		return logId;
+	}
+
+	public void setLogId(String logId) {
+		this.logId = logId;
+	}
+
 	@Override
 	public String toString() {
 		return "PersonalInformationTrainee [id=" + id + ", FirstName=" + firstName + ", mobile=" + mobile +  ", Email="+Email +" , AadharNumber="+AadharNumber+   "]";
 	}
+
+	
 	
 }

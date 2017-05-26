@@ -18,18 +18,21 @@
 	}
 
 	function OnStart() {
-		 url = window.location.href;
+		/*  url = window.location.href;
 		// p=url.length;
 		c = url.charAt(66);
 		if(c!=4){
 			$("#sa").css("display", "none");
 			$("#on").css("display", "none");
 			$("#tc").css("display", "none");
-		}
+		} */
 		var isUpdate = '${isUpdate}';
 		if (isUpdate != null && isUpdate == "Y") {
 
 			var name = '${PersonalInformationTrainer.firstName}';
+			
+			$("#logId").val('${PersonalInformationTrainer.loginDetails.id}');
+			$("#status").val('${PersonalInformationTrainer.status}');
 			$("#correspondenceState").val(
 					'${PersonalInformationTrainer.correspondenceState}');
 			$("#correspondenceState").trigger("change");
@@ -147,7 +150,8 @@
 							<div class="col-md-6 col-xs-12">
 
 
-
+<cf:input path="logId"  type="hidden"/>
+<cf:input path="status"  type="hidden"/>
 								<cf:input type="hidden" path="id" />
 								<div class="form-group">
 									<div>
@@ -820,10 +824,12 @@
 						.val(mainData1.correspondencePincode);
 				$("#mobile").val(mainData1.mobile);
 				$("#empID").val(mainData1.empID);
-				
+				$("#specialisedArea").val(mainData1.specialisedArea);
+				$("#orgName").val(mainData1.orgName);
+				$("#noOfTrainings").val(mainData1.noOfTrainings);
 
 				$("#updatebtn").css("display", "block");
-
+				
 				$("#createbtn").css("display", "none");
 			}
 		});

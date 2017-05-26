@@ -294,7 +294,6 @@ public class TrainerController {
 	public String addPersonalInfoTrainer(
 			@Valid @ModelAttribute("PersonalInformationTrainer") PersonalInformationTrainer p,
 			BindingResult result, Model model,HttpServletRequest request,HttpSession session) {
-		
 		String personalInformationTrainer = null;
 		String pid="";
 		if(session.getAttribute("profileId")==null)

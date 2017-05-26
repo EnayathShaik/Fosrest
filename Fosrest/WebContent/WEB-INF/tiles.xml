@@ -956,7 +956,7 @@
 	</definition>
 	
 	
-		<definition name="PersonalInformationTrainer" extends="base.user.afterLogin">
+		<definition name="PersonalInformationTrainer" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/personalInformationTrainer.jsp" />
 	</definition>

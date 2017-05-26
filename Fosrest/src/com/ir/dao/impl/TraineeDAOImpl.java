@@ -1214,7 +1214,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		loginDetails.setStatus("I");
 		loginDetails.setProfileId(3);
 		p.setLoginDetails(loginDetails);
-		
 		session.save(p);
 		return passwordString+"&"+nextSequenceUserID;
 	}	
@@ -1253,7 +1252,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainee.setResPincode(p.getResPincode());
 		System.out.println(" status "+p.getStatus());
 		if(p.getStatus() != null){
-			System.out.println(" loginId "+p.getLogId() );
+			System.out.println(" loginId"+p.getLogId() );
 			int loginId = Integer.parseInt(p.getLogId());
 			String sql = "update logindetails set status ='"+p.getStatus()+"'  where id =("+loginId+")";
 			Query query = session.createSQLQuery(sql);
@@ -1290,17 +1289,21 @@ public class TraineeDAOImpl implements TraineeDAO {
 		
 		String nextSequenceUserID = pageLoadService.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
 		LoginDetails loginDetails = new LoginDetails();
-		loginDetails.setLoginId(nextSequenceUserID);
-		loginDetails.setPassword(passwordString);
-		loginDetails.setEncrypted_Password(encryprPassword);
-		loginDetails.setStatus("A");
-		loginDetails.setProfileId(4);
 		if(pid==null){
 			p.setCreatedBy(4);
+			loginDetails.setStatus("I");
 		}
 		else{
 			p.setCreatedBy(2);
+			loginDetails.setStatus("A");
 		}
+		
+		loginDetails.setLoginId(nextSequenceUserID);
+		loginDetails.setPassword(passwordString);
+		loginDetails.setEncrypted_Password(encryprPassword);
+		//loginDetails.setStatus("A");
+		loginDetails.setProfileId(4);
+		p.setStatus("A");
 		p.setLoginDetails(loginDetails);
 		
 		session.save(p);
@@ -1316,6 +1319,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class, id);
 		personalInformationTrainer.setUserType(p.getUserType());
 		personalInformationTrainer.setTitle(p.getTitle());
+		//personalInformationTrainer.setStatus(p.getStatus());
 		personalInformationTrainer.setAadharNumber(p.getAadharNumber());
 		personalInformationTrainer.setEmpID(p.getEmpID());
 		personalInformationTrainer.setDob(p.getDob());
@@ -1343,6 +1347,14 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainer.setExpInYear(p.getExpInYear());
 	//	personalInformationTrainer.setSessWishToConduct(p.getSessWishToConduct());
 		personalInformationTrainer.setAssociatedWithAnyTrainingInstitute(p.getAssociatedWithAnyTrainingInstitute());
+		System.out.println(" status "+p.getStatus());
+		if(p.getStatus() != null){
+			System.out.println(" loginId "+p.getLogId() );
+			int loginId = Integer.parseInt(p.getLogId());
+			String sql = "update logindetails set status ='"+p.getStatus()+"'  where id =("+loginId+")";
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+		}
 		session.update(personalInformationTrainer);
 		return "updated";
 	}	
