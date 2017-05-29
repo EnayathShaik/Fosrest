@@ -195,7 +195,7 @@ body > section {
 }
 
 .top-bar {
-  padding: 10px 0;
+  
   background: #fff;
   line-height: 28px;
 }
@@ -282,7 +282,6 @@ input.search-form:hover {
   border-radius: 0;
   margin-bottom: 0;
   background: #fff;
-  padding: 15px 0;
   padding-bottom: 0;
 }
 
@@ -571,11 +570,12 @@ input.search-form:hover {
 	background:#dd4108;
 	color:#fff !important;
 	border:none;
-	padding-bottom: 10px;
-	padding-top:10px;
+	width:230px;
+	padding:12px;
+	margin-left:70px;
 	}
 
-.course-bg .industry-heading { color:#ffffff !important; text-transform:uppercase; padding-top:25px !important;}
+.course-bg .industry-heading { color:#ffffff !important; text-transform:uppercase; }
 
 .course-bg ul { margin-left:58px;} 
 .course-bg ul li a{ color:#fff;}
@@ -687,7 +687,7 @@ input.search-form:hover {
 
 
 
-.feature-wrap img { padding-top:10px;}
+/* .feature-wrap img { padding-top:10px;} */
 .feature-wrap h3 {
     color: #1c1b1b !important;
     font-size: 16px;
@@ -2795,7 +2795,7 @@ tbody tr:hover {
 }
 /*table*/
 
-.btm-space { margin-bottom:20px;}
+/* .btm-space { margin-bottom:20px;} */
 
 .img-pd { padding-left:30px; padding-right:10px; padding-top:10px;}
 

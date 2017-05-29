@@ -178,14 +178,14 @@
           </div>
           </a> </div>
         <!--/.col-md-4-->
-        
+         <div class="col-sm-1"></div>
         <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="trainer.fssai">
           <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/trainer-icon.png">
             <h3 class="industry-heading">Trainer</h3>
           </div>
           </a> </div>
         <!--/.col-md-4-->
-        
+         <div class="col-sm-1"></div>
         <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="learningresource.fssai">
           <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/learning-resource-icon.png">
             <h3 class="industry-heading">Learning resource</h3>
@@ -235,7 +235,8 @@
             </div>
           </div>
         </div> -->
-         <div class="col-md-3 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+        <div class="col-sm-2"></div>
+         <div class="col-md-3 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" style="border:1px solid #000;">
           <div class="page">
             <div style="display:inline-block;">
               <div class="monthly" id="mycalendar"></div>
@@ -251,7 +252,7 @@
   </div>
   <!--/.container--> 
 </section>
-<section id="feature" style="margin:0px; padding:0px;" >
+<!-- <section id="feature" style="margin:0px; padding:0px;" >
   <div class="container">
     <div class="row">
       <div class="features">
@@ -260,22 +261,22 @@
             <div style="margin-top:10px; padding:0px;"><a href="#"><img src="website/images/share-intitiave.jpg"></a></div>
           </div>
         </div>
-        <!--/.col-md-4-->
+        /.col-md-4
         
         <div class="col-md-6 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
           <div class="feature-wrap training-box center-block">
             <div style="margin-top:10px; padding:0px;"><a href="#"><img src="website/images/fssai-blog.jpg"></a></div>
           </div>
         </div>
-        <!--/.col-md-4--> 
+        /.col-md-4 
         
       </div>
-      <!--/.services--> 
+      /.services 
     </div>
-    <!--/.row--> 
+    /.row 
   </div>
-  <!--/.container--> 
-</section>
+  /.container 
+</section> -->
 
 <section id="bottom">
   <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
@@ -325,7 +326,7 @@
                 </div>
               </form>
             </li>
-            <li class="pd-top"> <a href="#" target="_blank"><img src="website/images/facebook.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/twitter.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/linkedin.png" width="30" height="30"></a> &nbsp;<a href="#" target="_blank"><img src="website/images/google-plus.png" width="32" height="32"></a></li>
+            <li class="pd-top"> <a href="https://www.facebook.com/" target="_blank"><img src="website/images/facebook.png" width="30" height="30"></a>&nbsp; <a href="https://twitter.com/" target="_blank"><img src="website/images/twitter.png" width="30" height="30"></a>&nbsp; <a href="https://in.linkedin.com/" target="_blank"><img src="website/images/linkedin.png" width="30" height="30"></a> &nbsp;<a href="https://goo.gl/QWk7zd" target="_blank"><img src="website/images/google-plus.png" width="32" height="32"></a></li>
           </ul>
         </div>
       </div>
