@@ -384,6 +384,10 @@ public interface AdminDAO {
 
 	public List<StateAdmin> stateAdminsearch(stateAdminForm stateAdminForm);
 
+	public int getQuestionNumber(String data);
+
+	public List listCalendar();
+
 	public List<TrainingScheduleForm> listtrainingScheduleMaster();
 
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/

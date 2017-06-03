@@ -2786,6 +2786,10 @@ public class AdminController {
 	public String manageAssessmentQuestionsSave(
 			@Valid @ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm,
 			BindingResult result, Model model) {
+		
+		System.out.println("aaaaa "+assessmentQuestionForm.getNoOfOption());
+		System.out.println("aaaaa "+assessmentQuestionForm.getQuestionNumber());
+		
 		if (result.hasErrors()) {
 			new ZLogger("manageAssessmentQuestionsSave", "bindingResult.hasErrors  " + result.hasErrors(),
 					"AdminController.java");
@@ -2960,6 +2964,23 @@ public class AdminController {
 		this.adminService.deleteAssessmentQuestion(id);
 		return "redirect:/manageAssessmentQuestions.fssai";
 	}
+   
+   
+   @RequestMapping(value="/getQuestionNumber" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getQuestionNumber(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getModule","getModule............" + data  , "CommonController.java");
+	
+		System.out.println("aaaaaaaawqqqqqqq");
+		int qNO = this.adminService.getQuestionNumber(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(qNO); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
 	@RequestMapping(value = "/trainingschedule123", method = RequestMethod.GET)
 	
 		public String trainingschedule12(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule,
@@ -2979,7 +3000,66 @@ public class AdminController {
 			HttpSession session) {
 		
 			model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
-	
-		return "trainingschedule123";
+			
+			return "trainingschedule123";
+		}
+			
+			@RequestMapping(value = "/trainingcalendar", method = RequestMethod.GET)
+	public String trainingCalendar(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule,
+			Model model, HttpSession session) {
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+		return "redirect:login.fssai";
+		}
+		System.out.println("listTrainingSchedule");
+		Map<String, String> userType = lst.userTypeMap;
+		Map<String, String> trainingType = lst.trainingTypeMap;
+		Map<String, String> trainingPhase = lst.trainingPhaseMap;
+		Map<String, String> userStatusMap = lst.userStatusMap;
+
+		model.addAttribute("userType", userType);
+		model.addAttribute("trainingType", trainingType);
+		model.addAttribute("trainingPhase", trainingPhase);
+		model.addAttribute("userStatusMap", userStatusMap);
+	model.addAttribute("TrainingScheduleForm", new TrainingScheduleForm());
+	/*	model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
+		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
+		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
+		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
+		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
+		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());*/
+		return "trainingcalendar";
 	}
+	
+   
+   @RequestMapping(value = "/trainingcalendarsearch", method = RequestMethod.POST)
+  	public String trainingCalendarSearch(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule,
+  			Model model, HttpSession session) {
+  		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+  			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+  		return "redirect:login.fssai";
+  		}
+  		System.out.println("listTrainingSchedule");
+  		Map<String, String> userType = lst.userTypeMap;
+  		Map<String, String> trainingType = lst.trainingTypeMap;
+  		Map<String, String> trainingPhase = lst.trainingPhaseMap;
+  		Map<String, String> userStatusMap = lst.userStatusMap;
+
+  		model.addAttribute("userType", userType);
+  		model.addAttribute("trainingType", trainingType);
+  		model.addAttribute("trainingPhase", trainingPhase);
+  		model.addAttribute("userStatusMap", userStatusMap);
+ 		model.addAttribute("TrainingScheduleForm", new TrainingScheduleForm());
+ 		model.addAttribute("listCalendar", this.adminService.listCalendar());
+ 		 /*model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
+  		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
+  		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
+  		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
+  		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+  		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
+  		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());*/
+  		return "trainingcalendar";
+  	}
+  	
 }

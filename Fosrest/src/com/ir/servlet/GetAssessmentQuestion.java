@@ -49,7 +49,7 @@ public class GetAssessmentQuestion extends HttpServlet {
 				" A.questiontitle,A.noofoption,A.correctanswer,A.optionone,A.optiontwo,A.optionthree,A.optionfour, " +
 				" A.optionfive,A.optionsix from assessmentquestions A where A.assessmentid = "+id;*/
 		
-		sql = "select A.assessmentid,A.unitmaster,A.modulemaster,A.questionhint," +
+		sql = "select A.assessmentid,A.unitmaster,A.modulemaster,A.questionNumber," +
 				" A.questiontitle,A.noofoption,A.correctanswer,A.optionone,A.optiontwo,A.optionthree,A.optionfour, " +
 				" A.optionfive,A.optionsix from assessmentquestions A where A.assessmentid = "+id;
 		

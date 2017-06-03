@@ -1497,6 +1497,20 @@ public class AdminServiceImpl implements AdminService {
 
 @Override
 @Transactional
+public int getQuestionNumber(String data) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.getQuestionNumber(data);
+}
+
+@Override
+@Transactional
+public List listCalendar() {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listCalendar();
+}
+
+@Override
+@Transactional
 public List<TrainingScheduleForm> listtrainingScheduleMaster() {
 	// TODO Auto-generated method stub
 	return this.adminDAO.listtrainingScheduleMaster();

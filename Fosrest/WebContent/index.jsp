@@ -109,7 +109,7 @@
           <li><a href="#">Useful Links</a></li>
           <li><a href="faq.fssai">FAQ</a></li>
           <li><a href="contact.fssai">CONTACT</a></li>
-          <li><a href="login.fssai">LOGIN</a></li>
+          <li><a href="login.fssai">All User's LOGIN</a></li>
         </ul>
         <div class="search">
           <form role="form" class="searchbar">
@@ -137,7 +137,7 @@
           <div class="row slide-margin">
          <div class="col-sm-12">
               <div class="carousel-content">
-                 <h2 style="text-align:left">Fssai Admin</h2> 
+                 <h2 style="text-align:left;margin-left: 283px;    color: #f9ff00 !important; ">Fssai Admin</h2> 
                  <div class="circle-wrap center-block">
                <ul>
                 <li><a href="login.fssai"><img src="website/images/trainee.png"></a></li>
@@ -166,8 +166,8 @@
         <div class="container">
           <div class="row slide-margin">
          <div class="col-sm-12">
-              <div class="carousel-content">
-                 <h2 style="text-align:left">State Admin</h2> 
+              <div class="carousel-content"> 
+                 <h2 style="text-align:left ">State Admin</h2> 
                  <div class="circle-wrap center-block">
                <ul>
                 <li><a href="login.fssai"><img src="website/images/transport-sector.png"></a></li>

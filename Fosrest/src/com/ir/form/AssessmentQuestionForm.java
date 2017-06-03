@@ -7,11 +7,11 @@ public class AssessmentQuestionForm {
 
 	private int unitCode1,moduleCode1,unitCode2,moduleCode2;
 	
-	//int questionNumber;
+	int questionNumber;
 	@NotNull @Size(min=0 , max = 500 , message="Please enter question")
 	private String questionTitle;
-	@NotNull @Size(min=0 , max = 500 , message="Please enter question hint")
-	private String questionHint;
+	/*@NotNull @Size(min=0 , max = 500 , message="Please enter question hint")
+	private String questionHint;*/
 	@NotNull
 	private int noOfOption;
 
@@ -70,12 +70,13 @@ public class AssessmentQuestionForm {
 		this.questionTitle = questionTitle;
 	}
 
-	public String getQuestionHint() {
-		return questionHint;
+
+	public int getQuestionNumber() {
+		return questionNumber;
 	}
 
-	public void setQuestionHint(String questionHint) {
-		this.questionHint = questionHint;
+	public void setQuestionNumber(int questionNumber) {
+		this.questionNumber = questionNumber;
 	}
 
 	public int getNoOfOption() {

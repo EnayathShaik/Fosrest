@@ -26,9 +26,9 @@ public class AssessmentQuestions {
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="ModuleMaster")
 	private ModuleMaster moduleCode;
 	
-	//private int questionNumber;
+	private int questionNumber;
 	private String questionTitle;
-	private String questionHint;
+	//private String questionHint;
 	private int noOfOption;
 
 	private String optionOne;
@@ -82,14 +82,13 @@ public class AssessmentQuestions {
 		this.questionTitle = questionTitle;
 	}
 
-	public String getQuestionHint() {
-		return questionHint;
-	}
 
-	public void setQuestionHint(String questionHint) {
-		this.questionHint = questionHint;
+	public int getQuestionNumber() {
+		return questionNumber;
 	}
-
+	public void setQuestionNumber(int questionNumber) {
+		this.questionNumber = questionNumber;
+	}
 	public int getNoOfOption() {
 		return noOfOption;
 	}

@@ -140,7 +140,7 @@ public class CommonDaoImpl implements CommonDao{
 	@Override
 	public  List getModule(String data){
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select moduleid ,  modulecode  from  ModuleMaster where unitId= '"+data+"'";		
+		String sql = "select moduleid ,  modulecode ,modulename from  ModuleMaster where unitId= '"+data+"'";		
 		Query query = session.createSQLQuery(sql);
 		List moduleList = query.list();
 		return moduleList;

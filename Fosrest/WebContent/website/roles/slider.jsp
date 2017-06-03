@@ -122,8 +122,8 @@
 		<li><a href="UnitMaster.fssai">Chapter Master</a></li>
 		<li><a href="ModuleMaster.fssai">Module Master</a></li>
 		<li><a href="manageAssessmentQuestions.fssai">Assessment Questions</a></li>
-		<!-- <li><a href="SubjectMaster.fssai">Subject Master</a></li>
-		<li><a href="">Training Calendar</a></li> -->
+		<!-- <li><a href="SubjectMaster.fssai">Subject Master</a></li>-->
+		<li><a href="trainingcalendar.fssai">Trainings Calendar</a></li> 
 		
                    
 	</ul>

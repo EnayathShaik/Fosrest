@@ -999,8 +999,8 @@ public class AdminDAOImpl implements AdminDAO {
 
 		assessmentQuestion.setUnitCode(uc);
 		assessmentQuestion.setModuleCode(mm);
-		//assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
-		assessmentQuestion.setQuestionHint(assessmentQuestionForm.getQuestionHint());
+		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
+		//assessmentQuestion.setQuestionHint(assessmentQuestionForm.getQuestionHint());
 		assessmentQuestion.setQuestionTitle(assessmentQuestionForm.getQuestionTitle());
 		assessmentQuestion.setNoOfOption(assessmentQuestionForm.getNoOfOption());
 		assessmentQuestion.setOptionOne(assessmentQuestionForm.getOptionOne());
@@ -3429,6 +3429,39 @@ System.out.println("aaaaaaaaaaa"+li[1]);
 		return StateAdmin;
 
 	}*/
+
+	@Override
+	public int getQuestionNumber(String data) {
+		// TODO Auto-generated method stub
+		System.out.println(data);/*
+		String id = (data.split("|"))[1];*/
+		String[] codes = data.split("-");
+		System.out.println(codes.length);
+		System.out.println(codes[0]);
+		System.out.println(codes[1]);
+		Session session = this.sessionFactory.getCurrentSession();
+		int i=0;
+		try{
+		Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where unitMaster="+codes[0]+" and moduleMaster="+codes[1]+"and isactive='Y'");
+		List list = query.list();
+		i=((BigInteger)list.get(0)).intValue();
+		
+		System.out.println("aaaa "+i);
+		}
+		catch (NullPointerException e) {
+			new ZLogger("getQuestionNumber", "Exception while  " + e.getMessage(), "AdminDAOImpl.java");
+		}
+		return i;
+	}
+
+	@Override
+	public List listCalendar() {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = 	session.createSQLQuery("select cast('FSO' as varchar(20)) as designation , cast('Foundation' as varchar(20)) as trainingtype,cast('Refresher' as varchar(20)) as TrainingPhase , cast('Seed' as varchar(20) ) as TrainingInstitute , cast('Food' as varchar(20)) as trainingTopic ,cast('12/1/2017' as varchar(20)) as trainingDate,cast('2hr' as varchar(20)) as duration   ");
+		List list = query.list();
+		return list;
+	}
 
 	@Override
 	public List<TrainingScheduleForm> listtrainingScheduleMaster() {
