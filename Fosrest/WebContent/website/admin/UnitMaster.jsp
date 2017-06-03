@@ -3,6 +3,11 @@
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
         <!-- @author Jyoti Mekal -->
 
+
+
+
+
+
    			  <ct:url var="addAction" value="/UnitMaster/add.fssai" ></ct:url>
             <cf:form action="${addAction}" name="myForm" method="POST" commandName="UnitMaster" onsubmit="return validateFields();">
 
@@ -31,11 +36,11 @@
                                         <div class="row">
 
                                             <div class="col-xs-12">
-                                                <h1>Unit Master <label id="created" class="style-li error-red">${created }</label></h1>
+                                                <h1>Chapter Master <label id="created" class="style-li error-red">${created }</label></h1>
                                                 <div class="row">
                                                     <div class="col-xs-12">
 												                           <fieldset>
-                                        <legend>Search Unit Master</legend>
+                                        <legend>Search Chapter Master</legend>
                                         <!-- table starts here -->
                                         <!-- left side -->
                                         <div class="col-md-6 col-xs-12">
@@ -44,8 +49,8 @@
                                             <div class="form-group">
                                                 <div>
                                                     <ul class="lab-no">
-                                                        <li class="style-li"><strong> User Type:</strong></li>
-                                                         <li id="userTypeErr" style="display:none;" class="style-li error-red" >Please Select User Type.</li>
+                                                        <li class="style-li"><strong>Designation:</strong></li>
+                                                         <li id="userTypeErr" style="display:none;" class="style-li error-red" >Please Select Designation.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -65,7 +70,9 @@
                                            			<cf:select path="trainingType" class="form-control">
 													<cf:option value="0" label="Select training" />
 													<cf:options items="${trainingType}"/>	
+													
 													</cf:select>
+													
                                             </div>
                                             <div class="form-group">
                                                 <div>
@@ -75,9 +82,9 @@
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                                  <cf:select path="trainingPhase" class="form-control">
+                                                  <cf:select path="trainingPhase" class="form-control" id="testId">
 													<cf:option value="0" label="Select training phase" />
-													<cf:options items="${trainingPhase}"/>	
+													 <cf:options items="${trainingPhase}"/>	
 												</cf:select>
                                             </div>
                                             
@@ -88,8 +95,8 @@
                                             <div class="form-group">
                                                 <div>
                                                     <ul class="lab-no">
-                                                        <li class="style-li"><strong>Unit Name:</strong></li>
-                                                           <li id="unitNameErr" style="display:none;" class="style-li error-red" > Please Enter Unit Name.</li>
+                                                        <li class="style-li"><strong>Chapter Name:</strong></li>
+                                                           <li id="unitNameErr" style="display:none;" class="style-li error-red" > Please Enter Chapter Name.</li>
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
@@ -144,11 +151,11 @@
                                                <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>
-                                                        <th>User Type</th>
+                                                        <th>Designation</th>
                                                         <th>Training Type</th>
                                                         <th>Training Phase</th>
-                                                        <th>Unit Name</th>
-                                                        <th>Unit Code</th>
+                                                        <th>Chapter Name</th>
+                                                        <th>Chapter Code</th>
                                                         <th>Status</th>
                                                         <th>Edit</th>
                                                         <th>Delete</th>
@@ -163,7 +170,7 @@
 												<td>${UnitMaster.unitName}</td>
 												<td>${UnitMaster.unitCode}</td>
 												<td><ct:choose><ct:when test="${ UnitMaster.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
-												<td><button onclick='editUnit(${UnitMaster.unitId});return false;' >Edit</button></td>
+											<td><button onclick='editUnit(${UnitMaster.unitId});return false;' >Edit</button></td>
 												<td><a href="<ct:url value='/UnitMaster/remove/${UnitMaster.unitId}.fssai' />" >Delete</a></td>
 											</tr>
 										</ct:forEach>

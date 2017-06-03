@@ -119,7 +119,7 @@
 		<!-- <li><a href="UpdateTrainingSchedule.fssai">Update Training
 				Schedule</a></li> -->
 		<li><a href="HolidayMaster.fssai">Holiday Master</a></li>
-		<li><a href="UnitMaster.fssai">Unit Master</a></li>
+		<li><a href="UnitMaster.fssai">Chapter Master</a></li>
 		<li><a href="ModuleMaster.fssai">Module Master</a></li>
 		<li><a href="manageAssessmentQuestions.fssai">Assessment Questions</a></li>
 		<!-- <li><a href="SubjectMaster.fssai">Subject Master</a></li>
@@ -180,7 +180,7 @@
                         <li> <a href="feedbackMaster.fssai">Activate Training</a> </li>
                         <li> <a href="activateAssessmentOfTrainee.fssai">Activate Assessment</a> </li>
                         <li> <a href="viewtrainingcalendar.fssai"> View Training Calendar</a> </li>
-                        <li> <a href="viewEnrolledCourses.fssai"> View Enrolled Courses</a> </li>
+                        <li> <a href=viewEnrolledCourses.fssai> View Enrolled Courses</a> </li>
                         <li> <a href="fotestGenerateCertificate.fssai">Generate Certificate</a> </li>
                     </ul>
                 </div>

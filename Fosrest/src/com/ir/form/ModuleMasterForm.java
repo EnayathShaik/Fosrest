@@ -15,8 +15,17 @@ public class ModuleMasterForm {
 	private String contentType;
 	private String contentName;
 	private String contentLink;
+	private String unitName;
 	
 	
+	
+	
+	public String getUnitName() {
+		return unitName;
+	}
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
+	}
 	public int getModuleId() {
 		return moduleId;
 	}

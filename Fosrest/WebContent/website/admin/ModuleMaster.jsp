@@ -48,12 +48,12 @@
 
 
 
-												<div class="form-group">
+												<%-- <div class="form-group">
 													<cf:input path="moduleId" type="hidden" />
 													<div>
 														<ul class="lab-no">
-															<li class="style-li"><strong> Unit Name:</strong></li>
-														 <li id="unitIdErr" style="display:none;" class="style-li error-red" >Please Select User Name.</li>
+															<li class="style-li"><strong> Chapter Name:</strong></li>
+														 <li id="unitIdErr" style="display:none;" class="style-li error-red" >Please Select Chapter Name.</li>
                                                         <li class="style-li error-red"> </li>
 
 
@@ -63,6 +63,28 @@
 														<cf:option value="0" label="Select Unit Name" />
 														<cf:options items="${listUnitMaster}" itemValue="unitId"
 															itemLabel="unitCode" />
+														<!-- itemlabel -->
+													</cf:select>
+
+												</div> --%>
+												
+												<div class="form-group">
+													<cf:input path="moduleId" type="hidden" />
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong> Chapter Name:</strong></li>
+														 <li id="unitIdErr" style="display:none;" class="style-li error-red" >Please Select Chapter Name.</li>
+                                                        <li class="style-li error-red"> </li>
+
+
+														</ul>
+													</div>
+													<cf:select path="unitName" class="form-control">
+													<ct:forEach var="listUnitMaster" items="${listUnitMaster}">
+														<cf:option value="${listUnitMaster.unitName}">
+														</cf:option>
+													</ct:forEach>
+														
 														<!-- itemlabel -->
 													</cf:select>
 
@@ -132,7 +154,7 @@
 													</cf:select>
 												</div>
 
-												<div class="form-group">
+												<%-- <div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Content Link:</strong></li>
@@ -143,7 +165,7 @@
 													</div>
 													<cf:input type="text" path="contentLink"
 														placeholder="Content Link" class="form-control" />
-												</div>
+												</div> --%>
 
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
@@ -175,24 +197,27 @@
 										<fieldset>
 											<legend>Module Master</legend>
 											<ct:if test="${!empty listModuleMaster}">
-												<table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
+									<table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
+															 <th>Chapter Name</th>
 															<th>Module Name</th>
 															<th>Status</th>
 															<th>Edit</th>
 															<th>Delete</th>
 														</tr>
 													</thead>
+													
 													<ct:forEach items="${listModuleMaster}" var="ModuleMaster" varStatus="loop">
 														<tr>
 															<td>${loop.count}</td>
+															 <td>${ModuleMaster.unitName}</td>
 															<td>${ModuleMaster.moduleName}</td>
 															<td><ct:choose>
-																	<ct:when test="${ ModuleMaster.status == 'A'}">Active</ct:when>
+														<ct:when test="${ ModuleMaster.status == 'A'}">Active</ct:when>
 																	<ct:otherwise>In-Active</ct:otherwise>
-																</ct:choose></td>
+															</ct:choose></td>
 															<td><button
 																	onclick='editModule(${ModuleMaster.moduleId});return false;'>Edit</button></td>
 															<td><a

@@ -1802,9 +1802,10 @@ public class AdminController {
 		moduleMaster.setModuleName(p.getModuleName());
 		moduleMaster.setStatus(p.getStatus());
 		moduleMaster.setContentName(p.getContentName());
-		moduleMaster.setContentLink(p.getContentLink());
+		/*moduleMaster.setContentLink(p.getContentLink());*/
+		moduleMaster.setUnitName(p.getUnitName());
 		moduleMaster.setContentType(p.getContentType());
-		moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p.getUnitId()));
+		//moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p.getUnitId()));
 
 		if (p.getModuleId() == 0) {
 			// new person, add it
