@@ -113,6 +113,13 @@
 												</cf:select>
 											</div>
 
+										</div>
+										<!-- left side ends -->
+
+										<!-- right side -->
+										<div class="col-xs-6">
+											
+<div class="form-group">
 											<div>
 												<ul class="lab-no">
 													<li class="style-li"><strong>Training
@@ -129,34 +136,12 @@
 
 												<cf:select path="trainingInstitude" class="form-control"
 													onchange="getTrainer(this.value , 'trainer_id')">
-													<cf:option value="0" label="Select Training Institude" />
+													<cf:option value="0" label="Select Training Institute" />
 													<cf:options items="${listTrainingInstitude}" itemValue="id"
 														itemLabel="trainingCenterName" />
 												</cf:select>
 											</div>
-
-										</div>
-										<!-- left side ends -->
-
-										<!-- right side -->
-										<div class="col-xs-6">
-											<div class="form-group">
-												<div>
-													<ul class="lab-no">
-														<li class="style-li"><strong>Training Topic
-																:</strong></li>
-
-														<li id="trainingStartDateErr" style="display: none;"
-															class="style-li error-red">Please Select Training
-															Topic.</li>
-														<li class="style-li error-red"><label
-															class="error visibility" id="courseError">*</label></li>
-													</ul>
-												</div>
-												<cf:input class="form-control" path="trainingStartDate"
-													type="text" placeholder="Training Topic" />
-											</div>
-
+</div>
 											<div class="form-group">
 												<div>
 													<ul class="lab-no">
@@ -174,22 +159,7 @@
 													type="text" placeholder="Training Start Date" />
 											</div>
 
-											<div class="form-group">
-												<div>
-													<ul class="lab-no">
-														<li class="style-li"><strong>Training
-																Duration :</strong></li>
-
-														<li id="trainingStartDateErr" style="display: none;"
-															class="style-li error-red">Please Select Training
-															Duration.</li>
-														<li class="style-li error-red"><label
-															class="error visibility" id="courseError">*</label></li>
-													</ul>
-												</div>
-												<cf:input class="form-control" path="trainingStartDate"
-													type="text" placeholder="Training Duration" />
-											</div>
+										
 										</div>
 										<!-- rigth side ends -->
 
