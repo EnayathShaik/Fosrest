@@ -1494,4 +1494,11 @@ public class AdminServiceImpl implements AdminService {
 		this.adminDAO.deleteAssessmentQuestion(id);
 
 	}
+
+@Override
+@Transactional
+public List<TrainingScheduleForm> listtrainingScheduleMaster() {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listtrainingScheduleMaster();
+}
 }

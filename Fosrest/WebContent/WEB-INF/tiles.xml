@@ -1334,4 +1334,9 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/welcomeRegisterTrainer.jsp" />
 	</definition>
+	<definition name="trainingschedule123" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body"
+			value="/website/admin/TrainingScheduleMaster.jsp" />
+	</definition>
 </tiles-definitions>

@@ -3410,4 +3410,35 @@ public class AdminDAOImpl implements AdminDAO {
 
 	}*/
 
+	@Override
+	public List<TrainingScheduleForm> listtrainingScheduleMaster() {
+		Session session = this.sessionFactory.getCurrentSession();
+		System.out.println("inside listtrainingScheduleMaster");
+		
+		TrainingScheduleForm bean = new TrainingScheduleForm();
+		List<TrainingScheduleForm> resulList = new ArrayList<TrainingScheduleForm>();
+		List<Object[]> list = session
+				.createSQLQuery(
+						"select cast('AO' as varchar(20)) as designation,cast('Induction' as varchar(20)) as trainingType,cast('DEF' as varchar(20)) as courseName,cast('ABC' as varchar(20)) as chapter,cast('XYZ' as varchar(20)) as module,cast('5hrs' as varchar(20)) as duration,cast('12/05/2017' as varchar(20)) as trainingStartDate,cast('03/06/2017' as varchar(20)) as trainingEndDate,cast('1' as integer) as day   ")
+				.list();
+		for (Object[] li : list) {
+
+			bean.setDesignation((String) li[0]);
+			bean.setTrainingType((String) li[1]);
+			bean.setCourseName((String) li[2]);
+			bean.setChapter((String) li[3]);
+			bean.setModule((String) li[4]);
+			bean.setDuration((String) li[5]);
+			bean.setTrainingStartDate((String) li[6]);
+			bean.setTrainingEndDate((String) li[7]);
+			bean.setDay((int) li[8]);
+			
+			
+			new ZLogger("listactivateTrainingOfTrainee", "", "List:" + li);
+			// logger.info("listactivateTrainingOfTrainee List::" + li);
+			resulList.add(bean);
+		}
+		return resulList;
+	}
+
 }

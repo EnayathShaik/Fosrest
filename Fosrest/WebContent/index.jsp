@@ -129,65 +129,69 @@
 
 <section id="main-slider" class="no-margin">
   <div class="carousel slide">
-    <div class="carousel-inner">
-      <div class="item active header-bg" style="background-image: url(website/images/slider/bg1.jpg)">
-        <div class="container">
+    <div class="carousel-inner" >
+      <div class="item active header-bg" style="background-image: url(website/images/slider/food5.jpg);     height: 30em;
+    width: 40em;
+    margin-left: 0px;">
+         <div class="container">
           <div class="row slide-margin">
-            <div class="col-sm-12">
+         <div class="col-sm-12">
               <div class="carousel-content">
-                <h1 class="animation animated-item-1">Food Safety Regulatory Staff Training</h1>
-                <h2 class="animation animated-item-2">
-                  <a class="btn topbtn" href="login.fssai">Login</a>
-                </h2>
+                 <h2 style="text-align:left">Fssai Admin</h2> 
+                 <div class="circle-wrap center-block">
+               <ul>
+                <li><a href="login.fssai"><img src="website/images/trainee.png"></a></li>
+                </ul>
+           </div>
+                   <div class="circle-wrap center-block">
+               <ul>
+                  <li><a href="training-of-trainers.html"><img src="website/images/training-of-trainers.png"></a></li>
+                </ul>
+           </div>
               </div>
             </div>
             <div class="col-sm-6 hidden-xs animation animated-item-4">
               <div class="slider-img"> </div>
-            </div>
-            <div class="circle-wrap center-block">
-              <ul>
-                <li><a href="induction-training.html"><img src="website/images/induction.png"></a></li>
-                <li><a href="refresher-training.html"><img src="website/images/refresher-training.png"></a></li>
-                <li><a href="training-of-trainers.html"><img src="website/images/training-of-trainers.png"></a></li>
-                <li><a href="specific-training.html"><img src="website/images/specific-training.png"></a></li>
-              </ul>
-            </div>
+            </div> 
+          
           </div>
         </div>
-      </div>
-      <!--/.item--> 
-      
-      <!--/.item--> 
-      
-      <!--/.item--> 
+   
     </div>
-    <!--/.carousel-inner--> 
-  </div>
-  <!--/.carousel--> 
-</section>
-<!--/#main-slider--> 
-
-	<!--/#feature-->
-<section id="feature" >
-  <div class="container">
-    <div class="row pdtop">
-      <div class="features">
+ <div class="item active header-bg" style="background-image: url(website/images/slider/banner.jpg);    height: 30em;
+        width: 57em;
+       margin-left: 560px;">
+      
+     
+        <div class="container">
+          <div class="row slide-margin">
+         <div class="col-sm-12">
+              <div class="carousel-content">
+                 <h2 style="text-align:left">State Admin</h2> 
+                 <div class="circle-wrap center-block">
+               <ul>
+                <li><a href="login.fssai"><img src="website/images/transport-sector.png"></a></li>
+                </ul>
+           </div>
+              </div>
+            </div>
+             <div class="features">
         <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="trainingInstitute.fssai">
-          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/training-partner-icon.png">
+          <div class="feature-wrap course-bg" style="width: 15em;"> <img class="img-responsive center-block" style="height:85px; "src="website/images/training-partner-icon.png">
             <h3 class="industry-heading">Training Partner</h3>
           </div>
           </a> </div>
         <!--/.col-md-4-->
-         <div class="col-sm-1"></div>
+        
         <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="trainer.fssai">
-          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/trainer-icon.png">
+          <div class="feature-wrap course-bg"  style="width: 15em;margin-left:-13px;"> <img class="img-responsive center-block" style="height:85px; "src="website/images/trainer-icon.png">
             <h3 class="industry-heading">Trainer</h3>
           </div>
           </a> </div>
         <!--/.col-md-4-->
-         <div class="col-sm-1"></div>
+        
         <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="learningresource.fssai">
-          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/learning-resource-icon.png">
+          <div class="feature-wrap course-bg"  style="width: 15em;margin-left:-32px;"> <img class="img-responsive center-block" style="height:85px; "src="website/images/learning-resource-icon.png">
             <h3 class="industry-heading">Learning resource</h3>
           </div>
           </a> </div>
@@ -197,6 +201,107 @@
         <!--/.col-md-4--> 
         
       </div>
+            <div class="col-sm-6 hidden-xs animation animated-item-4">
+              <div class="slider-img"> </div>
+            </div> 
+          
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </div>
+   
+    </div>
+   
+  </div>
+
+  
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!--/.carousel--> 
+</section>
+<!--/#main-slider--> 
+
+	<!--/#feature-->
+<section id="feature" >
+  <div class="container">
+    <div class="row pdtop">
+    <!--   <div class="features">
+        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="trainingInstitute.fssai">
+          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/training-partner-icon.png">
+            <h3 class="industry-heading">Training Partner</h3>
+          </div>
+          </a> </div>
+        /.col-md-4
+        
+        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="trainer.fssai">
+          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/trainer-icon.png">
+            <h3 class="industry-heading">Trainer</h3>
+          </div>
+          </a> </div>
+        /.col-md-4
+        
+        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="learningresource.fssai">
+          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/learning-resource-icon.png">
+            <h3 class="industry-heading">Learning resource</h3>
+          </div>
+          </a> </div>
+        /.col-md-4
+        
+       
+        /.col-md-4 
+        
+      </div> -->
       <!--/.services--> 
     </div>
     <!--/.row--> 
@@ -235,8 +340,7 @@
             </div>
           </div>
         </div> -->
-        <div class="col-sm-2"></div>
-         <div class="col-md-3 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" style="border:1px solid #000;">
+         <div class="col-md-3 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
           <div class="page">
             <div style="display:inline-block;">
               <div class="monthly" id="mycalendar"></div>
@@ -252,7 +356,7 @@
   </div>
   <!--/.container--> 
 </section>
-<!-- <section id="feature" style="margin:0px; padding:0px;" >
+<section id="feature" style="margin:0px; padding:0px;" >
   <div class="container">
     <div class="row">
       <div class="features">
@@ -261,22 +365,22 @@
             <div style="margin-top:10px; padding:0px;"><a href="#"><img src="website/images/share-intitiave.jpg"></a></div>
           </div>
         </div>
-        /.col-md-4
+        <!--/.col-md-4-->
         
         <div class="col-md-6 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
           <div class="feature-wrap training-box center-block">
             <div style="margin-top:10px; padding:0px;"><a href="#"><img src="website/images/fssai-blog.jpg"></a></div>
           </div>
         </div>
-        /.col-md-4 
+        <!--/.col-md-4--> 
         
       </div>
-      /.services 
+      <!--/.services--> 
     </div>
-    /.row 
+    <!--/.row--> 
   </div>
-  /.container 
-</section> -->
+  <!--/.container--> 
+</section>
 
 <section id="bottom">
   <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
@@ -326,7 +430,7 @@
                 </div>
               </form>
             </li>
-            <li class="pd-top"> <a href="https://www.facebook.com/" target="_blank"><img src="website/images/facebook.png" width="30" height="30"></a>&nbsp; <a href="https://twitter.com/" target="_blank"><img src="website/images/twitter.png" width="30" height="30"></a>&nbsp; <a href="https://in.linkedin.com/" target="_blank"><img src="website/images/linkedin.png" width="30" height="30"></a> &nbsp;<a href="https://goo.gl/QWk7zd" target="_blank"><img src="website/images/google-plus.png" width="32" height="32"></a></li>
+            <li class="pd-top"> <a href="#" target="_blank"><img src="website/images/facebook.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/twitter.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/linkedin.png" width="30" height="30"></a> &nbsp;<a href="#" target="_blank"><img src="website/images/google-plus.png" width="32" height="32"></a></li>
           </ul>
         </div>
       </div>

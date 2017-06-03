@@ -2959,6 +2959,26 @@ public class AdminController {
 		this.adminService.deleteAssessmentQuestion(id);
 		return "redirect:/manageAssessmentQuestions.fssai";
 	}
-
+	@RequestMapping(value = "/trainingschedule123", method = RequestMethod.GET)
 	
+		public String trainingschedule12(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule,
+				Model model, HttpSession session) {
+		System.out.println("trainingschedule123");
+	Map<String, String> trainingType = lst.trainingTypeMap;
+		Map<String, String> trainingPhase = lst.trainingPhaseMap;
+	Map<String, String> statusMap = lst.statusMap;
+		model.addAttribute("statusMap", statusMap);
+		model.addAttribute("trainingType", trainingType);
+		model.addAttribute("trainingPhase", trainingPhase);
+		return "trainingschedule123";
+	}
+	@RequestMapping(value = "/trainingScheduleMasterlist", method = RequestMethod.POST)
+	public String listtrainingScheduleMaster(
+			@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm p, Model model,
+			HttpSession session) {
+		
+			model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
+	
+		return "trainingschedule123";
+	}
 }

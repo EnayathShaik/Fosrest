@@ -47,6 +47,25 @@ public class TrainingSchedule {
 	private String trainer_status;
 	private String training_institude_status;
 	private String batchCode;
+	private String status;
+	private String designation;
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+
 	@Column(columnDefinition="int default 0")
 	private int seqNo;
 	

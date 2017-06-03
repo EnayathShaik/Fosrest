@@ -488,6 +488,8 @@ public interface AdminService {
 		
 
 public void deleteAssessmentQuestion(int id);
+public List<TrainingScheduleForm> listtrainingScheduleMaster( );
+
 }
 
 
