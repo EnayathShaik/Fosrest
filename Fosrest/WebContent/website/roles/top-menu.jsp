@@ -5,65 +5,6 @@
 <head>
 
 
- <style>/*  */
-	
-td{ 
-
-  text-align: right; 
-}
- 
-@media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
-	tr { border: 6px solid #ccc; }
-	
-	td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
-	
-	td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-	}
-/* 	
-		 td:nth-of-type(1):before { content: "aaa"; }
-	td:nth-of-type(2):before { content: "bbbb"; }
-	td:nth-of-type(3):before { content: "ccc"; }
-	td:nth-of-type(4):before { content: "TdddName"; }
-	td:nth-of-type(6):before { content: "eee"; }
-	td:nth-of-type(7):before { content: "fff"; }
-	td:nth-of-type(8):before { content: "gggg"; }
-	td:nth-of-type(9):before { content: "hhhh"; }
-	 */
-	/*
-	Label the data
-	*/
-
-}
-</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
@@ -350,14 +291,14 @@ thead tr {
                                     <li></li>
                                       
                                     <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-                                    <!-- <li ><a href="TrainingPartner.fssai">Training Partner List</a></li>
-                                     --> 
+                                    <li ><a href="TrainingPartner.fssai">Training Partner List</a></li>
+                                     
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
                                             <li><a href="trainerUserManagementForm.fssai" class="clr">Trainer</a></li>
                                             <li><a href="trainingCenterUserManagementForm.fssai" class="clr">Training Institude</a></li>
-                                             <li><a href="assessorUserManagementForm.fssai" class="clr">Assessor</a></li>
+                                             <!-- <li><a href="assessorUserManagementForm.fssai" class="clr">Assessor</a></li> -->
                                              <li><a href="adminUserManagementForm.fssai" class="clr">Admin</a></li>
                                              <!-- <li><a href="stateadmin.fssai" class="clr">StateAdmin</a></li> -->
                                         </ul>
