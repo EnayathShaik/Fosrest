@@ -1372,7 +1372,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		int id =  p.getId();
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainingInstitute personalInformationTrainingInstitute = (PersonalInformationTrainingInstitute) session.load(PersonalInformationTrainingInstitute.class, id);
-		personalInformationTrainingInstitute.setUserType(p.getUserType());
+		//personalInformationTrainingInstitute.setUserType(p.getUserType());
 		personalInformationTrainingInstitute.setTitle(p.getTitle());
 		personalInformationTrainingInstitute.setFirstName(p.getFirstName());
 		personalInformationTrainingInstitute.setLastName(p.getLastName());
@@ -1385,12 +1385,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainingInstitute.setCorrespondenceDistrict(p.getCorrespondenceDistrict());
 		personalInformationTrainingInstitute.setCorrespondenceCity(p.getCorrespondenceCity());
 		personalInformationTrainingInstitute.setCorrespondencePincode(p.getCorrespondencePincode());
-		personalInformationTrainingInstitute.setTrainingType(p.getTrainingType());
-		personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
+		//personalInformationTrainingInstitute.setTrainingType(p.getTrainingType());
+		//personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
 		personalInformationTrainingInstitute.setSeatingCapacity(p.getSeatingCapacity());
 		personalInformationTrainingInstitute.setNoOfInHouseTrainer(p.getNoOfInHouseTrainer());
-		personalInformationTrainingInstitute.setNoOfYearExp(p.getNoOfYearExp());
-		personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
+		//personalInformationTrainingInstitute.setNoOfYearExp(p.getNoOfYearExp());
+		//personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
 		session.update(personalInformationTrainingInstitute);
 		return "updated";
 	}	
@@ -1414,8 +1414,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 			System.out.println( " no such algo exception error catch ");
 		}
 		
-	System.out.println(	p.getTpName() + " ");
-		String nextSequenceUserID = pageLoadService.getNextCombinationId("TCTP"+p.getTpName(), "personalinformationtrainingInstitute" , "000000");
+	//System.out.println(	p.getTpName() + " ");
+		//String nextSequenceUserID = pageLoadService.getNextCombinationId("TCTP"+p.getTpName(), "personalinformationtrainingInstitute" , "000000");
+		String nextSequenceUserID = pageLoadService.getNextCombinationId("TC", "personalinformationtrainingInstitute" , "000000");
+		
 		LoginDetails loginDetails = new LoginDetails();
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);

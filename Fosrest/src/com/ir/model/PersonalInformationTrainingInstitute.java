@@ -29,7 +29,7 @@ public class PersonalInformationTrainingInstitute {
 	private int id;
 	
 
-	private String userType;
+//	private String userType;
 	
 
 	
@@ -45,27 +45,9 @@ public class PersonalInformationTrainingInstitute {
 		this.loginDetails = loginDetails;
 	}
 
-	/*private String empID;
+	//private String empID;
 	
 	
-	
-	 public String getEmpID() {
-		return empID;
-	}
-
-	public void setEmpID(String empID) {
-		this.empID = empID;
-	}*/
-
-
-
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
 
 
 
@@ -91,7 +73,7 @@ public class PersonalInformationTrainingInstitute {
 
 
 
-	private String pan;
+	//private String pan;
 	
 	private String firstName;
 	private String middleName;
@@ -122,15 +104,6 @@ public class PersonalInformationTrainingInstitute {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-	public String getPan() {
-		return pan;
-	}
-
-	public void setPan(String pan) {
-		this.pan = pan;
-	}
-
 
 
 	@NotNull
@@ -263,19 +236,11 @@ public class PersonalInformationTrainingInstitute {
 		this.steps = steps;
 	}
 		
-	private int sessWishToConduct;
+	//private int sessWishToConduct;
 	
 	
-	public int getSessWishToConduct() {
-		return sessWishToConduct;
-	}
-
-	public void setSessWishToConduct(int sessWishToConduct) {
-		this.sessWishToConduct = sessWishToConduct;
-	}
-
 	
-	private String trainingType;
+	//private String trainingType;
 	
 	private int seatingCapacity;
 	
@@ -297,26 +262,11 @@ public class PersonalInformationTrainingInstitute {
 		this.trainingCenterName = trainingCenterName;
 	}
 
-	/*public int getTrainingPartnerName() {
-		return trainingPartnerName;
-	}
-
-	public void setTrainingPartnerName(int trainingPartnerName) {
-		this.trainingPartnerName = trainingPartnerName;
-	}*/
-
-	public String getTrainingType() {
-		return trainingType;
-	}
-
-	public void setTrainingType(String trainingType) {
-		this.trainingType = trainingType;
-	}
 
 	
 	private int noOfInHouseTrainer;
 	
-	private int noOfYearExp;
+	//private int noOfYearExp;
 	
 	private boolean availableTVProjector;
 	
@@ -332,14 +282,6 @@ public class PersonalInformationTrainingInstitute {
 
 	public void setNoOfInHouseTrainer(int noOfInHouseTrainer) {
 		this.noOfInHouseTrainer = noOfInHouseTrainer;
-	}
-
-	public int getNoOfYearExp() {
-		return noOfYearExp;
-	}
-
-	public void setNoOfYearExp(int noOfYearExp) {
-		this.noOfYearExp = noOfYearExp;
 	}
 
 	public boolean isAvailableTVProjector() {
@@ -358,16 +300,9 @@ public class PersonalInformationTrainingInstitute {
 		this.availableInHouseTrainer = availableInHouseTrainer;
 	}
 
-	private String tpName;
+	//private String tpName;
 	
-	public String getTpName() {
-		return tpName;
-	}
-
-	public void setTpName(String tpName) {
-		this.tpName = tpName;
-	}
-
+	
 	@Override
 	public String toString() {
 		return trainingCenterName;

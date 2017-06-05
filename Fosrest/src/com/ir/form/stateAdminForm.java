@@ -16,11 +16,31 @@ public class stateAdminForm {
 	private String address2;
 	private String state;
 	private String pincode;
+	private String stateName;
+	
+	public String getStateName() {
+		return stateName;
+	}
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
+	private String mobileNo,landLine;
 	
 	
 	
+	public String getMobileNo() {
+		return mobileNo;
+	}
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
 	
-	
+	public String getLandLine() {
+		return landLine;
+	}
+	public void setLandLine(String landLine) {
+		this.landLine = landLine;
+	}
 	public String getPincode() {
 		return pincode;
 	}

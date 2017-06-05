@@ -88,6 +88,20 @@
 															placeholder="Email" onblur="emailVal(this.id,this.value)"
 															required="" />
 													</div>
+														<div class="form-group">
+				                                    <div>
+				                                        <ul class="lab-no">
+				                                            <li class="style-li"><strong>State:</strong></li><li class="style-li error-red"> * </li>
+				                                            <!--  valid -->
+				                                             <li id="stateErr" style="display:none;" class="style-li error-red" >correspondence State can not be blank.</li>
+				                                            
+				                                        </ul>
+				                                    </div>
+				                                    <cf:select path="state" class="form-control" >
+				                                	<cf:option value="0" label="Select state Name" />
+													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
+				                                    </cf:select>
+                                               </div>
 												 <div class="form-group">
 					                                    <div>
 					                                        <ul class="lab-no">
@@ -184,20 +198,7 @@
 														class="form-control" />
 
 												</div>
-												<div class="form-group">
-				                                    <div>
-				                                        <ul class="lab-no">
-				                                            <li class="style-li"><strong>State:</strong></li><li class="style-li error-red"> * </li>
-				                                            <!--  valid -->
-				                                             <li id="stateErr" style="display:none;" class="style-li error-red" >correspondence State can not be blank.</li>
-				                                            
-				                                        </ul>
-				                                    </div>
-				                                    <cf:select path="state" class="form-control" >
-				                                	<cf:option value="0" label="Select state Name" />
-													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
-				                                    </cf:select>
-                                               </div>
+											
                                                <div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -216,6 +217,31 @@
 
 												</div>
 												
+															  <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Landline:</strong></li>
+                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Landline cannot be blank</li>
+                                          
+                                            <li class="style-li error-red"> </li>
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="landLine" class="form-control"  placeholder="landLine" required=""
+                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>
+
+								  <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Mobile Number:</strong></li>
+                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile Number cannot be blank</li>
+                                          
+                                            <li class="style-li error-red"> </li>
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="mobileNo" class="form-control" minlength="10" maxlength="10" placeholder="Mobile" required=""
+                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>
 
 													<input type="submit" id="updatebtn"
 														style="display: none; float: right; margin-right: 122px;"
@@ -242,12 +268,16 @@
 					
 	</section>
 	<input type="hidden" id="idH" value="" />
+	<cf:input type="hidden" id="stateName" path="stateName"  />
 </cf:form>
 <script>
              
                  
                  
                  function validateFields(){
+                
+               	
+            
                 	$("#firstNameErr").css("display" , "none");
                 	$("#MiddleNameErr").css("display" , "none");
                 	$("#LastNameErr").css("display" , "none");
@@ -307,6 +337,12 @@
 						$("#pincodeErr").css("display" , "block");
 						return false;
 						}
+
+					 var el = document.getElementById('state');
+	               	 var text = el.options[el.selectedIndex].innerHTML;
+	               
+	            	 document.getElementById("stateName").value=text;
+					
               }  
                 </script>
               

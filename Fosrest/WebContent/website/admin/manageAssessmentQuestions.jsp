@@ -107,6 +107,8 @@ function editAssessmentQuestion(id){
 			document.getElementById('moduleCode2').value = obj[2];
 	    }, 3000);
 		document.getElementById('questionNumber').value = obj[3];
+		document.getElementById('dispQuestionNumber').value = obj[3];
+		document.getElementById("dispQuestionNumber").disabled = true;
 		//document.getElementById('questionHint').value = obj[3];
 		document.getElementById('questionTitle').value = obj[4];
 		document.getElementById('noOfAssesmentQues').value = obj[5];

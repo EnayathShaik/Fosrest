@@ -600,7 +600,7 @@ public class AdminController {
 
 	
 	@RequestMapping(value = "/stateadmin", method = RequestMethod.GET)
-	public String stateadmin(@ModelAttribute("stateAdminForm") StateAdmin StateAdmin ,Model model,HttpServletRequest request, HttpSession session) {
+	public String stateadmin(@ModelAttribute("stateAdminForm") stateAdminForm StateAdminForm ,Model model,HttpServletRequest request, HttpSession session) {
 		System.out.println("stateadmin");
 		if(checkAccess(session))
 			return "redirect:login.fssai";
@@ -614,7 +614,7 @@ public class AdminController {
 	}
 	// For add and update state both
 	@RequestMapping(value = "/stateadminadd", method = RequestMethod.POST)
-	public String addstateadmin(@ModelAttribute("stateAdminForm") StateAdmin p,Model model) {
+	public String addstateadmin(@ModelAttribute("stateAdminForm") stateAdminForm p,Model model) {
 		System.out.println("id1" + p.getId());
 		String stateadmin=null;
 		if (p.getId() == 0) {

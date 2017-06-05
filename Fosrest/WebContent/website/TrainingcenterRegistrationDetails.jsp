@@ -16,7 +16,7 @@
 
 	
 	 $("#trainingCenterNameErr").css("display" , "none");
-	 $("#trainingPartnerNameErr").css("display" , "none");
+	 //$("#trainingPartnerNameErr").css("display" , "none");
 	 $("#titleErr").css("display" , "none");
 	 $("#firstNameErr").css("display" , "none");
 	 $("#middleNameErr").css("display" , "none");
@@ -30,9 +30,9 @@
 	 $("#correspondencePincodeErr2").css("display" , "none");
 	 $("#EmailErr").css("display" , "none");
 	 $("#mobileErr").css("display" , "none");
-	 $("#panErr").css("display" , "none");
-	 $("#trainingTypeErr").css("display" , "none");
-	 $("#userTypeErr").css("display" , "none");
+	// $("#panErr").css("display" , "none");
+	// $("#trainingTypeErr").css("display" , "none");
+	// $("#userTypeErr").css("display" , "none");
 	 
 	 $("#txtInputErr").css("display" , "none"); 
 	 
@@ -41,17 +41,17 @@
 		$("#trainingCenterNameErr").css("display" , "block");
 		return false;
 	 } 
-	  if($("#trainingPartnerName").val() == '0'){
+	/*   if($("#trainingPartnerName").val() == '0'){
 		 
 			$("#trainingPartnerNameErr").css("display" , "block");
 		return false;
-		 }
+		 } */
 	
-	   if($("#pan").val() == '')
+	 /*   if($("#pan").val() == '')
 	 {
 		 $("#panErr").css("display" , "block");
 		 return false; 
-	 }
+	 } */
 	 
 	   if($("#title").val() == ''){
 		 
@@ -122,7 +122,7 @@
 		 return false;
 	 }
 	 
-	  if($("#trainingType").val() == ''){
+	/*   if($("#trainingType").val() == ''){
 		 
 			$("#trainingTypeErr").css("display" , "block");
 			return false;
@@ -131,7 +131,7 @@
 		 
 			$("#userTypeErr").css("display" , "block");
 			return false;
-		 }
+		 } */
 	  if($("#seatingCapacity").val() == ''){
 		 
 			$("#seatingCapacityErr").css("display" , "block");
@@ -142,7 +142,7 @@
 			$("#noOfInHouseTrainerErr").css("display" , "block");
 			return false;
 		 }
-	  if($("#noOfYearExp").val() == ''){
+	/*   if($("#noOfYearExp").val() == ''){
 		 
 			$("#noOfYearExpErr").css("display" , "block");
 			return false;
@@ -151,7 +151,7 @@
 		 
 			$("#sessWishToConductErr").css("display" , "block");
 			return false;
-		 }
+		 } */
 	
 	 if(!(isUpdate !=null && isUpdate== "Y")){
 	  if($("#txtInput").val() == '' ){
@@ -190,14 +190,14 @@
 	}
  
  
- function getTPName(){
+/*  function getTPName(){
 		
 		var TPName = $("#trainingPartnerName option:selected").text();
 		TPName = TPName.substring(0,3).toUpperCase();
 		console.log(" TPName  "+TPName);
 		$("#tpName").val(TPName);
 		
-	}
+	} */
 
  function DrawCaptcha()
  {
@@ -266,7 +266,19 @@
                             <!-- left side -->
                             <div class="col-md-6 col-xs-12">
                      		<cf:input type="hidden" path="id"/>
-                     		  <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                    <cf:input path="id" type="hidden" /> 
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Training Center Name:</strong></li>
+                                              <li id="trainingCenterNameErr" style="display:none;" class="style-li error-red" > Training name can not be blank.</li>
+                                                  
+                                            <li class="style-li error-red"> </li>
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="trainingCenterName" class="form-control" placeholder="Training Center Name" required=""/>
+                                </div>
+   <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Title:(Training Center Head)</strong></li>
@@ -280,21 +292,20 @@
 													<cf:options items="${titleMap}" />
 												</cf:select>
                                 </div>
-                     		
-                                <div class="form-group">
+                                
+                                 <div class="form-group">
                                     <div>
-                                    <cf:input path="id" type="hidden" /> 
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Training Center Name:</strong></li>
-                                              <li id="trainingCenterNameErr" style="display:none;" class="style-li error-red" > Training name can not be blank.</li>
-                                                  
+                                            <li class="style-li"><strong>First Name:(Training Center Head) </strong></li>
+                                             <li id="firstNameErr" style="display:none;" class="style-li error-red" > first Name can not be blank.</li>
+                                           
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="trainingCenterName" class="form-control" placeholder="Training Center Name" required=""/>
+                                    <cf:input type="text" class="form-control" path="firstName" placeholder="First Name" required=""
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
                                 </div>
-
-                               <%--  <div class="form-group">
+                              <%--   <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Partner Name:</strong></li>
@@ -308,7 +319,7 @@
 													<cf:options items="${listTrainingPartner}" itemValue="trainingPartnerId" itemLabel="trainingPartnerName" />
 												</cf:select>
                                 </div> --%>
-                                <div class="form-group">
+                           <%--      <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>PAN:</strong></li>
@@ -320,23 +331,13 @@
                                     <cf:input type="text" path="pan" class="form-control" placeholder="PAN" onkeypress="return AvoidSpace(event)"  
                                     onKeyUP="this.value = this.value.toUpperCase();" 
 														onblur="pan_validate(this.id,this.value);"/>
-                                </div>
+                                </div> --%>
                             </div>
                             <!-- right side -->
                             <div class="col-md-6 col-xs-12">
-                              
-                                <div class="form-group">
-                                    <div>
-                                        <ul class="lab-no">
-                                            <li class="style-li"><strong>First Name:(Training Center Head) </strong></li>
-                                             <li id="firstNameErr" style="display:none;" class="style-li error-red" > first Name can not be blank.</li>
-                                           
-                                            <li class="style-li error-red"> </li>
-                                        </ul>
-                                    </div>
-                                    <cf:input type="text" class="form-control" path="firstName" placeholder="First Name" required=""
-                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
-                                </div>
+                             
+
+                               
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
@@ -499,7 +500,7 @@
 
                                 <div class="col-xs-12 remove-padding">
 
-                                    <div class="col-md-7 col-xs-12 remove-padding">
+                                  <%--   <div class="col-md-7 col-xs-12 remove-padding">
                                         <div class="form-group">
                                             <div>
                                                 <ul class="lab-no">
@@ -513,9 +514,9 @@
 													<cf:options items="${trainingTypeMap}" />
 												</cf:select>
                                         </div>
-                                    </div>
+                                    </div> --%>
 
-                                    <div class="col-md-4 col-md-offset-1 col-xs-12 remove-padding">
+                                  <%--   <div class="col-md-4 col-md-offset-1 col-xs-12 remove-padding">
                                         <div class="form-group">
                                             <div>
                                                 <ul class="lab-no">
@@ -530,7 +531,7 @@
 													<cf:options items="${userType}" />
 												</cf:select>
                                         </div>
-                                    </div>
+                                    </div> --%>
                                 </div>
 
                                 <div class="form-group">
@@ -552,14 +553,7 @@
                                     <label class="radio-inline">
                                         <cf:radiobutton  path="availableTVProjector"  checked="checked" name="optradio"/> No </label>
                                 </div>
-                                <div class="form-group">
-                                    <label>Availability of in-house trainers in food safety ?</label>
-                                    <br>
-                                    <label class="radio-inline">
-                                        <cf:radiobutton  path="availableInHouseTrainer" name="optradio"/> Yes </label>
-                                    <label class="radio-inline">
-                                        <cf:radiobutton  path="availableInHouseTrainer"   checked="checked" name="optradio"/> No </label>
-                                </div>
+                              
                             </div>
                             <!-- left side ends -->
                             <!-- right side -->
@@ -576,7 +570,16 @@
                                     </div>
                                     <cf:input type="text" path="noOfInHouseTrainer" placeholder="Number of trainers" class="form-control"/>
                                 </div>
-                                <div class="form-group">
+                                
+                                  <div class="form-group">
+                                    <label>Availability of in-house trainers in food safety ?</label>
+                                    <br>
+                                    <label class="radio-inline">
+                                        <cf:radiobutton  path="availableInHouseTrainer" name="optradio"/> Yes </label>
+                                    <label class="radio-inline">
+                                        <cf:radiobutton  path="availableInHouseTrainer"   checked="checked" name="optradio"/> No </label>
+                                </div>
+                               <%--  <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Number of years in Business of training ?</strong></li>
@@ -599,7 +602,7 @@
                                     <cf:input type="text" path="sessWishToConduct" placeholder="Number of trainers" class="form-control"/>
                                     <cf:input type="hidden" path="tpName" />
                                     
-                                </div>
+                                </div> --%>
                             </div>
                             <!-- right side ends -->
                         </fieldset>

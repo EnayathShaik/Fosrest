@@ -745,14 +745,14 @@ public class AdminDAOImpl implements AdminDAO {
 	//state Admin
 	
 		@Override
-		public String addstateadmin(StateAdmin p) {
+		public String addstateadmin(stateAdminForm p) {
 			// TODO Auto-generated method stub
 			//System.out.println("getTrainingName " + p.getTrainingName());
 			PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 			char[] pass = passwordGenerator.get();
 			String passwordString = String.valueOf(pass);
-			
 			Session session = this.sessionFactory.getCurrentSession();
+		
 			String encryprPassword = null;
 			try{
 				EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
@@ -761,22 +761,53 @@ public class AdminDAOImpl implements AdminDAO {
 			}catch(NoSuchAlgorithmException e){
 				System.out.println( " no such algo exception error catch ");
 			}
+			String sun;
+			sun=p.getStateName();
+			/*Query query = session.createQuery("from StateMaster where stateid=" + p.getState());
+			List list= query.list();
+			StateMaster statemaster = (StateMaster)list.get(0);
+			sun=statemaster.getStateName();*/
 			
-			String nextSequenceUserID = pageLoadService.getNextCombinationId("ST", "StateAdmin" , "000000");
+			try{
+				sun=sun.substring(0,4).toUpperCase();
+			}
+			catch(StringIndexOutOfBoundsException e){
+				sun=p.getStateName()+"zzz"; //for states like Goa
+				sun=sun.substring(0,4).toUpperCase();
+			}
+			sun=sun+"_ST";
+			//String nextSequenceUserID = pageLoadService.getNextCombinationId(sun+"_ST", "StateAdmin" , "");
+			
 			LoginDetails loginDetails = new LoginDetails();
 			//StateAdmin s=new StateAdmin();
-			loginDetails.setLoginId(nextSequenceUserID);
+			loginDetails.setLoginId(sun);
 			loginDetails.setPassword(passwordString);
 			loginDetails.setEncrypted_Password(encryprPassword);
 			loginDetails.setStatus("A");
 			loginDetails.setProfileId(2);
 			//s.setUserId(nextSequenceUserID);
-			p.setLoginDetails(loginDetails);
-			p.setUserId(nextSequenceUserID);
-			session.save(p);
+			
+			StateAdmin s=new StateAdmin();
+			s.setAadharNumber(p.getAadharNumber());
+			s.setAddress1(p.getAddress1());
+			s.setAddress2(p.getAddress2());
+			s.setDesignation(p.getDesignation());
+			s.setEmail(p.getEmail());
+			s.setEmpID(p.getEmpID());
+			s.setFirstName(p.getFirstName());
+			s.setLandLine(p.getLandLine());
+			s.setLastName(p.getLastName());
+			s.setMiddleName(p.getMiddleName());
+			s.setMobileNo(p.getMobileNo());
+			s.setPincode(p.getPincode());
+			s.setState(p.getState());
+			
+			s.setLoginDetails(loginDetails);
+			s.setUserId(sun);
+			session.save(s);
 			//session.persist(s);
 			//return passwordString+"&"+nextSequenceUserID;
-			return passwordString+"&"+nextSequenceUserID;
+			return passwordString+"&"+sun;
 		}	
 			
 
@@ -786,7 +817,7 @@ public class AdminDAOImpl implements AdminDAO {
 		
 
 		@Override
-		public void updatestateadmin(StateAdmin p) {
+		public void updatestateadmin(stateAdminForm p) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
 			String u=p.getUserId();

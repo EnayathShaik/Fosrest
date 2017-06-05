@@ -215,14 +215,14 @@ public class AdminServiceImpl implements AdminService {
 	//stateAdmin
 	@Override
 	@Transactional
-	public String addstateadmin(StateAdmin p) {
+	public String addstateadmin(stateAdminForm p) {
 		// TODO Auto-generated method stub
 		return this.adminDAO.addstateadmin(p);
 	}
 
 	@Override
 	@Transactional
-	public void updatestateadmin(StateAdmin p) {
+	public void updatestateadmin(stateAdminForm p) {
 		 this.adminDAO.updatestateadmin(p);
 	}
 

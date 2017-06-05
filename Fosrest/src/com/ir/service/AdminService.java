@@ -114,9 +114,9 @@ public interface AdminService {
 
 	String adminUserManagementSave(AdminUserManagementForm adminUserManagementForm);
 	//stateadmin
-	public String addstateadmin(StateAdmin p);
+	public String addstateadmin(stateAdminForm p);
 
-	public void updatestateadmin(StateAdmin p);
+	public void updatestateadmin(stateAdminForm p);
 
 	public List<StateAdmin> liststateadmin();
 

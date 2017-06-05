@@ -311,7 +311,7 @@
                                             <li><a href="RegionMaster.fssai" class="clr">Region Mapping</a></li>
                                         </ul>
                                     </li>
-                                    <li ><a href="stateAdminPersonalInformation.fssai">Registor State Admin</a></li>
+                                    <li ><a href="stateAdminPersonalInformation.fssai">Register State Admin</a></li>
                                     <!-- 
                                     <li><a href="">Training Partner List</a></li>
                                     <li><a href="">Activate Trainee ID</a></li> -->
