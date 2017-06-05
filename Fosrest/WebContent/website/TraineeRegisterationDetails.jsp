@@ -64,8 +64,13 @@
 	
 		DrawCaptcha(); 
 		
-		 flatpickr("#dob" ,{});	
-		
+		flatpickr("#dob", {});
+		flatpickr("#dojService", {});
+		flatpickr("#dojPost", {});
+		flatpickr("#empDate", {});
+      	
+      
+      	flatpickr("#dateRetirement", {});
 	 		 
 		 		$('#sameAddr').change(function(){
 		 			
@@ -135,9 +140,9 @@
                                         <div class="form-group">
                                             <div>
                                                 <ul class="lab-no">
-                                                    <li class="style-li"><strong>User Type:</strong></li> <li class="style-li error-red"> * </li>
+                                                    <li class="style-li"><strong>Trainee Type:</strong></li> <li class="style-li error-red"> * </li>
                                                      <!--  valid -->
-                                                            <li id="userTypeErr" style="display:none;" class="style-li error-red" >User Type can not be blank.</li>
+                                                            <li id="userTypeErr" style="display:none;" class="style-li error-red" >Trainee Type can not be blank.</li>
                                                    
                                                 </ul>
                                             </div>
@@ -184,11 +189,48 @@
                                            
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="dob" id="dob" name="dob" class="form-control"/>
+                                    <cf:input type="text" path="dob" class="form-control"/>
                                 </div>
 
 
 
+                                
+                                
+                                <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>DOJ of Service:</strong></li> <li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                            <li id="dojServiceErr" style="display:none;" class="style-li error-red" >DOJ of Service can not be blank.</li>
+                                           
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="dojService"  class="form-control"/>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>DOJ This Post:</strong></li> <li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                            <li id="dojPostErr" style="display:none;" class="style-li error-red" >DOJ This Post can not be blank.</li>
+                                           
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="dojPost" class="form-control"/>
+                                </div>
+                                
+                                 <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Employement Date:</strong></li> <li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                            <li id="empDateErr" style="display:none;" class="style-li error-red" >Employement Datecan not be blank.</li>
+                                           
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="empDate" class="form-control"/>
+                                </div>
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
@@ -202,7 +244,7 @@
 									<cf:radiobutton path="gender" value="F" />Female
                                 </div>
 
-                                <div class="form-group">
+                               <%--  <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Induction Training Completed:</strong></li>
@@ -213,7 +255,7 @@
                                           <cf:radiobutton
 										path="inductionTrainee" value="Y" checked="true" />Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<cf:radiobutton path="inductionTrainee" value="N" />No
-                                </div>
+                                </div> --%>
 
                             </div>
                             <!-- left side ends -->
@@ -287,8 +329,33 @@
                                     onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')" />
                                 </div>
                                 
+                                  <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Date of Retirement:</strong></li> <li class="style-li error-red"> * </li>
+                                             <!--  valid -->
+                                            <li id="dateRetirementErr" style="display:none;" class="style-li error-red" >Date of Retirement can not be blank.</li>
+                                           
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="dateRetirement" class="form-control"/>
+                                </div>
                                 
-                                      <div class="form-group" style="display:none;" id="statusDIV" >
+                                <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Posting District:</strong></li><li class="style-li error-red"> * </li>
+                                              <!--  valid -->
+                                            <li id="postDistrictErr" style="display:none;" class="style-li error-red" >Posting District can not be blank.</li>
+                                            
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="postDistrict" class="form-control" placeholder="Posting District"/>
+                                </div>
+                                
+                                
+                                
+                                     <%--  <div class="form-group" style="display:none;" id="statusDIV" >
                                                                 <div>
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>Approved Trainee As:</strong></li>
@@ -302,7 +369,7 @@
                                                                     <cf:option value="I" label="In-Active" />
                                                                 </cf:select>
 
-                                                            </div>
+                                                            </div> --%>
 
 
 
@@ -575,7 +642,7 @@
 					</div>
 					<div id="chkunit" style="float: left; width: 99%;">
 						<input type="checkbox" id="check"   style="margin-left: 1%;">
-						<a href="#" target="_blank" class="terms-font-size"> 
+						<!-- <a href="#" target="_blank" class="terms-font-size">  -->
 						I have read and understood the Terms & Conditions and the Privacy
 						Policy of FSSAI.
 						</a>
@@ -641,7 +708,11 @@
 		 $("#resStateErr").css("display" , "none");
 		 $("#residentialDistrictErr").css("display" , "none");
 		 $("#resCityErr").css("display" , "none");
-		 
+		 $("#dojServiceErr").css("display" , "none");
+		 $("#dojPostErr").css("display" , "none");
+		 $("#empDateErr").css("display" , "none");
+		 $("#dateRetirementErr").css("display" , "none");
+		 $("#postDistrictErr").css("display" , "none");
 		 
    	    if($("#userType").val() == ''){
    		 
@@ -657,7 +728,18 @@
    	 }else if($("#dob").val() == ''){
    		 $("#dobErr").css("display" , "block");
   		return false;
-   	 }else if($("#title").val() == ''){
+   	 } 
+   	 else if($("#dojService").val() == ''){
+   		 $("#dojServiceErr").css("display" , "block");
+   		return false;
+   	}else if($("#dojPost").val() == ''){
+      		 $("#dojPostErr").css("display" , "block");
+        		return false;
+        }else if($("#empDate").val() == ''){
+             $("#empDateErr").css("display" , "block");
+             return false;
+        }
+   	 else if($("#title").val() == ''){
    		 $("#titleErr").css("display" , "block");
     		return false; 
    	 }else if($("#firstName").val() == ''){
@@ -672,7 +754,14 @@
  	 }else if($("#FatherName").val() == ''){
    		 $("#FatherNameErr").css("display" , "block");
    		return false; 
-  	 }else if($("#correspondenceAddress1").val() == ''){
+  	 }else if($("#dateRetirement").val() == ''){
+         $("#dateRetirementErr").css("display" , "block");
+         return false;
+    }else if($("#postDistrict").val() == ''){
+        $("#postDistrictErr").css("display" , "block");
+        return false;
+   }
+ 	 else if($("#correspondenceAddress1").val() == ''){
    		 $("#correspondenceAddress1Err").css("display" , "block");
     		return false; 
   	 }

@@ -31,9 +31,9 @@ public class PersonalInformationTrainee {
 
 	private String userType;
 	
-	@NotNull
+	/*@NotNull
 	@Size(min=1, max=50 , message="Select Induction Trainee")
-	private String inductionTrainee;
+	private String inductionTrainee;*/
 	
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
@@ -82,14 +82,14 @@ public class PersonalInformationTrainee {
 		this.userType = userType;
 	}
 
-	public String getInductionTrainee() {
+	/*public String getInductionTrainee() {
 		return inductionTrainee;
 	}
 
 	public void setInductionTrainee(String inductionTrainee) {
 		this.inductionTrainee = inductionTrainee;
 	}
-
+*/
 
 	private String title;
 	
@@ -399,5 +399,58 @@ public class PersonalInformationTrainee {
 	public String toString() {
 		return "PersonalInformationTrainee [id=" + id + ", FirstName=" + firstName + ", mobile=" + mobile +  ", Email="+Email +" , AadharNumber="+AadharNumber+   "]";
 	}
+	
+	private String dojService;
+	private String dojPost;
+	private String empDate;
+	private String dateRetirement;
+	private String postDistrict;
+
+
+
+
+	public String getDojService() {
+		return dojService;
+	}
+
+	public void setDojService(String dojService) {
+		this.dojService = dojService;
+	}
+
+	public String getDojPost() {
+		return dojPost;
+	}
+
+	public void setDojPost(String dojPost) {
+		this.dojPost = dojPost;
+	}
+
+	public String getEmpDate() {
+		return empDate;
+	}
+
+	public void setEmpDate(String empDate) {
+		this.empDate = empDate;
+	}
+
+	public String getDateRetirement() {
+		return dateRetirement;
+	}
+
+	public void setDateRetirement(String dateRetirement) {
+		this.dateRetirement = dateRetirement;
+	}
+
+	public String getPostDistrict() {
+		return postDistrict;
+	}
+
+	public void setPostDistrict(String postDistrict) {
+		this.postDistrict = postDistrict;
+	}
+	
+	
+	
+	
 	
 }

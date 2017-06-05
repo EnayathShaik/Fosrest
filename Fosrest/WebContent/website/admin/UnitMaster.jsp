@@ -55,7 +55,7 @@
                                                     </ul>
                                                 </div>
                                                	<cf:select path="userType" class="form-control">
-												<cf:option value="" label="Select User Type" />
+												<cf:option value="" label="Select Designation" />
 												<cf:options items="${userType}"/>	
 												</cf:select>
                                             </div>
@@ -68,7 +68,7 @@
                                                     </ul>
                                                 </div>
                                            			<cf:select path="trainingType" class="form-control">
-													<cf:option value="0" label="Select training" />
+													<cf:option value="0" label="Select training type" />
 													<cf:options items="${trainingType}"/>	
 													
 													</cf:select>
@@ -100,7 +100,7 @@
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                                <cf:input type="text" path="unitName"  placeholder="Unit Name" class="form-control"/> 
+                                                <cf:input type="text" path="unitName"  placeholder="Chapter Name" class="form-control"/> 
                                             </div>
                                             
                                             <div class="form-group">
@@ -145,7 +145,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                             <fieldset>
-                                           <legend>Unit Master</legend>
+                                           <legend>Chapter Master</legend>
                                             <ct:if test="${!empty listUnitMaster}">
                                             <table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>

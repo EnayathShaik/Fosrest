@@ -38,6 +38,8 @@ public class ListConstant {
         Map<String, String> auserTypeMap = new HashMap<String, String>();
         auserTypeMap.put("FSO", "FSO");
         auserTypeMap.put("AO", "AO");
+        auserTypeMap.put("DO", "DO");
+        auserTypeMap.put("RA", "RA");
         userTypeMap = Collections.unmodifiableMap(auserTypeMap);
     }
     
