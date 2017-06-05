@@ -38,7 +38,7 @@
 	 
 	 }
 	 if(isUpdate !=null && isUpdate== "Y"){
-		 alert("Update Your Details");
+
 		 var name = '${PersonalInformationTrainee.firstName}';
 		$("#logId").val('${PersonalInformationTrainee.loginDetails.id}');
 		$("#correspondenceState").val('${PersonalInformationTrainee.correspondenceState}');

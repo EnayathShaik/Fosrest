@@ -353,7 +353,7 @@ public class PersonalInformationTrainer {
 	}
 	
 	
-	private String ExpBackground;
+	/*private String ExpBackground;
 	
 	
 
@@ -363,7 +363,7 @@ public class PersonalInformationTrainer {
 
 	public void setExpBackground(String expBackground) {
 		ExpBackground = expBackground;
-	}
+	}*/
 
 	
 	private int sessWishToConduct;
@@ -412,7 +412,7 @@ public class PersonalInformationTrainer {
 		AssociatedWithAnyTrainingInstitute = associatedWithAnyTrainingInstitute;
 	}
 
-	private int noOfSessionConducted;
+	/*private int noOfSessionConducted;
 	
 	
 	
@@ -423,7 +423,7 @@ public class PersonalInformationTrainer {
 
 	public void setNoOfSessionConducted(int noOfSessionConducted) {
 		this.noOfSessionConducted = noOfSessionConducted;
-	}
+	}*/
 	private int createdBy;
 	public int getCreatedBy() {
 	return createdBy;
@@ -479,6 +479,15 @@ private String logId;
 	public void setLogId(String logId) {
 		this.logId = logId;
 	}
+private String otherTrainingInstitute;
+
+	public String getOtherTrainingInstitute() {
+	return otherTrainingInstitute;
+}
+
+public void setOtherTrainingInstitute(String otherTrainingInstitute) {
+	this.otherTrainingInstitute = otherTrainingInstitute;
+}
 
 	@Override
 	public String toString() {

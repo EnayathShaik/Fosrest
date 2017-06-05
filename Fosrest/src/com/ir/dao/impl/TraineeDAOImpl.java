@@ -1347,7 +1347,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainer.setResidentialDistrict(p.getResidentialDistrict());
 		personalInformationTrainer.setResCity(p.getResCity());
 		personalInformationTrainer.setResPincode(p.getResPincode());
-		personalInformationTrainer.setExpBackground(p.getExpBackground());
+	//	personalInformationTrainer.setExpBackground(p.getExpBackground());
 		personalInformationTrainer.setExpInMonth(p.getExpInMonth());
 		personalInformationTrainer.setExpInYear(p.getExpInYear());
 	//	personalInformationTrainer.setSessWishToConduct(p.getSessWishToConduct());

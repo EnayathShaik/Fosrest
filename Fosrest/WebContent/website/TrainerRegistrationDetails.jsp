@@ -26,6 +26,7 @@
 			$("#on").css("display", "none");
 			$("#tc").css("display", "none");
 		} */
+		// $("#otherTrainingInstitute").css("display" , "none");
 		var isUpdate = '${isUpdate}';
 		if (isUpdate != null && isUpdate == "Y") {
 
@@ -35,6 +36,12 @@
 			$("#status").val('${PersonalInformationTrainer.status}');
 			$("#correspondenceState").val(
 					'${PersonalInformationTrainer.correspondenceState}');
+			var fields = '${PersonalInformationTrainer.userType}'.split(',');
+			for(i=0;i<fields.length;i++){
+				 document.getElementById('userType_'+fields[i]).checked = true
+			 }
+			
+			
 			$("#correspondenceState").trigger("change");
 			window
 					.setTimeout(
@@ -153,6 +160,7 @@
 <cf:input path="logId"  type="hidden"/>
 <cf:input path="status"  type="hidden"/>
 								<cf:input type="hidden" path="id" />
+								
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -161,11 +169,13 @@
 											<li id="userTypeErr" style="display: none;"
 												class="style-li error-red">Please Select User Type.</li>
 										</ul>
+										
 									</div>
-									<cf:select path="userType" class="form-control">
-										<cf:option value="" label="Select User Type" />
-										<cf:options items="${userType}" />
-									</cf:select>
+									<ct:forEach items="${TrainerUserType}" var="map">
+									<cf:checkbox  path="userType" id="userType_${map.value}"
+										value="${map.value}" label=" ${map.value}" />
+									<br>
+								</ct:forEach>
 								</div>
 
 								<div class="form-group">
@@ -584,7 +594,7 @@
 							<legend>Experience Details </legend>
 							<!-- left side -->
 							<div class="col-md-6 col-xs-12">
-								<div class="form-group">
+								<%-- <div class="form-group">
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>Experience
@@ -598,7 +608,7 @@
 										<cf:option value="" label="Select Expe Background" />
 										<cf:options items="${ExpBackgroundMap}" />
 									</cf:select>
-								</div>
+								</div> --%>
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -627,7 +637,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-group">
+							<%-- 	<div class="form-group">
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>No. Of Training
@@ -640,7 +650,7 @@
 									</div>
 									
 									<cf:input type="text" path="noOfSessionConducted" class="form-control" placeholder="Session Number" required="" />
-								</div>
+								</div> --%>
 								<div class="form-group" id="sa">
 									<div>
 										<ul class="lab-no">
@@ -667,7 +677,19 @@
 									
 									<cf:input type="text" path="orgName" class="form-control" placeholder="Organization Name" required="" />
 								</div>
-								
+								<div class="form-group" id="tc">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>No. of Trainings Conducted:</strong></li>
+											<li class="style-li error-red"></li>
+											
+											 <li id="s1" style="display:none;" class="style-li error-red" >No. Of Training Sessions Conducted can not be blank.</li>
+									 
+										</ul>
+									</div>
+									
+									<cf:input type="text" path="noOfTrainings" class="form-control" placeholder="No of Trainings Conducted" required="" />
+								</div>
 							</div>
 							<!-- left side ends -->
 							<!-- right side -->
@@ -700,25 +722,27 @@
 									</div>
 
 									<cf:select path="AssociatedWithAnyTrainingInstitute"
-										class="form-control" onchange="">
-										<cf:option value="0" label="Select Training Institude" />
+										class="form-control" onchange="OtiHide();">
+										<%-- <cf:option value="0" label="Select Training Institude" /> --%>
 										<cf:options items="${listTrainingInstitude}" itemValue="id"
 											itemLabel="trainingCenterName" />
+											<cf:option value="0" label="Others" />
 									</cf:select>
 								</div>
-								<div class="form-group" id="tc">
+								<div class="form-group" id="Oti">
 									<div>
 										<ul class="lab-no">
-											<li class="style-li"><strong>No. of Trainings Conducted:</strong></li>
+											<li class="style-li"><strong> Training Institute Name:</strong></li>
 											<li class="style-li error-red"></li>
-											
-											 <li id="s1" style="display:none;" class="style-li error-red" >No. Of Training Sessions Conducted can not be blank.</li>
+											 <li id="otherTrainingInstituteErr" style="display:none;" class="style-li error-red" >Training Institute Name can not be blank.</li>
+											 
 									 
 										</ul>
 									</div>
 									
-									<cf:input type="text" path="noOfTrainings" class="form-control" placeholder="No of Trainings Conducted" required="" />
+									<cf:input type="text" path="otherTrainingInstitute" class="form-control" placeholder="Training Institute Name:" required="" />
 								</div>
+								
 								</div>
 								<!-- right side ends -->
 						</fieldset>
@@ -835,7 +859,17 @@
 		});
 
 	}
+	function OtiHide(){
+		 var a=document.getElementById('AssociatedWithAnyTrainingInstitute').value;
+		 if(a==0){	 
+			$("#Oti").css("display" , "block");
+			 }	
+		 else{
+			 $("#Oti").css("display" , "none"); 
+		 }
+	}
 	function validateFields() {
+		
 		var isUpdate = '${isUpdate}';
 		
 		 $("#userTypeErr").css("display" , "none");
@@ -855,29 +889,27 @@
 		$("#EmailErr").css("display" , "none");
 		 $("#correspondenceDistrictErr").css("display" , "none");
 		 $("#correspondenceCityErr").css("display" , "none");
-		 
-		 
-		 
 		 $("#ResidentialLine1Err").css("display" , "none");
 		 $("#ResidentialLine2Err").css("display" , "none");
 		 $("#resStateErr").css("display" , "none");
 		 $("#residentialDistrictErr").css("display" , "none");
 		 $("#resCityErr").css("display" , "none");
 		 $("#resPincodeErr").css("display" , "none");
-		 
 		 $("#txtInputErr").css("display" , "none");
-		  $("#ExpBackgroundErr").css("display" , "none");
+		 
 		 $("#sessWishToConductErr").css("display" , "none");
 		 $("#expInYearErr").css("display" , "none");
 		 $("#expInMonthErr").css("display" , "none");
-		 $("#AssociatedWithAnyTrainingInstituteErr").css("display" , "none"); 
+		 $("#otherTrainingInstituteErr").css("display" , "none");
+		 
+		 //$("#AssociatedWithAnyTrainingInstituteErr").css("display" , "none"); 
 		 
 		 if($("#userType").val() == ''){
 		 $("#userTypeErr").css("display" , "block");
 		 
 			return false; 
 		}
-	 	if($("#title").val() == 0){
+	 	 if($("#title").val() == 0){
 		 
 		$("#titleErr").css("display" , "block");
 		return false;
@@ -924,8 +956,6 @@
 		$("#correspondenceAddress1Err").css("display" , "block");
 		return false;
 		}
-		
-		
 		if($("#correspondenceState").val() == 0){
 		 
 		$("#correspondenceStateErr").css("display" , "block");
@@ -969,10 +999,7 @@
      		 $("#mobileErr").css("display" , "block");
      		return false;
  	 }
-		 
-		 
-			
-		   if($("#ResidentialLine1").val() == ''){
+		if($("#ResidentialLine1").val() == ''){
 		  		 $("#ResidentialLine1Err").css("display" , "block");
 		   		return false;
 			 }
@@ -994,13 +1021,6 @@
 				 $("#resPincodeErr").css("display" , "block");
 				return false;
 			} 
-			 
-				 
-		     if($("#ExpBackground").val() == ''){
-			$("#ExpBackgroundErr").css("display" , "block");
-			return false;
-		 }	 
-	
 		 if($("#expInYear").val() == 0){
 			 $("#expInYearErr").css("display" , "block");
 			return false;
@@ -1009,21 +1029,22 @@
 			 $("#expInMonthErr").css("display" , "block");
 			return false;
 		 } 
-		 if($("#noOfSessionConducted").val()==''){
-			 $("#noOfSessionConductedErr").css("display" , "block");
-				return false;
-			 
-	   }
+		 
 		 if($("#sessWishToConduct").val() < 1){
 			 $("#sessWishToConductErr").css("display" , "block");
 				return false;
 			 
 	   } 
-			  if($("#AssociatedWithAnyTrainingInstitute").val() == 0){
+	  if($("#otherTrainingInstitute").val() ==''){
+			 $("#otherTrainingInstituteErr").css("display" , "block");
+				return false;
+			 
+	   } 
+		/*   if($("#AssociatedWithAnyTrainingInstitute").val() == 0){
 				 $("#AssociatedWithAnyTrainingInstituteErr").css("display" , "block");
 				return false;
 			 }
-	       
+	        */
 			  if (!(isUpdate != null && isUpdate == "Y")){
 					
 					 if($("#txtInput").val() == ''){
@@ -1046,4 +1067,15 @@
 	
 
 	}
+</script>
+<script>
+function OtiHide(){
+	 var a=document.getElementById('AssociatedWithAnyTrainingInstitute').value;
+	 if(a==0){	 
+		$("#Oti").css("display" , "block");
+		 }	
+	 else{
+		 $("#Oti").css("display" , "none"); 
+	 }
+}
 </script>
