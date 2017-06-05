@@ -2677,7 +2677,7 @@ public class AdminDAOImpl implements AdminDAO {
 	 * @return
 	 */
 
-	@Override
+	/*@Override
 	public String addTrainingPartner(TrainingPartner p) {
 		// TODO Auto-generated method stub
 		System.out.println("RegionMapping " + p.getTrainingPartnerId());
@@ -2744,7 +2744,7 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("Holiday List::" + p);
 		}
 		return mccList;
-	}
+	}*/
 
 	/*@Override
 	public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) {

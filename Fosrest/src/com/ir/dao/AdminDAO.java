@@ -297,7 +297,7 @@ public interface AdminDAO {
 
 	// Trainingpartner Master
 
-	public String addTrainingPartner(TrainingPartner p);
+	/*public String addTrainingPartner(TrainingPartner p);
 
 	public void updateTrainingPartner(TrainingPartner p);
 
@@ -306,7 +306,7 @@ public interface AdminDAO {
 	public TrainingPartner getTrainingPartnerById(int id);
 
 	public List<TrainingPartner> listTrainingPartner();
-
+*/
 	//public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm);
 
 	//public List<TrainingClosureForm> listTrainingClosure();

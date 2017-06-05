@@ -306,7 +306,7 @@ public interface AdminService {
 	 *         All Add Edit delete for Holiday Master
 	 */
 
-	public String addTrainingPartner(TrainingPartner p);
+	/*public String addTrainingPartner(TrainingPartner p);
 
 	public void updateTrainingPartner(TrainingPartner p);
 
@@ -314,7 +314,7 @@ public interface AdminService {
 
 	public TrainingPartner getTrainingPartnerById(int id);
 
-	public List<TrainingPartner> listTrainingPartner();
+	public List<TrainingPartner> listTrainingPartner();*/
 
 	//public List<TrainingClosureForm> listTrainingClosure();
 

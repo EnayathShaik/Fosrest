@@ -360,8 +360,8 @@ public class TrainerController {
 		model.addAttribute("trainingTypeMap", trainingTypeMap);
 		model.addAttribute("ExpInYearMap", opt);
 		model.addAttribute("ExpInMonthMap", opt);
-		model.addAttribute("listTrainingPartner",
-				adminService.listTrainingPartner());
+		/*model.addAttribute("listTrainingPartner",
+				adminService.listTrainingPartner());*/
 		model.addAttribute("listStateMaster",
 				this.adminService.listStateMaster());
 		if (userId != null && Integer.parseInt(userId) > 0) {

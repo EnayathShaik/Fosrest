@@ -983,7 +983,7 @@ public class AdminServiceImpl implements AdminService {
 	 *         Impl For Holiday Master
 	 */
 
-	@Override
+	/*@Override
 	@Transactional
 	public String addTrainingPartner(TrainingPartner p) {
 		return this.adminDAO.addTrainingPartner(p);
@@ -1014,8 +1014,8 @@ public class AdminServiceImpl implements AdminService {
 		return this.adminDAO.getTrainingPartnerById(id);
 
 	}
-
-	// listTrainingPartner
+*/
+/*	// listTrainingPartner
 
 	@Override
 	@Transactional
@@ -1023,7 +1023,7 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listTrainingPartner();
 	}
-
+*/
 	// listGenerateCertificate
 
 	/*@Override

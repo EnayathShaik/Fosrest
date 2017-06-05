@@ -266,6 +266,21 @@
                             <!-- left side -->
                             <div class="col-md-6 col-xs-12">
                      		<cf:input type="hidden" path="id"/>
+                     		  <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Title:(Training Center Head)</strong></li>
+                                            <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
+                                             
+                                            <li class="style-li error-red"> </li>
+                                        </ul>
+                                    </div>
+                                   <cf:select path="title" class="form-control">
+													<cf:option value="" label="Select Title" />
+													<cf:options items="${titleMap}" />
+												</cf:select>
+                                </div>
+                     		
                                 <div class="form-group">
                                     <div>
                                     <cf:input path="id" type="hidden" /> 
@@ -279,7 +294,7 @@
                                     <cf:input type="text" path="trainingCenterName" class="form-control" placeholder="Training Center Name" required=""/>
                                 </div>
 
-                                <div class="form-group">
+                               <%--  <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Partner Name:</strong></li>
@@ -292,7 +307,7 @@
 													<cf:option value="0" label="Select Training Partner" />
 													<cf:options items="${listTrainingPartner}" itemValue="trainingPartnerId" itemLabel="trainingPartnerName" />
 												</cf:select>
-                                </div>
+                                </div> --%>
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
@@ -309,21 +324,7 @@
                             </div>
                             <!-- right side -->
                             <div class="col-md-6 col-xs-12">
-                                <div class="form-group">
-                                    <div>
-                                        <ul class="lab-no">
-                                            <li class="style-li"><strong>Title:(Training Center Head)</strong></li>
-                                            <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
-                                             
-                                            <li class="style-li error-red"> </li>
-                                        </ul>
-                                    </div>
-                                   <cf:select path="title" class="form-control">
-													<cf:option value="" label="Select Title" />
-													<cf:options items="${titleMap}" />
-												</cf:select>
-                                </div>
-
+                              
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">

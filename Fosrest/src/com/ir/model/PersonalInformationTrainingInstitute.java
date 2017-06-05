@@ -77,7 +77,7 @@ public class PersonalInformationTrainingInstitute {
 	@Size(min=1, max=50 , message="enter your Training Center Name")
 	private String trainingCenterName;
 
-	private int trainingPartnerName;
+	//private int trainingPartnerName;
 	
 
 
@@ -297,13 +297,13 @@ public class PersonalInformationTrainingInstitute {
 		this.trainingCenterName = trainingCenterName;
 	}
 
-	public int getTrainingPartnerName() {
+	/*public int getTrainingPartnerName() {
 		return trainingPartnerName;
 	}
 
 	public void setTrainingPartnerName(int trainingPartnerName) {
 		this.trainingPartnerName = trainingPartnerName;
-	}
+	}*/
 
 	public String getTrainingType() {
 		return trainingType;

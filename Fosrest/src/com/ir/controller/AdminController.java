@@ -1942,7 +1942,7 @@ public class AdminController {
 		model.addAttribute("trainingPhase", trainingPhase);
 		model.addAttribute("userStatusMap", userStatusMap);
 		model.addAttribute("TrainingScheduleForm", new TrainingScheduleForm());
-		model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
+		//model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
 		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
 		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
@@ -2312,7 +2312,7 @@ public class AdminController {
 	 *         All Add Edit delete for TrainingPartner Master
 	 */
 
-	@RequestMapping(value = "/TrainingPartner", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/TrainingPartner", method = RequestMethod.GET)
 	public String listTrainingPartner(@ModelAttribute("TrainingPartner") TrainingPartner trainingPartner, Model model, HttpSession session) {
 		System.out.println("listTrainingPartner");
 		if(checkAccess(session))
@@ -2372,7 +2372,7 @@ public class AdminController {
 		out.flush();
 
 	}
-
+*/
 /*	// for generate certificate
 
 	@RequestMapping(value = "/GenerateCertificate", method = RequestMethod.GET)
