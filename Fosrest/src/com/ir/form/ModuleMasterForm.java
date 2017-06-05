@@ -71,6 +71,7 @@ public class ModuleMasterForm {
 	public void setContentLink(String contentLink) {
 		this.contentLink = contentLink;
 	}
+
 	
 
 }

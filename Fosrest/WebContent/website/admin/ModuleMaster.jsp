@@ -48,7 +48,7 @@
 
 
 
-												<%-- <div class="form-group">
+												 <div class="form-group">
 													<cf:input path="moduleId" type="hidden" />
 													<div>
 														<ul class="lab-no">
@@ -62,13 +62,13 @@
 													<cf:select path="unitId" class="form-control">
 														<cf:option value="0" label="Select Unit Name" />
 														<cf:options items="${listUnitMaster}" itemValue="unitId"
-															itemLabel="unitCode" />
+															itemLabel="unitName" />
 														<!-- itemlabel -->
 													</cf:select>
 
-												</div> --%>
+												</div> 
 												
-												<div class="form-group">
+												<%-- <div class="form-group">
 													<cf:input path="moduleId" type="hidden" />
 													<div>
 														<ul class="lab-no">
@@ -83,12 +83,12 @@
 													<ct:forEach var="listUnitMaster" items="${listUnitMaster}">
 														<cf:option value="${listUnitMaster.unitName}">
 														</cf:option>
-													</ct:forEach>
+													</ct:forEach> 
 														
 														<!-- itemlabel -->
 													</cf:select>
 
-												</div>
+												</div>--%>
 
                                            
 												<div class="form-group">
@@ -154,7 +154,7 @@
 													</cf:select>
 												</div>
 
-												<%-- <div class="form-group">
+												<div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Content Link:</strong></li>
@@ -165,7 +165,7 @@
 													</div>
 													<cf:input type="text" path="contentLink"
 														placeholder="Content Link" class="form-control" />
-												</div> --%>
+												</div> 
 
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
@@ -212,16 +212,18 @@
 													<ct:forEach items="${listModuleMaster}" var="ModuleMaster" varStatus="loop">
 														<tr>
 															<td>${loop.count}</td>
-															 <td>${ModuleMaster.unitName}</td>
-															<td>${ModuleMaster.moduleName}</td>
+															
+															<td>${ModuleMaster[1]}</td>
+															 <td>${ModuleMaster[0]}</td>
+															<%--  <td>${ ModuleMaster[2]}</td> --%>
 															<td><ct:choose>
-														<ct:when test="${ ModuleMaster.status == 'A'}">Active</ct:when>
+														<ct:when test="${ ModuleMaster[2]== 'A'}">Active</ct:when>
 																	<ct:otherwise>In-Active</ct:otherwise>
 															</ct:choose></td>
-															<td><button
-																	onclick='editModule(${ModuleMaster.moduleId});return false;'>Edit</button></td>
-															<td><a
-																href="<ct:url value='/ModuleMaster/remove/${ModuleMaster.moduleId}.fssai' />">Delete</a></td>
+															<td><button 
+																	onclick='editModule(${ModuleMaster[3]});return false;'>Edit</button></td>
+															<td>
+															<a href="<ct:url value='/ModuleMaster/remove/${ModuleMaster[3]}.fssai' />">Delete</a></td>
 														</tr>
 													</ct:forEach>
 												</table>
@@ -310,6 +312,39 @@
            }
             
         
+            
+            
+            
+            
+            
+            function removeModule(id){
+                
+                
+                var name1=JSON.stringify({
+           		courseName:0
+             })
+           	$.ajax({
+           	      type: 'post',
+           	      url: 'ModuleMaster/remove/'+id+'.fssai',
+           	      contentType : "application/json",
+           		  data:name1,
+           	      success: function (response) {      
+           	      var mainData1 = jQuery.parseJSON(response);
+           	    $("#moduleId").val(mainData1.moduleId);
+           	    $("#moduleName").val(mainData1.moduleName);
+           	    $("#status").val(mainData1.status);
+           	    $("#contentName").val(mainData1.contentName);
+           	    $("#contentLink").val(mainData1.contentLink);
+           	    $("#contentType").val(mainData1.contentType);
+           	    $("#unitId").val(mainData1.unitMaster.unitId);
+           	    
+           	     $("#updatebtn").css("display" , "block");
+           	     
+           	     $("#createbtn").css("display" , "none");
+           	      }
+           	      });     
+                
+               }
 
             </script>
 

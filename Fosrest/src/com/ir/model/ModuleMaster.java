@@ -58,7 +58,7 @@ public class ModuleMaster {
 	private String status;
 	private String contentType;
 	private String contentName;
-	/*private String contentLink;*/
+	private String contentLink;
 	private String moduleCode;
 	@Column(columnDefinition="int default 0")
 	private int seqNo;
@@ -165,7 +165,7 @@ public class ModuleMaster {
 
 
 
-	/*public String getContentLink() {
+	public String getContentLink() {
 		return contentLink;
 	}
 
@@ -173,7 +173,7 @@ public class ModuleMaster {
 
 	public void setContentLink(String contentLink) {
 		this.contentLink = contentLink;
-	}*/
+	}
 
 
 
@@ -234,15 +234,6 @@ public class ModuleMaster {
 		this.seqNo = seqNo;
 	}
 
-private String unitName;
-
-
-public String getUnitName() {
-	return unitName;
-}
-public void setUnitName(String unitName) {
-	this.unitName = unitName;
-}
 
 
 

@@ -1772,7 +1772,6 @@ public class AdminController {
 		model.addAttribute("trainingType", trainingType);
 		model.addAttribute("trainingPhase", trainingPhase);
 		model.addAttribute("contentType", contentType);
-
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 
@@ -1795,17 +1794,21 @@ public class AdminController {
 			return "redirect:/ModuleMaster.fssai";
 			// return "ModuleMaster";
 		}
-
-		System.out.println("p.getId() " + p.getModuleId() + " " + p.getUnitId());
 		ModuleMaster moduleMaster = new ModuleMaster();
-		moduleMaster.setModuleId(p.getModuleId());
-		moduleMaster.setModuleName(p.getModuleName());
-		moduleMaster.setStatus(p.getStatus());
-		moduleMaster.setContentName(p.getContentName());
-		/*moduleMaster.setContentLink(p.getContentLink());*/
-		moduleMaster.setUnitName(p.getUnitName());
-		moduleMaster.setContentType(p.getContentType());
-		//moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p.getUnitId()));
+		try{
+			System.out.println("p.getId() " + p.getModuleId() + p.getUnitId());
+			
+			moduleMaster.setModuleId(p.getModuleId());
+			moduleMaster.setModuleName(p.getModuleName());
+			moduleMaster.setStatus(p.getStatus());
+			moduleMaster.setContentName(p.getContentName());
+			moduleMaster.setContentLink(p.getContentLink());
+			moduleMaster.setContentType(p.getContentType());
+			moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p.getUnitId()));
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 
 		if (p.getModuleId() == 0) {
 			// new person, add it
@@ -1836,6 +1839,7 @@ public class AdminController {
 	@RequestMapping("/ModuleMaster/remove/{id}")
 	public String removeModuleMaster(@PathVariable("id") int id) {
 		this.adminService.removeModuleMaster(id);
+		
 		return "redirect:/ModuleMaster.fssai";
 	}
 
@@ -1845,7 +1849,6 @@ public class AdminController {
 			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
 			HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {
 		new ZLogger("/ModuleMaster/edit", "/ModuleMaster/edit............" + id, "AdminController.java");
-
 		ModuleMaster hm = this.adminService.getModuleMasterById(id);
 		// List courseList = adminService.searchFeedbackMaster(data);
 		PrintWriter out = response.getWriter();
