@@ -307,9 +307,9 @@ public interface AdminDAO {
 
 	public List<TrainingPartner> listTrainingPartner();
 
-	public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm);
+	//public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm);
 
-	public List<TrainingClosureForm> listTrainingClosure();
+	//public List<TrainingClosureForm> listTrainingClosure();
 
 	/******************** invoice **************************************************/
 

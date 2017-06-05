@@ -1026,13 +1026,13 @@ public class AdminServiceImpl implements AdminService {
 
 	// listGenerateCertificate
 
-	@Override
+	/*@Override
 	@Transactional
 	public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listGenerateCertificate(generateCertificateForm);
-	}
-
+	}*/
+/*
 	// listTrainingClosure
 	@Override
 	@Transactional
@@ -1040,7 +1040,7 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return this.adminDAO.listTrainingClosure();
 	}
-
+*/
 	/****************************************** Invoice ************************************/
 	/**
 	 * @author Jyoti Mekal

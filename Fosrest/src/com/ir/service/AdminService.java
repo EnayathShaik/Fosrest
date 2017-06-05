@@ -258,7 +258,7 @@ public interface AdminService {
 
 	public List<TrainingSchedule> listTrainingSchedule(int id, int profileid);
 
-	public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm);
+	//public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm);
 
 	public String addStateMaster(StateMaster p);
 
@@ -316,7 +316,7 @@ public interface AdminService {
 
 	public List<TrainingPartner> listTrainingPartner();
 
-	public List<TrainingClosureForm> listTrainingClosure();
+	//public List<TrainingClosureForm> listTrainingClosure();
 
 	/****************************** Invoice ******************************************************/
 	/**

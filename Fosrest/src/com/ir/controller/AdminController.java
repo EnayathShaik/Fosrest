@@ -2370,7 +2370,7 @@ public class AdminController {
 
 	}
 
-	// for generate certificate
+/*	// for generate certificate
 
 	@RequestMapping(value = "/GenerateCertificate", method = RequestMethod.GET)
 	public String GenerateCertificate(
@@ -2405,9 +2405,9 @@ public class AdminController {
 				this.adminService.listGenerateCertificate(generateCertificateForm));
 
 		return "GenerateCertificate";
-	}
+	}*/
 
-	// for training closure
+	/*// for training closure
 	@RequestMapping(value = "/TrainingClosure", method = RequestMethod.GET)
 	public String TrainingClosure(@ModelAttribute("TrainingClosureForm") TrainingClosureForm trainingClosureForm,
 			Model model, HttpSession session) {
@@ -2447,7 +2447,7 @@ public class AdminController {
 		model.addAttribute("TrainingClosureForm", new TrainingClosureForm());
 		model.addAttribute("listTrainingClosure", this.adminService.listTrainingClosure());
 		return "TrainingClosure";
-	}
+	}*/
 
 	/************************************ invoice ***********************************************************/
 
@@ -2989,6 +2989,8 @@ public class AdminController {
 	Map<String, String> trainingType = lst.trainingTypeMap;
 		Map<String, String> trainingPhase = lst.trainingPhaseMap;
 	Map<String, String> statusMap = lst.statusMap;
+	Map<String, String> userType = lst.userTypeMap;
+	model.addAttribute("userType", userType);
 		model.addAttribute("statusMap", statusMap);
 		model.addAttribute("trainingType", trainingType);
 		model.addAttribute("trainingPhase", trainingPhase);

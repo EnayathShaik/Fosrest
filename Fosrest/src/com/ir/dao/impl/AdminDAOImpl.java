@@ -2766,7 +2766,7 @@ System.out.println("aaaaaaaaaaa"+li[1]);
 		return mccList;
 	}
 
-	@Override
+	/*@Override
 	public List<GenerateCertificateForm> listGenerateCertificate(GenerateCertificateForm generateCertificateForm) {
 		// TODO Auto-generated method stub
 		System.out.println("inside listGenerateCertificateForm " + generateCertificateForm.getBatchCode());
@@ -2796,8 +2796,8 @@ System.out.println("aaaaaaaaaaa"+li[1]);
 		System.out.println("list " + list);
 		return list;
 	}
-
-	@Override
+*/
+	/*@Override
 	public List<TrainingClosureForm> listTrainingClosure() {
 		// TODO Auto-generated method stub
 		System.out.println("inside listTrainingClosureForm");
@@ -2822,7 +2822,7 @@ System.out.println("aaaaaaaaaaa"+li[1]);
 		System.out.println("list " + list);
 		return list;
 	}
-
+*/
 	/************************************* Zinvoice ******************************************/
 
 	/**
