@@ -312,39 +312,5 @@
            }
             
         
-            
-            
-            
-            
-            
-            function removeModule(id){
-                
-                
-                var name1=JSON.stringify({
-           		courseName:0
-             })
-           	$.ajax({
-           	      type: 'post',
-           	      url: 'ModuleMaster/remove/'+id+'.fssai',
-           	      contentType : "application/json",
-           		  data:name1,
-           	      success: function (response) {      
-           	      var mainData1 = jQuery.parseJSON(response);
-           	    $("#moduleId").val(mainData1.moduleId);
-           	    $("#moduleName").val(mainData1.moduleName);
-           	    $("#status").val(mainData1.status);
-           	    $("#contentName").val(mainData1.contentName);
-           	    $("#contentLink").val(mainData1.contentLink);
-           	    $("#contentType").val(mainData1.contentType);
-           	    $("#unitId").val(mainData1.unitMaster.unitId);
-           	    
-           	     $("#updatebtn").css("display" , "block");
-           	     
-           	     $("#createbtn").css("display" , "none");
-           	      }
-           	      });     
-                
-               }
-
             </script>
 
