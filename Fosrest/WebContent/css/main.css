@@ -549,7 +549,7 @@ input.search-form:hover {
 
 #feature {
   background: #fcfcfc;
-  padding-bottom: 40px;
+ /*  padding-bottom: 40px; */
 }
 
 .features{
@@ -740,7 +740,7 @@ input.search-form:hover {
 }
 
 
-.course-heading { color:#fff; background:#000078; font-size:25px; padding:12px; width:246px; margin-left:15px; text-align:center;}
+.course-heading { color:#000;font-weight:bold; font-size:25px; padding:12px; width:246px; margin-left:5px; text-align:left;}
 .course-arrow {margin-left: 50px;}
 
 
@@ -2601,8 +2601,8 @@ shortcodes page css
   background: #e7e7e7;
   border-bottom: 1px solid #efefef;
   font-size: 14px;
-  margin-top: 56px;
-  padding-top: 30px;
+  margin-top: 16px;
+  /* padding-top: 30px; */
 }
 
 #bottom h3 {
@@ -2934,3 +2934,10 @@ tbody tr:hover {
 /* timeline ends */
 
 
+.panelimg{
+	height:auto;
+background: #dd4108;
+    color: #fff !important;
+    padding: 8px;
+    border:0px solid #dd4108;
+}

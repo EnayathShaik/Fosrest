@@ -308,7 +308,7 @@
 /* XS Portrait */
 @media (max-width: 480px) {
 .circle-wrap {margin-left: 33px;}
-.header-bg { background: #fff !important;}
+.header-bg { /* background: #fff !important; */}
 .course-bg {margin-bottom:20px;}
 .feature-wrap {margin-bottom:20px;}
 .form-group .form-control {
