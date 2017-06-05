@@ -118,9 +118,12 @@
 																</li>
 															</ul>
 														</div>
-														<cf:input path="designation" placeholder="Designation"
-															class="form-control" />
-
+													<%-- 	<cf:input path="designation" placeholder="Designation"
+															class="form-control" /> --%>
+<cf:select path="designation" class="form-control">
+													<cf:option value="" label="Select Designation" />
+													<cf:options items="${userType}" />
+												</cf:select>
 													</div>
 
 													<div class="col-md-06 col-xs-12" style="margin-top: 39px;">
