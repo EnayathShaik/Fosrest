@@ -154,6 +154,14 @@ public class CommonDaoImpl implements CommonDao{
 		List batchCodeList = query.list();
 		return batchCodeList;
 	}
+	@Override
+	public  List loadTrainingPhase(int trainingTypeId){
+		Session session = sessionFactory.getCurrentSession();
+        String sql = "  select tp.trainingPhaseName from trainingPhase tp where tp.trainingType= '"+trainingTypeId+"'";		
+		Query query = session.createSQLQuery(sql);
+		List PhaseList = query.list();
+		return PhaseList;
+	}
 
 	@Override
 	public String checkState(String id, String tableName) {

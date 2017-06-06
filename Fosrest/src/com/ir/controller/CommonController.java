@@ -88,8 +88,6 @@ public class CommonController {
 		out.flush();
 		
 	}
-	
-	
 	@RequestMapping(value="/checkstate" , method=RequestMethod.POST)
 	@ResponseBody
 	public void checkState(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
@@ -107,7 +105,6 @@ public class CommonController {
 		out.flush();
 		
 	}
-	
 	
 	@RequestMapping(value="/getCourseName" , method=RequestMethod.POST)
 	@ResponseBody
@@ -221,5 +218,17 @@ public void getBatchCode(@RequestParam("data") String data ,@RequestBody Generat
 	out.flush();
 }
 
+@RequestMapping(value="/loadTrainingPhase" , method=RequestMethod.POST)
+@ResponseBody
+public void loadTrainingPhase(@RequestParam("data") int data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("getModule","getModule............" + data  , "CommonController.java");
+	int trainingTypeId =  data;
+	List PhaseList = commonService.loadTrainingPhase(trainingTypeId);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(PhaseList); 
+	out.write(newList);
+	out.flush();
 	
+}
 }

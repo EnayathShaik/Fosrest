@@ -334,3 +334,29 @@ function getParameterByName(name, url) {
 
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+function getTrainingPhase(val , idName) {
+	$('#'+idName+' option').remove();
+ 	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	$.ajax({
+		type : 'post',
+		url : 'loadTrainingPhase.fssai?data='+ val,
+		contentType : "application/json",
+	    data:name,
+		success : function(response) {
+			var mainData1 = jQuery.parseJSON(response);
+			
+			$('#'+idName+' option').remove();
+			$('#'+idName).append(
+					'<option value="0" label="--Select Training Institude--" />');
+			$.each(mainData1, function(i, obj) {
+				$('#'+idName)
+						.append(
+								'<option value='+mainData1[0]+' >' + mainData1[i]
+										+ '</option>');
+			});
+		}
+	});
+}

@@ -63,3 +63,22 @@ INSERT INTO ASSESSMENTELIGIBILITYTRAINER(COURSENAMEID, ELIGIBILITY) VALUES (?, ?
 --ALTER TABLE public.personalinformationtrainingpartner drop COLUMN NoOfTrainingSessionWishToConductInAMonth
 --ALTER TABLE public.personalinformationtrainingpartner drop COLUMN NoOfYearsInBusinessOfTraining
 --ALTER TABLE public.personalinformationtrainingpartner drop COLUMN noofinhousetrainers
+
+
+
+INSERT INTO designation(  designationId, designationName) VALUES (1, 'AO');
+INSERT INTO designation(  designationId, designationName) VALUES (2, 'DO');
+INSERT INTO designation(  designationId, designationName) VALUES (3, 'RO');
+INSERT INTO designation(  designationId, designationName) VALUES (4, 'FSO');
+
+
+INSERT INTO trainingType(  trainingTypeId, trainingTypeName) VALUES (1, 'Refresher');
+INSERT INTO trainingType(  trainingTypeId, trainingTypeName) VALUES (2, 'Specific Training');
+INSERT INTO trainingType(  trainingTypeId, trainingTypeName) VALUES (3, 'Induction');
+INSERT INTO trainingType(  trainingTypeId, trainingTypeName) VALUES (4, 'Training of Trainers');
+
+
+INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (1, 'Refresher',3);
+INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (2, 'Onjob',3);
+INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (3, 'Foundation',3);
+INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (4, 'Other',4);

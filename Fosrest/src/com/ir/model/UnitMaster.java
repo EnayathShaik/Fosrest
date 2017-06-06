@@ -25,7 +25,7 @@ public class UnitMaster {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name= "unitId")
 	private int unitId;
-	private String userType;
+	//private String userType;
 	private String trainingType;
 	private String trainingPhase;
 	private String unitName;
@@ -36,7 +36,16 @@ public class UnitMaster {
 	private String contentType;
 	private String contentName;
 	private String contentLink;
-	
+	private String Designation;
+
+	public String getDesignation() {
+		return Designation;
+	}
+	public void setDesignation(String designation) {
+		Designation = designation;
+	}
+
+
 
 	@Column(name="isActive", columnDefinition="character varying(10) default 'Y'")
 	private String isActive;
@@ -107,7 +116,7 @@ public class UnitMaster {
 
 
 
-	public String getUserType() {
+	/*public String getUserType() {
 		return userType;
 	}
 
@@ -115,7 +124,7 @@ public class UnitMaster {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
-	}
+	}*/
 
 
 

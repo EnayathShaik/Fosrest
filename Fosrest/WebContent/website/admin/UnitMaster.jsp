@@ -6,7 +6,7 @@
 
 
 
-
+ <script src="website/js/commonController.js"></script>
 
    			  <ct:url var="addAction" value="/UnitMaster/add.fssai" ></ct:url>
             <cf:form action="${addAction}" name="myForm" method="POST" commandName="UnitMaster" onsubmit="return validateFields();">
@@ -54,10 +54,11 @@
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                               	<cf:select path="userType" class="form-control">
-												<cf:option value="" label="Select Designation" />
-												<cf:options items="${userType}"/>	
-												</cf:select>
+                                            <cf:select path="Designation" class="form-control">
+															<cf:option value="" label="Select Designation" />
+															<cf:options items="${DesignationList}"
+																itemValue="designationId" itemLabel="designationName" />
+														</cf:select>
                                             </div>
                                             <div class="form-group">
                                                 <div>
@@ -67,12 +68,11 @@
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                           			<cf:select path="trainingType" class="form-control">
-													<cf:option value="0" label="Select training type" />
-													<cf:options items="${trainingType}"/>	
-													
-													</cf:select>
-													
+														 <cf:select path="trainingType" class="form-control" onchange="getTrainingPhase(this.value , 'trainingPhase')">
+															<cf:option value="" label="Select Training Type" />
+															<cf:options items="${TrainingTypeList}"
+																itemValue="trainingTypeId" itemLabel="trainingTypeName" />
+														</cf:select>
                                             </div>
                                             <div class="form-group">
                                                 <div>
@@ -82,10 +82,11 @@
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                                  <cf:select path="trainingPhase" class="form-control">
-													<cf:option value="0" label="Select training phase" />
-													 <cf:options items="${trainingPhase}"/>	
-												</cf:select>
+												 <cf:select path="trainingPhase" class="form-control">
+															<cf:option value="" label="Select Training Type" />
+															<cf:options items="${TrainingPhaseList}"
+																itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
+														</cf:select>
                                             </div>
                                             
                                         </div>
@@ -164,14 +165,14 @@
                                             <ct:forEach items="${listUnitMaster}" var="UnitMaster" varStatus="loop">
                                                 <tr>
 												<td>${loop.count}</td>
-												<td>${UnitMaster.userType}</td>
-												<td>${UnitMaster.trainingType}</td>
-												<td>${UnitMaster.trainingPhase}</td>
-												<td>${UnitMaster.unitName}</td>
-												<td>${UnitMaster.unitCode}</td>
-												<td><ct:choose><ct:when test="${ UnitMaster.status == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
-											<td><button onclick='editUnit(${UnitMaster.unitId});return false;' >Edit</button></td>
-												<td><a href="<ct:url value='/UnitMaster/remove/${UnitMaster.unitId}.fssai' />" >Delete</a></td>
+												<td>${UnitMaster[0]}</td>
+												<td>${UnitMaster[1]}</td>
+												<td>${UnitMaster[2]}</td>
+												<td>${UnitMaster[3]}</td>
+												<td>${UnitMaster[4]}</td>
+												<td><ct:choose><ct:when test="${ UnitMaster[5] == 'A'}">Active</ct:when> <ct:otherwise>In-Active</ct:otherwise></ct:choose></td> 
+											<td><button onclick='editUnit(${UnitMaster[6]});return false;' >Edit</button></td>
+												<td><a href="<ct:url value='/UnitMaster/remove/${UnitMaster[6]}.fssai' />" >Delete</a></td>
 											</tr>
 										</ct:forEach>
                                             </table>
@@ -206,7 +207,7 @@
             	      success: function (response) {      
             	      var mainData1 = jQuery.parseJSON(response);
             	    $("#unitId").val(mainData1.unitId);
-            	    $("#userType").val(mainData1.userType);
+            	    $("#Designation").val(mainData1.Designation);
             	    $("#trainingType").val(mainData1.trainingType);
             	    $("#trainingPhase").val(mainData1.trainingPhase);
             	    $("#unitName").val(mainData1.unitName);
@@ -242,8 +243,5 @@
              		$("#trainingPhaseErr").css("display" , "block");
              		return false;
              	 }
-
-                	
-                
-                 }
+                	}
             </script>

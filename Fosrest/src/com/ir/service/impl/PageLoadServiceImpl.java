@@ -16,6 +16,7 @@ import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.Designation;
 import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
@@ -26,6 +27,8 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainingPhase;
+import com.ir.model.TrainingType;
 import com.ir.model.Utility;
 import com.ir.service.PageLoadService;
 @Service
@@ -234,5 +237,27 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 
+
+	@Override
+	@Transactional
+	public List<Designation> loadDesignation() {
+		// TODO Auto-generated method stub
+		List<Designation> DesignationList = pageLoadDao.loadDesignation();
+		return DesignationList;
+	}
+
+	@Override
+	@Transactional
+	public List<TrainingType> loadTrainingType() {
+		List<TrainingType> TrainingTypeList = pageLoadDao.loadTrainingType();
+		return TrainingTypeList;
+	}
+
+	@Override
+	@Transactional
+	public List<TrainingPhase> loadTrainingPhase() {
+		List<TrainingPhase> TrainingPhaseList = pageLoadDao.loadTrainingPhase();
+		return TrainingPhaseList;
+	}
 
 }

@@ -76,6 +76,7 @@ import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.CustomerDetails;
 import com.ir.model.CustomerMaster;
+import com.ir.model.Designation;
 import com.ir.model.District;
 import com.ir.model.DistrictMaster;
 import com.ir.model.EmployeeMonthlyCharges;
@@ -83,7 +84,7 @@ import com.ir.model.FeedbackMaster;
 
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
-
+import com.ir.model.KindOfBusiness;
 import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -98,7 +99,9 @@ import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
 import com.ir.model.TrainingPartner;
+import com.ir.model.TrainingPhase;
 import com.ir.model.TrainingSchedule;
+import com.ir.model.TrainingType;
 import com.ir.model.UnitMaster;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
@@ -1659,8 +1662,6 @@ public class AdminController {
 	public void Editassessmentquestion(@PathVariable("id") int id,
 			@RequestBody AssessmentQuestionForm assessmentQuestionForm, HttpServletRequest httpServletRequest,
 			HttpServletResponse response) throws IOException {
-
-		System.out.println("##########################################################################");
 		new ZLogger("AssessmentQuestionForm/edit", "AssessmentQuestionForm/edit............" + id,
 				"AdminController.java");
 
@@ -1689,9 +1690,15 @@ public class AdminController {
 		Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> trainingType = lst.trainingTypeMap;
 		Map<String, String> trainingPhase = lst.trainingPhaseMap;
+		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
+		List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
 		model.addAttribute("userType", userType);
 		model.addAttribute("trainingType", trainingType);
 		model.addAttribute("trainingPhase", trainingPhase);
+		model.addAttribute("DesignationList", DesignationList);
+		model.addAttribute("TrainingTypeList", TrainingTypeList);
+		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
 		model.addAttribute("UnitMaster", new UnitMaster());
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		return "UnitMaster";
@@ -1772,10 +1779,9 @@ public class AdminController {
 		model.addAttribute("trainingType", trainingType);
 		model.addAttribute("trainingPhase", trainingPhase);
 		model.addAttribute("contentType", contentType);
-		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster2());
 		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
-
-		model.addAttribute("ModuleMasterForm", moduleMasterForm);
+	model.addAttribute("ModuleMasterForm", moduleMasterForm);
 		return "ModuleMaster";
 	}
 
@@ -2993,10 +2999,18 @@ public class AdminController {
 		Map<String, String> trainingPhase = lst.trainingPhaseMap;
 	Map<String, String> statusMap = lst.statusMap;
 	Map<String, String> userType = lst.userTypeMap;
+	List<Designation> DesignationList=pageLoadService.loadDesignation();
+	List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
+	List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
+	
 	model.addAttribute("userType", userType);
 		model.addAttribute("statusMap", statusMap);
 		model.addAttribute("trainingType", trainingType);
 		model.addAttribute("trainingPhase", trainingPhase);
+		
+		model.addAttribute("DesignationList", DesignationList);
+		model.addAttribute("TrainingTypeList", TrainingTypeList);
+		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
 		return "trainingschedule123";
 	}
 	@RequestMapping(value = "/trainingScheduleMasterlist", method = RequestMethod.POST)

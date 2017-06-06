@@ -102,9 +102,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-			<property name="url" value="jdbc:postgresql://localhost/FOSREST" />
+			<property name="url" value="jdbc:postgresql://localhost/fosrest" />
 		<property name="username" value="postgres" />
-		<property name="password" value="test@1234" />
+		<property name="password" value="pass@123" />
 			
 	</bean>
 
@@ -177,6 +177,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.AssessmentQuestions</value>
 				<value>com.ir.model.InvoiceMaster</value>
 				 <value>com.ir.model.StateAdmin</value>
+				 <value>com.ir.model.Designation</value>
+				 <value>com.ir.model.TrainingType</value>
+				  <value>com.ir.model.TrainingPhase</value>
 			
 			</list>
 		</property>
@@ -270,7 +273,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="postVacancyTrainingCenterBeanS" class="com.ir.model.PostVacancyTrainingCenterBean"  scope="prototype"/>
 	<bean id="assessmentEvaluationTrainee" class="com.ir.model.trainee.TraineeAssessmentEvaluation"  scope="prototype"/>
 	<bean id="assessmentEvaluationTrainer" class="com.ir.model.trainer.TrainerAssessmentEvaluation"  scope="prototype"/>
-	
+	<!-- 	 <bean id="designation" class="com.ir.model.Designation" scope="prototype" />
+			<bean id="trainingType" class="com.ir.model.TrainingType" scope="prototype" /> 
+				<bean id="trainingPhase" class="com.ir.model.TrainingPhase" scope="prototype" /> -->
 	<!-- <bean id="generateID" class="com.ir.util.GenerateUniqueID">
     <property name="sessionFactory" ref="sessionFactory"></property>
 </bean> -->

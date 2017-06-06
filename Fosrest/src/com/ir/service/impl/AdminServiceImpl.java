@@ -1515,4 +1515,11 @@ public List<TrainingScheduleForm> listtrainingScheduleMaster() {
 	// TODO Auto-generated method stub
 	return this.adminDAO.listtrainingScheduleMaster();
 }
+
+@Override
+@Transactional
+public List<UnitMaster> listUnitMaster2() {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listUnitMaster2();
+}
 }

@@ -1971,7 +1971,7 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		UnitMaster unit = (UnitMaster) session.load(UnitMaster.class, p.getUnitId());
-		unit.setUserType(p.getUserType());
+		unit.setDesignation(p.getDesignation());
 		unit.setUnitName(p.getUnitName());
 		unit.setTrainingPhase(p.getTrainingPhase());
 		unit.setTrainingType(p.getTrainingType());
@@ -2014,10 +2014,10 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		System.out.println("inside listUnitMaster");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<UnitMaster> mccList = session.createQuery("from UnitMaster where coalesce(isactive,'') <> 'N' ").list();
-		for (UnitMaster p : mccList) {
+		List<UnitMaster> mccList = session.createSQLQuery("select d.designationName, tt.trainingTypeName,tp.trainingPhaseName,u.unitName,u.unitCode,u.status,u.unitId from UnitMaster u inner join TrainingType tt on cast (u.trainingType as numeric)=tt.trainingTypeId  inner join TrainingPhase tp on cast(u.trainingPhase as numeric)=tp.trainingPhaseId  inner join Designation d on cast(u.designation as numeric)=d.designationId where coalesce(isactive,'') <> 'N' ").list();
+		/*for (UnitMaster p : mccList) {
 			System.out.println("Unit List::" + p);
-		}
+		}*/
 		return mccList;
 	}
 
@@ -2113,7 +2113,7 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		List<ModuleMaster> lst = session.createSQLQuery("select m.moduleName ,u.unitName,m.status,m.moduleId from modulemaster m join unitmaster u on(u.unitid=m.unitid) where m.isactive='Y'").list();
-		
+		System.out.println("cccccccccccccccccccc");
 		return lst;
 	}
 
@@ -3519,6 +3519,17 @@ public class AdminDAOImpl implements AdminDAO {
 			resulList.add(bean);
 		}
 		return resulList;
+	}
+	@Override
+	public List<UnitMaster> listUnitMaster2() {
+		// TODO Auto-generated method stub
+		System.out.println("inside listUnitMaster");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<UnitMaster> mccList = session.createQuery("from UnitMaster where coalesce(isactive,'') <> 'N' ").list();
+		for (UnitMaster p : mccList) {
+			System.out.println("Unit List::" + p);
+		}
+		return mccList;
 	}
 
 }

@@ -22,6 +22,7 @@ import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.Designation;
 import com.ir.model.HolidayMaster;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
@@ -32,6 +33,8 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainingPhase;
+import com.ir.model.TrainingType;
 import com.ir.model.Utility;
 @Service
 public class PageLoadDaoImpl implements PageLoadDao {
@@ -371,4 +374,45 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			
 		}
 
+		@Override
+		public List<Designation> loadDesignation() {
+			System.out.println("Page Load DAOImpl process start in Designation ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from Designation");
+			List DesignationList = query.list();
+			System.out.println("business  ************* list dao     :"+ DesignationList);
+			return DesignationList;
+		}
+
+
+		@Override
+		public List<TrainingType> loadTrainingType() {
+			System.out.println("Page Load DAOImpl process start in Designation ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from TrainingType");
+			List TrainingTypeList = query.list();
+			System.out.println("business  ************* list dao     :"+ TrainingTypeList);
+			return TrainingTypeList;
+		}
+
+		
+		@Override
+		public List<TrainingPhase> loadTrainingPhase() {
+			System.out.println("Page Load DAOImpl process start in Designation ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from TrainingPhase");
+			List TrainingPhaseList = query.list();
+			System.out.println("business  ************* list dao     :"+ TrainingPhaseList);
+			return TrainingPhaseList;
+		}
+		/*@Override
+		public List<com.ir.model.District> District(String stateId) {
+			// TODO Auto-generated method stub
+			System.out.println("Page Load DAOImpl process start in district name ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from DistrictMaster where status = 'A'  and stateId =  '"+stateId+"'");
+			List districtList = query.list();
+			System.out.println("district  ************* list dao     :"+ districtList);
+			return districtList;
+		}*/
 }

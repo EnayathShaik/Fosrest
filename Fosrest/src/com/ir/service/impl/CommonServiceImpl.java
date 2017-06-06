@@ -89,6 +89,12 @@ public class CommonServiceImpl implements CommonService{
 	}
 	@Override
 	@Transactional
+	public List loadTrainingPhase(int trainingTypeId) {
+		List  PhaseList = commonDao.loadTrainingPhase( trainingTypeId);
+		return PhaseList;
+	}
+	@Override
+	@Transactional
 	public String checkState(String id, String tableName) {
 		// TODO Auto-generated method stub
 		String a = commonDao.checkState(id , tableName);

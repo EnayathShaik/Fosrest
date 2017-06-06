@@ -6,6 +6,7 @@
 	src="website/js/jquery-toaster/jquery.toaster.js"></script>
 
  -->
+ <script src="website/js/commonController.js"></script>
 <script>
 	function OnStart() {
 
@@ -67,10 +68,11 @@
 																id="name_status" class="clear-label"> </span> ${created }</li>
 														</ul>
 													</div>
-													<cf:select path="trainingType" class="form-control">
-														<cf:option value="" label="Select training" />
-														<cf:options items="${trainingType}" />
-													</cf:select>
+													 <cf:select path="TrainingType" class="form-control" onchange="getTrainingPhase(this.value , 'trainingPhase')">
+															<cf:option value="" label="Select Training Type" />
+															<cf:options items="${TrainingTypeList}"
+																itemValue="trainingTypeId" itemLabel="trainingTypeName" />
+														</cf:select>
 												</div>
 												<div class="form-group">
 													<div>
@@ -85,10 +87,11 @@
 																	error</label></li>
 														</ul>
 													</div>
-													<cf:select path="trainingPhase" class="form-control">
-														<cf:option value="" label="Select training phase" />
-														<cf:options items="${trainingPhase}" />
-													</cf:select>
+													 <cf:select path="trainingPhase" class="form-control">
+															<cf:option value="" label="Select Training Type" />
+															<cf:options items="${TrainingPhaseList}"
+																itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
+														</cf:select> 
 												</div>
 											</div>
 											<!-- right side -->
@@ -110,22 +113,21 @@
 														</cf:select>
 
 													</div>
-
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
-																<li class="style-li"><strong>Designation:
-																</li>
+																<li class="style-li"><strong>Designation:</strong></li>
+																<li class="style-li error-red"><cf:errors
+																		path="status" cssClass="error" /></li>
 															</ul>
 														</div>
-													<%-- 	<cf:input path="designation" placeholder="Designation"
-															class="form-control" /> --%>
-<cf:select path="designation" class="form-control">
-													<cf:option value="" label="Select Designation" />
-													<cf:options items="${userType}" />
-												</cf:select>
-													</div>
+														<cf:select path="Designation" class="form-control">
+															<cf:option value="" label="Select Designation" />
+															<cf:options items="${DesignationList}"
+																itemValue="designationId" itemLabel="designationName" />
+														</cf:select>
 
+													</div>
 													<div class="col-md-06 col-xs-12" style="margin-top: 39px;">
 														<input type="submit" id="searchbtn" value="Search"
 															style="float: right; padding: 10px 50px 10px 50px"
@@ -138,7 +140,7 @@
 								</div>
 							</div>
 							<!-- search Results -->
-						 <div class="col-xs-12 " id="testt">
+							<div class="col-xs-12 " id="testt">
 								<!-- table -->
 								<div class="row">
 									<div class="col-xs-12">
@@ -157,8 +159,8 @@
 															<th>Module Name</th>
 															<th>Duration</th>
 															<th>Training Date</th>
-														<th>Day</th>
-															
+															<th>Day</th>
+
 														</tr>
 													</thead>
 													<ct:forEach items="${listtrainingScheduleMaster}"
@@ -171,16 +173,17 @@
 															<td>${listtrainingScheduleMaster.chapter}</td>
 															<td>${listtrainingScheduleMaster.module}</td>
 															<td>${listtrainingScheduleMaster.duration}</td>
-															<td>${listtrainingScheduleMaster.trainingStartDate}  &nbsp &nbsp  ${listtrainingScheduleMaster.trainingEndDate}</td>
-									
+															<td>${listtrainingScheduleMaster.trainingStartDate}
+																&nbsp &nbsp
+																${listtrainingScheduleMaster.trainingEndDate}</td>
+
 															<td>${listtrainingScheduleMaster.day}</td>
 														</tr>
 													</ct:forEach>
 												</table>
 												<div class="col-md-06 col-xs-12" style="margin-top: -72px;">
-												<input type="button" id="savebtn" value="Save"
-													style=" float: right;"
-													 class="btn login-btn" /> 
+													<input type="button" id="savebtn" value="Save"
+														style="float: right;" class="btn login-btn" />
 											</ct:if>
 										</fieldset>
 									</div>
@@ -220,3 +223,4 @@
 		}
 	}
 </script> -->
+

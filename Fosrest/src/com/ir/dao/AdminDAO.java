@@ -390,5 +390,7 @@ public interface AdminDAO {
 
 	public List<TrainingScheduleForm> listtrainingScheduleMaster();
 
+	public List<UnitMaster> listUnitMaster2();
+
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

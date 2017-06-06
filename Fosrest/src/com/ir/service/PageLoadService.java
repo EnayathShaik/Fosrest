@@ -8,6 +8,7 @@ import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.Designation;
 import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
@@ -16,6 +17,8 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainingPhase;
+import com.ir.model.TrainingType;
 import com.ir.model.Utility;
 
 public interface PageLoadService {
@@ -53,6 +56,7 @@ public interface PageLoadService {
 	public List listTrainer();
 
 	public List<ModuleMaster> learningResource();
-	
-	 
+	public List<Designation> loadDesignation();
+	public List<TrainingType> loadTrainingType();
+	public List<TrainingPhase> loadTrainingPhase();
 }
