@@ -354,7 +354,7 @@ function getTrainingPhase(val , idName) {
 			$.each(mainData1, function(i, obj) {
 				$('#'+idName)
 						.append(
-								'<option value='+mainData1[0]+' >' + mainData1[i]
+								'<option value='+(i+1)+' >' + mainData1[i]
 										+ '</option>');
 			});
 		}

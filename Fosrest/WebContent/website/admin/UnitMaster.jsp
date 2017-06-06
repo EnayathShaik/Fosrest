@@ -238,10 +238,10 @@
              		$("#trainingTypeErr").css("display" , "block");
              		return false;
              	 }
-             	else if($("#trainingPhase").val() == 0){
+             	/* else if($("#trainingPhase").val() == 0){
               		 
              		$("#trainingPhaseErr").css("display" , "block");
              		return false;
-             	 }
+             	 } */
                 	}
             </script>

@@ -1954,13 +1954,16 @@ public class AdminDAOImpl implements AdminDAO {
 			maxId = (int) list.get(0);
 			// eligible = (String) list.get(0);
 		}
-		System.out.println("UnitMaster " + p.getUnitId());
+		if(p.getTrainingPhase()=="0"){
+			p.setTrainingPhase("5");
+		}
 		System.out.println(
 				p.getUnitName().substring(0, 2).toUpperCase() + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 
 		p.setUnitCode(
 				p.getUnitName().substring(0, 2).toUpperCase() + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		p.setSeqNo(maxId);
+		
 		p.setIsActive("Y");
 		session.persist(p);
 		return "created";

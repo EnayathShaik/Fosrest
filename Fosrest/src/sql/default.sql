@@ -82,3 +82,4 @@ INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VAL
 INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (2, 'Onjob',3);
 INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (3, 'Foundation',3);
 INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (4, 'Other',4);
+INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (0, 'Not Avaialble',null);
