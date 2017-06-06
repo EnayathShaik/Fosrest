@@ -90,6 +90,25 @@ public class CommonController {
 	}
 	
 	
+	@RequestMapping(value="/checkstate" , method=RequestMethod.POST)
+	@ResponseBody
+	public void checkState(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		
+		new ZLogger("testAjax","testAjax............" + data  , "CommonController.java");
+		String[] inputs = data.split("-");
+		String id = inputs[0];
+		String tableName = inputs[1];
+		System.out.println("State id= "+id + " tableName "+tableName);
+		String result = null;
+		result = commonService.checkState(id, tableName);
+		//checkAadhar
+		PrintWriter out = response.getWriter(); 
+		out.write(result.equalsIgnoreCase("Already") ? "Already" : "" );
+		out.flush();
+		
+	}
+	
+	
 	@RequestMapping(value="/getCourseName" , method=RequestMethod.POST)
 	@ResponseBody
 	public void getCourseName(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{

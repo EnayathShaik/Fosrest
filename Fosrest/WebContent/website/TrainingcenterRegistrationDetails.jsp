@@ -553,6 +553,15 @@
                                     <label class="radio-inline">
                                         <cf:radiobutton  path="availableTVProjector"  checked="checked" name="optradio"/> No </label>
                                 </div>
+                                
+                                   <div class="form-group">
+                                    <label>Availability of in-house trainers in food safety ?</label>
+                                    <br>
+                                    <label class="radio-inline">
+                                        <cf:radiobutton  path="availableInHouseTrainer" name="optradio"/> Yes </label>
+                                    <label class="radio-inline">
+                                        <cf:radiobutton  path="availableInHouseTrainer"   checked="checked" name="optradio"/> No </label>
+                                </div>
                               
                             </div>
                             <!-- left side ends -->
@@ -571,14 +580,19 @@
                                     <cf:input type="text" path="noOfInHouseTrainer" placeholder="Number of trainers" class="form-control"/>
                                 </div>
                                 
-                                  <div class="form-group">
-                                    <label>Availability of in-house trainers in food safety ?</label>
-                                    <br>
-                                    <label class="radio-inline">
-                                        <cf:radiobutton  path="availableInHouseTrainer" name="optradio"/> Yes </label>
-                                    <label class="radio-inline">
-                                        <cf:radiobutton  path="availableInHouseTrainer"   checked="checked" name="optradio"/> No </label>
+                                 <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Number of PC's</strong></li>
+                                             <li id="noOfPCErr" style="display:none;" class="style-li error-red" > Insert number of PC's.</li>
+                                            
+                                            <li class="style-li error-red"> </li>
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="noOfPC" placeholder="Number of Pc's" class="form-control"/>
                                 </div>
+                                
+                               
                                <%--  <div class="form-group">
                                     <div>
                                         <ul class="lab-no">

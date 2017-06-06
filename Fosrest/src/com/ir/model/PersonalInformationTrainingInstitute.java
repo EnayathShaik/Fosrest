@@ -52,8 +52,18 @@ public class PersonalInformationTrainingInstitute {
 
 
 	private String title;
+	private int noOfPC;
 	
-	
+
+
+	public int getNoOfPC() {
+		return noOfPC;
+	}
+
+	public void setNoOfPC(int noOfPC) {
+		this.noOfPC = noOfPC;
+	}
+
 	@NotNull
 	
 	@Size(min=1, max=50 , message="enter your Training Center Name")

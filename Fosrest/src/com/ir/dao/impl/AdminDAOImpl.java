@@ -678,10 +678,10 @@ public class AdminDAOImpl implements AdminDAO {
 		 */
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like = " where upper(pitp.FirstName) like '" + FirstName.toUpperCase() + "' and pitp.MiddleName like '"
-				+ MiddleName + "' and pitp.LastName like '" + LastName + "' and " + "pitp.PAN like '" + PanNumber
-				+ "' and ld.status like '" + status + "'";
+				+ MiddleName + "' and pitp.LastName like '" + LastName +
+				"' and ld.status like '" + status + "'";
 		like = like + userBuffer.toString();
-		String select = "pitp.id,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.PAN,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
+		String select = "pitp.id,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 
 		String sql = "Select " + select + "  from PersonalInformationTrainingInstitute as pitp " + join + like;
 		Query query = session.createSQLQuery(sql);
@@ -820,9 +820,25 @@ public class AdminDAOImpl implements AdminDAO {
 		public void updatestateadmin(stateAdminForm p) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
-			String u=p.getUserId();
-			p.setUserId(u);
-			session.update(p);
+			int id=p.getId();
+			
+			StateAdmin s = (StateAdmin) session.load(StateAdmin.class, id);
+			s.setAadharNumber(p.getAadharNumber());
+			s.setAddress1(p.getAddress1());
+			s.setAddress2(p.getAddress2());
+			s.setDesignation(p.getDesignation());
+			s.setEmail(p.getEmail());
+			s.setEmpID(p.getEmpID());
+			s.setFirstName(p.getFirstName());
+			s.setLandLine(p.getLandLine());
+			s.setLastName(p.getLastName());
+			s.setMiddleName(p.getMiddleName());
+			s.setMobileNo(p.getMobileNo());
+			s.setPincode(p.getPincode());
+			s.setState(p.getState());
+			
+			session.update(s);
+			
 			//new ZLogger("ManageTraining saved successfully", " ManageTraining Details=" + p, "AdminDAOImpl.java");
 		}
 		/*@Override

@@ -90,6 +90,46 @@ function ck_aadhar(tableName ) {
 }
 
 
+function ck_state(tableName ) {
+	var id=document.getElementById( "state" ).value;
+	 var el = document.getElementById('state');
+   	 var stateName = el.options[el.selectedIndex].innerHTML;
+   
+    if(id)
+        {
+    	
+    	var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
+    	 //var  input = name+"-"+"personalinformationtrainer";
+	  
+	  var  input = id+"-"+tableName;
+    		$.ajax({
+    		      type: 'post',
+    		      url: 'checkstate.fssai?data='+input,
+    		      contentType : "application/json",
+    		      data:name1,
+    		      success: function (response) {   
+    		    	 
+    		    	  $("#stateErr").css("display" , "none");
+    		    	  $('#state_status').html("StateAdmin for "+stateName+" "+response+ " EXISTS");
+      		    	if (response.trim() == 'Already') {
+    					document.getElementById('state').value =0;
+    					return false;
+
+    				} else {
+    					var aa = $('#state_status').html("");
+    					return true;
+    				}
+    		    	
+    		      } 
+    		      });
+     }
+}
+
+
+
 function getAssessorName(val) {
  	var name=JSON.stringify({
 		courseType:0,

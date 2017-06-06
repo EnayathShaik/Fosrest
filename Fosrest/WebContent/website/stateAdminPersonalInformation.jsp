@@ -3,6 +3,10 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+<script src="website/js/jquery-2.1.0.min.js"></script>
+
+
+ <script src="website/js/commonController.js"></script>
 
 
 <ct:url var="addAction" value="/stateadminadd.fssai"></ct:url>
@@ -94,10 +98,11 @@
 				                                            <li class="style-li"><strong>State:</strong></li><li class="style-li error-red"> * </li>
 				                                            <!--  valid -->
 				                                             <li id="stateErr" style="display:none;" class="style-li error-red" >correspondence State can not be blank.</li>
-				                                            
+				                                             <li class="style-li error-red">
+				                                              <span id="state_status" ></span></li>
 				                                        </ul>
 				                                    </div>
-				                                    <cf:select path="state" class="form-control" >
+				                                    <cf:select id="state" path="state" class="form-control"  onblur="ck_state('StateAdmin');" >
 				                                	<cf:option value="0" label="Select state Name" />
 													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
 				                                    </cf:select>
@@ -221,12 +226,12 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Landline:</strong></li>
-                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Landline cannot be blank</li>
+                                            <li id="landLineErr" style="display:none;" class="style-li error-red" > Landline cannot be blank</li>
                                           
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="landLine" class="form-control"  placeholder="landLine" required=""
+                                    <cf:input type="text" path="landLine" class="form-control"  placeholder="landLine"  minlength="2"  maxlength="8"  required=""
                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
 
@@ -279,7 +284,7 @@
                	
             
                 	$("#firstNameErr").css("display" , "none");
-                	$("#MiddleNameErr").css("display" , "none");
+                	$("#middleNameErr").css("display" , "none");
                 	$("#LastNameErr").css("display" , "none");
                 	$("#EmailErr").css("display" , "none");
                 	$("#empIdErr1").css("display" , "none");
@@ -288,11 +293,40 @@
                 	$("#designationErr").css("display" , "none");
                 	$("#stateErr").css("display" , "none");
                 	$("#pincodeErr").css("display" , "none");
+                	$("#stateErr").css("display" , "none");
+                
                 	
                 	if($("#empID").val() == ''){
     				$("#empIDErr1").css("display" , "block");
     				return false;
     				}
+                	
+                	if($("#email").val() == 0){
+               		 
+    					$("#EmailErr").css("display" , "block");
+    					return false;
+    					}
+                	if($("#state").val() < 1 || $("#state").val()=='' ){ 
+						 
+						alert("Select STATE");
+						return false;
+						}
+    					if($("#address1").val() == 0){
+    						  
+    						$("#address1Err").css("display" , "block");
+    						return false;
+    						}
+    					if($("#address2").val() == 0){
+    						 
+    						$("#address2Err").css("display" , "block");
+    						return false;
+    						}
+    					
+    					if($("#pincode").val() == 0){
+   						 
+    						$("#pincodeErr").css("display" , "block");
+    						return false;
+    						}
                 	if($("#firstName").val() == 0){
 					$("#firstNameErr").css("display" , "block");
 					return false;
@@ -307,34 +341,22 @@
 					$("#LastNameErr").css("display" , "block");
 					return false;
 					}
-					if($("#email").val() == 0){
-		 
-					$("#EmailErr").css("display" , "block");
-					return false;
-					}
-					if($("#address1").val() == 0){
-						 
-						$("#address1Err").css("display" , "block");
-						return false;
-						}
-					if($("#address2").val() == 0){
-						 
-						$("#address2Err").css("display" , "block");
-						return false;
-						}
-					if($("#state").val() == 0){
-						 
-						$("#stateErr").css("display" , "block");
-						return false;
-						}
+					
+			 
 					if($("#designation").val() == 0){
 						 
 						$("#designationErr").css("display" , "block");
 						return false;
 						}
-					if($("#pincode").val() == 0){
+				
+					if($("#landLine").val() == 0){
 						 
-						$("#pincodeErr").css("display" , "block");
+						$("#landLineErr").css("display" , "block");
+						return false;
+						}
+					if($("#mobileNo").val() == 0){
+						 
+						$("#mobileNoErr").css("display" , "block");
 						return false;
 						}
 

@@ -140,7 +140,7 @@
             <ul class="dropdown-menu">
        			<li><a href="PersonalInformationTrainee.fssai">Trainee</a></li>
               <li><a href="PersonalInformationTrainer.fssai">Trainer</a></li>
-              <li><a href="PersonalInformationTrainingInstitute.fssai">Training Institude</a></li>
+              <li><a href="PersonalInformationTrainingInstitute.fssai">Training Institute</a></li>
             </ul>
           </li>
 		<li><a href="NominateTrainee.fssai">Nominate Trainee</a></li>

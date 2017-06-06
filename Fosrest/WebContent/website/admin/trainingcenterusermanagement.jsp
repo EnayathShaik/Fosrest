@@ -77,14 +77,14 @@
                                                                         </ul>
                                                                     </div>
                                                                     <cf:input type="text" class="form-control" path="userId" placeholder="User ID" /> </div>
-                                                                <div class="form-group">
+                                                          <!--       <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong>PAN Number:</strong></li>
                                                                             <li class="style-li error-red"> </li>
                                                                         </ul>
                                                                     </div>
-                                                                    <input type="text" class="form-control" placeholder="PAN Number" /> </div>
+                                                                    <input type="text" class="form-control" placeholder="PAN Number" /> </div> -->
                                                                 <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
@@ -137,7 +137,7 @@
                                                         <th>First Name</th>
                                                         <th>Middle Name</th>
                                                         <th>Last Name</th>
-                                                        <th>PAN Number</th>
+                                                       <!--  <th>PAN Number</th> -->
                                                         <th>Current Status</th>
                                                         <th>Update Status</th>
                                                     </thead>
@@ -147,7 +147,7 @@
                                                                 <ct:forEach var="listValue" items="${searchTrainingCenterUsermanagement}" varStatus="loop">
                                                                     <tr>
                                                                         <td>
-                                                                            <label><a href="PersonalInformationTrainingInstitute.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                            <label><a href="PersonalInformationTrainingInstitute.fssai?userId=${listValue[5]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                         </td>
                                                                         <td>
                                                                             <label>${listValue[2] }</label>
@@ -159,13 +159,13 @@
                                                                             <label>${listValue[4]}</label>
                                                                         </td>
                                                                         <td>
-                                                                            <label>${listValue[5]}</label>
+                                                                            <label>${listValue[6]}</label>
                                                                         </td>
-                                                                            <td>
+                                                                           <%--  <td>
                                                                                     <label>${listValue[8]}</label>
-                                                                                </td>
+                                                                                </td> --%>
                                                                                 <td>
-                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[6]}','${listValue[7]}','1');" value="${listValue[7]}"/></label>
+                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[5]}','${listValue[6]}','1');" value="${listValue[7]}"/></label>
                                                                                 </td>
                                                                     </tr>
                                                                 </ct:forEach>

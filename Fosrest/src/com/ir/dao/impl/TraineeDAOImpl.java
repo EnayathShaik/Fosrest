@@ -1389,6 +1389,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		//personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
 		personalInformationTrainingInstitute.setSeatingCapacity(p.getSeatingCapacity());
 		personalInformationTrainingInstitute.setNoOfInHouseTrainer(p.getNoOfInHouseTrainer());
+		personalInformationTrainingInstitute.setNoOfPC(p.getNoOfPC());
 		//personalInformationTrainingInstitute.setNoOfYearExp(p.getNoOfYearExp());
 		//personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
 		session.update(personalInformationTrainingInstitute);

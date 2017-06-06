@@ -155,4 +155,25 @@ public class CommonDaoImpl implements CommonDao{
 		return batchCodeList;
 	}
 
+	@Override
+	public String checkState(String id, String tableName) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		String response = null;
+		String sql="select * from "+tableName+" where state = '" + id + "'";
+		try{
+			Query query = session.createSQLQuery(sql);
+			List list = (List)query.list();
+			if(list.size() > 0){
+				new ZLogger("checkState", "not available to use", "CommonDaoImpl.java");
+				response ="Already";
+			}else{
+				response ="N";
+			}
+		}catch(Exception e){
+			
+		}
+		return response;
+	}
+
 }

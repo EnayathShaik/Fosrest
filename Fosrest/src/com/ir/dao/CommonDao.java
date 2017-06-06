@@ -19,4 +19,5 @@ public interface CommonDao {
 	public List getModule(String unit);
 
 	public List getBatchCode(String module);
+	public String checkState(String id, String tableName);
 }

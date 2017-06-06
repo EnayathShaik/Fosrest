@@ -21,4 +21,6 @@ public interface CommonService {
 	
 	public List getModule(String data);
 	public List getBatchCode(String data);
+
+	public String checkState(String id, String tableName);
 }

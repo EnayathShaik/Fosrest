@@ -297,10 +297,10 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
                                             <li><a href="trainerUserManagementForm.fssai" class="clr">Trainer</a></li>
-                                            <li><a href="trainingCenterUserManagementForm.fssai" class="clr">Training Institude</a></li>
+                                            <li><a href="trainingCenterUserManagementForm.fssai" class="clr">Training Institute</a></li>
                                              <!-- <li><a href="assessorUserManagementForm.fssai" class="clr">Assessor</a></li> -->
                                              <li><a href="adminUserManagementForm.fssai" class="clr">Admin</a></li>
-                                             <!-- <li><a href="stateadmin.fssai" class="clr">StateAdmin</a></li> -->
+                                             <li><a href="stateadmin.fssai" class="clr">StateAdmin</a></li> 
                                         </ul>
                                     </li>
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>

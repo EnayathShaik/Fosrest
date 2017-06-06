@@ -87,5 +87,12 @@ public class CommonServiceImpl implements CommonService{
 		List  batchCodeList = commonDao.getBatchCode( module);
 		return batchCodeList;
 	}
+	@Override
+	@Transactional
+	public String checkState(String id, String tableName) {
+		// TODO Auto-generated method stub
+		String a = commonDao.checkState(id , tableName);
+		return a;
+	}
 	
 }
