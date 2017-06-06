@@ -1035,11 +1035,11 @@
 				return false;
 			 
 	   } 
-	  if($("#otherTrainingInstitute").val() ==''){
+	  /* if($("#otherTrainingInstitute").val() ==''){
 			 $("#otherTrainingInstituteErr").css("display" , "block");
 				return false;
 			 
-	   } 
+	   }  */
 		/*   if($("#AssociatedWithAnyTrainingInstitute").val() == 0){
 				 $("#AssociatedWithAnyTrainingInstituteErr").css("display" , "block");
 				return false;
