@@ -73,7 +73,7 @@
 													</ul>
 												</div>
 												<cf:select path="userType" class="form-control">
-													<cf:option value="" label="Select User Type" />
+													<cf:option value="" label="Select Designation" />
 													<cf:options items="${userType}" />
 												</cf:select>
 											</div>

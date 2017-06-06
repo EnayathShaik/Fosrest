@@ -366,7 +366,7 @@ public class PersonalInformationTrainer {
 	}*/
 
 	
-	private int sessWishToConduct;
+	/*private int sessWishToConduct;
 	
 	
 	public int getSessWishToConduct() {
@@ -375,7 +375,7 @@ public class PersonalInformationTrainer {
 
 	public void setSessWishToConduct(int sessWishToConduct) {
 		this.sessWishToConduct = sessWishToConduct;
-	}
+	}*/
 	
 	
 	private int expInYear;

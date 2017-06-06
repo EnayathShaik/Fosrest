@@ -82,7 +82,7 @@
                                                         <li class="style-li error-red"> </li>
                                                     </ul>
                                                 </div>
-                                                  <cf:select path="trainingPhase" class="form-control" id="testId">
+                                                  <cf:select path="trainingPhase" class="form-control">
 													<cf:option value="0" label="Select training phase" />
 													 <cf:options items="${trainingPhase}"/>	
 												</cf:select>
