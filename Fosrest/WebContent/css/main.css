@@ -60,7 +60,7 @@ a {
 }
 
 a:hover, a:focus {
-  color: #fff !important;
+  color: #000 !important;
 }
 
 hr {
@@ -2936,8 +2936,9 @@ tbody tr:hover {
 
 .panelimg{
 	height:auto;
-background: #dd4108;
+background: linear-gradient(to bottom, #7777ad 0%, #f19776 100%);
+border-radius:20%;
     color: #fff !important;
-    padding: 8px;
+    padding: 3px;
     border:0px solid #dd4108;
 }

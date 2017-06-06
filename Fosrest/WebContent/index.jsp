@@ -153,8 +153,109 @@ width:30%;
 
 	</header>
 	<!--/header-->
-
+	<hr>
 	<div class="header">
+	<div class="container">
+	<div class="row" >
+	<div class="col-sm-6">
+	<div class = "panel-group" id = "accordion">
+   <div class = "panel panel-default" style="border:1px solid #ccc;padding:3px;">
+      <div class = "panel-heading">
+         <h4 class = "panel-title">
+            <a data-toggle = "collapse" href = "#collapseOne">
+               <center style="font-size:20px; color:#e6511a;font-weight:bold;"> For Fssai Admin</center>
+            </a>
+         </h4>
+      </div>
+      <div id = "collapseOne" class = "panel-collapse collapse in">
+         <div class = "panel-body" style="background-image: url(website/images/slider/bg.jpg); height: 20em; width: 39em;">
+<div class="row">
+<div class="col-sm-12 text-center">
+<div style="font-size:16px;color:#000;font-weight:bold;"><a href="login.fssai" style="color:#fff;">Login</a></div>
+</div>
+</div>
+<div class="row" style="height:55px;">
+</div>
+<div class="row">
+<div class="col-sm-2"></div>
+<div class="col-sm-4">
+	<div class="feature-wrap panelimg" >
+								<img class="img-responsive center-block" style="height: 39px;">
+								<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3>
+							</div>
+</div>
+<div class="col-sm-4">
+<div class="feature-wrap panelimg">
+								<img class="img-responsive center-block" style="height: 25px;">
+								<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer</h3>
+							</div>
+</div>
+<div class="col-sm-2"></div>
+</div>         
+
+         </div>
+      </div>
+      </div>
+   </div>
+	</div>
+	
+	<div class="col-sm-6">
+ <div class = "panel panel-default" style="border:1px solid #ccc;padding:3px;">
+      <div class = "panel-heading">
+         <h4 class = "panel-title">
+            <a data-toggle = "collapse"  href = "#collapseTwo">
+            <center style="font-size:20px; color:#e6511a;font-weight:bold;">For State Admin</center> 
+            </a>
+         </h4>
+      </div>
+
+      <div id = "collapseTwo" class = "panel-collapse collapse in">
+         <div class = "panel-body" style="background-image: url(website/images/slider/bg2.jpg); height: 20em; width: 39em;">
+           <div class="row">
+<div class="col-sm-12 text-center">
+<div style="font-size:16px;color:#000;font-weight:bold;"><a href="login.fssai" style="color:#000;">Login</a></div>
+</div>
+</div> 
+<div class="row" style="height:55px;">
+</div>
+<div class="row">
+<div class="col-sm-4">
+	<div class="feature-wrap panelimg">
+								<img class="img-responsive center-block" style="height: 50px;"
+									src="website/images/training-partner-icon.png">
+								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Training <br>Partner</h3>
+							</div>
+</div>
+<div class="col-sm-4">
+<div class="feature-wrap panelimg">
+								<img class="img-responsive center-block" style="height: 50px;"
+									src="website/images/trainer-icon.png">
+								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Trainer <br>&nbsp;&nbsp;</h3>
+							</div>
+</div>
+<div class="col-sm-4">
+<div class="feature-wrap panelimg">
+								<img class="img-responsive center-block" style="height: 50px;"
+									src="website/images/learning-resource-icon.png">
+								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Learning resource</h3>
+							</div>
+</div>
+</div>
+         </div>
+      </div>
+      
+   </div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	
+	
+	
+	
+
+	<!-- <div class="header">
 		<div class="row">
 			<div class="col-xs-4 item active header-bg img-responsive"
 				style="background-image: url(website/images/slider/food5.jpg); height: 30em; width: 40em;">
@@ -234,13 +335,7 @@ width:30%;
 				</div>
 			</div>
 		</div>
-
-
-
-
-
-	
-	</div>
+	</div> -->
 
 <!-- 
 	<section id="main-slider" class="no-margin">
