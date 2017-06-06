@@ -3498,23 +3498,27 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		System.out.println("inside listtrainingScheduleMaster");
 		
-		TrainingScheduleForm bean = new TrainingScheduleForm();
+		TrainingScheduleForm bean ;
 		List<TrainingScheduleForm> resulList = new ArrayList<TrainingScheduleForm>();
+		String sql="select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),unitName,u.unitId,m.moduleId,moduleName from unitmaster u join modulemaster m on (u.unitid=m.unitid)";
+				//String sql="select cast('AO' as varchar(20)) as designation,cast('Induction' as varchar(20)) as trainingType,cast('DEF' as varchar(20)) as courseName,cast('ABC' as varchar(20)) as chapter,cast('XYZ' as varchar(20)) as module,cast('5hrs' as varchar(20)) as duration,cast('12/05/2017' as varchar(20)) as trainingStartDate,cast('03/06/2017' as varchar(20)) as trainingEndDate,cast('1' as integer) as day   ";
 		List<Object[]> list = session
-				.createSQLQuery(
-						"select cast('AO' as varchar(20)) as designation,cast('Induction' as varchar(20)) as trainingType,cast('DEF' as varchar(20)) as courseName,cast('ABC' as varchar(20)) as chapter,cast('XYZ' as varchar(20)) as module,cast('5hrs' as varchar(20)) as duration,cast('12/05/2017' as varchar(20)) as trainingStartDate,cast('03/06/2017' as varchar(20)) as trainingEndDate,cast('1' as integer) as day   ")
-				.list();
+				.createSQLQuery(sql).list();
 		for (Object[] li : list) {
-
+			System.out.println(li);
+			bean = new TrainingScheduleForm();
 			bean.setDesignation((String) li[0]);
-			bean.setTrainingType((String) li[1]);
-			bean.setCourseName((String) li[2]);
+			bean.setTrainingPhase((String) li[1]);
+			bean.setTrainingType((String) li[2]);
+			//bean.setCourseName((String) li[2]);
 			bean.setChapter((String) li[3]);
-			bean.setModule((String) li[4]);
+			bean.setModuleName((String) li[6]);
+			
+			/*bean.setModule((String) li[4]);
 			bean.setDuration((String) li[5]);
 			bean.setTrainingStartDate((String) li[6]);
 			bean.setTrainingEndDate((String) li[7]);
-			bean.setDay((int) li[8]);
+			bean.setDay((int) li[8]);*/
 			
 			
 			new ZLogger("listactivateTrainingOfTrainee", "", "List:" + li);

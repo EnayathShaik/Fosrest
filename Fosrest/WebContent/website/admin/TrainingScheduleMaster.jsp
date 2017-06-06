@@ -9,6 +9,16 @@
  <script src="website/js/commonController.js"></script>
 <script>
 	function OnStart() {
+	/* 	alert("");
+
+if('${search}'==0){
+	alert("aa");
+	var a='${listtrainingScheduleMaster}';
+	alert(a.length);
+}
+	 */
+	
+
 
 		flatpickr("#trainingDate", {
 
@@ -153,31 +163,38 @@
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
 															<th>Designation</th>
+															<th>Training Phase</th>
 															<th>Training Type</th>
-															<th>Course Name</th>
 															<th>Chapter Name</th>
-															<th>Module Name</th>
-															<th>Duration</th>
-															<th>Training Date</th>
+															<th>Module Names</th>
 															<th>Day</th>
-
-														</tr>
+															<th>Start & End Time</th>
+															
+		</tr>
 													</thead>
 													<ct:forEach items="${listtrainingScheduleMaster}"
-														var="listtrainingScheduleMaster">
+														var="listtrainingScheduleMaster" varStatus="loop">
 														<tr>
-															<td>1</td>
+															<td>${loop.count}</td>
 															<td>${listtrainingScheduleMaster.designation}</td>
+															<td>${listtrainingScheduleMaster.trainingPhase}</td>
 															<td>${listtrainingScheduleMaster.trainingType}</td>
-															<td>${listtrainingScheduleMaster.courseName}</td>
 															<td>${listtrainingScheduleMaster.chapter}</td>
-															<td>${listtrainingScheduleMaster.module}</td>
-															<td>${listtrainingScheduleMaster.duration}</td>
+															<td>${listtrainingScheduleMaster.moduleName}</td>
+															
+														<td> <cf:select path="TrainingType" class="form-control" >
+																<ct:forEach var="i" begin="0" end="30" varStatus="loop">
+	<cf:option value='${loop.count}' label='${loop.count}' />
+	
+	</ct:forEach>
+															 
+															
+														</cf:select></td>
 															<td>${listtrainingScheduleMaster.trainingStartDate}
 																&nbsp &nbsp
 																${listtrainingScheduleMaster.trainingEndDate}</td>
 
-															<td>${listtrainingScheduleMaster.day}</td>
+															
 														</tr>
 													</ct:forEach>
 												</table>

@@ -44,17 +44,18 @@ public class TrainingScheduleForm {
 	public void setDay(int day) {
 		this.day = day;
 	}
-	public String getUnit() {
-		return unit;
+
+	public String getUnitName() {
+		return unitName;
 	}
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
 	}
-	public String getModule() {
-		return module;
+	public String getModuleName() {
+		return moduleName;
 	}
-	public void setModule(String module) {
-		this.module = module;
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
 	}
 	public String getDuration() {
 		return duration;
@@ -133,8 +134,8 @@ public class TrainingScheduleForm {
 	
 	private String trainingInstitudeStatus;
 	private int day;
-	private String unit;
-	private String module;
+	private String unitName;
+	private String moduleName;
 	private String duration;
 	private String trainingStartDate;
 	private String trainingEndDate;
