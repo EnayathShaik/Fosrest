@@ -13,7 +13,7 @@
 <link href="css/monthly.css" rel="stylesheet">
 
 
-<section id="main-slider" class="no-margin">
+<!-- <section id="main-slider" class="no-margin">
   <div class="carousel slide">
     <div class="carousel-inner">
       <div class="item active header-bg" style="background-image: url(website/images/slider/bg1.jpg)">
@@ -41,14 +41,14 @@
           </div>
         </div>
       </div>
-      <!--/.item--> 
+      /.item 
       
      
     </div>
-    <!--/.carousel-inner--> 
+    /.carousel-inner 
   </div>
-  <!--/.carousel--> 
-</section>
+  /.carousel 
+</section> -->
 
 <section>
   <div class="col-xs-12 " id="testt">

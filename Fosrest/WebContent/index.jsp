@@ -39,7 +39,7 @@
 <link href="css/owl.transitions.css" rel="stylesheet">
 <link href="css/owl.carousel.css" rel="stylesheet">
 <link href="css/monthly.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -244,22 +244,22 @@ $(function(){
 <div class="col-sm-3">
 	<div class="feature-wrap panelimg">
 								<img class="img-responsive center-block" style="height: 50px;"
-src="website/images/training-partner-icon.png">
-<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Training <br>Institute</h3>
+src="website/images/training-partner-icon.png"><a href="trainingInstitute.fssai">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Training <br>Institute</h3></a>
 							</div>
 </div>
 <div class="col-sm-3">
 <div class="feature-wrap panelimg">
 								<img class="img-responsive center-block" style="height: 50px;"
-src="website/images/trainer-icon.png">
-<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Trainer <br>&nbsp;&nbsp;</h3>
+src="website/images/trainer-icon.png"><a href="trainer.fssai">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Trainer <br>&nbsp;&nbsp;</h3></a>
 							</div>
 </div>
 <div class="col-sm-3">
 <div class="feature-wrap panelimg">
 <img class="img-responsive center-block" style="height: 50px;"
-src="website/images/learning-resource-icon.png">
-<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Learning <br>resource</h3>
+src="website/images/learning-resource-icon.png"><a href="learningresource.fssai">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Learning <br>resource</h3></a>
 </div>
 </div>
 </div>
@@ -290,14 +290,14 @@ src="website/images/learning-resource-icon.png">
 
 <div class="col-sm-4">
 	<div class="feature-wrap panelimg" >
-								<img class="img-responsive center-block" style="height: 39px;">
-<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3>
+								<img class="img-responsive center-block" style="height: 39px;"><a href="">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3></a>
 							</div>
 </div>
 <div class="col-sm-4">
 <div class="feature-wrap panelimg">
-								<img class="img-responsive center-block" style="height: 25px;">
-<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer</h3>
+								<img class="img-responsive center-block" style="height: 25px;"><a href="training-of-trainers.html">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer</h3></a>
 							</div>
 </div>
 <div class="col-sm-2"></div>
@@ -492,8 +492,8 @@ src="website/images/learning-resource-icon.png">
 		</div>
 	</footer>
 	<!--/#footer-->
-<!-- 	<script src="js/jquery.js"></script>
- -->	<script src="js/bootstrap.min.js"></script>
+ 	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.isotope.min.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script src="js/owl.carousel.js"></script>
