@@ -2,6 +2,7 @@ package com.ir.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.transaction.Transactional;
 
@@ -1521,5 +1522,12 @@ public List<TrainingScheduleForm> listtrainingScheduleMaster() {
 public List<UnitMaster> listUnitMaster2() {
 	// TODO Auto-generated method stub
 	return this.adminDAO.listUnitMaster2();
+}
+
+@Override
+@Transactional
+public TreeMap<String, List<String>> allUnitModules() {
+	// TODO Auto-generated method stub
+	return this.adminDAO.allUnitModules();
 }
 }

@@ -180,21 +180,32 @@ if('${search}'==0){
 															<td>${listtrainingScheduleMaster.trainingPhase}</td>
 															<td>${listtrainingScheduleMaster.trainingType}</td>
 															<td>${listtrainingScheduleMaster.chapter}</td>
-															<td>${listtrainingScheduleMaster.moduleName}</td>
-															
-														<td> <cf:select path="TrainingType" class="form-control" >
-																<ct:forEach var="i" begin="0" end="30" varStatus="loop">
-	<cf:option value='${loop.count}' label='${loop.count}' />
-	
-	</ct:forEach>
-															 
-															
-														</cf:select></td>
-															<td>${listtrainingScheduleMaster.trainingStartDate}
-																&nbsp &nbsp
-																${listtrainingScheduleMaster.trainingEndDate}</td>
+															<%-- <td>${listtrainingScheduleMaster.moduleName}</td> --%>
 
-															
+															<td><ct:forEach items="${allModules}" var="treemap">
+																	<ct:if
+																		test="${listtrainingScheduleMaster.chapter == treemap.key}">
+																		<ul>
+																			<ct:forEach items="${treemap.value}" var="modules">
+																				<li><input type="checkbox" id='${modules}'
+																					value="${modules}"> ${modules}</li>
+																			</ct:forEach>
+																		</ul>
+																	</ct:if>
+																</ct:forEach></td>
+
+															<td><cf:select path="TrainingType"
+																	class="form-control">
+																	<ct:forEach var="i" begin="0" end="30" varStatus="loop">
+																		<cf:option value='${loop.count}' label='${loop.count}' />
+
+																	</ct:forEach>
+
+
+																</cf:select></td>
+															<td>12:30</td>
+
+
 														</tr>
 													</ct:forEach>
 												</table>

@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.transaction.Transactional;
 
@@ -3500,19 +3501,33 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		TrainingScheduleForm bean ;
 		List<TrainingScheduleForm> resulList = new ArrayList<TrainingScheduleForm>();
-		String sql="select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),unitName,u.unitId,m.moduleId,moduleName from unitmaster u join modulemaster m on (u.unitid=m.unitid)";
+		String sql="select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),unitName,moduleName,u.unitId,m.moduleId from unitmaster u join modulemaster m on (u.unitid=m.unitid) order by unitName";
 				//String sql="select cast('AO' as varchar(20)) as designation,cast('Induction' as varchar(20)) as trainingType,cast('DEF' as varchar(20)) as courseName,cast('ABC' as varchar(20)) as chapter,cast('XYZ' as varchar(20)) as module,cast('5hrs' as varchar(20)) as duration,cast('12/05/2017' as varchar(20)) as trainingStartDate,cast('03/06/2017' as varchar(20)) as trainingEndDate,cast('1' as integer) as day   ";
 		List<Object[]> list = session
 				.createSQLQuery(sql).list();
+		
+		//int i=0;
+		//List <String> allchapters = session.createSQLQuery("  select distinct unitname  from unitmaster u join modulemaster m on(u.unitId=m.unitId) order by unitName").list();
+		//String temp=allchapters.get(i);
+		
 		for (Object[] li : list) {
 			System.out.println(li);
+			//System.out.println(temp+" "+(String) li[3]+" "+temp.equals((String) li[3]));
+			
+			//if(temp.equals((String) li[3])){
+				
 			bean = new TrainingScheduleForm();
 			bean.setDesignation((String) li[0]);
 			bean.setTrainingPhase((String) li[1]);
 			bean.setTrainingType((String) li[2]);
 			//bean.setCourseName((String) li[2]);
 			bean.setChapter((String) li[3]);
-			bean.setModuleName((String) li[6]);
+			//for (Object[] li2 : list) {
+				//if((((String) li2[3]).equals(bean.getChapter())))
+					//bean.setModuleName(bean.getModuleName()+"-"+(String)li2[4]);
+			//}
+			//System.out.println(bean.getChapter()+"----"+bean.getModuleName());
+			//bean.setModuleName((String) li[6]);
 			
 			/*bean.setModule((String) li[4]);
 			bean.setDuration((String) li[5]);
@@ -3521,9 +3536,12 @@ public class AdminDAOImpl implements AdminDAO {
 			bean.setDay((int) li[8]);*/
 			
 			
-			new ZLogger("listactivateTrainingOfTrainee", "", "List:" + li);
+			new ZLogger("listactivateTrainingOfTrainee", "", "List:");
 			// logger.info("listactivateTrainingOfTrainee List::" + li);
 			resulList.add(bean);
+		//}
+			//temp=(String)li[3];
+			//temp=allchapters.get(i=i+1);
 		}
 		return resulList;
 	}
@@ -3537,6 +3555,24 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("Unit List::" + p);
 		}
 		return mccList;
+	}
+
+	@Override
+	public TreeMap<String, List<String>> allUnitModules() {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		TreeMap<String, List<String>> UMmap= new TreeMap<String, List<String>>();
+		List <String> allchapters = session.createSQLQuery("  select distinct unitname  from unitmaster u join modulemaster m on(u.unitId=m.unitId) order by unitName").list();
+		System.out.println("inside allUnitModules"+allchapters.size());
+		for(int i=0;i<allchapters.size();i++){
+			List <String> mod = session.createSQLQuery("select  modulename  from modulemaster where unitId= (select unitId from unitMaster where unitname='"+allchapters.get(i)+"')").list();
+			UMmap.put(allchapters.get(i), mod);
+			}
+		
+		
+		return UMmap;
+		
 	}
 
 }

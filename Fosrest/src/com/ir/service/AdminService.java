@@ -2,6 +2,7 @@ package com.ir.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.transaction.Transactional;
 
@@ -495,6 +496,8 @@ List listCalendar();
 public List<TrainingScheduleForm> listtrainingScheduleMaster( );
 
 public List<UnitMaster> listUnitMaster2();
+
+TreeMap<String, List<String>> allUnitModules();
 
 }
 

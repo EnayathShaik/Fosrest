@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -3019,6 +3020,8 @@ public class AdminController {
 			HttpSession session) {
 		
 			model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
+			
+			model.addAttribute("allModules", this.adminService.allUnitModules());
 			
 			return "trainingschedule123";
 		}

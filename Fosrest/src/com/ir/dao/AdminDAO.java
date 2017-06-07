@@ -1,6 +1,7 @@
 package com.ir.dao;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AdminUserManagementForm;
@@ -391,6 +392,8 @@ public interface AdminDAO {
 	public List<TrainingScheduleForm> listtrainingScheduleMaster();
 
 	public List<UnitMaster> listUnitMaster2();
+
+	public TreeMap<String, List<String>> allUnitModules();
 
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }
