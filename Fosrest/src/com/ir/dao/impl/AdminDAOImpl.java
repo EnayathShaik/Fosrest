@@ -2017,7 +2017,7 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		System.out.println("inside listUnitMaster");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<UnitMaster> mccList = session.createSQLQuery("select d.designationName, tt.trainingTypeName,tp.trainingPhaseName,u.unitName,u.unitCode,u.status,u.unitId from UnitMaster u inner join TrainingType tt on cast (u.trainingType as numeric)=tt.trainingTypeId  inner join TrainingPhase tp on cast(u.trainingPhase as numeric)=tp.trainingPhaseId  inner join Designation d on cast(u.designation as numeric)=d.designationId where coalesce(isactive,'') <> 'N' ").list();
+		List<UnitMaster> mccList = session.createSQLQuery("select d.designationName, tt.trainingTypeName,tp.trainingPhaseName,u.unitName,u.unitCode,u.status,u.unitId from UnitMaster u inner join TrainingType tt on cast (u.trainingType as numeric)=tt.trainingTypeId  inner join TrainingPhase tp on cast(u.trainingPhase as numeric)=tp.trainingPhaseId  inner join Designation d on cast(u.designation as numeric)=d.designationId where coalesce(isactive,'') <> 'N' order by unitId").list();
 		/*for (UnitMaster p : mccList) {
 			System.out.println("Unit List::" + p);
 		}*/
