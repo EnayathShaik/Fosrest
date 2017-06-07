@@ -39,14 +39,42 @@
 <link href="css/owl.transitions.css" rel="stylesheet">
 <link href="css/owl.carousel.css" rel="stylesheet">
 <link href="css/monthly.css" rel="stylesheet">
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
 
 <style>
+.holder { 
+  background-color:#ccc;
+  width:300px;
+  height:250px;
+  overflow:hidden;
+  padding:10px;
+  font-family:Helvetica;
+}
+.holder .mask {
+  position: relative;
+  left: 0px;
+  top: 10px;
+  width:300px;
+  height:240px;
+  overflow: hidden;
+}
+.holder ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+  position: relative;
+}
+.holder ul li {
+  padding:10px 0px;
+}
+.holder ul li a {
+  color:darkred;
+  text-decoration:none;
+}
 #news .item img {
 	display: block;
 	width: 100%;
@@ -70,11 +98,45 @@ overflow-x:hidden;}
 .xs3{
 width:30%;
 }
-
-
-
 </style>
+<script>
+jQuery.fn.liScroll = function(settings) {
+	settings = jQuery.extend({
+		travelocity: 0.03
+		}, settings);		
+		return this.each(function(){
+				var $strip = jQuery(this);
+				$strip.addClass("newsticker")
+				var stripHeight = 1;
+				$strip.find("li").each(function(i){
+					stripHeight += jQuery(this, i).outerHeight(true); // thanks to Michael Haszprunar and Fabien Volpi
+				});
+				var $mask = $strip.wrap("<div class='mask'></div>");
+				var $tickercontainer = $strip.parent().wrap("<div class='tickercontainer'></div>");								
+				var containerHeight = $strip.parent().parent().height();	//a.k.a. 'mask' width 	
+				$strip.height(stripHeight);			
+				var totalTravel = stripHeight;
+				var defTiming = totalTravel/settings.travelocity;	// thanks to Scott Waye		
+				function scrollnews(spazio, tempo){
+				$strip.animate({top: '-='+ spazio}, tempo, "linear", function(){$strip.css("top", containerHeight); scrollnews(totalTravel, defTiming);});
+				}
+				scrollnews(totalTravel, defTiming);				
+				$strip.hover(function(){
+				jQuery(this).stop();
+				},
+				function(){
+				var offset = jQuery(this).offset();
+				var residualSpace = offset.top + stripHeight;
+				var residualTime = residualSpace/settings.travelocity;
+				scrollnews(residualSpace, residualTime);
+				});			
+		});	
+};
 
+$(function(){
+    $("ul#ticker01").liScroll();
+});
+</script>
 </head>
 <!--/head-->
 
@@ -83,7 +145,7 @@ width:30%;
 	<header id="header">
 		<div class="top-bar">
 			<div class="container">
-				<div class="row">
+<!-- 				<div class="row"> -->
 					<div class="col-sm-6 col-xs-4">
 						<div class="top-logo">
 							<a href="fostac.fssai"><img class="img-responsive"
@@ -96,7 +158,7 @@ width:30%;
 						<div class="social">
 							<div class="social-share">
 								<a href="http://www.fssai.gov.in/" target="_blank"><img
-									class="img-responsive" src="website/images/fssai.png"></a>
+									class="img-responsive" src="website/images/fssai-logonew.jpg" width="303"></a>
 							</div>
 						</div>
 					</div>
@@ -154,40 +216,88 @@ width:30%;
 	</header>
 	<!--/header-->
 	<hr>
-	<div class="header">
-	<div class="container">
-	<div class="row" >
-	<div class="col-sm-6">
-	<div class = "panel-group" id = "accordion">
-   <div class = "panel panel-default" style="border:1px solid #ccc;padding:3px;">
-      <div class = "panel-heading">
-         <h4 class = "panel-title">
-            <a data-toggle = "collapse" href = "#collapseOne">
-               <center style="font-size:20px; color:#e6511a;font-weight:bold;"> For Fssai Admin</center>
-            </a>
-         </h4>
-      </div>
-      <div id = "collapseOne" class = "panel-collapse collapse in">
-         <div class = "panel-body" style="background-image: url(website/images/slider/bg.jpg); height: 20em; width: 39em;">
-<div class="row">
+	
+<div class="header">
+<div class="container">
+<div class="row" >
+<div class="col-sm-8">
+ <div class = "panel panel-default" style="border:1px solid #ccc;padding:3px;">
+<div class = "panel-heading">
+   <h4 class = "panel-title">
+      <a data-toggle = "collapse"  href = "#collapseTwo">
+      <center style="font-size:20px; color:#e6511a;font-weight:bold;">State Admin</center> 
+      </a>
+   </h4>
+</div>
+
+<div id = "collapseTwo" class = "panel-collapse collapse in">
+   <div class = "panel-body" style="background-image: url(website/images/slider/bg2.jpg); height: 20em; ">
+           <div class="row">
 <div class="col-sm-12 text-center">
+<div style="font-size:16px;color:#000;font-weight:bold;"><a href="login.fssai" style="color:#000;">Login</a></div>
+</div>
+</div> 
+<div class="row" style="height:55px;">
+</div>
+<div class="row">
+<div class="col-sm-2"></div>
+<div class="col-sm-3">
+	<div class="feature-wrap panelimg">
+								<img class="img-responsive center-block" style="height: 50px;"
+src="website/images/training-partner-icon.png">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Training <br>Institute</h3>
+							</div>
+</div>
+<div class="col-sm-3">
+<div class="feature-wrap panelimg">
+								<img class="img-responsive center-block" style="height: 50px;"
+src="website/images/trainer-icon.png">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Trainer <br>&nbsp;&nbsp;</h3>
+							</div>
+</div>
+<div class="col-sm-3">
+<div class="feature-wrap panelimg">
+<img class="img-responsive center-block" style="height: 50px;"
+src="website/images/learning-resource-icon.png">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Learning <br>resource</h3>
+</div>
+</div>
+</div>
+         </div>
+      </div>
+   </div>
+	</div>
+<div class="col-sm-4">
+<div class = "panel-group" id = "accordion">
+  <div class = "panel panel-default" style="border:1px solid #ccc;padding:3px;">
+<div class = "panel-heading">
+ <h4 class = "panel-title">
+<a data-toggle = "collapse" href = "#collapseOne">
+<center style="font-size:20px; color:#e6511a;font-weight:bold;">  Fssai Admin</center>
+</a>
+   </h4>
+</div>
+<div id = "collapseOne" class = "panel-collapse collapse in">
+   <div class = "panel-body" style="background-image: url(website/images/slider/bg.jpg); height: 20em; width: 39em;">
+<div class="row">
+<div class="col-sm-8 text-center">
 <div style="font-size:16px;color:#000;font-weight:bold;"><a href="login.fssai" style="color:#fff;">Login</a></div>
 </div>
 </div>
 <div class="row" style="height:55px;">
 </div>
 <div class="row">
-<div class="col-sm-2"></div>
+
 <div class="col-sm-4">
 	<div class="feature-wrap panelimg" >
 								<img class="img-responsive center-block" style="height: 39px;">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3>
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3>
 							</div>
 </div>
 <div class="col-sm-4">
 <div class="feature-wrap panelimg">
 								<img class="img-responsive center-block" style="height: 25px;">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer</h3>
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer</h3>
 							</div>
 </div>
 <div class="col-sm-2"></div>
@@ -198,287 +308,18 @@ width:30%;
       </div>
    </div>
 	</div>
-	
-	<div class="col-sm-6">
- <div class = "panel panel-default" style="border:1px solid #ccc;padding:3px;">
-      <div class = "panel-heading">
-         <h4 class = "panel-title">
-            <a data-toggle = "collapse"  href = "#collapseTwo">
-            <center style="font-size:20px; color:#e6511a;font-weight:bold;">For State Admin</center> 
-            </a>
-         </h4>
-      </div>
-
-      <div id = "collapseTwo" class = "panel-collapse collapse in">
-         <div class = "panel-body" style="background-image: url(website/images/slider/bg2.jpg); height: 20em; width: 39em;">
-           <div class="row">
-<div class="col-sm-12 text-center">
-<div style="font-size:16px;color:#000;font-weight:bold;"><a href="login.fssai" style="color:#000;">Login</a></div>
-</div>
-</div> 
-<div class="row" style="height:55px;">
-</div>
-<div class="row">
-<div class="col-sm-4">
-	<div class="feature-wrap panelimg">
-								<img class="img-responsive center-block" style="height: 50px;"
-									src="website/images/training-partner-icon.png">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Training <br>Partner</h3>
-							</div>
-</div>
-<div class="col-sm-4">
-<div class="feature-wrap panelimg">
-								<img class="img-responsive center-block" style="height: 50px;"
-									src="website/images/trainer-icon.png">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Trainer <br>&nbsp;&nbsp;</h3>
-							</div>
-</div>
-<div class="col-sm-4">
-<div class="feature-wrap panelimg">
-								<img class="img-responsive center-block" style="height: 50px;"
-									src="website/images/learning-resource-icon.png">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Learning resource</h3>
-							</div>
-</div>
-</div>
-         </div>
-      </div>
-      
-   </div>
 	</div>
 	</div>
 	</div>
-	</div>
-	
-	
-	
-	
-	
 
-	<!-- <div class="header">
-		<div class="row">
-			<div class="col-xs-4 item active header-bg img-responsive"
-				style="background-image: url(website/images/slider/food5.jpg); height: 30em; width: 40em;">
-				<div class="row">
-				<div class="col-xs-2 text-left" style="margin-left:10px;">
-					<div style="font-size:20px;color:#fff;width:83px;background-color:#dd4108;padding: 5px 12px 5px 16px;"><a href="login.fssai" style="color:#fff;">Login</a></div>
-					</div>
-					<div class="col-xs-8 text-center">
-						<h2 style="color: #f9ff00 !important;">Fssai Admin</h2>
-					</div>
-				</div>
-				<div class="row" style="height: 150px;"></div>
-				<div class="row" style="height: 50px;"></div>
-				<div class="row">
-					<div class="col-xs-2"></div>
-					<div class="col-xs-3 xs3">
-					<div class="feature-wrap panelimg" >
-								<img class="img-responsive center-block" style="height: 85px;">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Master Trainer</h3>
-							</div>
-					
-						
-					</div>
-					<div class="col-xs-1"></div>
-					<div class="col-xs-3 xs3">
-						<div class="feature-wrap panelimg">
-								<img class="img-responsive center-block" style="height: 61px;">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Training of Trainer</h3>
-							</div>
-					
-					
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-8 img-responsive"
-				style="background-image: url(website/images/slider/banner.jpg); height: 30em; width: 57em;">
-				<div class="row">
-					<div class="col-xs-2 text-left">
-					<div style="font-size:20px; color:#fff; background-color:#dd4108;padding: 5px 15px 5px 26px;"><a href="login.fssai" style="color:#fff;">Login</a></div>
-					</div>
-				
-					<div class="col-xs-10 text-center">
-						<h2 style="color: 000 !important;">State Admin</h2>
-					</div>
-				</div>
-				<div class="row" style="height: 150px;"></div>
-				<div class="row" style="height: 50px;"></div>
-				<div class="row">
-					<div class="col-xs-1"></div>
-					<div class="col-xs-3" style="margin-right:25px;">
-						<a href="trainingInstitute.fssai">
-							<div class="feature-wrap panelimg">
-								<img class="img-responsive center-block" style="height: 85px;"
-									src="website/images/training-partner-icon.png">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Training Partner</h3>
-							</div>
-						</a>
-					</div>
-					<div class="col-xs-3" style="margin-right:25px;">
-						<a href="trainer.fssai">
-							<div class="feature-wrap panelimg">
-								<img class="img-responsive center-block" style="height: 85px;"
-									src="website/images/trainer-icon.png">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Trainer</h3>
-							</div>
-						</a>
-					</div>
-					<div class="col-xs-3">
-						<a href="learningresource.fssai">
-							<div class="feature-wrap panelimg">
-								<img class="img-responsive center-block" style="height: 85px;"
-									src="website/images/learning-resource-icon.png">
-								<h3 class="industry-heading" style="color:#fff !important;padding:0px;">Learning resource</h3>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
 
-<!-- 
-	<section id="main-slider" class="no-margin">
-		<div class="carousel slide">
-			<div class="carousel-inner">
-				<div class="item active header-bg"
-					style="background-image: url(website/images/slider/food5.jpg); height: 30em; width: 40em; margin-left: 0px;">
-					<div class="container">
-						<div class="row slide-margin">
-							<div class="col-sm-12">
-								<div class="carousel-content">
-									<h2
-										style="text-align: left; margin-left: 283px; color: #f9ff00 !important;">Fssai
-										Admin</h2>
-									<div class="circle-wrap center-block">
-										<ul>
-											<li><a href="login.fssai"><img
-													src="website/images/trainee.png"></a></li>
-										</ul>
-									</div>
-									<div class="circle-wrap center-block">
-										<ul>
-											<li><a href="training-of-trainers.html"><img
-													src="website/images/training-of-trainers.png"></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 hidden-xs animation animated-item-4">
-								<div class="slider-img"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item active header-bg"
-					style="background-image: url(website/images/slider/banner.jpg); height: 30em; width: 57em; margin-left: 560px;">
-					<div class="container">
-						<div class="row slide-margin">
-							<div class="col-sm-12">
-								<div class="carousel-content">
-									<h2 style="text-align: left">State Admin</h2>
-									<div class="circle-wrap center-block">
-										<ul>
-											<li><a href="login.fssai"><img
-													src="website/images/transport-sector.png"></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="features">
-								<div class="col-md-3 col-xs-12 wow fadeInDown btm-space"
-									data-wow-duration="1000ms" data-wow-delay="600ms">
-									<a href="trainingInstitute.fssai">
-										<div class="feature-wrap course-bg"
-											style="width: 15em; margin-left: 10px;">
-											<img class="img-responsive center-block"
-												style="height: 85px;"
-												src="website/images/training-partner-icon.png">
-											<h3 class="industry-heading">Training Partner</h3>
-										</div>
-									</a>
-								</div>
-								/.col-md-4
-								<div class="col-md-3 col-xs-12 wow fadeInDown btm-space"
-									data-wow-duration="1000ms" data-wow-delay="600ms">
-									<a href="trainer.fssai">
-										<div class="feature-wrap course-bg"
-											style="width: 15em; margin-left: -13px;">
-											<img class="img-responsive center-block"
-												style="height: 85px;" src="website/images/trainer-icon.png">
-											<h3 class="industry-heading">Trainer</h3>
-										</div>
-									</a>
-								</div>
-								/.col-md-4
-								<div class="col-md-3 col-xs-12 wow fadeInDown btm-space"
-									data-wow-duration="1000ms" data-wow-delay="600ms">
-									<a href="learningresource.fssai">
-										<div class="feature-wrap course-bg"
-											style="width: 15em; margin-left: -32px;">
-											<img class="img-responsive center-block"
-												style="height: 85px;"
-												src="website/images/learning-resource-icon.png">
-											<h3 class="industry-heading">Learning resource</h3>
-										</div>
-									</a>
-								</div>
-								/.col-md-4
-								/.col-md-4
-							</div>
-							<div class="col-sm-6 hidden-xs animation animated-item-4">
-								<div class="slider-img"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		/.carousel
-	</section>
-	/#main-slider -->
 
-	<!--/#feature-->
-	<section id="feature">
-		<div class="container">
-			<div class="row pdtop">
-				<!--   <div class="features">
-        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="trainingInstitute.fssai">
-          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/training-partner-icon.png">
-            <h3 class="industry-heading">Training Partner</h3>
-          </div>
-          </a> </div>
-        /.col-md-4
-        
-        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="trainer.fssai">
-          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/trainer-icon.png">
-            <h3 class="industry-heading">Trainer</h3>
-          </div>
-          </a> </div>
-        /.col-md-4
-        
-        <div class="col-md-3 col-xs-12 wow fadeInDown btm-space" data-wow-duration="1000ms" data-wow-delay="600ms"> <a href="learningresource.fssai">
-          <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/learning-resource-icon.png">
-            <h3 class="industry-heading">Learning resource</h3>
-          </div>
-          </a> </div>
-        /.col-md-4
-        
-       
-        /.col-md-4 
-        
-      </div> -->
-				<!--/.services-->
-			</div>
-			<!--/.row-->
-		</div>
-		<!--/.container-->
-	</section>
-	
+
+
 	<div class="gallery">
 	<div class="container">
 	<div class="row">
-			<div class="col-md-6 wow fadeInDown btm-space"
+			<div class="col-md-5 wow fadeInDown btm-space"
 						data-wow-duration="1000ms" data-wow-delay="600ms">
 						<div class="row">
 							<div class="course-heading"> Gallery</div>
@@ -512,13 +353,31 @@ width:30%;
 							</div>
 						</div>
 					</div>
-	<div class="col-md-3  wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" style="margin-left:-45px;">
+					
+					<div class="col-sm-3">
+					<p class="course-heading" style="font-size:20px;padding-bottom:2px;" >Upcoming Events</p>
+		<div class="holder">
+  <ul id="ticker01">
+    <li><spam>1</spam> <a href="#">loreal ipsum loreal ipsum loreal ipsum loreal ipsum loreal ipsum loreal ipsum</a></li>
+						 <li><spam>2</spam> <a href="#">loreal ipsum loreal ipsumloreal ipsum</a></li>
+     <li><spam>3</spam> <a href="#">loreal ipsum</a></li>
+     <li><spam>4</spam> <a href="#">loreal ipsum</a></li> 
+    <li><spam>5</spam> <a href="#">loreal ipsum</a></li>
+       <li><spam>6</spam> <a href="#">loreal ipsum</a></li>
+          <li><spam>7</spam> <a href="#">loreal ipsum</a></li>
+             <li><spam>8</spam> <a href="#">loreal ipsum</a></li>
+				</ul>
+</div>
+					</div>
+					
+					
+	<!-- <div class="col-md-3  wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" style="margin-left:-45px;">
 						<div class="page">
 							<div style="display: inline-block;">
 								<div class="monthly" id="mycalendar"></div>
 							</div>
 						</div>	
-				</div>
+				</div> -->
 	<div class="col-sm-3" style="margin-left:25px;">
 	<div style="margin-top: 10px; padding: 0px;">
 								<a href="#"><img src="website/images/share-intitiave.jpg" class="img-responsive"></a>
@@ -526,41 +385,18 @@ width:30%;
 							<div style="margin-top: 30px; padding: 0px;">
 								<a href="#"><img src="website/images/fssai-blog.jpg" class="img-responsive"></a>
 							</div>
+							<div style="margin-top: 30px; padding: 0px;">
+							<span style="background-color: #000070;
+    padding: 21px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;">Download training guidelines</span>
+							</div>
 	</div>
 	</div>
 	</div>
 	</div>
 	
-	
-	
-<!-- 	
-	<section id="feature" style="margin: 0px; padding: 0px;">
-		<div class="container">
-			<div class="row">
-				<div class="features">
-					<div class="col-md-6 col-sm-6 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap training-box center-block">
-							
-						</div>
-					</div>
-					/.col-md-4
-
-					<div class="col-md-6 col-sm-6 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap training-box center-block">
-							
-						</div>
-					</div>
-					/.col-md-4
-
-				</div>
-				/.services
-			</div>
-			/.row
-		</div>
-		/.container
-	</section> -->
 
 	<section id="bottom">
 		<div class="container wow fadeInDown" data-wow-duration="1000ms"
@@ -656,8 +492,8 @@ width:30%;
 		</div>
 	</footer>
 	<!--/#footer-->
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+<!-- 	<script src="js/jquery.js"></script>
+ -->	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.isotope.min.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script src="js/owl.carousel.js"></script>
@@ -752,4 +588,3 @@ width:30%;
 	</script>
 </body>
 </html>
-
