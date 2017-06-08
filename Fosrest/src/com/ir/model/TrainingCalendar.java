@@ -22,7 +22,7 @@ public class TrainingCalendar {
 	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int trainingCalendarId;
 	
-	private int courseType;
+/*	private int courseType;
 	private int courseName;
 	private int trainingPartner;
 	private int trainingCenter;
@@ -142,15 +142,15 @@ public class TrainingCalendar {
 	public void setTrainingType(String trainingType) {
 		this.trainingType = trainingType;
 	}
-	/**
+	*//**
 	 * @return the personalinformationassessorid
-	 */
+	 *//*
 	public int getPersonalinformationassessorid() {
 		return personalinformationassessorid;
 	}
-	/**
+	*//**
 	 * @param personalinformationassessorid the personalinformationassessorid to set
-	 */
+	 *//*
 	public void setPersonalinformationassessorid(int personalinformationassessorid) {
 		this.personalinformationassessorid = personalinformationassessorid;
 	}
@@ -214,6 +214,61 @@ public class TrainingCalendar {
 	}
 	public void setSeqNo(int seqNo) {
 		this.seqNo = seqNo;
-	}
+	}*/
+			private String trainingType;
+			private String trainingPhase;
+			private String designation;
+			private String trainingInstitute;
+			private String trainerName;
+			private String trainingStartDate;
+			private String isActive;
+			public String getIsActive() {
+				return isActive;
+			}
+			public void setIsActive(String isActive) {
+				this.isActive = isActive;
+			}
+			public int getTrainingCalendarId() {
+				return trainingCalendarId;
+			}
+			public void setTrainingCalendarId(int trainingCalendarId) {
+				this.trainingCalendarId = trainingCalendarId;
+			}
+			public String getTrainingType() {
+				return trainingType;
+			}
+			public void setTrainingType(String trainingType) {
+				this.trainingType = trainingType;
+			}
+			public String getTrainingPhase() {
+				return trainingPhase;
+			}
+			public void setTrainingPhase(String trainingPhase) {
+				this.trainingPhase = trainingPhase;
+			}
+			public String getDesignation() {
+				return designation;
+			}
+			public void setDesignation(String designation) {
+				this.designation = designation;
+			}
+			public String getTrainingInstitute() {
+				return trainingInstitute;
+			}
+			public void setTrainingInstitute(String trainingInstitute) {
+				this.trainingInstitute = trainingInstitute;
+			}
+			public String getTrainerName() {
+				return trainerName;
+			}
+			public void setTrainerName(String trainerName) {
+				this.trainerName = trainerName;
+			}
+			public String getTrainingStartDate() {
+				return trainingStartDate;
+			}
+			public void setTrainingStartDate(String trainingStartDate) {
+				this.trainingStartDate = trainingStartDate;
+			}
 			
 }

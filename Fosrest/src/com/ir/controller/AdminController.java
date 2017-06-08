@@ -99,6 +99,7 @@ import com.ir.model.StateAdmin;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingPhase;
 import com.ir.model.TrainingSchedule;
@@ -788,7 +789,7 @@ public class AdminController {
 		return "trainingCalendarForm";
 	}
 
-	@RequestMapping(value = "/trainingCalenderSave", method = RequestMethod.POST)
+/*	@RequestMapping(value = "/trainingCalenderSave", method = RequestMethod.POST)
 	public String trainingCalenderSave(
 			@Valid @ModelAttribute("trainingCalendarForm") TrainingCalendarForm trainingCalendarForm,
 			BindingResult result, Model model) {
@@ -818,7 +819,7 @@ public class AdminController {
 		}
 
 		return "trainingCalendarForm";
-	}
+	}*/
 
 	@RequestMapping(value = "/trainerUserManagementSearch", method = RequestMethod.POST)
 	public String trainerUserManagementSave(
@@ -1701,7 +1702,7 @@ public class AdminController {
 		model.addAttribute("TrainingTypeList", TrainingTypeList);
 		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
 		model.addAttribute("UnitMaster", new UnitMaster());
-		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster2());
 		return "UnitMaster";
 	}
 
@@ -1780,7 +1781,7 @@ public class AdminController {
 		model.addAttribute("trainingType", trainingType);
 		model.addAttribute("trainingPhase", trainingPhase);
 		model.addAttribute("contentType", contentType);
-		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster2());
+		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 	model.addAttribute("ModuleMasterForm", moduleMasterForm);
 		return "ModuleMaster";
@@ -1953,7 +1954,7 @@ public class AdminController {
 		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
 		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
-		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster2());
 		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());
 		return "TrainingSchedule";
@@ -3027,61 +3028,54 @@ public class AdminController {
 		}
 			
 			@RequestMapping(value = "/trainingcalendar", method = RequestMethod.GET)
-	public String trainingCalendar(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule,
+	public String trainingCalendar(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm TrainingCalendarForm,
 			Model model, HttpSession session) {
 		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
 			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
 		return "redirect:login.fssai";
 		}
 		System.out.println("listTrainingSchedule");
-		Map<String, String> userType = lst.userTypeMap;
+		/*Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> trainingType = lst.trainingTypeMap;
-		Map<String, String> trainingPhase = lst.trainingPhaseMap;
-		Map<String, String> userStatusMap = lst.userStatusMap;
+		Map<String, String> trainingPhase = lst.trainingPhaseMap;*/
+		//Map<String, String> userStatusMap = lst.userStatusMap;
 
-		model.addAttribute("userType", userType);
+		
+		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
+		List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
+		model.addAttribute("DesignationList", DesignationList);
+		model.addAttribute("TrainingTypeList", TrainingTypeList);
+		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
+		/*model.addAttribute("userType", userType);
 		model.addAttribute("trainingType", trainingType);
-		model.addAttribute("trainingPhase", trainingPhase);
-		model.addAttribute("userStatusMap", userStatusMap);
-	model.addAttribute("TrainingScheduleForm", new TrainingScheduleForm());
-	/*	model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
-		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
-		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
-		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
-		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
-		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
-		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());*/
+		model.addAttribute("trainingPhase", trainingPhase);*/
+		//model.addAttribute("userStatusMap", userStatusMap);
+		model.addAttribute("listCalendar", this.adminService.listCalendar());
+	    model.addAttribute("TrainingCalendarForm", new TrainingCalendarForm());
+	    model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude());
+		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());
 		return "trainingcalendar";
 	}
 	
    
-   @RequestMapping(value = "/trainingcalendarsearch", method = RequestMethod.POST)
-  	public String trainingCalendarSearch(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule,
+   @RequestMapping(value = "/trainingcalendaradd", method = RequestMethod.POST)
+  	public String trainingCalendarSearch(@ModelAttribute("TrainingCalendarForm") TrainingCalendar p,
   			Model model, HttpSession session) {
   		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
   			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
   		return "redirect:login.fssai";
   		}
-  		System.out.println("listTrainingSchedule");
-  		Map<String, String> userType = lst.userTypeMap;
-  		Map<String, String> trainingType = lst.trainingTypeMap;
-  		Map<String, String> trainingPhase = lst.trainingPhaseMap;
-  		Map<String, String> userStatusMap = lst.userStatusMap;
-
-  		model.addAttribute("userType", userType);
-  		model.addAttribute("trainingType", trainingType);
-  		model.addAttribute("trainingPhase", trainingPhase);
-  		model.addAttribute("userStatusMap", userStatusMap);
- 		model.addAttribute("TrainingScheduleForm", new TrainingScheduleForm());
- 		model.addAttribute("listCalendar", this.adminService.listCalendar());
- 		 /*model.addAttribute("listTrainingPartner", this.adminService.listTrainingPartner());
-  		model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule());
-  		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
-  		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
-  		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
-  		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
-  		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());*/
-  		return "trainingcalendar";
+  		int profileId=(int) session.getAttribute("profileId");
+  		if(p.getTrainingPhase()==null){
+  			System.out.println("tttttttttttttttttttttttttttttttttttttt");
+  		}
+        if(profileId==2){
+	         String result = this.adminService.addTrainingCalendar(p);
+        }
+ 	
+  		//return "trainingcalendar";
+  		return "redirect:trainingcalendar.fssai";
   	}
    
 

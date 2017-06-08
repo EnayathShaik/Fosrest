@@ -143,8 +143,9 @@
               <li><a href="PersonalInformationTrainingInstitute.fssai">Training Institute</a></li>
             </ul>
           </li>
-		<li><a href="NominateTrainee.fssai">Nominate Trainee</a></li>
+       <li><a href="NominateTrainee.fssai">Nominate Trainee</a></li>
 		<li><a href="TrainingSchedule.fssai">Update Training Schedule</a></li>
+		  <li><a href="trainingcalendar.fssai">Training Calendar</a></li> 
 </ul>
 </div>
 

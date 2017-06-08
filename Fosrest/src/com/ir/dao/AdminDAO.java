@@ -59,6 +59,7 @@ import com.ir.model.StateAdmin;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -123,7 +124,7 @@ public interface AdminDAO {
 
 	public List<District> districtList();
 
-	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
+	//public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
 
 	State getState(int id);
 
@@ -218,7 +219,7 @@ public interface AdminDAO {
 
 	public UnitMaster getUnitMasterById(int id);
 
-	public List<UnitMaster> listUnitMaster();
+	public List<UnitMaster> listUnitMaster2();
 
 	public String addModuleMaster(ModuleMaster p);
 
@@ -391,11 +392,13 @@ public interface AdminDAO {
 
 	public List<TrainingScheduleForm> listtrainingScheduleMaster();
 
-	public List<UnitMaster> listUnitMaster2();
+	public List<UnitMaster> listUnitMaster();
 
 	public TreeMap<String, List<ModuleMaster>>  allUnitModules();
 
 	public String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm);
+
+	public String addTrainingCalendar(TrainingCalendar p);
 
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

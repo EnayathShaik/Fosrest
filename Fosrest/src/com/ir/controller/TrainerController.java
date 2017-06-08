@@ -257,17 +257,10 @@ public class TrainerController {
 			}
 	
 		String userId = request.getParameter("userId");
-		Map<String, String> TrainerUserType = lst.TrainerUserType;
 		Map<String, String> titleMap = lst.titleMap;
-		Map<String, String> ExpBG = lst.expBGMap;
-		Map<String, String> opt = lst.noOfOptionMap;
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		model.addAttribute("DesignationList", DesignationList);
-		model.addAttribute("TrainerUserType", TrainerUserType);
 		model.addAttribute("titleMap", titleMap);
-		model.addAttribute("ExpBackgroundMap", ExpBG);
-		model.addAttribute("ExpInYearMap", opt);
-		model.addAttribute("ExpInMonthMap", opt);
 		model.addAttribute("listStateMaster",
 				this.adminService.listStateMaster());
 		model.addAttribute("listTrainingInstitude",

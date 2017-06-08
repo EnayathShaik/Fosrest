@@ -635,19 +635,19 @@ public class TrainingPartnerController {
 		     
 			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
 			trainingPartnerService.setTrainingCalanderDeatils(trainingCalendarForm, trainingPartnerCalendarForm.getLoginId());
-			trainingCalendarForm.setCourseName(trainingPartnerCalendarForm.getSelCourseName());
-			trainingCalendarForm.setCourseType(trainingPartnerCalendarForm.getSelCourseType());
-			trainingCalendarForm.setTrainerName(trainingPartnerCalendarForm.getSelTrainerNames());
+			//trainingCalendarForm.setCourseName(trainingPartnerCalendarForm.getSelCourseName());
+			//trainingCalendarForm.setCourseType(trainingPartnerCalendarForm.getSelCourseType());
+			//trainingCalendarForm.setTrainerName(trainingPartnerCalendarForm.getSelTrainerNames());
 			trainingCalendarForm.setTrainingStartDate(trainingPartnerCalendarForm.getTrainingStartDate());
 			trainingCalendarForm.setTrainingEndDate(trainingPartnerCalendarForm.getTrainingEndDate());
-			trainingCalendarForm.setAssessmentAgencyName(trainingPartnerCalendarForm.getAssessmentAgencyName());
-			trainingCalendarForm.setTcid(trainingPartnerCalendarForm.getTcid());
-			trainingCalendarForm.setSeatCapacity(trainingPartnerCalendarForm.getSeatCapacity());
-			trainingCalendarForm.setType(trainingPartnerCalendarForm.getType());
-			trainingCalendarForm.setAssessor(trainingPartnerCalendarForm.getAssessorName());
-			trainingCalendarForm.setAssessmentDateTime(trainingPartnerCalendarForm.getAssessmentDateTime());
-			trainingCalendarForm.setTrainingCenter(tableID);
-			trainingCalendarForm.setUserName(trainingPartnerCalendarForm.getUserName());
+			//trainingCalendarForm.setAssessmentAgencyName(trainingPartnerCalendarForm.getAssessmentAgencyName());
+			//trainingCalendarForm.setTcid(trainingPartnerCalendarForm.getTcid());
+			//trainingCalendarForm.setSeatCapacity(trainingPartnerCalendarForm.getSeatCapacity());
+			//trainingCalendarForm.setType(trainingPartnerCalendarForm.getType());
+			//trainingCalendarForm.setAssessor(trainingPartnerCalendarForm.getAssessorName());
+			//trainingCalendarForm.setAssessmentDateTime(trainingPartnerCalendarForm.getAssessmentDateTime());
+			//trainingCalendarForm.setTrainingCenter(tableID);
+			//trainingCalendarForm.setUserName(trainingPartnerCalendarForm.getUserName());
 			
 			String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
 			

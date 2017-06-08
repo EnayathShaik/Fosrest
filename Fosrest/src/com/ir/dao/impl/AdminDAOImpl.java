@@ -996,7 +996,7 @@ public class AdminDAOImpl implements AdminDAO {
 		return districtList;
 	}
 
-	@Override
+	/*@Override
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select max(seqNo) + 1 from trainingcalendar";
@@ -1016,9 +1016,9 @@ public class AdminDAOImpl implements AdminDAO {
 		tc.setTrainingDate(trainingCalendarForm.getTrainingStartDate());
 		tc.setTrainingTime(trainingCalendarForm.getTrainingEndDate());
 		tc.setTrainerName(trainingCalendarForm.getTrainerName());
-		tc.setAssessmentDate(trainingCalendarForm.getTrainingStartDate());
-		tc.setAssessmentTime(trainingCalendarForm.getTrainingEndDate());
-		CourseName courseName = (CourseName) session.load(CourseName.class, trainingCalendarForm.getCourseName());
+		//tc.setAssessmentDate(trainingCalendarForm.getTrainingStartDate());
+		//tc.setAssessmentTime(trainingCalendarForm.getTrainingEndDate());
+		//CourseName courseName = (CourseName) session.load(CourseName.class, trainingCalendarForm.getCourseName());
 		if (courseName != null && courseName.getCourseCode() != null && courseName.getCourseCode().length() > 1) {
 			tc.setBatchCode(courseName.getCourseCode() + "/" + StringUtils.leftPad(String.valueOf(maxId), 5, "0"));
 			tc.setSeqNo(maxId);
@@ -1029,7 +1029,7 @@ public class AdminDAOImpl implements AdminDAO {
 		} else {
 			return "error";
 		}
-	}
+	}*/
 
 	@Override
 	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
@@ -1955,9 +1955,9 @@ public class AdminDAOImpl implements AdminDAO {
 			maxId = (int) list.get(0);
 			// eligible = (String) list.get(0);
 		}
-		if(p.getTrainingPhase()=="0"){
+		/*if(p.getTrainingPhase()=="0"){
 			p.setTrainingPhase("5");
-		}
+		}*/
 		System.out.println(
 				p.getUnitName().substring(0, 2).toUpperCase() + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 
@@ -2014,7 +2014,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<UnitMaster> listUnitMaster() {
+	public List<UnitMaster> listUnitMaster2() {
 		// TODO Auto-generated method stub
 		System.out.println("inside listUnitMaster");
 		Session session = this.sessionFactory.getCurrentSession();
@@ -2211,8 +2211,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void addTrainingSchedule(TrainingSchedule p) {
 		// TODO Auto-generated method stub
-		System.out.println("TrainingSchedule " + p.getTrainingScheduleId());
-		/*// getModuleMasterById
+		/*	System.out.println("TrainingSchedule " + p.getTrainingScheduleId());
+		// getModuleMasterById
 		p.setTrainer_status("N");
 		p.setTraining_institude_status("N");
 		p.setIsActive("A");
@@ -2246,7 +2246,8 @@ public class AdminDAOImpl implements AdminDAO {
 		// p.setUnitMaster(um);
 		// p.setModuleMaster(mm);
 
-		session.persist(p);*/
+		session.persist(p);
+		*/
 	}
 
 	@Override
@@ -3489,7 +3490,8 @@ public class AdminDAOImpl implements AdminDAO {
 	public List listCalendar() {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = 	session.createSQLQuery("select cast('FSO' as varchar(20)) as designation , cast('Foundation' as varchar(20)) as trainingtype,cast('Refresher' as varchar(20)) as TrainingPhase , cast('Seed' as varchar(20) ) as TrainingInstitute , cast('Food' as varchar(20)) as trainingTopic ,cast('12/1/2017' as varchar(20)) as trainingDate,cast('2hr' as varchar(20)) as duration   ");
+		System.out.println("inside ccccccccccccccccccccccc");
+		Query query = 	session.createSQLQuery("select c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingStartDate,c.trainerName,c.trainingInstitute from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
 		List list = query.list();
 		return list;
 	}
@@ -3548,7 +3550,7 @@ public class AdminDAOImpl implements AdminDAO {
 		return resulList;
 	}
 	@Override
-	public List<UnitMaster> listUnitMaster2() {
+	public List<UnitMaster> listUnitMaster() {
 		// TODO Auto-generated method stub
 		System.out.println("inside listUnitMaster");
 		Session session = this.sessionFactory.getCurrentSession();
@@ -3577,6 +3579,8 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 
+
+
 	@Override
 	public String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm) {
 		// TODO Auto-generated method stub
@@ -3597,5 +3601,18 @@ public class AdminDAOImpl implements AdminDAO {
 		return null;
 	}
 
+	@Override
+	public String addTrainingCalendar(TrainingCalendar p) {
+		Session session = this.sessionFactory.getCurrentSession();
+		System.out.println("DistrictMaster " + p.getTrainingCalendarId());
+		
+		TrainingCalendarForm d = new TrainingCalendarForm();
+if(p.getTrainingPhase()==null){
+	p.setTrainingPhase("0");
+}
+		p.setIsActive("Y");
+		session.persist(p);
+		return "created";
+	}
 	
 }

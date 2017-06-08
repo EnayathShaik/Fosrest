@@ -3,29 +3,46 @@ package com.ir.form;
 
 public class TrainingCalendarForm {
 	
-	private int tcid;
+	/*private int tcid;
 	private int courseType;
-	private int courseName;
-	private int trainingPartner;
-	private int trainingCenter;
+	private int courseName;*/
 	private String trainingStartDate;
 	private String trainingEndDate;
-	private String assessmentDateTime;
+	/*private String assessmentDateTime;
 	private String assessmentAgencyName;
 	private int assessor;
 	private String seatCapacity;
-	private String type;
-	private String userName;
+	private String type;*/
+	
+	private String trainingInstitute;
 	
 	
-	
-	public String getUserName() {
-		return userName;
+	public String getTrainingStartDate() {
+		return trainingStartDate;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setTrainingStartDate(String trainingStartDate) {
+		this.trainingStartDate = trainingStartDate;
 	}
-	public String getAssessmentDateTime() {
+	public String getTrainingEndDate() {
+		return trainingEndDate;
+	}
+	public void setTrainingEndDate(String trainingEndDate) {
+		this.trainingEndDate = trainingEndDate;
+	}
+	public String getTrainerName() {
+		return trainerName;
+	}
+	public void setTrainerName(String trainerName) {
+		this.trainerName = trainerName;
+	}
+	public String getTrainingInstitute() {
+		return trainingInstitute;
+	}
+	public void setTrainingInstitute(String trainingInstitute) {
+		this.trainingInstitute = trainingInstitute;
+	}
+
+	/*public String getAssessmentDateTime() {
 		return assessmentDateTime;
 	}
 	public void setAssessmentDateTime(String assessmentDateTime) {
@@ -80,37 +97,36 @@ public class TrainingCalendarForm {
 	}
 	public void setCourseName(int courseName) {
 		this.courseName = courseName;
+	}*/
+	private String trainerName;
+	private String designation;
+	
+	private String trainingType;
+	private String trainingPhase;
+	private String status;
+	public String getDesignation() {
+		return designation;
 	}
-	public int getTrainingPartner() {
-		return trainingPartner;
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
-	public void setTrainingPartner(int trainingPartner) {
-		this.trainingPartner = trainingPartner;
+	public String getTrainingType() {
+		return trainingType;
 	}
-	public int getTrainingCenter() {
-		return trainingCenter;
+	public void setTrainingType(String trainingType) {
+		this.trainingType = trainingType;
 	}
-	public void setTrainingCenter(int trainingCenter) {
-		this.trainingCenter = trainingCenter;
+	public String getTrainingPhase() {
+		return trainingPhase;
 	}
-
-	public String getTrainerName() {
-		return trainerName;
+	public void setTrainingPhase(String trainingPhase) {
+		this.trainingPhase = trainingPhase;
 	}
-	public void setTrainerName(String trainerName) {
-		this.trainerName = trainerName;
+	public String getStatus() {
+		return status;
 	}
-	public String getTrainingStartDate() {
-		return trainingStartDate;
-	}
-	public void setTrainingStartDate(String trainingStartDate) {
-		this.trainingStartDate = trainingStartDate;
-	}
-	public String getTrainingEndDate() {
-		return trainingEndDate;
-	}
-	public void setTrainingEndDate(String trainingEndDate) {
-		this.trainingEndDate = trainingEndDate;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

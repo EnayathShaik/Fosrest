@@ -83,8 +83,8 @@ public class SaveTPAssementCalender extends HttpServlet {
 		Session session = sf.openSession();
 				TrainingCalendar trainingCalendar = (TrainingCalendar) session
 				.load(TrainingCalendar.class, trainingID);
-				trainingCalendar.setAssessmentDate(assesmentCalender.getAssessmentDate());
-				trainingCalendar.setAssessmentTime(assesmentCalender.getAssessmentTime());
+				//trainingCalendar.setAssessmentDate(assesmentCalender.getAssessmentDate());
+				//trainingCalendar.setAssessmentTime(assesmentCalender.getAssessmentTime());
 				//trainingCalendar.setAssessor(assesmentCalender.getAssessorID());
 		session.update(trainingCalendar);
 		session.beginTransaction().commit();

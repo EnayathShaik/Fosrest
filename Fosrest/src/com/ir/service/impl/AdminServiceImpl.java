@@ -74,6 +74,7 @@ import com.ir.model.StateAdmin;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -284,12 +285,12 @@ public class AdminServiceImpl implements AdminService {
 		return districtList;
 	}
 
-	@Override
+	/*@Override
 	@Transactional
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
 		String trainingCalendar = adminDAO.trainingCalendarForm(trainingCalendarForm);
 		return trainingCalendar;
-	}
+	}*/
 
 	@Override
 	@Transactional
@@ -624,9 +625,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public List<UnitMaster> listUnitMaster() {
+	public List<UnitMaster> listUnitMaster2() {
 		// TODO Auto-generated method stub
-		return this.adminDAO.listUnitMaster();
+		return this.adminDAO.listUnitMaster2();
 	}
 
 	/**
@@ -1519,9 +1520,9 @@ public List<TrainingScheduleForm> listtrainingScheduleMaster() {
 
 @Override
 @Transactional
-public List<UnitMaster> listUnitMaster2() {
+public List<UnitMaster> listUnitMaster() {
 	// TODO Auto-generated method stub
-	return this.adminDAO.listUnitMaster2();
+	return this.adminDAO.listUnitMaster();
 }
 
 @Override
@@ -1530,11 +1531,16 @@ public TreeMap<String, List<ModuleMaster>>  allUnitModules() {
 	// TODO Auto-generated method stub
 	return this.adminDAO.allUnitModules();
 }
-
 @Override
 @Transactional
 public String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.saveTrainingSchedule(trainingScheduleForm);
+}
+@Override
+@Transactional
+public String addTrainingCalendar(TrainingCalendar p) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.addTrainingCalendar(p);
 }
 }

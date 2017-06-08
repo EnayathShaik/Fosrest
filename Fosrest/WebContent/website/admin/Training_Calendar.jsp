@@ -3,25 +3,23 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="website/js/commonController.js"></script>
 <script>
-	/*   function OnStart() {
+	   function OnStart() {
 	     
 	  	flatpickr("#trainingStartDate" , {
-	  		enableTime: true
+	  		
 	  	});	
-	  	
-	   	flatpickr("#trainingEndDate" , {
-	   		enableTime: true
-	  	});	
+		
 	   	
 	   	if('${profileId}' == 2){
-	   		$("#createbtn").css("display" , 'none');
+	   		$("#searchbtn").css("display" , 'none');
+	   		$("#createbtn").css("display" , 'block');
 	   	}
 	  }
-	  window.onload = OnStart; */
+	  window.onload = OnStart;
 </script>
-<ct:url var="addAction" value="/trainingcalendarsearch.fssai"></ct:url>
+<ct:url var="addAction" value="/trainingcalendaradd.fssai"></ct:url>
 <cf:form action="${addAction}" name="myForm" method="POST"
-	commandName="TrainingScheduleForm" onsubmit="">
+	commandName="TrainingCalendarForm" onsubmit="">
 
 	<section>
 		<%@include file="../roles/top-menu.jsp"%>
@@ -52,146 +50,177 @@
 						<div class="row">
 
 							<div class="col-xs-12">
-								<fieldset><legend><h1>Training Calendar</h1></legend>
-								<div class="row">
-									<div class="col-xs-12">
-										<cf:input type="hidden" path="trainingScheduleId" />
-										<!-- left side -->
-										<div class="col-xs-6">
+								<fieldset>
+									<legend>
+										<h1>Training Calendar</h1>
+									</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<%-- <cf:input type="hidden" path="trainingScheduleId" /> --%>
+											<!-- left side -->
+											<div class="col-xs-6">
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Designation:</strong></li>
+															<li class="style-li error-red"><cf:errors
+																	path="designation" cssClass="error" /></li>
+														</ul>
+													</div>
+													<cf:select path="designation" class="form-control">
+														<cf:option value="" label="Select Designation" />
+														<cf:options items="${DesignationList}"
+															itemValue="designationName" itemLabel="designationName" />
+													</cf:select>
 
-											<div class="form-group">
-												<div>
-													<ul class="lab-no">
-														<li class="style-li"><strong>Designation</strong></li>
-														<li id="userTypeErr" style="display: none;"
-															class="style-li error-red">Please Select
-															Designation.</li>
-														<li class="style-li error-red"><span id="name_status">
-														</span><span id="err"> </span> <label id=userTypeError
-															class="error visibility">* Select UserType </label> <cf:errors
-																path="userType" cssClass="error" />${created }</li>
-													</ul>
 												</div>
-												<cf:select path="userType" class="form-control">
-													<cf:option value="" label="Select Designation" />
-													<cf:options items="${userType}" />
-												</cf:select>
-											</div>
-
-
-											<div class="form-group">
-												<div>
-													<ul class="lab-no">
-														<li class="style-li"><strong>Training Type:</strong></li>
-														<li id="trainingTypeErr" style="display: none;"
-															class="style-li error-red">Please Select Training
-															Type.</li>
-														<li class="style-li error-red"><span id="name_status"
-															class="clear-label"> </span> ${created }</li>
-													</ul>
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training Type:</strong></li>
+															<li id="trainingTypeErr" style="display: none;"
+																class="style-li error-red">Please Select Training
+																Type.</li>
+															<li class="style-li error-red"><span
+																id="name_status" class="clear-label"> </span> ${created }</li>
+														</ul>
+													</div>
+													<cf:select path="trainingType" class="form-control"
+														onchange="getTrainingPhase(this.value , 'trainingPhase')">
+														<cf:option value="" label="Select Training Type" />
+														<cf:options items="${TrainingTypeList}"
+															itemValue="trainingTypeId" itemLabel="trainingTypeName" />
+													</cf:select>
 												</div>
-												<cf:select path="trainingType" class="form-control">
-													<cf:option value="" label="Select training" />
-													<cf:options items="${trainingType}" />
-												</cf:select>
-											</div>
-
-											<div class="form-group">
-												<div>
-													<ul class="lab-no">
-														<li class="style-li"><strong>Training Phase:</strong></li>
-														<li id="trainingPhaseErr" style="display: none;"
-															class="style-li error-red">Please Select Training
-															Phase.</li>
-														<li class="style-li error-red"><label
-															class="error visibility" id="courseError">* error</label></li>
-													</ul>
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training
+																	Phase:</strong></li>
+															<li id="trainingPhaseErr" style="display: none;"
+																class="style-li error-red">Please Select Training
+																Phase.</li>
+															<li class="style-li error-red"><label
+																class="error visibility" id="courseError">*
+																	error</label></li>
+														</ul>
+													</div>
+													<cf:select path="trainingPhase" class="form-control">
+														<cf:option value="0" label="Select Training Phase" />
+														<cf:options items="${TrainingPhaseList}"
+															itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
+													</cf:select>
 												</div>
-												<cf:select path="trainingPhase" class="form-control">
-													<cf:option value="" label="Select training phase" />
-													<cf:options items="${trainingPhase}" />
-												</cf:select>
+
 											</div>
+											<!-- left side ends -->
 
-										</div>
-										<!-- left side ends -->
-
-										<!-- right side -->
-										<div class="col-xs-6">
-											
-<div class="form-group">
-											<div>
-												<ul class="lab-no">
-													<li class="style-li"><strong>Training
-															Institute:</strong></li>
-													<li id="trainingInstitudeErr" style="display: none;"
-														class="style-li error-red">Please Select Training
-														Institute.</li>
-													<li class="style-li error-red"></li>
-												</ul>
-											</div>
+											<!-- right side -->
+											<div class="col-xs-6">
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training
+																	Institute:</strong></li>
+															<li id="trainingInstitudeErr" style="display: none;"
+																class="style-li error-red">Please Select Training
+																Institute.</li>
+															<li class="style-li error-red"></li>
+														</ul>
+													</div>
 
 
-											<div class="form-group">
-
-												<cf:select path="trainingInstitude" class="form-control"
+													<div class="form-group">
+														<cf:select path="trainingInstitute" class="form-control">
+															<cf:option value="" label="Select training phase" />
+															<cf:options items="${listTrainingInstitute}" />
+														</cf:select>
+														<%-- <cf:select path="trainingInstitude" class="form-control"
 													onchange="getTrainer(this.value , 'trainer_id')">
 													<cf:option value="0" label="Select Training Institute" />
 													<cf:options items="${listTrainingInstitude}" itemValue="id"
 														itemLabel="trainingCenterName" />
-												</cf:select>
-											</div>
-</div>
-											<div class="form-group">
-												<div>
-													<ul class="lab-no">
-														<li class="style-li"><strong>Training Start
-																Date:</strong></li>
-
-														<li id="trainingStartDateErr" style="display: none;"
-															class="style-li error-red">Please Select Training
-															Start Date.</li>
-														<li class="style-li error-red"><label
-															class="error visibility" id="courseError">*</label></li>
-													</ul>
+												</cf:select> --%>
+													</div>
 												</div>
-												<cf:input class="form-control" path="trainingStartDate"
-													type="text" placeholder="Training Start Date" />
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Trainer:</strong></li>
+															<li id="trainingInstitudeErr" style="display: none;"
+																class="style-li error-red">Please Select Training
+																Institute.</li>
+															<li class="style-li error-red"></li>
+														</ul>
+													</div>
+
+
+													<div class="form-group">
+														<cf:select path="trainerName" class="form-control">
+															<cf:option value="" label="Select training phase" />
+															<cf:options items="${listPersonalInfoTrainer}"
+																itemValue="firstName" itemLabel="firstName" />
+														</cf:select>
+														<%-- 	<cf:select path="trainingInstitude" class="form-control"
+													onchange="getTrainer(this.value , 'trainer_id')">
+													<cf:option value="0" label="Select Training Institute" />
+													<cf:options items="${listTrainingInstitude}" itemValue="id"
+														itemLabel="trainingCenterName" />
+												</cf:select> --%>
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training Start
+																	Date:</strong></li>
+
+															<li id="trainingStartDateErr" style="display: none;"
+																class="style-li error-red">Please Select Training
+																Start Date.</li>
+															<li class="style-li error-red"><label
+																class="error visibility" id="courseError">*</label></li>
+														</ul>
+													</div>
+													<cf:input class="form-control" path="trainingStartDate"
+														type="text" placeholder="Training Start Date" />
+												</div>
+
+
 											</div>
+											<!-- rigth side ends -->
 
-										
-										</div>
-										<!-- rigth side ends -->
-
-										<!-- button -->
-										<div class="row">
+											<!-- button -->
+											<div class="row">
 
 
-											<div class="col-md-12 col-xs-12 text-center">
-												<input type="submit" id="updatebtn"
-													style="display: none; float: right; margin-right: 122px;"
-													value="Update" class="btn login-btn" /> <input
-													type="submit" id="createbtn" value="Search"
-													class="btn login-btn" />
-												<!--  <input type="submit"
+												<div class="col-md-12 col-xs-12 text-center">
+													<input type="submit" id="createbtn"
+														style="display: none; float: right; margin-right: 122px;"
+														value="Create" class="btn login-btn" /> <input
+														type="submit" id="searchbtn" value="Search"
+														class="btn login-btn" />
+													<!--  <input type="submit"
 													class="btn login-btn show-details-vacancy collapsed"
 													data-toggle="collapse" style="margin-left: 381px;"
 													data-target="#show-result" aria-expanded="false"
 													value="Search" /> -->
 
+												</div>
 											</div>
+
 										</div>
 
+
 									</div>
-
-
-								</div>
 								</fieldset>
 							</div>
 
 
 							<!-- search Results -->
-											<div class="col-xs-12 " id="testt">
+							<div class="col-xs-12 " id="testt">
 
 								<!-- table -->
 								<div class="row">
@@ -199,42 +228,44 @@
 										<fieldset>
 											<legend>Search Result </legend>
 											<ct:if test="${!empty listCalendar}">
-												<table  border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
+												<table border="1" id="datatablesfosrest"
+													class="table table-bordered table-responsive">
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
 															<th>Designation</th>
 															<th>Training Type</th>
 															<th>Training Phase</th>
-															<th>Training Institute</th>
-															<th>training Topic</th>
+														<th>Training Institute</th>
+														<th>Trainer</th>
+															
 															<th>Training Date</th>
-															<th>Training Duration</th>
-													
+															<!-- <th>Training Duration</th> -->
+
 														</tr>
 													</thead>
 
-												 	<ct:forEach items="${listCalendar}"
-														var="listCalendar" varStatus="loop">
+													<ct:forEach items="${listCalendar}" var="listCalendar"
+														varStatus="loop">
 														<tr>
 															<td>${loop.count}</td>
 															<td>${listCalendar[0]}</td>
 															<td>${listCalendar[1]}</td>
-															 <td>${listCalendar[2]}</td>
-															  <td>${listCalendar[3]}</td>
-															   <td>${listCalendar[4]}</td>
-															    <td>${listCalendar[5]}</td>
-															    <td>${listCalendar[6]}</td>
-															    
-															
+															<td>${listCalendar[2]}</td>
+														<td>${listCalendar[5]}</td>
+															<td>${listCalendar[4]}</td>
+															<td>${listCalendar[3]}</td>
+															<%-- <td>${listCalendar[6]}</td>  --%>
+
+
 														</tr>
-													</ct:forEach> 
+													</ct:forEach>
 												</table>
 											</ct:if>
 										</fieldset>
 									</div>
 								</div>
-							</div> 
+							</div>
 							<!-- search div ends -->
 						</div>
 						<!-- row ends -->

@@ -72,6 +72,7 @@ import com.ir.model.StateAdmin;
 import com.ir.model.StateMaster;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -135,7 +136,7 @@ public interface AdminService {
 
 	List<District> districtList();
 
-	String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
+	//String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
 
 	String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm);
 	// boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm,
@@ -221,7 +222,7 @@ public interface AdminService {
 
 	public UnitMaster getUnitMasterById(int id);
 
-	public List<UnitMaster> listUnitMaster();
+	public List<UnitMaster> listUnitMaster2();
 
 	public String addModuleMaster(ModuleMaster p);
 
@@ -492,14 +493,17 @@ public void deleteAssessmentQuestion(int id);
 
 int getQuestionNumber(String data);
 
-List listCalendar();
+public List listCalendar();
 public List<TrainingScheduleForm> listtrainingScheduleMaster( );
 
-public List<UnitMaster> listUnitMaster2();
+public List<UnitMaster> listUnitMaster();
 
 TreeMap<String, List<ModuleMaster>>  allUnitModules();
 
 String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm);
+
+public String addTrainingCalendar(TrainingCalendar p);
+
 
 }
 

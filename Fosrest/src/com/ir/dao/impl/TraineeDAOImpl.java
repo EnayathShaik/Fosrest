@@ -559,13 +559,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 			maxId = (int) (list.get(0) == null ? "1" : list.get(0));
 		}
 		TrainingCalendar tc = (TrainingCalendar) session.load(TrainingCalendar.class, courseEnrolledUserForm.getTrainingCalendarId());
-		CourseName ct = (CourseName) session.load(CourseName.class, tc.getCourseName());
-		CourseType ctype = (CourseType) session.load(CourseType.class, tc.getCourseType());
+		//CourseName ct = (CourseName) session.load(CourseName.class, tc.getCourseName());
+		//CourseType ctype = (CourseType) session.load(CourseType.class, tc.getCourseType());
 		String rollNo = "";
-		rollNo = ct.getCourseCode()+""+StringUtils.leftPad(String.valueOf(maxId), 5, "0");
+		/*rollNo = ct.getCourseCode()+""+StringUtils.leftPad(String.valueOf(maxId), 5, "0");
 		if(ctype != null && ctype.getCourseType().toUpperCase().equals("TOT")){
 			rollNo = "T"+rollNo;
-		}
+		}*/
 		courseEnrolledUser.setRollno(rollNo);
 		courseEnrolledUser.setRollSeqNo(maxId);
 		courseEnrolledUser.setLoginDetails(loginid);

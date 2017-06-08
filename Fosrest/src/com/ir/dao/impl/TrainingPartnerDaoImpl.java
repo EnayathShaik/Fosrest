@@ -575,7 +575,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	@Override
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
-		new ZLogger("trainingCalendarForm","trainingCalendarForm  "+trainingCalendarForm.getCourseName(), "TrainingPartnerDaoImpl.java");
+		//new ZLogger("trainingCalendarForm","trainingCalendarForm  "+trainingCalendarForm.getCourseName(), "TrainingPartnerDaoImpl.java");
 		Session session = sessionFactory.getCurrentSession();
 		
 		String sql = "select coalesce(max(seqNo) + 1,1) from trainingcalendar";
@@ -587,8 +587,9 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		TrainingCalendar tc = new TrainingCalendar();
 		TrainingCalendarHistoryLogs tch =  new TrainingCalendarHistoryLogs();
+		return null;
 		
-		tc.setCourseType(trainingCalendarForm.getCourseType());
+		/*tc.setCourseType(trainingCalendarForm.getCourseType());
 		tc.setCourseName(trainingCalendarForm.getCourseName());
 		tc.setTrainingCenter(trainingCalendarForm.getTrainingCenter());
 		tc.setTrainingDate(trainingCalendarForm.getTrainingStartDate() == null ? "" : trainingCalendarForm.getTrainingStartDate());
@@ -640,7 +641,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			return "created";
 		}else{
 			return "error";
-		}	
+		}	*/
 	}
 	
 	
@@ -651,7 +652,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		new ZLogger("setTrainingCalanderDeatils","sql "+sql, "TrainingPartnerDaoImpl.java");
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> status = query.list();
-		try{
+		/*try{
 			if(status.size()>0){
 				for(Object[] s : status){
 				trainingCalendarForm.setTrainingCenter((int) s[0]);
@@ -660,7 +661,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			}	
 		}catch(Exception e){
 			new ZLogger("setTrainingCalanderDeatils","exception while  setTrainingCalanderDeatils  "+e.getMessage(), "TrainingPartnerDaoImpl.java");
-		}
+		}*/
 		
 	}
 	
