@@ -19,6 +19,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.StateAdmin;
 import com.ir.model.TrainingPartner_old;
 import com.ir.service.LoginService;
 
@@ -99,5 +100,14 @@ public class LoginServiceImpl implements LoginService {
 		PersonalInformationTrainingInstitute personalInformationTrainingInstitute = loginDAO.fulldetailtainingInstitute(loginId);
 		return personalInformationTrainingInstitute;
 	}
+	
+	@Override
+	@Transactional
+	public StateAdmin FullDetailState(int loginId) {
+		StateAdmin stateadmin = loginDAO.FullDetailState(loginId);
+		return stateadmin;
+	}
+
+	
 	
 }

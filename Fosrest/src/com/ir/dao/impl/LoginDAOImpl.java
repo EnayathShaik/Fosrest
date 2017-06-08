@@ -24,6 +24,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.StateAdmin;
 import com.ir.model.TrainingPartner_old;
 import com.ir.util.EncryptionPasswordANDVerification;
 
@@ -226,6 +227,24 @@ public class LoginDAOImpl implements LoginDAO{
 		}
 		return personalInformationTrainingInstitute11;
 	}
+	
+	@Override
+	public StateAdmin FullDetailState(int loginId ) {
+		System.out.println("LoginDAOImpl full detail process start ");
+		Session session = sessionFactory.getCurrentSession();
+		Integer i = loginId;
+		System.out.println("search " + loginId);
+		Query query = session.createQuery("from StateAdmin where loginDetails = '"+ i +"'");
+		List<StateAdmin> list = query.list();
+		StateAdmin stateadmin = null;
+		for(StateAdmin stateadmin1: list){
+			stateadmin=stateadmin1;
+		}
+		return stateadmin;
+	}
+
+	
+
 
 
 }

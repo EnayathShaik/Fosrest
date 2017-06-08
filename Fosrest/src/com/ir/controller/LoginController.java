@@ -25,6 +25,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.StateAdmin;
 import com.ir.model.TrainingPartner_old;
 import com.ir.service.AdminService;
 import com.ir.service.LoginService;
@@ -155,13 +156,16 @@ public class LoginController {
 			session.setAttribute("userName", loginDetails.getLoginId());
 			new ZLogger("loginProcess","in super admin admin login" , "LoginController.java");
 			return "adminHomepage";
-		}else if(loginDetails!=null && loginDetails.getProfileId() == 2 && loginDetails.getStatus().equalsIgnoreCase("A")){
+		}else if(loginDetails!=null && loginDetails.getProfileId() == 2 && loginDetails.getStatus().equalsIgnoreCase("A"))
+		{
+			StateAdmin stateadmin = loginService.FullDetailState(loginDetails.getId() );
 			new ZLogger("loginProcess","in admin login" , "LoginController.java");
 			session.setAttribute("loginUser", loginDetails);
 			session.setAttribute("logId",loginDetails.getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
+			session.setAttribute("stateId",stateadmin.getState() );
 			return "stateAdminHomepage";
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{

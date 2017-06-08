@@ -12,6 +12,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.StateAdmin;
 import com.ir.model.TrainingPartner_old;
 
 public interface LoginService {
@@ -45,4 +46,6 @@ public interface LoginService {
 	
 	public PersonalInformationTrainingInstitute FullDetailtrainingInstitute(int loginId);
 	
+	public StateAdmin FullDetailState(int loginId);
+
 }
