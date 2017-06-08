@@ -170,12 +170,26 @@
 												class="style-li error-red">Please Select User Type.</li>
 										</ul>
 										
-									</div>
-									<ct:forEach items="${TrainerUserType}" var="map">
-									<cf:checkbox  path="userType" id="userType_${map.value}"
-										value="${map.value}" label=" ${map.value}" />
+									</div><br>
+								
+																	
+																			<ct:forEach items="${DesignationList}" var="des">
+																				<cf:checkbox  path="userType"
+																					value="${des.designationName}"/> ${des.designationName}
+																			</ct:forEach>
+																		
+																	
+															
+									<%--  <cf:select path="trainingPhase" class="form-control">
+															<cf:option value="" label="Select Training Type" />
+															<cf:options items="${TrainingPhaseList}"
+																itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
+														</cf:select>  --%>
+									<%-- <ct:forEach items="${DesignationList}" var="map">
+									<cf:checkbox  path="userType" id="userType_${map}"
+										itemValue="designationId" itemLabel="designationName" />
 									<br>
-								</ct:forEach>
+								</ct:forEach> --%>
 								</div>
 
 								<div class="form-group">
@@ -197,7 +211,19 @@
 										                                      onblur="ck_aadhar('personalinformationtrainer');" 
 										/>
 								</div>
-
+	<div class="form-group" id="on">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Organization Name:</strong></li>
+											<li class="style-li error-red"></li>
+											
+											 <li id="s1" style="display:none;" class="style-li error-red" >No. Of Training Sessions Conducted can not be blank.</li>
+									 
+										</ul>
+									</div>
+									
+									<cf:input type="text" path="orgName" class="form-control" placeholder="Organization Name" required="" />
+								</div>
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -594,6 +620,35 @@
 							<legend>Experience Details </legend>
 							<!-- left side -->
 							<div class="col-md-6 col-xs-12">
+							
+								<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Modules:</strong></li>
+															<li id="trainingTypeErr" style="display: none;"
+																class="style-li error-red">Please Select Training
+																Type.</li>
+															<li class="style-li error-red"><span
+																id="name_status" class="clear-label"> </span> ${created }</li>
+														</ul>
+														<br>
+													</div><ct:forEach items="${allModules}" var="treemap">
+																	<ul>
+																			<ct:forEach items="${treemap.value}" var="modules">
+																				<li><cf:checkbox path="moduleNames" id='${modules}'
+																					value="${modules}"/> ${modules}</li>
+																			</ct:forEach>
+																		</ul>
+																	
+																</ct:forEach>
+													<%-- <cf:select path="moduleNames" class="form-control">
+														<cf:option value="" label="Select Training Type" />
+														<cf:options items="${allModules}"
+															 />
+													</cf:select> --%>
+												</div>
+							
+							
 								<%-- <div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -609,7 +664,7 @@
 										<cf:options items="${ExpBackgroundMap}" />
 									</cf:select>
 								</div> --%>
-								<div class="form-group">
+							<%-- 	<div class="form-group">
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>Food Safety
@@ -636,7 +691,7 @@
 											</cf:select>
 										</div>
 									</div>
-								</div>
+								</div> --%>
 							<%-- 	<div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -651,7 +706,7 @@
 									
 									<cf:input type="text" path="noOfSessionConducted" class="form-control" placeholder="Session Number" required="" />
 								</div> --%>
-								<div class="form-group" id="sa">
+							<%-- 	<div class="form-group" id="sa">
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>Specialised Area:</strong></li>
@@ -663,21 +718,9 @@
 									</div>
 									
 									<cf:input type="text" path="specialisedArea" class="form-control" placeholder="Specialised Area" required="" />
-								</div>
-								<div class="form-group" id="on">
-									<div>
-										<ul class="lab-no">
-											<li class="style-li"><strong>Organization Name:</strong></li>
-											<li class="style-li error-red"></li>
-											
-											 <li id="s1" style="display:none;" class="style-li error-red" >No. Of Training Sessions Conducted can not be blank.</li>
-									 
-										</ul>
-									</div>
-									
-									<cf:input type="text" path="orgName" class="form-control" placeholder="Organization Name" required="" />
-								</div>
-								<div class="form-group" id="tc">
+								</div> --%>
+							
+							<%-- 	<div class="form-group" id="tc">
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>No. of Trainings Conducted:</strong></li>
@@ -689,7 +732,7 @@
 									</div>
 									
 									<cf:input type="text" path="noOfTrainings" class="form-control" placeholder="No of Trainings Conducted" required="" />
-								</div>
+								</div> --%>
 							</div>
 							<!-- left side ends -->
 							<!-- right side -->

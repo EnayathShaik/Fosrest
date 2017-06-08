@@ -25,6 +25,7 @@ import com.ir.form.StateForm;
 import com.ir.form.TrainerRequestForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CourseName;
+import com.ir.model.Designation;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
@@ -260,7 +261,8 @@ public class TrainerController {
 		Map<String, String> titleMap = lst.titleMap;
 		Map<String, String> ExpBG = lst.expBGMap;
 		Map<String, String> opt = lst.noOfOptionMap;
-
+		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		model.addAttribute("DesignationList", DesignationList);
 		model.addAttribute("TrainerUserType", TrainerUserType);
 		model.addAttribute("titleMap", titleMap);
 		model.addAttribute("ExpBackgroundMap", ExpBG);
@@ -270,6 +272,7 @@ public class TrainerController {
 				this.adminService.listStateMaster());
 		model.addAttribute("listTrainingInstitude",
 				this.adminService.listTrainingInstitude());
+		model.addAttribute("allModules", this.adminService.allUnitModules());
 		if (userId != null && Integer.parseInt(userId) > 0) {
 			personalInformationTrainer = this.traineeService
 					.FullDetailTrainer(Integer.parseInt(userId));
