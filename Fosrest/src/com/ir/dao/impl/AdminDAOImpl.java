@@ -3501,7 +3501,8 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		TrainingScheduleForm bean ;
 		List<TrainingScheduleForm> resulList = new ArrayList<TrainingScheduleForm>();
-		String sql="select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),unitName,moduleName,u.unitId,m.moduleId from unitmaster u join modulemaster m on (u.unitid=m.unitid) order by unitName";
+		//String sql="select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),unitName,moduleName,u.unitId,m.moduleId from unitmaster u join modulemaster m on (u.unitid=m.unitid) order by unitName";
+		String sql="select distinct (select designationName from designation where designationid=cast(designation as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),unitName,u.unitId from unitmaster u join modulemaster m on (u.unitid=m.unitid) order by unitName";
 				//String sql="select cast('AO' as varchar(20)) as designation,cast('Induction' as varchar(20)) as trainingType,cast('DEF' as varchar(20)) as courseName,cast('ABC' as varchar(20)) as chapter,cast('XYZ' as varchar(20)) as module,cast('5hrs' as varchar(20)) as duration,cast('12/05/2017' as varchar(20)) as trainingStartDate,cast('03/06/2017' as varchar(20)) as trainingEndDate,cast('1' as integer) as day   ";
 		List<Object[]> list = session
 				.createSQLQuery(sql).list();
