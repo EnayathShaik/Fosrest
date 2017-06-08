@@ -1,12 +1,47 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 
-<script type="text/javascript"
-	src="website/js/jquery-toaster/jquery.toaster.js"></script>
 
- -->
  <script src="website/js/commonController.js"></script>
+ <script type="text/javascript" src="website/js/jquery.min.js"></script>
+<script type="text/javascript" src="website/js/bootstrap-clockpicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="website/css/bootstrap-clockpicker.min.css">
+
+<style type="text/css">
+.navbar h3 {
+	color: #f5f5f5;
+	margin-top: 14px;
+}
+.hljs-pre {
+	background: #f8f8f8;
+	padding: 3px;
+}
+.footer {
+	border-top: 1px solid #eee;
+	margin-top: 40px;
+	padding: 40px 0;
+}
+.input-group {
+	width: 110px;
+	margin-bottom: 10px;
+}
+.pull-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+@media (max-width: 767px) {
+  .pull-center {
+    float: right;
+  }
+}
+</style>
+
+ 
 <script>
 	function OnStart() {
 	/* 	alert("");
@@ -18,7 +53,6 @@ if('${search}'==0){
 }
 	 */
 	
-
 
 		flatpickr("#trainingDate", {
 
@@ -168,9 +202,10 @@ if('${search}'==0){
 															<th>Chapter Name</th>
 															<th>Module Names</th>
 															<th>Day</th>
-															<th>Start & End Time</th>
+															<th>Start Time</th>
+															<th>End Time</th>
 															
-		</tr>
+		                                                </tr>
 													</thead>
 													<ct:forEach items="${listtrainingScheduleMaster}"
 														var="listtrainingScheduleMaster" varStatus="loop">
@@ -203,10 +238,27 @@ if('${search}'==0){
 
 
 																</cf:select></td>
-															<td>12:30</td>
-
-
-														</tr>
+															<td>
+															<div class="form-group">
+																<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
+																	<input type="text" class="form-control" value="18:00">
+																	<span class="input-group-addon">
+																		<span class="glyphicon glyphicon-time"></span>
+																	</span>
+																</div>
+	                                                        </div>
+															</td>	
+															<td>
+															<div class="form-group">
+																<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
+																	<input type="text" class="form-control" value="18:00">
+																	<span class="input-group-addon">
+																		<span class="glyphicon glyphicon-time"></span>
+																	</span>
+																</div>
+	                                                        </div>
+															</td>			
+															</tr>
 													</ct:forEach>
 												</table>
 												<div class="col-md-06 col-xs-12" style="margin-top: -72px;">
@@ -251,4 +303,60 @@ if('${search}'==0){
 		}
 	}
 </script> -->
+<script type="text/javascript">
+ $('.clockpicker').clockpicker()
+	.find('input').change(function(){
+		console.log(this.value);
+	});
+var input = $('#single-input').clockpicker({
+	placement: 'bottom',
+	align: 'left',
+	autoclose: true,
+	'default': 'now'
+});
 
+$('.clockpicker-with-callbacks').clockpicker({
+		donetext: 'Done',
+		init: function() { 
+			console.log("colorpicker initiated");
+		},
+		beforeShow: function() {
+			console.log("before show");
+		},
+		afterShow: function() {
+			console.log("after show");
+		},
+		beforeHide: function() {
+			console.log("before hide");
+		},
+		afterHide: function() {
+			console.log("after hide");
+		},
+		beforeHourSelect: function() {
+			console.log("before hour selected");
+		},
+		afterHourSelect: function() {
+			console.log("after hour selected");
+		},
+		beforeDone: function() {
+			console.log("before done");
+		},
+		afterDone: function() {
+			console.log("after done");
+		}
+	})
+	.find('input').change(function(){
+		console.log(this.value);
+	});
+
+// Manually toggle to the minutes view
+$('#check-minutes').click(function(e){
+	// Have to stop propagation here
+	e.stopPropagation();
+	input.clockpicker('show')
+			.clockpicker('toggleView', 'minutes');
+});
+if (/mobile/i.test(navigator.userAgent)) {
+	$('input').prop('readOnly', true);
+} 
+</script>
