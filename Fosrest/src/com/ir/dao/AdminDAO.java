@@ -393,7 +393,9 @@ public interface AdminDAO {
 
 	public List<UnitMaster> listUnitMaster2();
 
-	public TreeMap<String, List<String>> allUnitModules();
+	public TreeMap<String, List<ModuleMaster>>  allUnitModules();
+
+	public String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm);
 
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

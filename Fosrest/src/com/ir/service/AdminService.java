@@ -497,7 +497,9 @@ public List<TrainingScheduleForm> listtrainingScheduleMaster( );
 
 public List<UnitMaster> listUnitMaster2();
 
-TreeMap<String, List<String>> allUnitModules();
+TreeMap<String, List<ModuleMaster>>  allUnitModules();
+
+String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm);
 
 }
 

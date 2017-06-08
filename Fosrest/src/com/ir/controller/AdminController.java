@@ -2993,7 +2993,7 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/trainingschedule123", method = RequestMethod.GET)
 	
-		public String trainingschedule12(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule,
+		public String trainingschedule12(@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm TrainingScheduleForm,
 				Model model, HttpSession session) {
 		System.out.println("trainingschedule123");
 	Map<String, String> trainingType = lst.trainingTypeMap;
@@ -3083,5 +3083,24 @@ public class AdminController {
   		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());*/
   		return "trainingcalendar";
   	}
+   
+
+   
+@RequestMapping(value="/saveTrainingSchedule" , method=RequestMethod.POST)
+	
+	public String saveTrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm trainingScheduleForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	
+		System.out.println("saveTrainingSchedule");
+		new ZLogger("saveTrainingSchedule", "Exception while saveTrainingSchedule :  ", "AdminController.java");
+
+		 adminService.saveTrainingSchedule(trainingScheduleForm);
+		
+		 
+		
+	
+		return "trainingschedule123"; 
+	}
+
+   
   	
 }

@@ -2212,7 +2212,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public void addTrainingSchedule(TrainingSchedule p) {
 		// TODO Auto-generated method stub
 		System.out.println("TrainingSchedule " + p.getTrainingScheduleId());
-		// getModuleMasterById
+		/*// getModuleMasterById
 		p.setTrainer_status("N");
 		p.setTraining_institude_status("N");
 		p.setIsActive("A");
@@ -2246,13 +2246,13 @@ public class AdminDAOImpl implements AdminDAO {
 		// p.setUnitMaster(um);
 		// p.setModuleMaster(mm);
 
-		session.persist(p);
+		session.persist(p);*/
 	}
 
 	@Override
 	public void updateTrainingSchedule(TrainingSchedule p) {
 		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
+		/*Session session = this.sessionFactory.getCurrentSession();
 		TrainingSchedule trainingSchedule = (TrainingSchedule) session.load(TrainingSchedule.class,
 				p.getTrainingScheduleId());
 		trainingSchedule.setTrainingType(p.getTrainingType());
@@ -2277,7 +2277,7 @@ public class AdminDAOImpl implements AdminDAO {
 			trainingSchedule.setTraining_institude_status("N");
 		}
 		session.update(trainingSchedule);
-
+*/
 	}
 
 	// removeTrainingSchedule
@@ -3090,7 +3090,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String[] loginIdName = arrData[0].split(",");
 		int trainingScheduleId = Integer.parseInt(arrData[1]);
 		TrainingSchedule ts = (TrainingSchedule) session.load(TrainingSchedule.class, trainingScheduleId);
-		int unitCode = ts.getUnitId();
+		int unitCode = ts.getChapterId();
 		int moduleId = ts.getModuleId();
 		ModuleMaster mm = getModuleMasterById(moduleId);
 		String moduleCode = mm.getModuleCode();
@@ -3523,6 +3523,7 @@ public class AdminDAOImpl implements AdminDAO {
 			bean.setTrainingType((String) li[2]);
 			//bean.setCourseName((String) li[2]);
 			bean.setChapter((String) li[3]);
+			bean.setChapterId((int)li[4]);
 			//for (Object[] li2 : list) {
 				//if((((String) li2[3]).equals(bean.getChapter())))
 					//bean.setModuleName(bean.getModuleName()+"-"+(String)li2[4]);
@@ -3559,15 +3560,15 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public TreeMap<String, List<String>> allUnitModules() {
+	public TreeMap<String, List<ModuleMaster>> allUnitModules() {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		
-		TreeMap<String, List<String>> UMmap= new TreeMap<String, List<String>>();
+		TreeMap<String, List<ModuleMaster>>  UMmap= new TreeMap<>();
 		List <String> allchapters = session.createSQLQuery("  select distinct unitname  from unitmaster u join modulemaster m on(u.unitId=m.unitId) order by unitName").list();
 		System.out.println("inside allUnitModules"+allchapters.size());
 		for(int i=0;i<allchapters.size();i++){
-			List <String> mod = session.createSQLQuery("select  modulename  from modulemaster where unitId= (select unitId from unitMaster where unitname='"+allchapters.get(i)+"')").list();
+			List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename from modulemaster where unitId= (select unitId from unitMaster where unitname='"+allchapters.get(i)+"')").list();
 			UMmap.put(allchapters.get(i), mod);
 			}
 		
@@ -3576,4 +3577,25 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 
+	@Override
+	public String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		TrainingSchedule ts= new TrainingSchedule();
+		ts.setChapterId(trainingScheduleForm.getChapterId());
+		ts.setTrainingType(trainingScheduleForm.getTrainingType2());
+		ts.setTrainingPhase(trainingScheduleForm.getTrainingPhase2());
+		ts.setDesignation(trainingScheduleForm.getDesignation2());
+		ts.setDay(trainingScheduleForm.getDay2());
+		ts.setModules(trainingScheduleForm.getModules());
+		ts.setStartTime(trainingScheduleForm.getStartTime());
+		ts.setEndTime(trainingScheduleForm.getEndTime());
+		
+		session.save(ts);
+		
+		return null;
+	}
+
+	
 }

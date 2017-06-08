@@ -112,7 +112,7 @@ if('${search}'==0){
 																id="name_status" class="clear-label"> </span> ${created }</li>
 														</ul>
 													</div>
-													 <cf:select path="TrainingType" class="form-control" onchange="getTrainingPhase(this.value , 'trainingPhase')">
+													 <cf:select path="trainingType" class="form-control" onchange="getTrainingPhase(this.value , 'trainingPhase')">
 															<cf:option value="" label="Select Training Type" />
 															<cf:options items="${TrainingTypeList}"
 																itemValue="trainingTypeId" itemLabel="trainingTypeName" />
@@ -165,7 +165,7 @@ if('${search}'==0){
 																		path="status" cssClass="error" /></li>
 															</ul>
 														</div>
-														<cf:select path="Designation" class="form-control">
+														<cf:select path="designation" class="form-control">
 															<cf:option value="" label="Select Designation" />
 															<cf:options items="${DesignationList}"
 																itemValue="designationId" itemLabel="designationName" />
@@ -204,44 +204,53 @@ if('${search}'==0){
 															<th>Day</th>
 															<th>Start Time</th>
 															<th>End Time</th>
+															<th>Save</th>
 															
 		                                                </tr>
 													</thead>
 													<ct:forEach items="${listtrainingScheduleMaster}"
 														var="listtrainingScheduleMaster" varStatus="loop">
-														<tr>
+														<tr >
 															<td>${loop.count}</td>
 															<td>${listtrainingScheduleMaster.designation}</td>
 															<td>${listtrainingScheduleMaster.trainingPhase}</td>
 															<td>${listtrainingScheduleMaster.trainingType}</td>
 															<td>${listtrainingScheduleMaster.chapter}</td>
-															<%-- <td>${listtrainingScheduleMaster.moduleName}</td> --%>
-
+															
 															<td><ct:forEach items="${allModules}" var="treemap">
 																	<ct:if
 																		test="${listtrainingScheduleMaster.chapter == treemap.key}">
+																		<%-- <ct:set value="${treemap.value}" var="modd" /> --%>
 																		<ul>
 																			<ct:forEach items="${treemap.value}" var="modules">
-																				<li><input type="checkbox" id='${modules}'
-																					value="${modules}"> ${modules}</li>
+																				<li><cf:checkbox path="modules" id='${loop.count}-${modules}'
+																					value="${modules[0]}" label=" ${modules[1]}" /></li>
 																			</ct:forEach>
+																			
+									
+																			
 																		</ul>
 																	</ct:if>
 																</ct:forEach></td>
 
-															<td><cf:select path="TrainingType"
+															<td><cf:select path="day" id='day_${loop.count}'
 																	class="form-control">
-																	<ct:forEach var="i" begin="0" end="30" varStatus="loop">
-																		<cf:option value='${loop.count}' label='${loop.count}' />
+																	<ct:forEach var="i" begin="0" end="30" varStatus="loop2">
+																	
+																		<cf:option value='${loop2.count}' label='${loop2.count}' />
 
 																	</ct:forEach>
 
-
+  
 																</cf:select></td>
+																
+ 
+ 
+														
 															<td>
 															<div class="form-group">
 																<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
-																	<input type="text" class="form-control" value="18:00">
+																	<input id='startT_${loop.count}' type="text" class="form-control" value="18:00">
 																	<span class="input-group-addon">
 																		<span class="glyphicon glyphicon-time"></span>
 																	</span>
@@ -251,19 +260,30 @@ if('${search}'==0){
 															<td>
 															<div class="form-group">
 																<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
-																	<input type="text" class="form-control" value="18:00">
+																	<input id='endT_${loop.count}' type="text" class="form-control" value="18:00">
 																	<span class="input-group-addon">
 																		<span class="glyphicon glyphicon-time"></span>
 																	</span>
 																</div>
 	                                                        </div>
-															</td>			
+															</td>	
+															<td><input  type="submit" value="save" formaction="saveTrainingSchedule.fssai" onclick="return saveSchedule('${loop.count}','${listtrainingScheduleMaster.designation}','${listtrainingScheduleMaster.trainingPhase}','${listtrainingScheduleMaster.trainingType}','${listtrainingScheduleMaster.chapterId}');"></td>
+																	
 															</tr>
 													</ct:forEach>
 												</table>
-												<div class="col-md-06 col-xs-12" style="margin-top: -72px;">
+												 <cf:hidden path="chapterId"/> 
+												  <cf:hidden path="day2"/> 
+												   <cf:hidden path="designation2"/> 
+												   
+												    <cf:hidden path="trainingPhase2"/> 
+												     <cf:hidden path="trainingType2"/> 
+												      <cf:hidden path="startTime"/> 
+												     <cf:hidden path="endTime"/> 
+												
+										<!-- 		<div class="col-md-06 col-xs-12" style="margin-top: -72px;">
 													<input type="button" id="savebtn" value="Save"
-														style="float: right;" class="btn login-btn" />
+														style="float: right;" class="btn login-btn" /> -->
 											</ct:if>
 										</fieldset>
 									</div>
@@ -277,14 +297,34 @@ if('${search}'==0){
 			</div>
 		</div>
 	</section>
-	<input type="hidden" id="idH" value="" />
+	<input type="hidden" id="idH" value="" /> 
+	
+	<script>
+function saveSchedule(l,a,b,c,d){
+	
+
+	document.getElementById("day2").value=document.getElementById("day_"+l).value;
+	document.getElementById("startTime").value=document.getElementById("startT_"+l).value;
+	document.getElementById("endTime").value=document.getElementById("endT_"+l).value;
+	
+	
+	document.getElementById("chapterId").value=d;
+	
+	document.getElementById("designation2").value=a;
+	document.getElementById("trainingPhase2").value=b;
+	document.getElementById("trainingType2").value=c;
+	
+	
+
+}
+</script>
 </cf:form>
 </body>
 </html>
 
 <!-- <script>
 	function validateFields() {
-
+	
 		if ($("#courseName").val() == '') {
 			$("#courseNameErr").css("display", "block");
 			return false;
@@ -307,6 +347,8 @@ if('${search}'==0){
  $('.clockpicker').clockpicker()
 	.find('input').change(function(){
 		console.log(this.value);
+		alert(this.value);
+		
 	});
 var input = $('#single-input').clockpicker({
 	placement: 'bottom',

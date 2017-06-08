@@ -20,152 +20,75 @@ import org.hibernate.annotations.ColumnDefault;
 
 public class TrainingScheduleForm {
 	
-	public int getTrainingScheduleId() {
-		return trainingScheduleId;
-	}
-	public void setTrainingScheduleId(int trainingScheduleId) {
-		this.trainingScheduleId = trainingScheduleId;
-	}
-	public String getUserType() {
-		return userType;
-	}
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-	public String getTrainingInstitudeStatus() {
-		return trainingInstitudeStatus;
-	}
-	public void setTrainingInstitudeStatus(String trainingInstitudeStatus) {
-		this.trainingInstitudeStatus = trainingInstitudeStatus;
-	}
+	private String modules;
+	
+	private int chapterId;
+	private String chapter;
+	private int trainingScheduleId;
+	private int day;
+
+	private int day2;
+	private String startTime;
+	private String endTime;
+	private String designation;
+	private String trainingType;
+	private String trainingPhase;
+	private String status;
+	
+	private String designation2;
+	private String trainingType2;
+	private String trainingPhase2;
+	
+	
 	public int getDay() {
 		return day;
 	}
 	public void setDay(int day) {
 		this.day = day;
 	}
-
-	public String getUnitName() {
-		return unitName;
-	}
-	public void setUnitName(String unitName) {
-		this.unitName = unitName;
-	}
-	public String getModuleName() {
-		return moduleName;
-	}
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
-	}
-	public String getDuration() {
-		return duration;
-	}
-	public void setDuration(String duration) {
-		this.duration = duration;
-	}
-	public String getTrainingStartDate() {
-		return trainingStartDate;
-	}
-	public void setTrainingStartDate(String trainingStartDate) {
-		this.trainingStartDate = trainingStartDate;
-	}
-	public String getTrainingEndDate() {
-		return trainingEndDate;
-	}
-	public void setTrainingEndDate(String trainingEndDate) {
-		this.trainingEndDate = trainingEndDate;
-	}
-	public int getTrainingPartner() {
-		return trainingPartner;
-	}
-	public void setTrainingPartner(int trainingPartner) {
-		this.trainingPartner = trainingPartner;
-	}
-	public int getTrainingInstitude() {
-		return trainingInstitude;
-	}
-	public void setTrainingInstitude(int trainingInstitude) {
-		this.trainingInstitude = trainingInstitude;
-	}
-	public int getState() {
-		return state;
-	}
-	public void setState(int state) {
-		this.state = state;
-	}
-	public int getTrainer_id() {
-		return trainer_id;
-	}
-	public void setTrainer_id(int trainer_id) {
-		this.trainer_id = trainer_id;
-	}
-	public int getTraining_institude_id() {
-		return training_institude_id;
-	}
-	public void setTraining_institude_id(int training_institude_id) {
-		this.training_institude_id = training_institude_id;
-	}
-	public String getTrainer_status() {
-		return trainer_status;
-	}
-	public void setTrainer_status(String trainer_status) {
-		this.trainer_status = trainer_status;
-	}
-	public String getTraining_institude_status() {
-		return training_institude_status;
-	}
-	public void setTraining_institude_status(String training_institude_status) {
-		this.training_institude_status = training_institude_status;
-	}
-	public int getUnitId() {
-		return unitId;
-	}
-	public void setUnitId(int unitId) {
-		this.unitId = unitId;
-	}
-	public int getModuleId() {
-		return moduleId;
-	}
-	public void setModuleId(int moduleId) {
-		this.moduleId = moduleId;
-	}
-	private int trainingScheduleId;
-	private String userType;
 	
-	private String trainingInstitudeStatus;
-	private int day;
-	private String unitName;
-	private String moduleName;
-	private String duration;
-	private String trainingStartDate;
-	private String trainingEndDate;
-	private int trainingPartner;
-	private int trainingInstitude;
-	private int state;
-	private int trainer_id;
-	private int training_institude_id;
-	private String trainer_status;
-	private String training_institude_status;
-	private int unitId;
-	private int moduleId;
-	private String chapter;
+	public String getModules() {
+		return modules;
+	}
+	public void setModules(String modules) {
+		this.modules = modules;
+	}
+	public int getChapterId() {
+		return chapterId;
+	}
+	public void setChapterId(int chapterId) {
+		this.chapterId = chapterId;
+	}
 	public String getChapter() {
 		return chapter;
 	}
 	public void setChapter(String chapter) {
 		this.chapter = chapter;
 	}
-	public String getCourseName() {
-		return courseName;
+	public int getTrainingScheduleId() {
+		return trainingScheduleId;
 	}
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
+	public void setTrainingScheduleId(int trainingScheduleId) {
+		this.trainingScheduleId = trainingScheduleId;
 	}
-	private String designation;
-	private String trainingType;
-	private String trainingPhase;
-	private String status;
-	private String courseName;
+	public int getDay2() {
+		return day2;
+	}
+	public void setDay2(int day2) {
+		this.day2 = day2;
+	}
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 	public String getDesignation() {
 		return designation;
 	}
@@ -190,6 +113,27 @@ public class TrainingScheduleForm {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getDesignation2() {
+		return designation2;
+	}
+	public void setDesignation2(String designation2) {
+		this.designation2 = designation2;
+	}
+	public String getTrainingType2() {
+		return trainingType2;
+	}
+	public void setTrainingType2(String trainingType2) {
+		this.trainingType2 = trainingType2;
+	}
+	public String getTrainingPhase2() {
+		return trainingPhase2;
+	}
+	public void setTrainingPhase2(String trainingPhase2) {
+		this.trainingPhase2 = trainingPhase2;
+	}
+	
+	
+	
 	
 	
  

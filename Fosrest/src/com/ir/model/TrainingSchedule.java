@@ -2,6 +2,7 @@ package com.ir.model;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,29 +34,90 @@ public class TrainingSchedule {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name= "trainingScheduleId")
 	private int trainingScheduleId;
-	private String userType;
+	private String designation;
 	private String trainingType;
 	private String trainingPhase;
-	private String trainingInstitudeStatus;
-	private String trainingStartDate;
-	private String trainingEndDate;
-	private int trainingPartner;
-	private int trainingInstitude;
-	private int state;
-	private int trainer_id;
-	private int training_institude_id;
-	private String trainer_status;
-	private String training_institude_status;
-	private String batchCode;
-	private String status;
-	private String designation;
-	public String getStatus() {
-		return status;
-	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	private int chapterId;// is unitId
+private String modules;
+private int day;
+private String startTime;
+private String endTime;
+
+
+@CreationTimestamp
+@Temporal(TemporalType.TIMESTAMP)
+@Column(name = "create_date")
+private Date createDate;
+
+@UpdateTimestamp
+@Temporal(TemporalType.TIMESTAMP)
+@Column(name = "modify_date")
+private Date modifyDate;
+
+@Column(columnDefinition="int default 0")
+private int seqNo;
+
+@Column(name="isActive", columnDefinition="character varying(10) default 'A'")
+private String isActive;
+
+
+private String status;
+
+
+private int moduleId;
+
+
+
+
+public int getChapterId() {
+	return chapterId;
+}
+
+public void setChapterId(int chapterId) {
+	this.chapterId = chapterId;
+}
+
+public String getModules() {
+	return modules;
+}
+
+public void setModules(String modules) {
+	this.modules = modules;
+}
+
+public int getDay() {
+	return day;
+}
+
+public void setDay(int day) {
+	this.day = day;
+}
+
+public String getStartTime() {
+	return startTime;
+}
+
+public void setStartTime(String startTime) {
+	this.startTime = startTime;
+}
+
+public String getEndTime() {
+	return endTime;
+}
+
+public void setEndTime(String endTime) {
+	this.endTime = endTime;
+}
+
+public String getStatus() {
+	return status;
+}
+
+public void setStatus(String status) {
+	this.status = status;
+}
+
 
 	public String getDesignation() {
 		return designation;
@@ -66,13 +128,7 @@ public class TrainingSchedule {
 	}
 
 
-	@Column(columnDefinition="int default 0")
-	private int seqNo;
-	
-	@Column(name="isActive", columnDefinition="character varying(10) default 'A'")
-	private String isActive;
-	
-	
+
 	
 
 	public String getIsActive() {
@@ -88,15 +144,6 @@ public class TrainingSchedule {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getUserType() {
-		return userType;
-	}
-
-
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
 
 
 
@@ -135,106 +182,6 @@ public class TrainingSchedule {
 		this.trainingScheduleId = trainingScheduleId;
 	}
 
-	public String getTrainingInstitudeStatus() {
-		return trainingInstitudeStatus;
-	}
-
-	public void setTrainingInstitudeStatus(String trainingInstitudeStatus) {
-		this.trainingInstitudeStatus = trainingInstitudeStatus;
-	}
-
-	public String getTrainingStartDate() {
-		return trainingStartDate;
-	}
-
-	public void setTrainingStartDate(String trainingStartDate) {
-		this.trainingStartDate = trainingStartDate;
-	}
-
-	public String getTrainingEndDate() {
-		return trainingEndDate;
-	}
-
-	public void setTrainingEndDate(String trainingEndDate) {
-		this.trainingEndDate = trainingEndDate;
-	}
-
-	public int getTrainingPartner() {
-		return trainingPartner;
-	}
-
-	public void setTrainingPartner(int trainingPartner) {
-		this.trainingPartner = trainingPartner;
-	}
-
-	public int getTrainingInstitude() {
-		return trainingInstitude;
-	}
-
-	public void setTrainingInstitude(int trainingInstitude) {
-		this.trainingInstitude = trainingInstitude;
-	}
-
-	public int getState() {
-		return state;
-	}
-
-	public void setState(int state) {
-		this.state = state;
-	}
-
-	public int getTrainer_id() {
-		return trainer_id;
-	}
-
-	public void setTrainer_id(int trainer_id) {
-		this.trainer_id = trainer_id;
-	}
-
-	public int getTraining_institude_id() {
-		return training_institude_id;
-	}
-
-	public void setTraining_institude_id(int training_institude_id) {
-		this.training_institude_id = training_institude_id;
-	}
-
-	public String getTrainer_status() {
-		return trainer_status;
-	}
-
-	public void setTrainer_status(String trainer_status) {
-		this.trainer_status = trainer_status;
-	}
-
-	public String getTraining_institude_status() {
-		return training_institude_status;
-	}
-
-	public void setTraining_institude_status(String training_institude_status) {
-		this.training_institude_status = training_institude_status;
-	}
-
-	
-	private int unitId;
-	private int moduleId;
-  
-
-public String getBatchCode() {
-		return batchCode;
-	}
-public void setBatchCode(String batchCode) {
-	this.batchCode = batchCode;
-}
-	
-
-public int getUnitId() {
-	return unitId;
-}
-
-public void setUnitId(int unitId) {
-	this.unitId = unitId;
-}
 
 public int getModuleId() {
 	return moduleId;
@@ -255,19 +202,6 @@ public void setModuleId(int moduleId) {
 	}
 
 	
-
-	
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date")
-	private Date createDate;
-
-	@UpdateTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modify_date")
-	private Date modifyDate;
-
-
 
 
 	public Date getCreateDate() {

@@ -1526,8 +1526,15 @@ public List<UnitMaster> listUnitMaster2() {
 
 @Override
 @Transactional
-public TreeMap<String, List<String>> allUnitModules() {
+public TreeMap<String, List<ModuleMaster>>  allUnitModules() {
 	// TODO Auto-generated method stub
 	return this.adminDAO.allUnitModules();
+}
+
+@Override
+@Transactional
+public String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.saveTrainingSchedule(trainingScheduleForm);
 }
 }
