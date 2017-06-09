@@ -400,5 +400,9 @@ public interface AdminDAO {
 
 	public String addTrainingCalendar(TrainingCalendar p);
 
+	public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s);
+
+	public List<PersonalInformationTrainer> trainingNameList2(String s);
+
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

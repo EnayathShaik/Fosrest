@@ -2368,8 +2368,9 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<TrainingSchedule> listTrainingSchedule(int id, int profileId) {
+		return null;
 		// TODO Auto-generated method stub
-		System.out.println("inside listTrainingSchedule with parameter");
+		/*System.out.println("inside listTrainingSchedule with parameter");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingSchedule> mccList = null;
 		if (profileId == 5) {
@@ -2380,14 +2381,14 @@ public class AdminDAOImpl implements AdminDAO {
 		} else {
 
 			mccList = session.createQuery(
-					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(trainer_status,'') not in ( 'Y' , '') and trainer_id='"
+					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(status,'') not in ( 'Y' , '') and trainer_id='"
 							+ id + "'  ")
 					.list();
 		}
 		for (TrainingSchedule p : mccList) {
 			System.out.println("listTrainingSchedule List::" + p);
 		}
-		return mccList;
+		return mccList;*/
 	}
 
 	/**
@@ -3490,8 +3491,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public List listCalendar() {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		System.out.println("inside ccccccccccccccccccccccc");
-		Query query = 	session.createSQLQuery("select c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingStartDate,c.trainerName,c.trainingInstitute from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
+		Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
 		List list = query.list();
 		return list;
 	}
@@ -3610,9 +3610,31 @@ public class AdminDAOImpl implements AdminDAO {
 if(p.getTrainingPhase()==null){
 	p.setTrainingPhase("0");
 }
+String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
+p.setBatchCode(batchCode);
 		p.setIsActive("Y");
 		session.persist(p);
 		return "created";
+	}
+
+	@Override
+	public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s) {
+		// TODO Auto-generated method stub
+		System.out.println("inside listSubjectMaster");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<PersonalInformationTrainingInstitute> mccList = session
+				.createQuery("from PersonalInformationTrainingInstitute where correspondenceState='"+s+"'").list();
+		
+		return mccList;
+	}
+
+	@Override
+	public List<PersonalInformationTrainer> trainingNameList2(String s) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from PersonalInformationTrainer where correspondenceState='"+s+"'");
+		List<PersonalInformationTrainer> trainingNameList = query.list();
+		return trainingNameList;
 	}
 	
 }

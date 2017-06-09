@@ -1543,4 +1543,18 @@ public String addTrainingCalendar(TrainingCalendar p) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.addTrainingCalendar(p);
 }
+
+@Override
+@Transactional
+public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listTrainingInstitude2(s);
+}
+
+@Override
+@Transactional
+public List<PersonalInformationTrainer> trainingNameList2(String s) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.trainingNameList2(s);
+}
 }

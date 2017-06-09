@@ -32,17 +32,19 @@ public class PersonalInformationTrainer {
 
 	private String userType;
 	
-	private String moduleNames;
+	private int modulesId;
 	
 
 	
 
-	public String getModuleNames() {
-		return moduleNames;
+
+
+	public int getModulesId() {
+		return modulesId;
 	}
 
-	public void setModuleNames(String moduleNames) {
-		this.moduleNames = moduleNames;
+	public void setModulesId(int modulesId) {
+		this.modulesId = modulesId;
 	}
 
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")

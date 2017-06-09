@@ -635,14 +635,15 @@
 													</div><ct:forEach items="${allModules}" var="treemap">
 																	<ul>
 																			<ct:forEach items="${treemap.value}" var="modules">
-																				<li><cf:checkbox path="moduleNames" id='${modules}'
-																					value="${modules}"/> ${modules}</li>
+																				<li><cf:checkbox path="modulesId" id='${modules[0]}'
+																					value="${modules[0]}"/> ${modules[1]}</li>
 																			</ct:forEach>
 																		</ul>
 																	
 																</ct:forEach>
 												</div>
-												
+											</div>
+											<div class="col-md-6 col-xs-12">	
 								<div class="form-group">
 									<label>Associated with any Training Institute ?</label> <br>
 									<label class="radio-inline"> <input type="radio"

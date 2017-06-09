@@ -222,6 +222,13 @@ public class TrainingCalendar {
 			private String trainerName;
 			private String trainingStartDate;
 			private String isActive;
+			private String batchCode;
+			public String getBatchCode() {
+				return batchCode;
+			}
+			public void setBatchCode(String batchCode) {
+				this.batchCode = batchCode;
+			}
 			public String getIsActive() {
 				return isActive;
 			}

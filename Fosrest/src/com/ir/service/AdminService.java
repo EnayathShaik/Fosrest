@@ -505,6 +505,9 @@ String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm);
 public String addTrainingCalendar(TrainingCalendar p);
 
 
+public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s);
+
+List<PersonalInformationTrainer> trainingNameList2(String s);
 }
 
 

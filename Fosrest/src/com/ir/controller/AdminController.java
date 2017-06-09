@@ -3035,10 +3035,6 @@ public class AdminController {
 		return "redirect:login.fssai";
 		}
 		System.out.println("listTrainingSchedule");
-		/*Map<String, String> userType = lst.userTypeMap;
-		Map<String, String> trainingType = lst.trainingTypeMap;
-		Map<String, String> trainingPhase = lst.trainingPhaseMap;*/
-		//Map<String, String> userStatusMap = lst.userStatusMap;
 
 		
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
@@ -3047,14 +3043,11 @@ public class AdminController {
 		model.addAttribute("DesignationList", DesignationList);
 		model.addAttribute("TrainingTypeList", TrainingTypeList);
 		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
-		/*model.addAttribute("userType", userType);
-		model.addAttribute("trainingType", trainingType);
-		model.addAttribute("trainingPhase", trainingPhase);*/
-		//model.addAttribute("userStatusMap", userStatusMap);
+		String s=(String) session.getAttribute("stateId");
 		model.addAttribute("listCalendar", this.adminService.listCalendar());
 	    model.addAttribute("TrainingCalendarForm", new TrainingCalendarForm());
-	    model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude());
-		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());
+	    model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
 		return "trainingcalendar";
 	}
 	
@@ -3068,17 +3061,13 @@ public class AdminController {
   		}
   		int profileId=(int) session.getAttribute("profileId");
   		if(p.getTrainingPhase()==null){
-  			System.out.println("tttttttttttttttttttttttttttttttttttttt");
+  			
   		}
         if(profileId==2){
 	         String result = this.adminService.addTrainingCalendar(p);
         }
- 	
-  		//return "trainingcalendar";
   		return "redirect:trainingcalendar.fssai";
   	}
-   
-
    
 @RequestMapping(value="/saveTrainingSchedule" , method=RequestMethod.POST)
 	
@@ -3088,13 +3077,7 @@ public class AdminController {
 		new ZLogger("saveTrainingSchedule", "Exception while saveTrainingSchedule :  ", "AdminController.java");
 
 		 adminService.saveTrainingSchedule(trainingScheduleForm);
-		
-		 
-		
-	
 		return "trainingschedule123"; 
 	}
-
-   
-  	
+ 	
 }
