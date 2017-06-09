@@ -699,8 +699,9 @@ public class TraineeController {
 			return "redirect:login.fssai";
 			}
 
+			int sid=Integer.parseInt( (String) session.getAttribute("stateId"));
+			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa "+sid);
 			String userId = request.getParameter("userId");
-			
 			Map<String , String> userType = lst.userTypeMap;			
 			Map<String , String> titleMap = lst.titleMap;
 			
@@ -711,8 +712,8 @@ public class TraineeController {
 			}else{
 				model.addAttribute("PersonalInformationTrainee", new PersonalInformationTrainee());
 			}
-		
-			model.addAttribute("listStateMaster", this.adminService.listStateMaster());
+			model.addAttribute("listStateMaster",this.adminService.listStateMaster2(sid));
+			/*model.addAttribute("listStateMaster", this.adminService.listStateMaster());*/
 			model.addAttribute("userType",userType);
 			model.addAttribute("titleMap",titleMap);
 			
