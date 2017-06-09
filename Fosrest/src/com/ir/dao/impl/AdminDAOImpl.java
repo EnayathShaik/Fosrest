@@ -3617,6 +3617,33 @@ p.setBatchCode(batchCode);
 		return "created";
 	}
 
+	
+	
+	@Override
+	public String shareInitiativesave(ContactTrainee contactTrainee, String id) {
+		SendContectMail traineeMaail = new SendContectMail();
+		Session session = sessionFactory.getCurrentSession();
+		ContactTraineee contactTraineeModel = new ContactTraineee();
+		String email = contactTrainee.getEmailAddress();
+		String msg = contactTrainee.getMessageDetails();
+		new ZLogger("contactTraineeSave", "user id in dao impl  :::::" + id, "AdminDAOImpl.java");
+		traineeMaail.mailProperty(msg, email, id);
+		contactTraineeModel.setEmailAddress(email);
+		contactTraineeModel.setMessageDetails(msg);
+		contactTraineeModel.setUserId(id);
+		contactTraineeModel.setDescription("My EmailId is :- " + email + " My message to You:-  "
+				+ msg);
+		
+		Integer contactTraineeModelId = (Integer) session
+				.save(contactTraineeModel);
+		if (contactTraineeModelId > 0 && contactTraineeModelId != null) {
+			return "created";
+		} else {
+			return "error";
+		}
+	}
+	
+
 	@Override
 	public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s) {
 		// TODO Auto-generated method stub

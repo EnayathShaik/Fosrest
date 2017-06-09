@@ -504,6 +504,9 @@ String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm);
 
 public String addTrainingCalendar(TrainingCalendar p);
 
+public String shareInitiativesave(ContactTrainee contactTrainee, String id);
+
+
 
 public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s);
 

@@ -3079,5 +3079,47 @@ public class AdminController {
 		 adminService.saveTrainingSchedule(trainingScheduleForm);
 		return "trainingschedule123"; 
 	}
- 	
+
+//share Initiative
+
+@RequestMapping(value ="/shareInitiative", method = RequestMethod.GET)
+public String contact(Model model , HttpSession session) {
+    		 model.addAttribute("ContactTrainee",  new ContactTrainee());
+	return "shareInitiative";
+
+}
+
+ @RequestMapping(value="/shareInitiativesave" , method=RequestMethod.POST)
+public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee contactTrainee
+		,BindingResult result , HttpSession session, Model model
+		){
+	if(result.hasErrors()){
+		new ZLogger("shareInitiativesave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+		new ZLogger("shareInitiativesave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+		return "shareInitiativesave";
+	}
+	model.addAttribute("ContactTrainee",  new ContactTrainee());
+	try{
+		//String id=(String) session.getAttribute("userName");
+		String id="public";
+		//int id1=(int) session.getAttribute("userId");
+		new ZLogger("shareInitiativesave","userid   "+ id  , "AdminController.java");
+		String shareInitiativesave = adminService.shareInitiativesave(contactTrainee , id);
+		if(shareInitiativesave.equalsIgnoreCase("created")){
+			model.addAttribute("created" , "Your request has been sent successfully !!!");
+		}else{
+			model.addAttribute("created" , "Oops, something went wrong !!!");
+		}
+	}catch(Exception e){
+		e.printStackTrace();
+		new ZLogger("shareInitiativesave", "Exception while shareInitiativesave  "+e.getMessage() , "AdminController.java");
+	}
+	return "shareInitiative";
+}
+
+
+
+
+   
+  	
 }

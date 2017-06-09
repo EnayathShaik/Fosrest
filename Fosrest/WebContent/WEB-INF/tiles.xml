@@ -1345,4 +1345,8 @@
 		<put-attribute name="body"
 			value="/website/admin/TrainingScheduleMaster.jsp" />
 	</definition>
+	<definition name="shareInitiative" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/shareInitiative.jsp" />
+	</definition>
 </tiles-definitions>

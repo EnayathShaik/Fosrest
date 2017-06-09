@@ -1546,6 +1546,14 @@ public String addTrainingCalendar(TrainingCalendar p) {
 
 @Override
 @Transactional
+public String shareInitiativesave(ContactTrainee contactTrainee , String id) {
+	String shareInitiativesave = adminDAO.shareInitiativesave(contactTrainee , id);
+	return shareInitiativesave;
+}
+
+
+@Override
+@Transactional
 public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.listTrainingInstitude2(s);

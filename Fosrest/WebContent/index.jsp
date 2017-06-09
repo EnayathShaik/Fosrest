@@ -564,10 +564,10 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 				</div> -->
 	<div class="col-sm-3" style="margin-left:25px;">
 	<div style="margin-top: 10px; padding: 0px;">
-								<a href="#"><img src="website/images/share-intitiave.jpg" class="img-responsive"></a>
+								<a href="shareInitiative.fssai"><img src="website/images/share-intitiave.jpg" class="img-responsive"></a>
 							</div>
 							<div style="margin-top: 30px; padding: 0px;">
-								<a href="#"><img src="website/images/fssai-blog.jpg" class="img-responsive"></a>
+								<a href="http://www.fssai.gov.in/home" target="blank"><img src="website/images/fssai-blog.jpg" class="img-responsive"></a>
 							</div>
 							<div style="margin-top: 42px; padding: 0px;">
 							<span style="background-color: #000070;
