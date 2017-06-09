@@ -233,14 +233,14 @@
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
+															<th>BatchCode</th>
 															<th>Designation</th>
 															<th>Training Type</th>
-															<th>Training Phase</th>
-														<th>Training Institute</th>
+														<th>Training Phase</th>
+														 <th>Training Institute</th>
 														<th>Trainer</th>
-															
 															<th>Training Date</th>
-															<!-- <th>Training Duration</th> -->
+															<th>Training Duration</th>
 
 														</tr>
 													</thead>
@@ -252,10 +252,10 @@
 															<td>${listCalendar[0]}</td>
 															<td>${listCalendar[1]}</td>
 															<td>${listCalendar[2]}</td>
-														<td>${listCalendar[5]}</td>
+														 <td>${listCalendar[3]}</td>
 															<td>${listCalendar[4]}</td>
-															<td>${listCalendar[3]}</td>
-															<%-- <td>${listCalendar[6]}</td>  --%>
+															<td>${listCalendar[5]}</td>
+															<td>${listCalendar[6]}</td> 
 
 
 														</tr>

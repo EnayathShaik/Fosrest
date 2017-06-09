@@ -38,13 +38,23 @@
                         <p align="center">FDA Bhawan near Bal Bhavan,
                             <br> Kotla Road, New Delhi - 110002 India.
                             <br> Email ID: <a href="mailto:fostac@fssai.gov.in">fostac@fssai.gov.in</a>
-                        </p>
+                       
+<br>
 
-
-                        <p align="center">EPABX : 011-23236975 Telefax: 011-23220994
-                            <br> Tollfree Number: 1800112100</p>
+                       EPABX : 011-23236975 Telefax: 011-23220994
+                            <br> Tollfree Number: 1800112100 </p>
+                            
+                   <!--          
                     </div>
-                </div>
+                </div>  -->
+                <br>
+                <br>
+                  <!-- <div class="col-md-12 col-sm-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="feature-wrap feature-wrapadvance"> -->
+                    <p align="center"><h3>Website related Queries</h3></p>
+                     <p align="center">Email ID: <a href="mailto:fostac@fssai.gov.in">fostac@fssai.gov.in</a></p>
+                    </div>
+                    </div>
                 <!--/.col-md-4-->
                 <!--/.col-md-4-->
             </div>
