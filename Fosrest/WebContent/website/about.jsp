@@ -20,7 +20,7 @@
     <body class="homepage">
     </header>
     <!--/header-->
-
+<!-- 
     <section id="main-slider" class="no-margin">
       <div class="carousel slide">
         <div class="carousel-inner">
@@ -49,16 +49,16 @@
               </div>
             </div>
           </div>
-          <!--/.item--> 
+          /.item 
 
-          <!--/.item--> 
+          /.item 
 
-          <!--/.item--> 
+          /.item 
         </div>
-        <!--/.carousel-inner--> 
+        /.carousel-inner 
       </div>
-      <!--/.carousel--> 
-    </section>
+      /.carousel 
+    </section> -->
     <!--/#main-slider--> 
     <section>
         <div class="row">

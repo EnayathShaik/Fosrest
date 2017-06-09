@@ -139,7 +139,7 @@
 														</ul>
 													</div>
 													<cf:input type="text" path="contentLink"
-														placeholder="Content Link" class="form-control" />
+														placeholder="https://www.google.com"  class="form-control" />
 												</div> 
 
 												<div class="row">

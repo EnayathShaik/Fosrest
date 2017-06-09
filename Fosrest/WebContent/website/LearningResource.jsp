@@ -32,7 +32,7 @@
 			<td>${Lrlist[0]}</td>
 		<td>${Lrlist[1]}</td>
 			<td>${Lrlist[2]}</td>
-			<td><a href="/${Lrlist[3]}">${Lrlist[3]}</a></td>
+			<td><a href="${Lrlist[3]}" target="_blank">${Lrlist[3]}</a></td>
 
 		</tr>
 	</ct:forEach>
