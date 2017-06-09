@@ -17,6 +17,172 @@
 	};
 </script>
 
+<style>
+.box-shadow (@x: 0, @y: 1px, @blur: 2px, @alpha: 0.33) {
+  -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+  -moz-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+  box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+}
+
+.timepicker {
+  @clock-padding: 5px;
+  
+  background-color: #F2F2F2;
+  position: absolute;
+  color: #8C8C8C;
+  border: 1px solid #B5B5B5;
+  .box-shadow(2px, 2px, 4px);
+  z-index: 2147483647;
+  
+  .clock {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    padding: @clock-padding;
+  }
+  
+  .done {
+    cursor: pointer;
+    text-align: center;
+    text-wrap: nowrap;
+    line-height: 34px;
+    font-size: 14px;
+    display: block;
+    border-top: 1px solid #DEDEDE;
+    &:hover {
+      background-color: #DEDEDE;
+      color: #848484;
+    }
+  }
+  
+  .meridiem {
+    position: absolute;
+    bottom: @clock-padding;
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    line-height: 32px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    
+    &.selected {
+      background-color: #D6F0F9;
+      color: #6D828C;
+    }
+    &.am {
+      left: @clock-padding;
+    }
+    &.pm {
+      right: @clock-padding;
+    }
+  }
+  
+  .bubble {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: #D6F0F9;
+      color: #6D828C;
+    }
+    
+    &.selected {
+      color: #D6F0F9;
+      background-color: #33B4E4
+    }
+  }
+  
+  .unit {
+    top: @clock-padding;
+    background-color: white;
+    
+    &.hour {
+      left: @clock-padding;
+    }
+    &.minute {
+      right: @clock-padding;
+    }
+  }
+  
+  
+  .face {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    position: relative;
+    
+    &:after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      margin: -3px 0 0 -3px;
+      background-color: #33B4E4;
+      border-radius: 50%;
+      content: "";
+      display: block;
+    }
+  }
+  
+  .hand {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform-origin: 50% 100%;
+    -moz-transform-origin: 50% 100%;
+    -ms-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    pointer-events:none;
+    background-color: #8C8C8C;
+    
+    &.minute {
+      margin: -30% 0 0 -1px;
+      padding: 30% 1px 0;
+      border-radius: 1px 1px 0 0;
+    }
+    
+    &.hour {
+      margin: -23% 0 0 -2px;
+      padding: 23% 2px 0;
+      border-radius: 2px 2px 0 0;
+    }
+    
+    &.selected {
+      background-color: #33B4E4;
+    }
+  }
+  
+  .time {
+    background-color: #F2F2F2;
+  }
+}
+body {
+  margin: 10px;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+	 $("#readFile").click(function() {
+	    $.get('test.txt', function(data) {
+	      $("#bottom_pane_options").html(data); // #bottom_pane_options is the div I want the data to go
+	    }, 'text');
+	 });
+	});
+	</script>
 <head>
 <base href="<%=basePath%>">
 
@@ -44,7 +210,10 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="website/js/jquery.mousewheel.min.js"></script>
+<script src="website/js/jquery.newstape.js"></script>
+<link href="website/css/demo.css" rel="stylesheet">
 <style>
 .holder { 
   background-color:#ccc;
@@ -217,6 +386,8 @@ $(function(){
 	<!--/header-->
 	<hr>
 	
+	
+	
 <div class="header">
 <div class="container">
 <div class="row" >
@@ -290,15 +461,13 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 
 <div class="col-sm-4">
 	<div class="feature-wrap panelimg" >
-								<img class="img-responsive center-block" style="height: 39px;"><a href="">
-<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3></a>
-							</div>
+<img class="img-responsive center-block" style="height: 39px;"><a href="">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3></a></div>
 </div>
 <div class="col-sm-4">
 <div class="feature-wrap panelimg">
-								<img class="img-responsive center-block" style="height: 25px;"><a href="training-of-trainers.html">
-<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer</h3></a>
-							</div>
+<img class="img-responsive center-block" style="height: 25px;"><a href="training-of-trainers.html">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer</h3></a></div>
 </div>
 <div class="col-sm-2"></div>
 </div>         
@@ -311,11 +480,6 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 	</div>
 	</div>
 	</div>
-
-
-
-
-
 	<div class="gallery">
 	<div class="container">
 	<div class="row">
@@ -355,22 +519,42 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 					</div>
 					
 					<div class="col-sm-3">
-					<p class="course-heading" style="font-size:20px;padding-bottom:2px;" >Upcoming Events</p>
-		<div class="holder">
-  <ul id="ticker01">
-    <li><spam>1</spam> <a href="#">loreal ipsum loreal ipsum loreal ipsum loreal ipsum loreal ipsum loreal ipsum</a></li>
-						 <li><spam>2</spam> <a href="#">loreal ipsum loreal ipsumloreal ipsum</a></li>
-     <li><spam>3</spam> <a href="#">loreal ipsum</a></li>
-     <li><spam>4</spam> <a href="#">loreal ipsum</a></li> 
-    <li><spam>5</spam> <a href="#">loreal ipsum</a></li>
-       <li><spam>6</spam> <a href="#">loreal ipsum</a></li>
-          <li><spam>7</spam> <a href="#">loreal ipsum</a></li>
-             <li><spam>8</spam> <a href="#">loreal ipsum</a></li>
-				</ul>
+    <h3 class="text-center">Upcoming Events</h3>
+    <div class="newstape">
+        <div class="newstape-content">
+            <div class="news-block">
+                <p class="text-justify">
+                 <a href="#" style="cursor:pointer">  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</a>
+                </p>
+                <hr />
+            </div>
+            <div class="news-block">             
+                <p class="text-justify">
+  <a href="#" style="cursor:pointer">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a></p>
+                <hr />
+            </div>
+            <div class="news-block">
+                <p class="text-justify">
+  <a href="#" style="cursor:pointer">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.                </p>
+            </a>    <hr />
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </div>
-					</div>
-					
-					
 	<!-- <div class="col-md-3  wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" style="margin-left:-45px;">
 						<div class="page">
 							<div style="display: inline-block;">
@@ -385,9 +569,9 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 							<div style="margin-top: 30px; padding: 0px;">
 								<a href="#"><img src="website/images/fssai-blog.jpg" class="img-responsive"></a>
 							</div>
-							<div style="margin-top: 30px; padding: 0px;">
+							<div style="margin-top: 42px; padding: 0px;">
 							<span style="background-color: #000070;
-    padding: 21px;
+    padding: 32px;
     color: #fff;
     font-weight: bold;
     font-size: 15px;">Download training guidelines</span>
@@ -407,16 +591,9 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 						<ul>
 							<li><a href="fostac.fssai">Home</a></li>
 							<li><a href="about.fssai">About</a></li>
-							<li class="dropdown"><a href="courses.html"
-								class="dropdown-toggle" data-toggle="dropdown">Courses<i
-									class="fa fa-angle-down"></i></a>
-								<ul class="dropdown-menu">
-									<li><a href="basic-level.html">Basic Level</a></li>
-									<li><a href="advance-level.html">Advance Level</a></li>
-									<li><a href="special-level.html">Special Level</a></li>
-								</ul></li>
-							<li><a href="#">Risk & Solutions</a></li>
-							<li><a href="#">Help</a></li>
+							<li ><a href="courses.html">Courses</a></li>
+							<!-- <li><a href="#">Risk & Solutions</a></li>
+							<li><a href="#">Help</a></li> -->
 							<li><a href="contact.fssai">Contact</a></li>
 						</ul>
 					</div>
@@ -427,10 +604,10 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 					<div class="widget center-block">
 						<ul>
 							<li><a href="#">Sitemap</a></li>
-							<li><a href="disclaimer.html">Disclaimer</a></li>
+							<!-- <li><a href="disclaimer.html">Disclaimer</a></li>
 							<li><a href="#">Archives</a></li>
-							<li><a href="#">Useful Links</a></li>
-							<li><a href="#">Faqs</a></li>
+							<li><a href="#">Useful Links</a></li> -->
+							<li><a href="#">FAQ's</a></li>
 							<li><a href="#">Feedback</a></li>
 						</ul>
 					</div>
@@ -438,7 +615,17 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<div class="widget center-block text-center"
+			<ul>
+			<li><a href="#" target="_blank"><img src="website/images/facebook.png" width="30" height="30" alt="Facebook"></a></li>
+			<li><a href="#" target="_blank"><img src="website/images/twitter.png" width="30" height="30" alt="Twitter"></a></li>
+			<li><a href="#" target="_blank"><img src="website/images/linkedin.png" width="30" height="30" alt="Linkedin"></a></li>
+			<li><a href="#" target="_blank"><img src="website/images/google-plus.png" width="32" height="32" alt="Google Plus"></a></li>
+			</ul>
+				</div>
+				<!--/.col-md-3-->
+
+				<div class="col-md-3 col-sm-6">
+							<div class="widget center-block text-center"
 						style="border-right: none;">
 						<ul>
 							<li class="subscribe">Sign up for our mailing list to get
@@ -450,29 +637,11 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 									</div>
 								</form>
 							</li>
-							<li class="pd-top"><a href="#" target="_blank"><img
-									src="website/images/facebook.png" width="30" height="30"></a>&nbsp;
-								<a href="#" target="_blank"><img
-									src="website/images/twitter.png" width="30" height="30"></a>&nbsp;
-								<a href="#" target="_blank"><img
-									src="website/images/linkedin.png" width="30" height="30"></a>
-								&nbsp;<a href="#" target="_blank"><img
-									src="website/images/google-plus.png" width="32" height="32"></a></li>
+						
 						</ul>
 					</div>
 				</div>
-				<!--/.col-md-3-->
-
-				<div class="col-md-3 col-sm-6">
-					<div class="widget center-block text-center"
-						style="border-right: none;">
-						<ul>
-							<li><a href="http://www.fssai.gov.in/" target="_blank"><img
-									src="website/images/fssai.png" alt="FSSAI" width="151"
-									height="86"></a></li>
-						</ul>
-					</div>
-				</div>
+				
 				<!--/.col-md-3-->
 			</div>
 		</div>
@@ -492,7 +661,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 		</div>
 	</footer>
 	<!--/#footer-->
- 	<script src="js/jquery.js"></script>
+ 	<!-- <script src="js/jquery.js"></script> -->
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.isotope.min.js"></script>
 	<script src="js/wow.min.js"></script>
@@ -586,5 +755,10 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 
 						});
 	</script>
+	<script>
+    $(function() {
+        $('.newstape').newstape();
+    });
+</script>
 </body>
 </html>
