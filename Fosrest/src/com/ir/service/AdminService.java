@@ -511,6 +511,9 @@ public String shareInitiativesave(ContactTrainee contactTrainee, String id);
 public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s);
 
 List<PersonalInformationTrainer> trainingNameList2(String s);
+
+
+public List<StateMaster> listStateMaster2(int sid);
 }
 
 

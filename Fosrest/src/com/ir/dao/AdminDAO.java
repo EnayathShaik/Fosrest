@@ -405,5 +405,7 @@ public interface AdminDAO {
 
 	public List<PersonalInformationTrainer> trainingNameList2(String s);
 
+	public List<StateMaster> listStateMaster2(int sid);
+
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

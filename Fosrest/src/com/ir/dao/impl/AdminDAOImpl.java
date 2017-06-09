@@ -3663,5 +3663,18 @@ p.setBatchCode(batchCode);
 		List<PersonalInformationTrainer> trainingNameList = query.list();
 		return trainingNameList;
 	}
+
+	
+	@Override
+	public List<StateMaster> listStateMaster2(int sid) {
+		// TODO Auto-generated method stub
+		System.out.println("inside listStateMaster");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<StateMaster> mccList = session.createQuery("from StateMaster where coalesce(isactive,'') <> 'N' and stateId='"+sid+"' ").list();
+		for (StateMaster p : mccList) {
+			System.out.println("State List::" + p);
+		}
+		return mccList;
+	}
 	
 }

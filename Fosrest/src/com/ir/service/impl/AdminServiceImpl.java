@@ -1565,4 +1565,12 @@ public List<PersonalInformationTrainer> trainingNameList2(String s) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.trainingNameList2(s);
 }
+
+@Override
+@Transactional
+public List<StateMaster> listStateMaster2(int sid) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listStateMaster2(sid);
+}
+
 }

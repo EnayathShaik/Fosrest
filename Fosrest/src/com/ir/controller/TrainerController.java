@@ -255,14 +255,15 @@ public class TrainerController {
 				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
 			return "redirect:login.fssai";
 			}
-	
+			int sid=Integer.parseInt( (String) session.getAttribute("stateId"));
+		/*	int sid=Integer.parseInt(s);*/
 		String userId = request.getParameter("userId");
 		Map<String, String> titleMap = lst.titleMap;
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		model.addAttribute("DesignationList", DesignationList);
 		model.addAttribute("titleMap", titleMap);
 		model.addAttribute("listStateMaster",
-				this.adminService.listStateMaster());
+				this.adminService.listStateMaster2(sid));
 		model.addAttribute("listTrainingInstitude",
 				this.adminService.listTrainingInstitude());
 		model.addAttribute("allModules", this.adminService.allUnitModules());
@@ -294,6 +295,7 @@ public class TrainerController {
 		String pid="";
 		if(session.getAttribute("profileId")==null)
 			pid=(String) session.getAttribute("profileId");
+	
 		try {
 
 			if (p.getId() == 0) {
