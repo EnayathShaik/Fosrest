@@ -577,8 +577,8 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
     font-size: 15px;">Download training guidelines</span>
 							</div>
 	</div>
-	</div> 
-	</div> 
+	</div>
+	</div>
 	</div>
 	
 
@@ -600,7 +600,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 				</div>
 				<!--/.col-md-3-->
 
-				<div class="col-md-3 col-sm-6">
+				<div class="col-md-2 col-sm-6">
 					<div class="widget center-block">
 						<ul>
 							<li><a href="#">Sitemap</a></li>
@@ -614,12 +614,13 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 				</div>
 				<!--/.col-md-3-->
 
-				<div class="col-md-3 col-sm-6">
+				<div class="col-md-3 col-sm-6 text-left">
 			<ul>
-			<li><a href="#" target="_blank"><img src="website/images/facebook.png" width="30" height="30" alt="Facebook"></a></li>
-			<li><a href="#" target="_blank"><img src="website/images/twitter.png" width="30" height="30" alt="Twitter"></a></li>
-			<li><a href="#" target="_blank"><img src="website/images/linkedin.png" width="30" height="30" alt="Linkedin"></a></li>
-			<li><a href="#" target="_blank"><img src="website/images/google-plus.png" width="32" height="32" alt="Google Plus"></a></li>
+			<li><a href="#" target="_blank"><img src="website/images/facebook.png" width="30" height="30" alt="Facebook"></a> &nbsp;&nbsp;
+			<a href="#" target="_blank"><img src="website/images/twitter.png" width="30" height="30" alt="Twitter"></a> &nbsp;&nbsp;&nbsp;
+			<a href="#" target="_blank"><img src="website/images/linkedin.png" width="30" height="30" alt="Linkedin"></a>&nbsp;&nbsp;&nbsp;
+			<a href="#" target="_blank"><img src="website/images/google-plus.png" width="32" height="32" alt="Google Plus"></a></li>
+
 			</ul>
 				</div>
 				<!--/.col-md-3-->
