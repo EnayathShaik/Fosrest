@@ -11,6 +11,7 @@ import com.ir.model.CourseType;
 import com.ir.model.Designation;
 import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
+import com.ir.model.Languages;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
@@ -53,4 +54,5 @@ public interface PageLoadDao {
 	public List<Designation> loadDesignation();
 	public List<TrainingType> loadTrainingType();
 	public List<TrainingPhase> loadTrainingPhase();
+	public List<Languages> loadLanguages();
 }

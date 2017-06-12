@@ -27,6 +27,7 @@ import com.ir.model.AdmitCardForm;
 import com.ir.model.CourseName;
 import com.ir.model.Designation;
 import com.ir.model.FeedbackMaster;
+import com.ir.model.Languages;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
@@ -251,33 +252,49 @@ public class TrainerController {
 		if(request.getParameter("id")!=null)
 		idd=Integer.parseInt(request.getParameter("id"));
 		System.out.println("idd "+idd);
-			if(idd!=4 && (int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+		if(idd!=4 && (int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
 				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
 			return "redirect:login.fssai";
 			}
-			int sid=Integer.parseInt( (String) session.getAttribute("stateId"));
+			
 		/*	int sid=Integer.parseInt(s);*/
-		String userId = request.getParameter("userId");
+		List<Languages> LanguagesList=pageLoadService.loadLanguages();
+		model.addAttribute("LanguagesList", LanguagesList);
+		model.addAttribute("listStateMaster",
+				this.adminService.listStateMaster());
 		Map<String, String> titleMap = lst.titleMap;
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		model.addAttribute("DesignationList", DesignationList);
 		model.addAttribute("titleMap", titleMap);
-		model.addAttribute("listStateMaster",
-				this.adminService.listStateMaster2(sid));
+		
 		model.addAttribute("listTrainingInstitude",
 				this.adminService.listTrainingInstitude());
 		model.addAttribute("allModules", this.adminService.allUnitModules());
+		
+		String userId = request.getParameter("userId");
 		if (userId != null && Integer.parseInt(userId) > 0) {
 			personalInformationTrainer = this.traineeService
 					.FullDetailTrainer(Integer.parseInt(userId));
 			model.addAttribute("PersonalInformationTrainer",
 					personalInformationTrainer);
 			model.addAttribute("isUpdate", "Y");
-		} else {
-			model.addAttribute("PersonalInformationTrainer",
-					new PersonalInformationTrainer());
+			
 		}
-
+		
+		else {
+			/*if(session.getAttribute("profileId")==null){
+				model.addAttribute("listStateMaster",
+						this.adminService.listStateMaster());
+			}
+			else{
+				int sid=Integer.parseInt( (String) session.getAttribute("stateId"));
+				model.addAttribute("listStateMaster",
+						this.adminService.listStateMaster2(sid));
+			}*/
+			model.addAttribute("PersonalInformationTrainer",
+					new PersonalInformationTrainer());	
+			
+		}
 		if(session.getAttribute("profileId")==null)
 		{
 			return "PersonalInformationTrainer";
@@ -285,6 +302,7 @@ public class TrainerController {
 		else{
 			return "updatetrainerinfo";
 		}
+		
 	}
 
 	@RequestMapping(value = "/PersonalInformationTrainerAdd", method = RequestMethod.POST)

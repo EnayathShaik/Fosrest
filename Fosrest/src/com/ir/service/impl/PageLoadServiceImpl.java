@@ -19,6 +19,7 @@ import com.ir.model.CourseType;
 import com.ir.model.Designation;
 import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
+import com.ir.model.Languages;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
@@ -258,6 +259,13 @@ public class PageLoadServiceImpl implements PageLoadService {
 	public List<TrainingPhase> loadTrainingPhase() {
 		List<TrainingPhase> TrainingPhaseList = pageLoadDao.loadTrainingPhase();
 		return TrainingPhaseList;
+	}
+
+	@Override
+	@Transactional
+	public List<Languages> loadLanguages() {
+		List<Languages> LanguagesList = pageLoadDao.loadLanguages();
+		return LanguagesList;
 	}
 
 }

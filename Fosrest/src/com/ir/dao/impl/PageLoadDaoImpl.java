@@ -25,6 +25,7 @@ import com.ir.model.CourseType;
 import com.ir.model.Designation;
 import com.ir.model.HolidayMaster;
 import com.ir.model.KindOfBusiness;
+import com.ir.model.Languages;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
@@ -405,14 +406,13 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			System.out.println("business  ************* list dao     :"+ TrainingPhaseList);
 			return TrainingPhaseList;
 		}
-		/*@Override
-		public List<com.ir.model.District> District(String stateId) {
-			// TODO Auto-generated method stub
-			System.out.println("Page Load DAOImpl process start in district name ");
+		@Override
+		public List<Languages> loadLanguages() {
+			System.out.println("Page Load DAOImpl process start in languages ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from DistrictMaster where status = 'A'  and stateId =  '"+stateId+"'");
-			List districtList = query.list();
-			System.out.println("district  ************* list dao     :"+ districtList);
-			return districtList;
-		}*/
+			Query query = session.createQuery("from Languages");
+			List LanguagesList = query.list();
+			System.out.println("business  ************* list dao     :"+ LanguagesList);
+			return LanguagesList;
+		}
 }

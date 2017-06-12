@@ -1,10 +1,17 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
+ 
+    <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
+        rel="stylesheet" type="text/css" />
 
-
+    <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+        rel="stylesheet" type="text/css" />
+   -->
 
 <script src="website/js/commonController.js"></script>
+
+        
 <script>
 	function DrawCaptcha() {
 		var a = Math.ceil(Math.random() * 7) + '';
@@ -160,7 +167,14 @@
 <cf:input path="logId"  type="hidden"/>
 <cf:input path="status"  type="hidden"/>
 								<cf:input type="hidden" path="id" />
-								
+								<!-- <select id="lstFruits" multiple="multiple">
+        <option value="1">Mango</option>
+        <option value="2">Apple</option>
+        <option value="3">Banana</option>
+        <option value="4">Guava</option>
+        <option value="5">Orange</option>
+    </select>
+    <input type="button" id="btnSelected" value="Get Selected" /> -->
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -403,7 +417,7 @@
 										</ul>
 									</div>
 									<cf:select path="correspondenceState" class="form-control"
-										onchange="getDistrict(this.value , 'correspondenceDistrict')">
+										onclick="getDistrict(this.value , 'correspondenceDistrict')">
 										<%-- <cf:option value="0" label="Select state Name" /> --%>
 										<cf:options items="${listStateMaster}" itemValue="stateId"
 											itemLabel="stateName" />
@@ -555,7 +569,7 @@
 										</ul>
 									</div>
 									<cf:select path="resState" class="form-control"
-										onchange="getDistrict(this.value , 'residentialDistrict')">
+										onclick="getDistrict(this.value , 'residentialDistrict')">
 										<%-- <cf:option value="0" label="Select state Name" /> --%>
 										<cf:options items="${listStateMaster}" itemValue="stateId"
 											itemLabel="stateName" />
@@ -620,7 +634,41 @@
 							<legend>Experience Details </legend>
 							<!-- left side -->
 							<div class="col-md-6 col-xs-12">
-							
+								<div class="form-group">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Languages in which trainer wish to conduct training:</strong></li>
+												<li class="style-li error-red"></li>
+											  
+											 <li id="AssociatedWithAnyTrainingInstituteErr" style="display:none;" class="style-li error-red" >Select the associated Training Institute.</li>
+										
+										</ul>
+									</div>
+
+									<cf:select path="languages"
+										class="form-control" >
+										<%-- <cf:option value="0" label="Select Training Institude" /> --%>
+										<cf:options items="${LanguagesList}" itemValue="languageId"
+											itemLabel="languageName" />
+											<cf:option value="0" label="Others" />
+									</cf:select>
+								</div>
+								<div class="form-group">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>State/UT in which trainer wish to conduct training:</strong></li>
+												<li class="style-li error-red"></li>
+											  
+											 <li id="AssociatedWithAnyTrainingInstituteErr" style="display:none;" class="style-li error-red" >Select the associated Training Institute.</li>
+										
+										</ul>
+									</div>
+
+								<ct:forEach items="${listStateMaster}" var="sm">
+																				<cf:checkbox  path="trainingState"
+																					value="${sm.stateId}"/> ${sm.stateName}
+																			</ct:forEach>
+								</div>
 								<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -1022,3 +1070,21 @@ function OtiHide(){
 	 }
 }
 </script>
+ <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+<!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+<!--   <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
+  <script type="text/javascript">
+        $(function () {
+            $('#lstFruits').multiselect({
+                includeSelectAllOption: true
+            });
+            $('#btnSelected').click(function () {
+                var selected = $("#lstFruits option:selected");
+                var message = "";
+                selected.each(function () {
+                    message += $(this).text() + " " + $(this).val() + "\n";
+                });
+                alert(message);
+            });
+        });
+    </script>  -->

@@ -497,6 +497,22 @@ private String otherTrainingInstitute;
 	public String getOtherTrainingInstitute() {
 	return otherTrainingInstitute;
 }
+private String languages;
+public String getLanguages() {
+	return languages;
+}
+
+public void setLanguages(String languages) {
+	this.languages = languages;
+}
+private String trainingState;
+public String getTrainingState() {
+	return trainingState;
+}
+
+public void setTrainingState(String trainingState) {
+	this.trainingState = trainingState;
+}
 
 public void setOtherTrainingInstitute(String otherTrainingInstitute) {
 	this.otherTrainingInstitute = otherTrainingInstitute;

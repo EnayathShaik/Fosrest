@@ -181,7 +181,8 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				 <value>com.ir.model.TrainingType</value>
 				  <value>com.ir.model.TrainingPhase</value>
 				  	  <value>com.ir.model.SubjectMapping</value>
-			
+			 <value>com.ir.model.Languages</value>
+			  <value>com.ir.model.MappingMasterTrainer</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

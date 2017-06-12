@@ -51,6 +51,7 @@ import com.ir.model.FeedbackMaster;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.MappingMasterTrainer;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationTrainee;
@@ -1294,24 +1295,33 @@ public class TraineeDAOImpl implements TraineeDAO {
 		
 		String nextSequenceUserID = pageLoadService.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
 		LoginDetails loginDetails = new LoginDetails();
-		if(pid==null){
-			p.setCreatedBy(4);
-			loginDetails.setStatus("I");
-		}
-		else{
-			p.setCreatedBy(2);
-			loginDetails.setStatus("A");
-		}
-		
+		loginDetails.setStatus("I");
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
-		//loginDetails.setStatus("A");
 		loginDetails.setProfileId(4);
 		p.setStatus("A");
 		p.setLoginDetails(loginDetails);
-		
+		MappingMasterTrainer mmt;
+		try{
+			
+			String s=p.getTrainingState();
+			String a[]=s.split(",");
+			for(int i=0;i<a.length;i++)
+			{
+				mmt=new MappingMasterTrainer();
+				mmt.setTrainerId(p);
+				mmt.setState(a[i]);
+				session.save(mmt);
+				
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		session.save(p);
+    
+		
 		return passwordString+"&"+nextSequenceUserID;
 	}	
 	
