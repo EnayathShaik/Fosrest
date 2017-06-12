@@ -39,15 +39,18 @@ function getQuestions(){
 	success: function (data){
 	$('#newTable').show();
 	var mainData1 = jQuery.parseJSON(data);
-	var j=1;
+
 	$('#newTable tr').remove();
-	if(data=="[]"){ 
+	if(data=="[]"){  
 	    //alert("What follows is blank: " + data);
 	    $('#newTable').append('<tr><th>Empty</th></tr>')
 	}
 	if(!(data=="[]")){ 
 	    //alert("What follows is NOT blank: " + data);
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Assessment ID - Module Code</th><th>Question Title</th><th>Delete</th></tr>')
+		//$('#newTable').append('<tr  class="background-open-vacancies"><th>Sr.No.</th><th>Question No</th><th>Module Name</th><th>Question Title</th><th>Delete</th></tr>')
+				$('#newTable').append('<tr  class="background-open-vacancies"><th>Question No</th><th>Unit Name</th><th>Module Name(Edit)</th><th>Question Title</th><th>Delete</th></tr>')
+
+		
 		$.each(mainData1 , function(i , obj)
 		{
 			//$('#newTable').append('<tr  id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[2]+' - '+obj[3]+'</a></td><td>'+obj[4]+'</td></tr>');
@@ -57,7 +60,8 @@ function getQuestions(){
 			 */
 	/* 																																											
 	 */		
-	 	$('#newTable').append('<tr  id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[2]+' - '+obj[3]+'</a></td><td>'+obj[4]+'</td><td><a href="" onClick="return deleteAQ('+obj[2]+')" >Delete</a></td></tr>');
+	 	//$('#newTable').append('<tr  id="tableRow"><td>'+(i+1) +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[5]+'</a></td><td>'+obj[3]+'-'+obj[1]+'</td><td>'+obj[4]+'</td><td><a href="" onClick="return deleteAQ('+obj[2]+')" >Delete</a></td></tr>');
+		 	$('#newTable').append('<tr  id="tableRow"><td>'+obj[5]+'</td><td>'+obj[0]+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[1]+'</a></td><td>'+obj[4]+'</td><td><a href="" onClick="return deleteAQ('+obj[2]+')" >Delete</a></td></tr>');
 
 	});
 

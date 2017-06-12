@@ -1533,9 +1533,9 @@ public TreeMap<String, List<ModuleMaster>>  allUnitModules() {
 }
 @Override
 @Transactional
-public String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm) {
+public String saveTrainingSchedule(String subject[],String duration[],TrainingScheduleForm form) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.saveTrainingSchedule(trainingScheduleForm);
+	return this.adminDAO.saveTrainingSchedule(subject,duration,form);
 }
 @Override
 @Transactional
@@ -1571,6 +1571,13 @@ public List<PersonalInformationTrainer> trainingNameList2(String s) {
 public List<StateMaster> listStateMaster2(int sid) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.listStateMaster2(sid);
+}
+
+@Override
+@Transactional
+public List<ModuleMaster> allSubjects() {
+	// TODO Auto-generated method stub
+	return this.adminDAO.allSubjects();
 }
 
 }

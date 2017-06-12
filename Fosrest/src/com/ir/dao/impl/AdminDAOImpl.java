@@ -89,6 +89,7 @@ import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateAdmin;
 import com.ir.model.StateMaster;
+import com.ir.model.SubjectMapping;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
 import com.ir.model.TrainingCalendar;
@@ -1715,7 +1716,7 @@ public class AdminDAOImpl implements AdminDAO {
 				+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
 				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";*/
 		
-		String sql = "select um.unitcode , mm.modulename ,  aq.assessmentid, mm.modulecode ,aq.questiontitle  from assessmentquestions as aq "
+		String sql = "select um.unitName , mm.modulename ,  aq.assessmentid, mm.modulecode ,aq.questiontitle, aq.questionNumber from assessmentquestions as aq "
 				+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
 				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
 		
@@ -3086,7 +3087,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public String enrollUser(String data) {
 		// TODO Auto-generated method stub
 		System.out.println("inside listEligibleuser " + data);
-		Session session = this.sessionFactory.getCurrentSession();
+		/*Session session = this.sessionFactory.getCurrentSession();
 		String[] arrData = data.split("-");
 		List<String> loginDetails = new ArrayList<String>();
 		String[] loginIdName = arrData[0].split(",");
@@ -3111,7 +3112,7 @@ public class AdminDAOImpl implements AdminDAO {
 			String result = addNomineeTrainee(moduleCode, trainingScheduleId, Integer.parseInt(s.split("@")[0]),
 					s.split("@")[1]);
 
-		}
+		}*/
 		System.out.println("6:1 st return created");
 		return "created";
 	}
@@ -3501,7 +3502,7 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		System.out.println("inside listtrainingScheduleMaster");
 		
-		TrainingScheduleForm bean ;
+	/*	TrainingScheduleForm bean ;
 		List<TrainingScheduleForm> resulList = new ArrayList<TrainingScheduleForm>();
 		//String sql="select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),unitName,moduleName,u.unitId,m.moduleId from unitmaster u join modulemaster m on (u.unitid=m.unitid) order by unitName";
 		String sql="select distinct (select designationName from designation where designationid=cast(designation as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),unitName,u.unitId from unitmaster u join modulemaster m on (u.unitid=m.unitid) order by unitName";
@@ -3523,30 +3524,21 @@ public class AdminDAOImpl implements AdminDAO {
 			bean.setDesignation((String) li[0]);
 			bean.setTrainingPhase((String) li[1]);
 			bean.setTrainingType((String) li[2]);
-			//bean.setCourseName((String) li[2]);
-			bean.setChapter((String) li[3]);
-			bean.setChapterId((int)li[4]);
-			//for (Object[] li2 : list) {
-				//if((((String) li2[3]).equals(bean.getChapter())))
-					//bean.setModuleName(bean.getModuleName()+"-"+(String)li2[4]);
-			//}
-			//System.out.println(bean.getChapter()+"----"+bean.getModuleName());
-			//bean.setModuleName((String) li[6]);
 			
-			/*bean.setModule((String) li[4]);
-			bean.setDuration((String) li[5]);
-			bean.setTrainingStartDate((String) li[6]);
-			bean.setTrainingEndDate((String) li[7]);
-			bean.setDay((int) li[8]);*/
-			
-			
+			//bean.setChapter((String) li[3]);
+			//bean.setChapterId((int)li[4]);
+		
 			new ZLogger("listactivateTrainingOfTrainee", "", "List:");
 			// logger.info("listactivateTrainingOfTrainee List::" + li);
 			resulList.add(bean);
 		//}
 			//temp=(String)li[3];
 			//temp=allchapters.get(i=i+1);
-		}
+		}*/
+		
+		List <TrainingScheduleForm> resulList = session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),scheduleCode,totalDuration from trainingSchedule").list();
+		
+		
 		return resulList;
 	}
 	@Override
@@ -3582,21 +3574,60 @@ public class AdminDAOImpl implements AdminDAO {
 
 
 	@Override
-	public String saveTrainingSchedule(TrainingScheduleForm trainingScheduleForm) {
+	public String saveTrainingSchedule(String subject[],String duration[],TrainingScheduleForm form) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		TrainingSchedule ts= new TrainingSchedule();
-		ts.setChapterId(trainingScheduleForm.getChapterId());
-		ts.setTrainingType(trainingScheduleForm.getTrainingType2());
-		ts.setTrainingPhase(trainingScheduleForm.getTrainingPhase2());
-		ts.setDesignation(trainingScheduleForm.getDesignation2());
-		ts.setDay(trainingScheduleForm.getDay2());
-		ts.setModules(trainingScheduleForm.getModules());
-		ts.setStartTime(trainingScheduleForm.getStartTime());
-		ts.setEndTime(trainingScheduleForm.getEndTime());
+		int totalDur=0;
+		ts.setDesignation(form.getDesignation());
+		ts.setStatus(form.getStatus());
+		ts.setTrainingType(form.getTrainingType());
+		ts.setTrainingPhase(form.getTrainingPhase());
+		
+		String subjects="";
+		
+		//part2 
+		
+		List l= session
+				.createSQLQuery("select designationName from Designation where designationId='"+form.getDesignation()+"'").list();
+	
+		List l2= session
+				.createSQLQuery("select trainingTypeName from TrainingType where trainingTypeId='"+form.getTrainingType()+"'").list();
+	
+		
+		String start1=((l.get(0).toString().substring(0, 2)+l2.get(0).toString().substring(0, 2)).toUpperCase());
+		String trainingCodeGen = pageLoadService.getNextCombinationId(start1, "trainingSchedule" , "000000");
+		
+		SubjectMapping sm;
+
+		for(int i=0;i<subject.length;i++){
+			subjects=subjects+subject[i]+"|";
+			
+			sm=new SubjectMapping();
+			sm.setScheduleCode(trainingCodeGen);
+			sm.setSubject(subject[i]);
+			
+			sm.setDuration(Integer.parseInt(duration[i]));
+			totalDur=totalDur+Integer.parseInt(duration[i]);
+			session.save(sm);
+		}
+		
+		ts.setSubjects(subjects);
+		ts.setTotalDuration(totalDur);
+		ts.setScheduleCode(trainingCodeGen);
+	/*	ts.setChapterId(form.getChapterId());
+		ts.setTrainingType(form.getTrainingType2());
+		ts.setTrainingPhase(form.getTrainingPhase2());
+		ts.setDesignation(form.getDesignation2());
+		ts.setDay(form.getDay2());
+		ts.setModules(form.getModules());
+		ts.setStartTime(form.getStartTime());
+		ts.setEndTime(form.getEndTime());*/
 		
 		session.save(ts);
+		
+		
 		
 		return null;
 	}
@@ -3675,6 +3706,17 @@ p.setBatchCode(batchCode);
 			System.out.println("State List::" + p);
 		}
 		return mccList;
+	}
+
+	@Override
+	public List<ModuleMaster> allSubjects() {
+		// TODO Auto-generated method stub
+Session session = this.sessionFactory.getCurrentSession();
+		
+List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename from modulemaster").list();
+
+		return mod;
+		
 	}
 	
 }

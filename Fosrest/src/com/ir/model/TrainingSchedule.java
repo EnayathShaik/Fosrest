@@ -37,13 +37,27 @@ public class TrainingSchedule {
 	private String designation;
 	private String trainingType;
 	private String trainingPhase;
+	private String scheduleCode;
+	
+	private int totalDuration;
 
-	private int chapterId;// is unitId
-private String modules;
-private int day;
-private String startTime;
-private String endTime;
+	public int getTotalDuration() {
+		return totalDuration;
+	}
 
+	public void setTotalDuration(int totalDuration) {
+		this.totalDuration = totalDuration;
+	}
+
+	public String getScheduleCode() {
+		return scheduleCode;
+	}
+
+	public void setScheduleCode(String scheduleCode) {
+		this.scheduleCode = scheduleCode;
+	}
+
+	private String subjects;// is unitId
 
 @CreationTimestamp
 @Temporal(TemporalType.TIMESTAMP)
@@ -64,51 +78,6 @@ private String isActive;
 
 private String status;
 
-
-private int moduleId;
-
-
-
-
-public int getChapterId() {
-	return chapterId;
-}
-
-public void setChapterId(int chapterId) {
-	this.chapterId = chapterId;
-}
-
-public String getModules() {
-	return modules;
-}
-
-public void setModules(String modules) {
-	this.modules = modules;
-}
-
-public int getDay() {
-	return day;
-}
-
-public void setDay(int day) {
-	this.day = day;
-}
-
-public String getStartTime() {
-	return startTime;
-}
-
-public void setStartTime(String startTime) {
-	this.startTime = startTime;
-}
-
-public String getEndTime() {
-	return endTime;
-}
-
-public void setEndTime(String endTime) {
-	this.endTime = endTime;
-}
 
 public String getStatus() {
 	return status;
@@ -183,15 +152,14 @@ public void setStatus(String status) {
 	}
 
 
-public int getModuleId() {
-	return moduleId;
-}
 
-public void setModuleId(int moduleId) {
-	this.moduleId = moduleId;
-}
+	public String getSubjects() {
+		return subjects;
+	}
 
-	
+	public void setSubjects(String subjects) {
+		this.subjects = subjects;
+	}
 
 	public int getSeqNo() {
 		return seqNo;

@@ -3013,16 +3013,25 @@ public class AdminController {
 		model.addAttribute("DesignationList", DesignationList);
 		model.addAttribute("TrainingTypeList", TrainingTypeList);
 		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
+		
+		model.addAttribute("allSubjects", this.adminService.allSubjects());
+		
+		model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
 		return "trainingschedule123";
 	}
 	@RequestMapping(value = "/trainingScheduleMasterlist", method = RequestMethod.POST)
 	public String listtrainingScheduleMaster(
-			@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm p, Model model,
-			HttpSession session) {
+			@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm form, Model model,
+			HttpSession session,HttpServletRequest request) {
 		
-			model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
-			
-			model.addAttribute("allModules", this.adminService.allUnitModules());
+			//model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
+			///model.addAttribute("allModules", this.adminService.allUnitModules());
+		
+		
+		String subject[]=request.getParameterValues("subject");
+		String duration[]=request.getParameterValues("duration");
+	
+		 adminService.saveTrainingSchedule(subject,duration,form);
 			
 			return "trainingschedule123";
 		}
@@ -3076,7 +3085,7 @@ public class AdminController {
 		System.out.println("saveTrainingSchedule");
 		new ZLogger("saveTrainingSchedule", "Exception while saveTrainingSchedule :  ", "AdminController.java");
 
-		 adminService.saveTrainingSchedule(trainingScheduleForm);
+		// adminService.saveTrainingSchedule(trainingScheduleForm);
 		return "trainingschedule123"; 
 	}
 

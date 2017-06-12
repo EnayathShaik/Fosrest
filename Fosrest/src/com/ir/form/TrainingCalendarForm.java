@@ -104,6 +104,14 @@ public class TrainingCalendarForm {
 	private String trainingType;
 	private String trainingPhase;
 	private String status;
+	private String scheduleCode;
+	
+	public String getScheduleCode() {
+		return scheduleCode;
+	}
+	public void setScheduleCode(String scheduleCode) {
+		this.scheduleCode = scheduleCode;
+	}
 	public String getDesignation() {
 		return designation;
 	}

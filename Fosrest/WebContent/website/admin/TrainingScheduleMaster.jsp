@@ -43,20 +43,80 @@
 
  
 <script>
-	function OnStart() {
-	/* 	alert("");
 
-if('${search}'==0){
-	alert("aa");
-	var a='${listtrainingScheduleMaster}';
-	alert(a.length);
-}
-	 */
+function addRow(thisId){
+
+	 rowString = ""; 
+	 var mystrr;
+	  mystrr="";
+			
+	  	var getSrNo= $(thisId).closest('tr').attr('id');
+		var sName;
+		var sId;
+		var flag;
+	 <ct:forEach items="${allSubjects}" var="aaa" > 
+	
+	flag=0;
+	 for(var i=1;i<=getSrNo;i++){
+		
+			
+			var e = document.getElementById("subject"+i);
+			var strUser = e.options[e.selectedIndex].value;
+			
+			sId='${aaa[0]}';
+			sName='${aaa[1]}';
+			
+			if((strUser==sId)){
+		flag=1;
+		}
+		
+		}
+	
+		if(flag==0){
+			
+			mystrr=mystrr+'<option value="';
+			mystrr=mystrr+sId;
+			mystrr=mystrr+'" >';
+			mystrr=mystrr+sName;
+			mystrr=mystrr+'</option>';
+			
+			//alert(mystrr); 
+		}
+			
+
+	</ct:forEach>
+
+	
+	$("#addRow"+getSrNo).css("display" , "none");
+	$("#deleteRow"+getSrNo).css("display" , "block");
+	console.log("getSrNo "+getSrNo);
+	var nextId = parseInt(getSrNo)+1;
+	rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><input type='text' id='duration"+nextId+"' name='duration'/></td><td><button id='addRow"+nextId+"' onclick='addRow(this);return false;'>Add</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='deleteRow(this);return false;'>Remove</button></td></tr>";
 	
 
-		flatpickr("#trainingDate", {
+	$("#subjectTable").append(rowString);
+	
+	
+	
+	alert("");
+ }
+ 
+ function deleteRow(id){
+	 
+	 $(id).parents('tr').remove();
+ }
+ function addSubSchedule(){	
+	
+	 rowString = "";
 
-		});
+		rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><input type='text' id='duration1' name='duration'/></td><td><button id='addRow1' onclick='addRow(this);return false;'>Add</button><button style='display:none;' id='deleteRow1' onclick='deleteRow(this);return false;'>Remove</button></td></tr>";
+	$("#subjectTable").append(rowString); 
+ }
+
+	function OnStart() {
+	addSubSchedule();
+	
+	
 	}
 	window.onload = OnStart;
 </script>
@@ -98,7 +158,7 @@ if('${search}'==0){
 								<div class="row">
 									<div class="col-xs-12">
 										<fieldset>
-											<legend>Training Schedule Master</legend>
+											<legend>Create Schedule </legend>
 											<!-- left side -->
 											<div class="col-xs-6">
 												<div class="form-group">
@@ -172,8 +232,26 @@ if('${search}'==0){
 														</cf:select>
 
 													</div>
+
+													 
+													
+													 <fieldset><legend>Add Subject</legend>
+                                      		<table id="subjectTable" class="table table-bordered table-responsive">
+                                      		<thead >
+                                      		<tr class="background-open-vacancies">
+                                      		
+                                      		<th>Subject Name</th>
+                                      		<th>Duration</th>
+                                      		<th>Operation</th>
+                                      
+                                      		</tr>
+                                      		</thead>
+                                      	
+                                      		
+                                      		</table>
+													</fieldset>
 													<div class="col-md-06 col-xs-12" style="margin-top: 39px;">
-														<input type="submit" id="searchbtn" value="Search"
+														<input type="submit" id="searchbtn" value="Create"
 															style="float: right; padding: 10px 50px 10px 50px"
 															class="btn login-btn" />
 													</div>
@@ -197,14 +275,11 @@ if('${search}'==0){
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
 															<th>Designation</th>
-															<th>Training Phase</th>
 															<th>Training Type</th>
-															<th>Chapter Name</th>
-															<th>Module Names</th>
-															<th>Day</th>
-															<th>Start Time</th>
-															<th>End Time</th>
-															<th>Save</th>
+															<th>Training Phase</th>
+															<th>Schedule Code</th>
+															
+															<th>Total Duration</th>
 															
 		                                                </tr>
 													</thead>
@@ -212,78 +287,17 @@ if('${search}'==0){
 														var="listtrainingScheduleMaster" varStatus="loop">
 														<tr >
 															<td>${loop.count}</td>
-															<td>${listtrainingScheduleMaster.designation}</td>
-															<td>${listtrainingScheduleMaster.trainingPhase}</td>
-															<td>${listtrainingScheduleMaster.trainingType}</td>
-															<td>${listtrainingScheduleMaster.chapter}</td>
+															<td>${listtrainingScheduleMaster[0]}</td>
+															<td>${listtrainingScheduleMaster[1]}</td>
+															<td>${listtrainingScheduleMaster[2]}</td>
+															<td>${listtrainingScheduleMaster[3]}</td>
+																<td>${listtrainingScheduleMaster[4]}</td>
 															
-															<td><ct:forEach items="${allModules}" var="treemap">
-																	<ct:if
-																		test="${listtrainingScheduleMaster.chapter == treemap.key}">
-																		<%-- <ct:set value="${treemap.value}" var="modd" /> --%>
-																		<ul>
-																			<ct:forEach items="${treemap.value}" var="modules">
-																				<li><cf:checkbox path="modules" id='${loop.count}-${modules}'
-																					value="${modules[0]}" label=" ${modules[1]}" /></li>
-																			</ct:forEach>
-																			
-									
-																			
-																		</ul>
-																	</ct:if>
-																</ct:forEach></td>
-
-															<td><cf:select path="day" id='day_${loop.count}'
-																	class="form-control">
-																	<ct:forEach var="i" begin="0" end="30" varStatus="loop2">
-																	
-																		<cf:option value='${loop2.count}' label='${loop2.count}' />
-
-																	</ct:forEach>
-
-  
-																</cf:select></td>
-																
- 
- 
-														
-															<td>
-															<div class="form-group">
-																<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
-																	<input id='startT_${loop.count}' type="text" class="form-control" value="18:00">
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-time"></span>
-																	</span>
-																</div>
-	                                                        </div>
-															</td>	
-															<td>
-															<div class="form-group">
-																<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
-																	<input id='endT_${loop.count}' type="text" class="form-control" value="18:00">
-																	<span class="input-group-addon">
-																		<span class="glyphicon glyphicon-time"></span>
-																	</span>
-																</div>
-	                                                        </div>
-															</td>	
-															<td><input  type="submit" value="save" formaction="saveTrainingSchedule.fssai" onclick="return saveSchedule('${loop.count}','${listtrainingScheduleMaster.designation}','${listtrainingScheduleMaster.trainingPhase}','${listtrainingScheduleMaster.trainingType}','${listtrainingScheduleMaster.chapterId}');"></td>
-																	
-															</tr>
+														</tr>
 													</ct:forEach>
 												</table>
-												 <cf:hidden path="chapterId"/> 
-												  <cf:hidden path="day2"/> 
-												   <cf:hidden path="designation2"/> 
-												   
-												    <cf:hidden path="trainingPhase2"/> 
-												     <cf:hidden path="trainingType2"/> 
-												      <cf:hidden path="startTime"/> 
-												     <cf:hidden path="endTime"/> 
-												
-										<!-- 		<div class="col-md-06 col-xs-12" style="margin-top: -72px;">
-													<input type="button" id="savebtn" value="Save"
-														style="float: right;" class="btn login-btn" /> -->
+												 
+						
 											</ct:if>
 										</fieldset>
 									</div>
@@ -300,23 +314,7 @@ if('${search}'==0){
 	<input type="hidden" id="idH" value="" /> 
 	
 	<script>
-function saveSchedule(l,a,b,c,d){
-	
 
-	document.getElementById("day2").value=document.getElementById("day_"+l).value;
-	document.getElementById("startTime").value=document.getElementById("startT_"+l).value;
-	document.getElementById("endTime").value=document.getElementById("endT_"+l).value;
-	
-	
-	document.getElementById("chapterId").value=d;
-	
-	document.getElementById("designation2").value=a;
-	document.getElementById("trainingPhase2").value=b;
-	document.getElementById("trainingType2").value=c;
-	
-	
-
-}
 </script>
 </cf:form>
 </body>

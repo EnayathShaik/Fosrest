@@ -111,6 +111,24 @@
 															itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
 													</cf:select>
 												</div>
+												
+													<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Schedule Code:</strong></li>
+															<li id="trainingPhaseErr" style="display: none;"
+																class="style-li error-red">Please Select Schedule Code.</li>
+															<li class="style-li error-red"><label
+																class="error visibility" id="courseError">*
+																	error</label></li>
+														</ul>
+													</div>
+													<cf:select path="scheduleCode" class="form-control">
+														<cf:option value="0" label="Select Training Phase" />
+														<cf:options items="${trainingSchedule}"
+															itemValue="trainingScheduleId" itemLabel="trainingScheduleCode" />
+													</cf:select>
+												</div>
 
 											</div>
 											<!-- left side ends -->
