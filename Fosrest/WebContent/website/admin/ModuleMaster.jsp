@@ -5,7 +5,7 @@
 
 <ct:url var="addAction" value="/ModuleMaster/add.fssai"></ct:url>
 <cf:form action="${addAction}" method="POST"
-	commandName="ModuleMasterForm" onsubmit="return validateFields();">
+	commandName="ModuleMasterForm" onsubmit="return validateFields();" enctype="multipart/form-data">
 
 	<section>
 		<%@include file="../roles/top-menu.jsp"%>
@@ -35,38 +35,65 @@
 
 							<div class="col-xs-12">
 								<h1>
-									Module Master <label id="created">${created }</label>
+									Subject Master <label id="created">${created }</label>
 								</h1>
 								<div class="row">
 									<div class="col-xs-12">
 										<fieldset>
-											<legend>Search Module Master</legend>
+											<legend>Search Subject Master</legend>
 											<!-- table starts here -->
 											<!-- left side -->
 											<div class="col-md-6 col-xs-12">
+                                              <cf:input path="moduleId" type="hidden" />
 
 
-
-										 <div class="form-group">
+										 <%-- <div class="form-group">
 													<cf:input path="moduleId" type="hidden" />
 													<div>
 														<ul class="lab-no">
-															<li class="style-li"><strong> Chapter Name:</strong></li>
-														 <li id="unitIdErr" style="display:none;" class="style-li error-red" >Please Select Chapter Name.</li>
+															<li class="style-li"><strong> Subject Name:</strong></li>
+														 <li id="unitIdErr" style="display:none;" class="style-li error-red" >Please Select Subject Name.</li>
                                                         <li class="style-li error-red"> </li>
 
 
 														</ul>
 													</div>
 													<cf:select path="unitId" class="form-control">
-														<cf:option value="0" label="Select Chapter Name" />
+														<cf:option value="0" label="Select Subject Name" />
 														<cf:options items="${listUnitMaster}" itemValue="unitId"
 															itemLabel="unitName" />
 														<!-- itemlabel -->
 													</cf:select>
 
-												</div> 
+												</div>  --%>
 												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Subject Name:</strong></li>
+															<li class="style-li error-red"></li>
+															<li id="moduleNameErr" style="display:none;" class="style-li error-red" >Please Select module Name.</li>
+
+														</ul>
+													</div>
+													<cf:input type="text" path="moduleName"
+														placeholder="Select Subject Name" class="form-control" />
+												</div>
+												<br>
+												 <div class="col-md-12 col-xs-12">
+												
+									              <input class="btn login-btn" type="file" id="file" name="file"/>
+									          
+                                                  <!-- <input type="submit" class="btn login-btn" value="Upload"> -->
+                                                               
+								                 </div> 
+								             
+                                             
+											</div>
+											
+											<!-- right side -->
+											<div class="col-md-6 col-xs-12">
+											
+											<div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong> Status:</strong></li>
@@ -79,69 +106,7 @@
 														<cf:option value="I" label="In-Active" />
 													</cf:select>
 												</div>
-
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Content Name:</strong></li>
-															<li class="style-li error-red"></li>
-															 <li id="contentNameErr" style="display:none;" class="style-li error-red" >Please Select Content Name.</li>
-                                                        <li class="style-li error-red"> </li>
-															
-														</ul>
-													</div>
-													<cf:input type="text" path="contentName"
-														placeholder="Content Name" class="form-control" />
-												</div>
-
-											</div>
-											<!-- right side -->
-											<div class="col-md-6 col-xs-12">
-
-
-
-
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Module Name:</strong></li>
-															<li class="style-li error-red"></li>
-															<li id="moduleNameErr" style="display:none;" class="style-li error-red" >Please Select module Name.</li>
-
-														</ul>
-													</div>
-													<cf:input type="text" path="moduleName"
-														placeholder="Module Name" class="form-control" />
-												</div>
-
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong> Content Type:</strong></li>
-															<li class="style-li error-red"></li>
-															<li id="contentTypeErr" style="display:none;" class="style-li error-red" >Please Select Content Type.</li>
-															
-														</ul>
-													</div>
-													<cf:select path="contentType" class="form-control">
-														<cf:option value="0" label="Select Content Type" />
-														<cf:options items="${contentType}" />
-													</cf:select>
-												</div>
-
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Content Link:</strong></li>
-															<li class="style-li error-red"></li>
-															<li id="contentLinkErr" style="display:none;" class="style-li error-red" >Please Select Content link.</li>
-															
-														</ul>
-													</div>
-													<cf:input type="text" path="contentLink"
-														placeholder="https://www.google.com"  class="form-control" />
-												</div> 
-
+												
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 														<input type="submit" id="updatebtn"
@@ -170,14 +135,14 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<fieldset>
-											<legend>Module Master</legend>
-											<ct:if test="${!empty listModuleMaster}">
+											<legend>Subject Master</legend>
+										<ct:if test="${!empty listModuleMaster}">
 									<table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
-															 <th>Chapter Name</th>
-															<th>Module Name</th>
+															 <th>Subject Name</th>
+															<th>Study Material</th>
 															<th>Status</th>
 															<th>Edit</th>
 															<th>Delete</th>
@@ -188,17 +153,17 @@
 														<tr>
 															<td>${loop.count}</td>
 															
-															<td>${ModuleMaster[1]}</td>
-															 <td>${ModuleMaster[0]}</td>
-															<%--  <td>${ ModuleMaster[2]}</td> --%>
+															<td>${ModuleMaster[8]}</td>
+															<td><a href="">Fosrest/Subject</a></td>
 															<td><ct:choose>
-														<ct:when test="${ ModuleMaster[2]== 'A'}">Active</ct:when>
+														<ct:when test="${ ModuleMaster[10]== 'A'}">Active</ct:when>
 																	<ct:otherwise>In-Active</ct:otherwise>
 															</ct:choose></td>
+															
 															<td><button 
-																	onclick='editModule(${ModuleMaster[3]});return false;'>Edit</button></td>
+																	onclick='editModule(${ModuleMaster[0]});return false;'>Edit</button></td>
 															<td>
-															<a href="<ct:url value='/ModuleMaster/remove/${ModuleMaster[3]}.fssai' />">Delete</a></td>
+															<a href="<ct:url value='/ModuleMaster/remove/${ModuleMaster[0]}.fssai' />">Delete</a></td>
 														</tr>
 													</ct:forEach>
 												</table>
@@ -222,13 +187,13 @@
 <script>
             function editModule(id){
                
-                
+                alert(id);
                  var name1=JSON.stringify({
             		courseName:0
               })
             	$.ajax({
             	      type: 'post',
-            	      url: 'ModuleMaster/edit/'+id+'.fssai',
+            	    url: 'ModuleMaster/edit/'+id+'.fssai',
             	      contentType : "application/json",
             		  data:name1,
             	      success: function (response) {      
@@ -236,14 +201,15 @@
             	    $("#moduleId").val(mainData1.moduleId);
             	    $("#moduleName").val(mainData1.moduleName);
             	    $("#status").val(mainData1.status);
-            	    $("#contentName").val(mainData1.contentName);
+            	  /*   $("#contentName").val(mainData1.contentName);
             	    $("#contentLink").val(mainData1.contentLink);
-            	    $("#contentType").val(mainData1.contentType);
-            	    $("#unitId").val(mainData1.unitMaster.unitId);
+            	    $("#contentType").val(mainData1.contentType); */
+            	   /*  $("#unitId").val(mainData1.unitMaster.unitId); */
             	    
-            	     $("#updatebtn").css("display" , "block");
-            	     
+            	    
+            	      $("#updatebtn").css("display" , "block");
             	     $("#createbtn").css("display" , "none");
+            	    
             	      }
             	      });     
                  

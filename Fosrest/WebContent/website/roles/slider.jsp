@@ -120,7 +120,7 @@
 				Schedule</a></li> -->
 		<li><a href="HolidayMaster.fssai">Holiday Master</a></li>
 		<li><a href="UnitMaster.fssai">Chapter Master</a></li>
-		<li><a href="ModuleMaster.fssai">Module Master</a></li>
+		<li><a href="ModuleMaster.fssai">Subject Master</a></li>
 		<li><a href="manageAssessmentQuestions.fssai">Assessment Questions</a></li>
 		<!-- <li><a href="SubjectMaster.fssai">Subject Master</a></li>-->
 		<li><a href="trainingcalendar.fssai">Training Calendar</a></li> 

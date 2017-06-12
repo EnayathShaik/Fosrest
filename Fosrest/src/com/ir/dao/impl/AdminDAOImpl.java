@@ -2035,13 +2035,15 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String addModuleMaster(ModuleMaster p) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query isempty = session.createSQLQuery("select moduleid from ModuleMaster where modulename='"
+		/*Query isempty = session.createSQLQuery("select moduleid from ModuleMaster where modulename='"
 				+ p.getModuleName() + "' and unitId='" + p.getUnitMaster().getUnitId() + "'");
+		
+				
 		List list1 = isempty.list();
 		System.out.println(list1.size());
 
 		if (list1.size() > 0)
-			return "error";
+			return "error";*/
 
 		String sql = "select coalesce(max(seqNo) + 1,1) from ModuleMaster";
 		int maxId = 0;
@@ -2053,15 +2055,15 @@ public class AdminDAOImpl implements AdminDAO {
 			maxId = (int) list.get(0);
 			// eligible = (String) list.get(0);
 		}
-		System.out.println("ModuleMaster " + p.getModuleId() + " p.getUnitMaster() " + p.getUnitMaster().getUnitId());
+		//System.out.println("ModuleMaster " + p.getModuleId() + " p.getUnitMaster() " + p.getUnitMaster().getUnitId());
 
-		UnitMaster um = getUnitMasterById(p.getUnitMaster().getUnitId());
-		System.out.println(p.getUnitMaster().getUnitName().substring(0, 2).toUpperCase()
-				+ p.getModuleName().substring(0, 2) + StringUtils.leftPad(String.valueOf(maxId), 2, "0"));
-		p.setModuleCode(p.getUnitMaster().getUnitName().substring(0, 2).toUpperCase()
-				+ p.getModuleName().toUpperCase().substring(0, 2) + StringUtils.leftPad(String.valueOf(maxId), 2, "0"));
+		//UnitMaster um = getUnitMasterById(p.getUnitMaster().getUnitId());
+		System.out.println(p.getModuleName().substring(0, 2) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+		/*p.setModuleCode(p.getUnitMaster().getUnitName().substring(0, 2).toUpperCase()
+				+ p.getModuleName().toUpperCase().substring(0, 2) + StringUtils.leftPad(String.valueOf(maxId), 2, "0"));*/
+		p.setModuleCode(p.getModuleName().toUpperCase().substring(0, 3) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		p.setSeqNo(maxId);
-		p.setUnitMaster(um);
+		//p.setUnitMaster(um);
 		p.setIsActive("Y");
 
 		session.persist(p);
@@ -2075,8 +2077,8 @@ public class AdminDAOImpl implements AdminDAO {
 		ModuleMaster mm = (ModuleMaster) session.load(ModuleMaster.class, p.getModuleId());
 		mm.setModuleName(p.getModuleName());
 		mm.setStatus(p.getStatus());
-		mm.setContentLink(p.getContentLink());
-		mm.setContentType(p.getContentType());
+		//mm.setContentLink(p.getContentLink());
+		//mm.setContentType(p.getContentType());
 		session.update(mm);
 
 	}
@@ -2117,8 +2119,8 @@ public class AdminDAOImpl implements AdminDAO {
 		List<ModuleMasterForm> list = new ArrayList<ModuleMasterForm>();
 		Session session = this.sessionFactory.getCurrentSession();
 		
-		List<ModuleMaster> lst = session.createSQLQuery("select m.moduleName ,u.unitName,m.status,m.moduleId from modulemaster m join unitmaster u on(u.unitid=m.unitid) where m.isactive='Y'").list();
-		System.out.println("cccccccccccccccccccc");
+/*		List<ModuleMaster> lst = session.createSQLQuery("select m.moduleName ,u.unitName,m.status,m.moduleId from modulemaster m join unitmaster u on(u.unitid=m.unitid) where m.isactive='Y'").list();*/		
+		List<ModuleMaster> lst = session.createSQLQuery("select * from ModuleMaster where isActive='Y'").list();
 		return lst;
 	}
 

@@ -1,5 +1,8 @@
 package com.ir.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -31,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
@@ -1773,24 +1777,25 @@ public class AdminController {
 		System.out.println("listModuleMaster");
 		if(checkAccess(session))
 			return "redirect:login.fssai";
-		Map<String, String> userType = lst.userTypeMap;
+		/*Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> trainingType = lst.trainingTypeMap;
 		Map<String, String> trainingPhase = lst.trainingPhaseMap;
 		Map<String, String> contentType = lst.contentType;
 		model.addAttribute("userType", userType);
 		model.addAttribute("trainingType", trainingType);
 		model.addAttribute("trainingPhase", trainingPhase);
-		model.addAttribute("contentType", contentType);
-		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("contentType", contentType);*/
+		//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 	model.addAttribute("ModuleMasterForm", moduleMasterForm);
 		return "ModuleMaster";
 	}
 
 	@RequestMapping(value = "/ModuleMaster/add", method = RequestMethod.POST)
-	public String addModuleMaster(@Valid @ModelAttribute("ModuleMasterForm") ModuleMasterForm p, BindingResult result,
-			Model model) {
-		System.out.println("..............." + p.getUnitId());
+	public String addModuleMaster(@RequestParam CommonsMultipartFile file,@Valid @ModelAttribute("ModuleMasterForm") ModuleMasterForm p, BindingResult result,
+			Model model,HttpSession session) {
+		System.out.println("..............." + p.getModuleId());
+		
 		System.out.println("result " + result.hasErrors());
 		if (result.hasErrors()) {
 
@@ -1804,15 +1809,14 @@ public class AdminController {
 		}
 		ModuleMaster moduleMaster = new ModuleMaster();
 		try{
-			System.out.println("p.getId() " + p.getModuleId() + p.getUnitId());
-			
+			System.out.println("p.getId() " + p.getModuleId());
 			moduleMaster.setModuleId(p.getModuleId());
 			moduleMaster.setModuleName(p.getModuleName());
 			moduleMaster.setStatus(p.getStatus());
-			moduleMaster.setContentName(p.getContentName());
-			moduleMaster.setContentLink(p.getContentLink());
-			moduleMaster.setContentType(p.getContentType());
-			moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p.getUnitId()));
+			//moduleMaster.setContentName(p.getContentName());
+			//moduleMaster.setContentLink(p.getContentLink());
+			//moduleMaster.setContentType(p.getContentType());
+			//moduleMaster.setUnitMaster(this.adminService.getUnitMasterById(p.getUnitId()));
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -1840,6 +1844,34 @@ public class AdminController {
 			this.adminService.updateModuleMaster(moduleMaster);
 		}
 		System.out.println("after insert");
+		 String subject = null;
+		//upload file
+				try{
+					String name = p.getModuleName();
+					//String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "Fostac/Trainee");
+					String ss = session.getServletContext().getRealPath("Subject");
+					File dir = new File(ss);
+					if (!dir.exists())
+						dir.mkdirs();
+					String extension = "";
+					String fileName = file.getOriginalFilename();
+					int i = fileName.lastIndexOf('.');
+					if (i > 0) {
+						extension = fileName.substring(i + 1);
+					}
+			    byte[] bytes = file.getBytes();  
+			    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
+			         new File(ss + File.separator + name+ "." +extension)));  
+			    stream.write(bytes);  
+			    stream.flush();  
+			    stream.close();  
+				}catch(Exception e){
+					e.printStackTrace();
+					new ZLogger("saveImage", "Exception while  saveFile "+e.getMessage(), "AdminController.java");
+				}
+
+				//upload file end
+		
 		return "redirect:/ModuleMaster.fssai";
 		// return "ModuleMaster";
 	}
