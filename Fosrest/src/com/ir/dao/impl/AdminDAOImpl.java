@@ -77,6 +77,7 @@ import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.MappingMasterTrainer;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
@@ -3773,4 +3774,15 @@ Session session=this.sessionFactory.getCurrentSession();
 				return "created";
 	}
 
+	
+
+	@Override
+	public List<MappingMasterTrainer> trainerMappingState(String s) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from MappingMasterTrainer where state='"+s+"'");
+		List<MappingMasterTrainer> trainingNameList = query.list();
+		return trainingNameList;
+	}
+	
 }

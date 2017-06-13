@@ -46,6 +46,7 @@ import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.MappingMasterTrainer;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
@@ -412,6 +413,7 @@ public interface AdminDAO {
 	List listCalendarSearch(String scheduleCode);
 
 	public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
+	public List<MappingMasterTrainer> trainerMappingState(String sid);
 
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

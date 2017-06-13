@@ -294,7 +294,7 @@
 														<ct:forEach items="${listPersonalInfoTrainer}" var="listPersonalInfoTrainer"
 														varStatus="loop">
 													
-														<option value="${listPersonalInfoTrainer.id}" >${listPersonalInfoTrainer.id}</option>
+														<option value="${listPersonalInfoTrainer.trainerId.id}" >${listPersonalInfoTrainer.firstName}</option>
 													</ct:forEach>
 													</select>
 												</div></td>

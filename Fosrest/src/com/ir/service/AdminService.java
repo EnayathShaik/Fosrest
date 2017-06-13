@@ -58,6 +58,7 @@ import com.ir.model.LoginDetails;
 import com.ir.model.ManageTraining;
 import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.MappingMasterTrainer;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
@@ -521,7 +522,7 @@ List<ModuleMaster>  allSubjects();
 List listCalendarSearch(String scheduleCode);
 
 String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
-
+public List<MappingMasterTrainer> trainerMappingState(String sid);
 }
 
 

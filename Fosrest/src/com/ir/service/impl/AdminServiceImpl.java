@@ -60,6 +60,7 @@ import com.ir.model.LoginDetails;
 import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ManageTraining;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.MappingMasterTrainer;
 import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
@@ -1593,4 +1594,12 @@ public String createTrainingCalendar(String[] trainers, String[] subjects, Train
 	// TODO Auto-generated method stub
 	return this.adminDAO.createTrainingCalendar( trainers,subjects,p);
 }
+
+@Override
+@Transactional
+public List<MappingMasterTrainer> trainerMappingState(String sid) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.trainerMappingState(sid);
+}
+
 }

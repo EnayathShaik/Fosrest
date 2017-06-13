@@ -3186,8 +3186,8 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
   		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
       	model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(p.getScheduleCode()));
-      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
-   
+      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
+      	
 	        // String result = this.adminService.addTrainingCalendar(p);
       }
 		return "trainingcalendar";
