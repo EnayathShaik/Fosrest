@@ -231,4 +231,20 @@ public void loadTrainingPhase(@RequestParam("data") int data ,@RequestBody Gener
 	out.flush();
 	
 }
+
+@RequestMapping(value="/getSceduleCode" , method=RequestMethod.POST)
+@ResponseBody
+public void getSceduleCode(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	new ZLogger("getModule","getModule............" + data  , "CommonController.java");
+	
+	List scheduleCode = commonService.getSceduleCode(data);
+	PrintWriter out = response.getWriter();
+	Gson g =new Gson();
+	String newList = g.toJson(scheduleCode); 
+	System.out.println("newList "+newList);
+	out.write(newList);
+	out.flush();
+	
+}
+
 }

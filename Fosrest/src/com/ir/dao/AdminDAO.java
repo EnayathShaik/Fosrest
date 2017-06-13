@@ -409,5 +409,9 @@ public interface AdminDAO {
 
 	public List<ModuleMaster> allSubjects();
 
+	List listCalendarSearch(String scheduleCode);
+
+	public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
+
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

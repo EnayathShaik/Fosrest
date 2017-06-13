@@ -3065,52 +3065,11 @@ public class AdminController {
 	
 		 adminService.saveTrainingSchedule(subject,duration,form);
 			
-			return "trainingschedule123";
+			return "redirect:trainingschedule123.fssai";
 		}
 			
-			@RequestMapping(value = "/trainingcalendar", method = RequestMethod.GET)
-	public String trainingCalendar(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm TrainingCalendarForm,
-			Model model, HttpSession session) {
-		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
-			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
-		return "redirect:login.fssai";
-		}
-		System.out.println("listTrainingSchedule");
-
 		
-		List<Designation> DesignationList=pageLoadService.loadDesignation();
-		List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
-		List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
-		model.addAttribute("DesignationList", DesignationList);
-		model.addAttribute("TrainingTypeList", TrainingTypeList);
-		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
-		String s=(String) session.getAttribute("stateId");
-		model.addAttribute("listCalendar", this.adminService.listCalendar());
-	    model.addAttribute("TrainingCalendarForm", new TrainingCalendarForm());
-	    model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
-		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
-		return "trainingcalendar";
-	}
-	
-   
-   @RequestMapping(value = "/trainingcalendaradd", method = RequestMethod.POST)
-  	public String trainingCalendarSearch(@ModelAttribute("TrainingCalendarForm") TrainingCalendar p,
-  			Model model, HttpSession session) {
-  		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
-  			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
-  		return "redirect:login.fssai";
-  		}
-  		int profileId=(int) session.getAttribute("profileId");
-  		if(p.getTrainingPhase()==null){
-  			
-  		}
-        if(profileId==2){
-	         String result = this.adminService.addTrainingCalendar(p);
-        }
-  		return "redirect:trainingcalendar.fssai";
-  	}
-   
-@RequestMapping(value="/saveTrainingSchedule" , method=RequestMethod.POST)
+/*@RequestMapping(value="/saveTrainingSchedule" , method=RequestMethod.POST)
 	
 	public String saveTrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm trainingScheduleForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
 	
@@ -3120,7 +3079,7 @@ public class AdminController {
 		// adminService.saveTrainingSchedule(trainingScheduleForm);
 		return "trainingschedule123"; 
 	}
-
+*/
 //share Initiative
 
 @RequestMapping(value ="/shareInitiative", method = RequestMethod.GET)
@@ -3159,8 +3118,80 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 }
 
 
+	@RequestMapping(value = "/trainingcalendar", method = RequestMethod.GET)
+	public String trainingCalendar(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm TrainingCalendarForm,
+			Model model, HttpSession session) {
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+		return "redirect:login.fssai";
+		}
+		System.out.println("trainingcalendar");
+
+		
+		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
+		List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
+		model.addAttribute("DesignationList", DesignationList);
+		model.addAttribute("TrainingTypeList", TrainingTypeList);
+		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
+		String s=(String) session.getAttribute("stateId");
+		model.addAttribute("listCalendar", this.adminService.listCalendar());	
+	    model.addAttribute("TrainingCalendarForm", new TrainingCalendarForm());
+	 //   model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
+		return "trainingcalendar";
+	}
+	
+
+@RequestMapping(value = "/trainingcalendaradd", method = RequestMethod.POST)
+	public String trainingCalendaradd(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm p,
+			Model model, HttpSession session,HttpServletRequest request) {
+	   System.out.println("traininigcalendaradd");
+
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+		return "redirect:login.fssai";
+		}
+		int profileId=(int) session.getAttribute("profileId");
+	   
+	
+	String  trainers[]=  request.getParameterValues("trainer");
+	String  subjects[]=  request.getParameterValues("subject");
+	         String result = this.adminService.createTrainingCalendar(trainers,subjects,p);
+    
+		return "redirect:trainingcalendar.fssai";
+	}
 
 
+
+ 
+ @RequestMapping(value = "/trainingcalendarsearch", method = RequestMethod.POST)
+	public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") TrainingCalendar p,
+			Model model, HttpSession session) {
+	   System.out.println("aaass");
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+		return "redirect:login.fssai";
+		}
+		int profileId=(int) session.getAttribute("profileId");
+	   if(profileId==1){
+			System.out.println("admin");
+			model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(p.getScheduleCode()));
+	
+		}
+      if(profileId==2){
+    	  String s=(String) session.getAttribute("stateId");
+  	
+  		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
+  		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
+  		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
+      	model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(p.getScheduleCode()));
+      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
+   
+	        // String result = this.adminService.addTrainingCalendar(p);
+      }
+		return "trainingcalendar";
+	}
    
   	
 }

@@ -518,6 +518,10 @@ public List<StateMaster> listStateMaster2(int sid);
 String saveTrainingSchedule(String[] subject, String[] duration, TrainingScheduleForm form);
 List<ModuleMaster>  allSubjects();
 
+List listCalendarSearch(String scheduleCode);
+
+String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
+
 }
 
 

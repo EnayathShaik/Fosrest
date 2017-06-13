@@ -93,6 +93,7 @@ import com.ir.model.SubjectMapping;
 import com.ir.model.SubjectMaster;
 import com.ir.model.TaxMaster;
 import com.ir.model.TrainingCalendar;
+import com.ir.model.TrainingCalendarMapping;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -3499,7 +3500,9 @@ public class AdminDAOImpl implements AdminDAO {
 	public List listCalendar() {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
+		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
+		Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode, totalDuration from trainingCalendar");
+		
 		List list = query.list();
 		return list;
 	}
@@ -3645,9 +3648,9 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("DistrictMaster " + p.getTrainingCalendarId());
 		
 		TrainingCalendarForm d = new TrainingCalendarForm();
-if(p.getTrainingPhase()==null){
+/*if(p.getTrainingPhase()==null){
 	p.setTrainingPhase("0");
-}
+}*/
 String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
 p.setBatchCode(batchCode);
 		p.setIsActive("Y");
@@ -3725,5 +3728,49 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		return mod;
 		
 	}
-	
+
+	@Override
+	public List listCalendarSearch(String scheduleCode) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
+		Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),ts.scheduleCode, sm.subject, totalDuration  from trainingSchedule ts join SubjectMapping sm on(ts.scheduleCode=sm.scheduleCode) where sm.scheduleCode='"+scheduleCode+"'");
+
+		List list = query.list();
+		return list;
+	}
+
+	@Override
+	public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p) {
+		// TODO Auto-generated method stub
+		TrainingCalendar tc = new TrainingCalendar();
+		
+		tc.setDesignation(p.getDesignation());
+		tc.setTrainingPhase(p.getTrainingPhase());
+		tc.setTrainingType(p.getTrainingType());
+		tc.setScheduleCode(p.getScheduleCode());
+		tc.setTrainingStartDate(p.getTrainingStartDate());
+		tc.setTrainingEndDate(p.getTrainingEndDate());
+		System.out.println(p.getScheduleCode());
+		String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
+		tc.setBatchCode(batchCode);
+		//p.setIsActive("Y");
+Session session=this.sessionFactory.getCurrentSession();
+		
+			TrainingCalendarMapping tcm;
+		for(int i=0;i<subjects.length;i++){
+			
+			tcm=new TrainingCalendarMapping();
+		
+			tcm.setBatchCode(batchCode);
+			tcm.setSubjectId(Integer.parseInt(subjects[i]));
+			tcm.setTrainerId(Integer.parseInt(trainers[i]));
+
+			session.save(tcm);
+		}
+		
+				session.save(tc);
+				return "created";
+	}
+
 }

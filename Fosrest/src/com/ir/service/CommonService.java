@@ -25,4 +25,6 @@ public interface CommonService {
 	public List loadTrainingPhase(int trainingTypeId);
 
 	public String checkState(String id, String tableName);
+
+	public List getSceduleCode(String data);
 }

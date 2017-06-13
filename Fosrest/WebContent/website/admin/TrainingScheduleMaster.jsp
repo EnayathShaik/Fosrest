@@ -49,8 +49,9 @@ function addRow(thisId){
 	 rowString = ""; 
 	 var mystrr;
 	  mystrr="";
-			
+			alert("aaa");
 	  	var getSrNo= $(thisId).closest('tr').attr('id');
+	  	alert("bb"+getSrNo);
 		var sName;
 		var sId;
 		var flag;
@@ -102,8 +103,14 @@ function addRow(thisId){
  }
  
  function deleteRow(id){
-	 
-	 $(id).parents('tr').remove();
+	 alert("");
+	$(id).parents('tr').remove();
+	 alert("end "+$(id).closest('tr').attr('id'));
+	 var delId= parseInt($(id).closest('tr').attr('id'))+1;
+	 alert("delId= "+delId);
+	//alert( "delId+1= "+document.getElementById(delId+1).id);
+	document.getElementById(delId).setAttribute("id", "div_top2");
+	 alert("aaa");
  }
  function addSubSchedule(){	
 	

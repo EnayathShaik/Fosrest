@@ -218,16 +218,17 @@ public class TrainingCalendar {
 			private String trainingType;
 			private String trainingPhase;
 			private String designation;
-			private String trainingInstitute;
-			private String trainerName;
-			private String duration;
+		//	private String trainingInstitute;
+			//private String trainerName;
+			private String totalduration;
 			private String trainingStartDate;
 			private String trainingEndDate;
-			public String getDuration() {
-				return duration;
+		
+			public String getTotalduration() {
+				return totalduration;
 			}
-			public void setDuration(String duration) {
-				this.duration = duration;
+			public void setTotalduration(String totalduration) {
+				this.totalduration = totalduration;
 			}
 			public String getTrainingEndDate() {
 				return trainingEndDate;
@@ -283,18 +284,7 @@ public class TrainingCalendar {
 			public void setDesignation(String designation) {
 				this.designation = designation;
 			}
-			public String getTrainingInstitute() {
-				return trainingInstitute;
-			}
-			public void setTrainingInstitute(String trainingInstitute) {
-				this.trainingInstitute = trainingInstitute;
-			}
-			public String getTrainerName() {
-				return trainerName;
-			}
-			public void setTrainerName(String trainerName) {
-				this.trainerName = trainerName;
-			}
+	
 			public String getTrainingStartDate() {
 				return trainingStartDate;
 			}

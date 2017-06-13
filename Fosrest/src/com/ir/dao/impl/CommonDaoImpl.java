@@ -184,4 +184,21 @@ public class CommonDaoImpl implements CommonDao{
 		return response;
 	}
 
+	@Override
+	public List getSceduleCode(String data) {
+		// TODO Auto-generated method stub
+		
+		String arr[]=data.split("-");
+		
+		String designationId=arr[0];
+		String trTypeId=arr[1];
+		String trPhaseId=arr[2];
+		
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "select scheduleCode from  trainingSchedule where designation= '"+designationId+"' and trainingType='"+trTypeId+"' and trainingPhase='"+trPhaseId+"'";		
+		Query query = session.createSQLQuery(sql);
+		List shList = query.list();
+		return shList;
+	}
+
 }

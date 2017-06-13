@@ -1580,4 +1580,17 @@ public List<ModuleMaster> allSubjects() {
 	return this.adminDAO.allSubjects();
 }
 
+@Override
+@Transactional
+public List listCalendarSearch(String scheduleCode) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listCalendarSearch( scheduleCode);
+}
+
+@Override
+@Transactional
+public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.createTrainingCalendar( trainers,subjects,p);
+}
 }

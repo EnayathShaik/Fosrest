@@ -100,5 +100,12 @@ public class CommonServiceImpl implements CommonService{
 		String a = commonDao.checkState(id , tableName);
 		return a;
 	}
+	@Override
+	@Transactional
+	public List getSceduleCode(String data) {
+		// TODO Auto-generated method stub
+		List  moduleList = commonDao.getSceduleCode( data);
+		return moduleList;
+	}
 	
 }

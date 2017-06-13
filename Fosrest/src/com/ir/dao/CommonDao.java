@@ -21,4 +21,5 @@ public interface CommonDao {
 	public List getBatchCode(String module);
 	public List loadTrainingPhase(int trainingTypeId);
 	public String checkState(String id, String tableName);
+	public List getSceduleCode(String data);
 }

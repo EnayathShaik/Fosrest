@@ -360,3 +360,37 @@ function getTrainingPhase(val , idName) {
 		}
 	});
 }
+
+
+
+function getScheduleCode(designation,trType,trPhase,idName){
+	   $('#'+idName+' option').remove();
+	   
+	   var val=designation+"-"+trType+"-"+trPhase;
+		
+ 	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+$.ajax({
+	type : 'post',
+	url : 'getSceduleCode.fssai?data='+ val,
+	contentType : "application/json",
+ data:name,
+	success : function(response) {
+		var mainData1 = jQuery.parseJSON(response);
+		$('#'+idName+' option').remove();
+		$('#'+idName).append(
+				'<option value="0" label="--Select Training Institude--" />');
+		$.each(mainData1, function(i, obj) {
+			$('#'+idName)
+					.append(
+							'<option value='+mainData1[i]+' >' + mainData1[i]
+									+ '</option>');
+		});
+	}
+});
+  
+}
+
+
