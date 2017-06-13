@@ -351,6 +351,16 @@
                                     <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
                                    <!-- <li><a href="manageTrainingPartnerForm.fssai">Manage Training Partner</a></li>
                                     <li><a href="manageAssessmentAgencyForm.fssai">Manage Assessment Agency</a></li> -->
+                                    <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
+                                            <li><a href="trainerUserManagementForm.fssai" class="clr">Trainer</a></li>
+                                            <li><a href="trainingCenterUserManagementForm.fssai" class="clr">Training Institute</a></li>
+                                             <!-- <li><a href="assessorUserManagementForm.fssai" class="clr">Assessor</a></li> -->
+                                             <li><a href="adminUserManagementForm.fssai" class="clr">Admin</a></li>
+                                             <li><a href="stateadmin.fssai" class="clr">StateAdmin</a></li> 
+                                        </ul>
+                                    </li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
 							<li class="dropdown active"><a href="#"

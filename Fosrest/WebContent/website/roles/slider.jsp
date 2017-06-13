@@ -39,7 +39,9 @@
 <div id="sidebar-wrapper">
 	<ul class="sidebar-nav">
 		<!-- <li><a href="search-and-apply.fssai">Search	& Apply Vacancy</a></li> -->
-	<li><a href="TrainerRequest.fssai">Training Request</a></li>
+	<li><a href="loginProcess.fssai">Upcoming Training</a></li>
+	<li><a href="loginProcess.fssai">Mark Attendance</a></li>
+	<li><a href="loginProcess.fssai">Upload Assessment</a></li>
 	</ul>
 </div>
 
