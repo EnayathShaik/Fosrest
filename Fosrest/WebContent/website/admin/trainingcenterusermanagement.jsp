@@ -2,6 +2,13 @@
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 
+ <style>
+             a.disabled {
+   pointer-events: none;color:#000;
+   cursor: default;
+}
+             </style>
+
 <script src="website/js/commonController.js"></script>
             <cf:form action="trainingCetnterUserManagementSearch.fssai" name="myForm" method="POST" commandName="trainingCenterUserManagementForm">
 
@@ -147,7 +154,12 @@
                                                                 <ct:forEach var="listValue" items="${searchTrainingCenterUsermanagement}" varStatus="loop">
                                                                     <tr>
                                                                         <td>
-                                                                            <label><a href="PersonalInformationTrainingInstitute.fssai?userId=${listValue[5]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                         <% if(session.getAttribute("profileId").equals(1)){%>
+                                                                            	  <label><a class="disabled" href="PersonalInformationTrainingInstitute.fssai?userId=${listValue[5]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                              <%  }else{%>
+                                                                                   <label><a href="PersonalInformationTrainingInstitute.fssai?userId=${listValue[5]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                                   <%    }%> 
+                                                                            <%-- <label><a href="PersonalInformationTrainingInstitute.fssai?userId=${listValue[5]}" value="${listValue[0]}">${listValue[1]}</a></label> --%>
                                                                         </td>
                                                                         <td>
                                                                             <label>${listValue[2] }</label>

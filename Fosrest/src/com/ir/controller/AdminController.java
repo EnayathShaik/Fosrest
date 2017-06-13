@@ -459,8 +459,8 @@ public class AdminController {
 	@RequestMapping(value = "/traineeUserManagementForm", method = RequestMethod.GET)
 	public String traineeUserManagementForm(
 			@ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm, HttpSession session) {
-		if(checkAccess(session))
-			return "redirect:login.fssai";
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
 		return "traineeUserManagementForm";
 	}
 
@@ -493,16 +493,16 @@ public class AdminController {
 	@RequestMapping(value = "/trainerUserManagementForm", method = RequestMethod.GET)
 	public String trainerUserManagementForm(
 			@ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm, HttpSession session) {
-		if(checkAccess(session))
-			return "redirect:login.fssai";
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
 		return "trainerUserManagementForm";
 	}
 
 	@RequestMapping(value = "/trainingCenterUserManagementForm", method = RequestMethod.GET)
 	public String adminUserManagementForm(
 			@ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainerUserManagementForm, HttpSession session) {
-		if(checkAccess(session))
-			return "redirect:login.fssai";
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
 		return "trainingCenterUserManagementForm";
 	}
 

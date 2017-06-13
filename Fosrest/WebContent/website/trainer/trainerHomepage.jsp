@@ -24,21 +24,18 @@
             <div class="row">
                                             <div class="col-xs-12">
                                            <fieldset>
-                                           <legend>Training Requests for Trainer</legend>
+                                           <legend>Upcoming Training</legend>
                                             <ct:if test="${!empty listTrainingSchedule}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>
-                                                        <th>Training Type</th>
-                                                        <th>User Type</th>
-                                                        <th>Training Phase</th>
+                                                        <th>Training Schedule code</th>
+                                                        <th>Subject</th>
                                                         <th>Training Start Date</th>
                                                         <th>Training End Date</th>
-                                                        <th>No. Of Enrollments</th>
-                                                        <th>Status</th>
-                                                        <th>Accept</th>
-                                                        <th>Reject</th>
+                                                        <th>Training Institute</th>
+                                                        
                                                         
                                                     </tr>
                                                 </thead>
@@ -46,21 +43,20 @@
                                                 <ct:forEach items="${listTrainingSchedule}" var="TrainingSchedule" varStatus="loop">
                                                 <tr>
 												<td>${loop.count}</td>
-												<td>${TrainingSchedule.trainingType}</td>
-												<td>${TrainingSchedule.userType}</td>
-												<td>${TrainingSchedule.trainingPhase}</td>
-												<td>${TrainingSchedule.trainingStartDate}</td>
-												<td>${TrainingSchedule.trainingEndDate}</td>
-												<td>20</td>
+												<td>${TrainingSchedule[0]}</td>
+												<td>${TrainingSchedule[1]}</td>
+												<td>${TrainingSchedule[2]}</td>
+												<td>${TrainingSchedule[3]}</td>
+												<td>${TrainingSchedule[4]} &nbsp;${TrainingSchedule[5]}</td>
+												<%-- <td>20</td>
 												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
-												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"accept");return false;' >Accept</button></td>
-												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"reject");return false;' >Reject</button></td>
-												
-											</tr>
+											    <td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"accept");return false;' >Accept</button></td>
+											   <td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"reject");return false;' >Reject</button></td> --%>
+										</tr>
 										</ct:forEach>
                                             </table>
                                            </ct:if>
-                                        </fieldset>
+                                                                               </fieldset>
                                                     </div>
                                                 </div>
                  
@@ -71,7 +67,7 @@
 </section>
 <!-- scripts --> 
 
-<script>
+<!-- <script>
 
 function acceptTrainingRequest(id , profileId,loginUser2,operation){
 	//alert(" id "+id + "profileId  "+profileId+" userID:"+loginUser2+" OPer="+operation);
@@ -92,4 +88,4 @@ function acceptTrainingRequest(id , profileId,loginUser2,operation){
 }
 }
 
-</script>
+</script> -->

@@ -2371,27 +2371,32 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<TrainingSchedule> listTrainingSchedule(int id, int profileId) {
-		return null;
+		
 		// TODO Auto-generated method stub
-		/*System.out.println("inside listTrainingSchedule with parameter");
+		System.out.println("inside listTrainingSchedule with parameter");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingSchedule> mccList = null;
-		if (profileId == 5) {
+/*		if (profileId == 5) {
 			mccList = session.createQuery(
 					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"
 							+ id + "'  ")
 					.list();
-		} else {
+		} else {*/
 
-			mccList = session.createQuery(
-					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(status,'') not in ( 'Y' , '') and trainer_id='"
+			mccList = session.createSQLQuery(
+					"select s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric)  inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) where tc.trainerName='"
 							+ id + "'  ")
 					.list();
-		}
-		for (TrainingSchedule p : mccList) {
+		
+		/*for (TrainingSchedule p : mccList) {
 			System.out.println("listTrainingSchedule List::" + p);
-		}
-		return mccList;*/
+		}*/
+		return mccList;
+		
+		
+		
+		
+		
 	}
 
 	/**
