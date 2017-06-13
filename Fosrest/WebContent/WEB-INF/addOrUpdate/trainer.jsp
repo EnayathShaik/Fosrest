@@ -52,9 +52,9 @@
                                                         <th>First Name</th>
                                                         <th>Email</th>
                                                         <th>Contact No. & Address</th>
-                                                       <th>Specialised Area</th>
+                                                      <!--  <th>Specialised Area</th> -->
                                                         <th>Organization Name</th>
-                                                        <th>No. of Trainings Conducted</th>
+                                                       <!--  <th>No. of Trainings Conducted</th> -->
                                                     </tr> 
                                                 </thead>
                                                 
@@ -66,9 +66,9 @@
 												<td>${listTrainer[0]}</td>
 												<td>${listTrainer[1]}</td>
 												<td>${listTrainer[2]} <br> ${listTrainer[3]},${listTrainer[4]},${listTrainer[5]},${listTrainer[6]}</td>
-											 <td>${listTrainer[7]}</td>  
+											<%--  <td>${listTrainer[7]}</td>   --%>
 												<td>${listTrainer[8]}</td>
-												<td>${listTrainer[9]}</td>
+												<%-- <td>${listTrainer[9]}</td> --%>
 											</tr>
 										</ct:forEach>
                                             </table>
@@ -77,6 +77,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <strong>To be Fssai Trainer</strong>
                                           <a href="PersonalInformationTrainer.fssai?id=4">  <input type="button" id="applynow"
 														value="Apply Now"  class="btn login-btn"/></a>
      

@@ -405,7 +405,7 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                      <cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value , 'correspondenceDistrict')">
+                                      <cf:select path="correspondenceState" class="form-control" onclick="getDistrict(this.value , 'correspondenceDistrict')">
                                   <%--  <cf:option value="0" label="Select state Name" /> --%>
 									<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
                                     </cf:select>

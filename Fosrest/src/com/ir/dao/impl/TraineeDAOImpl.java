@@ -1283,7 +1283,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 		String passwordString = String.valueOf(pass);
 		
 		Session session = sessionFactory.getCurrentSession();
-	
+	if(pid==null){
+		p.setCreatedBy(4);
+	}
+	else{
+		p.setCreatedBy(2);
+	}
 		String encryprPassword = null;
 		try{
 			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
@@ -1311,6 +1316,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			{
 				mmt=new MappingMasterTrainer();
 				mmt.setTrainerId(p);
+				mmt.setFirstName(p.getFirstName());
 				mmt.setState(a[i]);
 				session.save(mmt);
 				

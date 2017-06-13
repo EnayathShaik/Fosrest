@@ -43,91 +43,68 @@
 			$("#status").val('${PersonalInformationTrainer.status}');
 			$("#correspondenceState").val(
 					'${PersonalInformationTrainer.correspondenceState}');
+			$("#correspondenceState").trigger("change");
+	        window.setTimeout(function() {
+	        	$("#correspondenceDistrict").val('${PersonalInformationTrainer.correspondenceDistrict}');
+	        	var ss = '${PersonalInformationTrainer.correspondenceDistrict}';
+	        	alert(ss+"PPPPPPP");
+	            $("#correspondenceDistrict").trigger("change");
+	            window.setTimeout(function() {
+	            	$("#correspondenceCity").val('${PersonalInformationTrainer.correspondenceCity}');
+	            }, 1000);
+	        }, 1000);
+			$("#resState").val('');
+	        $("#residentialDistrict").val('');
+	        $("#resCity").val('');
+	        $("#ResidentialLine1").val('');
+	        $("#ResidentialLine2").val('');
+			 $("#createUpdateBtn").val("Update");
+			$("#captcha").css("display" , "none");
+			 $("#chkunit").css("display" , "none");
+			 $("#check").attr("checked","checked");
+			 
 			var fields = '${PersonalInformationTrainer.userType}'.split(',');
 			for(i=0;i<fields.length;i++){
 				 document.getElementById('userType_'+fields[i]).checked = true
 			 }
 			
 			
-			$("#correspondenceState").trigger("change");
-			window
-					.setTimeout(
-							function() {
-								$("#correspondenceDistrict")
-										.val(
-												'${PersonalInformationTrainer.correspondenceDistrict}');
-								$("#correspondenceDistrict").trigger("change");
-								window
-										.setTimeout(
-												function() {
-													$("#correspondenceCity")
-															.val(
-																	'${PersonalInformationTrainer.correspondenceCity}');
-												}, 1000);
-							}, 1000);
-			$("#resState").val('');
-			$("#residentialDistrict").val('');
-			$("#resCity").val('');
-			$("#ResidentialLine1").val('');
-			$("#ResidentialLine2").val('');
-			$("#createUpdateBtn").val("Update");
-			$("#captcha").css("display", "none");
-			 $("#chkunit").css("display" , "none");
-			 $("#check").attr("checked","checked");
-
+		
 		}
 		DrawCaptcha();
 
 		flatpickr("#dob", {});
 
-		$('#sameAddr')
-				.change(
-						function() {
-
-							if (this.checked) {
-								$("#resState").val(
-										$("#correspondenceState").val());
-								$("#resState").trigger("change");
-								window
-										.setTimeout(
-												function() {
-													$("#residentialDistrict")
-															.val(
-																	$(
-																			"#correspondenceDistrict")
-																			.val());
-													$("#residentialDistrict")
-															.trigger("change");
-													window
-															.setTimeout(
-																	function() {
-																		$(
-																				"#resCity")
-																				.val(
-																						$(
-																								"#correspondenceCity")
-																								.val());
-																	}, 1000);
-												}, 1000);
-
-								$("#resPincode").val(
-										$("#correspondencePincode").val());
-								$("#ResidentialLine1").val(
-										$("#correspondenceAddress1").val());
-								$("#ResidentialLine2").val(
-										$("#correspondenceAddress2").val())
-								//
-							} else {
-								$("#resState").val('');
-								$("#residentialDistrict").val('');
-								$("#resCity").val('');
-								$("#resPincode").val('');
-								$("#ResidentialLine1").val('');
-								$("#ResidentialLine2").val('');
-							}
-						});
-
-	}
+	 	$('#sameAddr').change(function(){
+	 			if(this.checked){
+	 				$("#resState").val($("#correspondenceState").val());
+	 				 $("#resState").trigger("change");
+	                    window.setTimeout(function() {
+	                    	$("#residentialDistrict").val($("#correspondenceDistrict").val());
+	                        $("#residentialDistrict").trigger("change");
+	                        window.setTimeout(function() {
+	                        	$("#resCity").val($("#correspondenceCity").val());
+	                        }, 1000);
+	                    }, 1000);
+	 				
+	 				
+	 				$("#resPincode").val($("#correspondencePincode").val());
+	 				$("#ResidentialLine1").val($("#correspondenceAddress1").val());
+	 				$("#ResidentialLine2").val($("#correspondenceAddress2").val())
+	 				//
+	 			}else{
+	 				$("#resState").val('');
+	 				$("#residentialDistrict").val('');
+	 				$("#resCity").val('');
+	 				$("#resPincode").val('');
+	 				$("#ResidentialLine1").val('');
+	 				$("#ResidentialLine2").val('');
+	 				
+	 				
+	 			}
+	 		 
+	 		}); 
+			}
 	window.onload = OnStart;
   // Remove the spaces from the entered and generated code
     function removeSpaces(string) {
@@ -417,7 +394,7 @@
 										</ul>
 									</div>
 									<cf:select path="correspondenceState" class="form-control"
-										onclick="getDistrict(this.value , 'correspondenceDistrict')">
+										onchange="getDistrict(this.value , 'correspondenceDistrict')">
 										<%-- <cf:option value="0" label="Select state Name" /> --%>
 										<cf:options items="${listStateMaster}" itemValue="stateId"
 											itemLabel="stateName" />
@@ -569,7 +546,7 @@
 										</ul>
 									</div>
 									<cf:select path="resState" class="form-control"
-										onclick="getDistrict(this.value , 'residentialDistrict')">
+										onchange="getDistrict(this.value , 'residentialDistrict')">
 										<%-- <cf:option value="0" label="Select state Name" /> --%>
 										<cf:options items="${listStateMaster}" itemValue="stateId"
 											itemLabel="stateName" />
@@ -690,6 +667,35 @@
 																	
 																</ct:forEach>
 												</div>
+												
+												
+												
+												
+												
+												
+												
+												
+										 <select id="lstFruits" multiple="multiple">
+        <option value="1">Mango</option>
+        <option value="2">Apple</option>
+        <option value="3">Banana</option>
+        <option value="4">Guava</option>
+        <option value="5">Orange</option>
+    </select>
+    <input type="button" id="btnSelected" value="Get Selected" />		
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
 											</div>
 											<div class="col-md-6 col-xs-12">	
 								<div class="form-group">
@@ -1070,9 +1076,9 @@ function OtiHide(){
 	 }
 }
 </script>
- <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
-<!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
-<!--   <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
   <script type="text/javascript">
         $(function () {
             $('#lstFruits').multiselect({
@@ -1087,4 +1093,4 @@ function OtiHide(){
                 alert(message);
             });
         });
-    </script>  -->
+    </script> 

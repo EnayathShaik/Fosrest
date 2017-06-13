@@ -26,7 +26,16 @@ public class MappingMasterTrainer {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int Id;
 	
-	
+	@Column(name="firstName")
+	private String firstName;
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
 	@Column(name="State")
 	@NotEmpty(message="Please selct your business type !")
