@@ -220,9 +220,33 @@ public class TrainingCalendar {
 			private String designation;
 			private String trainingInstitute;
 			private String trainerName;
+			private String duration;
 			private String trainingStartDate;
+			private String trainingEndDate;
+			public String getDuration() {
+				return duration;
+			}
+			public void setDuration(String duration) {
+				this.duration = duration;
+			}
+			public String getTrainingEndDate() {
+				return trainingEndDate;
+			}
+			public void setTrainingEndDate(String trainingEndDate) {
+				this.trainingEndDate = trainingEndDate;
+			}
+			public String getScheduleCode() {
+				return scheduleCode;
+			}
+			public void setScheduleCode(String scheduleCode) {
+				this.scheduleCode = scheduleCode;
+			}
 			private String isActive;
 			private String batchCode;
+			private String scheduleCode;
+		
+			
+			
 			public String getBatchCode() {
 				return batchCode;
 			}
