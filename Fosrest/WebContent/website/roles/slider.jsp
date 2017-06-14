@@ -52,8 +52,9 @@
 	<ul class="sidebar-nav">
 		<!-- <li class="sidebar-brand">
                         </li> -->
+                        <li><a href="loginProcess.fssai">Upcoming Training</a></li>
 		<li><a href="TrainingRequest.fssai">Training Request</a></li>
-		<li> <a href="traineeAttendance.fssai">Mark Attendance</a> </li>
+		<!-- <li> <a href="traineeAttendance.fssai">Mark Attendance</a> </li> -->
 	
 	</ul>
 </div>
@@ -121,7 +122,7 @@
 		<!-- <li><a href="UpdateTrainingSchedule.fssai">Update Training
 				Schedule</a></li> -->
 		<li><a href="HolidayMaster.fssai">Holiday Master</a></li>
-		<li><a href="UnitMaster.fssai">Chapter Master</a></li>
+		<!-- <li><a href="UnitMaster.fssai">Chapter Master</a></li> -->
 		<li><a href="ModuleMaster.fssai">Subject Master</a></li>
 		<li><a href="manageAssessmentQuestions.fssai">Assessment Questions</a></li>
 		<!-- <li><a href="SubjectMaster.fssai">Subject Master</a></li>-->
@@ -138,7 +139,7 @@
 	<ul class="sidebar-nav">
 		<!-- <li class="sidebar-brand"></li> -->
 		<!-- <li><a href="traineeUserManagementForm.fssai">Trainee User Management Form</a></li> -->
-		     <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Management <i class="fa fa-angle-down"></i></a>
+		     <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create User Management <i class="fa fa-angle-down"></i></a>
             <ul class="dropdown-menu">
        			<li><a href="PersonalInformationTrainee.fssai">Trainee</a></li>
               <li><a href="PersonalInformationTrainer.fssai">Trainer</a></li>
@@ -146,7 +147,7 @@
             </ul>
           </li>
        <li><a href="NominateTrainee.fssai">Nominate Trainee</a></li>
-		<li><a href="TrainingSchedule.fssai">Update Training Schedule</a></li>
+		<!-- <li><a href="TrainingSchedule.fssai">Update Training Schedule</a></li> -->
 		  <li><a href="trainingcalendar.fssai">Training Calendar</a></li> 
 </ul>
 </div>
