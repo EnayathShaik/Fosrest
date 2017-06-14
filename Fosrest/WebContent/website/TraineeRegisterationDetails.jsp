@@ -41,6 +41,7 @@
 
 		 var name = '${PersonalInformationTrainee.firstName}';
 		$("#logId").val('${PersonalInformationTrainee.loginDetails.id}');
+		$("#status").val('${PersonalInformationTrainee.status}');
 		$("#correspondenceState").val('${PersonalInformationTrainee.correspondenceState}');
 		$("#correspondenceState").trigger("change");
         window.setTimeout(function() {
@@ -134,7 +135,8 @@
                             <!-- left side -->
                             <div class="col-md-6 col-xs-12">
 
-
+<cf:input path="logId"  type="hidden"/>
+<cf:input path="status"  type="hidden"/>
 										<cf:input type="hidden" path="id"/>
                                 
                                         <div class="form-group">
@@ -425,8 +427,8 @@
                                             
                                         </ul>
                                     </div>
-                                    <cf:select path="correspondenceState" class="form-control" onclick="getDistrict(this.value , 'correspondenceDistrict')">
-                                	<%-- <cf:option value="0" label="Select state Name" /> --%>
+                                    <cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value , 'correspondenceDistrict')">
+                                	<cf:option value="0" label="Select state Name" /> 
 									<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
                                     </cf:select>
                                 </div>
