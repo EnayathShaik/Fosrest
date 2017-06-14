@@ -68,7 +68,7 @@
 												</div>
 												<cf:select path="userType" class="form-control">
 													<cf:option value="" label="Select user Type" />
-													<cf:options items="${userTypeMap}" />
+													<cf:options items="${DesignationList}" itemValue="designationName" itemLabel="designationName"/>
 												</cf:select>
 											</div>
 
@@ -108,7 +108,7 @@
 											</button>
 											<h4 class="modal-title" id="myModalLabel">Codes</h4>
 										</div>
-										<div class="modal-body">
+									<div class="modal-body">
 
 											<div class="form-group" id="batchCodeDIV"
 												style="display: none">
@@ -119,9 +119,9 @@
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
-												<cf:select path="batchCode" class="form-control">
+												<cf:select path="scheduleCode" class="form-control">
 													<cf:option value="0" label="Select Batch Code" />
-													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingScheduleId" />
+													<cf:options items="${batchCodeList}" itemLabel="scheduleCode" itemValue="trainingScheduleId" />
 												</cf:select>
 											</div>
 										</div>
@@ -225,20 +225,22 @@
 						// console.log($("#userId_"+i).val());
 						if (loginIds == "") {
 							loginIds = $("#userId_" + i).val() + "@"+ $("#userName_" + i).text();
+							
 						} else {
 							loginIds = loginIds + "," + $("#userId_" + i).val()+ "@" + $("#userName_" + i).text();
 						}
-
+alert(loginIds+"MMMMMMMMMMMM");
 					}
 				});
 
 		console.log(loginIds);
 	
-		var batchCode = $("#batchCode").val();
+		var scheduleCode = $("#scheduleCode").val();
+
 		var name = JSON.stringify({
 			courseType : 0
 		});
-		var result = loginIds + "-" +batchCode;
+		var result = loginIds + "-" +scheduleCode;
 				
 		$.ajax({
 			type : 'post',
