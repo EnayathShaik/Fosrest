@@ -2378,18 +2378,22 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("inside listTrainingSchedule with parameter");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingSchedule> mccList = null;
-/*		if (profileId == 5) {
-			mccList = session.createQuery(
+	       if (profileId == 4) {
+			/*mccList = session.createQuery(
 					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"
 							+ id + "'  ")
-					.list();
-		} else {*/
+					.list();*/
+		mccList = session.createSQLQuery(
+				" select s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric)  inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where tcm.trainerid='"
+						+ id + "'  ")
+				.list();
+		} else if (profileId == 5) {
 
 			mccList = session.createSQLQuery(
-					" select s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric)  inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where tcm.trainerid='"
+					"  select p.firstName,s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where pit.id='"
 							+ id + "'  ")
 					.list();
-		
+		}
 		/*for (TrainingSchedule p : mccList) {
 			System.out.println("listTrainingSchedule List::" + p);
 		}*/

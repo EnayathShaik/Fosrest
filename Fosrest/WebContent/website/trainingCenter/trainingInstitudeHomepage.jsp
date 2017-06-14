@@ -25,21 +25,21 @@ wwindow.profileId = '${profileId}';
                   <div class="row">
                                             <div class="col-xs-12">
                                            <fieldset>
-                                           <legend>Training Requests for Institute</legend>
+                                           <legend>Upcoming Training</legend>
                                             <ct:if test="${!empty listTrainingSchedule}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>
-                                                        <th>Training Type</th>
-                                                        <th>User Type</th>
-                                                        <th>Training Phase</th>
+                                                        <th>Trainer Name</th>
+                                                        <th>Schedule Code</th>
+                                                        <th>Subject</th>
                                                         <th>Training Start Date</th>
                                                         <th>Training End Date</th>
-                                                        <th>No. Of Enrollments</th>
+                                                        <!-- <th>No. Of Enrollments</th>
                                                         <th>Status</th>
                                                         <th>Accept</th>
-                                                        <th>Reject</th>
+                                                        <th>Reject</th> -->
                                                         
                                                     </tr>
                                                 </thead>
@@ -47,17 +47,17 @@ wwindow.profileId = '${profileId}';
                                                 <ct:forEach items="${listTrainingSchedule}" var="TrainingSchedule" varStatus="loop">
                                                 <tr>
 												<td>${loop.count}</td>
-												<td>${TrainingSchedule.trainingType}</td>
-												<td>${TrainingSchedule.userType}</td>
-												<td>${TrainingSchedule.trainingPhase}</td>
-												<td>${TrainingSchedule.trainingStartDate}</td>
-												<td>${TrainingSchedule.trainingEndDate}</td>
-												<td>20</td>
+												<td>${TrainingSchedule[0]}</td>
+												<td>${TrainingSchedule[1]}</td>
+												<td>${TrainingSchedule[2]}</td>
+												<td>${TrainingSchedule[3]}</td>
+												<td>${TrainingSchedule[4]}</td>
+												<%-- <td>20</td>
 												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
 												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} ,${profileId},${userTableId },"accept");return false;' >Accept</button></td>
-												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} ,${profileId},${userTableId },"reject" );return false;' >Reject</button></td>
+												<td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} ,${profileId},${userTableId },"reject" );return false;' >Reject</button></td> --%>
 												
-											</tr>
+										</tr>
 										</ct:forEach>
                                             </table>
                                            </ct:if>
