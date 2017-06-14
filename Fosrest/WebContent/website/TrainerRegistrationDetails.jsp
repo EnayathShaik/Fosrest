@@ -47,7 +47,6 @@
 	        window.setTimeout(function() {
 	        	$("#correspondenceDistrict").val('${PersonalInformationTrainer.correspondenceDistrict}');
 	        	var ss = '${PersonalInformationTrainer.correspondenceDistrict}';
-	        	alert(ss+"PPPPPPP");
 	            $("#correspondenceDistrict").trigger("change");
 	            window.setTimeout(function() {
 	            	$("#correspondenceCity").val('${PersonalInformationTrainer.correspondenceCity}');
@@ -68,13 +67,15 @@
 				 document.getElementById('userType_'+fields[i]).checked = true
 			 }
 			
-			
+			var fields = '${PersonalInformationTrainer.trainingState}'.split(',');
+			for(i=0;i<fields.length;i++){
+				 document.getElementById('trainingState_'+fields[i]).checked = true
+			 }
 		
 		}
 		DrawCaptcha();
 
 		flatpickr("#dob", {});
-
 	 	$('#sameAddr').change(function(){
 	 			if(this.checked){
 	 				$("#resState").val($("#correspondenceState").val());
@@ -144,14 +145,6 @@
 <cf:input path="logId"  type="hidden"/>
 <cf:input path="status"  type="hidden"/>
 								<cf:input type="hidden" path="id" />
-								<!-- <select id="lstFruits" multiple="multiple">
-        <option value="1">Mango</option>
-        <option value="2">Apple</option>
-        <option value="3">Banana</option>
-        <option value="4">Guava</option>
-        <option value="5">Orange</option>
-    </select>
-    <input type="button" id="btnSelected" value="Get Selected" /> -->
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -162,25 +155,11 @@
 										</ul>
 										
 									</div><br>
-								
-																	
-																			<ct:forEach items="${DesignationList}" var="des">
-																				<cf:checkbox  path="userType"
-																					value="${des.designationName}"/> ${des.designationName}
-																			</ct:forEach>
-																		
-																	
-															
-									<%--  <cf:select path="trainingPhase" class="form-control">
-															<cf:option value="" label="Select Training Type" />
-															<cf:options items="${TrainingPhaseList}"
-																itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
-														</cf:select>  --%>
-									<%-- <ct:forEach items="${DesignationList}" var="map">
-									<cf:checkbox  path="userType" id="userType_${map}"
-										itemValue="designationId" itemLabel="designationName" />
-									<br>
-								</ct:forEach> --%>
+								<ct:forEach items="${DesignationList}" var="des">
+
+										<cf:checkbox path="userType" id="userType_${des.designationName}"
+											value="${des.designationName}" label=" ${des.designationName}" />
+									</ct:forEach>
 								</div>
 
 								<div class="form-group">
@@ -395,7 +374,7 @@
 									</div>
 									<cf:select path="correspondenceState" class="form-control"
 										onchange="getDistrict(this.value , 'correspondenceDistrict')">
-										<%-- <cf:option value="0" label="Select state Name" /> --%>
+										 <cf:option value="0" label="Select state Name" />
 										<cf:options items="${listStateMaster}" itemValue="stateId"
 											itemLabel="stateName" />
 									</cf:select> 
@@ -547,7 +526,7 @@
 									</div>
 									<cf:select path="resState" class="form-control"
 										onchange="getDistrict(this.value , 'residentialDistrict')">
-										<%-- <cf:option value="0" label="Select state Name" /> --%>
+										<cf:option value="0" label="Select state Name" />
 										<cf:options items="${listStateMaster}" itemValue="stateId"
 											itemLabel="stateName" />
 									</cf:select>
@@ -641,12 +620,29 @@
 										</ul>
 									</div>
 
-								<ct:forEach items="${listStateMaster}" var="sm">
+								<%-- <ct:forEach items="${listStateMaster}" var="sm">
 																				<cf:checkbox  path="trainingState"
 																					value="${sm.stateId}"/> ${sm.stateName}
-																			</ct:forEach>
+																			</ct:forEach> --%>
+																			
+																			
+																			
+																			
+															<ct:forEach items="${listStateMaster}" var="ts">
+											<cf:checkbox path="trainingState" id="trainingState_${ts.stateId}"
+											value="${ts.stateId}" label=" ${ts.stateName}" />
+									</ct:forEach>				
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
 								</div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Modules:</strong></li>
@@ -666,37 +662,16 @@
 																		</ul>
 																	
 																</ct:forEach>
-												</div>
-												
-												
-												
-												
-												
-												
-												
-												
-										 <select id="lstFruits" multiple="multiple">
+												</div> --%>
+											<!-- <select id="lstFruits" multiple="multiple">
         <option value="1">Mango</option>
         <option value="2">Apple</option>
         <option value="3">Banana</option>
         <option value="4">Guava</option>
         <option value="5">Orange</option>
     </select>
-    <input type="button" id="btnSelected" value="Get Selected" />		
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-											</div>
+    <input type="button" id="btnSelected" value="Get Selected" />	 -->	
+										</div>
 											<div class="col-md-6 col-xs-12">	
 								<div class="form-group">
 									<label>Associated with any Training Institute ?</label> <br>
@@ -1076,7 +1051,7 @@ function OtiHide(){
 	 }
 }
 </script>
- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!--  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
   <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
   <script type="text/javascript">
@@ -1093,4 +1068,4 @@ function OtiHide(){
                 alert(message);
             });
         });
-    </script> 
+    </script>  -->

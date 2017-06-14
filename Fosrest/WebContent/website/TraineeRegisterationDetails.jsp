@@ -656,7 +656,7 @@
                         <div class="row">
                             <div class="col-md-4 col-xs-12"></div>
                             <div class="col-md-4 col-xs-12">
-                            <cf:input path="logId"  type="hidden"/>
+                           <%--  <cf:input path="logId"  type="hidden"/> --%>
                                 <input type="submit"  style="width: 100%;" class="btn login-btn" id="createUpdateBtn"  value="Register" />
                                 
                             </div>

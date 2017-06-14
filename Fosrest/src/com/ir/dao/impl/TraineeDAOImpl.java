@@ -1212,8 +1212,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
-		loginDetails.setStatus("A");
+		loginDetails.setStatus("I");
 		loginDetails.setProfileId(3);
+		p.setStatus("A");
 		p.setLoginDetails(loginDetails);
 		session.save(p);
 		return passwordString+"&"+nextSequenceUserID;
@@ -1408,6 +1409,14 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainingInstitute.setNoOfPC(p.getNoOfPC());
 		//personalInformationTrainingInstitute.setNoOfYearExp(p.getNoOfYearExp());
 		//personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
+		System.out.println(" statusssssssssssssssssssssss "+p.getStatus());
+		if(p.getStatus() != null){
+			System.out.println(" loginId "+p.getLogId() );
+			int loginId = Integer.parseInt(p.getLogId());
+			String sql = "update logindetails set status ='"+p.getStatus()+"'  where id =("+loginId+")";
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+		}
 		session.update(personalInformationTrainingInstitute);
 		return "updated";
 	}	
@@ -1439,10 +1448,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
-		loginDetails.setStatus("A");
+		loginDetails.setStatus("I");
 		loginDetails.setProfileId(5);
 		p.setLoginDetails(loginDetails);
-		
+		p.setStatus("A");
 		session.save(p);
 		return passwordString+"&"+nextSequenceUserID;
 	}

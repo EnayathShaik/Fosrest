@@ -311,8 +311,25 @@ public class PersonalInformationTrainingInstitute {
 	}
 
 	//private String tpName;
+	private String logId;
+	public String getLogId() {
+		return logId;
+	}
+
+	public void setLogId(String logId) {
+		this.logId = logId;
+	}
+private String Status;
 	
 	
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
 	@Override
 	public String toString() {
 		return trainingCenterName;

@@ -363,7 +363,7 @@ public class TrainerController {
 		return "redirect:login.fssai";
 		}
 
-		int sid=Integer.parseInt( (String) session.getAttribute("stateId"));
+		//int sid=Integer.parseInt( (String) session.getAttribute("stateId"));
 		String userId = request.getParameter("userId");
 		Map<String, String> userType = lst.userTypeMap;
 		Map<String, String> titleMap = lst.titleMap;
@@ -379,7 +379,7 @@ public class TrainerController {
 		/*model.addAttribute("listTrainingPartner",
 				adminService.listTrainingPartner());*/
 		model.addAttribute("listStateMaster",
-				this.adminService.listStateMaster2(sid));
+				this.adminService.listStateMaster());
 		if (userId != null && Integer.parseInt(userId) > 0) {
 			personalInformationTrainingInstitute = this.traineeService
 					.FullDetailTrainingInstitude(Integer.parseInt(userId));

@@ -220,6 +220,10 @@
 	 if(isUpdate !=null && isUpdate== "Y"){
 		 
 		 var name = '${PersonalInformationTrainingInstitute.firstName}';
+			$("#logId").val('${PersonalInformationTrainingInstitute.loginDetails.id}');
+			$("#status").val('${PersonalInformationTrainingInstitute.status}');
+			var s='${PersonalInformationTrainingInstitute.status}';
+			alert(s+"OOOOOOO");
 		$("#correspondenceState").val('${PersonalInformationTrainingInstitute.correspondenceState}');
 		$("#correspondenceState").trigger("change");
         window.setTimeout(function() {
@@ -265,10 +269,14 @@
                                
                             <!-- left side -->
                             <div class="col-md-6 col-xs-12">
+                                             
                      		<cf:input type="hidden" path="id"/>
+
                                 <div class="form-group">
                                     <div>
                                     <cf:input path="id" type="hidden" /> 
+                                        		<cf:input path="logId"  type="hidden"/>
+									<cf:input path="status"  type="hidden"/>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Center Name:</strong></li>
                                               <li id="trainingCenterNameErr" style="display:none;" class="style-li error-red" > Training name can not be blank.</li>
@@ -405,8 +413,8 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                      <cf:select path="correspondenceState" class="form-control" onclick="getDistrict(this.value , 'correspondenceDistrict')">
-                                  <%--  <cf:option value="0" label="Select state Name" /> --%>
+                                      <cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value , 'correspondenceDistrict')">
+                                  <cf:option value="0" label="Select state Name" />
 									<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
                                     </cf:select>
                                 </div>
@@ -440,7 +448,7 @@
                                     </div>
                                     
                                     <cf:select path="correspondenceCity" class="form-control">
-                                   <cf:option value="0" label="Select District" />
+                                   <cf:option value="0" label="Select City" />
                                     </cf:select>
                                 </div>
 
