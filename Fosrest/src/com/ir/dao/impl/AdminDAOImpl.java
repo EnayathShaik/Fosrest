@@ -2386,7 +2386,7 @@ public class AdminDAOImpl implements AdminDAO {
 		} else {*/
 
 			mccList = session.createSQLQuery(
-					"select s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric)  inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) where tc.trainerName='"
+					" select s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric)  inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where tcm.trainerid='"
 							+ id + "'  ")
 					.list();
 		

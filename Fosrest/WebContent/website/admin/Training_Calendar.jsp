@@ -157,7 +157,7 @@
 													<div class="form-group">
 														<cf:select path="trainingInstitute" class="form-control">
 															<cf:option value="" label="Select training phase" />
-															<cf:options items="${listTrainingInstitute}" />
+															<cf:options items="${listTrainingInstitute}" itemValue="id" itemLabel="trainingCenterName"/>
 														</cf:select>
 														<%-- <cf:select path="trainingInstitude" class="form-control"
 													onchange="getTrainer(this.value , 'trainer_id')">
