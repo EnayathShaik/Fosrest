@@ -2715,10 +2715,11 @@ public class AdminController {
 			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
 		return "redirect:login.fssai";
 		}
+		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		model.addAttribute("DesignationList", DesignationList);
+		/*Map<String, String> userTypeMap = lst.userTypeMap;
 
-		Map<String, String> userTypeMap = lst.userTypeMap;
-
-		model.addAttribute("userTypeMap", userTypeMap);
+		model.addAttribute("userTypeMap", userTypeMap);*/
 		model.addAttribute("NominateTraineeForm", new NominateTraineeForm());
 
 		return "NominateTrainee";

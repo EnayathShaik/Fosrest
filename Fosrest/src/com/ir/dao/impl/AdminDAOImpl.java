@@ -2394,6 +2394,13 @@ public class AdminDAOImpl implements AdminDAO {
 							+ id + "'  ")
 					.list();
 		}
+	      
+		else{
+			mccList = session.createSQLQuery(
+					"select p.firstName,s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where cast(mmt.state as numeric)='"
+							+ id + "'  ")
+					.list();
+		}
 		/*for (TrainingSchedule p : mccList) {
 			System.out.println("listTrainingSchedule List::" + p);
 		}*/
@@ -3100,16 +3107,17 @@ public class AdminDAOImpl implements AdminDAO {
 	public String enrollUser(String data) {
 		// TODO Auto-generated method stub
 		System.out.println("inside listEligibleuser " + data);
-		/*Session session = this.sessionFactory.getCurrentSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		String[] arrData = data.split("-");
 		List<String> loginDetails = new ArrayList<String>();
+		System.out.println("xxxxxxxxxxxxxxxxxxxx"+loginDetails);
 		String[] loginIdName = arrData[0].split(",");
 		int trainingScheduleId = Integer.parseInt(arrData[1]);
 		TrainingSchedule ts = (TrainingSchedule) session.load(TrainingSchedule.class, trainingScheduleId);
-		int unitCode = ts.getChapterId();
-		int moduleId = ts.getModuleId();
-		ModuleMaster mm = getModuleMasterById(moduleId);
-		String moduleCode = mm.getModuleCode();
+		//int unitCode = ts.getChapterId();
+		//String moduleId = ts.getSubjects();
+		//ModuleMaster mm = getModuleMasterById(moduleId);
+		//String moduleCode = mm.getModuleCode();
 		if (arrData[0].contains(",")) {
 			for (int i = 0; i < loginIdName.length; i++) {
 				System.out.println(" loginIdName[i] " + loginIdName[i]);
@@ -3122,19 +3130,19 @@ public class AdminDAOImpl implements AdminDAO {
 
 			System.out.println("id " + s.split("@")[0]);
 
-			String result = addNomineeTrainee(moduleCode, trainingScheduleId, Integer.parseInt(s.split("@")[0]),
+			String result = addNomineeTrainee( trainingScheduleId, Integer.parseInt(s.split("@")[0]),
 					s.split("@")[1]);
 
-		}*/
+		}
 		System.out.println("6:1 st return created");
 		return "created";
 	}
 
 	// addNomineeTrainee
 	// @Override
-	public String addNomineeTrainee(String moduleCode, int trainingScheduleId, int loginId, String traineeName) {
+	public String addNomineeTrainee( int trainingScheduleId, int loginId, String traineeName) {
 
-		System.out.println("moduleCode " + moduleCode + " trainingScheduleId " + trainingScheduleId + " loginId "
+		System.out.println( " trainingScheduleId " + trainingScheduleId + " loginId "
 				+ loginId + " traineeName " + traineeName);
 		String sql = "select coalesce(max(rollseqNo) + 1,1) from nomineetrainee";
 		int maxId = 0;
@@ -3152,7 +3160,7 @@ public class AdminDAOImpl implements AdminDAO {
 		NomineeTrainee nt = new NomineeTrainee();
 
 		nt.setStatus("N");
-		nt.setRollNo(moduleCode + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+		//nt.setRollNo(moduleCode + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		nt.setRollSeqNo(maxId);
 		nt.setLoginDetails(loginId);
 		nt.setTraineeName(traineeName);

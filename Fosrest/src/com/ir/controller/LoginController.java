@@ -166,6 +166,8 @@ public class LoginController {
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
 			session.setAttribute("stateId",stateadmin.getState() );
+			int s=Integer.parseInt( (String) session.getAttribute("stateId"));
+			model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(s,2));
 			return "stateAdminHomepage";
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{
@@ -326,7 +328,7 @@ public class LoginController {
 			if(profileID == 1){
 				return "adminHomepage";
 			}else if(profileID == 2){
-				return "adminHomepage";
+				return "stateAdminHomepage";
 			}else if(profileID == 3){
 				return "traineeHomepage";
 			}else if(profileID == 4){
@@ -360,7 +362,9 @@ public class LoginController {
 			if(profileID == 1){
 				return "adminHomepage";
 			}else if(profileID == 2){
-				return "adminHomepage";
+				int s=Integer.parseInt( (String) session.getAttribute("stateId"));
+				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(s,2));
+				return "stateAdminHomepage";
 			}else if(profileID == 3){
 				return "traineeHomepage";
 			}else if(profileID == 4){
