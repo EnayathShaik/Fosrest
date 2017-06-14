@@ -1609,4 +1609,10 @@ public List listSchCodeSubjects(String scheduleCode) {
 	return this.adminDAO.listSchCodeSubjects( scheduleCode);
 }
 
+@Override
+public String calculateEndDate(String startDate,String duration) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.calculateEndDate(startDate, duration);
+}
+
 }

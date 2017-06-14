@@ -61,13 +61,13 @@
 											<div class="form-group">
 												<div>
 													<ul class="lab-no">
-														<li class="style-li"><strong>User Type:</strong></li>
+														<li class="style-li"><strong>Designation:</strong></li>
 														<li class="style-li error-red"><span id="name_status"
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
 												<cf:select path="userType" class="form-control">
-													<cf:option value="" label="Select user Type" />
+													<cf:option value="" label="Select Designation" />
 													<cf:options items="${DesignationList}" itemValue="designationName" itemLabel="designationName"/>
 												</cf:select>
 											</div>
@@ -114,13 +114,13 @@
 												style="display: none">
 												<div>
 													<ul class="lab-no">
-														<li class="style-li"><strong>Batch Code:</strong></li>
+														<li class="style-li"><strong>Schedule Code:</strong></li>
 														<li class="style-li error-red"><span id="name_status"
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
 												<cf:select path="scheduleCode" class="form-control">
-													<cf:option value="0" label="Select Batch Code" />
+													<cf:option value="0" label="Select Schedule Code" />
 													<cf:options items="${batchCodeList}" itemLabel="scheduleCode" itemValue="trainingScheduleId" />
 												</cf:select>
 											</div>

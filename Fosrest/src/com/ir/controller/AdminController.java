@@ -5,10 +5,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.TreeMap;
 
 import javax.servlet.ServletException;
@@ -3186,15 +3189,21 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
   		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
   		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
-      	model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(form.getScheduleCode()));
+  		
+  		List list=	this.adminService.listCalendarSearch(form.getScheduleCode());
+      	model.addAttribute("listCalendarSearch", list);
      	model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
       	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
     	model.addAttribute("institute", form.getTrainingInstitute());
-      
-     // 	System.out.println("tytytytytyt "+this.adminService.listCalendarSearch(form.getScheduleCode()).get(0)[3]);
+    	model.addAttribute("startDate", form.getTrainingStartDate());
+    	
+    	Object[] obj = (Object[]) list.get(0);
+    	
+    	String Duration=obj[7].toString();
+ 
+    	model.addAttribute("endDate", this.adminService.calculateEndDate(form.getTrainingStartDate(),Duration));
+  
 
-      	
-	        // String result = this.adminService.addTrainingCalendar(p);
       }
 		return "trainingcalendar";
 	}

@@ -63,8 +63,8 @@
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Designation:</strong></li>
-															<li class="style-li error-red"><cf:errors
-																	path="designation" cssClass="error" /></li>
+															<li id="designationErr" style="display: none;"
+																class="style-li error-red">Select Designation.</li>
 														</ul>
 													</div>
 													<cf:select path="designation" class="form-control">
@@ -79,8 +79,7 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training Type:</strong></li>
 															<li id="trainingTypeErr" style="display: none;"
-																class="style-li error-red">Please Select Training
-																Type.</li>
+																class="style-li error-red">Select Training Type.</li>
 															<li class="style-li error-red"><span
 																id="name_status" class="clear-label"> </span> ${created }</li>
 														</ul>
@@ -98,8 +97,7 @@
 															<li class="style-li"><strong>Training
 																	Phase:</strong></li>
 															<li id="trainingPhaseErr" style="display: none;"
-																class="style-li error-red">Please Select Training
-																Phase.</li>
+																class="style-li error-red">Select Training Phase.</li>
 															<li class="style-li error-red"><label
 																class="error visibility" id="courseError">*
 																	error</label></li>
@@ -126,16 +124,15 @@
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Schedule Code:</strong></li>
-															<li id="trainingPhaseErr" style="display: none;"
-																class="style-li error-red">Please Select Schedule
-																Code.</li>
+															<li id="scheduleCodeErr" style="display: none;"
+																class="style-li error-red">Select Schedule Code.</li>
 															<li class="style-li error-red"><label
 																class="error visibility" id="courseError">*
 																	error</label></li>
 														</ul>
 													</div>
 													<cf:select path="scheduleCode" class="form-control">
-														<cf:option value="0" label="Select Training Phase" />
+														<cf:option value="0" label="Select Schedule Code" />
 														<cf:options items="${sched}"
 															itemValue="trainingScheduleId"
 															itemLabel="trainingScheduleCode" />
@@ -146,8 +143,8 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training
 																	Institute:</strong></li>
-															<li id="trainingInstitudeErr" style="display: none;"
-																class="style-li error-red">Please Select Training
+															<li id="trainingInstituteErr" style="display: none;"
+																class="style-li error-red">Select Training
 																Institute.</li>
 															<li class="style-li error-red"></li>
 														</ul>
@@ -156,8 +153,9 @@
 
 													<div class="form-group">
 														<cf:select path="trainingInstitute" class="form-control">
-															<cf:option value="" label="Select training phase" />
-															<cf:options items="${listTrainingInstitute}" itemValue="id" itemLabel="trainingCenterName"/>
+															<cf:option value="" label="Select Training Institute" />
+															<cf:options items="${listTrainingInstitute}"
+																itemValue="id" itemLabel="trainingCenterName" />
 														</cf:select>
 														<%-- <cf:select path="trainingInstitude" class="form-control"
 													onchange="getTrainer(this.value , 'trainer_id')">
@@ -172,7 +170,7 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Trainer:</strong></li>
 															<li id="trainingInstitudeErr" style="display: none;"
-																class="style-li error-red">Please Select Training
+																class="style-li error-red">  Select Training
 																Institute.</li>
 															<li class="style-li error-red"></li>
 														</ul>
@@ -202,14 +200,16 @@
 																	Date:</strong></li>
 
 															<li id="trainingStartDateErr" style="display: none;"
-																class="style-li error-red">Please Select Training
-																Start Date.</li>
+																class="style-li error-red">Select Training Start
+																Date.</li>
 															<li class="style-li error-red"><label
 																class="error visibility" id="courseError">*</label></li>
 														</ul>
 													</div>
 													<cf:input class="form-control" path="trainingStartDate"
 														type="text" placeholder="Training Start Date" />
+
+
 												</div>
 
 
@@ -226,7 +226,8 @@
 														value="Create" class="btn login-btn" /> -->
 													<input type="submit" id="searchbtn" value="Search"
 														class="btn login-btn"
-														formaction="trainingcalendarsearch.fssai" />
+														formaction="trainingcalendarsearch.fssai"
+														onclick="return validateFields();" />
 													<!--  <input type="submit"
 													class="btn login-btn show-details-vacancy collapsed"
 													data-toggle="collapse" style="margin-left: 381px;"
@@ -261,6 +262,7 @@
 															<th>Training Type</th>
 															<th>Schedule Code</th>
 															<th>Training Duration</th>
+															<th>Training Start Date</th>
 															<th>Training End Date</th>
 															<th>Subject</th>
 															<th>Trainer</th>
@@ -277,7 +279,7 @@
 															<td>${listCalendarSearch[0]}</td>
 															<td>${listCalendarSearch[1]}</td>
 															<td>${listCalendarSearch[6]}</td>
-															<td>${listCalendarSearch[7]}</td>
+															<td>${listCalendarSearch[7]} hrs</td>
 															<cf:hidden path="designation2"
 																value="${listCalendarSearch[3]}" />
 															<cf:hidden path="trainingType2"
@@ -290,12 +292,13 @@
 
 															<cf:hidden path='totalDuration'
 																value="${listCalendarSearch[7]}" />
-															<td><input type="text" class="form-control"
-																id="trainingEndDate" type="text" /></td>
+
+															<td>${startDate}</td>
+															<td>${endDate}</td>
 
 
 															<td><ct:forEach items="${listSchCodeSubjects}"
-																	var="subjects" varStatus="loop">
+																	var="subjects" varStatus="loop2">
 																	<input type="hidden" name="subject"
 																		value="${subjects[1]}" />
 													${subjects[0]}<br />
@@ -305,8 +308,9 @@
 
 															<td><div class="form-group">
 																	<ct:forEach items="${listSchCodeSubjects}"
-																		var="subjects" varStatus="loop">
-																		<select name='trainer' class="form-control">
+																		var="subjects" varStatus="loop2">
+																		<select id="trainer_${loop2.count}" name='trainer'
+																			class="form-control">
 																			<option value="" label="Select Trainer" />
 																			<ct:forEach items="${listPersonalInfoTrainer}"
 																				var="listPersonalInfoTrainer" varStatus="loop">
@@ -323,9 +327,12 @@
 														</tr>
 													</ct:forEach>
 												</table>
-												<input type="submit" id="searchbtn" value="create"
-													class="btn login-btn" />
+												<div    style="margin-left: 868px;     margin-top: 96px;" ><input type="submit" id="searchbtn" value="create"
+													class="btn login-btn" onclick="return validate2();" />
+													</div>
 												<cf:hidden path="trainingInstitute2" value="${institute}" />
+												<cf:hidden path="trainingStartDate2" value="${startDate}" />
+												<cf:hidden path="trainingEndDate2" value="${endDate}" />
 
 											</ct:if>
 										</fieldset>
@@ -372,10 +379,9 @@
 															<td>${listCalendar[1]}</td>
 															<td>${listCalendar[2]}</td>
 															<td>${listCalendar[3]}</td>
-															<td>${listCalendar[4]}</td>
-
-															<td>s</td>
-															<td>s</td>
+															<td>${listCalendar[4]} hrs</td>
+															<td>${listCalendar[5]}</td>
+															<td>${listCalendar[6]}</td>
 
 
 														</tr>
@@ -440,82 +446,7 @@
 
 	}
 
-	function validateFields() {
-		$("#unitIdErr").css("display", "none");
-		$("#moduleIdErr").css("display", "none");
-		$("#userTypeErr").css("display", "none");
-		$("#statusErr").css("display", "none");
-		$("#trainingPartnerErr").css("display", "none");
-		$("#trainingTypeErr").css("display", "none");
-		$("#trainingInstitudeErr").css("display", "none");
-		$("#trainingPhaseErr").css("display", "none");
-		$("#trainingInstitudeStatusErr").css("display", "none");
-		$("#trainingStartDateErr").css("display", "none");
-		$("#trainingEndDateErr").css("display", "none");
-		$("#trainingTrainerErr").css("display", "none");
-		$("#stateErr").css("display", "none");
-
-		if ($("#unitId").val() == 0) {
-
-			$("#unitIdErr").css("display", "block");
-			return false;
-		}
-		if ($("#moduleId").val() == 0) {
-
-			$("#moduleIdErr").css("display", "block");
-			return false;
-		}
-		if ($("#userType").val() == '') {
-			$("#userTypeErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainingPartner").val() == 0) {
-
-			$("#trainingPartnerErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainingType").val() == 0) {
-
-			$("#trainingTypeErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainingInstitude").val() == 0) {
-
-			$("#trainingInstitudeErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainingPhase").val() == 0) {
-
-			$("#trainingPhaseErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainer_id").val() == 0) {
-
-			$("#trainingTrainerErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainingInstitudeStatus").val() == 0) {
-
-			$("#trainingInstitudeStatusErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainingStartDate").val() == 0) {
-
-			$("#trainingStartDateErr").css("display", "block");
-			return false;
-		}
-		if ($("#trainingEndDate").val() == 0) {
-
-			$("#trainingEndDateErr").css("display", "block");
-			return false;
-		}
-		if ($("#state").val() == 0) {
-
-			$("#stateErr").css("display", "block");
-			return false;
-		}
-
-	}
+	
 
 	function getTrainer(val, idName) {
 		var name1 = JSON.stringify({
@@ -543,8 +474,51 @@
 </script> -->
 
 <script>
+	function validateFields() {
+		$("#designationErr").css("display", "none");
+
+		$("#trainingTypeErr").css("display", "none");
+		$("#trainingPhaseErr").css("display", "none");
+		$("#scheduleCodeErr").css("display", "none");
+
+		$("#trainingInstituteErr").css("display", "none");
+		$("#trainingStartDateErr").css("display", "none");
+		$("#trainingEndDateErr").css("display", "none");
+
+		if ($("#designation").val() == '') {
+			$("#designationErr").css("display", "block");
+			return false;
+		}
+		if ($("#trainingType").val() == 0) {
+			$("#trainingTypeErr").css("display", "block");
+			return false;
+		}
+		if ($("#trainingType").val() == 3 && $("#trainingPhase").val() == 0) {// 3 for induction
+			$("#trainingPhaseErr").css("display", "block");
+			return false;
+		}
+		if ($("#scheduleCode").val() == 0) {
+			$("#scheduleCodeErr").css("display", "block");
+			return false;
+		}
+		if ($("#trainingInstitute").val() == 0) {
+			$("#trainingInstituteErr").css("display", "block");
+			return false;
+		}
+
+		if ($("#trainingStartDate").val() == 0) {
+			$("#trainingStartDateErr").css("display", "block");
+			return false;
+		}
+		if ($("#trainingEndDate").val() == 0) {
+			$("#trainingEndDateErr").css("display", "block");
+			return false;
+		}
+
+	}
+
 	function redirectScheduleCode1(trType, id) {
-		alert(trType);
+		//alert(trType);
 
 		if (trType != 3) {// 3 for induction
 			getScheduleCode(document.getElementById("designation").value,
@@ -555,10 +529,45 @@
 	}
 
 	function redirectScheduleCode2(trPhase, id) {
-		alert(trPhase + id);
+		//	alert(trPhase + id);
 
 		getScheduleCode(document.getElementById("designation").value, document
 				.getElementById("trainingType").value, trPhase, id);
 
 	}
+
+	function validate2() {
+
+		<ct:forEach items="${listSchCodeSubjects}" 
+			var="subjects" varStatus="loop2"> // just for iteration 
+
+		if ($("#trainer_" + '${loop2.count}').val() == '') {
+			alert("Select TRAINER");
+			$("#trainer_" + '${loop2.count}').focus();
+			return false;
+		}
+		</ct:forEach>
+
+	}
+
+	/* 	function calDate(val,id){
+	 alert(val);
+	 var d=val.split('-')
+	 alert(d);
+	 var temp=d[0];
+	 d[0]=d[1];
+	 d[1]=temp;
+	 alert(d);
+	
+	 d = new Date(d).getTime() ;
+	 alert(d);
+	 var s = new Date(parseInt(d)); 
+	 alert(s);
+
+	 var endDate="";
+	 endDate=s.getDate()+"-"+(s.getMonth()+1)+"-"+s.getFullYear()+" "+s.getHours()+":"+s.getMinutes();
+	 alert(endDate);
+	 document.getElementById(id).value=endDate;
+	
+	 }  */
 </script>

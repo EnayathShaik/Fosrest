@@ -417,5 +417,7 @@ public interface AdminDAO {
 
 	public List listSchCodeSubjects(String scheduleCode);
 
+	public String calculateEndDate(String startDate,String duration);
+
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

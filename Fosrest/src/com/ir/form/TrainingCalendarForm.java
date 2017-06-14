@@ -24,8 +24,24 @@ public class TrainingCalendarForm {
 
 
 	private String scheduleCode2;
+	public String getTrainingStartDate2() {
+		return trainingStartDate2;
+	}
+	public void setTrainingStartDate2(String trainingStartDate2) {
+		this.trainingStartDate2 = trainingStartDate2;
+	}
+	public String getTrainingEndDate2() {
+		return trainingEndDate2;
+	}
+	public void setTrainingEndDate2(String trainingEndDate2) {
+		this.trainingEndDate2 = trainingEndDate2;
+	}
+
+
 	private String trainingType2;
 	private String trainingPhase2;
+	private String trainingStartDate2;
+	private String trainingEndDate2;
 
 	
 	

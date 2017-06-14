@@ -2,7 +2,11 @@ package com.ir.dao.impl;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
@@ -3514,7 +3518,7 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
-		Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,traininginstitute, totalDuration from trainingCalendar");
+		Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDuration,trainingStartDate,trainingEndDate from trainingCalendar");
 		
 		List list = query.list();
 		return list;
@@ -3765,8 +3769,8 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		tc.setTrainingType(p.getTrainingType2());
 		tc.setScheduleCode(p.getScheduleCode2());
 		tc.setTotalduration(p.getTotalDuration());
-		tc.setTrainingStartDate(p.getTrainingStartDate());
-		tc.setTrainingEndDate(p.getTrainingEndDate());
+		tc.setTrainingStartDate(p.getTrainingStartDate2());
+		tc.setTrainingEndDate(p.getTrainingEndDate2());
 		tc.setTrainingInstitute(p.getTrainingInstitute2());
 		String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
 		tc.setBatchCode(batchCode);
@@ -3809,6 +3813,43 @@ Session session=this.sessionFactory.getCurrentSession();
 		
 		List list = query.list();
 		return list;
+	}
+
+	@Override
+	public String calculateEndDate(String startDate,String duration) {
+		// TODO Auto-generated method stub
+
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    	
+    	Date date=null;
+    	
+    	try {
+		date = sdf.parse(startDate);
+		} catch (ParseException e) {
+		e.printStackTrace();
+    	}
+    	
+    	
+    	long millis = date.getTime();
+    	
+    	SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
+    	
+    	try {
+		date = sdf3.parse(duration);
+		} catch (ParseException e) {
+		e.printStackTrace();
+    	}
+    	
+    	millis=millis+date.getTime();
+ 
+    	Calendar calendar = Calendar.getInstance();
+    	calendar.setTimeInMillis(millis);
+    	date=new Date(millis);
+    	
+    	String endDate=new SimpleDateFormat("dd-MM-yyyy HH:mm").format(date);
+    	System.out.println(startDate+" <> "+endDate);
+
+    	return endDate;
 	}
 	
 }
