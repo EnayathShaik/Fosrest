@@ -252,7 +252,7 @@ public class TrainerController {
 		if(request.getParameter("id")!=null)
 		idd=Integer.parseInt(request.getParameter("id"));
 		System.out.println("idd "+idd);
-		if(idd!=4 && (int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+		if(idd!=4 && (int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1&& (int)session.getAttribute("profileId")!=4){	
 				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
 			return "redirect:login.fssai";
 			}
@@ -272,6 +272,8 @@ public class TrainerController {
 		model.addAttribute("allModules", this.adminService.allUnitModules());
 		
 		String userId = request.getParameter("userId");
+		/*int ui= (int) session.getAttribute("Id");
+		System.out.println("dddddddddddd"+ui);*/
 		if (userId != null && Integer.parseInt(userId) > 0) {
 			personalInformationTrainer = this.traineeService
 					.FullDetailTrainer(Integer.parseInt(userId));
@@ -279,6 +281,12 @@ public class TrainerController {
 					personalInformationTrainer);
 			model.addAttribute("isUpdate", "Y");
 			
+		}else if (session.getAttribute("Id")!=null) {
+		personalInformationTrainer = this.traineeService
+					.FullDetailTrainer((int)session.getAttribute("Id"));
+			model.addAttribute("PersonalInformationTrainer",
+					personalInformationTrainer);
+			model.addAttribute("isUpdate", "Y");
 		}
 		
 		else {
@@ -358,7 +366,7 @@ public class TrainerController {
 			HttpServletRequest request, Model model,HttpSession session) {
 		System.out.println("PersonalInformationTrainingInstitute");
 
-		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1 && (int)session.getAttribute("profileId")!=5){	
 			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
 		return "redirect:login.fssai";
 		}
@@ -386,7 +394,15 @@ public class TrainerController {
 			model.addAttribute("PersonalInformationTrainingInstitute",
 					personalInformationTrainingInstitute);
 			model.addAttribute("isUpdate", "Y");
-		} else {
+		} 
+		/*else if (session.getAttribute("userId")!=null) {
+			personalInformationTrainingInstitute = this.traineeService
+						.FullDetailTrainingInstitude((int)session.getAttribute("userId"));
+				model.addAttribute("PersonalInformationTrainingInstitute",
+						personalInformationTrainingInstitute);
+				model.addAttribute("isUpdate", "Y");
+			}*/
+		else {
 
 			model.addAttribute("PersonalInformationTrainingInstitute",
 					new PersonalInformationTrainingInstitute());

@@ -25,6 +25,7 @@
 				<li><a href="assessment-instructions-trainee.fssai">Online Assessment</a></li>
 				<li><a href="GetScoreCard.fssai">Get Score Card </a></li>
 				<li><a href="Certificate.fssai">Certificate</a></li>
+				<li><a href="PersonalInformationTrainee.fssai">Update Profile</a></li>
 		<!-- <li><a href="course-training.fssai?courseTypeId=1">Online Assessment</a></li>-->
 		<!-- <li><a href="assessment-instructions-trainee.fssai">Assessment</a></li> -->
 		<!-- <li><a href="feedbackForm.fssai">Feedback</a></li>
@@ -42,6 +43,7 @@
 	<li><a href="loginProcess.fssai">Upcoming Training</a></li>
 	<li><a href="loginProcess.fssai">Mark Attendance</a></li>
 	<li><a href="loginProcess.fssai">Upload Assessment</a></li>
+	<li><a href="PersonalInformationTrainer.fssai">Update Profile</a></li>
 	</ul>
 </div>
 
@@ -53,8 +55,9 @@
 		<!-- <li class="sidebar-brand">
                         </li> -->
                         <li><a href="loginProcess.fssai">Upcoming Training</a></li>
-		<li><a href="TrainingRequest.fssai">Training Request</a></li>
+		<!-- <li><a href="TrainingRequest.fssai">Training Request</a></li> -->
 		<!-- <li> <a href="traineeAttendance.fssai">Mark Attendance</a> </li> -->
+		<li><a href="PersonalInformationTrainingInstitute.fssai">Update Profile</a></li>
 	
 	</ul>
 </div>
