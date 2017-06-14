@@ -3,22 +3,19 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="website/js/commonController.js"></script>
 <script>
-	   function OnStart() {
-	     
-		
-		   
-	  	flatpickr("#trainingStartDate" , {
-	  		
-	  		enableTime: true
-	  	});	
-		
-	   	
-	   	if('${profileId}' == 2){
-	   		/*$("#searchbtn").css("display" , 'none');
-	   	 $("#createbtn").css("display" , 'block'); */
-	   	}
-	  }
-	  window.onload = OnStart;
+	function OnStart() {
+
+		flatpickr("#trainingStartDate", {
+
+			enableTime : true
+		});
+
+		if ('${profileId}' == 2) {
+			/*$("#searchbtn").css("display" , 'none');
+			$("#createbtn").css("display" , 'block'); */
+		}
+	}
+	window.onload = OnStart;
 </script>
 <ct:url var="addAction" value="/trainingcalendaradd.fssai"></ct:url>
 <cf:form action="${addAction}" name="myForm" method="POST"
@@ -108,28 +105,30 @@
 																	error</label></li>
 														</ul>
 													</div>
-													<cf:select path="trainingPhase" class="form-control" onchange="redirectScheduleCode2(this.value,'scheduleCode')">
+													<cf:select path="trainingPhase" class="form-control"
+														onchange="redirectScheduleCode2(this.value,'scheduleCode')">
 														<cf:option value="0" label="Select Training Phase" />
 														<cf:options items="${TrainingPhaseList}"
 															itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
 													</cf:select>
 												</div>
-												
-												
+
+
 
 											</div>
 											<!-- left side ends -->
 
 											<!-- right side -->
 											<div class="col-xs-6">
-											
-											
+
+
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Schedule Code:</strong></li>
 															<li id="trainingPhaseErr" style="display: none;"
-																class="style-li error-red">Please Select Schedule Code.</li>
+																class="style-li error-red">Please Select Schedule
+																Code.</li>
 															<li class="style-li error-red"><label
 																class="error visibility" id="courseError">*
 																	error</label></li>
@@ -138,10 +137,11 @@
 													<cf:select path="scheduleCode" class="form-control">
 														<cf:option value="0" label="Select Training Phase" />
 														<cf:options items="${sched}"
-															itemValue="trainingScheduleId" itemLabel="trainingScheduleCode" />
+															itemValue="trainingScheduleId"
+															itemLabel="trainingScheduleCode" />
 													</cf:select>
 												</div>
-												<%-- <div class="form-group">
+												<div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training
@@ -159,15 +159,15 @@
 															<cf:option value="" label="Select training phase" />
 															<cf:options items="${listTrainingInstitute}" />
 														</cf:select>
-														<cf:select path="trainingInstitude" class="form-control"
+														<%-- <cf:select path="trainingInstitude" class="form-control"
 													onchange="getTrainer(this.value , 'trainer_id')">
 													<cf:option value="0" label="Select Training Institute" />
 													<cf:options items="${listTrainingInstitude}" itemValue="id"
 														itemLabel="trainingCenterName" />
-												</cf:select>
+												</cf:select> --%>
 													</div>
-												</div> --%>
-											<%-- 	<div class="form-group">
+												</div>
+												<%-- 	<div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Trainer:</strong></li>
@@ -224,9 +224,9 @@
 													<!-- <input type="submit" id="createbtn"
 														style="display: none; float: right; margin-right: 122px;"
 														value="Create" class="btn login-btn" /> -->
-														 <input
-														type="submit" id="searchbtn" value="Search"
-														class="btn login-btn" formaction="trainingcalendarsearch.fssai"/>
+													<input type="submit" id="searchbtn" value="Search"
+														class="btn login-btn"
+														formaction="trainingcalendarsearch.fssai" />
 													<!--  <input type="submit"
 													class="btn login-btn show-details-vacancy collapsed"
 													data-toggle="collapse" style="margin-left: 381px;"
@@ -242,9 +242,9 @@
 									</div>
 								</fieldset>
 							</div>
-	<!-- search Results 11111 -->
+							<!-- search Results 11111 -->
 
-<div class="col-xs-12 " id="testt">
+							<div class="col-xs-12 " id="testt">
 
 								<!-- table -->
 								<div class="row">
@@ -260,59 +260,79 @@
 															<th>Designation</th>
 															<th>Training Type</th>
 															<th>Schedule Code</th>
-															<th>Subject</th>
 															<th>Training Duration</th>
-														
 															<th>Training End Date</th>
+															<th>Subject</th>
 															<th>Trainer</th>
-															
-															
+
+
 
 														</tr>
 													</thead>
 
-													<ct:forEach items="${listCalendarSearch}" var="listCalendarSearch"
-														varStatus="loop">
+													<ct:forEach items="${listCalendarSearch}"
+														var="listCalendarSearch" varStatus="loop">
 														<tr>
 															<td>${loop.count}</td>
-															 <td>${listCalendarSearch[0]}</td>
+															<td>${listCalendarSearch[0]}</td>
 															<td>${listCalendarSearch[1]}</td>
-															<td>${listCalendarSearch[2]}</td>
-														 <td>${listCalendarSearch[3]}</td>
-														 <input type="hidden" class="form-control" name='subject' value="${listCalendarSearch[3]}"
-														type="text"  />
-														 <td>${listCalendarSearch[4]}</td>
-													
-														<td><input type="text" class="form-control" id="trainingEndDate${loop.count}"
-														type="text"  /></td>
-														
-														
-													<td><div class="form-group">
-												
-													<select name='trainer' class="form-control">
-															<option value="" label="Select Trainer" />
-														<ct:forEach items="${listPersonalInfoTrainer}" var="listPersonalInfoTrainer"
-														varStatus="loop">
-													
-														<option value="${listPersonalInfoTrainer.trainerId.id}" >${listPersonalInfoTrainer.firstName}</option>
-													</ct:forEach>
-													</select>
-												</div></td>
-														
+															<td>${listCalendarSearch[6]}</td>
+															<td>${listCalendarSearch[7]}</td>
+															<cf:hidden path="designation2"
+																value="${listCalendarSearch[3]}" />
+															<cf:hidden path="trainingType2"
+																value="${listCalendarSearch[4]}" />
+															<cf:hidden path="trainingPhase2"
+																value="${listCalendarSearch[5]}" />
+															<cf:hidden path="scheduleCode2"
+																value="${listCalendarSearch[6]}" />
+
+
+															<cf:hidden path='totalDuration'
+																value="${listCalendarSearch[7]}" />
+															<td><input type="text" class="form-control"
+																id="trainingEndDate" type="text" /></td>
+
+
+															<td><ct:forEach items="${listSchCodeSubjects}"
+																	var="subjects" varStatus="loop">
+																	<input type="hidden" name="subject"
+																		value="${subjects[1]}" />
+													${subjects[0]}<br />
+																	<br />
+																	<br />
+																</ct:forEach></td>
+
+															<td><div class="form-group">
+																	<ct:forEach items="${listSchCodeSubjects}"
+																		var="subjects" varStatus="loop">
+																		<select name='trainer' class="form-control">
+																			<option value="" label="Select Trainer" />
+																			<ct:forEach items="${listPersonalInfoTrainer}"
+																				var="listPersonalInfoTrainer" varStatus="loop">
+
+																				<option
+																					value="${listPersonalInfoTrainer.trainerId.id}">${listPersonalInfoTrainer.firstName}</option>
+																			</ct:forEach>
+																		</select>
+																	</ct:forEach>
+																</div></td>
+
 
 
 														</tr>
 													</ct:forEach>
 												</table>
-												 <input
-														type="submit" id="searchbtn" value="create"
-														class="btn login-btn"  />
+												<input type="submit" id="searchbtn" value="create"
+													class="btn login-btn" />
+												<cf:hidden path="trainingInstitute2" value="${institute}" />
+
 											</ct:if>
 										</fieldset>
 									</div>
 								</div>
-								
-								
+
+
 							</div>
 							<!-- search Results 22222 -->
 							<div class="col-xs-12 " id="testt">
@@ -323,7 +343,7 @@
 										<fieldset>
 											<legend>Training Calendar</legend>
 											<ct:if test="${!empty listCalendar}">
-										
+
 												<table border="1" id="datatablesfosrest"
 													class="table table-bordered table-responsive">
 													<thead>
@@ -332,12 +352,14 @@
 															<th>Designation</th>
 															<th>Training Type</th>
 															<th>Schedule Code</th>
+															<th>Training Institute</th>
 															<th>Total Duration</th>
+
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
-															<th>Trainer</th> 
-															
-															
+
+
+
 
 														</tr>
 													</thead>
@@ -346,13 +368,14 @@
 														varStatus="loop">
 														<tr>
 															<td>${loop.count}</td>
-															 <td>${listCalendar[0]}</td>
+															<td>${listCalendar[0]}</td>
 															<td>${listCalendar[1]}</td>
 															<td>${listCalendar[2]}</td>
-														 <td>${listCalendar[3]}</td>
-														<td>s</td>
-														<td>s</td>
-														<td>s</td>
+															<td>${listCalendar[3]}</td>
+															<td>${listCalendar[4]}</td>
+
+															<td>s</td>
+															<td>s</td>
 
 
 														</tr>
@@ -519,25 +542,23 @@
 	}
 </script> -->
 
-   <script>
-   function redirectScheduleCode1(trType,id){
-	   alert(trType);
-   
-	  if(trType!=3){// 3 for induction
-   	   getScheduleCode(document.getElementById("designation").value,trType,'0',id);
+<script>
+	function redirectScheduleCode1(trType, id) {
+		alert(trType);
 
-	  }
-		  
-   }
-   
-  function redirectScheduleCode2(trPhase,id){
-                    	   alert(trPhase+id);
-                    	
-                    	   getScheduleCode(document.getElementById("designation").value,document.getElementById("trainingType").value,trPhase,id);
-                    	   
-                       }
-  
- 
-                       
-                
-                       </script>
+		if (trType != 3) {// 3 for induction
+			getScheduleCode(document.getElementById("designation").value,
+					trType, '0', id);
+
+		}
+
+	}
+
+	function redirectScheduleCode2(trPhase, id) {
+		alert(trPhase + id);
+
+		getScheduleCode(document.getElementById("designation").value, document
+				.getElementById("trainingType").value, trPhase, id);
+
+	}
+</script>

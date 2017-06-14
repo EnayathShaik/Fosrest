@@ -3137,7 +3137,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		String s=(String) session.getAttribute("stateId");
 		model.addAttribute("listCalendar", this.adminService.listCalendar());	
 	    model.addAttribute("TrainingCalendarForm", new TrainingCalendarForm());
-	 //   model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+	  model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
 		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
 		return "trainingcalendar";
 	}
@@ -3166,7 +3166,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 
  
  @RequestMapping(value = "/trainingcalendarsearch", method = RequestMethod.POST)
-	public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") TrainingCalendar p,
+	public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm form,
 			Model model, HttpSession session) {
 	   System.out.println("aaass");
 		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
@@ -3176,7 +3176,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		int profileId=(int) session.getAttribute("profileId");
 	   if(profileId==1){
 			System.out.println("admin");
-			model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(p.getScheduleCode()));
+			model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(form.getScheduleCode()));
 	
 		}
       if(profileId==2){
@@ -3185,8 +3185,13 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
   		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
   		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
-      	model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(p.getScheduleCode()));
+      	model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(form.getScheduleCode()));
+     	model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
       	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
+    	model.addAttribute("institute", form.getTrainingInstitute());
+      
+     // 	System.out.println("tytytytytyt "+this.adminService.listCalendarSearch(form.getScheduleCode()).get(0)[3]);
+
       	
 	        // String result = this.adminService.addTrainingCalendar(p);
       }

@@ -218,7 +218,13 @@ public class TrainingCalendar {
 			private String trainingType;
 			private String trainingPhase;
 			private String designation;
-		//	private String trainingInstitute;
+			public String getTrainingInstitute() {
+				return trainingInstitute;
+			}
+			public void setTrainingInstitute(String trainingInstitute) {
+				this.trainingInstitute = trainingInstitute;
+			}
+			private String trainingInstitute;
 			//private String trainerName;
 			private String totalduration;
 			private String trainingStartDate;

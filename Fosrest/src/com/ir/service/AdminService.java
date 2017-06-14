@@ -523,6 +523,8 @@ List listCalendarSearch(String scheduleCode);
 
 String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
 public List<MappingMasterTrainer> trainerMappingState(String sid);
+
+List listSchCodeSubjects(String scheduleCode);
 }
 
 

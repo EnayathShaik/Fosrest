@@ -415,5 +415,7 @@ public interface AdminDAO {
 	public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
 	public List<MappingMasterTrainer> trainerMappingState(String sid);
 
+	public List listSchCodeSubjects(String scheduleCode);
+
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

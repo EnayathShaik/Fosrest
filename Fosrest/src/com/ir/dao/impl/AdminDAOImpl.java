@@ -3502,7 +3502,7 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
-		Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode, totalDuration from trainingCalendar");
+		Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,traininginstitute, totalDuration from trainingCalendar");
 		
 		List list = query.list();
 		return list;
@@ -3735,8 +3735,10 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
-		Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),ts.scheduleCode, sm.subject, totalDuration  from trainingSchedule ts join SubjectMapping sm on(ts.scheduleCode=sm.scheduleCode) where sm.scheduleCode='"+scheduleCode+"'");
+		//Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),ts.scheduleCode, sm.subject, totalDuration  from trainingSchedule ts join SubjectMapping sm on(ts.scheduleCode=sm.scheduleCode) where sm.scheduleCode='"+scheduleCode+"'");
+		Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration  from trainingSchedule where scheduleCode='"+scheduleCode+"'");
 
+		
 		List list = query.list();
 		return list;
 	}
@@ -3747,12 +3749,13 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		TrainingCalendar tc = new TrainingCalendar();
 		
 		tc.setDesignation(p.getDesignation());
-		tc.setTrainingPhase(p.getTrainingPhase());
-		tc.setTrainingType(p.getTrainingType());
-		tc.setScheduleCode(p.getScheduleCode());
+		tc.setTrainingPhase(p.getTrainingPhase2());
+		tc.setTrainingType(p.getTrainingType2());
+		tc.setScheduleCode(p.getScheduleCode2());
+		tc.setTotalduration(p.getTotalDuration());
 		tc.setTrainingStartDate(p.getTrainingStartDate());
 		tc.setTrainingEndDate(p.getTrainingEndDate());
-		System.out.println(p.getScheduleCode());
+		tc.setTrainingInstitute(p.getTrainingInstitute2());
 		String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
 		tc.setBatchCode(batchCode);
 		//p.setIsActive("Y");
@@ -3783,6 +3786,17 @@ Session session=this.sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from MappingMasterTrainer where state='"+s+"'");
 		List<MappingMasterTrainer> trainingNameList = query.list();
 		return trainingNameList;
+	}
+
+	@Override
+	public List listSchCodeSubjects(String scheduleCode) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = 	session.createSQLQuery("select (select moduleName from moduleMaster where moduleId=cast(subject as numeric)),subject from SubjectMapping where scheduleCode='"+scheduleCode+"'");
+
+		
+		List list = query.list();
+		return list;
 	}
 	
 }

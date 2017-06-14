@@ -8,15 +8,57 @@ public class TrainingCalendarForm {
 	private int courseName;*/
 	private String trainingStartDate;
 	private String trainingEndDate;
+	private String totalDuration;
 	/*private String assessmentDateTime;
 	private String assessmentAgencyName;
 	private int assessor;
 	private String seatCapacity;
 	private String type;*/
+	private String designation2;
+	public String getDesignation2() {
+		return designation2;
+	}
+	public void setDesignation2(String designation2) {
+		this.designation2 = designation2;
+	}
+
+
+	private String scheduleCode2;
+	private String trainingType2;
+	private String trainingPhase2;
+
 	
+	
+	
+	public String getScheduleCode2() {
+		return scheduleCode2;
+	}
+	public void setScheduleCode2(String scheduleCode2) {
+		this.scheduleCode2 = scheduleCode2;
+	}
+	public String getTrainingType2() {
+		return trainingType2;
+	}
+	public void setTrainingType2(String trainingType2) {
+		this.trainingType2 = trainingType2;
+	}
+	public String getTrainingPhase2() {
+		return trainingPhase2;
+	}
+	public void setTrainingPhase2(String trainingPhase2) {
+		this.trainingPhase2 = trainingPhase2;
+	}
+
 	private String trainingInstitute;
+	private String trainingInstitute2;
 	
 	
+	public String getTrainingInstitute2() {
+		return trainingInstitute2;
+	}
+	public void setTrainingInstitute2(String trainingInstitute2) {
+		this.trainingInstitute2 = trainingInstitute2;
+	}
 	public String getTrainingStartDate() {
 		return trainingStartDate;
 	}
@@ -129,6 +171,13 @@ public class TrainingCalendarForm {
 	}
 	public void setTrainingPhase(String trainingPhase) {
 		this.trainingPhase = trainingPhase;
+	}
+
+	public String getTotalDuration() {
+		return totalDuration;
+	}
+	public void setTotalDuration(String totalDuration) {
+		this.totalDuration = totalDuration;
 	}
 	public String getStatus() {
 		return status;

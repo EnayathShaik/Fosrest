@@ -1602,4 +1602,11 @@ public List<MappingMasterTrainer> trainerMappingState(String sid) {
 	return this.adminDAO.trainerMappingState(sid);
 }
 
+@Override
+@Transactional
+public List listSchCodeSubjects(String scheduleCode) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listSchCodeSubjects( scheduleCode);
+}
+
 }
