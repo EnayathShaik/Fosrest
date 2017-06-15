@@ -395,13 +395,13 @@ public class TrainerController {
 					personalInformationTrainingInstitute);
 			model.addAttribute("isUpdate", "Y");
 		} 
-		/*else if (session.getAttribute("userId")!=null) {
+		else if (session.getAttribute("Id")!=null) {
 			personalInformationTrainingInstitute = this.traineeService
-						.FullDetailTrainingInstitude((int)session.getAttribute("userId"));
+						.FullDetailTrainingInstitude((int)session.getAttribute("Id"));
 				model.addAttribute("PersonalInformationTrainingInstitute",
 						personalInformationTrainingInstitute);
 				model.addAttribute("isUpdate", "Y");
-			}*/
+			}
 		else {
 
 			model.addAttribute("PersonalInformationTrainingInstitute",

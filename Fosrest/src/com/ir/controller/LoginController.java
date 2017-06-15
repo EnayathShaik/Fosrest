@@ -179,6 +179,7 @@ public class LoginController {
 			session.setAttribute("userName", loginDetails.getLoginId());
 			session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
 			session.setAttribute("personalTraineeId", personalInformationTrainee.getId());
+			session.setAttribute("Id",personalInformationTrainee.getLoginDetails().getId());
 			
 			return "traineeHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 4 && loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -205,7 +206,8 @@ public class LoginController {
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
 				session.setAttribute("userTableId", persoInformationTrainingInstitute.getId());
-				session.setAttribute("userName", loginDetails.getLoginId());	
+				session.setAttribute("userName", loginDetails.getLoginId());
+				session.setAttribute("Id",persoInformationTrainingInstitute.getLoginDetails().getId());
 				model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(persoInformationTrainingInstitute.getId(), 5));
 				return "trainingInstitudeHomepage";
 			}else{

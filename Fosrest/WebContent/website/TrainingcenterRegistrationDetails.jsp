@@ -222,8 +222,8 @@
 		 var name = '${PersonalInformationTrainingInstitute.firstName}';
 			$("#logId").val('${PersonalInformationTrainingInstitute.loginDetails.id}');
 			$("#status").val('${PersonalInformationTrainingInstitute.status}');
-			var s='${PersonalInformationTrainingInstitute.status}';
-			alert(s+"OOOOOOO");
+			
+		
 		$("#correspondenceState").val('${PersonalInformationTrainingInstitute.correspondenceState}');
 		$("#correspondenceState").trigger("change");
         window.setTimeout(function() {

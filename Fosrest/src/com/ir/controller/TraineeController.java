@@ -694,7 +694,7 @@ public class TraineeController {
 	public String listSubjectMaster(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request,HttpSession session) {
 			System.out.println("PersonalInformationTrainee ");
 
-			if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1 && (int)session.getAttribute("profileId")!=3){	
 				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TraineeController.java");
 			return "redirect:login.fssai";
 			}
@@ -709,7 +709,16 @@ public class TraineeController {
 				personalInformationTrainee = traineeService.FullDetail(Integer.parseInt(userId));	
 				model.addAttribute("PersonalInformationTrainee", personalInformationTrainee);
 				model.addAttribute("isUpdate", "Y");
-			}else{
+			}
+			else if (session.getAttribute("Id")!=null) {
+				personalInformationTrainee = this.traineeService
+					.FullDetail((int)session.getAttribute("Id"));
+			model.addAttribute("PersonalInformationTrainee",
+					personalInformationTrainee);
+			model.addAttribute("isUpdate", "Y");
+		}
+			
+			else{
 				model.addAttribute("PersonalInformationTrainee", new PersonalInformationTrainee());
 			}
 			//model.addAttribute("listStateMaster",this.adminService.listStateMaster2(sid));
