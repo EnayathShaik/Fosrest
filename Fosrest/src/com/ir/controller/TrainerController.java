@@ -350,6 +350,9 @@ public class TrainerController {
 			}
 			return "welcome";
 		} else if (personalInformationTrainer.equalsIgnoreCase("updated")) {
+			if (session.getAttribute("Id")!=null) {
+				return "redirect:/loginProcess.fssai";
+			}
 			return "redirect:/trainerUserManagementForm.fssai";
 		} else {
 			return "PersonalInformationTrainer";
@@ -420,7 +423,7 @@ public class TrainerController {
 	@RequestMapping(value = "/PersonalInformationTrainingInstituteAdd", method = RequestMethod.POST)
 	public String addPersonalInfoTrainer(
 			@Valid @ModelAttribute("PersonalInformationTrainingInstitute") PersonalInformationTrainingInstitute p,
-			BindingResult result, Model model) {
+			BindingResult result, Model model,HttpSession session) {
 		System.out.println("Add PersonalInformationTrainingInstitute");
 		String personalInformationTrainingInstitute = null;
 
@@ -450,9 +453,13 @@ public class TrainerController {
 			return "welcome";
 		} else if (personalInformationTrainingInstitute
 				.equalsIgnoreCase("updated")) {
+			 if (session.getAttribute("Id")!=null) 
+			 {
+				 return "redirect:/loginProcess.fssai";
+			 }
 			return "redirect:/trainingCenterUserManagementForm.fssai";
-
-		} else {
+		} 
+		else {
 			return "PersonalInformationTrainingInstitute";
 		}
 

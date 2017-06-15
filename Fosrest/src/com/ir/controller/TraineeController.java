@@ -735,7 +735,7 @@ public class TraineeController {
 	
 	
 	@RequestMapping(value = "/PersonalInformationTraineeAdd", method = RequestMethod.POST)
-	public String addPersonalInfoTrainee(@Valid @ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee p , BindingResult result, Model model){
+	public String addPersonalInfoTrainee(@Valid @ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee p , BindingResult result, Model model,HttpSession session){
 		System.out.println("Add PersonalInformationTrainee" + p.getId());
 		String personalInformationTrainee = null;
 
@@ -758,12 +758,19 @@ public class TraineeController {
 			new Thread(new Mail("Thanks", p.getEmail(), all[1], all[0], p.getFirstName())).start();
 			return "welcome";
 		}else if(personalInformationTrainee.equalsIgnoreCase("updated")){
-			
-			return "redirect:/traineeUserManagementForm.fssai";
+			if((session.getAttribute("Id")!=null))
+			{
+				return "redirect:/loginProcess.fssai";
+			}
+			else{
+				return "redirect:/traineeUserManagementForm.fssai";
+			}
+	
 		
 		}else{
 			return "PersonalInformationTrainee";
 		}
+		
 	}
 		
 		

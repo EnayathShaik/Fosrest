@@ -30,6 +30,9 @@
 	 $("#correspondencePincodeErr2").css("display" , "none");
 	 $("#EmailErr").css("display" , "none");
 	 $("#mobileErr").css("display" , "none");
+	 $("#seatingCapacityErr").css("display" , "none");
+	 $("#noOfInHouseTrainerErr").css("display" , "none");
+	 $("#noOfPCErr").css("display" , "none");
 	// $("#panErr").css("display" , "none");
 	// $("#trainingTypeErr").css("display" , "none");
 	// $("#userTypeErr").css("display" , "none");
@@ -141,6 +144,11 @@
 		 
 			$("#noOfInHouseTrainerErr").css("display" , "block");
 			return false;
+		 }
+	  if($("#noOfPC").val() == ''){
+			 
+			$("#noOfPCErr").css("display" , "block");
+		return false;
 		 }
 	/*   if($("#noOfYearExp").val() == ''){
 		 

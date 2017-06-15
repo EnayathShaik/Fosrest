@@ -151,7 +151,7 @@
 											<li class="style-li"><strong>User Type:</strong></li>
 											<li class="style-li error-red">*</li>
 											<li id="userTypeErr" style="display: none;"
-												class="style-li error-red">Please Select User Type.</li>
+												class="style-li error-red">Select User Type.</li>
 										</ul>
 										
 									</div><br>
@@ -875,12 +875,13 @@
 		 $("#otherTrainingInstituteErr").css("display" , "none");
 		 
 		 //$("#AssociatedWithAnyTrainingInstituteErr").css("display" , "none"); 
-		 
-		 if($("#userType").val() == ''){
+		
+		
+		/*  if($("#userType").val() == ''){
 		 $("#userTypeErr").css("display" , "block");
 		 
 			return false; 
-		}
+		} */
 	 	 if($("#title").val() == 0){
 		 
 		$("#titleErr").css("display" , "block");
