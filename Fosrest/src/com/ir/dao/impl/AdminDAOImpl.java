@@ -3116,7 +3116,6 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		String[] arrData = data.split("-");
 		List<String> loginDetails = new ArrayList<String>();
-		System.out.println("xxxxxxxxxxxxxxxxxxxx"+loginDetails);
 		String[] loginIdName = arrData[0].split(",");
 		int trainingCalendarId = Integer.parseInt(arrData[1]);
 		TrainingCalendar ts = (TrainingCalendar) session.load(TrainingCalendar.class, trainingCalendarId);
@@ -3166,7 +3165,7 @@ public class AdminDAOImpl implements AdminDAO {
 		NomineeTrainee nt = new NomineeTrainee();
 
 		nt.setStatus("N");
-		//nt.setRollNo(moduleCode + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+		nt.setRollNo( StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		nt.setRollSeqNo(maxId);
 		nt.setLoginDetails(loginId);
 		nt.setTraineeName(traineeName);
