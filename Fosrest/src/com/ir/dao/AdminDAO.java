@@ -410,7 +410,7 @@ public interface AdminDAO {
 
 	public List<ModuleMaster> allSubjects();
 
-	List listCalendarSearch(TrainingCalendarForm form);
+	List listCalendarSearch(String scheduleCode);
 
 	public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
 	public List<MappingMasterTrainer> trainerMappingState(String sid);

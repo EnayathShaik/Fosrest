@@ -2396,7 +2396,7 @@ public class AdminDAOImpl implements AdminDAO {
 		} else if (profileId == 5) {
 
 			mccList = session.createSQLQuery(
-					"  select distinct m.moduleName,p.firstName,s.schedulecode,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where pit.id='"
+					"  select p.firstName,s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where pit.id='"
 							+ id + "'  ")
 					.list();
 		}
@@ -3751,29 +3751,17 @@ Session session = this.sessionFactory.getCurrentSession();
 		
 List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename from modulemaster").list();
 
-		return mod; 
+		return mod;
 		
 	}
 
 	@Override
-	public List listCalendarSearch(TrainingCalendarForm form) {
+	public List listCalendarSearch(String scheduleCode) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		
-		
-	Query query = 	session.createSQLQuery("select trainingcalendarid from trainingcalendar where traininginstitute='"+form.getTrainingInstitute()+"' and scheduleCode='"+form.getScheduleCode()+"' and trainingstartdate='"+form.getTrainingStartDate()+"'");
-	List list1 = query.list();
-	System.out.println(list1);
-		if(list1.size()!=0)
-			return null;
-		else 
-			System.out.println("else");
-	
-		
-		
 		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
 		//Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),ts.scheduleCode, sm.subject, totalDuration  from trainingSchedule ts join SubjectMapping sm on(ts.scheduleCode=sm.scheduleCode) where sm.scheduleCode='"+scheduleCode+"'");
-		query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration  from trainingSchedule where scheduleCode='"+form.getScheduleCode()+"'");
+		Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration  from trainingSchedule where scheduleCode='"+scheduleCode+"'");
 
 		
 		List list = query.list();
