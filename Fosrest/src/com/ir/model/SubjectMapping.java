@@ -19,7 +19,7 @@ public class SubjectMapping {
 	 	
 		private String scheduleCode;
 	 	private String subject;
-	 	private int duration;
+	 	private String duration;
 
 	 	
 	 	
@@ -36,10 +36,10 @@ public class SubjectMapping {
 		public void setScheduleCode(String scheduleCode) {
 			this.scheduleCode = scheduleCode;
 		}
-		public int getDuration() {
+		public String getDuration() {
 			return duration;
 		}
-		public void setDuration(int duration) {
+		public void setDuration(String duration) {
 			this.duration = duration;
 		}
 		public String getSubject() {

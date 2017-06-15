@@ -41,7 +41,7 @@
 							<div class="col-lg-12">
 								<a href="#menu-toggle" class="vertical-menu-position-btn"
 									id="menu-toggle"> <i class="fa fa-bars"></i> <span
-									class="orange-font">Welcome Admin</span>
+									class="orange-font">Welcome ${userName }</span>
 								</a>
 							</div>
 						</div>
@@ -133,9 +133,7 @@
 													</div>
 													<cf:select path="scheduleCode" class="form-control">
 														<cf:option value="0" label="Select Schedule Code" />
-														<cf:options items="${sched}"
-															itemValue="trainingScheduleId"
-															itemLabel="trainingScheduleCode" />
+													
 													</cf:select>
 												</div>
 												<div class="form-group">
@@ -265,7 +263,8 @@
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
 															<th>Subject</th>
-															<th>Trainer</th>
+															<th>	<ul><li id="trainerErr" style="display: none;"
+																class="style-li error-red">Select TRAINER for each subject.</li></ul>Trainer</th>
 
 
 
@@ -484,6 +483,7 @@
 		$("#trainingInstituteErr").css("display", "none");
 		$("#trainingStartDateErr").css("display", "none");
 		$("#trainingEndDateErr").css("display", "none");
+		$("#trainerErr").css("display", "none");
 
 		if ($("#designation").val() == '') {
 			$("#designationErr").css("display", "block");
@@ -543,7 +543,9 @@
 
 		if ($("#trainer_" + '${loop2.count}').val() == '') {
 			alert("Select TRAINER");
+			$("#trainerErr").css("display", "block");
 			$("#trainer_" + '${loop2.count}').focus();
+			
 			return false;
 		}
 		</ct:forEach>

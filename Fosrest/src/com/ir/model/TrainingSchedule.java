@@ -39,13 +39,15 @@ public class TrainingSchedule {
 	private String trainingPhase;
 	private String scheduleCode;
 	
-	private int totalDuration;
+	private String totalDuration;
 
-	public int getTotalDuration() {
+
+
+	public String getTotalDuration() {
 		return totalDuration;
 	}
 
-	public void setTotalDuration(int totalDuration) {
+	public void setTotalDuration(String totalDuration) {
 		this.totalDuration = totalDuration;
 	}
 

@@ -1583,9 +1583,9 @@ public List<ModuleMaster> allSubjects() {
 
 @Override
 @Transactional
-public List listCalendarSearch(String scheduleCode) {
+public List listCalendarSearch(TrainingCalendarForm form) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.listCalendarSearch( scheduleCode);
+	return this.adminDAO.listCalendarSearch( form);
 }
 
 @Override

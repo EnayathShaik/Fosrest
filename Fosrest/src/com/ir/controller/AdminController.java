@@ -3180,7 +3180,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		int profileId=(int) session.getAttribute("profileId");
 	   if(profileId==1){
 			System.out.println("admin");
-			model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(form.getScheduleCode()));
+		//	model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(form.getScheduleCode()));
 	
 		}
       if(profileId==2){
@@ -3189,8 +3189,13 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
   		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
   		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
-  		
-  		List list=	this.adminService.listCalendarSearch(form.getScheduleCode());
+		
+		model.addAttribute("listCalendar", this.adminService.listCalendar());	
+	    model.addAttribute("TrainingCalendarForm", new TrainingCalendarForm());
+	  model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
+  		List list=	this.adminService.listCalendarSearch(form);
+  		if(list!=null){
       	model.addAttribute("listCalendarSearch", list);
      	model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
       	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
@@ -3203,7 +3208,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
  
     	model.addAttribute("endDate", this.adminService.calculateEndDate(form.getTrainingStartDate(),Duration));
   
-
+  		}
       }
 		return "trainingcalendar";
 	}

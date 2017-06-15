@@ -3606,7 +3606,10 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		TrainingSchedule ts= new TrainingSchedule();
-		int totalDur=0;
+		String totalDur="";
+		int hrs=0;
+		int min=0;
+		
 		ts.setDesignation(form.getDesignation());
 		ts.setStatus(form.getStatus());
 		ts.setTrainingType(form.getTrainingType());
@@ -3635,13 +3638,17 @@ public class AdminDAOImpl implements AdminDAO {
 			sm.setScheduleCode(trainingCodeGen);
 			sm.setSubject(subject[i]);
 			
-			sm.setDuration(Integer.parseInt(duration[i]));
-			totalDur=totalDur+Integer.parseInt(duration[i]);
+			sm.setDuration(duration[i]);
+			String arr[]=duration[i].split(":");
+			System.out.println("opop "+arr.length);
+			hrs=hrs+Integer.parseInt(arr[0]);
+			min=min+Integer.parseInt(arr[1]);
 			session.save(sm);
 		}
 		
-		ts.setSubjects(subjects);
+		totalDur=hrs+":"+min;
 		ts.setTotalDuration(totalDur);
+		ts.setSubjects(subjects);
 		ts.setScheduleCode(trainingCodeGen);
 	/*	ts.setChapterId(form.getChapterId());
 		ts.setTrainingType(form.getTrainingType2());
@@ -3742,17 +3749,29 @@ Session session = this.sessionFactory.getCurrentSession();
 		
 List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename from modulemaster").list();
 
-		return mod;
+		return mod; 
 		
 	}
 
 	@Override
-	public List listCalendarSearch(String scheduleCode) {
+	public List listCalendarSearch(TrainingCalendarForm form) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
+		
+		
+	Query query = 	session.createSQLQuery("select trainingcalendarid from trainingcalendar where traininginstitute='"+form.getTrainingInstitute()+"' and scheduleCode='"+form.getScheduleCode()+"' and trainingstartdate='"+form.getTrainingStartDate()+"'");
+	List list1 = query.list();
+	System.out.println(list1);
+		if(list1.size()!=0)
+			return null;
+		else 
+			System.out.println("else");
+	
+		
+		
 		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
 		//Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),ts.scheduleCode, sm.subject, totalDuration  from trainingSchedule ts join SubjectMapping sm on(ts.scheduleCode=sm.scheduleCode) where sm.scheduleCode='"+scheduleCode+"'");
-		Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration  from trainingSchedule where scheduleCode='"+scheduleCode+"'");
+		query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration  from trainingSchedule where scheduleCode='"+form.getScheduleCode()+"'");
 
 		
 		List list = query.list();
@@ -3819,6 +3838,8 @@ Session session=this.sessionFactory.getCurrentSession();
 	public String calculateEndDate(String startDate,String duration) {
 		// TODO Auto-generated method stub
 
+		System.out.println("duration= "+duration);
+		
     	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     	
     	Date date=null;
@@ -3828,23 +3849,25 @@ Session session=this.sessionFactory.getCurrentSession();
 		} catch (ParseException e) {
 		e.printStackTrace();
     	}
-    	
-    	
+ 
     	long millis = date.getTime();
     	
-    	SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
+    /*	SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
     	
     	try {
-		date = sdf3.parse(duration);
+		date = sdf3.parse(duration.split(":")[0]);
 		} catch (ParseException e) {
 		e.printStackTrace();
     	}
-    	
-    	millis=millis+date.getTime();
+    	System.out.println(date.getTime());
+    	//millis=millis+date.getTime();
  
-    	Calendar calendar = Calendar.getInstance();
+    	*/Calendar calendar = Calendar.getInstance();
     	calendar.setTimeInMillis(millis);
-    	date=new Date(millis);
+    	calendar.add(Calendar.HOUR_OF_DAY, Integer.parseInt(duration.split(":")[0]));
+    	calendar.add(Calendar.MINUTE, Integer.parseInt(duration.split(":")[1]));
+    	
+    	date=new Date(calendar.getTimeInMillis());
     	
     	String endDate=new SimpleDateFormat("dd-MM-yyyy HH:mm").format(date);
     	System.out.println(startDate+" <> "+endDate);

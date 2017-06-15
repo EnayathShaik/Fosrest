@@ -9,7 +9,7 @@
 
 <style type="text/css">
 .navbar h3 {
-	color: #f5f5f5;
+	color: #f5f5f5; 
 	margin-top: 14px;
 }
 .hljs-pre {
@@ -46,91 +46,94 @@
 
 function addRow(thisId){
 
-	 rowString = ""; 
-	 var mystrr;
-	  mystrr="";
-			alert("aaa");
-	  	var getSrNo= $(thisId).closest('tr').attr('id');
-	  	alert("bb"+getSrNo);
+	var noOfSubjects='${allSubjects}'.split(",").length;
+	var getSrNo= $(thisId).closest('tr').attr('id');
+	//alert("getSrNo<noOfSubjects------"+getSrNo+"<"+noOfSubjects);
+	if(getSrNo<noOfSubjects){
+		rowString = ""; 
+	 	var mystrr;
+	 	 mystrr="";
 		var sName;
 		var sId;
 		var flag;
+		
 	 <ct:forEach items="${allSubjects}" var="aaa" > 
-	
 	flag=0;
 	 for(var i=1;i<=getSrNo;i++){
-		
-			
 			var e = document.getElementById("subject"+i);
 			var strUser = e.options[e.selectedIndex].value;
-			
+			alert("werere "+strUser);
 			sId='${aaa[0]}';
 			sName='${aaa[1]}';
 			
 			if((strUser==sId)){
-		flag=1;
+			flag=1;
+			}
 		}
-		
-		}
-	
+
 		if(flag==0){
-			
 			mystrr=mystrr+'<option value="';
 			mystrr=mystrr+sId;
 			mystrr=mystrr+'" >';
 			mystrr=mystrr+sName;
 			mystrr=mystrr+'</option>';
-			
-			//alert(mystrr); 
-		}
-			
-
+			}
 	</ct:forEach>
 
-	
 	$("#addRow"+getSrNo).css("display" , "none");
 	$("#deleteRow"+getSrNo).css("display" , "block");
 	console.log("getSrNo "+getSrNo);
 	var nextId = parseInt(getSrNo)+1;
-	rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><input type='text' id='duration"+nextId+"' name='duration'/></td><td><button id='addRow"+nextId+"' onclick='addRow(this);return false;'>Add</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='deleteRow(this);return false;'>Remove</button></td></tr>";
+	rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><input type='text' id='duration"+nextId+"' name='duration' placeholder='HH:mm' /></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove</button></td></tr>";
 	
-
 	$("#subjectTable").append(rowString);
+}
 	
-	
-	
-	alert("");
+	else{
+		alert("No More Subjects");
+	}
+	return false;
  }
  
+ 
  function deleteRow(id){
-	 alert("");
 	$(id).parents('tr').remove();
-	 alert("end "+$(id).closest('tr').attr('id'));
-	 var delId= parseInt($(id).closest('tr').attr('id'))+1;
-	 alert("delId= "+delId);
-	//alert( "delId+1= "+document.getElementById(delId+1).id);
-	document.getElementById(delId).setAttribute("id", "div_top2");
-	 alert("aaa");
+	// alert("end "+$(id).closest('tr').attr('id'));
+	 var delId= parseInt($(id).closest('tr').attr('id'));
+	 var idval = $('#subjectTable tr:last').attr('id');
+	// alert("last id="+idval);
+
+	 var newId=0;
+	for(var i=0;i<idval-1;i++){
+	
+		 newId=delId+i;
+		// alert((delId+i+1)+">>"+newId);	
+			document.getElementById(delId+i+1).setAttribute("id", newId);
+			document.getElementById("subject"+(delId+i+1)).setAttribute("id", "subject"+newId);
+			document.getElementById("duration"+(delId+i+1)).setAttribute("id", "duration"+newId);
+			document.getElementById("addRow"+(delId+i+1)).setAttribute("id", "addRow"+newId);
+			document.getElementById("deleteRow"+(delId+i+1)).setAttribute("id", "deleteRow"+newId);
+	}
+	 return false;
  }
+ 
+ 
  function addSubSchedule(){	
 	
 	 rowString = "";
-
-		rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><input type='text' id='duration1' name='duration'/></td><td><button id='addRow1' onclick='addRow(this);return false;'>Add</button><button style='display:none;' id='deleteRow1' onclick='deleteRow(this);return false;'>Remove</button></td></tr>";
+	rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><input type='text' id='duration1' name='duration'  placeholder='HH:mm' /></td><td><button id='addRow1' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove</button></td></tr>";
 	$("#subjectTable").append(rowString); 
  }
 
 	function OnStart() {
 	addSubSchedule();
-	
-	
 	}
 	window.onload = OnStart;
 </script>
 <%-- <ct:url var="addAction" value="/activateAssessmentOfTraineelist.fssai"></ct:url> --%>
 <ct:url var="addAction" value="/trainingScheduleMasterlist.fssai"></ct:url>
 <cf:form action="${addAction}" name="myForm" method="POST"
-	commandName="TrainingScheduleForm" onsubmit="return validateFields();">
+	commandName="TrainingScheduleForm" onsubmit="return validateFields();"> 
 
 	<section>
 		<%@include file="/website/roles/top-menu.jsp"%>
@@ -168,12 +171,50 @@ function addRow(thisId){
 											<legend>Create Schedule </legend>
 											<!-- left side -->
 											<div class="col-xs-6">
-												<div class="form-group">
+											<div class="form-group">
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Designation:</strong></li>
+																<li id="designationErr" style="display: none;"
+																class="style-li error-red">Select Designation.</li>
+															</ul>
+														</div>
+														<cf:select path="designation" class="form-control">
+															<cf:option value="" label="Select Designation" />
+															<cf:options items="${DesignationList}"
+																itemValue="designationId" itemLabel="designationName" />
+														</cf:select>
+
+													</div>
+												
+													<div class="form-group">
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Status:</strong></li>
+																	<li id="statusErr" style="display: none;"
+																class="style-li error-red">Please Select Training
+																Type.</li>
+															</ul>
+														</div>
+														<cf:select path="status" class="form-control">
+															<cf:option value="A" label="Active" />
+															<cf:option value="I" label="In-Active" />
+														</cf:select>
+
+													</div>
+											</div>
+											<!-- right side -->
+											<div class="row">
+
+												<!-- left -->
+												<div class="col-xs-6">
+												
+													<div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training Type:</strong></li>
 															<li id="trainingTypeErr" style="display: none;"
-																class="style-li error-red">Please Select Training
+																class="style-li error-red">Select Training
 																Type.</li>
 															<li class="style-li error-red"><span
 																id="name_status" class="clear-label"> </span> ${created }</li>
@@ -191,7 +232,7 @@ function addRow(thisId){
 															<li class="style-li"><strong>Training
 																	Phase:</strong></li>
 															<li id="trainingPhaseErr" style="display: none;"
-																class="style-li error-red">Please Select Training
+																class="style-li error-red">Select Training
 																Phase.</li>
 															<li class="style-li error-red"><label
 																class="error visibility" id="courseError">*
@@ -199,56 +240,20 @@ function addRow(thisId){
 														</ul>
 													</div>
 													 <cf:select path="trainingPhase" class="form-control">
-															<cf:option value="" label="Select Training Type" />
+															<cf:option value="" label="Select Training Phase" />
 															<cf:options items="${TrainingPhaseList}"
 																itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
 														</cf:select> 
 												</div>
-											</div>
-											<!-- right side -->
-											<div class="row">
 
-												<!-- left -->
-												<div class="col-xs-6">
-													<div class="form-group">
-														<div>
-															<ul class="lab-no">
-																<li class="style-li"><strong>Status:</strong></li>
-																<li class="style-li error-red"><cf:errors
-																		path="status" cssClass="error" /></li>
-															</ul>
-														</div>
-														<cf:select path="status" class="form-control">
-															<cf:option value="A" label="Active" />
-															<cf:option value="I" label="In-Active" />
-														</cf:select>
-
-													</div>
-													<div class="form-group">
-														<div>
-															<ul class="lab-no">
-																<li class="style-li"><strong>Designation:</strong></li>
-																<li class="style-li error-red"><cf:errors
-																		path="status" cssClass="error" /></li>
-															</ul>
-														</div>
-														<cf:select path="designation" class="form-control">
-															<cf:option value="" label="Select Designation" />
-															<cf:options items="${DesignationList}"
-																itemValue="designationId" itemLabel="designationName" />
-														</cf:select>
-
-													</div>
-
-													 
-													
 													 <fieldset><legend>Add Subject</legend>
                                       		<table id="subjectTable" class="table table-bordered table-responsive">
                                       		<thead >
                                       		<tr class="background-open-vacancies">
                                       		
                                       		<th>Subject Name</th>
-                                      		<th>Duration</th>
+                                      		<th><ul><li id="trErr" style="display: none;"
+																class="style-li error-red">Enter Duration for each SUBJECT	</li></ul>Duration</th>
                                       		<th>Operation</th>
                                       
                                       		</tr>
@@ -298,7 +303,7 @@ function addRow(thisId){
 															<td>${listtrainingScheduleMaster[1]}</td>
 															<td>${listtrainingScheduleMaster[2]}</td>
 															<td>${listtrainingScheduleMaster[3]}</td>
-																<td>${listtrainingScheduleMaster[4]}</td>
+																<td>${listtrainingScheduleMaster[4]} hrs</td>
 															
 														</tr>
 													</ct:forEach>
@@ -327,27 +332,43 @@ function addRow(thisId){
 </body>
 </html>
 
-<!-- <script>
+<script>
 	function validateFields() {
 	
-		if ($("#courseName").val() == '') {
-			$("#courseNameErr").css("display", "block");
+		$("#designationErr").css("display", "none");
+
+		$("#trainingTypeErr").css("display", "none");
+		$("#trainingPhaseErr").css("display", "none");
+		$("#trErr").css("display", "none");
+		
+		
+		if ($("#designation").val() == 0) {
+			$("#designationErr").css("display", "block");
 			return false;
 		}
-		if ($("#trainingDate").val() == 0) {
-			$("#trainingDateErr").css("display", "block");
+		if ($("#trainingType").val() == 0) {
+			$("#trainingTypeErr").css("display", "block");
 			return false;
 		}
-		if ($("#trainingLab").val() == '') {
-			$("#courseNameErr").css("display", "block");
+		if ($("#trainingType").val() == 3 && $("#trainingPhase").val() == 0) {// 3 for induction
+			$("#trainingPhaseErr").css("display", "block");
 			return false;
 		}
-		if ($("#traineeName").val() == 0) {
-			$("#trainingDateErr").css("display", "block");
-			return false;
-		}
+		 var idval = $('#subjectTable tr:last').attr('id');
+	
+		 for(var i=1;i<=idval;i++){
+			
+			 if($("#duration"+i).val()=='')
+				 {
+				 alert("Enter Duration for each SUBJECT");
+				 $("#trErr").css("display", "block");
+				 return false;
+				 } 
+		 }
+		
+
 	}
-</script> -->
+</script> 
 <script type="text/javascript">
  $('.clockpicker').clockpicker()
 	.find('input').change(function(){
