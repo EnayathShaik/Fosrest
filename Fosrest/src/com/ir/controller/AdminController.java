@@ -2733,9 +2733,10 @@ public class AdminController {
 	@RequestMapping(value = "/ListEligibleUser", method = RequestMethod.POST)
 	public String ListEligibleUser(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm,
 			Model model) {
-		Map<String, String> userTypeMap = lst.userTypeMap;
-		model.addAttribute("userTypeMap", userTypeMap);
-		model.addAttribute("batchCodeList", this.adminService.listTrainingSchedule());
+		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		model.addAttribute("DesignationList", DesignationList);
+		//model.addAttribute("batchCodeList", this.adminService.listTrainingSchedule());
+		model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
 		System.out.println("admin controller ListEligibleUser" + nominateTraineeForm.getUserType());
 		model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getUserType()));
 

@@ -527,6 +527,8 @@ public List<MappingMasterTrainer> trainerMappingState(String sid);
 List listSchCodeSubjects(String scheduleCode);
 
 String calculateEndDate(String startDate,String duration);
+
+public List<TrainingCalendar> listBatchCodeList();
 }
 
 

@@ -2352,6 +2352,8 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingSchedule> mccList = session
 				.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' ").list();
+		/*List<TrainingSchedule> mccList = session
+				.createQuery("from TrainingCalendar where coalesce(isactive,'') <> 'I' ").list();*/
 		// List<TrainingSchedule> mccList = session.createSQLQuery("select *
 		// from TrainingSchedule where trainer_status='N' ").list();
 
@@ -2388,20 +2390,20 @@ public class AdminDAOImpl implements AdminDAO {
 							+ id + "'  ")
 					.list();*/
 		mccList = session.createSQLQuery(
-				" select s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric)  inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where tcm.trainerid='"
+				" select distinct m.moduleName,s.schedulecode,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric)  inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where tcm.trainerid='"
 						+ id + "'  ")
 				.list();
 		} else if (profileId == 5) {
 
 			mccList = session.createSQLQuery(
-					"  select p.firstName,s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where pit.id='"
+					"  select distinct m.moduleName,p.firstName,s.schedulecode,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where pit.id='"
 							+ id + "'  ")
 					.list();
 		}
 	      
 		else{
 			mccList = session.createSQLQuery(
-					"select p.firstName,s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where cast(mmt.state as numeric)='"
+					"select distinct m.moduleName,p.firstName,s.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where cast(mmt.state as numeric)='"
 							+ id + "'  ")
 					.list();
 		}
@@ -3116,8 +3118,8 @@ public class AdminDAOImpl implements AdminDAO {
 		List<String> loginDetails = new ArrayList<String>();
 		System.out.println("xxxxxxxxxxxxxxxxxxxx"+loginDetails);
 		String[] loginIdName = arrData[0].split(",");
-		int trainingScheduleId = Integer.parseInt(arrData[1]);
-		TrainingSchedule ts = (TrainingSchedule) session.load(TrainingSchedule.class, trainingScheduleId);
+		int trainingCalendarId = Integer.parseInt(arrData[1]);
+		TrainingCalendar ts = (TrainingCalendar) session.load(TrainingCalendar.class, trainingCalendarId);
 		//int unitCode = ts.getChapterId();
 		//String moduleId = ts.getSubjects();
 		//ModuleMaster mm = getModuleMasterById(moduleId);
@@ -3134,7 +3136,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 			System.out.println("id " + s.split("@")[0]);
 
-			String result = addNomineeTrainee( trainingScheduleId, Integer.parseInt(s.split("@")[0]),
+			String result = addNomineeTrainee( trainingCalendarId, Integer.parseInt(s.split("@")[0]),
 					s.split("@")[1]);
 
 		}
@@ -3144,9 +3146,9 @@ public class AdminDAOImpl implements AdminDAO {
 
 	// addNomineeTrainee
 	// @Override
-	public String addNomineeTrainee( int trainingScheduleId, int loginId, String traineeName) {
+	public String addNomineeTrainee( int trainingCalendarId, int loginId, String traineeName) {
 
-		System.out.println( " trainingScheduleId " + trainingScheduleId + " loginId "
+		System.out.println( " trainingScheduleId " + trainingCalendarId + " loginId "
 				+ loginId + " traineeName " + traineeName);
 		String sql = "select coalesce(max(rollseqNo) + 1,1) from nomineetrainee";
 		int maxId = 0;
@@ -3168,7 +3170,7 @@ public class AdminDAOImpl implements AdminDAO {
 		nt.setRollSeqNo(maxId);
 		nt.setLoginDetails(loginId);
 		nt.setTraineeName(traineeName);
-		nt.setTrainingscheduleid(trainingScheduleId);
+		nt.setTrainingCalendarId(trainingCalendarId);
 		nt.setCertificateStatus("N");
 		int id = (int) session.save(nt);
 		tx.commit();
@@ -3873,6 +3875,18 @@ Session session=this.sessionFactory.getCurrentSession();
     	System.out.println(startDate+" <> "+endDate);
 
     	return endDate;
+	}
+
+	@Override
+	public List<TrainingCalendar> listBatchCodeList() {
+		System.out.println("inside listBatchCodeList wo parameter");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<TrainingCalendar> mccList = session
+				.createQuery("from TrainingCalendar where coalesce(isactive,'') <> 'I' ").list();
+		for (TrainingCalendar p : mccList) {
+			System.out.println("TrainingSchedule List::" + p);
+		}
+		return mccList;
 	}
 	
 }

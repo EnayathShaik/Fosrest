@@ -129,7 +129,7 @@
                                     </div>
                                     <!-- add the content here for main body -->
                                     <!-- timeline  -->
-                                    <div class="row" id="conclusionListOfAssessment">
+                                  <!--   <div class="row" id="conclusionListOfAssessment">
                                         <div class="col-xs-12">
                                             <fieldset>
                                                 <legend>Pending Assessor ID Activation</legend>
@@ -150,12 +150,12 @@
 
 
                                         <div class="col-md-2 hidden-xs"></div>
-                                    </div>
+                                    </div> -->
 
 
 
 
-                                    <div class="row" id="detailListOfAssessor">
+                                   <!--  <div class="row" id="detailListOfAssessor">
                                         <div class="col-xs-12">
                                             <span id=name_status "></span>
                                 <div class="page-header ">
@@ -173,12 +173,50 @@
                                     </thead>
                                    <tbody></tbody>
                                 </table>
-<!--                                 <div class="col-xs-12 pull-right "> -->
-<!--                                     <input style="margin-top:20px; width:100px; " type="button " class="form-control login-btn btn " value="Activate " /> </div> -->
-<!--                             </div> -->
+                                <div class="col-xs-12 pull-right ">
+                                    <input style="margin-top:20px; width:100px; " type="button " class="form-control login-btn btn " value="Activate " /> </div>
+                            </div>
                             <div class="col-md-2 hidden-xs "></div>
                         </div>
-                    </div>
+                    </div> -->
+                      <div class="row">
+                                            <div class="col-xs-12">
+                                           <fieldset>
+                                           <legend>Upcoming Training</legend>
+                                            <ct:if test="${!empty listTrainingSchedule}">
+                                            <table id="datatablesfosrest" class="table table-bordered table-responsive">
+                                               <thead>
+                                                    <tr class="background-open-vacancies">
+                                                        <th>S.No.</th>
+                                                          <th>Trainer Name</th>
+                                                        <th>Training Schedule code</th>
+                                                        <th>Subject</th>
+                                                        <th>Training Start Date</th>
+                                                        <th>Training End Date</th>
+                                                        <th>Training Institute</th>
+                                                                                                         </tr>
+                                                </thead>
+                                                
+                                                <ct:forEach items="${listTrainingSchedule}" var="TrainingSchedule" varStatus="loop">
+                                                <tr>
+												<td>${loop.count}</td>
+												<td>${TrainingSchedule[1]}</td>
+												<td>${TrainingSchedule[2]}</td>
+												<td>${TrainingSchedule[0]}</td>
+												<td>${TrainingSchedule[3]}</td>
+												<td>${TrainingSchedule[4]}</td>
+												<td>${TrainingSchedule[5]} &nbsp;${TrainingSchedule[6]}</td>
+												<%-- <td>20</td>
+												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
+											    <td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"accept");return false;' >Accept</button></td>
+											   <td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"reject");return false;' >Reject</button></td> --%>
+										</tr>
+										</ct:forEach>
+                                            </table>
+                                           </ct:if>
+                                                                               </fieldset>
+                                                    </div>
+                                                </div>
                 </div>
             </div>
         </div>

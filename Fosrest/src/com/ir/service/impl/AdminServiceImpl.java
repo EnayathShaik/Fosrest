@@ -1615,4 +1615,10 @@ public String calculateEndDate(String startDate,String duration) {
 	return this.adminDAO.calculateEndDate(startDate, duration);
 }
 
+@Override
+@Transactional
+public List<TrainingCalendar> listBatchCodeList() {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listBatchCodeList();
+}
 }

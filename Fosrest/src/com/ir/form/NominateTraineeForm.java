@@ -4,18 +4,15 @@ public class NominateTraineeForm {
 private String userType;
 private String unit;
 private String module;
-private String scheduleCode;
+private String batchCode;
 
 
-
-
-
-public String getScheduleCode() {
-	return scheduleCode;
+public String getBatchCode() {
+	return batchCode;
 }
 
-public void setScheduleCode(String scheduleCode) {
-	this.scheduleCode = scheduleCode;
+public void setBatchCode(String batchCode) {
+	this.batchCode = batchCode;
 }
 
 public String getUserType() {

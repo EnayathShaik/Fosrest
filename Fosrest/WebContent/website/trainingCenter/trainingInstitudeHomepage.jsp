@@ -47,8 +47,8 @@ wwindow.profileId = '${profileId}';
                                                 <ct:forEach items="${listTrainingSchedule}" var="TrainingSchedule" varStatus="loop">
                                                 <tr>
 												<td>${loop.count}</td>
-												<td>${TrainingSchedule[0]}</td>
 												<td>${TrainingSchedule[1]}</td>
+												<td>${TrainingSchedule[0]}</td>
 												<td>${TrainingSchedule[2]}</td>
 												<td>${TrainingSchedule[3]}</td>
 												<td>${TrainingSchedule[4]}</td>

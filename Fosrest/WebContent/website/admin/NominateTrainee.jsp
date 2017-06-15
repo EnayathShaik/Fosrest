@@ -119,9 +119,9 @@
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
-												<cf:select path="scheduleCode" class="form-control">
+												<cf:select path="batchCode" class="form-control">
 													<cf:option value="0" label="Select Schedule Code" />
-													<cf:options items="${batchCodeList}" itemLabel="scheduleCode" itemValue="trainingScheduleId" />
+													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingCalendarId" />
 												</cf:select>
 											</div>
 										</div>
@@ -229,18 +229,17 @@
 						} else {
 							loginIds = loginIds + "," + $("#userId_" + i).val()+ "@" + $("#userName_" + i).text();
 						}
-alert(loginIds+"MMMMMMMMMMMM");
 					}
 				});
 
 		console.log(loginIds);
 	
-		var scheduleCode = $("#scheduleCode").val();
+		var batchCode = $("#batchCode").val();
 
 		var name = JSON.stringify({
 			courseType : 0
 		});
-		var result = loginIds + "-" +scheduleCode;
+		var result = loginIds + "-" +batchCode;
 				
 		$.ajax({
 			type : 'post',

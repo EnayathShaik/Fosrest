@@ -37,7 +37,15 @@ public class NomineeTrainee {
 	private String rollNo;
 	private String status;
 	private String traineeName;
-	private int trainingscheduleid;
+	private int trainingCalendarId;
+	public int getTrainingCalendarId() {
+		return trainingCalendarId;
+	}
+	public void setTrainingCalendarId(int trainingCalendarId) {
+		this.trainingCalendarId = trainingCalendarId;
+	}
+
+
 	@Column(columnDefinition="varchar(1) default 'N'")
 	private String certificateStatus;
 	private int score;
@@ -113,12 +121,7 @@ public class NomineeTrainee {
 	public void setTraineeName(String traineeName) {
 		this.traineeName = traineeName;
 	}
-	public int getTrainingscheduleid() {
-		return trainingscheduleid;
-	}
-	public void setTrainingscheduleid(int trainingscheduleid) {
-		this.trainingscheduleid = trainingscheduleid;
-	}
+
 	public int getScore() {
 		return score;
 	}

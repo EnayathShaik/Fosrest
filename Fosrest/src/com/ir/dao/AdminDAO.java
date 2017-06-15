@@ -419,5 +419,7 @@ public interface AdminDAO {
 
 	public String calculateEndDate(String startDate,String duration);
 
+	public List<TrainingCalendar> listBatchCodeList();
+
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }
