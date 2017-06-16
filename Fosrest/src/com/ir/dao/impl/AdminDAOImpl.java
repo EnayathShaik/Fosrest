@@ -2390,20 +2390,20 @@ public class AdminDAOImpl implements AdminDAO {
 							+ id + "'  ")
 					.list();*/
 		mccList = session.createSQLQuery(
-				" select distinct m.moduleName,s.schedulecode,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric)  inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where tcm.trainerid='"
+				" select distinct m.moduleName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric) inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid  where s.trainerid='"
 						+ id + "'  ")
 				.list();
 		} else if (profileId == 5) {
 
 			mccList = session.createSQLQuery(
-					"  select p.firstName,s.schedulecode,m.moduleName,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where pit.id='"
+					"  select distinct m.moduleName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where pit.id='"
 							+ id + "'  ")
 					.list();
 		}
 	      
 		else{
 			mccList = session.createSQLQuery(
-					"select distinct m.moduleName,p.firstName,s.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join subjectmapping s on tc.schedulecode=s.schedulecode inner join modulemaster m on m.moduleId=cast(s.subject as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where cast(mmt.state as numeric)='"
+					"select distinct m.moduleName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where cast(mmt.state as numeric)='"
 							+ id + "'  ")
 					.list();
 		}

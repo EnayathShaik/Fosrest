@@ -32,8 +32,8 @@ wwindow.profileId = '${profileId}';
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>
                                                         <th>Trainer Name</th>
-                                                        <th>Schedule Code</th>
                                                         <th>Subject</th>
+                                                        <th>Schedule Code</th>
                                                         <th>Training Start Date</th>
                                                         <th>Training End Date</th>
                                                         <!-- <th>No. Of Enrollments</th>
