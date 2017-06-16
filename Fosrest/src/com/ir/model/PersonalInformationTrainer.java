@@ -33,11 +33,27 @@ public class PersonalInformationTrainer {
 	private String userType;
 	
 	private int modulesId;
+	/*private String state;
+	private String stateBox2;
 	
 
-	
 
 
+	public String getStateBox2() {
+		return stateBox2;
+	}
+
+	public void setStateBox2(String stateBox2) {
+		this.stateBox2 = stateBox2;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}*/
 
 	public int getModulesId() {
 		return modulesId;
