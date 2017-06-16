@@ -62,7 +62,7 @@ function addRow(thisId){
 	 for(var i=1;i<=getSrNo;i++){
 			var e = document.getElementById("subject"+i);
 			var strUser = e.options[e.selectedIndex].value;
-			alert("werere "+strUser);
+			//alert("werere "+strUser);
 			sId='${aaa[0]}';
 			sName='${aaa[1]}';
 			
@@ -84,7 +84,7 @@ function addRow(thisId){
 	$("#deleteRow"+getSrNo).css("display" , "block");
 	console.log("getSrNo "+getSrNo);
 	var nextId = parseInt(getSrNo)+1;
-	rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><input type='text' id='duration"+nextId+"' name='duration' placeholder='HH:mm' /></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove</button></td></tr>";
+	rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><input type='text' id='duration"+nextId+"' name='duration' placeholder='HH:mm' onblur='return chkDur(this);'/></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove</button></td></tr>";
 	
 	$("#subjectTable").append(rowString);
 }
@@ -121,11 +121,26 @@ function addRow(thisId){
  function addSubSchedule(){	
 	
 	 rowString = "";
-	rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><input type='text' id='duration1' name='duration'  placeholder='HH:mm' /></td><td><button id='addRow1' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove</button></td></tr>";
+	rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><input type='text' id='duration1' name='duration'  placeholder='HH:mm' onblur='return chkDur(this);'/></td><td><button id='addRow1' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove</button></td></tr>";
 	$("#subjectTable").append(rowString); 
  }
 
-	function OnStart() {
+ function chkDur(obj){
+	// alert(obj); 
+	 
+	 //alert("ff "+obj.value);   
+	// alert(obj.id);
+	//alert( obj.value.match(/^[0-9]{2}:[0-9]{2}$/)); 
+	if( obj.value.match(/^[0-9]{2}:[0-9]{2}$/)==null){
+		 alert("Invalid Duration:- Enter correct format(eg. 01:30 for 1hr 30min)");
+		 return false;
+	}
+
+	
+ } 
+ 
+ 
+	function OnStart() { 
 	addSubSchedule();
 	}
 	window.onload = OnStart;
@@ -303,7 +318,7 @@ function addRow(thisId){
 															<td>${listtrainingScheduleMaster[1]}</td>
 															<td>${listtrainingScheduleMaster[2]}</td>
 															<td>${listtrainingScheduleMaster[3]}</td>
-																<td>${listtrainingScheduleMaster[4]} hrs</td>
+															<td>${listtrainingScheduleMaster[4]} hrs</td>
 															
 														</tr>
 													</ct:forEach>

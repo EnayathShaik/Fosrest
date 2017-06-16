@@ -3181,7 +3181,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		int profileId=(int) session.getAttribute("profileId");
 	   if(profileId==1){
 			System.out.println("admin");
-			model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(form.getScheduleCode()));
+			//model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(form.getScheduleCode()));
 	
 		}
       if(profileId==2){
@@ -3191,20 +3191,37 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
   		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
   		
-  		List list=	this.adminService.listCalendarSearch(form.getScheduleCode());
+  		List list=	this.adminService.listCalendarSearch(form);
+  		
+  		if(list!=null){
+  			
+  			Object[] obj = (Object[]) list.get(0);
+  	    	
+  	    	String Duration=obj[7].toString();
+  	    	
+  	    	String result=this.adminService.calculateEndDate(form.getTrainingStartDate(),Duration,form.getTrainingInstitute());
+  	    	
+  	    	if(!(result.equals("clash"))){
+  	    
+  	  	model.addAttribute("endDate",result);
+			
       	model.addAttribute("listCalendarSearch", list);
      	model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
       	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
     	model.addAttribute("institute", form.getTrainingInstitute());
     	model.addAttribute("startDate", form.getTrainingStartDate());
-    	
-    	Object[] obj = (Object[]) list.get(0);
-    	
-    	String Duration=obj[7].toString();
- 
-    	model.addAttribute("endDate", this.adminService.calculateEndDate(form.getTrainingStartDate(),Duration));
-  
-
+  	    	}
+  	    	else{
+  	    		model.addAttribute("errorTime", "Change Start-Date");
+  	    	}
+  	    }
+  		else{
+	    		model.addAttribute("errorTime", "Same Start-Date exists");
+	    }
+  		model.addAttribute("listCalendar", this.adminService.listCalendar());	
+  		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
+  		
       }
 		return "trainingcalendar";
 	}

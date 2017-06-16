@@ -1583,9 +1583,9 @@ public List<ModuleMaster> allSubjects() {
 
 @Override
 @Transactional
-public List listCalendarSearch(String scheduleCode) {
+public List listCalendarSearch(TrainingCalendarForm form) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.listCalendarSearch( scheduleCode);
+	return this.adminDAO.listCalendarSearch( form);
 }
 
 @Override
@@ -1610,9 +1610,10 @@ public List listSchCodeSubjects(String scheduleCode) {
 }
 
 @Override
-public String calculateEndDate(String startDate,String duration) {
+@Transactional
+public String calculateEndDate(String startDate,String duration,String institute) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.calculateEndDate(startDate, duration);
+	return this.adminDAO.calculateEndDate(startDate, duration,institute);
 }
 
 @Override

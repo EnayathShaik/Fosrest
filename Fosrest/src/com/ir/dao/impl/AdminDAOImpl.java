@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 import javax.transaction.Transactional;
@@ -3519,7 +3520,7 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
-		Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDuration,trainingStartDate,trainingEndDate from trainingCalendar");
+		Query query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDuration,trainingStartDate,trainingEndDate from trainingCalendar");
 		
 		List list = query.list();
 		return list;
@@ -3755,16 +3756,23 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 	}
 
 	@Override
-	public List listCalendarSearch(String scheduleCode) {
+	public List listCalendarSearch(TrainingCalendarForm form) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
-		//Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),ts.scheduleCode, sm.subject, totalDuration  from trainingSchedule ts join SubjectMapping sm on(ts.scheduleCode=sm.scheduleCode) where sm.scheduleCode='"+scheduleCode+"'");
-		Query query = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration  from trainingSchedule where scheduleCode='"+scheduleCode+"'");
+		
+		Query query = 	session.createSQLQuery("select trainingcalendarid from trainingcalendar where traininginstitute='"+form.getTrainingInstitute()+"' and scheduleCode='"+form.getScheduleCode()+"' and trainingstartdate='"+form.getTrainingStartDate()+"'");
+		List list = query.list();
+		System.out.println(list);
+			if(list.size()!=0)
+				return null;
+			else 
+				System.out.println("else");
+		
+		Query query1 = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration  from trainingSchedule where scheduleCode='"+form.getScheduleCode()+"'");
 
 		
-		List list = query.list();
-		return list;
+		List list1 = query1.list();
+		return list1;
 	}
 
 	@Override
@@ -3783,22 +3791,21 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
 		tc.setBatchCode(batchCode);
 		//p.setIsActive("Y");
-Session session=this.sessionFactory.getCurrentSession();
+			
+		Session session=this.sessionFactory.getCurrentSession();
 		
 			TrainingCalendarMapping tcm;
 		for(int i=0;i<subjects.length;i++){
 			
 			tcm=new TrainingCalendarMapping();
-		
 			tcm.setBatchCode(batchCode);
 			tcm.setSubjectId(Integer.parseInt(subjects[i]));
 			tcm.setTrainerId(Integer.parseInt(trainers[i]));
 
 			session.save(tcm);
 		}
-		
-				session.save(tc);
-				return "created";
+		session.save(tc);
+		return "created";
 	}
 
 	
@@ -3824,7 +3831,7 @@ Session session=this.sessionFactory.getCurrentSession();
 	}
 
 	@Override
-	public String calculateEndDate(String startDate,String duration) {
+	public String calculateEndDate(String startDate,String duration,String institute) {
 		// TODO Auto-generated method stub
 
 		System.out.println("duration= "+duration);
@@ -3832,6 +3839,12 @@ Session session=this.sessionFactory.getCurrentSession();
     	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     	
     	Date date=null;
+    	long startdb=0;
+    	long millis=0;
+    	long newStartDate=0;
+    	long newEndDate=0;
+    	long enddb=0;
+    	int flag=0;
     	
     	try {
 		date = sdf.parse(startDate);
@@ -3839,8 +3852,8 @@ Session session=this.sessionFactory.getCurrentSession();
 		e.printStackTrace();
     	}
  
-    	long millis = date.getTime();
-    	
+    	millis = date.getTime();
+    	newStartDate=millis;
     /*	SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
     	
     	try {
@@ -3861,7 +3874,47 @@ Session session=this.sessionFactory.getCurrentSession();
     	String endDate=new SimpleDateFormat("dd-MM-yyyy HH:mm").format(date);
     	System.out.println(startDate+" <> "+endDate);
 
-    	return endDate;
+    	
+    	
+    	//check timespan for institute
+    	newEndDate=calendar.getTimeInMillis();
+    	Session session = this.sessionFactory.getCurrentSession();
+    	Query query1 = 	session.createQuery("from TrainingCalendar");
+    	List<TrainingCalendar> list1 = query1.list();
+
+		flag=0;
+		
+		for(TrainingCalendar i:list1){
+			System.out.println("new StartDate"+startDate);
+	System.out.println("startDate db "+i.getTrainingStartDate());
+	System.out.println("endDate db "+i.getTrainingEndDate());
+	
+	try {
+		date = sdf.parse(i.getTrainingStartDate());
+		} catch (ParseException e) {
+		e.printStackTrace();
+    	}
+	startdb=date.getTime();
+	try {
+		date = sdf.parse(i.getTrainingEndDate());
+		} catch (ParseException e) {
+		e.printStackTrace();
+    	}
+	enddb=date.getTime();
+	
+	System.out.println();
+	
+	if((!(newStartDate<startdb&&newEndDate<startdb || newStartDate>enddb&&newEndDate>enddb)&&(i.getTrainingInstitute().equals(institute)))){
+		//System.out.println(i.getTrainingInstitute()+" "+institute+" -->"+i.getTrainingInstitute().equals(institute));
+		flag=1;//calendar exists;
+		}
+		
+		}
+		
+		if(flag==1)
+			return "clash";
+		
+	return endDate;	
 	}
 
 	@Override

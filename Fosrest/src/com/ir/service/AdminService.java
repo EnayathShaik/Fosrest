@@ -519,14 +519,14 @@ public List<StateMaster> listStateMaster2(int sid);
 String saveTrainingSchedule(String[] subject, String[] duration, TrainingScheduleForm form);
 List<ModuleMaster>  allSubjects();
 
-List listCalendarSearch(String scheduleCode);
+List listCalendarSearch(TrainingCalendarForm form);
 
 String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
 public List<MappingMasterTrainer> trainerMappingState(String sid);
 
 List listSchCodeSubjects(String scheduleCode);
 
-String calculateEndDate(String startDate,String duration);
+String calculateEndDate(String startDate,String duration,String institute);
 
 public List<TrainingCalendar> listBatchCodeList();
 }

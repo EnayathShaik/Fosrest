@@ -49,16 +49,20 @@
 						<!-- timeline  -->
 						<div class="row">
 
+<%if ((Integer)session.getAttribute("profileId")==2) {%>
 							<div class="col-xs-12">
 								<fieldset>
 									<legend>
 										<h1>Training Calendar</h1>
 									</legend>
 									<div class="row">
+										
 										<div class="col-xs-12">
 											<%-- <cf:input type="hidden" path="trainingScheduleId" /> --%>
 											<!-- left side -->
+											
 											<div class="col-xs-6">
+										
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -196,6 +200,8 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training Start
 																	Date:</strong></li>
+																	<li class="style-li error-red"><span
+																id="error_time" class="clear-label"> </span> ${errorTime }</li>
 
 															<li id="trainingStartDateErr" style="display: none;"
 																class="style-li error-red">Select Training Start
@@ -247,11 +253,11 @@
 
 								<!-- table -->
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-xs-12"> 
 										<fieldset>
-											<legend>Search Result </legend>
+											<legend>Search Result and Create Calendar </legend>
 											<ct:if test="${!empty listCalendarSearch}">
-												<table border="1" id="datatablesfosrest"
+												<table border="1" 
 													class="table table-bordered table-responsive">
 													<thead>
 														<tr class="background-open-vacancies">
@@ -315,7 +321,7 @@
 																				var="listPersonalInfoTrainer" varStatus="loop">
 
 																				<option
-																					value="${listPersonalInfoTrainer.trainerId.id}">${listPersonalInfoTrainer.firstName}</option>
+																					value="${listPersonalInfoTrainer.id}">${listPersonalInfoTrainer.firstName}</option>
 																			</ct:forEach>
 																		</select>
 																	</ct:forEach>
@@ -325,8 +331,8 @@
 
 														</tr>
 													</ct:forEach>
-												</table>
-												<div    style="margin-left: 868px;     margin-top: 96px;" ><input type="submit" id="searchbtn" value="create"
+												</table><!--     margin-top: 96px; -->
+												<div    style="margin-left: 868px; "><input type="submit" id="searchbtn" value="create"
 													class="btn login-btn" onclick="return validate2();" />
 													</div>
 												<cf:hidden path="trainingInstitute2" value="${institute}" />
@@ -340,6 +346,7 @@
 
 
 							</div>
+							<%} %>
 							<!-- search Results 22222 -->
 							<div class="col-xs-12 " id="testt">
 
@@ -355,6 +362,7 @@
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
+															<th>BatchCode</th>
 															<th>Designation</th>
 															<th>Training Type</th>
 															<th>Schedule Code</th>
@@ -378,9 +386,10 @@
 															<td>${listCalendar[1]}</td>
 															<td>${listCalendar[2]}</td>
 															<td>${listCalendar[3]}</td>
-															<td>${listCalendar[4]} hrs</td>
-															<td>${listCalendar[5]}</td>
+															<td>${listCalendar[4]}</td>
+															<td>${listCalendar[5]}  hrs</td>
 															<td>${listCalendar[6]}</td>
+															<td>${listCalendar[7]}</td>
 
 
 														</tr>
