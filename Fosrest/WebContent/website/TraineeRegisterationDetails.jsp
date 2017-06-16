@@ -150,7 +150,7 @@
                                             </div>
                                           	<cf:select path="userType" class="form-control">
 													<cf:option value="" label="Select User Type" />
-													<cf:options items="${userType}" />
+													<cf:options items="${DesignationList}"  itemLabel="designationName" itemValue="designationName"/>
 												</cf:select>
                                         </div>
 

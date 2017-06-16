@@ -57,6 +57,7 @@ import com.ir.model.AssessmentQuestions;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CourseTrainee;
 import com.ir.model.CourseType;
+import com.ir.model.Designation;
 import com.ir.model.District;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
@@ -702,8 +703,9 @@ public class TraineeController {
 			//int sid=Integer.parseInt( (String) session.getAttribute("stateId"));
 			//System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa "+sid);
 			String userId = request.getParameter("userId");
-			Map<String , String> userType = lst.userTypeMap;			
+			//Map<String , String> userType = lst.userTypeMap;			
 			Map<String , String> titleMap = lst.titleMap;
+			List<Designation> DesignationList=pageLoadService.loadDesignation();
 			
 			if(userId != null && Integer.parseInt(userId) > 0){
 				personalInformationTrainee = traineeService.FullDetail(Integer.parseInt(userId));	
@@ -723,7 +725,8 @@ public class TraineeController {
 			}
 			//model.addAttribute("listStateMaster",this.adminService.listStateMaster2(sid));
 			model.addAttribute("listStateMaster", this.adminService.listStateMaster());
-			model.addAttribute("userType",userType);
+			//model.addAttribute("userType",userType);
+			model.addAttribute("DesignationList", DesignationList);
 			model.addAttribute("titleMap",titleMap);
 			
 			System.out.println("ttt"+session.getAttribute("profileId"));
