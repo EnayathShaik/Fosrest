@@ -110,7 +110,7 @@
 														</ul>
 													</div>
 													<cf:select path="trainingPhase" class="form-control"
-														onchange="batchInfo(this.value,'batchCode')">
+														onchange="batchInfo2(this.value,'batchCode')">
 														<cf:option value="0" label="Select Training Phase" />
 														<cf:options items="${TrainingPhaseList}"
 															itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
@@ -125,12 +125,8 @@
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
-												<%-- 	<cf:select path="batchCode" class="form-control">
-													<cf:option value="0" label="Select Schedule Code" />
-													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingCalendarId" />
-												</cf:select> --%>
 												<cf:select path="batchCode" class="form-control">
-														<cf:option value="0" label="Select Schedule Code" />
+														<cf:option value="0" label="Select Batch Code" />
 													</cf:select>
 											</div>
 												
@@ -363,12 +359,13 @@
 				val, '0', id);
 
 	}
-	else{
-		getBatch(document.getElementById("designation").value, document
-				.getElementById("trainingType").value, val, id);
-	}
+	
 } 
-
+ function batchInfo2(val, id){
+			getBatch(document.getElementById("designation").value, document
+					.getElementById("trainingType").value, val, id);
+		
+ }
 
 
 
@@ -408,21 +405,12 @@
 
 
 	function validateFields() {
-		if($("#testTable").find('input[type=checkbox]:checked').length == 0)
+		/* if($("#testTable").find('input[type=checkbox]:checked').length == 0)
 		{
 		     alert('Please select atleast one Trainee');
 		    $("#batchCodeDIV").css("display" , "none");
 		     return false;
-		}
-/* 		//	 alert($("#holidayDate").val());
-		//	 alert($("#trainingType").val());
-		if ($("#unit").val() == '') {
-			$("#uniteErr").css("display", "block");
-			return false;
-		} else if ($("#module").val() == '') {
-
-			$("#moduleErr").css("display", "block");
-			return false;
-		} */
+		} */	
+	
 	}
 </script>
