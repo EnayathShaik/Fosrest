@@ -41,15 +41,21 @@ public class TrainingSchedule {
 	
 	private String totalDuration;
 
-
-
 	public String getTotalDuration() {
 		return totalDuration;
 	}
-
 	public void setTotalDuration(String totalDuration) {
 		this.totalDuration = totalDuration;
 	}
+
+	private int days;
+	public int getDays() {
+return days;
+}
+public void setDays(int days) {
+this.days = days;
+}
+
 
 	public String getScheduleCode() {
 		return scheduleCode;

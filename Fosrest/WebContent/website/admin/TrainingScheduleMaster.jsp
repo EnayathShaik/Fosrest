@@ -84,7 +84,10 @@ function addRow(thisId){
 	$("#deleteRow"+getSrNo).css("display" , "block");
 	console.log("getSrNo "+getSrNo);
 	var nextId = parseInt(getSrNo)+1;
-	rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><input type='text' id='duration"+nextId+"' name='duration' placeholder='HH:mm' onblur='return chkDur(this);'/></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove</button></td></tr>";
+	
+	var time=generateOptionTexts( '01:00' );
+	var days=dayNumbers();
+	rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><select id='day"+nextId+"' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime"+nextId+"' name='startTime' class='form-control'>"+time+"</select></td><td><select id='endTime"+nextId+"' name='endTime' class='form-control'>"+time+"</select></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove</button></td></tr>";
 	
 	$("#subjectTable").append(rowString);
 }
@@ -111,6 +114,10 @@ function addRow(thisId){
 			document.getElementById(delId+i+1).setAttribute("id", newId);
 			document.getElementById("subject"+(delId+i+1)).setAttribute("id", "subject"+newId);
 			document.getElementById("duration"+(delId+i+1)).setAttribute("id", "duration"+newId);
+			document.getElementById("day"+(delId+i+1)).setAttribute("id", "day"+newId);
+			document.getElementById("startTime"+(delId+i+1)).setAttribute("id", "startTime"+newId);
+			document.getElementById("endTime"+(delId+i+1)).setAttribute("id", "endTime"+newId);
+		
 			document.getElementById("addRow"+(delId+i+1)).setAttribute("id", "addRow"+newId);
 			document.getElementById("deleteRow"+(delId+i+1)).setAttribute("id", "deleteRow"+newId);
 	}
@@ -121,11 +128,13 @@ function addRow(thisId){
  function addSubSchedule(){	
 	
 	 rowString = "";
-	rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><input type='text' id='duration1' name='duration'  placeholder='HH:mm' onblur='return chkDur(this);'/></td><td><button id='addRow1' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove</button></td></tr>";
+		var time=generateOptionTexts( '01:00' );
+		var days=dayNumbers();
+	rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control'>"+time+"</select></td><td><select id='endTime1' name='endTime' class='form-control'>"+time+"</select></td><td><button id='addRow1' onclick='return addRow(this);'>Add</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove</button></td></tr>";
 	$("#subjectTable").append(rowString); 
  }
 
- function chkDur(obj){
+/*  function chkDur(obj){
 	// alert(obj); 
 	 
 	 //alert("ff "+obj.value);   
@@ -137,8 +146,29 @@ function addRow(thisId){
 	}
 
 	
- } 
+ }  */
  
+ function chkDates(){
+	 var idval = $('#subjectTable tr:last').attr('id');
+	 //alert(idval);
+		for(var i=1;i<=idval;i++){
+			
+			var sTime=$("#startTime"+i).val();
+			var eTime=$("#endTime"+i).val();
+			//alert(sTime+" "+eTime);
+			var result=""+endTimeValidation(sTime,eTime);
+			
+			
+			if(result=="false"){
+				alert("invalid End date");
+				$("#endTime"+i).focus();  
+				
+				return false;
+			}
+		}
+		
+	 
+ }
  
 	function OnStart() { 
 	addSubSchedule();
@@ -261,14 +291,19 @@ function addRow(thisId){
 														</cf:select> 
 												</div>
 
+												
+												</div>
 													 <fieldset><legend>Add Subject</legend>
                                       		<table id="subjectTable" class="table table-bordered table-responsive">
                                       		<thead >
                                       		<tr class="background-open-vacancies">
                                       		
                                       		<th>Subject Name</th>
-                                      		<th><ul><li id="trErr" style="display: none;"
-																class="style-li error-red">Enter Duration for each SUBJECT	</li></ul>Duration</th>
+                                      		<th>Day</th>
+                                      		<th>Start Time</th>
+                                      		<th>End Time</th>
+                                      		<!-- <th><ul><li id="trErr" style="display: none;"
+																class="style-li error-red">Enter Duration for each SUBJECT	</li></ul>Duration</th> -->
                                       		<th>Operation</th>
                                       
                                       		</tr>
@@ -280,9 +315,8 @@ function addRow(thisId){
 													<div class="col-md-06 col-xs-12" style="margin-top: 39px;">
 														<input type="submit" id="searchbtn" value="Create"
 															style="float: right; padding: 10px 50px 10px 50px"
-															class="btn login-btn" />
+															class="btn login-btn" onclick="return chkDates();" />
 													</div>
-												</div>
 											</div>
 										</fieldset>
 									</div>
@@ -306,7 +340,7 @@ function addRow(thisId){
 															<th>Training Phase</th>
 															<th>Schedule Code</th>
 															
-															<th>Total Duration</th>
+															<th>Total Days</th>
 															
 		                                                </tr>
 													</thead>
@@ -318,7 +352,7 @@ function addRow(thisId){
 															<td>${listtrainingScheduleMaster[1]}</td>
 															<td>${listtrainingScheduleMaster[2]}</td>
 															<td>${listtrainingScheduleMaster[3]}</td>
-															<td>${listtrainingScheduleMaster[4]} hrs</td>
+															<td>${listtrainingScheduleMaster[4]} </td>
 															
 														</tr>
 													</ct:forEach>
@@ -369,7 +403,7 @@ function addRow(thisId){
 			$("#trainingPhaseErr").css("display", "block");
 			return false;
 		}
-		 var idval = $('#subjectTable tr:last').attr('id');
+		/*  var idval = $('#subjectTable tr:last').attr('id');
 	
 		 for(var i=1;i<=idval;i++){
 			
@@ -379,7 +413,7 @@ function addRow(thisId){
 				 $("#trErr").css("display", "block");
 				 return false;
 				 } 
-		 }
+		 } */
 		
 
 	}

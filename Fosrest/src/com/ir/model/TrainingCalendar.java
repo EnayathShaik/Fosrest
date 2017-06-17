@@ -215,6 +215,7 @@ public class TrainingCalendar {
 	public void setSeqNo(int seqNo) {
 		this.seqNo = seqNo;
 	}*/
+	
 			private String trainingType;
 			private String trainingPhase;
 			private String designation;
@@ -227,15 +228,22 @@ public class TrainingCalendar {
 			private String trainingInstitute;
 			//private String trainerName;
 			private String totalduration;
-			private String trainingStartDate;
-			private String trainingEndDate;
-		
 			public String getTotalduration() {
 				return totalduration;
 			}
 			public void setTotalduration(String totalduration) {
 				this.totalduration = totalduration;
 			}
+			private String totalDays;
+			public String getTotalDays() {
+				return totalDays;
+			}
+			public void setTotalDays(String totalDays) {
+				this.totalDays = totalDays;
+			}
+			private String trainingStartDate;
+			private String trainingEndDate;
+		
 			public String getTrainingEndDate() {
 				return trainingEndDate;
 			}

@@ -9,12 +9,19 @@ public class TrainingCalendarForm {
 	private String trainingStartDate;
 	private String trainingEndDate;
 	private String totalDuration;
+	private String totalDays;
 	/*private String assessmentDateTime;
 	private String assessmentAgencyName;
 	private int assessor;
 	private String seatCapacity;
 	private String type;*/
 	private String designation2;
+	public String getTotalDays() {
+		return totalDays;
+	}
+	public void setTotalDays(String totalDays) {
+		this.totalDays = totalDays;
+	}
 	public String getDesignation2() {
 		return designation2;
 	}

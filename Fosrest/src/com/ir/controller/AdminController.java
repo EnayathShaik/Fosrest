@@ -3076,6 +3076,9 @@ public class AdminController {
 		model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
 		return "trainingschedule123";
 	}
+	
+	
+	
 	@RequestMapping(value = "/trainingScheduleMasterlist", method = RequestMethod.POST)
 	public String listtrainingScheduleMaster(
 			@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm form, Model model,
@@ -3087,8 +3090,13 @@ public class AdminController {
 		
 		String subject[]=request.getParameterValues("subject");
 		String duration[]=request.getParameterValues("duration");
+		String day[]=request.getParameterValues("day");
+		String startTime[]=request.getParameterValues("startTime");
+		String endTime[]=request.getParameterValues("endTime");
+		
+		
 	
-		 adminService.saveTrainingSchedule(subject,duration,form);
+		 adminService.saveTrainingSchedule(subject,duration,day,startTime,endTime,form);
 			
 			return "redirect:trainingschedule123.fssai";
 		}
@@ -3217,9 +3225,10 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   			
   			Object[] obj = (Object[]) list.get(0);
   	    	
-  	    	String Duration=obj[7].toString();
+  	    	//String Duration=obj[7].toString();
+  	    	String days=obj[8].toString();
   	    	
-  	    	String result=this.adminService.calculateEndDate(form.getTrainingStartDate(),Duration,form.getTrainingInstitute());
+  	    	String result=this.adminService.calculateEndDate(form.getTrainingStartDate(),days,form.getTrainingInstitute());
   	    	
   	    	if(!(result.equals("clash"))){
   	    

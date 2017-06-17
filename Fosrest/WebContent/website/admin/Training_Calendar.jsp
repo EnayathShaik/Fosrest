@@ -7,7 +7,6 @@
 
 		flatpickr("#trainingStartDate", {
 
-			enableTime : true
 		});
 
 		if ('${profileId}' == 2) {
@@ -265,7 +264,7 @@
 															<th>Designation</th>
 															<th>Training Type</th>
 															<th>Schedule Code</th>
-															<th>Training Duration</th>
+															<!-- <th>Training Duration</th> -->
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
 															<th>Subject</th>
@@ -284,7 +283,7 @@
 															<td>${listCalendarSearch[0]}</td>
 															<td>${listCalendarSearch[1]}</td>
 															<td>${listCalendarSearch[6]}</td>
-															<td>${listCalendarSearch[7]} hrs</td>
+															<%-- <td>${listCalendarSearch[7]} hrs</td> --%>
 															<cf:hidden path="designation2"
 																value="${listCalendarSearch[3]}" />
 															<cf:hidden path="trainingType2"
@@ -295,8 +294,10 @@
 																value="${listCalendarSearch[6]}" />
 
 
-															<cf:hidden path='totalDuration'
-																value="${listCalendarSearch[7]}" />
+															<%-- <cf:hidden path='totalDuration'
+																value="${listCalendarSearch[7]}" /> --%>
+																<cf:hidden path='totalDays'
+																value="${listCalendarSearch[8]}" />
 
 															<td>${startDate}</td>
 															<td>${endDate}</td>
@@ -367,7 +368,7 @@
 															<th>Training Type</th>
 															<th>Schedule Code</th>
 															<th>Training Institute</th>
-															<th>Total Duration</th>
+															<th>Total Days</th>
 
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
@@ -387,7 +388,7 @@
 															<td>${listCalendar[2]}</td>
 															<td>${listCalendar[3]}</td>
 															<td>${listCalendar[4]}</td>
-															<td>${listCalendar[5]}  hrs</td>
+															<td>${listCalendar[5]}</td>
 															<td>${listCalendar[6]}</td>
 															<td>${listCalendar[7]}</td>
 

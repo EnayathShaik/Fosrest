@@ -89,5 +89,12 @@ INSERT INTO languages(  languageId, languageName) VALUES (2, 'Hindi');
 INSERT INTO languages(  languageId, languageName) VALUES (3, 'Marathi');
 
 
-drop table trainingschedule-----niranjan
-drop table personalinformationtrainer---supriya.
+--drop tables 17/06/2017
+
+drop table trainingcalendarmapping;
+drop table subjectmapping;
+drop table trainingschedule;
+drop table trainingcalendar;
+drop table personalinformationtrainer cascade;
+drop table personalinformationtrainee cascade;
+drop table nomineetrainee cascade;

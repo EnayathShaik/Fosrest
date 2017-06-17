@@ -516,17 +516,17 @@ List<PersonalInformationTrainer> trainingNameList2(String s);
 
 public List<StateMaster> listStateMaster2(int sid);
 
-String saveTrainingSchedule(String[] subject, String[] duration, TrainingScheduleForm form);
-List<ModuleMaster>  allSubjects();
+public String saveTrainingSchedule(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form);
+public List<ModuleMaster>  allSubjects();
 
-List listCalendarSearch(TrainingCalendarForm form);
+public List listCalendarSearch(TrainingCalendarForm form);
 
-String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
+public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
 public List<MappingMasterTrainer> trainerMappingState(String sid);
 
-List listSchCodeSubjects(String scheduleCode);
+public List listSchCodeSubjects(String scheduleCode);
 
-String calculateEndDate(String startDate,String duration,String institute);
+public String calculateEndDate(String startDate,String duration,String institute);
 
 public List<TrainingCalendar> listBatchCodeList();
 
