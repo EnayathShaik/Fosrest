@@ -137,12 +137,14 @@
 			<ct:forEach items="${listStateMaster}" var="ts" varStatus="loop">
 			
 			if ('${ts.stateId}' == this.value) {
+				var a = "";
 				if(this.checked){
-					alert("KKKKKKKKK");
-					var a = "";
+					//alert("KKKKKKKKK");
+					
 					a = '${ts.stateName}' + "," + $('#stateBox').val();
 					$('#stateBox').val(a);
 				}
+				
 				else{
 					var s="";
 					$('#stateBox').val(s);
@@ -190,7 +192,7 @@
 								<cf:input path="logId" type="hidden" />
 								<cf:input path="status" type="hidden" />
 								<cf:input type="hidden" path="id" />
-								<div class="form-group">
+								<div class="form-group" id="abc" >
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>User Type:</strong></li>
@@ -201,7 +203,7 @@
 
 									</div>
 									<br>
-									<ct:forEach items="${DesignationList}" var="des">
+									<ct:forEach items="${DesignationList}" var="des" >
 
 										<cf:checkbox path="userType"
 											id="userType_${des.designationName}"
@@ -218,6 +220,8 @@
 											<li class="style-li error-red">*</li>
 											<li id="AadharNumberErr" style="display: none;"
 												class="style-li error-red">Please Enter Aadhar No.</li>
+												<li id="aadharNumberErr2" style="display: none;"
+																	class="style-li error-red">Aadhar No. should be 12 digit</li>
 											<li class="style-li error-red"><span id="aadhar_status"></span>
 										</ul>
 									</div>
@@ -226,21 +230,22 @@
 										onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
 										onblur="ck_aadhar('personalinformationtrainer');" />
 								</div>
-								<div class="form-group" id="on">
+								<%-- <div class="form-group" id="on">
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>Organization Name:</strong></li>
-											<li class="style-li error-red"></li>
+											<li class="style-li error-red">*</li>
+											
 
-											<li id="s1" style="display: none;" class="style-li error-red">No.
-												Of Training Sessions Conducted can not be blank.</li>
+											<li id="s1" style="display: none;" class="style-li error-red">
+												Organization Name can not be blank.</li>
 
 										</ul>
 									</div>
 
 									<cf:input type="text" path="orgName" class="form-control"
 										placeholder="Organization Name" required="" />
-								</div>
+								</div> --%>
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -443,7 +448,7 @@
 										</ul>
 									</div>
 									<cf:input type="text" path="Email" class="form-control"
-										placeholder="Email" onblur="emailVal(this.id,this.value)"
+										placeholder="Email" onblur="emailVal(this.id,this.value);return false;"
 										required="" />
 
 								</div>
@@ -655,24 +660,20 @@
 							<!-- left side -->
 							<div class="col-md-6 col-xs-12">
 								<div class="form-group">
-									<div>
+								<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>Languages in which
 													trainer wish to conduct training:</strong></li>
 											<li class="style-li error-red"></li>
-
-											<li id="AssociatedWithAnyTrainingInstituteErr"
-												style="display: none;" class="style-li error-red">Select
-												the associated Training Institute.</li>
-
+											 <li id="languagesErr" style="display: none;"
+												class="style-li error-red">Language can not be blank.</li>
 										</ul>
 									</div>
-
 									<cf:select path="languages" class="form-control">
-										<%-- <cf:option value="0" label="Select Training Institude" /> --%>
+										 <cf:option value="0" label="Select Language" />
 										<cf:options items="${LanguagesList}" itemValue="languageId"
 											itemLabel="languageName" />
-										<cf:option value="0" label="Others" />
+										<%-- <cf:option value="0" label="Others" /> --%>
 									</cf:select>
 								</div>
 
@@ -738,7 +739,7 @@
 											<li class="style-li"><strong>Selected States:</strong></li>
 											<li class="style-li error-red">*</li>
 											<li id="state" style="display: none;"
-												class="style-li error-red">Please Enter state.</li>
+												class="style-li error-red">Please select states from above link.</li>
 										</ul>
 									</div>
 									<ul id="results"></ul>
@@ -945,6 +946,7 @@
 		}
 	}
 	function validateFields() {
+		
 
 		var isUpdate = '${isUpdate}';
 
@@ -977,20 +979,22 @@
 		$("#expInYearErr").css("display", "none");
 		$("#expInMonthErr").css("display", "none");
 		$("#otherTrainingInstituteErr").css("display", "none");
-
+		$("#s1").css("display", "none");
+		$("#languagesErr").css("display" , "none");
+		$("#state").css("display", "none");
+		 $("#aadharNumberErr2").css("display" , "none");
 		//$("#AssociatedWithAnyTrainingInstituteErr").css("display" , "none"); 
 
-		/* $("#userType_${des.designationName}").click(function(){
-		if($('input[type=checkbox]:checked').length == 0)
-		{
-		alert('Please select atleast one checkbox');
-		}
-		}); */
-		/*  if($("#userType").val() == ''){
-		 $("#userTypeErr").css("display" , "block");
-		 
-			return false; 
-		} */
+	
+		
+			
+		if($("#abc").find('input[type=checkbox]:checked').length == 0)
+			{
+			    // alert('Please select atleast one checkbox');
+			     $("#userTypeErr").css("display" , "block");
+			     return false;
+			} 
+
 		if ($("#title").val() == 0) {
 
 			$("#titleErr").css("display", "block");
@@ -1002,7 +1006,16 @@
 			$("#AadharNumberErr").css("display", "block");
 			return false;
 		}
+		if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
+   		 $("#aadharNumberErr2").css("display" , "block");
+    		 return false;
+      	 }
+		/* if ($("#orgName").val() == 0) {
 
+			$("#s1").css("display", "block");
+			return false;
+		}
+ */
 		if ($("#firstName").val() == 0) {
 
 			$("#firstNameErr").css("display", "block");
@@ -1099,10 +1112,18 @@
 			$("#resCityErr").css("display", "block");
 			return false;
 		}
-		if ($("#resPincode").val().match(/^[0-9]{6}$/) == null) {
+		 if ($("#resPincode").val().match(/^[0-9]{6}$/) == null) {
 			$("#resPincodeErr").css("display", "block");
 			return false;
-		}
+		} 
+		 if($("#languages").val() == 0){
+			 $("#languagesErr").css("display" , "block");
+			return false;
+		 }  
+		 if ($("#stateBox").val()== 0) {
+				$("#state").css("display", "block");
+				return false;
+			} 
 		if ($("#expInYear").val() == 0) {
 			$("#expInYearErr").css("display", "block");
 			return false;
@@ -1122,11 +1143,8 @@
 				return false;
 			 
 		 }  */
-		/*   if($("#AssociatedWithAnyTrainingInstitute").val() == 0){
-				 $("#AssociatedWithAnyTrainingInstituteErr").css("display" , "block");
-				return false;
-			 }
-		 */
+		   
+		 
 		if (!(isUpdate != null && isUpdate == "Y")) {
 
 			if ($("#txtInput").val() == '') {
@@ -1158,5 +1176,8 @@
 			$("#Oti").css("display", "none");
 		}
 	}
+	
+
+		
 </script>
 

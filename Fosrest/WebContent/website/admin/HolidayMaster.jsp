@@ -118,7 +118,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                             <fieldset>
-                                            <legend>Training Schedule</legend>
+                                            <legend>Holiday Master</legend>
                                             <ct:if test="${!empty listHolidayMaster}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                 <thead>

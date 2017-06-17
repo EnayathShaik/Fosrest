@@ -149,8 +149,8 @@
                                                 </ul>
                                             </div>
                                           	<cf:select path="userType" class="form-control">
-													<cf:option value="" label="Select User Type" />
-													<cf:options items="${DesignationList}"  itemLabel="designationName" itemValue="designationName"/>
+													<cf:option value="" label="Select Trainee Type" />
+													<cf:options items="${DesignationList}"  itemLabel="designationName" itemValue="designationId"/>
 												</cf:select>
                                         </div>
 
@@ -160,6 +160,8 @@
                                             <li class="style-li"><strong>Aadhar Number:</strong></li><li class="style-li error-red"> * </li>
                                              <!--  valid -->
                                             <li id="AadharNumberErr" style="display:none;" class="style-li error-red" >Aadhar Number can not be blank.</li>
+                                            <li id="aadharNumberErr2" style="display: none;"
+																	class="style-li error-red">Aadhar No. should be 12 digit</li>
                                             <li class="style-li error-red">
                                             <span id="aadhar_status" ></span>
 									
@@ -443,7 +445,7 @@
                                         </ul>
                                     </div>
                   
-                                    <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="emailVal(this.id,this.value)" required=""/>
+                                    <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="emailVal(this.id,this.value);return false;" required=""/>
                                 </div>
 
                             </div>
@@ -715,105 +717,114 @@
 		 $("#empDateErr").css("display" , "none");
 		 $("#dateRetirementErr").css("display" , "none");
 		 $("#postDistrictErr").css("display" , "none");
+		 $("#aadharNumberErr2").css("display", "none");
 		 
    	    if($("#userType").val() == ''){
    		 
    		$("#userTypeErr").css("display" , "block");
    		return false;
-   	 } else if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
+   	 }  
+   	 if ($("#AadharNumber").val() == 0) {
+   		 $("#AadharNumberErr").css("display" , "block");
+ 	
+ 		return false;
+ 	}
+   	    if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
  		/* alert("Please Enter 12 digit Adhar number"); */
- 		 $("#AadharNumberErr").css("display" , "block");
+ 			$("#aadharNumberErr2").css("display", "block");
  	     return false;
-   	 }else if($("#empID").val() == ''){
+   	 } 
+   	
+   	if($("#empID").val() == ''){
    		 $("#empIDErr").css("display" , "block");
  		return false; 
-   	 }else if($("#dob").val() == ''){
+   	 } if($("#dob").val() == ''){
    		 $("#dobErr").css("display" , "block");
   		return false;
    	 } 
-   	 else if($("#dojService").val() == ''){
+   	 if($("#dojService").val() == ''){
    		 $("#dojServiceErr").css("display" , "block");
    		return false;
-   	}else if($("#dojPost").val() == ''){
+   	}if($("#dojPost").val() == ''){
       		 $("#dojPostErr").css("display" , "block");
         		return false;
-        }else if($("#empDate").val() == ''){
+        } if($("#empDate").val() == ''){
              $("#empDateErr").css("display" , "block");
              return false;
         }
-   	 else if($("#title").val() == ''){
+   	  if($("#title").val() == ''){
    		 $("#titleErr").css("display" , "block");
     		return false; 
-   	 }else if($("#firstName").val() == ''){
+   	 } if($("#firstName").val() == ''){
    		 $("#firstNameErr").css("display" , "block");
  		return false; 
-	 }else if($("#MiddleName").val() == ''){
+	 } if($("#MiddleName").val() == ''){
    		 $("#MiddleNameErr").css("display" , "block");
  		return false; 
-	 } else if($("#LastName").val() == ''){
+	 }  if($("#LastName").val() == ''){
    		 $("#LastNameErr").css("display" , "block");
   		return false; 
- 	 }else if($("#FatherName").val() == ''){
+ 	 } if($("#FatherName").val() == ''){
    		 $("#FatherNameErr").css("display" , "block");
    		return false; 
-  	 }else if($("#dateRetirement").val() == ''){
+  	 } if($("#dateRetirement").val() == ''){
          $("#dateRetirementErr").css("display" , "block");
          return false;
-    }else if($("#postDistrict").val() == ''){
+    }if($("#postDistrict").val() == ''){
         $("#postDistrictErr").css("display" , "block");
         return false;
    }
- 	 else if($("#correspondenceAddress1").val() == ''){
+ 	  if($("#correspondenceAddress1").val() == ''){
    		 $("#correspondenceAddress1Err").css("display" , "block");
     		return false; 
   	 }
-  	 else if($("#correspondenceState").val() == 0){
+  	  if($("#correspondenceState").val() == 0){
    		 $("#correspondenceStateErr").css("display" , "block");
   		return false; 
- 	 }else if($("#Email").val() == ''){
+ 	 } if($("#Email").val() == ''){
    		 $("#EmailErr").css("display" , "block");
    		return false; 
-  	 }else if($("#correspondenceDistrict").val() == 0){
+  	 } if($("#correspondenceDistrict").val() == 0){
    		 $("#correspondenceDistrictErr").css("display" , "block");
     		return false;
-  	 }else if($("#correspondenceCity").val() == 0){
+  	 } if($("#correspondenceCity").val() == 0){
    		 $("#correspondenceCityErr").css("display" , "block");
     		return false;
-  	 }else if($("#correspondencePincode").val().match(/^[0-9]{6}$/) == null){
+  	 } if($("#correspondencePincode").val().match(/^[0-9]{6}$/) == null){
   		 alert("invalid pin");
   		 $("#correspondencePincodeErr").css("display" , "block");
   		return false;
-  	 }else if($("#mobile").val().match(/^[0-9]{10}$/) == null){
+  	 }if($("#mobile").val().match(/^[0-9]{10}$/) == null){
     	
       		 $("#mobileErr").css("display" , "block");
       		return false;
   	 }
    	   
    	
-   	else  if($("#ResidentialLine1").val() == ''){
+   	  if($("#ResidentialLine1").val() == ''){
   		 $("#ResidentialLine1Err").css("display" , "block");
    		return false;
 	 }
    	   
   
-	else if($("#resState").val() == 0){
+	 if($("#resState").val() == 0){
 		 $("#resStateErr").css("display" , "block");
  		return false;
 	 }
-	else if($("#residentialDistrict").val() == 0){
+	 if($("#residentialDistrict").val() == 0){
 		 $("#residentialDistrictErr").css("display" , "block");
 		return false;
 	 }
 	
-	else if($("#resCity").val() == 0){
+	 if($("#resCity").val() == 0){
 		 $("#resCityErr").css("display" , "block");
 		return false;
 	 }
-	else if($("#resPincode").val().match(/^[0-9]{6}$/) == null){
+	 if($("#resPincode").val().match(/^[0-9]{6}$/) == null){
 		 $("#resPincodeErr").css("display" , "block");
 		return false;
 	} 
-		else if(!(isUpdate !=null && isUpdate== "Y")){
+		 if(!(isUpdate !=null && isUpdate== "Y")){
 			if($("#txtInput").val() == ''){
 			 $("#txtInputErr").css("display" , "block");
 			return false;

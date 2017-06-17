@@ -469,13 +469,13 @@ public void setSpecialisedArea(String specialisedArea) {
 	this.specialisedArea = specialisedArea;
 }
 
-public String getOrgName() {
+/*public String getOrgName() {
 	return orgName;
 }
 
 public void setOrgName(String orgName) {
 	this.orgName = orgName;
-}
+}*/
 
 public String getNoOfTrainings() {
 	return noOfTrainings;
@@ -486,7 +486,7 @@ public void setNoOfTrainings(String noOfTrainings) {
 }
 
 	private String specialisedArea;
-	private String orgName;
+	//private String orgName;
 	private String noOfTrainings;
 	
 private String Status;

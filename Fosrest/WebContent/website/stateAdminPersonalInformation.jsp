@@ -66,14 +66,19 @@
 															<ul class="lab-no">
 																<li class="style-li"><strong>Aadhar
 																		Number:</strong></li>
-																<li class="style-li error-red"><cf:errors
-																		path="aadharNumber" cssClass="error" /></li>
+																<%-- <li class="style-li error-red"><cf:errors
+																		path="aadharNumber" cssClass="error" /></li> --%>
+																		<li id="aadharNumberErr" style="display: none;"
+																	class="style-li error-red">Aadhar No. can not be
+																	blank.</li>
+																	<li id="aadharNumberErr2" style="display: none;"
+																	class="style-li error-red">Aadhar No. should be 12 digit</li>
 															</ul>
 														</div>
 														<cf:input path="aadharNumber" maxlength="12"
 															onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
 															placeholder="Aadhar Number" class="form-control"
-															required="required" />
+															 />
 													</div>
 													<div class="form-group">
 														<div>
@@ -89,7 +94,7 @@
 														</div>
 
 														<cf:input type="text" path="email" class="form-control"
-															placeholder="Email" onblur="emailVal(this.id,this.value)"
+															placeholder="Email" onblur="emailVal(this.id,this.value); return false;" 
 															required="" />
 													</div>
 														<div class="form-group">
@@ -165,7 +170,7 @@
 														</ul>
 													</div>
 													<cf:input path="firstName" placeholder="First Name"
-														class="form-control" />
+														class="form-control" onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
 
 												</div>
 
@@ -183,7 +188,7 @@
 														</ul>
 													</div>
 													<cf:input path="middleName" placeholder="Middle Name"
-														class="form-control" />
+														class="form-control" onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
 
 												</div>
 												<div class="form-group">
@@ -200,7 +205,7 @@
 														</ul>
 													</div>
 													<cf:input path="lastName" placeholder="Last Name"
-														class="form-control" />
+														class="form-control" onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
 
 												</div>
 											
@@ -217,9 +222,10 @@
 
 														</ul>
 													</div>
-													<cf:input path="designation" placeholder="designation"
-														class="form-control" />
-
+                                                    <cf:select path="designation" class="form-control">
+													<cf:option value="" label="Select Designation" />
+													<cf:options items="${DesignationList}" itemValue="designationId" itemLabel="designationName"/>
+												</cf:select>
 												</div>
 												
 															  <div class="form-group">
@@ -231,7 +237,7 @@
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="landLine" class="form-control"  placeholder="landLine"  minlength="2"  maxlength="8"  required=""
+                                    <cf:input type="text" path="landLine" class="form-control"  placeholder="landLine"  minlength="8"  maxlength="8"  required=""
                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
 
@@ -294,16 +300,39 @@
                 	$("#stateErr").css("display" , "none");
                 	$("#pincodeErr").css("display" , "none");
                 	$("#stateErr").css("display" , "none");
-                
+                	$("#aadharNumberErr").css("display" , "none");
+                	$("#aadharNumberErr2").css("display" , "none");
+                	$("#mobileErr").css("display" , "none");
+                	$("#landLineErr").css("display" , "none");
                 	
-                	if($("#empID").val() == ''){
+                	if($("#empID").val() == 0){
     				$("#empIDErr1").css("display" , "block");
     				return false;
     				}
-                	
+                	if($("#aadharNumber").val()==0){
+                		$("#aadharNumberErr").css("display" , "block");
+                		  return false;
+                	}
+                	 if($("#aadharNumber").val().match(/^[0-9]{12}$/) == null){
+                		 $("#aadharNumberErr2").css("display" , "block");
+                 		 return false;
+                   	 }
+                	if($("#firstName").val() == 0){
+    					$("#firstNameErr").css("display" , "block");
+    					return false;
+    					}
+                	if($("#middleName").val() == ''){
+    					$("#middleNameErr").css("display" , "block");
+    					return false;
+    					}
                 	if($("#email").val() == 0){
                		 
     					$("#EmailErr").css("display" , "block");
+    					return false;
+    					}
+                	if($("#lastName").val() == ''){
+   					 
+    					$("#LastNameErr").css("display" , "block");
     					return false;
     					}
                 	if($("#state").val() < 1 || $("#state").val()=='' ){ 
@@ -311,9 +340,19 @@
 						alert("Select STATE");
 						return false;
 						}
+                	if($("#designation").val() == 0){
+						 
+						$("#designationErr").css("display" , "block");
+						return false;
+						}
     					if($("#address1").val() == 0){
     						  
     						$("#address1Err").css("display" , "block");
+    						return false;
+    						}
+
+    					if($("#landLine").val() == 0){
+    						$("#landLineErr").css("display" , "block");
     						return false;
     						}
     					if($("#address2").val() == 0){
@@ -321,46 +360,16 @@
     						$("#address2Err").css("display" , "block");
     						return false;
     						}
-    					
-    					if($("#pincode").val() == 0){
-   						 
-    						$("#pincodeErr").css("display" , "block");
-    						return false;
-    						}
-                	if($("#firstName").val() == 0){
-					$("#firstNameErr").css("display" , "block");
-					return false;
-					}
-					if($("#middleName").val() == ''){
-					 
-					$("#middleNameErr").css("display" , "block");
-					return false;
-					}
-					if($("#lastName").val() == ''){
-					 
-					$("#LastNameErr").css("display" , "block");
-					return false;
-					}
-					
-			 
-					if($("#designation").val() == 0){
-						 
-						$("#designationErr").css("display" , "block");
-						return false;
-						}
-				
-					if($("#landLine").val() == 0){
-						 
-						$("#landLineErr").css("display" , "block");
-						return false;
-						}
-					if($("#mobileNo").val() == 0){
-						 
-						$("#mobileNoErr").css("display" , "block");
-						return false;
-						}
-
-					 var el = document.getElementById('state');
+    					if($("#mobileNo").val().match(/^[0-9]{10}$/) == null){
+    				    	
+   			      		 $("#mobileErr").css("display" , "block");
+   			      		return false;
+   			  	       }
+    					if($("#pincode").val().match(/^[0-9]{6}$/) == null){
+    				  		 $("#pincodeErr").css("display" , "block");
+    				  		return false;
+    				  	 }
+    				var el = document.getElementById('state');
 	               	 var text = el.options[el.selectedIndex].innerHTML;
 	               
 	            	 document.getElementById("stateName").value=text;
