@@ -1,11 +1,28 @@
 package com.ir.form;
 
 public class NominateTraineeForm {
-private String userType;
+private String designation;
 private String unit;
 private String module;
 private String batchCode;
+private String trainingPhase;
+private String trainingType;
 
+public String getTrainingPhase() {
+	return trainingPhase;
+}
+
+public void setTrainingPhase(String trainingPhase) {
+	this.trainingPhase = trainingPhase;
+}
+
+public String getTrainingType() {
+	return trainingType;
+}
+
+public void setTrainingType(String trainingType) {
+	this.trainingType = trainingType;
+}
 
 public String getBatchCode() {
 	return batchCode;
@@ -15,12 +32,14 @@ public void setBatchCode(String batchCode) {
 	this.batchCode = batchCode;
 }
 
-public String getUserType() {
-	return userType;
+
+
+public String getDesignation() {
+	return designation;
 }
 
-public void setUserType(String userType) {
-	this.userType = userType;
+public void setDesignation(String designation) {
+	this.designation = designation;
 }
 
 public String getUnit() {

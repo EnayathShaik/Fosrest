@@ -3928,5 +3928,18 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		}
 		return mccList;
 	}
+
+	@Override
+	public List<TrainingCalendar> listBatchcodeInfo(String batchCode) {
+		// TODO Auto-generated method stub
+		System.out.println("inside listBatchcodeInfo with parameter");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<TrainingCalendar> mccList = null;
+		mccList = session.createSQLQuery(
+				"select distinct m.moduleName,p.firstName,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where tc.trainingCalendarId='"
+						+ batchCode + "'  ")
+				.list();
+		return mccList;
+	}
 	
 }

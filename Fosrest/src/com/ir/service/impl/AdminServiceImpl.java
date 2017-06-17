@@ -1622,4 +1622,12 @@ public List<TrainingCalendar> listBatchCodeList() {
 	// TODO Auto-generated method stub
 	return this.adminDAO.listBatchCodeList();
 }
+
+@Override
+@Transactional
+public List<TrainingCalendar> listBatchcodeInfo(String batchCode) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listBatchcodeInfo(batchCode);
+}
+
 }

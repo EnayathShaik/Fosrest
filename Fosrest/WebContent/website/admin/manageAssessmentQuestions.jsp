@@ -343,27 +343,7 @@ function getQuestionNo(){
 
                                             <!-- left side -->
                                             <div class="col-md-6 col-xs-12">
-                                                
-                                                  <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>Chapter Name:</strong></li>
-                                                           
-                                                            <li class="style-li error-red">
-                                                            <span id="name_status" class = "clear-label"> </span>
-                                                           <%--  ${created } --%></li>
-                                                        </ul>
-                                                    </div>
-												<cf:select path="unitCode1" class="form-control" onchange="getModule(this.value,'moduleCode1');">
-													
-													<cf:options items="${listUnitMaster}" itemLabel='unitName' itemValue="unitId" />
-												</cf:select> 
-											</div>
-                                                    
-                                            </div> <!-- left side ends -->
- 										<div class="col-md-6 col-xs-12">
-                                            <!-- right side -->
-                                                   <div class="form-group">  
+                                                 <div class="form-group">  
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Module Name:</strong></li>
@@ -378,6 +358,26 @@ function getQuestionNo(){
     												</ct:forEach>
 												 </cf:select>
 											</div>
+                                                <%--   <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Chapter Name:</strong></li>
+                                                           
+                                                            <li class="style-li error-red">
+                                                            <span id="name_status" class = "clear-label"> </span>
+                                                            ${created }</li>
+                                                        </ul>
+                                                    </div>
+												<cf:select path="unitCode1" class="form-control" onchange="getModule(this.value,'moduleCode1');">
+													
+													<cf:options items="${listUnitMaster}" itemLabel='unitName' itemValue="unitId" />
+												</cf:select> 
+											</div> --%>
+                                                    
+                                            </div> <!-- left side ends -->
+ 										<div class="col-md-6 col-xs-12">
+                                            <!-- right side -->
+                                                  
                                              </div> <!-- rigth side ends -->
                                             <!-- button -->
                                             <div class="row">
@@ -439,8 +439,24 @@ function getQuestionNo(){
                                                 
                                                 <!-- left side -->
                                                 <div class="col-md-6 col-xs-12">
-                                                    
-                                                      <div class="form-group">
+                                                      <div class="form-group">  
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Module Name:</strong></li>
+                                                             <li id="moduleCodeErr" style="display:none;" class="style-li error-red" > Enter Module Code</li>
+                                            
+                                                            <li class="style-li error-red">
+                                                            <span id="name_status" class = "clear-label"> </span>
+                                                            <%-- ${created } --%></li>
+                                                        </ul>
+                                                    </div>
+												<cf:select  path="moduleCode2"   class="form-control"  onchange="getQuestionNo();" >
+												   <ct:forEach var="twofields" items="${listModuleMaster}">
+       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleCode} - ${twofields.moduleName}"/></cf:option>
+    												</ct:forEach>
+												 </cf:select>
+											</div> 
+                                                <%--       <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Chapter Name:</strong></li>
@@ -448,14 +464,14 @@ function getQuestionNo(){
                                             
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
-                                                            <%-- ${created } --%></li>
+                                                            ${created }</li>
                                                         </ul>
                                                     </div>
 												<cf:select  path="unitCode2" class="form-control" onchange="getModule(this.value,'moduleCode2')" >
 													
 													<cf:options items="${listUnitMaster}" itemLabel="unitCode" itemValue="unitId" />
 												</cf:select> 
-											</div>
+											</div> --%>
                                                      
                                                     <div class="form-group">
                                                         <div>
@@ -482,6 +498,17 @@ function getQuestionNo(){
                                                       <cf:input path="questionTitle" class="form-control" placeholder="Question Title" />
                                                     </div>
                                                     
+                                                      <div class="form-group">
+                                                        <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Answer Number:</strong></li>
+                                                                  <li id="correctAnswerErr" style="display:none;" class="style-li error-red" >Invalid Answer number</li>
+                                                                <li class="style-li error-red"> </li>
+                                                            </ul>
+                                                        </div>
+                                                        <cf:input id="correctAnswer" path="correctAnswer" onblur="answerno(this.id,this.value);" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
+                                                        
+                                                    </div>
                                                     
                                                     
                                                     
@@ -489,23 +516,7 @@ function getQuestionNo(){
                                                 
                                                 <!-- right side -->
                                                 <div class="col-md-6 col-xs-12">
-                                                  <div class="form-group">  
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>Module Name:</strong></li>
-                                                             <li id="moduleCodeErr" style="display:none;" class="style-li error-red" > Enter Module Code</li>
-                                            
-                                                            <li class="style-li error-red">
-                                                            <span id="name_status" class = "clear-label"> </span>
-                                                            <%-- ${created } --%></li>
-                                                        </ul>
-                                                    </div>
-												<cf:select  path="moduleCode2"   class="form-control"  onchange="getQuestionNo();" >
-												   <ct:forEach var="twofields" items="${listModuleMaster}">
-       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleCode} - ${twofields.moduleName}"/></cf:option>
-    												</ct:forEach>
-												 </cf:select>
-											</div> 
+                                                
                                                 <%--     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
@@ -558,17 +569,7 @@ function getQuestionNo(){
                                                     </fieldset>
                                                     <br />
                                                     <br />
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Answer Number:</strong></li>
-                                                                  <li id="correctAnswerErr" style="display:none;" class="style-li error-red" >Invalid Answer number</li>
-                                                                <li class="style-li error-red"> </li>
-                                                            </ul>
-                                                        </div>
-                                                        <cf:input id="correctAnswer" path="correctAnswer" onblur="answerno(this.id,this.value);" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
-                                                        
-                                                    </div>
+                                                  
                                                     <cf:input type="hidden" path="id" class="form-control" placeholder="Help Text" />
                                                     <button onClick="return validateFields();" class="btn login-btn pull-right">Save</button>
                                                 </div> 

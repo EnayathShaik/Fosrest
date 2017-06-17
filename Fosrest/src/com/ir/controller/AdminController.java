@@ -589,6 +589,8 @@ public class AdminController {
 		if(checkAccess(session))
 			return "redirect:login.fssai";
 		//String userId = request.getParameter("userId");
+		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		model.addAttribute("DesignationList", DesignationList);
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("stateAdminForm", new stateAdminForm());
 		//model.addAttribute("liststateadmin", this.adminService.liststateadmin());
@@ -2719,9 +2721,13 @@ public class AdminController {
 		return "redirect:login.fssai";
 		}
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
+		List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
 		model.addAttribute("DesignationList", DesignationList);
+		model.addAttribute("TrainingTypeList", TrainingTypeList);
+		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
+		model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
 		/*Map<String, String> userTypeMap = lst.userTypeMap;
-
 		model.addAttribute("userTypeMap", userTypeMap);*/
 		model.addAttribute("NominateTraineeForm", new NominateTraineeForm());
 
@@ -2734,15 +2740,29 @@ public class AdminController {
 	public String ListEligibleUser(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm,
 			Model model) {
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
+		List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
 		model.addAttribute("DesignationList", DesignationList);
-		//model.addAttribute("batchCodeList", this.adminService.listTrainingSchedule());
+		model.addAttribute("TrainingTypeList", TrainingTypeList);
+		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
 		model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
-		System.out.println("admin controller ListEligibleUser" + nominateTraineeForm.getUserType());
-		model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getUserType()));
-
+		System.out.println("admin controller ListEligibleUser" + nominateTraineeForm.getDesignation());
+		model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getDesignation()));
+		
 		return "NominateTrainee";
 	}
-
+	@RequestMapping(value = "/batchCodeInfo", method = RequestMethod.POST)
+	public void batchCodeInfo(@RequestParam("id") String id,@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm,
+			Model model,HttpServletResponse response) throws IOException {
+		List<TrainingCalendar> data1=this.adminService.listBatchcodeInfo(id);
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		String newList = g.toJson(data1);
+		System.out.println("newList " + newList);
+		out.write(newList);
+		out.flush();
+		
+	}
 	@RequestMapping(value = "/enrollUser", method = RequestMethod.POST)
 	@ResponseBody
 	public void enrollUser(@RequestParam("data") String data,

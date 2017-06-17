@@ -421,5 +421,7 @@ public interface AdminDAO {
 
 	public List<TrainingCalendar> listBatchCodeList();
 
+	public List<TrainingCalendar> listBatchcodeInfo(String batchCode);
+
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

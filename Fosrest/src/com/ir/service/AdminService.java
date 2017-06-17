@@ -529,6 +529,8 @@ List listSchCodeSubjects(String scheduleCode);
 String calculateEndDate(String startDate,String duration,String institute);
 
 public List<TrainingCalendar> listBatchCodeList();
+
+public List<TrainingCalendar> listBatchcodeInfo(String batchCode);
 }
 
 
