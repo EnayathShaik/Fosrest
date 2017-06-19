@@ -1630,4 +1630,17 @@ public List<TrainingCalendar> listBatchcodeInfo(String batchCode) {
 	return this.adminDAO.listBatchcodeInfo(batchCode);
 }
 
+@Override
+@Transactional
+public List<PersonalInformationTrainer> listpendingTrainer(int id, int profileId) {
+	return this.adminDAO.listpendingTrainer(id, profileId);
+
+}
+
+@Override
+@Transactional
+public List<PersonalInformationTrainingInstitute> listpendingTrainingInstitute(int id, int profileId) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listpendingTrainingInstitute(id, profileId);
+}
 }

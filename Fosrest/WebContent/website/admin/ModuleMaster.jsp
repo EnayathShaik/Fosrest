@@ -71,7 +71,8 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Subject Name:</strong></li>
 															<li class="style-li error-red"></li>
-															<li id="moduleNameErr" style="display:none;" class="style-li error-red" >Please Select module Name.</li>
+															<li id="moduleNameErr" style="display:none;" class="style-li error-red" >Please Select Subject Name.</li>
+															<li id="moduleNameErr2" style="display:none;" class="style-li error-red" >Subject Name should be minimum 3 characters.</li>
 
 														</ul>
 													</div>
@@ -230,10 +231,14 @@
            		 $("#unitIdErr").css("display" , "block");
               		return false; 
            	 } 
-           	else if($("#moduleName").val() == ''){
+           	else if($("#moduleName").val()== ''){
           		 $("#moduleNameErr").css("display" , "block");
         		return false; 
        	 }
+           	else 	if($("#moduleName").val().match(/^[a-zA-Z]{3,}/ )== null){
+      		 $("#moduleNameErr2").css("display" , "block");
+     		return false; 
+    	 }
             else if($("#contentType").val() == 0){
           		 $("#contentTypeErr").css("display" , "block");
          		return false; 

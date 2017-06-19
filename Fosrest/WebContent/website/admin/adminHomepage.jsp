@@ -129,7 +129,114 @@
                                     </div>
                                     <!-- add the content here for main body -->
                                     <!-- timeline  -->
-                                    <div class="row" id="conclusionListOfAssessment">
+                                    
+                                    
+                                    
+                                    <div id="page-content-wrapper">
+                                         <div class="container-fluid"> 
+          
+                                          <div class="row">
+                                            <div class="col-xs-12">
+                                           <fieldset>
+                                           <legend>Pending Trainer List</legend>
+                                            <ct:if test="${!empty listpendingTrainer}">
+                                            <table id="datatablesfosrest" class="table table-bordered table-responsive">
+                                               <thead>
+                                                    <tr class="background-open-vacancies">
+                                                        <th>S.No.</th>
+                                                        <th>User Id</th>
+                                                        <th>First Name</th>
+                                                        <th>Middle Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Aadhar Number</th>
+                                                        
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                
+                                                <ct:forEach items="${listpendingTrainer}" var="pendingTrainer" varStatus="loop">
+                                                <tr>
+												<td>${loop.count}</td>
+												<td>${pendingTrainer[0]}</td>
+												<td>${pendingTrainer[1]}</td>
+												<td>${pendingTrainer[2]}</td>
+												<td>${pendingTrainer[3]}</td>
+												<td>${pendingTrainer[4]}</td>
+												<%-- <td>20</td>
+												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
+											    <td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"accept");return false;' >Accept</button></td>
+											   <td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"reject");return false;' >Reject</button></td> --%>
+										</tr>
+										</ct:forEach>
+                                            </table>
+                                           </ct:if>
+                                                                               </fieldset>
+                                                    </div>
+                                                </div>
+                 
+        </div>
+      </div>
+      
+      
+                                    
+                                    
+       <div id="page-content-wrapper">
+                                         <div class="container-fluid"> 
+          
+                                          <div class="row">
+                                            <div class="col-xs-12">
+                                           <fieldset>
+                                           <legend>Pending Training Institute List</legend>
+                                            <ct:if test="${!empty listpendingTrainingInstitute}">
+                                            <table id="datatablesfosrest" class="table table-bordered table-responsive">
+                                               <thead>
+                                                    <tr class="background-open-vacancies">
+                                                        <th>S.No.</th>
+                                                        <th>User Id</th>
+                                                        <th>First Name</th>
+                                                        <th>Middle Name</th>
+                                                        <th>Last Name</th>
+                                                       
+                                                        
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                
+                                                <ct:forEach items="${listpendingTrainingInstitute}" var="pendingTrainingInstitute" varStatus="loop">
+                                                <tr>
+												<td>${loop.count}</td>
+												<td>${pendingTrainingInstitute[0]}</td>
+												<td>${pendingTrainingInstitute[1]}</td>
+												<td>${pendingTrainingInstitute[2]}</td>
+												<td>${pendingTrainingInstitute[3]}</td>
+												
+												<%-- <td>20</td>
+												<td>${TrainingSchedule.trainingInstitudeStatus}</td>
+											    <td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"accept");return false;' >Accept</button></td>
+											   <td><button  class="btn login-btn" onclick='acceptTrainingRequest(${TrainingSchedule.trainingScheduleId} , ${profileId },${loginUser2 },"reject");return false;' >Reject</button></td> --%>
+										</tr>
+										</ct:forEach>
+                                            </table>
+                                           </ct:if>
+                                                                               </fieldset>
+                                                    </div>
+                                                </div>
+                 
+        </div>
+      </div>                              
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <!-- <div class="row" id="conclusionListOfAssessment">
                                         <div class="col-xs-12">
                                             <fieldset>
                                                 <legend>Pending Assessor ID Activation</legend>
@@ -151,7 +258,7 @@
 
                                         <div class="col-md-2 hidden-xs"></div>
                                     </div>
-
+ -->
 
 
 

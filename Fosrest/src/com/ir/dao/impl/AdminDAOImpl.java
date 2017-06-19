@@ -1042,7 +1042,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("manageAsssessmentQuestionsSAVE");
 		AssessmentQuestions assessmentQuestion = null;
 		if (assessmentQuestionForm.getId() <= 0) {
 			assessmentQuestion = new AssessmentQuestions();
@@ -1736,6 +1735,7 @@ public class AdminDAOImpl implements AdminDAO {
 				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
 		*/
 		
+		
 		String sql = "select  mm.modulename ,  aq.assessmentquestionid, mm.modulecode ,aq.questiontitle, aq.questionNumber from assessmentquestions as aq "
 				
 				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
@@ -2425,11 +2425,6 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("listTrainingSchedule List::" + p);
 		}*/
 		return mccList;
-		
-		
-		
-		
-		
 	}
 
 	/**
@@ -3977,5 +3972,40 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 				.list();
 		return mccList;
 	}
+	@Override
+	public List<PersonalInformationTrainer> listpendingTrainer(int id, int profileId) {
+		
+		// TODO Auto-generated method stub
+		System.out.println("inside SuperAdmin with parameter");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<PersonalInformationTrainer> mccList = null;
+			/*mccList = session.createQuery(
+					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"
+							+ id + "'  ")
+					.list();*/
+		mccList = session.createSQLQuery(
+				" select ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber from PersonalInformationTrainer as pitp inner join loginDetails as ld on pitp.loginDetails = ld.id where ld.status='I' ").list();
+		
+		return mccList;
+	}
+
+	@Override
+	public List<PersonalInformationTrainingInstitute> listpendingTrainingInstitute(int id, int profileid) {
+		// TODO Auto-generated method stub
+		System.out.println("inside SuperAdmin with parameter");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<PersonalInformationTrainingInstitute> mccList = null;
+			/*mccList = session.createQuery(
+					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"
+							+ id + "'  ")
+					.list();*/
+		mccList = session.createSQLQuery(
+				" select ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName from PersonalInformationTrainingInstitute as pitp inner join loginDetails as ld on pitp.loginDetails = ld.id where ld.status='I'  ").list();
+		
+		return mccList;
+	}
+
+	
+	
 	
 }

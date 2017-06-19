@@ -66,11 +66,11 @@
 			$("#firstNameErr").css("display" , "block");
 			return false;
 		 }
-	  if($("#middleName").val() == ''){
+	  /* if($("#middleName").val() == ''){
 			 
 			$("#middleNameErr").css("display" , "block");
 			return false;
-		 }
+		 } */
 	  if($("#lastName").val() == ''){
 		 
 			$("#lastNameErr").css("display" , "block");
@@ -289,7 +289,7 @@
                                             <li class="style-li"><strong>Training Center Name:</strong></li>
                                               <li id="trainingCenterNameErr" style="display:none;" class="style-li error-red" > Training name can not be blank.</li>
                                                   
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red">* </li>
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="trainingCenterName" class="form-control" placeholder="Training Center Name" required=""/>
@@ -300,7 +300,7 @@
                                             <li class="style-li"><strong>Title:(Training Center Head)</strong></li>
                                             <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
                                              
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red"> *</li>
                                         </ul>
                                     </div>
                                    <cf:select path="title" class="form-control">
@@ -315,7 +315,7 @@
                                             <li class="style-li"><strong>First Name:(Training Center Head) </strong></li>
                                              <li id="firstNameErr" style="display:none;" class="style-li error-red" > first Name can not be blank.</li>
                                            
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red"> *</li>
                                         </ul>
                                     </div>
                                     <cf:input type="text" class="form-control" path="firstName" placeholder="First Name" required=""
@@ -396,7 +396,7 @@
                                             <li class="style-li"><strong>Training Center Address Line 1:</strong></li>
                                             <li id="correspondenceAddress1Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
                                            
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red">* </li>
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="correspondenceAddress1" class="form-control" placeholder="Training Center Line 1" required=""/>
@@ -405,20 +405,18 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Center Address Line 2:</strong></li>
-                                            
-                                           
-                                           
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="correspondenceAddress2" class="form-control" placeholder="Training Center Line 2" required=""/>
                                 </div>
+                               
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>State:</strong></li>
                                             <li id="correspondenceStateErr" style="display:none;" class="style-li error-red" > Please select a Correspondence State.</li>
                                            
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red"> *</li>
                                         </ul>
                                     </div>
                                       <cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value , 'correspondenceDistrict')">
@@ -432,7 +430,7 @@
                                             <li class="style-li"><strong>District:</strong></li>
                                              <li id="correspondenceDistrictErr" style="display:none;" class="style-li error-red" > Please select a Correspondence District.</li>
                                           
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red"> *</li>
                                         </ul>
                                     </div>
                                      <cf:select path="correspondenceDistrict" class="form-control" onchange="getCity(this.value , 'correspondenceCity')">
@@ -451,7 +449,7 @@
                                             <li class="style-li"><strong>Closest City:</strong></li>
                                             <li id="correspondenceCityErr" style="display:none;" class="style-li error-red" > Please select a Correspondence City.</li>
                                           
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red"> *</li>
                                         </ul>
                                     </div>
                                     
@@ -469,7 +467,7 @@
                                             <li class="style-li"><strong>PIN Code:</strong></li>
                                             <li id="correspondencePincodeErr" style="display:none;" class="style-li error-red" > Pincode cannot be empty.</li>
                                           
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red">* </li>
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="correspondencePincode" class="form-control" minlength="6"  maxlength="6" placeholder="Pincode" required=""
@@ -482,7 +480,7 @@
                                             <li class="style-li"><strong>Email:</strong></li>
                                             <li id="EmailErr" style="display:none;" class="style-li error-red" > Email cannot be empty.</li>
                                           
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red">* </li>
                                         </ul>
                                     </div>
                                      <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="emailVal(this.id,this.value);return false;" required=""/>
@@ -493,7 +491,7 @@
                                             <li class="style-li"><strong>Mobile:</strong></li>
                                             <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile cannot be blank</li>
                                           
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red"> *</li>
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="mobile" class="form-control" minlength="10" maxlength="10" placeholder="Mobile" required=""
@@ -556,7 +554,7 @@
                                             <li class="style-li"><strong>Seating capacity Per session?</strong></li>
                                              <li id="seatingCapacityErr" style="display:none;" class="style-li error-red" >Seating capacity cannot be empty.</li>
                                                   
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red">* </li>
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="seatingCapacity" class="form-control" placeholder="Number of Seats"/>
@@ -590,7 +588,7 @@
                                             <li class="style-li"><strong>Number of in-house trainers ?</strong></li>
                                              <li id="noOfInHouseTrainerErr" style="display:none;" class="style-li error-red" > give the no of trainers.</li>
                                             
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red">* </li>
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="noOfInHouseTrainer" placeholder="Number of trainers" class="form-control"/>
@@ -602,7 +600,7 @@
                                             <li class="style-li"><strong>Number of PC's</strong></li>
                                              <li id="noOfPCErr" style="display:none;" class="style-li error-red" > Insert number of PC's.</li>
                                             
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red">* </li>
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="noOfPC" placeholder="Number of Pc's" class="form-control"/>

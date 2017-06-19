@@ -362,6 +362,8 @@ public class LoginController {
 		
 		if(profileID != null && profileID > 0){
 			if(profileID == 1){
+				model.addAttribute("listpendingTrainer", this.adminService.listpendingTrainer((int)session.getAttribute("userId"),1));
+				model.addAttribute("listpendingTrainingInstitute", this.adminService.listpendingTrainingInstitute((int)session.getAttribute("userId"),1));
 				return "adminHomepage";
 			}else if(profileID == 2){
 				int s=Integer.parseInt( (String) session.getAttribute("stateId"));

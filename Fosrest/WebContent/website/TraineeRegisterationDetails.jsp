@@ -51,11 +51,22 @@
             	$("#correspondenceCity").val('${PersonalInformationTrainee.correspondenceCity}');
             }, 1000);
         }, 1000);
-		$("#resState").val('');
+       
+       $("#resState").val('${PersonalInformationTrainee.resState}');
+        $("#resState").trigger("change");
+        window.setTimeout(function() {
+        	$("#residentialDistrict").val('${PersonalInformationTrainee.residentialDistrict}');
+            $("#residentialDistrict").trigger("change");
+            window.setTimeout(function() {
+            	$("#resCity").val('${PersonalInformationTrainee.resCity}');
+            }, 1000);
+        }, 1000);   
+
+		 /* $("#resState").val('');
         $("#residentialDistrict").val('');
         $("#resCity").val('');
         $("#ResidentialLine1").val('');
-        $("#ResidentialLine2").val('');
+        $("#ResidentialLine2").val('');  */
 		 $("#createUpdateBtn").val("Update");
 		$("#captcha").css("display" , "none");
 		 $("#chkunit").css("display" , "none");
@@ -92,12 +103,14 @@
 		 				$("#ResidentialLine2").val($("#correspondenceAddress2").val())
 		 				//
 		 			}else{
+		 				
+		 				$("#ResidentialLine1").val('');
+		 				$("#ResidentialLine2").val('');
 		 				$("#resState").val('');
 		 				$("#residentialDistrict").val('');
 		 				$("#resCity").val('');
 		 				$("#resPincode").val('');
-		 				$("#ResidentialLine1").val('');
-		 				$("#ResidentialLine2").val('');
+		 				
 		 				
 		 				
 		 			}
@@ -538,7 +551,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Permanent Address Line 1:</strong></li>
-                                            <li id="ResidentialLine1Err" style="display:none;" class="style-li error-red" >Correspondence Address can not be blank.</li>
+                                            <li id="ResidentialLine1Err" style="display:none;" class="style-li error-red" >Permanent Address can not be blank.</li>
                                        </ul>
                                     </div>
                                     <cf:input type="text" path="ResidentialLine1" class="form-control" placeholder="Address" required=""/>
@@ -548,7 +561,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Permanent Address Line 2:</strong></li>
-                                             <li id="ResidentialLine2Err" style="display:none;" class="style-li error-red" >Correspondence Address can not be blank.</li>
+                                             <li id="ResidentialLine2Err" style="display:none;" class="style-li error-red" >Permanent Address can not be blank.</li>
                                        </ul>
                                     </div>
                                     <cf:input type="text" path="ResidentialLine2" class="form-control" placeholder="Address" required=""/>
@@ -565,7 +578,7 @@
                                        </ul>
                                     </div>
                                    <cf:select path="resState" class="form-control" onchange="getDistrict(this.value , 'residentialDistrict')">
-                                      <%--   <cf:option value="0" label="Select state Name" /> --%>
+                                         <cf:option value="0" label="Select state Name" />
 									<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
                                     </cf:select>
                                 </div>
@@ -758,10 +771,11 @@
    	 } if($("#firstName").val() == ''){
    		 $("#firstNameErr").css("display" , "block");
  		return false; 
-	 } if($("#MiddleName").val() == ''){
+	 } /* if($("#MiddleName").val() == ''){
    		 $("#MiddleNameErr").css("display" , "block");
  		return false; 
-	 }  if($("#LastName").val() == ''){
+	 }  */ 
+	 if($("#LastName").val() == ''){
    		 $("#LastNameErr").css("display" , "block");
   		return false; 
  	 } if($("#FatherName").val() == ''){

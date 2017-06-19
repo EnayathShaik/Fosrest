@@ -531,6 +531,13 @@ public String calculateEndDate(String startDate,String duration,String institute
 public List<TrainingCalendar> listBatchCodeList();
 
 public List<TrainingCalendar> listBatchcodeInfo(String batchCode);
+
+//Object listSuperAdmin(int attribute, int i);
+public List<PersonalInformationTrainer> listpendingTrainer(int id, int profileid);
+
+public List<PersonalInformationTrainingInstitute> listpendingTrainingInstitute(int id, int profileid);
+
+
 }
 
 
