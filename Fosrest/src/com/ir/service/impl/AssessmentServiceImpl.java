@@ -79,7 +79,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 		//int totalQuestion = answers.size();
 		Map<String, Integer> answersMap = new HashMap<String, Integer>();
 		for (int i = 0; i < answers.size(); i++) {
-			answersMap.put(String.valueOf(answers.get(i).getAssessmentId()), answers.get(i).getCorrectAnswer());
+			answersMap.put(String.valueOf(answers.get(i).getAssessmentQuestionId()), answers.get(i).getCorrectAnswer());
 		}
 		int totalQuestions = answers.size();
 		int correctAnswers = 0;

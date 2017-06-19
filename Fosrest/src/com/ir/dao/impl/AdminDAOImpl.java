@@ -1042,6 +1042,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
 		Session session = sessionFactory.getCurrentSession();
+		System.out.println("manageAsssessmentQuestionsSAVE");
 		AssessmentQuestions assessmentQuestion = null;
 		if (assessmentQuestionForm.getId() <= 0) {
 			assessmentQuestion = new AssessmentQuestions();
@@ -1050,10 +1051,10 @@ public class AdminDAOImpl implements AdminDAO {
 					assessmentQuestionForm.getId());
 		}
 
-		UnitMaster uc = getUnitMasterById(assessmentQuestionForm.getUnitCode2());
+		//UnitMaster uc = getUnitMasterById(assessmentQuestionForm.getUnitCode2());
 		ModuleMaster mm = getModuleMasterById(assessmentQuestionForm.getModuleCode2());
 
-		assessmentQuestion.setUnitCode(uc);
+		//assessmentQuestion.setUnitCode(uc);
 		assessmentQuestion.setModuleCode(mm);
 		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
 		//assessmentQuestion.setQuestionHint(assessmentQuestionForm.getQuestionHint());
@@ -1071,13 +1072,13 @@ public class AdminDAOImpl implements AdminDAO {
 
 		Integer assessmentQuestionIdd = null;
 
-		/*String where = " where unitmaster = " + assessmentQuestionForm.getUnitCode2() + " and modulemaster = '"
+		String where = " where modulemaster = '"
 				+ assessmentQuestionForm.getModuleCode2() + "' and questionNumber = '"
-				+ assessmentQuestionForm.getQuestionNumber() + "'";*/
+				+ assessmentQuestionForm.getQuestionNumber() + "' and isActive ='Y' ";
 		
-		String where = " where unitmaster = " + assessmentQuestionForm.getUnitCode2() + " and modulemaster = '"
+		/*String where = " where unitmaster = " + assessmentQuestionForm.getUnitCode2() + " and modulemaster = '"
 				+ assessmentQuestionForm.getModuleCode2() + "' and questiontitle = '"
-				+ assessmentQuestionForm.getQuestionTitle() + "'";
+				+ assessmentQuestionForm.getQuestionTitle() + "'";*/
 		
 		String sql = "select assessmenttype from AssessmentQuestions " + where;
 		Query query = session.createSQLQuery(sql);
@@ -1685,13 +1686,14 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List getQuestions(String data) {
-		String[] totalConnected = data.split("-");
+	/*	String[] totalConnected = data.split("-");
 
 		int unitCodeSearch = Integer.parseInt((totalConnected[0].split("="))[1]);
 		int moduleCodeSearch = Integer.parseInt((totalConnected[1].split("="))[1]);
-
+*/
+		int moduleCodeSearch = Integer.parseInt(data);
 		String unitCodeSearch1, moduleCodeSearch1;
-		if (unitCodeSearch == 0) {
+	/*	if (unitCodeSearch == 0) {
 			unitCodeSearch1 = "%";
 		} else {
 			unitCodeSearch1 = (totalConnected[0].split("="))[1];
@@ -1701,15 +1703,21 @@ public class AdminDAOImpl implements AdminDAO {
 			moduleCodeSearch1 = "%";
 		} else {
 			moduleCodeSearch1 = (totalConnected[0].split("="))[1];
+		}*/
+		
+		if (moduleCodeSearch == 0) {
+			moduleCodeSearch1 = "%";
+		} else {
+			moduleCodeSearch1 = data;
 		}
 
-		System.out.println("unitcodesearch  " + unitCodeSearch + "  " + unitCodeSearch1);
+		//System.out.println("unitcodesearch  " + unitCodeSearch + "  " + unitCodeSearch1);
 		System.out.println("modulecodesearch   " + moduleCodeSearch + "  " + moduleCodeSearch1);
 		StringBuffer wherebuffer = new StringBuffer();
 		wherebuffer.append(" WHERE 1=1 ");
-		if (unitCodeSearch > 0) {
+		/*if (unitCodeSearch > 0) {
 			wherebuffer.append(" AND um.unitid=" + unitCodeSearch);
-		}
+		}*/
 		if (moduleCodeSearch > 0) {
 			wherebuffer.append(" AND mm.moduleid=" + moduleCodeSearch);
 		}
@@ -1723,8 +1731,13 @@ public class AdminDAOImpl implements AdminDAO {
 				+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
 				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";*/
 		
-		String sql = "select um.unitName , mm.modulename ,  aq.assessmentid, mm.modulecode ,aq.questiontitle, aq.questionNumber from assessmentquestions as aq "
+		/*String sql = "select um.unitName , mm.modulename ,  aq.assessmentid, mm.modulecode ,aq.questiontitle, aq.questionNumber from assessmentquestions as aq "
 				+ " inner join unitmaster as um on um.unitid= aq.unitmaster"
+				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
+		*/
+		
+		String sql = "select  mm.modulename ,  aq.assessmentquestionid, mm.modulecode ,aq.questiontitle, aq.questionNumber from assessmentquestions as aq "
+				
 				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
 		
 		sql = sql + wherebuffer.toString();
@@ -3415,7 +3428,7 @@ public class AdminDAOImpl implements AdminDAO {
 		AssessmentQuestions p = (AssessmentQuestions) session.load(AssessmentQuestions.class, new Integer(id));
 		String sql = null;
 		if (null != p) {
-			sql = "update AssessmentQuestions set isactive='N' where assessmentid=" + id;
+			sql = "update AssessmentQuestions set isactive='N' where assessmentQuestionid=" + id;
 		}
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
@@ -3494,17 +3507,19 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public int getQuestionNumber(String data) {
 		// TODO Auto-generated method stub
-		System.out.println(data);/*
-		String id = (data.split("|"))[1];*/
+		System.out.println(data);
+		/*
 		String[] codes = data.split("-");
 		System.out.println(codes.length);
 		System.out.println(codes[0]);
 		System.out.println(codes[1]);
-		Session session = this.sessionFactory.getCurrentSession();
+		*/Session session = this.sessionFactory.getCurrentSession();
 		int i=0;
 		try{
-		Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where unitMaster="+codes[0]+" and moduleMaster="+codes[1]+"and isactive='Y'");
-		List list = query.list();
+		//Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where unitMaster="+codes[0]+" and moduleMaster="+codes[1]+"and isactive='Y'");
+			Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where moduleMaster="+data+"and isactive='Y'");
+
+			List list = query.list();
 		i=((BigInteger)list.get(0)).intValue();
 		
 		System.out.println("aaaa "+i);

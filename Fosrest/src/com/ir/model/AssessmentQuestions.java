@@ -18,12 +18,12 @@ public class AssessmentQuestions {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	
-	private int assessmentId;
+	private int assessmentQuestionId;
 	
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="UnitMaster")
+	/*@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="UnitMaster")
 	private UnitMaster unitCode;
 	
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="ModuleMaster")
+	*/@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="ModuleMaster")
 	private ModuleMaster moduleCode;
 	
 	private int questionNumber;
@@ -54,16 +54,6 @@ public class AssessmentQuestions {
 	}
 	
 	
-	
-	
-	public UnitMaster getUnitCode() {
-		return unitCode;
-	}
-
-	public void setUnitCode(UnitMaster unitCode) {
-		this.unitCode = unitCode;
-	}
-
 	public ModuleMaster getModuleCode() {
 		return moduleCode;
 	}
@@ -154,14 +144,12 @@ public class AssessmentQuestions {
 	}
 
 
-	public int getAssessmentId() {
-		return assessmentId;
+	public int getAssessmentQuestionId() {
+		return assessmentQuestionId;
 	}
-
-	public void setAssessmentId(int assessmentId) {
-		this.assessmentId = assessmentId;
+	public void setAssessmentQuestionId(int assessmentQuestionId) {
+		this.assessmentQuestionId = assessmentQuestionId;
 	}
-
 	public String getAssessmentType() {
 		return assessmentType;
 	}

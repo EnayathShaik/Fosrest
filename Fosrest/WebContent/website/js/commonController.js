@@ -359,11 +359,12 @@ $.ajax({
 		var mainData1 = jQuery.parseJSON(response);
 		$('#'+idName+' option').remove();
 		$('#'+idName).append(
-				'<option value="0" label="--Select Training Institude--" />');
+				'<option value="0" label="--Select Schedule Code--" />');
 		$.each(mainData1, function(i, obj) {
-			$('#'+idName)
+		
+			$('#'+idName) 
 					.append(
-							'<option value='+mainData1[i]+' >' + mainData1[i]
+							'<option value='+obj+' >' +obj
 									+ '</option>');
 		});
 	}

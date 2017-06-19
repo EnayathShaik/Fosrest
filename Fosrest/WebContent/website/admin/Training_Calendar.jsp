@@ -135,8 +135,10 @@
 														</ul>
 													</div>
 													<cf:select path="scheduleCode" class="form-control">
-														<cf:option value="0" label="Select Schedule Code" />
-													
+														<cf:option value="0" label="Select Schedeule Code" />
+													<ct:forEach items="${listtrainingScheduleMaster}" var="ltsm">
+													<cf:option value="${ltsm[3]}" label="${ltsm[3]}" />
+													</ct:forEach>  
 													</cf:select>
 												</div>
 												<div class="form-group">

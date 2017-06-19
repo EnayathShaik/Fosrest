@@ -14,8 +14,8 @@ document.getElementById('questionTitle').value = '';
 document.getElementById('noOfAssesmentQues').value = 0;
 document.getElementById('correctAnswer').value = '';
 
-getModule(document.getElementById('unitCode1').value,'moduleCode1');
-getModule(document.getElementById('unitCode2').value,'moduleCode2');
+//getModule(document.getElementById('unitCode1').value,'moduleCode1');
+//getModule(document.getElementById('unitCode2').value,'moduleCode2');
 
 }
 window.onload = OnStart;
@@ -23,17 +23,18 @@ window.onload = OnStart;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function getQuestions(){
-	var unitCodeSearch =  $("#unitCode1").val();
+//	var unitCodeSearch =  $("#unitCode1").val();
 	var moduleCodeSearch =  $("#moduleCode1").val();
-	var total = "unitCodeSearch="+unitCodeSearch+"-moduleCodeSearch="+moduleCodeSearch;
+	//var total = "unitCodeSearch="+unitCodeSearch+"-moduleCodeSearch="+moduleCodeSearch;
 	var result="";
 	var name1=JSON.stringify({
 		courseType:0
   })
 	$.ajax({
 	type: 'post',
-	url: 'getQuestions.fssai?data='+ total,
-	 contentType : "application/json",
+	//url: 'getQuestions.fssai?data='+ total,
+	url: 'getQuestions.fssai?data='+ moduleCodeSearch,
+	contentType : "application/json",
 	 data:name1,
 	async: false, 
 	success: function (data){
@@ -48,7 +49,7 @@ function getQuestions(){
 	if(!(data=="[]")){ 
 	    //alert("What follows is NOT blank: " + data);
 		//$('#newTable').append('<tr  class="background-open-vacancies"><th>Sr.No.</th><th>Question No</th><th>Module Name</th><th>Question Title</th><th>Delete</th></tr>')
-				$('#newTable').append('<tr  class="background-open-vacancies"><th>Question No</th><th>Unit Name</th><th>Module Name(Edit)</th><th>Question Title</th><th>Delete</th></tr>')
+				$('#newTable').append('<tr  class="background-open-vacancies"><th>Sr. No.</th><th>Subject Name (Edit)</th><th>Question No</th><th>Question Title</th><th>Delete</th></tr>')
 
 		
 		$.each(mainData1 , function(i , obj)
@@ -61,7 +62,7 @@ function getQuestions(){
 	/* 																																											
 	 */		
 	 	//$('#newTable').append('<tr  id="tableRow"><td>'+(i+1) +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[5]+'</a></td><td>'+obj[3]+'-'+obj[1]+'</td><td>'+obj[4]+'</td><td><a href="" onClick="return deleteAQ('+obj[2]+')" >Delete</a></td></tr>');
-		 	$('#newTable').append('<tr  id="tableRow"><td>'+obj[5]+'</td><td>'+obj[0]+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[1]+'</a></td><td>'+obj[4]+'</td><td><a href="" onClick="return deleteAQ('+obj[2]+')" >Delete</a></td></tr>');
+		 	$('#newTable').append('<tr  id="tableRow"><td>'+(i+1)+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[1]+')">'+obj[0]+'</a></td><td>'+obj[4]+'</td><td>'+obj[3]+'</td><td><a href="" onClick="return deleteAQ('+obj[1]+')" >Delete</a></td></tr>');
 
 	});
 
@@ -105,36 +106,38 @@ function editAssessmentQuestion(id){
 	$.each(mainData1 , function(i , obj)
 	{
 		document.getElementById('id').value = obj[0];
-		document.getElementById('unitCode2').value = obj[1];
+	/* 	document.getElementById('unitCode2').value = obj[1];
 		$("#unitCode2").trigger("change");
 		window.setTimeout(function(){
 			document.getElementById('moduleCode2').value = obj[2];
-	    }, 3000);
-		document.getElementById('questionNumber').value = obj[3];
-		document.getElementById('dispQuestionNumber').value = obj[3];
+	    }, 3000); */
+	    document.getElementById('moduleCode2').value = obj[1];
+	    
+		document.getElementById('questionNumber').value = obj[2];
+		document.getElementById('dispQuestionNumber').value = obj[2];
 		document.getElementById("dispQuestionNumber").disabled = true;
 		//document.getElementById('questionHint').value = obj[3];
-		document.getElementById('questionTitle').value = obj[4];
-		document.getElementById('noOfAssesmentQues').value = obj[5];
+		document.getElementById('questionTitle').value = obj[3];
+		document.getElementById('noOfAssesmentQues').value = obj[4];
 		$("#noOfAssesmentQues").trigger("change");
 		window.setTimeout(function(){
-			for(j=1;j<=obj[5];j++){
+			for(j=1;j<=obj[4];j++){
 				if(j==1){
-					document.getElementById('optionOne').value = obj[7];
+					document.getElementById('optionOne').value = obj[6];
 				}else if(j==2){
-					document.getElementById('optionTwo').value = obj[8];
+					document.getElementById('optionTwo').value = obj[7];
 				}else if(j==3){
-					document.getElementById('optionThree').value = obj[9];
+					document.getElementById('optionThree').value = obj[8];
 				}else if(j==4){
-					document.getElementById('optionFour').value = obj[10];
+					document.getElementById('optionFour').value = obj[9];
 				}else if(j==5){
-					document.getElementById('optionFive').value = obj[11];
+					document.getElementById('optionFive').value = obj[10];
 				}else if(j==6){
-					document.getElementById('optionSix').value = obj[12];
+					document.getElementById('optionSix').value = obj[11];
 				}
 			}
 	    }, 1000);
-		document.getElementById('correctAnswer').value = obj[6];
+		document.getElementById('correctAnswer').value = obj[5];
 	});
 	}
 	});
@@ -144,7 +147,7 @@ function editAssessmentQuestion(id){
 function validateFields(){
 		
 	$(':focus').blur();// this is required for to call answerno() method
-	 $("#unitCodeErr").css("display" , "none");
+	// $("#unitCodeErr").css("display" , "none");
 	 $("#moduleCodeErr").css("display" , "none");
 	$("#questionNumberErr").css("display" , "none");
 $("#questionTitleErr").css("display" , "none");
@@ -156,11 +159,11 @@ $("#correctAnswerErr").css("display" , "none");
 
 
 
-if($("#unitCode2").val() == 0){
+/* if($("#unitCode2").val() == 0){
 	 
 		$("#unitCodeErr").css("display" , "block");
 		return false;
-	 } 
+	 }  */
 if($("#moduleCode2").val() == 0){
 	 
 		$("#moduleCodeErr").css("display" , "block");
@@ -201,13 +204,15 @@ if($("#correctAnswer").val() == 0){
 		return false;
 	 } 
 
+return answerno("correctAnswer",$("#correctAnswer").val());
 }
 
 
 
-function getQuestionNo(){
-	var val=document.getElementById('unitCode2').value+'-'+	document.getElementById('moduleCode2').value;
-//alert(val );
+function getQuestionNo(val){
+	//var val=document.getElementById('unitCode2').value+'-'+	document.getElementById('moduleCode2').value;
+
+	//alert(val );
 	
 	var name=JSON.stringify({
 		courseType:0,
@@ -220,7 +225,7 @@ function getQuestionNo(){
 	    data:name,
 		success : function(response) {
 			var mainData1 = jQuery.parseJSON(response);
-			alert("Question Numnber "+mainData1); 
+			//alert("Question Numnber "+mainData1); 
 			document.getElementById('questionNumber').value =mainData1+1;
 			document.getElementById('dispQuestionNumber').value =mainData1+1;
 			document.getElementById("dispQuestionNumber").disabled = true;
@@ -277,14 +282,15 @@ function getQuestionNo(){
        		
     	document.getElementById(id).value="";
     	$("#correctAnswerErr").css("display" , "block");
+     	return false;
     	 } 
        	else
        		$("#correctAnswerErr").css("display" , "none");
 
-       	
+      
     	}
     
-    function getModule(val , idName) {
+  /*   function getModule(val , idName) {
     	
     	$('#'+idName+' option').remove();
      	var name=JSON.stringify({
@@ -309,7 +315,7 @@ function getQuestionNo(){
     			});
     		}
     	});
-    }
+    } */
     </script>
     <section>
         <%@include file="../roles/top-menu.jsp"%>
@@ -346,20 +352,21 @@ function getQuestionNo(){
                                                  <div class="form-group">  
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Module Name:</strong></li>
+                                                            <li class="style-li"><strong>Subject Name:</strong></li>
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
                                                            <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
 												<cf:select  path="moduleCode1"   class="form-control">
+												 <cf:option value="0" label="Select Subject"></cf:option>
 												   <ct:forEach var="twofields" items="${listModuleMaster}">
-       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleCode} - ${twofields.moduleName}"/></cf:option>
+												   <cf:option value="${twofields[0]}"><ct:out value="${twofields[7]} - ${twofields[8]}"/></cf:option>
     												</ct:forEach>
 												 </cf:select>
 											</div>
                                                 <%--   <div class="form-group">
-                                                    <div>
+                                                    <div> 
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Chapter Name:</strong></li>
                                                            
@@ -442,17 +449,18 @@ function getQuestionNo(){
                                                       <div class="form-group">  
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Module Name:</strong></li>
-                                                             <li id="moduleCodeErr" style="display:none;" class="style-li error-red" > Enter Module Code</li>
+                                                            <li class="style-li"><strong>Subject Name:</strong></li>
+                                                             <li id="moduleCodeErr" style="display:none;" class="style-li error-red" > Select Subject</li>
                                             
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
                                                             <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select  path="moduleCode2"   class="form-control"  onchange="getQuestionNo();" >
+												<cf:select  path="moduleCode2"   class="form-control"  onchange="getQuestionNo(this.value);" >
+												   	 <cf:option value="0" label="Select Subject"></cf:option>
 												   <ct:forEach var="twofields" items="${listModuleMaster}">
-       												 <cf:option value="${twofields.moduleId}"><ct:out value="${twofields.moduleCode} - ${twofields.moduleName}"/></cf:option>
+       												 <cf:option value="${twofields[0]}"><ct:out value="${twofields[7]} - ${twofields[8]}"/></cf:option>
     												</ct:forEach>
 												 </cf:select>
 											</div> 
@@ -506,7 +514,7 @@ function getQuestionNo(){
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <cf:input id="correctAnswer" path="correctAnswer" onblur="answerno(this.id,this.value);" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
+                                                        <cf:input id="correctAnswer" path="correctAnswer" onblur="return answerno(this.id,this.value);" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
                                                         
                                                     </div>
                                                     

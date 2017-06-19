@@ -2846,7 +2846,8 @@ public class AdminController {
 			@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model, HttpSession session) {
 		if(checkAccess(session))
 			return "redirect:login.fssai";
-		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 		return "manageAssessmentQuestions";
 	}
 
@@ -2855,8 +2856,8 @@ public class AdminController {
 			@Valid @ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm,
 			BindingResult result, Model model) {
 		
-		System.out.println("aaaaa "+assessmentQuestionForm.getNoOfOption());
-		System.out.println("aaaaa "+assessmentQuestionForm.getQuestionNumber());
+		//System.out.println("aaaaa "+assessmentQuestionForm.getNoOfOption());
+		//System.out.println("aaaaa "+assessmentQuestionForm.getQuestionNumber());
 		
 		if (result.hasErrors()) {
 			new ZLogger("manageAssessmentQuestionsSave", "bindingResult.hasErrors  " + result.hasErrors(),
@@ -2878,7 +2879,9 @@ public class AdminController {
 			new ZLogger("manageAssessmentQuestionsSave",
 					"Exception while manageAssessmentQuestionsSave :  " + e.getMessage(), "AdminController.java");
 		}
-		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
+
 		return "manageAssessmentQuestions";
 	}
 
@@ -3039,7 +3042,7 @@ public class AdminController {
 	public void getQuestionNumber(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
 		new ZLogger("getModule","getModule............" + data  , "CommonController.java");
 	
-		System.out.println("aaaaaaaawqqqqqqq");
+		//System.out.println("aaaaaaaawqqqqqqq");
 		int qNO = this.adminService.getQuestionNumber(data);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();
@@ -3218,6 +3221,10 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
   		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
   		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
+  		model.addAttribute("listCalendar", this.adminService.listCalendar());	
+  		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+  		model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
+  		System.out.println( this.adminService.listtrainingScheduleMaster()+" yuyuyuyuuyuyu");
   		
   		List list=	this.adminService.listCalendarSearch(form);
   		
@@ -3239,6 +3246,8 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
       	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
     	model.addAttribute("institute", form.getTrainingInstitute());
     	model.addAttribute("startDate", form.getTrainingStartDate());
+    	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
+    	
   	    	}
   	    	else{
   	    		model.addAttribute("errorTime", "Change Start-Date");
@@ -3247,9 +3256,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   		else{
 	    		model.addAttribute("errorTime", "Same Start-Date exists");
 	    }
-  		model.addAttribute("listCalendar", this.adminService.listCalendar());	
-  		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
-		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
+  		
   		
       }
 		return "trainingcalendar";

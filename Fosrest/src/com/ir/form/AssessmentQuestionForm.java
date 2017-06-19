@@ -5,8 +5,9 @@ import javax.validation.constraints.Size;
 
 public class AssessmentQuestionForm {
 
-	private int unitCode1,moduleCode1,unitCode2,moduleCode2;
+	//private int unitCode1,moduleCode1,unitCode2,moduleCode2;
 	
+	private int moduleCode1,moduleCode2;
 	int questionNumber;
 	@NotNull @Size(min=0 , max = 500 , message="Please enter question")
 	private String questionTitle;
@@ -29,28 +30,12 @@ public class AssessmentQuestionForm {
 	@NotNull
 	private int correctAnswer;
 
-	public int getUnitCode1() {
-		return unitCode1;
-	}
-
-	public void setUnitCode1(int unitCode1) {
-		this.unitCode1 = unitCode1;
-	}
-
 	public int getModuleCode1() {
 		return moduleCode1;
 	}
 
 	public void setModuleCode1(int moduleCode1) {
 		this.moduleCode1 = moduleCode1;
-	}
-
-	public int getUnitCode2() {
-		return unitCode2;
-	}
-
-	public void setUnitCode2(int unitCode2) {
-		this.unitCode2 = unitCode2;
 	}
 
 	public int getModuleCode2() {
