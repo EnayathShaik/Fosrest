@@ -328,9 +328,9 @@ public class TraineeServiceImpl implements TraineeService {
 	
 	@Override
 	@Transactional
-	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute  p) {
+	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute  p,int pid) {
 		// TODO Auto-generated method stub
-		return traineeDAO.addPersonalInfoTrainingInstitute(p);
+		return traineeDAO.addPersonalInfoTrainingInstitute(p,pid);
 	}
 
 

@@ -45,27 +45,32 @@
 			$("#correspondenceState").val(
 					'${PersonalInformationTrainer.correspondenceState}');
 			$("#correspondenceState").trigger("change");
-			window
-					.setTimeout(
+			window.setTimeout(
 							function() {
-								$("#correspondenceDistrict")
-										.val(
-												'${PersonalInformationTrainer.correspondenceDistrict}');
+								$("#correspondenceDistrict").val('${PersonalInformationTrainer.correspondenceDistrict}');
 								var ss = '${PersonalInformationTrainer.correspondenceDistrict}';
 								$("#correspondenceDistrict").trigger("change");
-								window
-										.setTimeout(
-												function() {
-													$("#correspondenceCity")
-															.val(
-																	'${PersonalInformationTrainer.correspondenceCity}');
+								window.setTimeout(function() {
+													$("#correspondenceCity").val('${PersonalInformationTrainer.correspondenceCity}');
 												}, 1000);
 							}, 1000);
-			$("#resState").val('');
+			
+			
+			$("#resState").val('${PersonalInformationTrainer.resState}');
+	        $("#resState").trigger("change");
+	        window.setTimeout(function() {
+	        	$("#residentialDistrict").val('${PersonalInformationTrainer.residentialDistrict}');
+	            $("#residentialDistrict").trigger("change");
+	            window.setTimeout(function() {
+	            	$("#resCity").val('${PersonalInformationTrainer.resCity}');
+	            }, 1000);
+	        }, 1000);   
+
+			/* $("#resState").val('');
 			$("#residentialDistrict").val('');
 			$("#resCity").val('');
 			$("#ResidentialLine1").val('');
-			$("#ResidentialLine2").val('');
+			$("#ResidentialLine2").val(''); */
 			$("#createUpdateBtn").val("Update");
 			$("#captcha").css("display", "none");
 			$("#chkunit").css("display", "none");
@@ -75,13 +80,22 @@
 			for (i = 0; i < fields.length; i++) {
 				document.getElementById('userType_' + fields[i]).checked = true
 			}
-
+			
 			var fields = '${PersonalInformationTrainer.trainingState}'
 					.split(',');
+			<ct:forEach items="${listStateMaster}" var="ts" varStatus="loop">
 			for (i = 0; i < fields.length; i++) {
-				document.getElementById('trainingState_' + fields[i]).checked = true
+				var s=fields[i];
+				 document.getElementById('trainingState_' + fields[i]).checked = true
+				 var a="";
+				if(s=='${ts.stateId}'){
+ 				 a = '${ts.stateName}' + "," + $('#stateBox').val();
+		$('#stateBox').val(a); 
+				}
 			}
-
+		
+			</ct:forEach>
+		
 		}
 		DrawCaptcha();
 
@@ -121,7 +135,6 @@
 										$("#correspondenceAddress1").val());
 								$("#ResidentialLine2").val(
 										$("#correspondenceAddress2").val())
-								//
 							} else {
 								$("#resState").val('');
 								$("#residentialDistrict").val('');
@@ -133,22 +146,20 @@
 							}
 
 						});
+		var a = "";
 		$('#batchCodeDIV input').change(function() {
 			<ct:forEach items="${listStateMaster}" var="ts" varStatus="loop">
-			
 			if ('${ts.stateId}' == this.value) {
-				var a = "";
-				if(this.checked){
-					//alert("KKKKKKKKK");
-					
+			if(this.checked){
 					a = '${ts.stateName}' + "," + $('#stateBox').val();
 					$('#stateBox').val(a);
 				}
-				
 				else{
 					var s="";
-					$('#stateBox').val(s);
-				}
+					$('#stateBox').val(s); 
+					/* a = '${ts.stateName}' + "," + $('#stateBox').val();
+					$('#stateBox').val(a); */
+				} 
 			}
 			</ct:forEach>
 		});
@@ -772,12 +783,16 @@
 							<div class="col-md-6 col-xs-12">
 								<div class="form-group">
 									<label>Associated with any Training Institute ?</label> <br>
-									<label class="radio-inline"> <input type="radio"
+									<!-- <label class="radio-inline"> <input type="radio"
 										name="optradio" checked="checked" /> Yes
 									</label> <label class="radio-inline"> <input type="radio"
 										name="optradio" /> No
-									</label>
+									</label> -->
 								</div>
+									<cf:radiobutton path="radioTrainingInstitute" value="Y" checked="true" />
+									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="radioTrainingInstitute" value="N" />
+									No
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -795,6 +810,7 @@
 									<cf:select path="AssociatedWithAnyTrainingInstitute"
 										class="form-control" onchange="OtiHide();">
 										<%-- <cf:option value="0" label="Select Training Institude" /> --%>
+										<cf:option value="" label="Select Training Institute" />
 										<cf:options items="${listTrainingInstitude}" itemValue="id"
 											itemLabel="trainingCenterName" />
 										<cf:option value="0" label="Others" />
@@ -1119,8 +1135,11 @@
 		 if($("#languages").val() == 0){
 			 $("#languagesErr").css("display" , "block");
 			return false;
-		 }  
-		 if ($("#stateBox").val()== 0) {
+		 }
+		 if(isUpdate=='Y'){
+			 return true;
+		 }
+		 else if ($("#stateBox").val()== 0) {
 				$("#state").css("display", "block");
 				return false;
 			} 

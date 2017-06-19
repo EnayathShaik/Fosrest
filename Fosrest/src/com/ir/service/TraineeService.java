@@ -152,7 +152,7 @@ public interface TraineeService {
 	
 	public String updatePersonalInfoTrainer(PersonalInformationTrainer p);
 	
-	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p );
+	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p, int pid );
 
 
 

@@ -27,12 +27,20 @@ public class PersonalInformationTrainingInstitute {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "PERSONALINFOTRAINIGINSTITUTE_SEQ", allocationSize=1, initialValue=1)
 	private int id;
-	
+	private int createdBy;
 
 //	private String userType;
 	
 
 	
+	public int getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(int createdBy) {
+		this.createdBy = createdBy;
+	}
+
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
 	

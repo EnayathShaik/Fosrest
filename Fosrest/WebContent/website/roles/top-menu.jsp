@@ -301,6 +301,7 @@
                                              <!-- <li><a href="assessorUserManagementForm.fssai" class="clr">Assessor</a></li> -->
                                              <li><a href="adminUserManagementForm.fssai" class="clr">Admin</a></li>
                                              <li><a href="stateadmin.fssai" class="clr">StateAdmin</a></li> 
+                                           
                                         </ul>
                                     </li>
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>
@@ -312,6 +313,7 @@
                                         </ul>
                                     </li>
                                     <li ><a href="stateAdminPersonalInformation.fssai">Register State Admin</a></li>
+                                       <li><a href="PersonalInformationTrainingInstitute.fssai?id=1">Register Training Institute</a></li>
                                     <!-- 
                                     <li><a href="">Training Partner List</a></li>
                                     <li><a href="">Activate Trainee ID</a></li> -->

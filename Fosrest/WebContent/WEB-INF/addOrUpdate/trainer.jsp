@@ -33,7 +33,7 @@
       <div class="row">
         <h1 class="pull-left">About Trainer</h1><br><br><br><br>
         <p class="clearfix">The Food Safety and Standards Authority of India has been established under the Food Safety and Standards Act, 2006 as a statutory body for laying down science based standards for articles of food and regulating manufacturing, processing, distribution, sale and import of food so as to ensure safe and wholesome food for human consumption. Cases pending under PFA Act and other orders repealed by FSS Act, 2006 (Schedule 2). (Uploaded on: 05.10.2016).</p>
-     <h2 class="pull-left">Specialized Trainer</h2>            
+     <!-- <h2 class="pull-left">Specialized Trainer</h2>    -->         
       </div>
       <br>
      
@@ -43,7 +43,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                             <fieldset>
-                                            <legend>View List of Empalled Trainers</legend>
+                                            <legend>View List of Empanelled Trainers</legend>
                                             <ct:if test="${!empty listTrainer}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                 <thead>

@@ -125,6 +125,15 @@ public class PersonalInformationTrainer {
 	private String Email;
 	@NotNull
 	private String dob;
+	@NotNull
+	private String radioTrainingInstitute;
+	public String getRadioTrainingInstitute() {
+		return radioTrainingInstitute;
+	}
+
+	public void setRadioTrainingInstitute(String radioTrainingInstitute) {
+		this.radioTrainingInstitute = radioTrainingInstitute;
+	}
 
 	@Size(max=10 , message = "enter your mobile Number")
 	private String mobile;
@@ -428,16 +437,17 @@ public class PersonalInformationTrainer {
 		this.expInMonth = expInMonth;
 	}
 
-	private int AssociatedWithAnyTrainingInstitute;
+	private String AssociatedWithAnyTrainingInstitute;
 	
 	
 
-	public int getAssociatedWithAnyTrainingInstitute() {
+	
+
+	public String getAssociatedWithAnyTrainingInstitute() {
 		return AssociatedWithAnyTrainingInstitute;
 	}
 
-	public void setAssociatedWithAnyTrainingInstitute(
-			int associatedWithAnyTrainingInstitute) {
+	public void setAssociatedWithAnyTrainingInstitute(String associatedWithAnyTrainingInstitute) {
 		AssociatedWithAnyTrainingInstitute = associatedWithAnyTrainingInstitute;
 	}
 

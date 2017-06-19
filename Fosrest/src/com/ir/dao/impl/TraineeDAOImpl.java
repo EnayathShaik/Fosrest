@@ -1282,8 +1282,11 @@ public class TraineeDAOImpl implements TraineeDAO {
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 		char[] pass = passwordGenerator.get();
 		String passwordString = String.valueOf(pass);
-		
-		Session session = sessionFactory.getCurrentSession();
+	Session session = sessionFactory.getCurrentSession();
+		if(p.getRadioTrainingInstitute().equals("N")){
+			p.setAssociatedWithAnyTrainingInstitute(null);
+			p.setOtherTrainingInstitute(null);
+		}
 	if(pid==null){
 		p.setCreatedBy(4);
 	}
@@ -1341,7 +1344,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class, id);
 		personalInformationTrainer.setUserType(p.getUserType());
 		personalInformationTrainer.setTitle(p.getTitle());
-		//personalInformationTrainer.setStatus(p.getStatus());
+		personalInformationTrainer.setTrainingState(p.getTrainingState());
 		personalInformationTrainer.setAadharNumber(p.getAadharNumber());
 		personalInformationTrainer.setEmpID(p.getEmpID());
 		personalInformationTrainer.setDob(p.getDob());
@@ -1364,7 +1367,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainer.setResidentialDistrict(p.getResidentialDistrict());
 		personalInformationTrainer.setResCity(p.getResCity());
 		personalInformationTrainer.setResPincode(p.getResPincode());
-	//	personalInformationTrainer.setExpBackground(p.getExpBackground());
+		personalInformationTrainer.setLanguages(p.getLanguages());
 		personalInformationTrainer.setExpInMonth(p.getExpInMonth());
 		personalInformationTrainer.setExpInYear(p.getExpInYear());
 	//	personalInformationTrainer.setSessWishToConduct(p.getSessWishToConduct());
@@ -1424,13 +1427,22 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 	
 	@Override
-	public  String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p){
+	public  String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p,int pid){
 
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 		char[] pass = passwordGenerator.get();
 		String passwordString = String.valueOf(pass);
 		
 		Session session = sessionFactory.getCurrentSession();
+		LoginDetails loginDetails = new LoginDetails();
+		if(pid==1){
+			p.setCreatedBy(1);
+			loginDetails.setStatus("A");
+		}
+		else{
+			p.setCreatedBy(2);
+			loginDetails.setStatus("I");
+		}
 		String encryprPassword = null;
 		try{
 			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
@@ -1444,11 +1456,11 @@ public class TraineeDAOImpl implements TraineeDAO {
 		//String nextSequenceUserID = pageLoadService.getNextCombinationId("TCTP"+p.getTpName(), "personalinformationtrainingInstitute" , "000000");
 		String nextSequenceUserID = pageLoadService.getNextCombinationId("TC", "personalinformationtrainingInstitute" , "000000");
 		
-		LoginDetails loginDetails = new LoginDetails();
+		
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
-		loginDetails.setStatus("I");
+		//loginDetails.setStatus("I");
 		loginDetails.setProfileId(5);
 		p.setLoginDetails(loginDetails);
 		p.setStatus("A");

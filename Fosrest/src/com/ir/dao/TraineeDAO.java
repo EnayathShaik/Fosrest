@@ -110,7 +110,7 @@ public interface TraineeDAO {
 	
 	public String updatePersonalInfoTrainer(PersonalInformationTrainer p);
 	
-	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p);
+	public String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p, int pid);
 	
 
 	public List<MyTrainingForm> listMyTraining();
