@@ -1042,6 +1042,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
 		Session session = sessionFactory.getCurrentSession();
+		System.out.println("manageAsssessmentQuestionsSAVE");
 		AssessmentQuestions assessmentQuestion = null;
 		if (assessmentQuestionForm.getId() <= 0) {
 			assessmentQuestion = new AssessmentQuestions();
@@ -3624,31 +3625,42 @@ public class AdminDAOImpl implements AdminDAO {
 		int hrs=0;
 		int min=0;
 		int days=0;
+		String subjects="";
 		
+		SubjectMapping sm;
+		
+		
+		for(int i=0;i<subject.length;i++){
+			subjects=subjects+subject[i]+"|";
+			
+		}
 		ts.setDesignation(form.getDesignation());
 		ts.setStatus(form.getStatus());
 		ts.setTrainingType(form.getTrainingType());
 		ts.setTrainingPhase(form.getTrainingPhase());
-		
-		String subjects="";
-		
-		//part2 
-		
-		List l= session
-				.createSQLQuery("select designationName from Designation where designationId='"+form.getDesignation()+"'").list();
-	
-		List l2= session
-				.createSQLQuery("select trainingTypeName from TrainingType where trainingTypeId='"+form.getTrainingType()+"'").list();
+		//check if same subjectSchedule exists
+		List chkSch= session
+				.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and subjects='"+subjects+"'").list();
 	
 		
-		String start1=((l.get(0).toString().substring(0, 2)+l2.get(0).toString().substring(0, 2)).toUpperCase());
-		String trainingCodeGen = pageLoadService.getNextCombinationId(start1, "trainingSchedule" , "000000");
+		if(chkSch.size()==0)
+		{
 		
-		SubjectMapping sm;
 
-		for(int i=0;i<subject.length;i++){
-			subjects=subjects+subject[i]+"|";
 			
+			List l= session
+					.createSQLQuery("select designationName from Designation where designationId='"+form.getDesignation()+"'").list();
+		
+			List l2= session
+					.createSQLQuery("select trainingTypeName from TrainingType where trainingTypeId='"+form.getTrainingType()+"'").list();
+		
+			
+			String start1=((l.get(0).toString().substring(0, 2)+l2.get(0).toString().substring(0, 2)).toUpperCase());
+			String trainingCodeGen = pageLoadService.getNextCombinationId(start1, "trainingSchedule" , "000000");
+			
+			
+		
+		for(int i=0;i<subject.length;i++){
 			sm=new SubjectMapping();
 			sm.setScheduleCode(trainingCodeGen);
 			sm.setDay(day[i]);
@@ -3671,6 +3683,11 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		totalDur=hrs+":"+min;
 		//ts.setTotalDuration(totalDur);
+
+		ts.setDesignation(form.getDesignation());
+		ts.setStatus(form.getStatus());
+		ts.setTrainingType(form.getTrainingType());
+		ts.setTrainingPhase(form.getTrainingPhase());
 		ts.setSubjects(subjects);
 		ts.setScheduleCode(trainingCodeGen);
 		ts.setDays(days);
@@ -3684,10 +3701,11 @@ public class AdminDAOImpl implements AdminDAO {
 		ts.setEndTime(form.getEndTime());*/
 		
 		session.save(ts);
+		return "created";
+		}
+		else
+			return "Schedule Already Exists";
 		
-		
-		
-		return null;
 	}
 
 	@Override

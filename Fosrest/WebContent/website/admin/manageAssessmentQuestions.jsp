@@ -348,7 +348,7 @@ function getQuestionNo(val){
                                         <div class="col-xs-12">
 
                                             <!-- left side -->
-                                            <div class="col-md-6 col-xs-12">
+                                            <div >
                                                  <div class="form-group">  
                                                     <div>
                                                         <ul class="lab-no">
@@ -365,6 +365,12 @@ function getQuestionNo(val){
     												</ct:forEach>
 												 </cf:select>
 											</div>
+											<div class="row">
+                                                <div class="col-md-6 col-xs-12"></div>
+                                                
+                                                <div class="col-md-6 col-xs-12">
+                                                <input type="button" onclick="getQuestions();"  class="btn login-btn" value="Search">                                                         </div>
+                                            </div>
                                                 <%--   <div class="form-group">
                                                     <div> 
                                                         <ul class="lab-no">
@@ -387,12 +393,7 @@ function getQuestionNo(val){
                                                   
                                              </div> <!-- rigth side ends -->
                                             <!-- button -->
-                                            <div class="row">
-                                                <div class="col-md-6 col-xs-12"></div>
-                                                
-                                                <div class="col-md-6 col-xs-12">
-                                                <input type="button" onclick="getQuestions();"  class="btn login-btn" value="Search">                                                         </div>
-                                            </div>
+                                            
                                            
                                         </div>
 

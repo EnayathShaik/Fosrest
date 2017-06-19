@@ -9,9 +9,14 @@
 
 		});
 
-		if ('${profileId}' == 2) {
-			/*$("#searchbtn").css("display" , 'none');
-			$("#createbtn").css("display" , 'block'); */
+		/* if ('${profileId}' == 2) {
+			$("#searchbtn").css("display" , 'none');
+			$("#createbtn").css("display" , 'block'); 
+		} */
+		
+		if('${search}'=='Y'){
+			var trPhase=$("#trainingPhase").val();
+			redirectScheduleCode2(trPhase,'scheduleCode');
 		}
 	}
 	window.onload = OnStart;
@@ -357,7 +362,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<fieldset>
-											<legend>Training Calendar</legend>
+											<legend>Training Calendar List</legend>
 											<ct:if test="${!empty listCalendar}">
 
 												<table border="1" id="datatablesfosrest"

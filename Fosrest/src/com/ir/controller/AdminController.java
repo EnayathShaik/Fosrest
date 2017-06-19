@@ -3052,42 +3052,40 @@ public class AdminController {
 		out.flush();
 		
 	}
-	@RequestMapping(value = "/trainingschedule123", method = RequestMethod.GET)
+	@RequestMapping(value = "/trainingschedulemaster", method = RequestMethod.GET)
 	
 		public String trainingschedule12(@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm TrainingScheduleForm,
 				Model model, HttpSession session) {
-		System.out.println("trainingschedule123");
-	Map<String, String> trainingType = lst.trainingTypeMap;
+		System.out.println("trainingschedulemaster");
+/*	Map<String, String> trainingType = lst.trainingTypeMap;
 		Map<String, String> trainingPhase = lst.trainingPhaseMap;
 	Map<String, String> statusMap = lst.statusMap;
 	Map<String, String> userType = lst.userTypeMap;
-	List<Designation> DesignationList=pageLoadService.loadDesignation();
-	List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
-	List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
 	
 	model.addAttribute("userType", userType);
 		model.addAttribute("statusMap", statusMap);
 		model.addAttribute("trainingType", trainingType);
-		model.addAttribute("trainingPhase", trainingPhase);
-		
-		model.addAttribute("DesignationList", DesignationList);
-		model.addAttribute("TrainingTypeList", TrainingTypeList);
-		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
+		model.addAttribute("trainingPhase", trainingPhase);*/
+	
+
+		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
+		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
+		model.addAttribute("TrainingPhaseList", pageLoadService.loadTrainingPhase());
 		
 		model.addAttribute("allSubjects", this.adminService.allSubjects());
 		
 		model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
-		return "trainingschedule123";
+		return "trainingschedulemaster";
 	}
 	
 	
 	
-	@RequestMapping(value = "/trainingScheduleMasterlist", method = RequestMethod.POST)
-	public String listtrainingScheduleMaster(
+	@RequestMapping(value = "/saveTrainingScheduleMaster", method = RequestMethod.POST)
+	public String saveTrainingScheduleMaster(
 			@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm form, Model model,
 			HttpSession session,HttpServletRequest request) {
 		
-			//model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
+			
 			///model.addAttribute("allModules", this.adminService.allUnitModules());
 		
 		
@@ -3099,9 +3097,21 @@ public class AdminController {
 		
 		
 	
-		 adminService.saveTrainingSchedule(subject,duration,day,startTime,endTime,form);
-			
-			return "redirect:trainingschedule123.fssai";
+		String result = adminService.saveTrainingSchedule(subject,duration,day,startTime,endTime,form);
+		
+		model.addAttribute(	"result", result);
+		System.out.println("saveTrainingScheduleMaster result= " +result);
+		if(result.equals("Schedule Already Exists")){
+			model.addAttribute("DesignationList", pageLoadService.loadDesignation());
+			model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
+			model.addAttribute("TrainingPhaseList", pageLoadService.loadTrainingPhase());
+			model.addAttribute("allSubjects", this.adminService.allSubjects());
+			model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
+			return "trainingschedulemaster";
+		}
+		
+		else
+			return "redirect:trainingschedulemaster.fssai";
 		}
 			
 		
@@ -3223,8 +3233,9 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
   		model.addAttribute("listCalendar", this.adminService.listCalendar());	
   		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
-  		model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
-  		System.out.println( this.adminService.listtrainingScheduleMaster()+" yuyuyuyuuyuyu");
+  		/*model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
+  		System.out.println( this.adminService.listtrainingScheduleMaster()+" yuyuyuyuuyuyu");*/
+		model.addAttribute("search", "Y");
   		
   		List list=	this.adminService.listCalendarSearch(form);
   		

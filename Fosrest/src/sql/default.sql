@@ -32,17 +32,17 @@ INSERT INTO Steps (stepId,steps) values (4 ,'Get Your Self Assessed');
 INSERT INTO Steps (stepId,steps) values (5 ,'Give Your Feedback');
 INSERT INTO Steps (stepId,steps) values (6 ,'Get Your Certificate');
 
-INSERT INTO state(  stateid, statename, status) VALUES (100, 'UP', 'A');
-INSERT INTO state(  stateid, statename, status) VALUES (99, 'MP', 'A');
+INSERT INTO stateMaster(  stateid, statename, status) VALUES (100, 'UP', 'A');
+INSERT INTO stateMaster(  stateid, statename, status) VALUES (99, 'MP', 'A');
 
-INSERT INTO district( districtid, districtname, stateid, status) VALUES (100000, 'Agra', 100, 'A');
-INSERT INTO district( districtid, districtname, stateid, status) VALUES (100001, 'Aligarh', 100, 'A');
-INSERT INTO district( districtid, districtname, stateid, status) VALUES (100002, 'Gwalior', 99, 'A');
-INSERT INTO district( districtid, districtname, stateid, status) VALUES (100003, 'Morena', 99, 'A');
+INSERT INTO districtMaster( districtid, districtname, stateid, status) VALUES (100000, 'Agra', 100, 'A');
+INSERT INTO districtMaster( districtid, districtname, stateid, status) VALUES (100001, 'Aligarh', 100, 'A');
+INSERT INTO districtMaster( districtid, districtname, stateid, status) VALUES (100002, 'Gwalior', 99, 'A');
+INSERT INTO districtMaster( districtid, districtname, stateid, status) VALUES (100003, 'Morena', 99, 'A');
 
-INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000000, 'Agra_Cantt', 100000, 'A');
-INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000001, 'Agra_City', 100000, 'A');
-INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000002, 'Sasni_Gate', 100001, 'A');
+INSERT INTO cityMaster(  cityid, cityname, districtid, status) VALUES (1000000, 'Agra_Cantt', 100000, 'A');
+INSERT INTO cityMaster(  cityid, cityname, districtid, status) VALUES (1000001, 'Agra_City', 100000, 'A');
+INSERT INTO cityMaster(  cityid, cityname, districtid, status) VALUES (1000002, 'Sasni_Gate', 100001, 'A');
 INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000003, 'Bus_Stand', 100001, 'A');
 INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000004, 'Thatipur', 100002, 'A');
 INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000005, 'Gwl_Cantt', 100002, 'A');
