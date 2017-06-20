@@ -79,7 +79,7 @@
 														</ul>
 													</div>
 													<cf:select path="trainingType" class="form-control"
-														onchange="getTrainingPhase(this.value , 'trainingPhase'); batchInfo(this.value,'batchCode')">
+														onchange="getTrainingPhase(this.value , 'trainingPhase'); batchInfo(this.value,'batchCode2')">
 														<cf:option value="" label="Select Training Type" />
 														<cf:options items="${TrainingTypeList}"
 															itemValue="trainingTypeId" itemLabel="trainingTypeName" />
@@ -110,7 +110,7 @@
 														</ul>
 													</div>
 													<cf:select path="trainingPhase" class="form-control"
-														onchange="batchInfo2(this.value,'batchCode')">
+														onchange="batchInfo2(this.value,'batchCode2')">
 														<cf:option value="0" label="Select Training Phase" />
 														<cf:options items="${TrainingPhaseList}"
 															itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
@@ -125,7 +125,7 @@
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
-												<cf:select path="batchCode" class="form-control">
+												<cf:select path="batchCode2" class="form-control" >
 														<cf:option value="0" label="Select Batch Code" />
 													</cf:select>
 											</div>
@@ -220,7 +220,7 @@
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
-												<cf:select path="batchCode" class="form-control">
+												<cf:select path="batchCode" class="form-control" id="batchCode">
 													<cf:option value="0" label="Select Batch Code" />
 													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingCalendarId" />
 												</cf:select>
@@ -333,7 +333,6 @@
 		console.log(loginIds);
 	
 		var batchCode = $("#batchCode").val();
-
 		var name = JSON.stringify({
 			courseType : 0
 		});
@@ -372,7 +371,7 @@
 
 
  function batchcodeinfo(){
-	var a=document.getElementById("batchCode").value;
+	var a=document.getElementById("batchCode2").value;
      var name1=JSON.stringify({
  		courseName:0
    })

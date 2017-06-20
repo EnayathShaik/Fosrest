@@ -7,6 +7,15 @@ private String module;
 private String batchCode;
 private String trainingPhase;
 private String trainingType;
+private String batchCode2;
+
+public String getBatchCode2() {
+	return batchCode2;
+}
+
+public void setBatchCode2(String batchCode2) {
+	this.batchCode2 = batchCode2;
+}
 
 public String getTrainingPhase() {
 	return trainingPhase;
