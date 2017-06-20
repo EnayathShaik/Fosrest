@@ -1071,14 +1071,15 @@ public class AdminDAOImpl implements AdminDAO {
 		assessmentQuestion.setIsActive("Y");
 
 		Integer assessmentQuestionIdd = null;
-
+		/*
+		//check if same question number already exits
 		String where = " where modulemaster = '"
 				+ assessmentQuestionForm.getModuleCode2() + "' and questionNumber = '"
 				+ assessmentQuestionForm.getQuestionNumber() + "' and isActive ='Y' ";
 		
-		/*String where = " where unitmaster = " + assessmentQuestionForm.getUnitCode2() + " and modulemaster = '"
+		String where = " where unitmaster = " + assessmentQuestionForm.getUnitCode2() + " and modulemaster = '"
 				+ assessmentQuestionForm.getModuleCode2() + "' and questiontitle = '"
-				+ assessmentQuestionForm.getQuestionTitle() + "'";*/
+				+ assessmentQuestionForm.getQuestionTitle() + "'";
 		
 		String sql = "select assessmenttype from AssessmentQuestions " + where;
 		Query query = session.createSQLQuery(sql);
@@ -1086,7 +1087,7 @@ public class AdminDAOImpl implements AdminDAO {
 		if (l != null && l.size() > 0 && assessmentQuestionForm.getId() <= 0) {
 			session.close();
 			return "already";
-		} else {
+		} else {*/
 			if (assessmentQuestionForm.getId() > 0) {
 				// assessmentQuestion.setAssessmentQuestionId(assessmentQuestionForm.getId());
 				session.update(assessmentQuestion);
@@ -1100,7 +1101,7 @@ public class AdminDAOImpl implements AdminDAO {
 			} else {
 				return "already";
 			}
-		}
+		//}
 	}
 
 	// Rishi
@@ -1722,7 +1723,7 @@ public class AdminDAOImpl implements AdminDAO {
 			wherebuffer.append(" AND mm.moduleid=" + moduleCodeSearch);
 		}
 		
-		wherebuffer.append(" AND coalesce(aq.isactive,'') <> 'N' ");
+		wherebuffer.append(" AND coalesce(aq.isactive,'') <> 'N' order by assessmentquestionid");
 		 
 		Session session = sessionFactory.getCurrentSession();
 		
@@ -1739,7 +1740,7 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		String sql = "select  mm.modulename ,  aq.assessmentquestionid, mm.modulecode ,aq.questiontitle, aq.questionNumber from assessmentquestions as aq "
 				
-				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster";
+				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster ";
 		
 		sql = sql + wherebuffer.toString();
 		Query query = session.createSQLQuery(sql);
@@ -3663,6 +3664,7 @@ public class AdminDAOImpl implements AdminDAO {
 		for(int i=0;i<subject.length;i++){
 			sm=new SubjectMapping();
 			sm.setScheduleCode(trainingCodeGen);
+			sm.setDuration(duration[i]);
 			sm.setDay(day[i]);
 			sm.setStartTime(startTime[i]);
 			sm.setEndTime(endTime[i]);

@@ -6,6 +6,7 @@
 <script>
 function OnStart(){
 document.getElementById('id').value = 0;
+document.getElementById('moduleCode2').value = 0;
 /* document.getElementById('unitCode').value = 0;
 document.getElementById('moduleCode').value = 0; */
 document.getElementById('questionNumber').value = '';
@@ -48,8 +49,8 @@ function getQuestions(){
 	}
 	if(!(data=="[]")){ 
 	    //alert("What follows is NOT blank: " + data);
-		//$('#newTable').append('<tr  class="background-open-vacancies"><th>Sr.No.</th><th>Question No</th><th>Module Name</th><th>Question Title</th><th>Delete</th></tr>')
-				$('#newTable').append('<tr  class="background-open-vacancies"><th>Sr. No.</th><th>Subject Name (Edit)</th><th>Question No</th><th>Question Title</th><th>Delete</th></tr>')
+		//$('#newTable').append('<tr  class="background-open-vacancies"><th>Sr. No.</th><th>Subject Name (Edit)</th><th>Question No</th><th>Question Title</th><th>Delete</th></tr>')
+						$('#newTable').append('<tr  class="background-open-vacancies"><th>Question No</th><th>Question Title</th><th>Delete</th></tr>')
 
 		
 		$.each(mainData1 , function(i , obj)
@@ -62,7 +63,7 @@ function getQuestions(){
 	/* 																																											
 	 */		
 	 	//$('#newTable').append('<tr  id="tableRow"><td>'+(i+1) +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[5]+'</a></td><td>'+obj[3]+'-'+obj[1]+'</td><td>'+obj[4]+'</td><td><a href="" onClick="return deleteAQ('+obj[2]+')" >Delete</a></td></tr>');
-		 	$('#newTable').append('<tr  id="tableRow"><td>'+(i+1)+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[1]+')">'+obj[0]+'</a></td><td>'+obj[4]+'</td><td>'+obj[3]+'</td><td><a href="" onClick="return deleteAQ('+obj[1]+')" >Delete</a></td></tr>');
+		 	$('#newTable').append('<tr  id="tableRow"><td>'+(i+1)+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[1]+','+(i+1)+')">'+obj[3]+'</a></td><td><a href="" onClick="return deleteAQ('+obj[1]+')" >Delete</a></td></tr>');
 
 	});
 
@@ -95,7 +96,7 @@ return false;
 
 }
 
-function editAssessmentQuestion(id){
+function editAssessmentQuestion(id,Qcount){
 	var result="";
 	$.ajax({
 	type: 'post',
@@ -113,8 +114,8 @@ function editAssessmentQuestion(id){
 	    }, 3000); */
 	    document.getElementById('moduleCode2').value = obj[1];
 	    
-		document.getElementById('questionNumber').value = obj[2];
-		document.getElementById('dispQuestionNumber').value = obj[2];
+		document.getElementById('questionNumber').value = Qcount;
+		document.getElementById('dispQuestionNumber').value = Qcount;
 		document.getElementById("dispQuestionNumber").disabled = true;
 		//document.getElementById('questionHint').value = obj[3];
 		document.getElementById('questionTitle').value = obj[3];
@@ -359,7 +360,7 @@ function getQuestionNo(val){
                                                         </ul>
                                                     </div>
 												<cf:select  path="moduleCode1"   class="form-control">
-												 <cf:option value="0" label="Select Subject"></cf:option>
+										<%-- 		 <cf:option value="0" label="Select Subject"></cf:option> --%>
 												   <ct:forEach var="twofields" items="${listModuleMaster}">
 												   <cf:option value="${twofields[0]}"><ct:out value="${twofields[7]} - ${twofields[8]}"/></cf:option>
     												</ct:forEach>
@@ -489,9 +490,9 @@ function getQuestionNo(val){
                                                                   <li id="questionNumberErr" style="display:none;" class="style-li error-red" > Enter Question number</li>
                                             
                                                                 <li class="style-li error-red"> </li>
-                                                            </ul>
+                                                            </ul> 
                                                         </div>
-                                                        <input type="text" id="dispQuestionNumber" class="form-control" >
+                                                        <input type="text" id="dispQuestionNumber" class="form-control" disabled='disabled'>
                                                       <cf:input type="hidden" path="questionNumber" class="form-control" placeholder="Question Number" />
                                                     </div> 
                                                     
