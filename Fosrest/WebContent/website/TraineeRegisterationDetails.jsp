@@ -101,7 +101,7 @@
 		 				$("#resPincode").val($("#correspondencePincode").val());
 		 				$("#ResidentialLine1").val($("#correspondenceAddress1").val());
 		 				$("#ResidentialLine2").val($("#correspondenceAddress2").val())
-		 				//
+		 				
 		 			}else{
 		 				
 		 				$("#ResidentialLine1").val('');

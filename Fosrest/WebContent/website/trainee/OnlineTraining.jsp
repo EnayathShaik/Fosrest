@@ -72,8 +72,9 @@ window.onload = OnStart;
                                      
                                         <legend> Online Training</legend>
                                         
-                                        <h4> Training Type: ${listOnlineTraining.trainingType}</h4>
-                                        <h4>Training Phase: ${listOnlineTraining.trainingPhase}</h4>
+                                         <h4> Training Type: ${listOnlineTraining.trainingType}</h4>
+                                        <h4>Training Phase: ${listOnlineTraining.trainingPhase}</h4> 
+                                         <h4>Designation: ${listOnlineTraining.designation}</h4> 
                                         <h4>Training Duration: ${listOnlineTraining.trainingstartdate} to ${listOnlineTraining.trainingenddate} </h4>
                                         <%--  <ct:out value="${listOnlineTraining}"></ct:out> --%>
                                           
@@ -95,11 +96,13 @@ window.onload = OnStart;
                                     <fieldset>
                                         <legend> Course Curriculum</legend>
                                         
-                                         <h4>${listTrainingTopic.unitName}</h4>
-                                         <ul> <li>${listOnlineTraining.moduleName}
-                                         <ul><li>${listTrainingTopic.contentType}</li></ul>
+                                        
+                                     
+                                         <h4>Subjects:</h4>
+                                         <ul> <li>   ${listOnlineTraining.moduleName}
+                                         <%-- <ul><li>${listTrainingTopic.contentType}</li></ul>
                                           <ul> <li>${listTrainingTopic.contentName}</li></ul>
-                                         <ul> <li><a href="">${listTrainingTopic.contentLink}</a></li> 
+                                         <ul> <li><a href="">${listTrainingTopic.contentLink}</a></li>  --%> 
                                            </li></ul>
                              <!-- search div ends -->
                         </div><!-- row ends -->

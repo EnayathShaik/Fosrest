@@ -1342,7 +1342,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		int id =  p.getId();
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class, id);
-		personalInformationTrainer.setUserType(p.getUserType());
+		//personalInformationTrainer.setUserType(p.getUserType());
 		personalInformationTrainer.setTitle(p.getTitle());
 		personalInformationTrainer.setTrainingState(p.getTrainingState());
 		personalInformationTrainer.setAadharNumber(p.getAadharNumber());
@@ -1607,15 +1607,17 @@ System.out.println("list "+list);
 			OnlineTrainingForm bean = new OnlineTrainingForm();
 		//	List<OnlineTrainingForm> list = new ArrayList<OnlineTrainingForm>();
 			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> lst = session.createSQLQuery("select trainingtype , trainingphase ,mm.modulename,  trainingstartdate , trainingenddate  from nomineetrainee nt  left join trainingschedule ts on  (nt.trainingscheduleid = ts.trainingscheduleid) left join modulemaster mm on (mm.moduleid = ts.moduleid) where nt.logindetails ='"+ id +"'").list();
-			
+			/*List<Object[]> lst = session.createSQLQuery("select trainingtype , trainingphase ,mm.modulename,  trainingstartdate , trainingenddate  from nomineetrainee nt  left join trainingschedule ts on  (nt.trainingscheduleid = ts.trainingscheduleid) left join modulemaster mm on (mm.moduleid = ts.moduleid) where nt.logindetails ='"+ id +"'").list();*/
+			List<Object[]> lst = session.createSQLQuery("select tt.trainingtypeName , tp.trainingphaseName ,d.designationName,tc.trainingstartdate , tc.trainingenddate , mm.modulename from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join modulemaster mm on (mm.moduleid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'").list();
 			if(lst.size() > 0){
 			 Object[] obj=	lst.get(0);
 			 bean.setTrainingType((String)obj[0]);
 			 bean.setTrainingPhase((String)obj[1]);
-			 bean.setModuleName((String)obj[2]);
+			 bean.setDesignation((String)obj[2]);
 			 bean.setTrainingstartdate((String)obj[3]);
 			 bean.setTrainingenddate((String)obj[4]);
+			 bean.setModuleName((String)obj[5]);
+			
 			}
 			    
 		

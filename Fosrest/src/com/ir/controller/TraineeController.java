@@ -728,7 +728,6 @@ public class TraineeController {
 			//model.addAttribute("userType",userType);
 			model.addAttribute("DesignationList", DesignationList);
 			model.addAttribute("titleMap",titleMap);
-			
 			System.out.println("ttt"+session.getAttribute("profileId"));
 			if(session.getAttribute("profileId")==null)
 				return "PersonalInformationTrainee";
@@ -863,6 +862,7 @@ public class TraineeController {
         	if(checkAccess(session))
     			return "redirect:login.fssai";
         	int userId = (int) session.getAttribute("userId");
+        	System.out.println("aaaaaaaa"+session.getAttribute("userId"));
         	int personalTraineeId = (int)session.getAttribute("personalTraineeId");
         	traineeService.updateSteps(personalTraineeId,2);
         	session.setAttribute("traineeSteps", 2);
@@ -870,7 +870,7 @@ public class TraineeController {
    			
    			System.out.println(" list online training "+this.traineeService.listOnlineTraining(userId));
    			
-        	model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic(userId));
+        	//model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
         	model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
         	
 				System.out.println("listOnlineTraining");

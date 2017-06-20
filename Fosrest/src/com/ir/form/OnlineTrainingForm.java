@@ -10,12 +10,14 @@ public class OnlineTrainingForm {
 	private String moduleName;
 	private String trainingstartdate;
 	private String trainingenddate;
+	private String designation;
 	
-	
-	
-	
-	
-	
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
 	public String getTrainingstartdate() {
 		return trainingstartdate;
 	}
