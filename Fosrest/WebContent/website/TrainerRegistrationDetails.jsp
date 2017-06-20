@@ -26,14 +26,12 @@
 
 	function OnStart() {
 
-		/*  url = window.location.href;
-		// p=url.length;
-		c = url.charAt(66);
-		if(c!=4){
+
+		/* if(c!=4){
 			$("#sa").css("display", "none");
 			$("#on").css("display", "none");
 			$("#tc").css("display", "none");
-		} */
+		}  */
 		// $("#otherTrainingInstitute").css("display" , "none");
 		var isUpdate = '${isUpdate}';
 		if (isUpdate != null && isUpdate == "Y") {
@@ -76,27 +74,7 @@
 			$("#chkunit").css("display", "none");
 			$("#check").attr("checked", "checked");
 
-			var fields = '${PersonalInformationTrainer.userType}'.split(',');
-			for (i = 0; i < fields.length; i++) {
-				document.getElementById('userType_' + fields[i]).checked = true
 			}
-			
-			var fields = '${PersonalInformationTrainer.trainingState}'
-					.split(',');
-			<ct:forEach items="${listStateMaster}" var="ts" varStatus="loop">
-			for (i = 0; i < fields.length; i++) {
-				var s=fields[i];
-				 document.getElementById('trainingState_' + fields[i]).checked = true
-				 var a="";
-				if(s=='${ts.stateId}'){
- 				 a = '${ts.stateName}' + "," + $('#stateBox').val();
-		$('#stateBox').val(a); 
-				}
-			}
-		
-			</ct:forEach>
-		
-		}
 		DrawCaptcha();
 
 		flatpickr("#dob", {});
@@ -146,23 +124,7 @@
 							}
 
 						});
-		var a = "";
-		$('#batchCodeDIV input').change(function() {
-			<ct:forEach items="${listStateMaster}" var="ts" varStatus="loop">
-			if ('${ts.stateId}' == this.value) {
-			if(this.checked){
-					a = '${ts.stateName}' + "," + $('#stateBox').val();
-					$('#stateBox').val(a);
-				}
-				else{
-					var s="";
-					$('#stateBox').val(s); 
-					/* a = '${ts.stateName}' + "," + $('#stateBox').val();
-					$('#stateBox').val(a); */
-				} 
-			}
-			</ct:forEach>
-		});
+	
 
 	}
 	window.onload = OnStart;
@@ -203,25 +165,7 @@
 								<cf:input path="logId" type="hidden" />
 								<cf:input path="status" type="hidden" />
 								<cf:input type="hidden" path="id" />
-								<div class="form-group" id="abc" >
-									<div>
-										<ul class="lab-no">
-											<li class="style-li"><strong>User Type:</strong></li>
-											<li class="style-li error-red">*</li>
-											<li id="userTypeErr" style="display: none;"
-												class="style-li error-red">Select User Type.</li>
-										</ul>
-
-									</div>
-									<br>
-									<ct:forEach items="${DesignationList}" var="des" >
-
-										<cf:checkbox path="userType"
-											id="userType_${des.designationName}"
-											value="${des.designationName}"
-											label=" ${des.designationName}" />
-									</ct:forEach>
-								</div>
+							
 
 								<div class="form-group">
 									<div>
@@ -693,58 +637,79 @@
 
 									<!-- Trigger the modal with a button -->
 									<!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Select State</button> -->
-									<div class="col-md-6 col-xs-12">
-										<a href="#" data-toggle="modal" data-target="#myModal" style="margin-left: -13px;"><b>Select
-												State:</b></a>
-
+									<div class="col-md-6 col-xs-12" >
+									
+									<!-- 	<a href="#" data-toggle="modal" data-target="#myModal" style="margin-left: -13px;"><b>Select
+												State:</b></a> -->
+<button type="button" class="btn btn-primary btn-lg"
+												data-toggle="modal" data-target="#myModal" onClick="statecheckbox(); return false;">Select States</button>
 									</div>
 
 									<!-- Modal -->
-									<div class="modal fade" id="myModal" role="dialog">
-										<div class="modal-dialog">
-
-											<!-- Modal content-->
-											<div class="modal-content">
-
-												<div class="modal-body">
-
-													<div class="form-group" id="batchCodeDIV">
-
-														<div>
-															<ul class="lab-no">
-																<li class="style-li"><strong>States:</strong></li>
-																<li class="style-li error-red"><span
-																	id="name_status" class="clear-label"> </span> ${created }</li>
-															</ul>
-														</div>
-
-														<ct:forEach items="${listStateMaster}" var="ts"
-															varStatus="loop">
-															<cf:checkbox path="trainingState"
-																id="trainingState_${ts.stateId}" value="${ts.stateId}"
-																label="${ts.stateName}" />
-															<br>
-														</ct:forEach>
-													</div>
-
-													<!-- 	 <ul id="results"></ul> -->
-												</div>
-												<div class="modal-footer">
-													<div id="checkstate">
-														<input type="button" class="btn btn-primary"
-															data-toggle="collapse" data-target="#show-result"
-															aria-expanded="false" data-dismiss="modal" value="OK" />
-
-													</div>
-												</div>
-											</div>
-
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel">All States</h4>
 										</div>
-									</div>
+									<div class="modal-body">
 
-								<!-- </div> -->
+							<!-- table -->
+							<div class="row">
+								<div class="col-xs-12">
+								<table class="table table-bordered table-responsive"
+												id="testTable">
+												<thead>
+													<tr class="background-open-vacancies">
+
+														<th>S.No.</th>
+														<th>State Id</th>
+														<th>State Name</th>
+														 <th>Enroll States</th>
+													</tr>
+												</thead>
+												<ct:forEach items="${listStateMaster}" var="listStateMaster"
+													varStatus="loop">
+													<tr>
+													<td>${loop.count}</td>
+													<td>${listStateMaster.stateId}</td>
+													<td id="userName_${loop.index}">${listStateMaster.stateName}
+													</td>
+													<cf:hidden path="trainingState"
+																value="${listStateMaster.stateId}" />
+													<td class="text-center" id="statecheck"><input type="checkbox">
+													</td>
+
+
+													</tr>
+												</ct:forEach>
+
+											</table>
+											
+											
+								</div>
+							</div>
+						</div>
+								<div class="modal-footer">
+											<div>
+												<input type="button"
+													class="btn login-btn show-details-vacancy collapsed"
+													data-toggle="collapse" data-target="#show-result"
+													aria-expanded="false" data-dismiss="modal"  value="OK" />
+
+											</div>
+										</div>
+</div>
+									</div>
+								</div>
+							
 <br>
-								<div class="form-group">
+							<%-- 	<div class="form-group">
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>Selected States:</strong></li>
@@ -757,6 +722,7 @@
 									<cf:input type="text" id="stateBox" path=""
 										class="form-control" placeholder="state" required="" />
 
+								</div> --%>
 								</div>
 								<%-- <div class="form-group">
 													<div>
@@ -779,7 +745,7 @@
 																	
 																</ct:forEach>
 												</div> --%>
-							</div>
+							<!-- </div> -->
 							<div class="col-md-6 col-xs-12">
 								<div class="form-group">
 									<label>Associated with any Training Institute ?</label> <br>
@@ -834,10 +800,10 @@
 										class="form-control" placeholder="Training Institute Name:"
 										required="" />
 								</div>
-
-							</div>
+</div>
+							
 							<!-- right side ends -->
-						</fieldset>
+						</fieldset> 
 						<!-- Experience end -->
 
 						<!-- captcha -->
@@ -890,7 +856,7 @@
 					</form>
 					<!-- form ends -->
 
-					</d>
+					</div>
 
 
 					<div class="col-md-1 col-xs-12"></div>
@@ -921,7 +887,7 @@
 			success : function(response) {
 				var mainData1 = jQuery.parseJSON(response);
 				//  $("#trainingScheduleId").val(mainData1.trainingScheduleId);
-				$("#userType").val(mainData1.userType);
+				//$("#userType").val(mainData1.userType);
 				$("#title").val(mainData1.title);
 				$("#AadharNumber").val(mainData1.AadharNumber);
 				$("#firstName").val(mainData1.firstName);
@@ -934,17 +900,17 @@
 						mainData1.correspondenceAddress1);
 				$("#correspondenceState").val(mainData1.correspondenceState);
 				$("#Email").val(mainData1.Email);
-				$("#correspondenceDistrict").val(
+				/* $("#correspondenceDistrict").val(
 						mainData1.correspondenceDistrict);
 
-				$("#correspondenceCity").val(mainData1.correspondenceCity);
+				$("#correspondenceCity").val(mainData1.correspondenceCity); */
 				$("#correspondencePincode")
 						.val(mainData1.correspondencePincode);
 				$("#mobile").val(mainData1.mobile);
-				$("#empID").val(mainData1.empID);
-				$("#specialisedArea").val(mainData1.specialisedArea);
-				$("#orgName").val(mainData1.orgName);
-				$("#noOfTrainings").val(mainData1.noOfTrainings);
+				//$("#empID").val(mainData1.empID);
+				//$("#specialisedArea").val(mainData1.specialisedArea);
+				//$("#orgName").val(mainData1.orgName);
+				//$("#noOfTrainings").val(mainData1.noOfTrainings);
 
 				$("#updatebtn").css("display", "block");
 
@@ -966,7 +932,7 @@
 
 		var isUpdate = '${isUpdate}';
 
-		$("#userTypeErr").css("display", "none");
+		//$("#userTypeErr").css("display", "none");
 		$("#titleErr").css("display", "none");
 		$("#correspondencePincodeErr").css("display", "none");
 		$("#correspondencePincodeErr1").css("display", "none");
@@ -1003,13 +969,7 @@
 
 	
 		
-			
-		if($("#abc").find('input[type=checkbox]:checked').length == 0)
-			{
-			    // alert('Please select atleast one checkbox');
-			     $("#userTypeErr").css("display" , "block");
-			     return false;
-			} 
+		
 
 		if ($("#title").val() == 0) {
 
@@ -1136,13 +1096,13 @@
 			 $("#languagesErr").css("display" , "block");
 			return false;
 		 }
-		 if(isUpdate=='Y'){
+		 /* if(isUpdate=='Y'){
 			 return true;
 		 }
 		 else if ($("#stateBox").val()== 0) {
 				$("#state").css("display", "block");
 				return false;
-			} 
+			}  */
 		if ($("#expInYear").val() == 0) {
 			$("#expInYearErr").css("display", "block");
 			return false;
@@ -1197,6 +1157,33 @@
 	}
 	
 
-		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 </script>
+	 <script>
+	 var isUpdate = '${isUpdate}';
+	 if(isUpdate=='Y'){
+	 	function statecheckbox(){
+	 		<ct:forEach items="${listStateMaster}" var="ts" varStatus="loop">
+	 		var fields = '${PersonalInformationTrainer.trainingState}'.split(',');
+	 		for (i = 0; i < fields.length; i++) {
+	 						var s=fields[i];
+	 						if(s=='${ts.stateId}'){
+	 						//document.getElementById("statecheck" + fields[i]).checked = true
+	 							("#statecheck"  + fields[i]).attr("checked", true);
+	 							}
+	 					}
+	 					</ct:forEach>
+	 	}
+	 	}
 </script>
 

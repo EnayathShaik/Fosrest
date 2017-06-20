@@ -30,39 +30,19 @@ public class PersonalInformationTrainer {
 	
 
 
-	private String userType;
+	//private String userType;
 	
-	private int modulesId;
-	/*private String state;
-	private String stateBox2;
-	
+	//private int modulesId;
 
 
-
-	public String getStateBox2() {
-		return stateBox2;
-	}
-
-	public void setStateBox2(String stateBox2) {
-		this.stateBox2 = stateBox2;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}*/
-
-	public int getModulesId() {
+/*	public int getModulesId() {
 		return modulesId;
 	}
 
 	public void setModulesId(int modulesId) {
 		this.modulesId = modulesId;
 	}
-
+*/
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
 	
@@ -88,14 +68,14 @@ public class PersonalInformationTrainer {
 	}
 
 
-
+/*
 	public String getUserType() {
 		return userType;
 	}
 
 	public void setUserType(String userType) {
 		this.userType = userType;
-	}
+	}*/
 
 
 
@@ -471,14 +451,14 @@ public class PersonalInformationTrainer {
 public void setCreatedBy(int createdBy) {
 	this.createdBy = createdBy;
 }
-	public String getSpecialisedArea() {
+/*	public String getSpecialisedArea() {
 	return specialisedArea;
 }
 
 public void setSpecialisedArea(String specialisedArea) {
 	this.specialisedArea = specialisedArea;
 }
-
+*/
 /*public String getOrgName() {
 	return orgName;
 }
@@ -487,17 +467,17 @@ public void setOrgName(String orgName) {
 	this.orgName = orgName;
 }*/
 
-public String getNoOfTrainings() {
+/*public String getNoOfTrainings() {
 	return noOfTrainings;
 }
 
 public void setNoOfTrainings(String noOfTrainings) {
 	this.noOfTrainings = noOfTrainings;
-}
+}*/
 
-	private String specialisedArea;
+	//private String specialisedArea;
 	//private String orgName;
-	private String noOfTrainings;
+	//private String noOfTrainings;
 	
 private String Status;
 	
