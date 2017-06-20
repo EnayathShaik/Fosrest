@@ -204,7 +204,7 @@
                                                                     </ct:when>
                                                                     <ct:otherwise>
                                                                         <tr>
-                                                                            <td colspan="6">
+                                                                            <td colspan="7">
                                                                                 <label>No records available</label>
                                                                             </td>
                                                                         </tr>

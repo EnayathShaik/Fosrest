@@ -179,7 +179,7 @@
                                                                     </ct:forEach>
                                                                 </ct:when>
                                                                 <ct:otherwise>
-                                                                    <td colspan="5">
+                                                                    <td colspan="7">
                                                                         <label>No records available</label>
                                                                     </td>
 
