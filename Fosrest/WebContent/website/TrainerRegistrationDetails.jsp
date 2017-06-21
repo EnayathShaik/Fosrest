@@ -181,7 +181,7 @@
 										</ul>
 									</div>
 									<cf:input type="text" path="AadharNumber" class="form-control"
-										minlength="12" maxlength="12" placeholder="Aadhar Number"
+										maxlength="12" placeholder="Aadhar Number"
 										onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
 										onblur="ck_aadhar('personalinformationtrainer');" />
 								</div>
@@ -510,7 +510,7 @@
 													Line 1:</strong></li>
 											<li class="style-li error-red"></li>
 											<li id="ResidentialLine1Err" style="display: none;"
-												class="style-li error-red">Correspondence Address can
+												class="style-li error-red">Permanent Address can
 												not be blank.</li>
 
 										</ul>
@@ -755,9 +755,9 @@
 										name="optradio" /> No
 									</label> -->
 								</div>
-									<cf:radiobutton path="radioTrainingInstitute" value="Y" checked="true" />
+									<cf:radiobutton  path="radioTrainingInstitute" value="Y" checked="true"/>
 									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<cf:radiobutton path="radioTrainingInstitute" value="N" />
+									<cf:radiobutton  path="radioTrainingInstitute" value="N" />
 									No
 								<div class="form-group">
 									<div>
@@ -928,8 +928,7 @@
 		}
 	}
 	function validateFields() {
-		
-
+	
 		var isUpdate = '${isUpdate}';
 
 		//$("#userTypeErr").css("display", "none");
@@ -939,7 +938,7 @@
 		$("#mobileErr").css("display", "none");
 		$("#AadharNumberErr").css("display", "none");
 		$("#firstNameErr").css("display", "none");
-		$("#MiddleNameErr").css("display", "none");
+		//$("#MiddleNameErr").css("display", "none");
 		$("#LastNameErr").css("display", "none");
 		$("#FatherNameErr").css("display", "none");
 		$("#empIDErr").css("display", "none");
@@ -967,25 +966,23 @@
 		 $("#aadharNumberErr2").css("display" , "none");
 		//$("#AssociatedWithAnyTrainingInstituteErr").css("display" , "none"); 
 
-	
-		
-		
+		 if ($("#AadharNumber").val() == 0) {
 
+				$("#AadharNumberErr").css("display", "block");
+				return false;
+			}
+			if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
+	   		 $("#aadharNumberErr2").css("display" , "block");
+	    		 return false;
+	      	 }
+		
 		if ($("#title").val() == 0) {
 
 			$("#titleErr").css("display", "block");
 			return false;
 		}
 
-		if ($("#AadharNumber").val() == 0) {
-
-			$("#AadharNumberErr").css("display", "block");
-			return false;
-		}
-		if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
-   		 $("#aadharNumberErr2").css("display" , "block");
-    		 return false;
-      	 }
+		
 		/* if ($("#orgName").val() == 0) {
 
 			$("#s1").css("display", "block");
@@ -997,11 +994,11 @@
 			$("#firstNameErr").css("display", "block");
 			return false;
 		}
-		if ($("#MiddleName").val() == 0) {
+	/* 	if ($("#MiddleName").val() == 0) {
 
 			$("#MiddleNameErr").css("display", "block");
 			return false;
-		}
+		} */
 		if ($("#LastName").val() == 0) {
 
 			$("#LastNameErr").css("display", "block");
@@ -1096,6 +1093,12 @@
 			 $("#languagesErr").css("display" , "block");
 			return false;
 		 }
+			if($("#testTable").find('input[type=checkbox]:checked').length == 0)
+			{
+			    alert('Please select atleast one checkbox');
+			     return false;
+			} 
+			
 		 /* if(isUpdate=='Y'){
 			 return true;
 		 }
@@ -1117,6 +1120,7 @@
 			return false;
 
 		}
+		
 		/* if($("#otherTrainingInstitute").val() ==''){
 			 $("#otherTrainingInstituteErr").css("display" , "block");
 				return false;
@@ -1139,6 +1143,7 @@
 			}
 
 		}
+		 
 		if ($("#check").is(":checked") == false) {
 			alert("check the checkbox to agree to term and conditions");
 			return false;
@@ -1147,6 +1152,26 @@
 	}
 </script>
 <script>
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+function abc(){
+	alert("OOOOOOOOOOOOOOOOO");
+	var q='a1';
+	var z=document.getElemenetById("radioTrainingInstitute").text;
+	 alert("aaaaaaaaaaa"+z);
+}
 	function OtiHide() {
 		var a = document.getElementById('AssociatedWithAnyTrainingInstitute').value;
 		if (a == 0) {
@@ -1171,6 +1196,7 @@
 	 </script>
 	 <script>
 	 var isUpdate = '${isUpdate}';
+	
 	 if(isUpdate=='Y'){
 	 	function statecheckbox(){
 	 		<ct:forEach items="${listStateMaster}" var="ts" varStatus="loop">
