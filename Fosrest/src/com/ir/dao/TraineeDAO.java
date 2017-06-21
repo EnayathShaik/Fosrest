@@ -142,4 +142,5 @@ public interface TraineeDAO {
 	public List<fotestonlineTrainingForm> listfotestonlineTraining();
 	
 	public List<FotestCertificationForm> listcertification();
+	 public List listsubjects(int id);
 }

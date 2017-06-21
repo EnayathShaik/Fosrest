@@ -445,4 +445,11 @@ public class TraineeServiceImpl implements TraineeService {
 			return this.traineeDAO.listcertification();
 		}
 
+		@Override
+		@Transactional
+		public List listsubjects(int id) {
+			// TODO Auto-generated method stub
+			return this.traineeDAO.listsubjects( id);
+		}
+
 }

@@ -1,3 +1,6 @@
+<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
+<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 package com.ir.dao;
 import java.util.List;
 
@@ -10,9 +13,8 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
-import com.ir.form.GenerateCertificateForm;<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
-<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+import com.ir.form.GenerateCertificateForm;
+
  
  <script type="text/javascript">
 
@@ -30,6 +32,7 @@ import com.ir.form.GenerateCertificateForm;<%@ taglib prefix="cf" uri="http://ww
 		}
 		window.location.href ='/Fosrest/loginProcess.fssai';
 	}
+	
 }
 window.onload = OnStart; 
 
@@ -96,14 +99,15 @@ window.onload = OnStart;
                                     <fieldset>
                                         <legend> Course Curriculum</legend>
                                         
-                                        
-                                     
                                          <h4>Subjects:</h4>
-                                         <ul> <li>   ${listOnlineTraining.moduleName}
+                                         <ct:forEach var="subjects" items="${listsubjects}">
+                                           <li>  <ct:out value="${subjects}"/><br></li>
+                                             </ct:forEach>
                                          <%-- <ul><li>${listTrainingTopic.contentType}</li></ul>
                                           <ul> <li>${listTrainingTopic.contentName}</li></ul>
                                          <ul> <li><a href="">${listTrainingTopic.contentLink}</a></li>  --%> 
-                                           </li></ul>
+                                          
+                                    </fieldset>
                              <!-- search div ends -->
                         </div><!-- row ends -->
                     </div>

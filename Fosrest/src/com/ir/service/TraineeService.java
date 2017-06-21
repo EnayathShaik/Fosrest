@@ -193,6 +193,10 @@ public List<FotestFeedbackForm> listFotestFeedback();
  public List<fotestonlineTrainingForm> listfotestonlineTraining();
 
  public List<FotestCertificationForm> listcertification();
+ 
+ public List listsubjects(int id);
+
+
 	
 	
 	

@@ -870,8 +870,9 @@ public class TraineeController {
    			
    			System.out.println(" list online training "+this.traineeService.listOnlineTraining(userId));
    			
-        	//model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
+        	
         	model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
+        	model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
         	
 				System.out.println("listOnlineTraining");
 			

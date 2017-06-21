@@ -1691,7 +1691,27 @@ System.out.println("list "+list);
 			}
 			return resulList;
 		}
-		
+
+		@Override
+		public List listsubjects(int id) {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
+			Query query =session.createSQLQuery(" select mm.modulename from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join modulemaster mm on (mm.moduleid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'");
+			
+			List list = query.list();
+			return list;
+		}
+		/*@Override
+		public List listCalendar() {
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
+			Query query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDays,trainingStartDate,trainingEndDate from trainingCalendar");
+			
+			List list = query.list();
+			return list;
+		}*/
 		}
 		
 		
