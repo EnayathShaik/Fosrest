@@ -144,6 +144,22 @@
 
 												<!-- left -->
 												<div class="col-xs-6">
+												
+												
+												<div class="form-group">
+				                                    <div>
+				                                        <ul class="lab-no">
+				                                            <li class="style-li"><strong>Title</strong></li>
+				                                            <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
+				                                             
+				                                            <li class="style-li error-red"> *</li>
+				                                        </ul>
+				                                    </div>
+				                                   <cf:select path="title" class="form-control">
+													<cf:option value="" label="Select Title" />
+													<cf:options items="${titleMap}" />
+												</cf:select>
+                                                </div>
 
 													<div class="form-group">
 													<div>
@@ -211,7 +227,7 @@
 													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
 				                                    </cf:select>
                                                </div>
-                                               <div class="form-group">
+                                              <%--  <div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Designation: <span
@@ -227,7 +243,25 @@
 													<cf:input path="designation" placeholder="designation"
 														class="form-control" />
 
-												</div>
+												</div> --%>
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Designation: <span
+																	style="color: red;">*</span>
+
+															</strong></li>
+															<li id="designationErr" style="display: none;"
+																class="style-li error-red">designation should not
+																be blank.</li>
+
+														</ul>
+													</div>
+                                                    <cf:select path="designation" class="form-control">
+													<cf:option value="" label="Select Designation" />
+													<cf:options items="${DesignationList}" itemValue="designationName" itemLabel="designationName"/>
+												</cf:select>
+											</div>
 
 													<input type="submit" id="updatebtn"
 														style="display: none; float: right; margin-right: 122px;"
@@ -320,6 +354,7 @@
             	      success: function (response) {      
             	      var mainData1 = jQuery.parseJSON(response);
             	    $("#id").val(mainData1.id);
+            	    $("#title").val(mainData1.title);
             	    $("#firstName").val(mainData1.firstName);
             	    $("#middleName").val(mainData1.middleName);
             	    $("#lastName").val(mainData1.lastName);

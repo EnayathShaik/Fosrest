@@ -371,7 +371,7 @@ public class TrainerController {
 		int idd=0;//for tainer-institute superadmin login.
 		if(request.getParameter("id")!=null)
 		idd=Integer.parseInt(request.getParameter("id"));
-		System.out.println("idd rrrrrrrrrrrrrrr"+idd);
+		
 		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1 && (int)session.getAttribute("profileId")!=5){	
 			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
 		return "redirect:login.fssai";

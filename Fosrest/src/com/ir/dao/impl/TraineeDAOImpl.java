@@ -1392,7 +1392,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		int id =  p.getId();
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainingInstitute personalInformationTrainingInstitute = (PersonalInformationTrainingInstitute) session.load(PersonalInformationTrainingInstitute.class, id);
-		//personalInformationTrainingInstitute.setUserType(p.getUserType());
+		personalInformationTrainingInstitute.setTrainingCenterName(p.getTrainingCenterName());
 		personalInformationTrainingInstitute.setTitle(p.getTitle());
 		personalInformationTrainingInstitute.setFirstName(p.getFirstName());
 		personalInformationTrainingInstitute.setLastName(p.getLastName());
@@ -1408,6 +1408,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 		//personalInformationTrainingInstitute.setTrainingType(p.getTrainingType());
 		//personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
 		personalInformationTrainingInstitute.setSeatingCapacity(p.getSeatingCapacity());
+		personalInformationTrainingInstitute.setAvailableTVProjector(p.isAvailableTVProjector());
+		personalInformationTrainingInstitute.setAvailableInHouseTrainer(p.isAvailableInHouseTrainer());
 		personalInformationTrainingInstitute.setNoOfInHouseTrainer(p.getNoOfInHouseTrainer());
 		personalInformationTrainingInstitute.setNoOfPC(p.getNoOfPC());
 		//personalInformationTrainingInstitute.setNoOfYearExp(p.getNoOfYearExp());

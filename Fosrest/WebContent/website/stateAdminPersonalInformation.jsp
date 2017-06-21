@@ -155,6 +155,22 @@
 
 												<!-- left -->
 												<div class="col-xs-6">
+												
+												
+												 <div class="form-group">
+				                                    <div>
+				                                        <ul class="lab-no">
+				                                            <li class="style-li"><strong>Title:</strong></li>
+				                                            <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
+				                                             
+				                                            <li class="style-li error-red"> *</li>
+				                                        </ul>
+				                                    </div>
+				                                   <cf:select path="title" class="form-control">
+													<cf:option value="" label="Select Title" />
+													<cf:options items="${titleMap}" />
+												</cf:select>
+                                                </div>
 
 													<div class="form-group">
 													<div>
@@ -224,7 +240,7 @@
 													</div>
                                                     <cf:select path="designation" class="form-control">
 													<cf:option value="" label="Select Designation" />
-													<cf:options items="${DesignationList}" itemValue="designationId" itemLabel="designationName"/>
+													<cf:options items="${DesignationList}" itemValue="designationName" itemLabel="designationName"/>
 												</cf:select>
 												</div>
 												
@@ -288,7 +304,7 @@
                  function validateFields(){
                 
                	
-            
+                	 $("#titleErr").css("display" , "none");
                 	$("#firstNameErr").css("display" , "none");
                 	$("#middleNameErr").css("display" , "none");
                 	$("#LastNameErr").css("display" , "none");
@@ -304,6 +320,7 @@
                 	$("#aadharNumberErr2").css("display" , "none");
                 	$("#mobileErr").css("display" , "none");
                 	$("#landLineErr").css("display" , "none");
+                	$("#empIDErr1").css("display" , "none");
                 	
                 	if($("#empID").val() == 0){
     				$("#empIDErr1").css("display" , "block");
@@ -317,14 +334,18 @@
                 		 $("#aadharNumberErr2").css("display" , "block");
                  		 return false;
                    	 }
+                	 if($("#title").val() == ''){
+     					$("#titleErr").css("display" , "block");
+     					return false;
+     					}
                 	if($("#firstName").val() == 0){
     					$("#firstNameErr").css("display" , "block");
     					return false;
     					}
-                	if($("#middleName").val() == ''){
+                	/* if($("#middleName").val() == ''){
     					$("#middleNameErr").css("display" , "block");
     					return false;
-    					}
+    					} */
                 	if($("#email").val() == 0){
                		 
     					$("#EmailErr").css("display" , "block");
@@ -355,11 +376,11 @@
     						$("#landLineErr").css("display" , "block");
     						return false;
     						}
-    					if($("#address2").val() == 0){
+    					/* if($("#address2").val() == 0){
     						 
     						$("#address2Err").css("display" , "block");
     						return false;
-    						}
+    						} */
     					if($("#mobileNo").val().match(/^[0-9]{10}$/) == null){
     				    	
    			      		 $("#mobileErr").css("display" , "block");

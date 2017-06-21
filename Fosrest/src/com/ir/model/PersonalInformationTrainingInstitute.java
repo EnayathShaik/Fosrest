@@ -33,25 +33,11 @@ public class PersonalInformationTrainingInstitute {
 	
 
 	
-	public int getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(int createdBy) {
-		this.createdBy = createdBy;
-	}
 
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
 	
 	
-	public LoginDetails getLoginDetails() {
-		return loginDetails;
-	}
-
-	public void setLoginDetails(LoginDetails loginDetails) {
-		this.loginDetails = loginDetails;
-	}
 
 	//private String empID;
 	
@@ -64,13 +50,7 @@ public class PersonalInformationTrainingInstitute {
 	
 
 
-	public int getNoOfPC() {
-		return noOfPC;
-	}
-
-	public void setNoOfPC(int noOfPC) {
-		this.noOfPC = noOfPC;
-	}
+	
 
 	@NotNull
 	
@@ -99,30 +79,7 @@ public class PersonalInformationTrainingInstitute {
 	
 	
 	
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
+	
 
 	@NotNull
 	@Size(min=1, max=100 , message="enter your correspondenceAddress1")
@@ -147,84 +104,11 @@ public class PersonalInformationTrainingInstitute {
 
 	
 
-	public int getId() {
-		return id;
-	}
+	
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 
 	
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-
-
-	public String getEmail() {
-		return Email;
-	}
-
-	public void setEmail(String email) {
-		this.Email = email;
-	}
-
-	
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public String getCorrespondenceAddress1() {
-		return correspondenceAddress1;
-	}
-
-	public void setCorrespondenceAddress1(String correspondenceAddress1) {
-		this.correspondenceAddress1 = correspondenceAddress1;
-	}
-
-	public String getCorrespondenceAddress2() {
-		return correspondenceAddress2;
-	}
-
-	public void setCorrespondenceAddress2(String correspondenceAddress2) {
-		this.correspondenceAddress2 = correspondenceAddress2;
-	}
-
-	public String getCorrespondenceState() {
-		return correspondenceState;
-	}
-
-	public void setCorrespondenceState(String correspondenceState) {
-		this.correspondenceState = correspondenceState;
-	}
-
-	public String getCorrespondenceCity() {
-		return correspondenceCity;
-	}
-
-	public void setCorrespondenceCity(String correspondenceCity) {
-		this.correspondenceCity = correspondenceCity;
-	}
-
-	public String getCorrespondencePincode() {
-		return correspondencePincode;
-	}
-
-	public void setCorrespondencePincode(String correspondencePincode) {
-		this.correspondencePincode = correspondencePincode;
-	}
 
 	/*public String getResidentialDistrict() {
 		return residentialDistrict;
@@ -234,26 +118,10 @@ public class PersonalInformationTrainingInstitute {
 		this.residentialDistrict = residentialDistrict;
 	}*/
 
-	public String getCorrespondenceDistrict() {
-		return correspondenceDistrict;
-	}
 
-	public void setCorrespondenceDistrict(String correspondenceDistrict) {
-		this.correspondenceDistrict = correspondenceDistrict;
-	}
-
-	
 	
 	private int steps;
 
-	public int getSteps() {
-		return steps;
-	}
-
-	public void setSteps(int steps) {
-		this.steps = steps;
-	}
-		
 	//private int sessWishToConduct;
 	
 	
@@ -264,23 +132,7 @@ public class PersonalInformationTrainingInstitute {
 	
 	
 	
-	public int getSeatingCapacity() {
-		return seatingCapacity;
-	}
-
-	public void setSeatingCapacity(int seatingCapacity) {
-		this.seatingCapacity = seatingCapacity;
-	}
-
-	public String getTrainingCenterName() {
-		return trainingCenterName;
-	}
-
-	public void setTrainingCenterName(String trainingCenterName) {
-		this.trainingCenterName = trainingCenterName;
-	}
-
-
+	
 	
 	private int noOfInHouseTrainer;
 	
@@ -294,50 +146,352 @@ public class PersonalInformationTrainingInstitute {
 	
 	
 	
-	public int getNoOfInHouseTrainer() {
-		return noOfInHouseTrainer;
-	}
-
-	public void setNoOfInHouseTrainer(int noOfInHouseTrainer) {
-		this.noOfInHouseTrainer = noOfInHouseTrainer;
-	}
-
-	public boolean isAvailableTVProjector() {
-		return availableTVProjector;
-	}
-
-	public void setAvailableTVProjector(boolean availableTVProjector) {
-		this.availableTVProjector = availableTVProjector;
-	}
-
-	public boolean isAvailableInHouseTrainer() {
-		return availableInHouseTrainer;
-	}
-
-	public void setAvailableInHouseTrainer(boolean availableInHouseTrainer) {
-		this.availableInHouseTrainer = availableInHouseTrainer;
-	}
+	
 
 	//private String tpName;
 	private String logId;
-	public String getLogId() {
-		return logId;
-	}
 
-	public void setLogId(String logId) {
-		this.logId = logId;
-	}
 private String Status;
 	
 	
 
-	public String getStatus() {
-		return Status;
-	}
+	
+	public int getId() {
+	return id;
+}
 
-	public void setStatus(String status) {
-		Status = status;
-	}
+
+
+
+public void setId(int id) {
+	this.id = id;
+}
+
+
+
+
+public int getCreatedBy() {
+	return createdBy;
+}
+
+
+
+
+public void setCreatedBy(int createdBy) {
+	this.createdBy = createdBy;
+}
+
+
+
+
+public LoginDetails getLoginDetails() {
+	return loginDetails;
+}
+
+
+
+
+public void setLoginDetails(LoginDetails loginDetails) {
+	this.loginDetails = loginDetails;
+}
+
+
+
+
+public String getTitle() {
+	return title;
+}
+
+
+
+
+public void setTitle(String title) {
+	this.title = title;
+}
+
+
+
+
+public int getNoOfPC() {
+	return noOfPC;
+}
+
+
+
+
+public void setNoOfPC(int noOfPC) {
+	this.noOfPC = noOfPC;
+}
+
+
+
+
+public String getTrainingCenterName() {
+	return trainingCenterName;
+}
+
+
+
+
+public void setTrainingCenterName(String trainingCenterName) {
+	this.trainingCenterName = trainingCenterName;
+}
+
+
+
+
+public String getEmail() {
+	return Email;
+}
+
+
+
+
+public void setEmail(String email) {
+	Email = email;
+}
+
+
+
+
+public String getMobile() {
+	return mobile;
+}
+
+
+
+
+public void setMobile(String mobile) {
+	this.mobile = mobile;
+}
+
+
+
+
+public String getFirstName() {
+	return firstName;
+}
+
+
+
+
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+
+
+
+
+public String getMiddleName() {
+	return middleName;
+}
+
+
+
+
+public void setMiddleName(String middleName) {
+	this.middleName = middleName;
+}
+
+
+
+
+public String getLastName() {
+	return lastName;
+}
+
+
+
+
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+
+
+
+
+public String getCorrespondenceAddress1() {
+	return correspondenceAddress1;
+}
+
+
+
+
+public void setCorrespondenceAddress1(String correspondenceAddress1) {
+	this.correspondenceAddress1 = correspondenceAddress1;
+}
+
+
+
+
+public String getCorrespondenceAddress2() {
+	return correspondenceAddress2;
+}
+
+
+
+
+public void setCorrespondenceAddress2(String correspondenceAddress2) {
+	this.correspondenceAddress2 = correspondenceAddress2;
+}
+
+
+
+
+public String getCorrespondenceState() {
+	return correspondenceState;
+}
+
+
+
+
+public void setCorrespondenceState(String correspondenceState) {
+	this.correspondenceState = correspondenceState;
+}
+
+
+
+
+public String getCorrespondenceCity() {
+	return correspondenceCity;
+}
+
+
+
+
+public void setCorrespondenceCity(String correspondenceCity) {
+	this.correspondenceCity = correspondenceCity;
+}
+
+
+
+
+public String getCorrespondencePincode() {
+	return correspondencePincode;
+}
+
+
+
+
+public void setCorrespondencePincode(String correspondencePincode) {
+	this.correspondencePincode = correspondencePincode;
+}
+
+
+
+
+public String getCorrespondenceDistrict() {
+	return correspondenceDistrict;
+}
+
+
+
+
+public void setCorrespondenceDistrict(String correspondenceDistrict) {
+	this.correspondenceDistrict = correspondenceDistrict;
+}
+
+
+
+
+public int getSteps() {
+	return steps;
+}
+
+
+
+
+public void setSteps(int steps) {
+	this.steps = steps;
+}
+
+
+
+
+public int getSeatingCapacity() {
+	return seatingCapacity;
+}
+
+
+
+
+public void setSeatingCapacity(int seatingCapacity) {
+	this.seatingCapacity = seatingCapacity;
+}
+
+
+
+
+public int getNoOfInHouseTrainer() {
+	return noOfInHouseTrainer;
+}
+
+
+
+
+public void setNoOfInHouseTrainer(int noOfInHouseTrainer) {
+	this.noOfInHouseTrainer = noOfInHouseTrainer;
+}
+
+
+
+
+public boolean isAvailableTVProjector() {
+	return availableTVProjector;
+}
+
+
+
+
+public void setAvailableTVProjector(boolean availableTVProjector) {
+	this.availableTVProjector = availableTVProjector;
+}
+
+
+
+
+public boolean isAvailableInHouseTrainer() {
+	return availableInHouseTrainer;
+}
+
+
+
+
+public void setAvailableInHouseTrainer(boolean availableInHouseTrainer) {
+	this.availableInHouseTrainer = availableInHouseTrainer;
+}
+
+
+
+
+public String getLogId() {
+	return logId;
+}
+
+
+
+
+public void setLogId(String logId) {
+	this.logId = logId;
+}
+
+
+
+
+public String getStatus() {
+	return Status;
+}
+
+
+
+
+public void setStatus(String status) {
+	Status = status;
+}
+
+
+
+
 	@Override
 	public String toString() {
 		return trainingCenterName;

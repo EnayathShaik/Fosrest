@@ -803,6 +803,7 @@ public class AdminDAOImpl implements AdminDAO {
 			s.setDesignation(p.getDesignation());
 			s.setEmail(p.getEmail());
 			s.setEmpID(p.getEmpID());
+			s.setTitle(p.getTitle());
 			s.setFirstName(p.getFirstName());
 			s.setLandLine(p.getLandLine());
 			s.setLastName(p.getLastName());
@@ -838,6 +839,7 @@ public class AdminDAOImpl implements AdminDAO {
 			s.setDesignation(p.getDesignation());
 			s.setEmail(p.getEmail());
 			s.setEmpID(p.getEmpID());
+			s.setTitle(p.getTitle());
 			s.setFirstName(p.getFirstName());
 			s.setLandLine(p.getLandLine());
 			s.setLastName(p.getLastName());
@@ -1904,6 +1906,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public void updateHolidayMaster(HolidayMaster p) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
+		p.setIsActive("Y");
 		session.update(p);
 
 	}

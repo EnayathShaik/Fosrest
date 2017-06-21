@@ -294,7 +294,7 @@
                                     </div>
                                     <cf:input type="text" path="trainingCenterName" class="form-control" placeholder="Training Center Name" required=""/>
                                 </div>
-   <div class="form-group">
+                                <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Title:(Training Center Head)</strong></li>
@@ -560,22 +560,31 @@
                                     <cf:input type="text" path="seatingCapacity" class="form-control" placeholder="Number of Seats"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>Availability of TV/ Projector in training center ?</label>
-                                    <br>
-                                    <label class="radio-inline">
-                                        <cf:radiobutton path="availableTVProjector" name="optradio"/> Yes </label>
-                                    <label class="radio-inline">
-                                        <cf:radiobutton  path="availableTVProjector"  checked="checked" name="optradio"/> No </label>
-                                </div>
-                                
-                                   <div class="form-group">
-                                    <label>Availability of in-house trainers in food safety ?</label>
-                                    <br>
-                                    <label class="radio-inline">
-                                        <cf:radiobutton  path="availableInHouseTrainer" name="optradio"/> Yes </label>
-                                    <label class="radio-inline">
-                                        <cf:radiobutton  path="availableInHouseTrainer"   checked="checked" name="optradio"/> No </label>
-                                </div>
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Availability of TV/ Projector in training center ?</strong></li>
+
+											<li class="style-li error-red">*</li>
+										</ul>
+									</div>
+									<cf:radiobutton path="availableTVProjector" value="Yes" checked="true" />
+									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="availableTVProjector" value="No" />
+									No
+								</div>
+                                <div class="form-group">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Availability of in-house trainers in food safety ?</strong></li>
+
+											<li class="style-li error-red">*</li>
+										</ul>
+									</div>
+									<cf:radiobutton path="availableInHouseTrainer" value="Yes" checked="true" />
+									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="availableInHouseTrainer" value="No" />
+									No
+								</div>
                               
                             </div>
                             <!-- left side ends -->

@@ -125,7 +125,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                             <fieldset>
-                                            <legend>Training Schedule</legend>
+                                            <legend>State Master</legend>
                                             <ct:if test="${!empty listStateMaster}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                 <thead>

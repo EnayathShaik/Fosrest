@@ -27,7 +27,14 @@ public class StateAdmin {
 	private String userId;
 	private String firstName;
 	private String email;
+	private String title;
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	private String mobileNo,landLine;
 
 	public String getMobileNo() {

@@ -591,6 +591,8 @@ public class AdminController {
 		//String userId = request.getParameter("userId");
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		model.addAttribute("DesignationList", DesignationList);
+		Map<String, String> titleMap = lst.titleMap;
+		model.addAttribute("titleMap", titleMap);
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("stateAdminForm", new stateAdminForm());
 		//model.addAttribute("liststateadmin", this.adminService.liststateadmin());
@@ -619,6 +621,10 @@ public class AdminController {
 		if(checkAccess(session))
 			return "redirect:login.fssai";
 		model.addAttribute("stateAdminForm", new stateAdminForm());
+		List<Designation> DesignationList=pageLoadService.loadDesignation();
+		Map<String, String> titleMap = lst.titleMap;
+		model.addAttribute("titleMap", titleMap);
+		model.addAttribute("DesignationList", DesignationList);
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("liststateadmin", this.adminService.liststateadmin());
 		
