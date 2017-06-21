@@ -3271,7 +3271,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   	    	}
   	    }
   		else{
-	    		model.addAttribute("errorTime", "Same Start-Date exists");
+	    		model.addAttribute("errorTime", "Same Start-Date exists for ScheduleCode "+form.getScheduleCode());
 	    }
   		
   		

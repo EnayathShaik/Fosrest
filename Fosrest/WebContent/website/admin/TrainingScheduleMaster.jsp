@@ -88,9 +88,9 @@
 		var sTime=generateOptionTexts( '01:00' );
 		var eTime=generateOptionTexts( '02:00' );
 		var days=dayNumbers();
-		rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><select id='day"+nextId+"' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime"+nextId+"' name='startTime' class='form-control' onchange='return calDuration("+nextId+");'>"+sTime+"</select></td><td><select id='endTime"+nextId+"' name='endTime' class='form-control' onchange='return calDuration("+nextId+");'>"+eTime+"</select></td><td><input type='text' class='form-control' id='dispDuration"+nextId+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+nextId+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
+		rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><select id='day"+nextId+"' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime"+nextId+"' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime"+nextId+"' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select></td><td><input type='text' class='form-control' id='dispDuration"+nextId+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+nextId+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
 		
-		$("#subjectTable").append(rowString);
+		$("#subjectTable").append(rowString); 
 	}	
 		 
 		else{ 
@@ -101,8 +101,10 @@
 	
 	
 	 	
-	function calDuration(currId){
- 	//alert("asas= "+currId); 
+	function calDuration(currObj){
+ 	
+ 	var currId=$(currObj).closest('tr').attr('id');
+ 
  var start=	$("#startTime"+currId).val(); 
  var end=	$("#endTime"+currId).val(); 
  start = start.split(":");
@@ -163,37 +165,38 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 		 var delId= parseInt($(id).closest('tr').attr('id'));
 		 var idval = $('#subjectTable tr:last').attr('id');
 		// alert("last id="+idval);
-	
 		 var newId=0;
-		for(var i=0;i<idval-1;i++){
+
+		for(var i=delId;i<idval;i++){
 		
-			 newId=delId+i;
-			// alert((delId+i+1)+">>"+newId);	
-				document.getElementById(delId+i+1).setAttribute("id", newId);
-				document.getElementById("subject"+(delId+i+1)).setAttribute("id", "subject"+newId);
-				document.getElementById("duration"+(delId+i+1)).setAttribute("id", "duration"+newId);
-				document.getElementById("dispDuration"+(delId+i+1)).setAttribute("id", "dispDuration"+newId);
-				document.getElementById("day"+(delId+i+1)).setAttribute("id", "day"+newId);
-				document.getElementById("startTime"+(delId+i+1)).setAttribute("id", "startTime"+newId);
-				document.getElementById("endTime"+(delId+i+1)).setAttribute("id", "endTime"+newId);
+			// newId=delId+i; 
+				  
+			 document.getElementById(i+1).setAttribute("id", i); 
+				document.getElementById("subject"+(i+1)).setAttribute("id", "subject"+i);
+				document.getElementById("duration"+(i+1)).setAttribute("id", "duration"+i);
+				document.getElementById("dispDuration"+(i+1)).setAttribute("id", "dispDuration"+i);
+				document.getElementById("day"+(i+1)).setAttribute("id", "day"+i);
+				document.getElementById("startTime"+(i+1)).setAttribute("id", "startTime"+i);
+				document.getElementById("endTime"+(i+1)).setAttribute("id", "endTime"+i);
 			
-				document.getElementById("addRow"+(delId+i+1)).setAttribute("id", "addRow"+newId);
-				document.getElementById("deleteRow"+(delId+i+1)).setAttribute("id", "deleteRow"+newId);
-		}
+				document.getElementById("addRow"+(i+1)).setAttribute("id", "addRow"+i);
+				document.getElementById("deleteRow"+(i+1)).setAttribute("id", "deleteRow"+i);
+				
+		} 
 		 return false;
 	 }
 	 
-	 
+	  
 	 function addSubSchedule(){	
 		
 		 rowString = ""; 
 			var days=dayNumbers();
 			var sTime=generateOptionTexts( '01:00' );
 			var eTime=generateOptionTexts( '02:00' );
-		rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(1);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(1);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
+		rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
 		$("#subjectTable").append(rowString); 
 	 }
-	
+	  
 	/*  function chkDur(obj){ 
 		// alert(obj);  
 		 
@@ -222,18 +225,12 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 			for(var i=1;i<=idval;i++){
 				
 				var dayCurr=$("#day"+i).val();
-				
-				
-				
 				var dayPrev=0;
 				
 				if(i==1)
 					dayPrev	=1;
 				else
 					dayPrev=$("#day"+(i-1)).val();
-				
-				
-				 
 				//alert(dayCurr+" "+dayPrev);
 				if(dayCurr<dayPrev){
 					alert("Invalid DAY");
@@ -241,12 +238,10 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 					
 					return false;
 				}
-				
 				var sTime=$("#startTime"+i).val();
 				var eTime=$("#endTime"+i).val();
 				//alert(sTime+" "+eTime);
 				var result=""+endTimeValidation(sTime,eTime);
-				
 				
 				if(result=="false"){
 					alert("Invalid END TIME");
@@ -409,7 +404,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 														</div>
 												</div>
 											</fieldset>
-										</div>
+										</div> 
 									</div>
 								</div>
 								<!-- search Results -->

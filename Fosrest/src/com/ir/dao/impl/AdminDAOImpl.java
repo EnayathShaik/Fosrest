@@ -3880,7 +3880,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 	public String calculateEndDate(String startDate,String days,String institute) {
 		// TODO Auto-generated method stub
 
-		System.out.println("duration= "+days);
+		System.out.println("calculate End date");
 		
     	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     	
@@ -3900,7 +3900,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
  
     	millis = date.getTime();
     	newStartDate=millis;
-    	System.out.println("ttttttttttttttt "+millis+" "+newStartDate);
+    	//System.out.println("ttttttttttttttt "+millis+" "+newStartDate);
   
     	String arr[]=startDate.split("-");
     	int plusDays=Integer.parseInt(arr[0]);  
@@ -3930,7 +3930,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
     	
     	//check timespan for institute//----------------------------------------------------------
     //newEndDate=calendar.getTimeInMillis();
-    	System.out.println(startDate+" <> "+endDate);
+    	
     	Session session = this.sessionFactory.getCurrentSession();
     	Query query1 = 	session.createQuery("from TrainingCalendar");
     	List<TrainingCalendar> list1 = query1.list();
@@ -3938,9 +3938,6 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		flag=0;
 		
 		for(TrainingCalendar i:list1){
-			System.out.println("new StartDate"+startDate);
-	System.out.println("startDate db "+i.getTrainingStartDate());
-	System.out.println("endDate db "+i.getTrainingEndDate());
 	
 	try {
 		date = sdf.parse(i.getTrainingStartDate());
@@ -3954,8 +3951,6 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		e.printStackTrace();
     	}
 	enddb=date.getTime();
-	
-	System.out.println();
 	
 	if((!(newStartDate<startdb&&newEndDate<startdb || newStartDate>enddb&&newEndDate>enddb)&&(i.getTrainingInstitute().equals(institute)))){
 		//System.out.println(i.getTrainingInstitute()+" "+institute+" -->"+i.getTrainingInstitute().equals(institute));

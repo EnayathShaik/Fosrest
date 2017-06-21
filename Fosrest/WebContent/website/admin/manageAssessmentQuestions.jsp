@@ -63,9 +63,9 @@ function getQuestions(){
 	/* 																																											
 	 */		
 	 	//$('#newTable').append('<tr  id="tableRow"><td>'+(i+1) +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[2]+')">'+obj[5]+'</a></td><td>'+obj[3]+'-'+obj[1]+'</td><td>'+obj[4]+'</td><td><a href="" onClick="return deleteAQ('+obj[2]+')" >Delete</a></td></tr>');
-		 	$('#newTable').append('<tr  id="tableRow"><td>'+(i+1)+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[1]+','+(i+1)+')">'+obj[3]+'</a></td><td><a href="" onClick="return deleteAQ('+obj[1]+')" >Delete</a></td></tr>');
+		 	$('#newTable').append('<tr  id="tableRow"><td>'+(i+1)+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[1]+','+(i+1)+')">'+obj[3]+'</a></td><td><a href="<ct:url value="/deleteassessmentquestion/'+obj[1]+'.fssai" />">Delete</a></td</tr>');  
 
-	});
+	}); 
 
 	}
 	
@@ -338,11 +338,12 @@ function getQuestionNo(val){
                         </div>
                         <!-- add the content here for main body -->
                         <!-- timeline  -->
+                        <h1>Manage Assessment Questions</h1> 
                         <div class="row">
 
                                 <div class="col-xs-12">
                                   
-                                   <fieldset> <legend>Manage Assessment Questions</legend>
+                                   <fieldset> <legend>Search Questions</legend>
                                     <span id="name_status" class = "style-li error-red"><h3>${created } </h3></span>
                                    <BR>                          
                                     <div class="row">
