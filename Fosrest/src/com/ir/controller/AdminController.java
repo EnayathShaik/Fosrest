@@ -2853,6 +2853,9 @@ public class AdminController {
 		if(checkAccess(session))
 			return "redirect:login.fssai";
 		//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
+  		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
+  		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
 		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 		return "manageAssessmentQuestions";
 	}

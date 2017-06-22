@@ -26,15 +26,20 @@ window.onload = OnStart;
 function getQuestions(){
 //	var unitCodeSearch =  $("#unitCode1").val();
 	var moduleCodeSearch =  $("#moduleCode1").val();
+	var designationSearch =  $("#designation1").val();
+	var trainingTypeSearch =  $("#trainingType1").val();
+	var trainingPhaseSearch =  $("#trainingPhase1").val();
 	//var total = "unitCodeSearch="+unitCodeSearch+"-moduleCodeSearch="+moduleCodeSearch;
+	var total = "designationSearch="+designationSearch+"-trainingTypeSearch="+trainingTypeSearch+"-trainingPhaseSearch="+trainingPhaseSearch+"-moduleCodeSearch="+moduleCodeSearch;
+	//alert(total);
 	var result="";
-	var name1=JSON.stringify({
+	var name1=JSON.stringify({ 
 		courseType:0
   })
 	$.ajax({
 	type: 'post',
-	//url: 'getQuestions.fssai?data='+ total,
-	url: 'getQuestions.fssai?data='+ moduleCodeSearch,
+	url: 'getQuestions.fssai?data='+ total,
+	//url: 'getQuestions.fssai?data='+ moduleCodeSearch,
 	contentType : "application/json",
 	 data:name1,
 	async: false, 
@@ -112,33 +117,35 @@ function editAssessmentQuestion(id,Qcount){
 		window.setTimeout(function(){
 			document.getElementById('moduleCode2').value = obj[2];
 	    }, 3000); */
-	    document.getElementById('moduleCode2').value = obj[1];
-	    
+	    document.getElementById('moduleCode2').value = obj[4];
+		document.getElementById('designation2').value = obj[1];
+		document.getElementById('trainingType2').value = obj[2];
+		document.getElementById('trainingPhase2').value = obj[3];
 		document.getElementById('questionNumber').value = Qcount;
 		document.getElementById('dispQuestionNumber').value = Qcount;
 		document.getElementById("dispQuestionNumber").disabled = true;
 		//document.getElementById('questionHint').value = obj[3];
-		document.getElementById('questionTitle').value = obj[3];
-		document.getElementById('noOfAssesmentQues').value = obj[4];
+		document.getElementById('questionTitle').value = obj[6];
+		document.getElementById('noOfAssesmentQues').value = obj[7];
 		$("#noOfAssesmentQues").trigger("change");
 		window.setTimeout(function(){
 			for(j=1;j<=obj[4];j++){
 				if(j==1){
-					document.getElementById('optionOne').value = obj[6];
+					document.getElementById('optionOne').value = obj[9];
 				}else if(j==2){
-					document.getElementById('optionTwo').value = obj[7];
+					document.getElementById('optionTwo').value = obj[10];
 				}else if(j==3){
-					document.getElementById('optionThree').value = obj[8];
+					document.getElementById('optionThree').value = obj[11];
 				}else if(j==4){
-					document.getElementById('optionFour').value = obj[9];
+					document.getElementById('optionFour').value = obj[12];
 				}else if(j==5){
-					document.getElementById('optionFive').value = obj[10];
+					document.getElementById('optionFive').value = obj[13];
 				}else if(j==6){
 					document.getElementById('optionSix').value = obj[11];
 				}
 			}
 	    }, 1000);
-		document.getElementById('correctAnswer').value = obj[5];
+		document.getElementById('correctAnswer').value = obj[8];
 	});
 	}
 	});
@@ -348,10 +355,80 @@ function getQuestionNo(val){
                                    <BR>                          
                                     <div class="row">
                                         <div class="col-xs-12">
-
-                                            <!-- left side -->
+									         <!-- left side -->
+									         <div class="col-xs-6">
+									         <div class="form-group">
+															<div>
+																<ul class="lab-no">
+																	<li class="style-li"><strong>Designation:</strong></li>
+																	<li id="designationErr" style="display: none;"
+																	class="style-li error-red">Select Designation.</li>
+																</ul>
+															</div>
+															<cf:select path="designation1" class="form-control">
+																<cf:option value="0" label="Select Designation" />
+															 	<cf:options items="${DesignationList}" 
+																	itemValue="designationId" itemLabel="designationName"  /> 
+															</cf:select>
+	
+														</div>
+													
+													<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training Type:</strong></li>
+															<li id="trainingTypeErr" style="display: none;"
+																class="style-li error-red">Select Training Type.</li>
+															
+														</ul>
+													</div>
+													<cf:select path="trainingType1" class="form-control"
+														onchange="getTrainingPhase(this.value , 'trainingPhase1');">
+														<cf:option value="0" label="Select Training Type" />
+														<cf:options items="${TrainingTypeList}"
+															itemValue="trainingTypeId" itemLabel="trainingTypeName" />
+													</cf:select>
+												</div>
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training
+																	Phase:</strong></li>
+															<li id="trainingPhaseErr" style="display: none;"
+																class="style-li error-red">Select Training Phase.</li>
+																
+														</ul>
+													</div>
+													<cf:select path="trainingPhase1" class="form-control"
+														>
+														<cf:option value="0" label="Select Training Phase" />
+														<cf:options items="${TrainingPhaseList}"
+															itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
+													</cf:select>
+												</div>
                                             <div >
-                                                 <div class="form-group">  
+                                                
+                                                <%--   <div class="form-group">
+                                                    <div> 
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Chapter Name:</strong></li>
+                                                           
+                                                            <li class="style-li error-red">
+                                                            <span id="name_status" class = "clear-label"> </span>
+                                                            ${created }</li>
+                                                        </ul>
+                                                    </div>
+												<cf:select path="unitCode1" class="form-control" onchange="getModule(this.value,'moduleCode1');">
+													
+													<cf:options items="${listUnitMaster}" itemLabel='unitName' itemValue="unitId" />
+												</cf:select> 
+											</div> --%>
+                                                    
+                                            </div> <!-- left side ends -->
+                                              </div>
+ 										<div class="col-md-6 col-xs-12">
+                                            <!-- right side -->
+                                                   <div class="form-group">   
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Subject Name:</strong></li>
@@ -373,30 +450,10 @@ function getQuestionNo(val){
                                                 <div class="col-md-6 col-xs-12">
                                                 <input type="button" onclick="getQuestions();"  class="btn login-btn" value="Search">                                                         </div>
                                             </div>
-                                                <%--   <div class="form-group">
-                                                    <div> 
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>Chapter Name:</strong></li>
-                                                           
-                                                            <li class="style-li error-red">
-                                                            <span id="name_status" class = "clear-label"> </span>
-                                                            ${created }</li>
-                                                        </ul>
-                                                    </div>
-												<cf:select path="unitCode1" class="form-control" onchange="getModule(this.value,'moduleCode1');">
-													
-													<cf:options items="${listUnitMaster}" itemLabel='unitName' itemValue="unitId" />
-												</cf:select> 
-											</div> --%>
-                                                    
-                                            </div> <!-- left side ends -->
- 										<div class="col-md-6 col-xs-12">
-                                            <!-- right side -->
-                                                  
                                              </div> <!-- rigth side ends -->
                                             <!-- button -->
                                             
-                                           
+                                         
                                         </div>
 
                                        
@@ -449,6 +506,55 @@ function getQuestionNo(val){
                                                 
                                                 <!-- left side -->
                                                 <div class="col-md-6 col-xs-12">
+                                                   <div class="form-group">
+															<div>
+																<ul class="lab-no">
+																	<li class="style-li"><strong>Designation:</strong></li>
+																	<li id="designationErr" style="display: none;"
+																	class="style-li error-red">Select Designation.</li>
+																</ul>
+															</div>
+															<cf:select path="designation2" class="form-control">
+																<cf:option value="0" label="Select Designation" />
+															 	<cf:options items="${DesignationList}" 
+																	itemValue="designationId" itemLabel="designationName"  /> 
+															</cf:select>
+	
+														</div>
+													
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training Type:</strong></li>
+															<li id="trainingTypeErr" style="display: none;"
+																class="style-li error-red">Select Training Type.</li>
+															
+														</ul>
+													</div>
+													<cf:select path="trainingType2" class="form-control"
+														onchange="getTrainingPhase(this.value , 'trainingPhase2');">
+														<cf:option value="0" label="Select Training Type" />
+														<cf:options items="${TrainingTypeList}"
+															itemValue="trainingTypeId" itemLabel="trainingTypeName" />
+													</cf:select>
+												</div>
+												<div class="form-group"> 
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training
+																	Phase:</strong></li>
+															<li id="trainingPhaseErr" style="display: none;"
+																class="style-li error-red">Select Training Phase.</li>
+															
+														</ul>
+													</div>
+													<cf:select path="trainingPhase2" class="form-control"
+														>
+														<cf:option value="0" label="Select Training Phase" />
+														<cf:options items="${TrainingPhaseList}"
+															itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
+													</cf:select>
+												</div>
                                                       <div class="form-group">  
                                                     <div>
                                                         <ul class="lab-no">
@@ -484,6 +590,27 @@ function getQuestionNo(val){
 												</cf:select> 
 											</div> --%>
                                                      
+                                                    
+                                                    
+                                                    
+                                                    
+                                                </div>
+                                                
+                                                <!-- right side -->
+                                                <div class="col-md-6 col-xs-12">
+                                                
+                                                <%--     <div class="form-group">
+                                                        <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Help Text:</strong></li>
+                                                                <li id="questionHintErr" style="display:none;" class="style-li error-red" > Enter Help Text</li>
+                                               
+                                                                <li class="style-li error-red"> </li>
+                                                            </ul>
+                                                        </div>
+                                                        <cf:input path="questionHint" class="form-control" placeholder="Help Text" />
+                                                    </div>   --%>   
+                                                    
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
@@ -508,37 +635,7 @@ function getQuestionNo(val){
                                                         </div>
                                                       <cf:input path="questionTitle" class="form-control" placeholder="Question Title" />
                                                     </div>
-                                                    
-                                                      <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Answer Number:</strong></li>
-                                                                  <li id="correctAnswerErr" style="display:none;" class="style-li error-red" >Invalid Answer number</li>
-                                                                <li class="style-li error-red"> </li>
-                                                            </ul>
-                                                        </div>
-                                                        <cf:input id="correctAnswer" path="correctAnswer" onblur="return answerno(this.id,this.value);" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
-                                                        
-                                                    </div>
-                                                    
-                                                    
-                                                    
-                                                </div>
-                                                
-                                                <!-- right side -->
-                                                <div class="col-md-6 col-xs-12">
-                                                
-                                                <%--     <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Help Text:</strong></li>
-                                                                <li id="questionHintErr" style="display:none;" class="style-li error-red" > Enter Help Text</li>
-                                               
-                                                                <li class="style-li error-red"> </li>
-                                                            </ul>
-                                                        </div>
-                                                        <cf:input path="questionHint" class="form-control" placeholder="Help Text" />
-                                                    </div>   --%>   
+                                                  
                                                     
                                                     <div class="form-group">
                                                         <div>
@@ -580,7 +677,18 @@ function getQuestionNo(val){
                                                     </fieldset>
                                                     <br />
                                                     <br />
-                                                  
+                                                    
+                                                      <div class="form-group">
+                                                        <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Answer Number:</strong></li>
+                                                                  <li id="correctAnswerErr" style="display:none;" class="style-li error-red" >Invalid Answer number</li>
+                                                                <li class="style-li error-red"> </li>
+                                                            </ul>
+                                                        </div>
+                                                        <cf:input id="correctAnswer" path="correctAnswer" onblur="return answerno(this.id,this.value);" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
+                                                        
+                                                    </div>
                                                     <cf:input type="hidden" path="id" class="form-control" placeholder="Help Text" />
                                                     <button onClick="return validateFields();" class="btn login-btn pull-right">Save</button>
                                                 </div> 

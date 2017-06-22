@@ -1056,6 +1056,9 @@ public class AdminDAOImpl implements AdminDAO {
 		//UnitMaster uc = getUnitMasterById(assessmentQuestionForm.getUnitCode2());
 		ModuleMaster mm = getModuleMasterById(assessmentQuestionForm.getModuleCode2());
 
+		assessmentQuestion.setDesignationId(assessmentQuestionForm.getDesignation2());
+		assessmentQuestion.setTrainingTypeId(assessmentQuestionForm.getTrainingType2());
+		assessmentQuestion.setTrainingPhaseId(assessmentQuestionForm.getTrainingPhase2());
 		//assessmentQuestion.setUnitCode(uc);
 		assessmentQuestion.setModuleCode(mm);
 		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
@@ -1096,6 +1099,7 @@ public class AdminDAOImpl implements AdminDAO {
 				assessmentQuestionIdd = assessmentQuestionForm.getId();
 			} else {
 				assessmentQuestionIdd = (Integer) session.save(assessmentQuestion);
+			
 			}
 
 			if (assessmentQuestionIdd != 0) {
@@ -1689,30 +1693,50 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List getQuestions(String data) {
-	/*	String[] totalConnected = data.split("-");
+		String[] totalConnected = data.split("-");
 
-		int unitCodeSearch = Integer.parseInt((totalConnected[0].split("="))[1]);
-		int moduleCodeSearch = Integer.parseInt((totalConnected[1].split("="))[1]);
-*/
-		int moduleCodeSearch = Integer.parseInt(data);
-		String unitCodeSearch1, moduleCodeSearch1;
-	/*	if (unitCodeSearch == 0) {
+		/*int unitCodeSearch = Integer.parseInt((totalConnected[0].split("="))[1]);
+	*/
+		int designationSearch = Integer.parseInt((totalConnected[0].split("="))[1]);
+		int trainingTypeSearch = Integer.parseInt((totalConnected[1].split("="))[1]);
+		int trainingPhaseSearch = Integer.parseInt((totalConnected[2].split("="))[1]);
+		int moduleCodeSearch = Integer.parseInt((totalConnected[3].split("="))[1]);
+
+		//int moduleCodeSearch = Integer.parseInt(data);
+		String unitCodeSearch1, moduleCodeSearch1,designationSearch1,trainingTypeSearch1,trainingPhaseSearch1;
+		
+/*	if (unitCodeSearch == 0) {
 			unitCodeSearch1 = "%";
 		} else {
 			unitCodeSearch1 = (totalConnected[0].split("="))[1];
-		}
+		}*/
 
+		if (designationSearch == 0) {
+			designationSearch1 = "%";
+		} else {
+			designationSearch1 = (totalConnected[0].split("="))[1];
+		}
+		if (trainingTypeSearch == 0) {
+			trainingTypeSearch1 = "%";
+		} else {
+			trainingTypeSearch1 = (totalConnected[1].split("="))[1];
+		}
+		if (trainingPhaseSearch == 0) {
+			trainingPhaseSearch1 = "%";
+		} else {
+			trainingPhaseSearch1 = (totalConnected[2].split("="))[1];
+		}
 		if (moduleCodeSearch == 0) {
 			moduleCodeSearch1 = "%";
 		} else {
-			moduleCodeSearch1 = (totalConnected[0].split("="))[1];
-		}*/
+			moduleCodeSearch1 = (totalConnected[3].split("="))[1];
+		}
 		
-		if (moduleCodeSearch == 0) {
+		/*if (moduleCodeSearch == 0) {
 			moduleCodeSearch1 = "%";
 		} else {
 			moduleCodeSearch1 = data;
-		}
+		}*/
 
 		//System.out.println("unitcodesearch  " + unitCodeSearch + "  " + unitCodeSearch1);
 		System.out.println("modulecodesearch   " + moduleCodeSearch + "  " + moduleCodeSearch1);
@@ -1721,9 +1745,21 @@ public class AdminDAOImpl implements AdminDAO {
 		/*if (unitCodeSearch > 0) {
 			wherebuffer.append(" AND um.unitid=" + unitCodeSearch);
 		}*/
+		if (designationSearch > 0) {
+			wherebuffer.append(" AND aq.designationid=" + designationSearch);
+		}
+		if (trainingTypeSearch > 0) {
+			wherebuffer.append(" AND aq.trainingtypeid=" + trainingTypeSearch);
+		}
+		
+		if (trainingPhaseSearch > 0) {
+			wherebuffer.append(" AND aq.trainingphaseid=" + trainingPhaseSearch);
+		}
+		
 		if (moduleCodeSearch > 0) {
 			wherebuffer.append(" AND mm.moduleid=" + moduleCodeSearch);
 		}
+		
 		
 		wherebuffer.append(" AND coalesce(aq.isactive,'') <> 'N' order by assessmentquestionid");
 		 

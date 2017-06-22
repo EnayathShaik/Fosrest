@@ -31,6 +31,9 @@ public class AssessmentQuestions {
 	//private String questionHint;
 	private int noOfOption;
 
+	private int designationId;
+	private int trainingTypeId;
+	private int trainingPhaseId;
 	private String optionOne;
 	private String optionTwo;
 	private String optionThree;
@@ -45,6 +48,25 @@ public class AssessmentQuestions {
 	@Column(name="isActive", columnDefinition="character varying(10) default 'Y'")
 	private String isActive;
 	
+	public int getDesignationId() {
+	return designationId;
+}
+public void setDesignationId(int designationId) {
+	this.designationId = designationId;
+}
+public int getTrainingTypeId() {
+	return trainingTypeId;
+}
+public void setTrainingTypeId(int trainingTypeId) {
+	this.trainingTypeId = trainingTypeId;
+}
+public int getTrainingPhaseId() {
+	return trainingPhaseId;
+}
+public void setTrainingPhaseId(int trainingPhaseId) {
+	this.trainingPhaseId = trainingPhaseId;
+}
+
 	
 	public String getIsActive() {
 		return isActive;

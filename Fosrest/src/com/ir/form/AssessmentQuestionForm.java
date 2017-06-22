@@ -8,7 +8,58 @@ public class AssessmentQuestionForm {
 	//private int unitCode1,moduleCode1,unitCode2,moduleCode2;
 	
 	private int moduleCode1,moduleCode2;
+	private int designation1,designation2;
+	private int trainingType1,trainingType2;
+	private int trainingPhase1,trainingPhase2;
 	int questionNumber;
+	public int getDesignation1() {
+		return designation1;
+	}
+
+	public void setDesignation1(int designation1) {
+		this.designation1 = designation1;
+	}
+
+	public int getDesignation2() {
+		return designation2;
+	}
+
+	public void setDesignation2(int designation2) {
+		this.designation2 = designation2;
+	}
+
+	public int getTrainingType1() {
+		return trainingType1;
+	}
+
+	public void setTrainingType1(int trainingType1) {
+		this.trainingType1 = trainingType1;
+	}
+
+	public int getTrainingType2() {
+		return trainingType2;
+	}
+
+	public void setTrainingType2(int trainingType2) {
+		this.trainingType2 = trainingType2;
+	}
+
+	public int getTrainingPhase1() {
+		return trainingPhase1;
+	}
+
+	public void setTrainingPhase1(int trainingPhase1) {
+		this.trainingPhase1 = trainingPhase1;
+	}
+
+	public int getTrainingPhase2() {
+		return trainingPhase2;
+	}
+
+	public void setTrainingPhase2(int trainingPhase2) {
+		this.trainingPhase2 = trainingPhase2;
+	}
+
 	@NotNull @Size(min=0 , max = 500 , message="Please enter question")
 	private String questionTitle;
 	/*@NotNull @Size(min=0 , max = 500 , message="Please enter question hint")
