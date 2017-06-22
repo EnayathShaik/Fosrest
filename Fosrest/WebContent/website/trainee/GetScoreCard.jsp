@@ -50,12 +50,13 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                              <fieldset>
-                                    
-                                     
-                                        
-                                        
-                                        <h4>Unit Name: ${listTrainingTopic.unitName}</h4>
-                                        <h4>Module Name: ${listOnlineTraining.moduleName}</h4>
+                                        <h4>Designation: ${listOnlineTraining.designation}</h4>
+                                        <h4>Training Type:${listOnlineTraining.trainingType}</h4>
+                                        <h4>Training Phase:${listOnlineTraining.trainingPhase}</h4>
+                                         <h4>Subjects: </h4>
+                                         <ct:forEach var="subjects" items="${listsubjects}">
+                                           <li>  <ct:out value="${subjects}"/><br></li>
+                                             </ct:forEach>
                                         <h4>Score:${listGetScoreCard.score} </h4>
                                        
                                         <br> </fieldset>

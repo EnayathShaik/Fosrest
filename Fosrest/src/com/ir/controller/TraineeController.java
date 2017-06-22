@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -55,6 +56,7 @@ import com.ir.model.AdmitCardForm;
 import com.ir.model.AssessmentQuestion_old;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.CertificateInfo;
+import com.ir.model.ContactTraineee;
 import com.ir.model.CourseTrainee;
 import com.ir.model.CourseType;
 import com.ir.model.Designation;
@@ -75,6 +77,7 @@ import com.ir.service.AssessmentService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
 import com.ir.util.Profiles;
+import com.ir.util.SendContectMail;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 import com.zentect.list.constant.ListConstant;
@@ -125,17 +128,24 @@ public class TraineeController {
 	public String contactTrainee(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee, Model model , HttpSession session){
 		if(checkAccess(session))
 			return "redirect:login.fssai";
-		try{
+		/*try{
 			Integer userId = (Integer) session.getAttribute("userId");
 			Integer profileId = (Integer) session.getAttribute("profileId");
 			String defaultMail = traineeService.getDefaultMailID(userId, profileId);
 			model.addAttribute("defaultMail", defaultMail);
+			if(defaultMail.equalsIgnoreCase("created")){
+				model.addAttribute("created" , "Your request has been sent successfully !!!");
+			}else{
+				model.addAttribute("created" , "Oops, something went wrong !!!");
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			new ZLogger("contactTrainee", "Exception while  contactTrainee "+e.getMessage(), "TraineeController.java");
-		}
+		}*/
 		return "contactTrainee";
 	}
+	
+	
 	@RequestMapping(value="/changePasswordTrainee" , method=RequestMethod.GET)
 	public String contactTrainee(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm ){
 		return "changePasswordTrainee";
@@ -327,10 +337,11 @@ public class TraineeController {
 		if(result.hasErrors()){
 			new ZLogger("contactTraineeSave", "bindingResult.hasErrors  "+result.hasErrors() , "TraineeController.java");
 			new ZLogger("contactTraineeSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TraineeController.java");
-			return "contactTrainee";
+			return "contactTraineeSave";
 		}
+		model.addAttribute("ContactTrainee",  new ContactTrainee());
 		try{
-			String id=(String) session.getAttribute("logId");
+			String id=(String) session.getAttribute("userName");
 			new ZLogger("contactTraineeSave","userid   "+ id  , "TraineeController.java");
 			String contactTraineeSave = traineeService.contactTraineeSave(contactTrainee , id);
 			if(contactTraineeSave.equalsIgnoreCase("created")){
@@ -342,10 +353,10 @@ public class TraineeController {
 			e.printStackTrace();
 			new ZLogger("contactTraineeSave", "Exception while contactTraineeSave  "+e.getMessage() , "TraineeController.java");
 		}
-		return "contactTrainee";
+		return "redirect:contactTrainee.fssai";
 	}
-
-
+	
+		
 	@RequestMapping(value="/updateInformation" , method=RequestMethod.GET)
 	public String updateInformation(@RequestParam(value = "userId", required = true)  Integer userId ,@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee, HttpSession session, Model model ){		
 		if(checkAccess(session))
@@ -828,8 +839,9 @@ public class TraineeController {
 				int personalTraineeId=(int)session.getAttribute("personalTraineeId");
 				
 				model.addAttribute("GetScoreCardForm", new GetScoreCardForm());
-				model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic(userId));
+				//model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic(userId));
 				model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
+				model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
 				model.addAttribute("listGetScoreCard", this.traineeService.listGetScoreCard(userId));
 				
 				traineeService.updateSteps(personalTraineeId, 4);
