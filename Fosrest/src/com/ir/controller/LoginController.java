@@ -177,6 +177,7 @@ public class LoginController {
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
+			session.setAttribute("logId",loginDetails.getLoginId());
 			session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
 			session.setAttribute("personalTraineeId", personalInformationTrainee.getId());
 			session.setAttribute("Id",personalInformationTrainee.getLoginDetails().getId());

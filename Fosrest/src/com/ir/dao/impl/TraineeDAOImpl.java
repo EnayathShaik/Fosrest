@@ -531,12 +531,22 @@ public class TraineeDAOImpl implements TraineeDAO {
 			ChangePasswordForm changePasswordForm, String id) {
 		boolean confirm = Boolean.FALSE;
 		Session session = sessionFactory.getCurrentSession();
+	
 		try{
 			String oldPassword = changePasswordForm.getOldPassword();
 			String newPassword = changePasswordForm.getNewPassword();
+			String conPswd=changePasswordForm.getConfirmPwd();
+			if(newPassword.equals(conPswd)){
+				System.out.println("new"+newPassword.length());
+				if(newPassword.length()>6&&newPassword.length()<16){
+					
+					confirm = changePasswordUtility.changePasswordUtil(oldPassword,
+							newPassword, id, session);
+				}
+			}
+			
 			new ZLogger("updateTrainee","new pass   " + oldPassword, "TraineeDAOImpl.java");
-			confirm = changePasswordUtility.changePasswordUtil(oldPassword,
-					newPassword, id, session);
+		
 
 		}catch(Exception e){
 			e.printStackTrace();

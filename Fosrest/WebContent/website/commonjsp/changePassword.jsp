@@ -46,7 +46,7 @@ function pwdConfirm(){
 	var pwd1 = document.getElementById("newPassword").value;
 	var pwd2 = document.getElementById("confirmPwd").value;
 	if(pwd1 == pwd2){
-	//	alert('password has matched  !!!!!!!!');
+	//alert('password has matched  !!!!!!!!');
 		return false;
 	}else{
 		document.getElementById("confirmPwd").value="";
@@ -131,10 +131,10 @@ function pwd(){
                       <div class="form-group">
                         <label>Confirm Password</label>
 <cf:errors path="confirmPwd" cssclass="error" />
-<cf:input type="password" path="confirmPwd" class="form-control" placeholder="Confirm Password"   onblur="pwdConfirm();"/>
+<cf:input type="password" path="confirmPwd" class="form-control" placeholder="Confirm Password"  onblur="return pwdConfirm();" />
                       </div>
                       <div class="form-group">
-                        <input type="submit" class="form-control login-btn" value="Change Password" onsubmit="return pwdConfirm();" />
+                        <input type="submit" class="form-control login-btn" value="Change Password"  />
                       </div>
                     </div>
                   <%--   <cf:input path="loginid"  value="${loginuser1 }"/> --%>
