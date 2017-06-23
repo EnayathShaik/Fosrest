@@ -31,9 +31,9 @@ public class AssessmentServiceImpl implements AssessmentService {
 	private AssessmentDao assessmentDao;
 	@Override
 	@Transactional
-	public List<AssessmentQuestions> getAssessmentQuestions( int moduleId) {
+	public List<AssessmentQuestions> getAssessmentQuestions( List<Integer> subIds) {
 //		AssessmentDaoImpl assessmentDao = new AssessmentDaoImpl();
-		final List<AssessmentQuestions> listAssessmetQustions = assessmentDao.getAssessmentQuestions( moduleId);
+		final List<AssessmentQuestions> listAssessmetQustions = assessmentDao.getAssessmentQuestions( subIds);
 		return listAssessmetQustions;
 	}
 	@Override
@@ -66,19 +66,20 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 	@Override
 	@Transactional
-	public List<AssessmentQuestions> getAssessmentAnswers(int modulecode, List<Integer> questions) {
+	public List<AssessmentQuestions> getAssessmentAnswers(List<Integer> lst, List<Integer> questions) {
 		// TODO Auto-generated method stub
-		List<AssessmentQuestions> answersList = assessmentDao.getAssessmentAnswers(modulecode, questions);
+		List<AssessmentQuestions> answersList = assessmentDao.getAssessmentAnswers(lst, questions);
 		return answersList;
 	}
 
 	@Override
 	@Transactional
-	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestions> answers, int moduleid){
+	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestions> answers, List <Integer> lst){
 		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
 		//int totalQuestion = answers.size();
 		Map<String, Integer> answersMap = new HashMap<String, Integer>();
 		for (int i = 0; i < answers.size(); i++) {
+			//System.out.println("qqqq "+answers.get(i).getAssessmentQuestionId());  
 			answersMap.put(String.valueOf(answers.get(i).getAssessmentQuestionId()), answers.get(i).getCorrectAnswer());
 		}
 		int totalQuestions = answers.size();
@@ -87,7 +88,9 @@ public class AssessmentServiceImpl implements AssessmentService {
 		double totalScore = 0.00;
 		Set<String> questionKeys = questions.keySet();
 		Iterator<String> keysIterator = questionKeys.iterator();
+		int i=0;
 		while(keysIterator.hasNext()){
+			
 			String key = keysIterator.next();
 			int correctAnswer = answersMap.get(key);
 			int providedAnswer = Integer.parseInt(questions.get(key));
@@ -108,8 +111,8 @@ public class AssessmentServiceImpl implements AssessmentService {
 		traineeEvaluation.setCorrectAnswers(correctAnswers);
 		traineeEvaluation.setIncorrectAnswers(wrongAnswers);
 		traineeEvaluation.setTotalScore(totalScore);
-		traineeEvaluation.setModuleId(moduleid);
-		int eligibility = assessmentDao.getElegibilityForAssessment(moduleid);
+		traineeEvaluation.setModuleId(lst.get(i++));
+		int eligibility = assessmentDao.getElegibilityForAssessment(lst.get(i++)); 
 		if(eligibility > -1){
 			if(totalScore >= eligibility){
 				traineeEvaluation.setResult("Pass");

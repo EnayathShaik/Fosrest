@@ -475,10 +475,11 @@ public class TraineeController {
 		if(loginId > 0){
 			TraineeAssessment traineeAssessment = new TraineeAssessment();
 			int courseType = 1;
-			int moduleId = 	traineeService.getCurrentModuleId(loginId);
-			List<AssessmentQuestions> assessmentQuestions =  assessmentService.getAssessmentQuestions( moduleId);
+			List<Integer> subIds = 	traineeService.getCurrentModuleId(loginId);
+			System.out.println("subIds "+subIds);
+			List<AssessmentQuestions> assessmentQuestions =  assessmentService.getAssessmentQuestions(subIds);
 			traineeAssessment.setListAssessmentQuestion(assessmentQuestions);
-			traineeAssessment.setModuleId(moduleId);
+			traineeAssessment.setModuleId(subIds);
 			Gson gson=new Gson();
 			String list=gson.toJson(traineeAssessment);
 			responseText = "traineeAssessmentOnline";

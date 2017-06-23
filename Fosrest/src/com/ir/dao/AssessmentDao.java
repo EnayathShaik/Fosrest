@@ -12,12 +12,12 @@ import com.ir.model.trainee.TraineeAssessmentEvaluation;
 
 public interface AssessmentDao {
 	
-	public List<AssessmentQuestions> getAssessmentQuestions( int moduleId);
+	public List<AssessmentQuestions> getAssessmentQuestions( List<Integer> subIds);
 	public String saveAssessment(List<AssessmentAnswerCriteria> answerCriterias);
 	public List<CourseType> courseTypes();
 	public List<CourseName> courseNames();
 	public List<IntStringBean> getTrainingPartners(int assessorId);
-	public List<AssessmentQuestions> getAssessmentAnswers(int modulecode, List<Integer> questions);
+	public List<AssessmentQuestions> getAssessmentAnswers(List<Integer> lst, List<Integer> questions);
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation);
 	public int getElegibilityForAssessment(int moduleid);
 	public List<CourseType> courseTypeList();

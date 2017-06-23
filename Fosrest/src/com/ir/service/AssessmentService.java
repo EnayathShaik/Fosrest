@@ -13,7 +13,7 @@ import com.ir.model.trainee.TraineeAssessmentEvaluation;
 
 public interface AssessmentService {
 	
-	public List<AssessmentQuestions> getAssessmentQuestions( int moduleId);
+	public List<AssessmentQuestions> getAssessmentQuestions( List<Integer> subIds);
 	
 	
 	public String saveAssessment(List<AssessmentAnswerCriteria> assessmentAnswerCriteria);
@@ -27,10 +27,10 @@ public interface AssessmentService {
 	public List<IntStringBean> getTrainingPartners(int assessorId);
 	
 	
-	public List<AssessmentQuestions> getAssessmentAnswers(int courseType, List<Integer> questions);
+	public List<AssessmentQuestions> getAssessmentAnswers(List<Integer> lst, List<Integer> questions);
 	
 	
-	public TraineeAssessmentEvaluation evaluate(Map<String,String> question,List<AssessmentQuestions> answers, int courseNameId);
+	public TraineeAssessmentEvaluation evaluate(Map<String,String> question,List<AssessmentQuestions> answers, List <Integer> lst);
 	
 	
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation);

@@ -11,7 +11,8 @@ public class TraineeAssessment {
 	
 	/** Name of the course for which assessment is submitting **/
 
-	private int moduleId;
+	//private int moduleId;
+	private List<Integer> moduleId;
 	private List<AssessmentQuestions> listAssessmentQuestion; 
 	private int totalQuestions;
 	private String loginId;
@@ -59,14 +60,14 @@ public class TraineeAssessment {
 		this.loginId = loginId;
 	}
 
-
-
-	public int getModuleId() {
+	public List<Integer> getModuleId() {
 		return moduleId;
 	}
 
-	public void setModuleId(int moduleId) {
+	public void setModuleId(List<Integer> moduleId) {
 		this.moduleId = moduleId;
 	}
+
+	
 
 }

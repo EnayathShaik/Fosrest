@@ -37,14 +37,19 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<AssessmentQuestions> getAssessmentQuestions( int moduleId) {
+	public List<AssessmentQuestions> getAssessmentQuestions( List<Integer> subIds) {
 		System.out.println("AssessmentQuestions");
-		List<AssessmentQuestions> assessmentQuestions = null;
+		List<AssessmentQuestions> assessmentQuestions = null; 
 		Session session = sessionFactory.getCurrentSession();
+		String strIds=subIds.toString();
+		
+		strIds=strIds.replace("[", "(");
+		strIds=strIds.replace("]", ")");
+		System.out.println(strIds);
 		try{
-			Query query = session.createQuery("from AssessmentQuestions where modulemaster  = "+ moduleId);
+			Query query = session.createQuery("from AssessmentQuestions where modulemaster in "+ strIds);
 			 assessmentQuestions = query.list();
-			 System.out.println(" assessmentQuestions "+assessmentQuestions);
+			 //System.out.println(" assessmentQuestions "+assessmentQuestions);
 		}catch(Exception e){
 			e.printStackTrace();
 		} 
@@ -113,14 +118,18 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	}
 
 	@Override
-	public List<AssessmentQuestions> getAssessmentAnswers(int modulecode, List<Integer> questions) {
+	public List<AssessmentQuestions> getAssessmentAnswers(List<Integer> subIds, List<Integer> questions) {
 		Session session = sessionFactory.getCurrentSession();
 		String questionIds = questions.toString();
 		if(questionIds.length() >2){
 			questionIds = questionIds.substring(1,questionIds.length()-1);
 		}
-		System.out.println(" modulecode "+modulecode);
-		Query query = session.createQuery(" from AssessmentQuestions where moduleMaster = "+ modulecode +" and assessmentid in ("+questionIds+")");
+		System.out.println(" modulecode "+subIds);
+String strIds=subIds.toString();
+		
+		strIds=strIds.replace("[", "(");
+		strIds=strIds.replace("]", ")");
+		Query query = session.createQuery(" from AssessmentQuestions where moduleMaster in "+ strIds +" and assessmentQuestionid in ("+questionIds+")");
 		List<AssessmentQuestions> listAssessmentQuestions = query.list();
 		
 		return listAssessmentQuestions;

@@ -746,21 +746,22 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	@Override
-	public int getCurrentModuleId(int loginId) {
+	public List<Integer> getCurrentModuleId(int loginId) {
 		Session session = sessionFactory.getCurrentSession();
 		/**
 		 * TODO - add training status change training status as 'A' while course
 		 * enrollment
 		 **/
-		String sql = "select moduleid from nomineetrainee  nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) "
-				+ " where nt.status='N' and nt.logindetails= "+loginId;
-				
-		Query query = session.createSQLQuery(sql);
-		List listCourseNameId = query.list();
-		if (listCourseNameId.size() > 0) {
-			return (int) listCourseNameId.get(0);
+		//String sql = "select subjectid from trainingcalendarmapping where batchcode=(select batchcode from trainingcalendar where trainingcalendarid=(select nt.trainingcalendarid  from nomineetrainee nt inner join trainingcalendar ts on (nt.trainingcalendarid = ts.trainingcalendarid)  where nt.status='N' and nt.logindetails="+loginId+"))";
+		String sql = "select moduleMaster from assessmentQuestions where isactive='Y' and modulemaster in(select subjectid from trainingcalendarmapping where batchcode=(select batchcode from trainingcalendar where trainingcalendarid=(select nt.trainingcalendarid  from nomineetrainee nt inner join trainingcalendar ts on (nt.trainingcalendarid = ts.trainingcalendarid)  where nt.status='N' and nt.logindetails= "+loginId+")))";
+
+		Query query = session. createSQLQuery(sql);
+		List<Integer> subId = query.list();
+		/*if (subId.size() > 0) {
+			return  listCourseNameId.get(0);
 		}
-		return -1;
+		return -1;*/
+		return subId;
 	}
 
 	@Override

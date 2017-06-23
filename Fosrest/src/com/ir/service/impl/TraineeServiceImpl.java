@@ -192,7 +192,7 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 	@Override
 	@Transactional
-	public int getCurrentModuleId(int loginId){
+	public List<Integer>  getCurrentModuleId(int loginId){
 		return traineeDAO.getCurrentModuleId(loginId);
 	}
 	@Override

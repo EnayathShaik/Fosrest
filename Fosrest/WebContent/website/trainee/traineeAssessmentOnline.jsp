@@ -37,20 +37,19 @@
 		</div>
 		
 			<script >
-			var questionList = ${traineeAssessment};
+			var questionList = ${traineeAssessment}; 
 			
-			$('#questionsTable').append('<input type="hidden" name="moduleId" value = "'+questionList.moduleId+'">');
 // 			$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "+JSON.stringify(assessmentQuestions)+">');
 			$(window).load(function () {
-				var assessmentQuestions = [];
+				var assessmentQuestions = []; 
 				for(var index=0;index<questionList.listAssessmentQuestion.length;index++){
+					$('#questionsTable').append('<input type="hidden" name="moduleId" value = "'+questionList.moduleId[index]+'">');   
 					$('#questionsTable').append('<ol>');
-					//$('#questionsTable').append('<li><strong>Question No.'+questionList.listAssessmentQuestion[index].questionNumber+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
-					$('#questionsTable').append('<li><strong>Question No.'+(index+1)+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
+					$('#questionsTable').append('<li><strong>Question No.'+questionList.listAssessmentQuestion[index].questionNumber+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
 					
 					//var noOption=questionList.listAssessmentQuestion[index].noOfOption;
-					assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentId);
-					var noOption=questionList.listAssessmentQuestion[index].noOfOption;
+					assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentQuestionId);
+					var noOption=questionList.listAssessmentQuestion[index].noOfOption; 
 					$('#questionsTable').append('<table width="200" border="0">');
 					for(var noOptionIndex=1; noOptionIndex<=noOption; noOptionIndex++){
 						var questionOption = "option";
@@ -77,7 +76,7 @@
 						}
 						questionOption += value;
 						var questionListRow = questionList.listAssessmentQuestion[index];
-						$('#questionsTable').append('<tr><td>'+noOptionIndex+')</td> <td><input name="'+questionList.listAssessmentQuestion[index].assessmentId+'" type="radio" value="'+noOptionIndex+'"></td><td>'+questionListRow[questionOption]+'</td></tr>')
+						$('#questionsTable').append('<tr><td>'+noOptionIndex+')</td> <td><input name="'+questionList.listAssessmentQuestion[index].assessmentQuestionId+'" type="radio" value="'+noOptionIndex+'"></td><td>'+questionListRow[questionOption]+'</td></tr>')
 					}
 					$('#questionsTable').append('</table>');
 					$('#questionsTable').append('</ol>')

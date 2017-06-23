@@ -103,7 +103,7 @@ public interface TraineeService {
 	public List<FeedbackForm> getFeedbackDetails(Utility utility);
 	
 	
-	public int getCurrentModuleId(int loginId);
+	public List<Integer> getCurrentModuleId(int loginId);
 	
 	
 	public AdmitCardForm generateTrainerAdmitCard(int loginId,int profileId);
