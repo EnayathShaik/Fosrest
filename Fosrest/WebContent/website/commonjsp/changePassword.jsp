@@ -46,6 +46,17 @@ function pwdConfirm(){
 	var pwd1 = document.getElementById("newPassword").value;
 	var pwd2 = document.getElementById("confirmPwd").value;
 	if(pwd1 == pwd2){
+		var paswd="^(?=.*?[A-Za-z])(?=.*?[0-9]).{7,15}$";
+		if(newPassword.value.match(paswd)) 
+		{
+			return false;
+		}
+		else{
+			document.getElementById("confirmPwd").value="";
+			document.getElementById("newPassword").value="";
+			alert('Password Does not meet requirement Please check password policy');  
+			return true;
+		}
 	//alert('password has matched  !!!!!!!!');
 		return false;
 	}else{
@@ -92,7 +103,7 @@ function pwd(){
           <!-- vertical button -->
           <div class="row">
             <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i>
-             <span class="orange-font">Welcome  Trainee</span> </a> </div>
+             <span class="orange-font">Welcome  ${userName }</span> </a> </div>
           </div>
           <!-- add the content here for main body --> 
           <!-- timeline  -->

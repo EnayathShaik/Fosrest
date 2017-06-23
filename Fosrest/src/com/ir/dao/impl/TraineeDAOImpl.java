@@ -996,15 +996,15 @@ public class TraineeDAOImpl implements TraineeDAO {
 			}
 
 			// max SeqNo
-			String sql = "Select C.modulecode,B.trainingstartdate,"
-					+ " A.id  as nomineeId , cast(D.firstname || ' '|| D.middlename ||' '|| D.lastname as varchar (50)) ,A.issueDate,A.certificateid "
-					+" , concat(E.trainingcentername , ' ' , s.statename, ' ' , ds.districtname) as address ,  tp.trainingpartnername    "
+			String sql = "Select B.trainingstartdate,"
+					+ " A.id  as nomineeId , cast(D.firstname || ' '|| D.middlename ||' '|| D.lastname as varchar (50)) ,A.issueDate,A.certificateid  "
+					+" , concat(E.trainingcentername , ' ' , s.statename, ' ' , ds.districtname) as address "
 					+ " from nomineetrainee A "
-					+ " inner join trainingschedule B on(A.trainingscheduleid=B.trainingscheduleid) "
-					+"	inner join trainingpartner tp on (B.trainingpartner = tp.trainingpartnerid) "
-					+ " inner join modulemaster C on(B.moduleid=C.moduleid) "
+					+ " inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) "
+					//+"	inner join trainingcalendarmapping tcm on(tcm.batchcode=B.batchcode) "
+					//+ " inner join modulemaster C on(tcm.subjectId=C.moduleid) "
 					+ " inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "
-					+ " inner join personalinformationtraininginstitute E on(B.traininginstitude=E.id) "
+					+ " inner join personalinformationtraininginstitute E on(cast(B.traininginstitute as numeric)=E.id)  "
 					+ " inner join statemaster as s on s.stateid = cast( E.correspondencestate as int) "
 					+ " inner join districtmaster as ds on ds.districtid = cast( E.correspondencedistrict as int)  "
 					+ " " + whereCondition;
@@ -1017,20 +1017,20 @@ public class TraineeDAOImpl implements TraineeDAO {
 			try {
 				if (records.size() > 0) {
 					Object[] obj = records.get(0);
-					moduleCode = obj[0] == null ? "" : obj[0].toString();
-					certificateInfo.setTrainingDate(obj[1] == null ? ""
-							: obj[1].toString());
-					nomineeTraineeUserID = (int) obj[2];
-					certificateInfo.setName(obj[3] == null ? "" : obj[3]
+					//moduleCode = obj[0] == null ? "" : obj[0].toString();
+					certificateInfo.setTrainingDate(obj[0] == null ? ""
+							: obj[0].toString());
+					nomineeTraineeUserID = (int) obj[1];
+					certificateInfo.setName(obj[2] == null ? "" : obj[2]
 							.toString());
-					certificateInfo.setIssueDate(obj[4] == null ? "" : obj[4]
+					certificateInfo.setIssueDate(obj[3] == null ? "" : obj[3]
 							.toString());
-					certificateInfo.setCertificateID(obj[5] == null ? ""
+					certificateInfo.setCertificateID(obj[4] == null ? ""
+							: obj[4].toString());
+					certificateInfo.setTrainingAddress(obj[5] == null ? ""
 							: obj[5].toString());
-					certificateInfo.setTrainingAddress(obj[6] == null ? ""
-							: obj[6].toString());
-					certificateInfo.setTrainingPartnerName(obj[7] == null ? ""
-							: obj[6].toString());
+				/*	certificateInfo.setTrainingPartnerName(obj[7] == null ? ""
+							: obj[6].toString());*/
 					
 				}
 			} catch (Exception e) {
@@ -1537,7 +1537,7 @@ System.out.println("list "+list);
 			List<CertificateForm> list = new ArrayList<CertificateForm>();
 			Session session = this.sessionFactory.getCurrentSession();
 			StringBuffer sqlQuery  = new StringBuffer();
-			 sqlQuery.append("select ts.trainingtype, case when coalesce(certificateid , '') = '' then cast('Pending' as varchar(20)) else cast('Completed' as varchar(20)) end as status,  case when certificatestatus = 'Y' then cast('YES' as varchar(3)) else cast('NO' as varchar(2)) end as cerificateAvailable  , pit.id from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid)  ");
+			 sqlQuery.append("select tt.trainingtypeName, case when coalesce(a.result , 'Fail') = '' then cast('Pending' as varchar(20)) else cast('Completed' as varchar(20)) end as status,  case when a.result = 'Pass' then cast('YES' as varchar(3)) else cast('NO' as varchar(2)) end as cerificateAvailable  , pit.id from nomineetrainee nt inner join trainingCalendar tc on (nt.trainingcalendarid = tc.trainingcalendarid) inner join trainingType tt on (cast(tc.trainingType as numeric) = tt.trainingTypeId) inner join assessmentevaluationtrainee a on (nt.logindetails = a.logindetails)  ");
 			 sqlQuery.append("left join personalinformationtrainee pit on (nt.logindetails = pit.logindetails) where nt.logindetails =  '"+loginId+"'");
 			List<Object[]> lst = session.createSQLQuery(sqlQuery.toString()).list();
 			for (Object[] li : lst ) {
