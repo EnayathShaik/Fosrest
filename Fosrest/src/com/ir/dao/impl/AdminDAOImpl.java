@@ -3830,10 +3830,10 @@ p.setBatchCode(batchCode);
 		// TODO Auto-generated method stub
 Session session = this.sessionFactory.getCurrentSession();
 		
-List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename from modulemaster").list();
+List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename from modulemaster where isActive='Y'").list();
 
 		return mod;
-		
+		 
 	}
 
 	@Override

@@ -48,6 +48,9 @@
 	
 		var noOfSubjects='${allSubjects}'.split(",").length;
 		var getSrNo= $(thisId).closest('tr').attr('id');
+		//alert(getSrNo);
+		
+		
 		//alert("getSrNo<noOfSubjects------"+getSrNo+"<"+noOfSubjects);
 		if(getSrNo<noOfSubjects){
 			rowString = ""; 
@@ -73,11 +76,12 @@
 	
 			if(flag==0){
 				mystrr=mystrr+'<option value="';
-				mystrr=mystrr+sId;
+				mystrr=mystrr+sId+'"';
+				mystrr=mystrr+' label="'+sName;
 				mystrr=mystrr+'" >';
 				mystrr=mystrr+sName;
 				mystrr=mystrr+'</option>';
-				}
+				}	
 		</ct:forEach>
 	
 		$("#addRow"+getSrNo).css("display" , "none");
@@ -85,21 +89,44 @@
 		console.log("getSrNo "+getSrNo);
 		var nextId = parseInt(getSrNo)+1;
 		
-		var sTime=generateOptionTexts( '01:00' );
-		var eTime=generateOptionTexts( '02:00' );
+		//var sTime=generateOptionTexts( '01:00' );
+		var eTime=generateOptionTexts( '12:00' );	
 		var days=dayNumbers();
-		rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control'>"+mystrr+"</select></td><td><select id='day"+nextId+"' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime"+nextId+"' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime"+nextId+"' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select></td><td><input type='text' class='form-control' id='dispDuration"+nextId+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+nextId+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
+		rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'>"+mystrr+"</select></td><td><select id='day"+nextId+"' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime"+nextId+"' name='startTime' class='form-control' onchange='return calDuration(this);'>"+generateOptionTexts(document.getElementById("endTime"+(nextId-1)).value)+"</select></td><td><select id='endTime"+nextId+"' name='endTime' class='form-control' onchange='return calDuration(this);'>"+defaultEndTime(document.getElementById("endTime"+(nextId-1)).value)+"</select></td><td><input type='text' class='form-control' id='dispDuration"+nextId+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+nextId+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
+		 
+		$("#subjectTable").append(rowString);  	
+	 
+		var e = document.getElementById("subject"+getSrNo); 
+		  
+		if(typeof e.options[e.selectedIndex+1] =='undefined'){
+			alert("####################################################");  
+			return false;
+		}
+		var strUser = e.options[e.selectedIndex+1].value;
+		  
+		for(var i=1;i<=getSrNo;i++){  
 		
-		$("#subjectTable").append(rowString); 
-	}	
+		$("#subject"+i+" option[value='"+strUser+"']").remove();  
+		} 
+	}	 
 		 
 		else{ 
 			alert("No More Subjects");
+		
 		}
+
 		return false; 
-	 } 
+	 }   
 	
+
 	
+	function defaultEndTime(prevEndTime){
+		//alert(prevEndTime);
+		var timeArr=prevEndTime.split(":");
+		return generateOptionTexts((parseInt(timeArr[0])+1)+":00"); 
+		
+	}
+	 	
 	 	
 	function calDuration(currObj){
  	
@@ -160,18 +187,18 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 	}
 	 
 	 function deleteRow(id){ 
-		$(id).parents('tr').remove();
+		
 		// alert("end "+$(id).closest('tr').attr('id'));
 		 var delId= parseInt($(id).closest('tr').attr('id'));
+		 
+		 var sName=$("#subject"+delId+" option:selected").text();     
+		 var sVal=$("#subject"+delId+" option:selected").val();
+		// alert(sName+" "+sVal); 
 		 var idval = $('#subjectTable tr:last').attr('id');
-		// alert("last id="+idval);
-		 var newId=0;
-
+		var newId=0;
+		 $(id).parents('tr').remove(); 
 		for(var i=delId;i<idval;i++){
-		
-			// newId=delId+i; 
-				  
-			 document.getElementById(i+1).setAttribute("id", i); 
+		 document.getElementById(i+1).setAttribute("id", i); 
 				document.getElementById("subject"+(i+1)).setAttribute("id", "subject"+i);
 				document.getElementById("duration"+(i+1)).setAttribute("id", "duration"+i);
 				document.getElementById("dispDuration"+(i+1)).setAttribute("id", "dispDuration"+i);
@@ -183,20 +210,40 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 				document.getElementById("deleteRow"+(i+1)).setAttribute("id", "deleteRow"+i);
 				
 		} 
+		
+		 for(var i=1;i<=idval-1;i++){ 
+			 $("#subject"+i).append("<option value="+sVal+" label="+sName+">"+sName+"</option>");  
+		 
+		 }
 		 return false;
 	 }
 	 
 	  
-	 function addSubSchedule(){	
+	 function addSubSchedule(){ 
+			 
+			if('${allSubjects}'=="[]" )   {
+				//alert("if"); 
+			 	$('#subjectTable tr').remove(); 
+				$('#subjectTable').append('<tr><th>No subjects available. Add subjects From Subject Master</th></tr>');
+			}	
 		
-		 rowString = ""; 
-			var days=dayNumbers();
-			var sTime=generateOptionTexts( '01:00' );
-			var eTime=generateOptionTexts( '02:00' );
-		rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
-		$("#subjectTable").append(rowString); 
+			else
+				{
+					// alert("else");
+				    rowString = ""; 
+					var days=dayNumbers();
+					var sTime=generateOptionTexts( '09:00' );
+					var eTime=generateOptionTexts( '10:00' );  
+
+				rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' label='${subb[1]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
+				$('#subjectTable').append('<tr><th>Subject Name</th><th>Day</th><th>Start Time</th><th>End Time</th><th>Duration</th><th>Operation</th></tr>');
+ 
+				$("#subjectTable").append(rowString); 
+	 			}
+		
+			
 	 }
-	  
+	   
 	/*  function chkDur(obj){ 
 		// alert(obj);  
 		 
@@ -207,58 +254,80 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 			 alert("Invalid Duration:- Enter correct format(eg. 01:30 for 1hr 30min)");
 			 return false;
 		}
-	
+	 
 		
 	 }  */
-	 
-	 function chkDates(){
-		 var idval = $('#subjectTable tr:last').attr('id');
+ 
+	 function removeSingleOption(currObj){
+		
 	
-		 
-		 if($("#day1").val()!=1){
-			 alert("Invalid DAY");
-				$("#day1").focus();  
-				
-				return false;
-			}
-		 
-			for(var i=1;i<=idval;i++){
-				
-				var dayCurr=$("#day"+i).val();
-				var dayPrev=0;
-				
-				if(i==1)
-					dayPrev	=1;
-				else
-					dayPrev=$("#day"+(i-1)).val();
-				//alert(dayCurr+" "+dayPrev);
-				if(dayCurr<dayPrev){
-					alert("Invalid DAY");
-					$("#day"+i).focus();  
-					
-					return false;
-				}
-				var sTime=$("#startTime"+i).val();
-				var eTime=$("#endTime"+i).val();
-				//alert(sTime+" "+eTime);
-				var result=""+endTimeValidation(sTime,eTime);
-				
-				if(result=="false"){
-					alert("Invalid END TIME");
-					$("#endTime"+i).focus();  
-					
-					return false;
-				}
-			}
-	
-		 
-	 }
-	 
-		function OnStart() { 
+			var currId=$(currObj).closest('tr').attr('id');
+			 var idval = $('#subjectTable tr:last').attr('id');
+  
+			// alert(currId+" "+idval);
+			 var sVal=$("#subject"+currId+" option:selected").val();
+			
+			 for(var i=1;i<=idval;i++){
+				 if(i!=currId)  	
+					$("#subject"+i+" option[value='"+sVal+"']").remove();
+			 } 
+			 return false;
+	 } 
+		function OnStart() {  
 		addSubSchedule();
 		}
 		window.onload = OnStart;
 	</script>
+	
+	<script>
+	
+	function onclick2(currObj){
+		
+	
+		 var currId=$(currObj).closest('tr').attr('id');
+		 var idval = $('#subjectTable tr:last').attr('id');
+		 //alert("sasasas"); 
+		 var sVal1=$("#subject"+currId+"  option:selected").val();
+		 var sName1=$("#subject"+currId+" option:selected").text();
+		 for(var i=1;i<=idval;i++){
+			 if(i!=currId)  	
+				 $("#subject"+i).append("<option value="+sVal1+" label="+sName1+">"+sName1+"</option>"); 
+		 } 
+
+		 return false;
+
+	}
+	
+/* 	function abcd(currObj){
+	 var previous, new_value;
+	
+	 //alert("1111 "+sVal1+" "+sName1); 
+	  $('select[id=subject2]').on({ 
+  	
+	
+	    change: function(){
+	   	 var sVal2=$("#subject"+currId+"  option:selected").val();
+		 var sName2=$("#subject"+currId+" option:selected").text();
+		 
+	        // new_value = $(this).attr('id');
+	        $(currObj).blur(); 
+	    	
+	   	 alert("2222 "+sVal2+" "+sName2);  
+			// alert(currId+" "+idval);
+			 var sVal=$("#subject"+currId+" option:selected").val();
+			
+			 for(var i=1;i<=idval;i++){
+				 if(i!=currId)  	{
+					$("#subject"+i+" option[value='"+sVal2+"']").remove(); 
+				 } 
+			 
+			 }
+	    }
+
+	  });
+	} */
+	 
+</script>
 	<%-- <ct:url var="addAction" value="/activateAssessmentOfTraineelist.fssai"></ct:url> --%>
 	<ct:url var="addAction" value="/saveTrainingScheduleMaster.fssai"></ct:url>
 	<cf:form action="${addAction}" name="myForm" method="POST"
@@ -294,6 +363,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 									<h1>
 										Training Schedule Master 
 									</h1>
+									
 									<div class="row">
 										<div class="col-xs-12">
 											<fieldset>
@@ -308,7 +378,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 																	class="style-li error-red">Select Designation.</li>
 																</ul>
 															</div>
-															<cf:select path="designation" class="form-control">
+															<cf:select path="designation" name="designation" class="form-control">
 																<cf:option value="" label="Select Designation" />
 																<cf:options items="${DesignationList}"
 																	itemValue="designationId" itemLabel="designationName" />
@@ -377,21 +447,10 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 	
 													
 													</div>
-														 <fieldset><legend>Add Subject</legend>
+														 <fieldset style="margin: 0 15px;"><legend>Add Subject</legend>
 	                                      		<table id="subjectTable" class="table table-bordered table-responsive">
 	                                      		<thead >
-	                                      		<tr class="background-open-vacancies">
-	                                      		
-	                                      		<th>Subject Name</th>
-	                                      		<th>Day</th>
-	                                      		<th>Start Time</th>
-	                                      		<th>End Time</th>
-	                                      		<th>Duration</th>
-	                                      		<!-- <th><ul><li id="trErr" style="display: none;"
-																	class="style-li error-red">Enter Duration for each SUBJECT	</li></ul>Duration</th> -->
-	                                      		<th>Operation</th>
-	                                      
-	                                      		</tr>
+	                                      	
 	                                      		</thead>
 	                                      	
 	                                      		
@@ -475,6 +534,45 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 			$("#trainingPhaseErr").css("display", "none");
 			$("#trErr").css("display", "none");
 			
+			
+			 var idval = $('#subjectTable tr:last').attr('id');
+				
+			 
+			 if($("#day1").val()!=1){
+				 alert("Invalid DAY");
+					$("#day1").focus();  
+					
+					return false;
+				}
+			 
+				for(var i=1;i<=idval;i++){
+					
+					var dayCurr=$("#day"+i).val();
+					var dayPrev=0;
+					
+					if(i==1)
+						dayPrev	=1;
+					else
+						dayPrev=$("#day"+(i-1)).val();
+					//alert(dayCurr+" "+dayPrev);
+					if(dayCurr<dayPrev){
+						alert("Invalid DAY");
+						$("#day"+i).focus();  
+						
+						return false;
+					}
+					var sTime=$("#startTime"+i).val();
+					var eTime=$("#endTime"+i).val();
+					//alert(sTime+" "+eTime);
+					var result=""+endTimeValidation(sTime,eTime);
+					
+					if(result=="false"){
+						alert("Invalid END TIME");
+						$("#endTime"+i).focus();  
+						 
+						return false;
+					}
+				}
 			
 			if ($("#designation").val() == 0) {
 				$("#designationErr").css("display", "block");
