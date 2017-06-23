@@ -57,6 +57,7 @@
                                          <ct:forEach var="subjects" items="${listsubjects}">
                                            <li>  <ct:out value="${subjects}"/><br></li>
                                              </ct:forEach>
+                                       
                                         <h4>Score:${listGetScoreCard.score} </h4>
                                        
                                         <br> </fieldset>

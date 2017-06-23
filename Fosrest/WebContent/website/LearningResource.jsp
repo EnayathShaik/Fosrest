@@ -20,9 +20,9 @@
 	<thead>
 	<tr>
 	<th >Sr. No</th>
-		<th >Module Name</th>
-		<th >Content Name</th>
-		<th >Content Type</th>
+		<th >Subject Name</th>
+		<!-- <th >Content Name</th>
+		<th >Content Type</th> -->
 		<th >Content Link</th>
 	</tr>
 	</thead>
@@ -30,10 +30,10 @@
 	<tr>
 			<td>${loop.count}</td>
 			<td>${Lrlist[0]}</td>
-		<td>${Lrlist[1]}</td>
-			<td>${Lrlist[2]}</td>
-			<td><a href="${Lrlist[3]}" target="_blank">${Lrlist[3]}</a></td>
-
+		<%-- <td>${Lrlist[1]}</td>
+			<td>${Lrlist[2]}</td> --%>
+			<%-- <td><a href="${Lrlist[3]}" target="_blank">${Lrlist[3]}</a></td> --%>
+           <td><a href="" >Fosrest/Subject/${Lrlist[0]}</a></td>
 		</tr>
 	</ct:forEach>
 	</table>
