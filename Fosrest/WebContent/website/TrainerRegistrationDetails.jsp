@@ -642,7 +642,7 @@
 									<!-- 	<a href="#" data-toggle="modal" data-target="#myModal" style="margin-left: -13px;"><b>Select
 												State:</b></a> -->
 <button type="button" class="btn btn-primary btn-lg"
-												data-toggle="modal" data-target="#myModal" onClick="statecheckbox(); return false;">Select States</button>
+												data-toggle="modal" data-target="#myModal" onclick="statecheckbox(); return false;">Select States</button>
 									</div>
 
 									<!-- Modal -->
@@ -682,7 +682,7 @@
 													</td>
 													<cf:hidden path="trainingState"
 																value="${listStateMaster.stateId}" />
-													<td class="text-center" id="statecheck"><input type="checkbox">
+													<td class="text-center" ><input type="checkbox" id="statecheck_${listStateMaster.stateId}" onclick='selectStates(${listStateMaster.stateId})'>
 													</td>
 
 
@@ -700,7 +700,7 @@
 												<input type="button"
 													class="btn login-btn show-details-vacancy collapsed"
 													data-toggle="collapse" data-target="#show-result"
-													aria-expanded="false" data-dismiss="modal"  value="OK" />
+													aria-expanded="false" data-dismiss="modal" onclick="$('#trainingState').val(window.stateArray);"  value="OK" />
 
 											</div>
 										</div>
@@ -1181,24 +1181,14 @@ function abc(){
 		}
 	}
 	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	 </script>
 	 <script>
 	 var isUpdate = '${isUpdate}';
+	window.stateArray = [];
 	
 	 if(isUpdate=='Y'){
-	 	function statecheckbox(){
+	 
 	 		<ct:forEach items="${listStateMaster}" var="ts" varStatus="loop">
 	 		var fields = '${PersonalInformationTrainer.trainingState}'.split(',');
 	 		for (i = 0; i < fields.length; i++) {
@@ -1209,7 +1199,34 @@ function abc(){
 	 							}
 	 					}
 	 					</ct:forEach>
+	 	
 	 	}
-	 	}
+	 
+		function statecheckbox(){
+			
+			if(window.stateArray.length>1){
+				for(var i = 0 ; i < window.stateArray.length ; i++){
+					$("#statecheck_"+window.stateArray[i]).prop("checked" , true);
+				}
+			}
+			
+		}
+	 function selectStates(stateId){
+		 console.log(stateId);
+		 var ischecked = document.getElementById("statecheck_"+stateId).checked;
+		 console.log(ischecked);
+		if(document.getElementById("statecheck_"+stateId).checked){
+			window.stateArray.push(stateId);
+		}else if(!document.getElementById("statecheck_"+stateId).checked){
+			//window.stateArray.removeA(stateId);
+			 var index = window.stateArray.indexOf(stateId);
+			if(index > -1){
+				window.stateArray.splice(index , 1);	
+			} 	
+		}
+		 
+		 
+	 }
+
 </script>
 
