@@ -6,7 +6,32 @@
 <!--
 
 //-->
-</script>
+<script>
+                function OnStart() {
+                   
+                  	var steps = 4;
+                	var traineeSteps =
+                		<%=(Integer) session.getAttribute("traineeSteps")%>
+                	if(traineeSteps >= steps){
+                		//allow
+                	}else{ 
+                		if(steps-1 == traineeSteps){
+                			alert('Please Complete Your Previous Training First')
+                		}else{
+                			alert('Please Flow Step By Step..');
+                		}
+                		window.location.href ='/Fosrest/loginProcess.fssai';
+                	}
+
+                	flatpickr("#trainingDate" , {
+                		
+                	});	
+                	
+              
+                }
+                window.onload = OnStart;
+
+            </script>
 
  <%-- <ct:url var="addAction" value="/TrainingSchedule/add.fssai" ></ct:url> --%>
 <cf:form action="ListCertificate.fssai" name="myForm" method="POST" commandName="CertificateForm" onsubmit="return validateFields();"> 

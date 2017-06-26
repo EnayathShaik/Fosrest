@@ -1,20 +1,21 @@
 <script type="text/javascript">
 function OnStart(){
-	var steps = 4;
+	var steps = 2;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
-	if(steps > traineeSteps){
-	}else{
+	if(traineeSteps >= steps){
+		//allow
+	}else{ 
 		if(steps-1 == traineeSteps){
 			alert('Please Complete Your Previous Training First')
 		}else{
 			alert('Please Flow Step By Step..');
 		}
-		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+		window.location.href ='/Fosrest/loginProcess.fssai';
 	}
 
 }
-//window.onload = OnStart;
+ window.onload = OnStart;
 </script>      
 
         <!-- horizontal navigation -->

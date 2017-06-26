@@ -16,7 +16,7 @@ public class TraineeAssessmentEvaluation {
 	/**Login id of the trainee */
 	private int logindetails;
 	/**Course Id for which the assessment has been taken */
-	private int moduleId;
+	private String moduleIds;
 	/**Total number of questions provided for assessment*/
 	private int totalQuestions;
 	/**Number of correct answers by trainee */
@@ -111,12 +111,13 @@ public class TraineeAssessmentEvaluation {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public int getModuleId() {
-		return moduleId;
+	public String getModuleIds() {
+		return moduleIds;
 	}
-	public void setModuleId(int moduleId) {
-		this.moduleId = moduleId;
+	public void setModuleIds(String moduleIds) {
+		this.moduleIds = moduleIds;
 	}
+
 
 	
 }

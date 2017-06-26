@@ -844,10 +844,10 @@ public class TraineeController {
 				model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
 				model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
 				model.addAttribute("listGetScoreCard", this.traineeService.listGetScoreCard(userId));
-				
+			if(session.getAttribute("traineeSteps").toString().equals("3")){
 				traineeService.updateSteps(personalTraineeId, 4);
 				session.setAttribute("traineeSteps", 4);
-			
+				} 
 				return "GetScoreCard";
 		
 		}
@@ -877,8 +877,10 @@ public class TraineeController {
         	int userId = (int) session.getAttribute("userId");
         	System.out.println("aaaaaaaa"+session.getAttribute("userId"));
         	int personalTraineeId = (int)session.getAttribute("personalTraineeId");
-        	traineeService.updateSteps(personalTraineeId,2);
-        	session.setAttribute("traineeSteps", 2);
+        	if(session.getAttribute("traineeSteps").toString().equals("1")){
+				traineeService.updateSteps(personalTraineeId, 2);
+				session.setAttribute("traineeSteps", 2);
+				} 
         	
    			
    			System.out.println(" list online training "+this.traineeService.listOnlineTraining(userId));

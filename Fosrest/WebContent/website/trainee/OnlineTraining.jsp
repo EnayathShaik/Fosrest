@@ -17,23 +17,23 @@ import com.ir.form.GenerateCertificateForm;
 
  
  <script type="text/javascript">
-
+ 
  function OnStart(){
 	var steps = 1;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
-	alert(" steps "+steps + " traineeSteps "+traineeSteps);
-	if(steps >= traineeSteps){
+	if(traineeSteps >= steps){
 	}else{
-		if(steps-1 == traineeSteps){
-			alert('Please Complete Your Previous Training First')
+		if(steps-1 == traineeSteps){ 
+			//alert('Please Complete Your Previous Training First')
+				alert('You must be nominated to start Training')
 		}else{
 			alert('Please Flow Step By Step..');
 		}
 		window.location.href ='/Fosrest/loginProcess.fssai';
 	}
 	
-}
+} 
 window.onload = OnStart; 
 
 </script> 

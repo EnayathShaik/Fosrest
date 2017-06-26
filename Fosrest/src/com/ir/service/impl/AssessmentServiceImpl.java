@@ -89,6 +89,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 		Set<String> questionKeys = questions.keySet();
 		Iterator<String> keysIterator = questionKeys.iterator();
 		int i=0;
+		String moduleIds="";
 		while(keysIterator.hasNext()){
 			
 			String key = keysIterator.next();
@@ -111,7 +112,13 @@ public class AssessmentServiceImpl implements AssessmentService {
 		traineeEvaluation.setCorrectAnswers(correctAnswers);
 		traineeEvaluation.setIncorrectAnswers(wrongAnswers);
 		traineeEvaluation.setTotalScore(totalScore);
-		traineeEvaluation.setModuleId(lst.get(i++));
+		System.out.println(lst);
+		for(int j=0;j<lst.size();j++){
+			System.out.println(lst.get(j));
+			 moduleIds=moduleIds+lst.get(j)+"|";
+
+		} 
+		traineeEvaluation.setModuleIds(moduleIds);
 		int eligibility = assessmentDao.getElegibilityForAssessment(lst.get(i++)); 
 		if(eligibility > -1){
 			if(totalScore >= eligibility){
