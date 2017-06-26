@@ -681,7 +681,7 @@
 													<td id="userName_${loop.index}">${listStateMaster.stateName}
 													</td>
 												
-													<td class="text-center" ><input type="checkbox" id="statecheck_${listStateMaster.stateId}" onclick='selectStates(${listStateMaster.stateId})'>
+													<td class="text-center" ><input type="checkbox" id="statecheck_${listStateMaster.stateId}" onclick='selectStates(${listStateMaster.stateId})' >
 													</td>
 
 
@@ -1110,35 +1110,35 @@
 	 <script>
 	 var isUpdate = '${isUpdate}';
 	window.stateArray = [];
-	
-		function statecheckbox(){
-			
-			if(window.stateArray.length>1){
-				for(var i = 0 ; i < window.stateArray.length ; i++){
-					$("#statecheck_"+window.stateArray[i]).prop("checked" , true);
-				}
+	function statecheckbox(){
+		if(isUpdate=='Y'){
+			window.stateArray='${PersonalInformationTrainer.trainingState}'.split(',');
+		if(window.stateArray.length>0){
+			for(var i = 0 ; i < window.stateArray.length ; i++){
+				$("#statecheck_"+window.stateArray[i]).prop("checked" , true);
 			}
-			
 		}
-	 function selectStates(stateId){
+		}
+	}
+ 	 function selectStates(stateId){
 		 console.log(stateId);
 		 var ischecked = document.getElementById("statecheck_"+stateId).checked;
 		 console.log(ischecked);
-		if(document.getElementById("statecheck_"+stateId).checked){
-			window.stateArray.push(stateId);
-		}else if(!document.getElementById("statecheck_"+stateId).checked){
-			 var index = window.stateArray.indexOf(stateId);
-			if(index > -1){
-				window.stateArray.splice(index , 1);	
-			} 	
+		 
+		if(document.getElementById("statecheck_"+stateId).checked  ){
+			window.stateArray.push(stateId);	
 		}
-		 
-		 
+	else if(!document.getElementById("statecheck_"+stateId).checked){
+			 var index = window.stateArray.indexOf(""+stateId+"");
+			if(index != -1){
+				window.stateArray.splice(index , 1);	
+			}
+		}
 	 }
 	 
 	 function setAllStates(){
-		 $('#trainingState').val(window.stateArray);	
-		
+	 var a=window.stateArray;
+		 $('#trainingState').val(a);
 	 } 
 	 
 	 

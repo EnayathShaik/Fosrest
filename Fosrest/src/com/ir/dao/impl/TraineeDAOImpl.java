@@ -1021,8 +1021,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 					Object[] obj = records.get(0);
 					
 					schedulecode = obj[1] == null ? "" : obj[1].toString();
-					certificateInfo.setTrainingDate(obj[1] == null ? ""
-							: obj[1].toString());
+					certificateInfo.setTrainingDate(obj[0] == null ? ""
+							: obj[0].toString());
 					nomineeTraineeUserID = (int) obj[2];
 					certificateInfo.setName(obj[3] == null ? "" : obj[3]
 							.toString());

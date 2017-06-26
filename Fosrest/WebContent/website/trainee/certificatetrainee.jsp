@@ -65,7 +65,7 @@ try{
                                         <hr class="nam-hr">
                                         <div class="di-msg">
                                             <p>has received necessary training required to be a trainer for Project Clean Streat Food . The Training</p>
-                                            <p> was help on
+                                            <p> was held on
                                                 <span class="on-dat-general">${trainingDate}</span>
                                                 <span class="at-general">at</span>
                                                 <span><hr class="on-hr-general" /></span>
