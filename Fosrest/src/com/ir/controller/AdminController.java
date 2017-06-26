@@ -1635,7 +1635,7 @@ public class AdminController {
 			String hm = this.adminService.addHolidayMaster(p);
 			if (hm.equalsIgnoreCase("created")) {
 				model.addAttribute("created", " State insertion successfull !!!");
-				model.addAttribute("stateMaster", new StateForm());
+				//model.addAttribute("stateMaster", new StateForm());
 			} else {
 				model.addAttribute("created", "State already exists in reord !!!");
 
@@ -1832,30 +1832,22 @@ public class AdminController {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-
 		if (p.getModuleId() == 0) {
 			// new person, add it
 			String result1 = this.adminService.addModuleMaster(moduleMaster);
 			System.out.println("result1: " + result1);
-
-			try {
-
 				if (result1.equalsIgnoreCase("created")) {
 					model.addAttribute("created", " New Unit insertion successful !!!");
 				} else {
 					model.addAttribute("created", "Unit already exists in reord !!!");
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				new ZLogger("addUnitMaster", "Exception while addUnitMaster :  " + e.getMessage(),
-						"AdminController.java");
 			}
-		} else {
+		 else {
 			// existing person, call update
 			this.adminService.updateModuleMaster(moduleMaster);
 		}
 		System.out.println("after insert");
-		 String subject = null;
+		// String subject = null;
 		//upload file
 				try{
 					String name = p.getModuleName();
@@ -2889,9 +2881,6 @@ public class AdminController {
 					"Exception while manageAssessmentQuestionsSave :  " + e.getMessage(), "AdminController.java");
 		}
 		//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
-		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
-  		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
-  		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
 		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 
 		return "manageAssessmentQuestions";

@@ -2095,18 +2095,17 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public String addModuleMaster(ModuleMaster p) {
+		
 		Session session = this.sessionFactory.getCurrentSession();
-		/*Query isempty = session.createSQLQuery("select moduleid from ModuleMaster where modulename='"
-				+ p.getModuleName() + "' and unitId='" + p.getUnitMaster().getUnitId() + "'");
+		Query isempty = session.createSQLQuery("select * from ModuleMaster where isActive='Y' and modulename='"+ p.getModuleName()  + "'");
 		
 				
 		List list1 = isempty.list();
-		System.out.println(list1.size());
+		if (list1 != null && list1.size() > 0) {
+			return "error";
+		}
 
-		if (list1.size() > 0)
-			return "error";*/
-
-		String sql = "select coalesce(max(seqNo) + 1,1) from ModuleMaster";
+		String sql = "select coalesce(max(seqNo) + 1,1) from ModuleMaster ";
 		int maxId = 0;
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();

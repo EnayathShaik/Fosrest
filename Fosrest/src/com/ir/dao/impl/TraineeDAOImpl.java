@@ -982,6 +982,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			if (certificateID != null && certificateID.length() > 5) {
 				whereCondition = whereCondition + " AND A.certificateid = '"
 						+ certificateID + "'";
+				
 			} else {
 				String sqlSeq = "select coalesce(max(certificateseqno) + 1,1) from nomineetrainee";
 				Query maxIDListSeq = session.createSQLQuery(sqlSeq);
@@ -996,7 +997,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			}
 
 			// max SeqNo
-			String sql = "Select B.trainingstartdate,"
+			String sql = "Select B.trainingstartdate,B.schedulecode,"
 					+ " A.id  as nomineeId , cast(D.firstname || ' '|| D.middlename ||' '|| D.lastname as varchar (50)) ,A.issueDate,A.certificateid  "
 					+" , concat(E.trainingcentername , ' ' , s.statename, ' ' , ds.districtname) as address "
 					+ " from nomineetrainee A "
@@ -1009,40 +1010,44 @@ public class TraineeDAOImpl implements TraineeDAO {
 					+ " inner join districtmaster as ds on ds.districtid = cast( E.correspondencedistrict as int)  "
 					+ " " + whereCondition;
 			int nomineeTraineeUserID = 0;
-			String moduleCode = "";
+			String schedulecode = "";
 			
 			Query query = session.createSQLQuery(sql);
 			List<Object[]> records = (List<Object[]>) query.list();
 			System.out.println("Record Size == " + records.size());
+			
 			try {
 				if (records.size() > 0) {
 					Object[] obj = records.get(0);
-					//moduleCode = obj[0] == null ? "" : obj[0].toString();
-					certificateInfo.setTrainingDate(obj[0] == null ? ""
-							: obj[0].toString());
-					nomineeTraineeUserID = (int) obj[1];
-					certificateInfo.setName(obj[2] == null ? "" : obj[2]
+					
+					schedulecode = obj[1] == null ? "" : obj[1].toString();
+					certificateInfo.setTrainingDate(obj[1] == null ? ""
+							: obj[1].toString());
+					nomineeTraineeUserID = (int) obj[2];
+					certificateInfo.setName(obj[3] == null ? "" : obj[3]
 							.toString());
-					certificateInfo.setIssueDate(obj[3] == null ? "" : obj[3]
+					certificateInfo.setIssueDate(obj[4] == null ? "" : obj[4]
 							.toString());
-					certificateInfo.setCertificateID(obj[4] == null ? ""
-							: obj[4].toString());
-					certificateInfo.setTrainingAddress(obj[5] == null ? ""
+					certificateInfo.setCertificateID(obj[5] == null ? ""
 							: obj[5].toString());
+					
+					certificateInfo.setTrainingAddress(obj[6] == null ? ""
+							: obj[6].toString());
 				/*	certificateInfo.setTrainingPartnerName(obj[7] == null ? ""
 							: obj[6].toString());*/
 					
 				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			if (certificateInfo != null
-					&& certificateInfo.getCertificateID() == null
+					/*&& certificateInfo.getCertificateID() == null*/
 					|| certificateInfo.getCertificateID().trim().length() <= 5
 					|| certificateInfo.getCertificateID().toUpperCase()
 							.equals("NULL")) {
-				if (moduleCode != null && moduleCode.length() > 0) {
-					certificateID = moduleCode
+				if (schedulecode != null && schedulecode.length() > 0) {
+					certificateID = schedulecode
 							+ StringUtils.leftPad(String.valueOf(maxIdSeq), 6,
 									"0") + "17";
 				}
