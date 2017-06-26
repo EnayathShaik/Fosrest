@@ -680,8 +680,7 @@
 													<td>${listStateMaster.stateId}</td>
 													<td id="userName_${loop.index}">${listStateMaster.stateName}
 													</td>
-													<cf:hidden path="trainingState"
-																value="${listStateMaster.stateId}" />
+												
 													<td class="text-center" ><input type="checkbox" id="statecheck_${listStateMaster.stateId}" onclick='selectStates(${listStateMaster.stateId})'>
 													</td>
 
@@ -700,7 +699,7 @@
 												<input type="button"
 													class="btn login-btn show-details-vacancy collapsed"
 													data-toggle="collapse" data-target="#show-result"
-													aria-expanded="false" data-dismiss="modal" onclick="$('#trainingState').val(window.stateArray);"  value="OK" />
+													aria-expanded="false" data-dismiss="modal" onclick="setAllStates();"  value="OK" />
 
 											</div>
 										</div>
@@ -709,42 +708,8 @@
 								</div>
 							
 <br>
-							<%-- 	<div class="form-group">
-									<div>
-										<ul class="lab-no">
-											<li class="style-li"><strong>Selected States:</strong></li>
-											<li class="style-li error-red">*</li>
-											<li id="state" style="display: none;"
-												class="style-li error-red">Please select states from above link.</li>
-										</ul>
-									</div>
-									<ul id="results"></ul>
-									<cf:input type="text" id="stateBox" path=""
-										class="form-control" placeholder="state" required="" />
-
-								</div> --%>
 								</div>
-								<%-- <div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Modules:</strong></li>
-															<li id="trainingTypeErr" style="display: none;"
-																class="style-li error-red">Please Select Training
-																Type.</li>
-															<li class="style-li error-red"><span
-																id="name_status" class="clear-label"> </span> ${created }</li>
-														</ul>
-														<br>
-													</div><ct:forEach items="${allModules}" var="treemap">
-																	<ul>
-																			<ct:forEach items="${treemap.value}" var="modules">
-																				<li><cf:checkbox path="modulesId" id='${modules[0]}'
-																					value="${modules[0]}"/> ${modules[1]}</li>
-																			</ct:forEach>
-																		</ul>
-																	
-																</ct:forEach>
-												</div> --%>
+								
 							<!-- </div> -->
 							<div class="col-md-6 col-xs-12">
 								<div class="form-group">
@@ -852,7 +817,7 @@
 						</div>
 
 
-
+		<cf:hidden path="trainingState" value="" />
 					</form>
 					<!-- form ends -->
 
@@ -907,11 +872,7 @@
 				$("#correspondencePincode")
 						.val(mainData1.correspondencePincode);
 				$("#mobile").val(mainData1.mobile);
-				//$("#empID").val(mainData1.empID);
-				//$("#specialisedArea").val(mainData1.specialisedArea);
-				//$("#orgName").val(mainData1.orgName);
-				//$("#noOfTrainings").val(mainData1.noOfTrainings);
-
+			
 				$("#updatebtn").css("display", "block");
 
 				$("#createbtn").css("display", "none");
@@ -994,11 +955,7 @@
 			$("#firstNameErr").css("display", "block");
 			return false;
 		}
-	/* 	if ($("#MiddleName").val() == 0) {
 
-			$("#MiddleNameErr").css("display", "block");
-			return false;
-		} */
 		if ($("#LastName").val() == 0) {
 
 			$("#LastNameErr").css("display", "block");
@@ -1057,11 +1014,6 @@
 			return false;
 		}
 
-		/* if($("#mobile").val() == 0){
-		
-		$("#mobileErr").css("display" , "block");
-		return false;
-		} */
 		if ($("#mobile").val().match(/^[0-9]{10}$/) == null) {
 
 			$("#mobileErr").css("display", "block");
@@ -1153,55 +1105,12 @@
 </script>
 <script>
 
-
-
- 
-
-
-
-
-
-
-
-
-
-
-function abc(){
-	alert("OOOOOOOOOOOOOOOOO");
-	var q='a1';
-	var z=document.getElemenetById("radioTrainingInstitute").text;
-	 alert("aaaaaaaaaaa"+z);
-}
-	function OtiHide() {
-		var a = document.getElementById('AssociatedWithAnyTrainingInstitute').value;
-		if (a == 0) {
-			$("#Oti").css("display", "block");
-		} else {
-			$("#Oti").css("display", "none");
-		}
-	}
-	
 	
 	 </script>
 	 <script>
 	 var isUpdate = '${isUpdate}';
 	window.stateArray = [];
 	
-	 if(isUpdate=='Y'){
-	 
-	 		<ct:forEach items="${listStateMaster}" var="ts" varStatus="loop">
-	 		var fields = '${PersonalInformationTrainer.trainingState}'.split(',');
-	 		for (i = 0; i < fields.length; i++) {
-	 						var s=fields[i];
-	 						if(s=='${ts.stateId}'){
-	 						//document.getElementById("statecheck" + fields[i]).checked = true
-	 							("#statecheck"  + fields[i]).attr("checked", true);
-	 							}
-	 					}
-	 					</ct:forEach>
-	 	
-	 	}
-	 
 		function statecheckbox(){
 			
 			if(window.stateArray.length>1){
@@ -1218,7 +1127,6 @@ function abc(){
 		if(document.getElementById("statecheck_"+stateId).checked){
 			window.stateArray.push(stateId);
 		}else if(!document.getElementById("statecheck_"+stateId).checked){
-			//window.stateArray.removeA(stateId);
 			 var index = window.stateArray.indexOf(stateId);
 			if(index > -1){
 				window.stateArray.splice(index , 1);	
@@ -1227,6 +1135,13 @@ function abc(){
 		 
 		 
 	 }
+	 
+	 function setAllStates(){
+		 $('#trainingState').val(window.stateArray);	
+		
+	 } 
+	 
+	 
 
 </script>
 
