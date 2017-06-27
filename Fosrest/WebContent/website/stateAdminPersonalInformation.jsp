@@ -34,7 +34,7 @@
                                             <div class="col-xs-12">  
 			
 					
-					<h3 class="text-capitalize heading-3-padding">State Admin
+					<h3 class="text-capitalize heading-3-padding" style="margin-top: 99px;">State Admin
 						Registration Form</h3>
 
 					
