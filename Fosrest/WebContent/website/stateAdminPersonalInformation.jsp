@@ -334,6 +334,25 @@
                 		 $("#aadharNumberErr2").css("display" , "block");
                  		 return false;
                    	 }
+                	 if($("#email").val() == 0){
+                   		 
+     					$("#EmailErr").css("display" , "block");
+     					return false;
+     					}
+                	 if($("#state").val() < 1 || $("#state").val()=='' ){ 
+						 
+ 						alert("Select STATE");
+ 						return false;
+ 						}
+                	 if($("#address1").val() == 0){
+						  
+ 						$("#address1Err").css("display" , "block");
+ 						return false;
+ 						}
+                	 if($("#pincode").val().match(/^[0-9]{6}$/) == null){
+				  		 $("#pincodeErr").css("display" , "block");
+				  		return false;
+				  	 }
                 	 if($("#title").val() == ''){
      					$("#titleErr").css("display" , "block");
      					return false;
@@ -346,31 +365,19 @@
     					$("#middleNameErr").css("display" , "block");
     					return false;
     					} */
-                	if($("#email").val() == 0){
-               		 
-    					$("#EmailErr").css("display" , "block");
-    					return false;
-    					}
+                	
                 	if($("#lastName").val() == ''){
    					 
     					$("#LastNameErr").css("display" , "block");
     					return false;
     					}
-                	if($("#state").val() < 1 || $("#state").val()=='' ){ 
-						 
-						alert("Select STATE");
-						return false;
-						}
+                	
                 	if($("#designation").val() == 0){
 						 
 						$("#designationErr").css("display" , "block");
 						return false;
 						}
-    					if($("#address1").val() == 0){
-    						  
-    						$("#address1Err").css("display" , "block");
-    						return false;
-    						}
+    					
 
     					if($("#landLine").val() == 0){
     						$("#landLineErr").css("display" , "block");
@@ -386,10 +393,7 @@
    			      		 $("#mobileErr").css("display" , "block");
    			      		return false;
    			  	       }
-    					if($("#pincode").val().match(/^[0-9]{6}$/) == null){
-    				  		 $("#pincodeErr").css("display" , "block");
-    				  		return false;
-    				  	 }
+    					
     				var el = document.getElementById('state');
 	               	 var text = el.options[el.selectedIndex].innerHTML;
 	               
