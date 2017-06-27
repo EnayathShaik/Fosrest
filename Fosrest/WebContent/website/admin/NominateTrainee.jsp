@@ -18,7 +18,7 @@
 </script>
 
 <cf:form action="ListEligibleUser.fssai" name="myForm" method="POST"
-	commandName="NominateTraineeForm">
+	commandName="NominateTraineeForm" onsubmit="return validateFields();">
 
 	<section>
 		<%@include file="../roles/top-menu.jsp"%>
@@ -61,6 +61,7 @@
 														<li class="style-li"><strong>Designation:</strong></li>
 														<li class="style-li error-red"><span id="name_status"
 															class="clear-label"> </span> ${created }</li>
+															 <li id="userTypeErr" style="display:none;" class="style-li error-red" >Trainee Type can not be blank.</li>
 													</ul>
 												</div>
 												<cf:select path="designation" class="form-control">
@@ -74,6 +75,7 @@
 															<li class="style-li"><strong>Training Type:</strong></li>
 															<li id="trainingTypeErr" style="display: none;"
 																class="style-li error-red">Select Training Type.</li>
+																
 															<li class="style-li error-red"><span
 																id="name_status" class="clear-label"> </span> ${created }</li>
 														</ul>
@@ -87,8 +89,8 @@
 												</div>
 												<div class="col-md-6 col-xs-12">
 
-												<input type="submit" class="btn btn-primary btn-lg"
-													data-toggle="modal" data-target="#myModal"
+												<input type="submit" class="btn btn-primary btn-lg" 
+													
 													style="margin-top: 24px;     margin-left: 350px;" aria-expanded="false"
 													value="Get List" />
 
@@ -132,10 +134,8 @@
 												
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
-														<!-- <input    
-															type="button" id="getinfo" value="Get Information" onclick="batchcodeinfo();" class="btn login-btn" /> -->
 <button type="button" class="btn btn-primary btn-lg"
-												data-toggle="modal" data-target="#myModal2" onclick="batchcodeinfo();">Get Information</button>
+												data-toggle="modal" data-target="#myModal2" onclick=" batchcodeinfo(); ">Get Information</button>
 													</div>
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 														<!--   <button  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button> -->
@@ -401,15 +401,19 @@
 
 
 
-
+ 
 
 	function validateFields() {
-		/* if($("#testTable").find('input[type=checkbox]:checked').length == 0)
+	/* 	 if($("#testTable").find('input[type=checkbox]:checked').length == 0)
 		{
 		     alert('Please select atleast one Trainee');
 		    $("#batchCodeDIV").css("display" , "none");
 		     return false;
-		} */	
-	
+		}  */
+		 if($("#designation").val() == ''){
+	   		 
+		   		$("#userTypeErr").css("display" , "block");
+		   		return false;
+		   	 } 
 	}
 </script>

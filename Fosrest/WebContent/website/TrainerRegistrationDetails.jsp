@@ -26,7 +26,8 @@
 
 	function OnStart() {
 
-
+		/* $("#Oti").css("display", "none");
+	 	$("#Ati").css("display", "none"); */
 		/* if(c!=4){
 			$("#sa").css("display", "none");
 			$("#on").css("display", "none");
@@ -35,7 +36,10 @@
 		// $("#otherTrainingInstitute").css("display" , "none");
 		var isUpdate = '${isUpdate}';
 		if (isUpdate != null && isUpdate == "Y") {
-
+			if ( $('#YesLabNotified').is(':checked')==false) {
+				$("#Oti").css("display", "none");
+			 	$("#Ati").css("display", "none");
+			}
 			var name = '${PersonalInformationTrainer.firstName}';
 
 			$("#logId").val('${PersonalInformationTrainer.loginDetails.id}');
@@ -720,11 +724,11 @@
 										name="optradio" /> No
 									</label> -->
 								</div>
-									<cf:radiobutton  path="radioTrainingInstitute" value="Y" checked="true"/>
+									<cf:radiobutton  path="radioTrainingInstitute" value="Y" onchange="radioYes(); return false;"  id="YesLabNotified" checked="true"/>
 									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<cf:radiobutton  path="radioTrainingInstitute" value="N" />
+									<cf:radiobutton  path="radioTrainingInstitute" value="N" onchange="radioNo(); return false;"  />
 									No
-								<div class="form-group">
+								<div class="form-group" id="Ati">
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>If Yes Training
@@ -739,12 +743,12 @@
 									</div>
 
 									<cf:select path="AssociatedWithAnyTrainingInstitute"
-										class="form-control" onchange="OtiHide();">
+										class="form-control" onclick="OtiHide();">
 										<%-- <cf:option value="0" label="Select Training Institude" /> --%>
-										<cf:option value="" label="Select Training Institute" />
+									<cf:option value="0" label="Select Training Institute" />
 										<cf:options items="${listTrainingInstitude}" itemValue="id"
 											itemLabel="trainingCenterName" />
-										<cf:option value="0" label="Others" />
+										<cf:option value="-1" label="Others" />
 									</cf:select>
 								</div>
 								<div class="form-group" id="Oti">
@@ -882,17 +886,25 @@
 	}
 	function OtiHide() {
 		var a = document.getElementById('AssociatedWithAnyTrainingInstitute').value;
-		if (a == 0) {
+		if (a == -1) {
 			$("#Oti").css("display", "block");
 		} else {
+			
 			$("#Oti").css("display", "none");
 		}
 	}
+	function radioNo(){
+	 	$("#Oti").css("display", "none");
+	 	$("#Ati").css("display", "none");
+	 } 
+  function radioYes(){
+	 	$("#Oti").css("display", "block");
+	 	$("#Ati").css("display", "block");
+	  }
 	function validateFields() {
 	
 		var isUpdate = '${isUpdate}';
 
-		//$("#userTypeErr").css("display", "none");
 		$("#titleErr").css("display", "none");
 		$("#correspondencePincodeErr").css("display", "none");
 		$("#correspondencePincodeErr1").css("display", "none");
@@ -925,8 +937,9 @@
 		$("#languagesErr").css("display" , "none");
 		$("#state").css("display", "none");
 		 $("#aadharNumberErr2").css("display" , "none");
-		//$("#AssociatedWithAnyTrainingInstituteErr").css("display" , "none"); 
+		$("#AssociatedWithAnyTrainingInstituteErr").css("display" , "none"); 
 
+			
 		 if ($("#AadharNumber").val() == 0) {
 
 				$("#AadharNumberErr").css("display", "block");
@@ -936,7 +949,16 @@
 	   		 $("#aadharNumberErr2").css("display" , "block");
 	    		 return false;
 	      	 }
-		
+			if ($("#empID").val() == 0) {
+
+				$("#empIDErr").css("display", "block");
+				return false;
+			}
+			if ($("#dob").val() == 0) {
+
+				$("#dobErr").css("display", "block");
+				return false;
+			}
 		if ($("#title").val() == 0) {
 
 			$("#titleErr").css("display", "block");
@@ -966,16 +988,7 @@
 			$("#FatherNameErr").css("display", "block");
 			return false;
 		}
-		if ($("#empID").val() == 0) {
-
-			$("#empIDErr").css("display", "block");
-			return false;
-		}
-		if ($("#dob").val() == 0) {
-
-			$("#dobErr").css("display", "block");
-			return false;
-		}
+		
 		if ($("#correspondenceAddress1").val() == 0) {
 
 			$("#correspondenceAddress1Err").css("display", "block");
@@ -1045,12 +1058,13 @@
 			 $("#languagesErr").css("display" , "block");
 			return false;
 		 }
+		 if(isUpdate!='Y'){
 			if($("#testTable").find('input[type=checkbox]:checked').length == 0)
 			{
 			    alert('Please select atleast one checkbox');
 			     return false;
 			} 
-			
+		 }
 		 /* if(isUpdate=='Y'){
 			 return true;
 		 }
@@ -1073,12 +1087,16 @@
 
 		}
 		
+		
 		/* if($("#otherTrainingInstitute").val() ==''){
 			 $("#otherTrainingInstituteErr").css("display" , "block");
 				return false;
 			 
 		 }  */
-		   
+		 if ($("#AssociatedWithAnyTrainingInstitute").val() == 0 && $('#YesLabNotified').is(':checked')) {
+				$("#AssociatedWithAnyTrainingInstituteErr").css("display", "block");
+				return false;
+			} 
 		 
 		if (!(isUpdate != null && isUpdate == "Y")) {
 
@@ -1108,7 +1126,9 @@
 	
 	 </script>
 	 <script>
-	 var isUpdate = '${isUpdate}';
+
+  
+  var isUpdate = '${isUpdate}';
 	window.stateArray = [];
 	function statecheckbox(){
 		if(isUpdate=='Y'){

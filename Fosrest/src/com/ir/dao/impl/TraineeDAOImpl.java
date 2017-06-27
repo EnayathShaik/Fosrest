@@ -1273,6 +1273,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainee.setDojPost(p.getDojPost());
 		personalInformationTrainee.setDateRetirement(p.getDateRetirement());
 		personalInformationTrainee.setPostDistrict(p.getPostDistrict());
+		
 		System.out.println(" status "+p.getStatus());
 		if(p.getStatus() != null){
 			System.out.println(" loginId"+p.getLogId() );
@@ -1300,8 +1301,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 		String passwordString = String.valueOf(pass);
 	Session session = sessionFactory.getCurrentSession();
 		if(p.getRadioTrainingInstitute().equals("N")){
+			p.setRadioTrainingInstitute("N");
 			p.setAssociatedWithAnyTrainingInstitute(null);
 			p.setOtherTrainingInstitute(null);
+		}
+		else{
+			p.setRadioTrainingInstitute("Y");
 		}
 	if(pid==null){
 		p.setCreatedBy(4);
@@ -1354,7 +1359,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 	
 	@Override
 	public  String updatePersonalInfoTrainer(PersonalInformationTrainer p){
-
 		int id =  p.getId();
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class, id);
@@ -1386,8 +1390,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainer.setLanguages(p.getLanguages());
 		personalInformationTrainer.setExpInMonth(p.getExpInMonth());
 		personalInformationTrainer.setExpInYear(p.getExpInYear());
-	//	personalInformationTrainer.setSessWishToConduct(p.getSessWishToConduct());
+		personalInformationTrainer.setRadioTrainingInstitute(p.getRadioTrainingInstitute());
 		personalInformationTrainer.setAssociatedWithAnyTrainingInstitute(p.getAssociatedWithAnyTrainingInstitute());
+		personalInformationTrainer.setOtherTrainingInstitute(p.getOtherTrainingInstitute());
 		System.out.println(" status "+p.getStatus());
 		if(p.getStatus() != null){
 			System.out.println(" loginId "+p.getLogId() );
