@@ -561,10 +561,27 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 						
 						return false;
 					}
+					
+					if(idval!=1 && i!=1){
+					var prevEndTime=$("#endTime"+(i-1)).val();
+					var currStartTime=$("#startTime"+i).val();
+					
+					
+					var result=""+endTimeValidation(prevEndTime,currStartTime);
+					  
+					if(result=="false"){
+						alert("Invalid START/END time: End Time="+prevEndTime+" for "+$("#subject"+(i-1)+" option:selected").text()+" and Start Time="+currStartTime+" for "+$("#subject"+(i)+" option:selected").text()); 
+						$("#startTime"+i).focus(); 
+						    
+						return false;
+					}
+					 
+					}
 					var sTime=$("#startTime"+i).val();
 					var eTime=$("#endTime"+i).val();
+					
 					//alert(sTime+" "+eTime);
-					var result=""+endTimeValidation(sTime,eTime);
+					result=""+endTimeValidation(sTime,eTime);
 					
 					if(result=="false"){
 						alert("Invalid END TIME");

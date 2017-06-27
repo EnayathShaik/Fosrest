@@ -11,7 +11,7 @@
                 </section>
                 <!-- main body -->
                 <section class="main-section-margin-top">
-                    <div class="container-fluid">
+                    <div class="container-fluid"> 
                         <div id="wrapper">
                             <!-- Sidebar -->
                             <%@include file="../roles/slider.jsp" %>
@@ -22,7 +22,7 @@
                                         <!-- vertical button -->
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Admin</span>
+                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName}</span>
                                                 </a>
                                             </div>
                                         </div>

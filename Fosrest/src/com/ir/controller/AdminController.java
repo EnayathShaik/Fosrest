@@ -2881,6 +2881,9 @@ public class AdminController {
 					"Exception while manageAssessmentQuestionsSave :  " + e.getMessage(), "AdminController.java");
 		}
 		//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
+  		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
+  		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
 		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
 
 		return "manageAssessmentQuestions";

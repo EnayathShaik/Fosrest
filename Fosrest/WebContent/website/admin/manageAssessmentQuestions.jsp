@@ -123,7 +123,7 @@ function editAssessmentQuestion(id,Qcount){
 		document.getElementById('trainingPhase2').value = obj[3];
 		document.getElementById('questionNumber').value = Qcount;
 		document.getElementById('dispQuestionNumber').value = Qcount;
-		document.getElementById("dispQuestionNumber").disabled = true;
+		//document.getElementById("dispQuestionNumber").disabled = true;
 		//document.getElementById('questionHint').value = obj[3];
 		document.getElementById('questionTitle').value = obj[6];
 		document.getElementById('noOfAssesmentQues').value = obj[7];
@@ -227,7 +227,7 @@ function getQuestionNo(val){
 		courseName:0
   })
 	$.ajax({
-		type : 'post',
+		type : 'post', 
 		url : 'getQuestionNumber.fssai?data='+ val,
 		contentType : "application/json",
 	    data:name,
@@ -236,7 +236,7 @@ function getQuestionNo(val){
 			//alert("Question Numnber "+mainData1); 
 			document.getElementById('questionNumber').value =mainData1+1;
 			document.getElementById('dispQuestionNumber').value =mainData1+1;
-			document.getElementById("dispQuestionNumber").disabled = true;
+			//document.getElementById("dispQuestionNumber").disabled = true;
 			
 			
 		}
@@ -647,8 +647,8 @@ function getQuestionNo(val){
                                                             </ul>
                                                         </div>
                                                         <cf:select id="noOfAssesmentQues" onchange="generateAnsSeq();" path="noOfOption" class="form-control">
-                                                            <cf:option value="-1" label="Please Select" />
-                                                            <cf:option value="1" label="1" />
+                                                            <cf:option value="0" label="Please Select" />
+                                                           <%--  <cf:option value="1" label="1" /> --%>
                                                              <cf:option value="2" label="2" />
                                                              <cf:option value="3" label="3" />
                                                               <cf:option value="4" label="4" />
