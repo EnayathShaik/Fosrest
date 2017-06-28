@@ -3131,12 +3131,12 @@ public class AdminDAOImpl implements AdminDAO {
 
 		if (list.size() > 0) {
 			query = session.createSQLQuery(
-					"select pit.id , usertype , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails)  where pit.steps=0 and pit.usertype='"
+					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.userType as numeric) = d.designationId)  where pit.steps=0 and pit.usertype='"
 							+ userType + "'");
 			System.out.println("data der " + query);
 		} else {
 			query = session.createSQLQuery(
-					"select pit.id , usertype , firstName , pit.loginDetails from PersonalInformationTrainee pit where  pit.usertype='"
+					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.userType as numeric) = d.designationId) where  pit.usertype='"
 							+ userType + "'");
 			System.out.println("data not der " + query);
 
