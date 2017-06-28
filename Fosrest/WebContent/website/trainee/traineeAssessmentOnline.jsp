@@ -38,7 +38,22 @@
 		
 			<script >
 			var questionList = ${traineeAssessment}; 
-			
+			var noOption=[]; 
+			for(var index=0;index<questionList.listAssessmentQuestion.length;index++){
+				noOption[index]=questionList.listAssessmentQuestion[index].noOfOption;
+} 	 
+			var i=0;
+			var optFive=[];
+			optFive[0]=0; 
+			while(i<noOption.length){
+				var sum=0;
+				for(var j=i;j<i+5&&j<noOption.length;j++)   
+					sum=sum+noOption[j];
+				
+					i+=5;
+					optFive[(i/5)]=optFive[(i/5)-1]+ sum; 
+				}
+
 // 			$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "+JSON.stringify(assessmentQuestions)+">');
 			$(window).load(function () {
 				var assessmentQuestions = []; 
@@ -47,14 +62,13 @@
 					$('#questionsTable').append('<ol>');
 					$('#questionsTable').append('<li><strong>Question No.'+questionList.listAssessmentQuestion[index].questionNumber+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
 					
-					//var noOption=questionList.listAssessmentQuestion[index].noOfOption;
-					assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentQuestionId);
+				 	assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentQuestionId);
 					var noOption=questionList.listAssessmentQuestion[index].noOfOption; 
 					$('#questionsTable').append('<table width="200" border="0">');
 					for(var noOptionIndex=1; noOptionIndex<=noOption; noOptionIndex++){
 						var questionOption = "option";
 						var value= "";
-						switch(noOptionIndex){
+						switch(noOptionIndex){ 
 						case 1:
 							value = "One";
 							break;
@@ -130,13 +144,14 @@ $(window).load(function () {
 	$('div.paginated').each(function() {
 	    var currentPage = 0;
 	    var numPerPage = 5;
-	    var $olList = $(this);
+	    var $olList = $(this); 
 	    $olList.bind('repaginate', function() {
-	        $olList.find('ol').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
-	        $olList.find('table').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
-	        $olList.find('li').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
-	        $olList.find('tr').hide().slice(currentPage * numPerPage*6, (currentPage + 1) * numPerPage*6).show();
-	    });
+	    	   
+	        $olList.find('li').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show(); 
+ 
+	        $olList.find('tr').hide().slice( optFive[currentPage], optFive[currentPage+1]).show();    
+
+	    });   
 	    $olList.trigger('repaginate');
 	    var numRows = $olList.find('ol').length;
 	    var numPages = Math.ceil(numRows / numPerPage);

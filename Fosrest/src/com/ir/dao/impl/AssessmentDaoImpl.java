@@ -47,7 +47,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		strIds=strIds.replace("]", ")");
 		System.out.println(strIds);
 		try{
-			Query query = session.createQuery("from AssessmentQuestions where isActive='Y' and modulemaster in "+ strIds);
+			Query query = session.createQuery("from AssessmentQuestions where isActive='Y' and modulemaster in "+ strIds+" order by assessmentquestionid");
 			 assessmentQuestions = query.list();
 			 //System.out.println(" assessmentQuestions "+assessmentQuestions);
 		}catch(Exception e){
