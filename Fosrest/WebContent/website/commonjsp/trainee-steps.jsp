@@ -80,7 +80,7 @@
 							<p>
 								<ct:choose>
 									<ct:when test="${traineeSteps < 3}">
-										<a href="OnlineAssessment.fssai"> Online Assessment</a>
+										<a href="assessment-instructions-trainee.fssai"> Online Assessment</a>
 									</ct:when>
 									<ct:otherwise>
 Online Assessment
