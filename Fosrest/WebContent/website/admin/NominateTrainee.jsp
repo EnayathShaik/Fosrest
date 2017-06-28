@@ -38,7 +38,7 @@
 							<div class="col-lg-12">
 								<a href="#menu-toggle" class="vertical-menu-position-btn"
 									id="menu-toggle"> <i class="fa fa-bars"></i> <span
-									class="orange-font">Welcome Admin</span>
+									class="orange-font">Welcome ${userName }</span>
 								</a>
 							</div>
 						</div>
@@ -61,7 +61,7 @@
 														<li class="style-li"><strong>Designation:</strong></li>
 														<li class="style-li error-red"><span id="name_status"
 															class="clear-label"> </span> ${created }</li>
-															 <li id="userTypeErr" style="display:none;" class="style-li error-red" >Trainee Type can not be blank.</li>
+															 <li id="userTypeErr" style="display:none;" class="style-li error-red" >Please Select Designation.</li>
 													</ul>
 												</div>
 												<cf:select path="designation" class="form-control">
