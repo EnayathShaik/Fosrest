@@ -135,7 +135,7 @@
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 <button type="button" class="btn btn-primary btn-lg"
-												data-toggle="modal" data-target="#myModal2" onclick=" batchcodeinfo(); ">Get Information</button>
+												data-toggle="modal" data-target="#myModal2" onclick=" batchcodeinfo(); ">View Batchcode Details</button>
 													</div>
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 														<!--   <button  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button> -->
@@ -297,7 +297,9 @@
 								</div>
 							</div>
 							</ct:if>
-
+                                <ct:if test="${empty listEligibleuser}">
+                               <strong> No Records Available</strong>
+                                </ct:if>
 							</fieldset>
 
 						</div>
