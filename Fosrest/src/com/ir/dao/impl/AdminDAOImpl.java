@@ -3655,24 +3655,45 @@ public class AdminDAOImpl implements AdminDAO {
 	public String saveEditTrainingScheduleMaster(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		
 		TrainingSchedule ts=null;
 		SubjectMapping sm=null;
-		if(form.getTrainingScheduleId()==0)
-			ts= new TrainingSchedule();
-		else{
-			ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
-			Query query = session.createQuery("delete SubjectMapping where scheduleCode = :sch");
-			query.setParameter("sch", ts.getScheduleCode());
-			query.executeUpdate(); 
-		}
-
 		String totalDur=""; 
 		int hrs=0;
 		int min=0;
 		int days=0;
 		String subjects="";
 		
+		
+		if(form.getTrainingScheduleId()!=0)
+		{
+			ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
+			
+			Query query = session.createSQLQuery("select subjectmappingid from subjectmapping where scheduleCode='"+ts.getScheduleCode()+"'");
+			List list1 = query.list();
+			
+			for(int i=0;i<duration.length;i++){
+				
+				sm = (SubjectMapping) session.load(SubjectMapping.class,(int)list1.get(i));
+
+				sm.setDuration(duration[i]);
+				sm.setDay(day[i]);
+				sm.setStartTime(startTime[i]);
+				sm.setEndTime(endTime[i]);
+				
+				if(Integer.parseInt(day[i])>days)
+					days=Integer.parseInt(day[i]);
+				
+				session.update(sm);
+			}
+			ts.setDays(days);
+			
+			session.update(ts);
+			return "updated";
+		}
+		else{
+			ts= new TrainingSchedule();
+		
+
 		
 		for(int i=0;i<subject.length;i++){
 			subjects=subjects+subject[i]+"|";
@@ -3683,26 +3704,18 @@ public class AdminDAOImpl implements AdminDAO {
 		List chkSch= session
 				.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and subjects='"+subjects+"'").list();
 
-		if(chkSch.size()==0||chkSch.get(0).equals(form.getTrainingScheduleId()))//or condtion related to edit funtionality
+		if(chkSch.size()==0)//or condtion related to edit funtionality
 		{
-			
 			List l= session
 					.createSQLQuery("select designationName from Designation where designationId='"+form.getDesignation()+"'").list();
 		
 			List l2= session
 					.createSQLQuery("select trainingTypeName from TrainingType where trainingTypeId='"+form.getTrainingType()+"'").list();
 			String trainingCodeGen="";
-			if(form.getTrainingScheduleId()==0)
-			{
+			
 			String start1=((l.get(0).toString().substring(0, 2)+l2.get(0).toString().substring(0, 2)).toUpperCase());
 			trainingCodeGen = pageLoadService.getNextCombinationId(start1, "trainingSchedule" , "000000");
-			}
-			else{
-				System.out.println("edit sch"+ts.getScheduleCode());
-				String start1=((l.get(0).toString().substring(0, 2)+l2.get(0).toString().substring(0, 2)).toUpperCase());
-				trainingCodeGen = start1+ts.getScheduleCode().substring(4);
-				System.out.println(trainingCodeGen);
-				}
+			
 		
 		
 		for(int i=0;i<subject.length;i++){
@@ -3746,15 +3759,14 @@ public class AdminDAOImpl implements AdminDAO {
 		ts.setStartTime(form.getStartTime());
 		ts.setEndTime(form.getEndTime());*/
 		
-		if(form.getTrainingScheduleId()==0)
 			session.save(ts);
-		else
-		session.update(ts);
+		
 
 		return "created";
 		}
 		else
 			return "Schedule Already Exists";
+		}
 		
 	}
 
@@ -4074,7 +4086,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		System.out.println("editTrainingSchedule2: id " + id);
 		Session session = this.sessionFactory.getCurrentSession();
 
-		Query query = session.createSQLQuery("select designation,trainingType,trainingPhase,status,subject,sm.day,sm.startTime,sm.endTime,sm.duration from trainingschedule ts join subjectmapping sm on ts.scheduleCode=sm.scheduleCode where trainingscheduleid=" + id);
+		Query query = session.createSQLQuery("select designation,trainingType,trainingPhase,status,subject,sm.day,sm.startTime,sm.endTime,sm.duration from trainingschedule ts join subjectmapping sm on ts.scheduleCode=sm.scheduleCode where trainingscheduleid=" + id+" order by subjectmappingid"); 
 
 		List list = query.list();
 		return list;

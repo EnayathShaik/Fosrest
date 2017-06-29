@@ -639,7 +639,12 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
                 	    $("#trainingType").val(mainData1[0][1]);
                 	    $("#trainingPhase").val(mainData1[0][2]);
                 	    $("#status").val(mainData1[0][3]);
-        			$('#subjectTable').show();
+                		$("#designation").attr("disabled", "disabled");
+    					$("#trainingType").attr("disabled", "disabled");
+    					$("#trainingPhase").attr("disabled", "disabled"); 
+    					$("#status").attr("disabled", "disabled"); 
+        			
+    					$('#subjectTable').show();
 
         			$('#subjectTable tr').remove();
     				$('#subjectTable').append('<tr><th>Subject Name</th><th>Day</th><th>Start Time</th><th>End Time</th><th>Duration</th><th>Operation</th></tr>');
@@ -654,6 +659,8 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 					$('#endTime1').val(mainData1[0][7]); 
 					$('#duration1').val(mainData1[0][8]);  
 					$("#dispDuration1").val(mainData1[0][8]); 
+					$("#subject1").attr("disabled", "disabled");  
+
 					
         				$.each(mainData1 , function(i , obj)
         				{	
@@ -665,6 +672,9 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
         					$('#endTime'+(i+1)).val(obj[7]); 
         					$('#duration'+(i+1)).val(obj[8]);  
         					$("#dispDuration"+(i+1)).val(obj[8]);
+        					
+        					$("#subject" +(i+1)).attr("disabled", "disabled");
+        				
         					 } 
         					//$('#subjectTable').append('<tr  id="tableRow"><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[9]+'</td></tr>');  
         					//$('#subjectTable').append("<tr id="+(i+1)+"><td><select id='subject"+(i+1)+"' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'></select></td><td><select id='day"+(i+1)+"' name='day' class='form-control'></select></td><td><select id='startTime"+(i+1)+"' name='startTime' class='form-control' onchange='return calDuration(this);'></select></td><td><select id='endTime"+(i+1)+"' name='endTime' class='form-control' onchange='return calDuration(this);'></select></td><td><input type='text' class='form-control' id='dispDuration"+(i+1)+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+(i+1)+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+(i+1)+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+(i+1)+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>");
