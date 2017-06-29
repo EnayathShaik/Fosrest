@@ -93,7 +93,7 @@
 		//var sTime=generateOptionTexts( '01:00' );
 		//var eTime=generateOptionTexts( '12:00' );	
 		var days=dayNumbers();
-		rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'>"+mystrr+"</select></td><td><select id='day"+nextId+"' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime"+nextId+"' name='startTime' class='form-control' onchange='return calDuration(this);'>"+generateOptionTexts(document.getElementById("endTime"+(nextId-1)).value)+"</select></td><td><select id='endTime"+nextId+"' name='endTime' class='form-control' onchange='return calDuration(this);'>"+defaultEndTime(document.getElementById("endTime"+(nextId-1)).value)+"</select></td><td><input type='text' class='form-control' id='dispDuration"+nextId+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+nextId+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
+		rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'>"+mystrr+"</select></td><td><select id='day"+nextId+"' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime"+nextId+"' name='startTime' class='form-control' onchange='return calDuration(this);'>"+generateOptionTexts(document.getElementById("endTime"+(nextId-1)).value)+"</select></td><td><select id='endTime"+nextId+"' name='endTime' class='form-control' onchange='return calDuration(this);'>"+defaultEndTime(document.getElementById("endTime"+(nextId-1)).value)+"</select></td><td><input type='text' class='form-control' id='dispDuration"+nextId+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+nextId+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+nextId+"' class='btn login-btn'  onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+nextId+"' class='btn login-btn'  onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
 		 
 		$("#subjectTable").append(rowString);  	
 	 
@@ -235,7 +235,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 					var sTime=generateOptionTexts( '09:00' );
 					var eTime=generateOptionTexts( '10:00' );  
 
-				rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' label='${subb[1]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
+				rowString = rowString + "<tr id='1'><td><select id='subject1' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' label='${subb[1]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' class='btn login-btn'  onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' class='btn login-btn'  onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
 				$('#subjectTable').append('<tr><th>Subject Name</th><th>Day</th><th>Start Time</th><th>End Time</th><th>Duration</th><th>Operation</th></tr>');
  
 				$("#subjectTable").append(rowString); 
@@ -639,10 +639,10 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
                 	    $("#trainingType").val(mainData1[0][1]);
                 	    $("#trainingPhase").val(mainData1[0][2]);
                 	    $("#status").val(mainData1[0][3]);
-                		$("#designation").attr("disabled", "disabled");
-    					$("#trainingType").attr("disabled", "disabled");
-    					$("#trainingPhase").attr("disabled", "disabled"); 
-    					$("#status").attr("disabled", "disabled"); 
+                		$("#designation").prop("disabled", "disabled");
+    					$("#trainingType").prop("disabled", "disabled");
+    					$("#trainingPhase").prop("disabled", "disabled"); 
+    					$("#status").prop("disabled", "disabled"); 
         			
     					$('#subjectTable').show();
 
@@ -652,15 +652,17 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 					var sTime=generateOptionTexts( mainData1[0][6] );
 					var eTime=generateOptionTexts( mainData1[0][7]  ); 
 					//alert(asasasas +'${allSubjects}');
-					$('#subjectTable').append("<tr id='1'><td><select id='subject1' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);' ><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' label='${subb[1]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove Row</button></td></tr>");
+					$('#subjectTable').append("<tr id='1'><td><select id='subject1' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);' ><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' label='${subb[1]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' class='btn login-btn' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' class='btn login-btn'  onclick='return deleteRow(this);'>Remove Row</button></td></tr>");
 					$('#subject1').val(mainData1[0][4]); 
 					$('#day1').val(mainData1[0][5]);
 					$('#startTime1').val(mainData1[0][6]);
 					$('#endTime1').val(mainData1[0][7]); 
 					$('#duration1').val(mainData1[0][8]);  
 					$("#dispDuration1").val(mainData1[0][8]); 
-					$("#subject1").attr("disabled", "disabled");  
-
+					$("#subject1").prop("disabled", "disabled");  
+				//	$("#deleteRow1").prop("value","aaaa");  
+					$("#deleteRow1").prop("disabled", true); 
+					  
 					
         				$.each(mainData1 , function(i , obj)
         				{	
@@ -673,8 +675,9 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
         					$('#duration'+(i+1)).val(obj[8]);  
         					$("#dispDuration"+(i+1)).val(obj[8]);
         					
-        					$("#subject" +(i+1)).attr("disabled", "disabled");
-        				
+        					$("#subject" +(i+1)).prop("disabled", "disabled");
+        					$("#addRow" +(i+1)).prop("disabled", true);
+        					$("#deleteRow" +(i+1)).prop("disabled", true); 
         					 } 
         					//$('#subjectTable').append('<tr  id="tableRow"><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[9]+'</td></tr>');  
         					//$('#subjectTable').append("<tr id="+(i+1)+"><td><select id='subject"+(i+1)+"' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'></select></td><td><select id='day"+(i+1)+"' name='day' class='form-control'></select></td><td><select id='startTime"+(i+1)+"' name='startTime' class='form-control' onchange='return calDuration(this);'></select></td><td><select id='endTime"+(i+1)+"' name='endTime' class='form-control' onchange='return calDuration(this);'></select></td><td><input type='text' class='form-control' id='dispDuration"+(i+1)+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+(i+1)+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+(i+1)+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+(i+1)+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>");

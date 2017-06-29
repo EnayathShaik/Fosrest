@@ -3668,7 +3668,7 @@ public class AdminDAOImpl implements AdminDAO {
 		{
 			ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
 			
-			Query query = session.createSQLQuery("select subjectmappingid from subjectmapping where scheduleCode='"+ts.getScheduleCode()+"'");
+			Query query = session.createSQLQuery("select subjectmappingid from subjectmapping where scheduleCode='"+ts.getScheduleCode()+"' order by subjectmappingid");
 			List list1 = query.list();
 			
 			for(int i=0;i<duration.length;i++){
