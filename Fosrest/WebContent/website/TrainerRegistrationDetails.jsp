@@ -623,32 +623,87 @@
 										<ul class="lab-no">
 											<li class="style-li"><strong>Languages in which
 													trainer wish to conduct training:</strong></li>
-											<li class="style-li error-red"></li>
-											 <li id="languagesErr" style="display: none;"
-												class="style-li error-red">Language can not be blank.</li>
+											<li class="style-li error-red"></li>	
 										</ul>
+										<button type="button" class="btn btn-primary btn-lg"
+												data-toggle="modal" data-target="#myModal2" onclick="Languagecheckbox(); return false;">Select Language</button>
 									</div>
-									<cf:select path="languages" class="form-control">
-										 <cf:option value="0" label="Select Language" />
-										<cf:options items="${LanguagesList}" itemValue="languageId"
-											itemLabel="languageName" />
-										<%-- <cf:option value="0" label="Others" /> --%>
-									</cf:select>
+									<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel">All Languages</h4>
+										</div>
+									<div class="modal-body">
+
+							<!-- table -->
+							<div class="row">
+								<div class="col-xs-12">
+								<table class="table table-bordered table-responsive"
+												id="testTable">
+												<thead>
+													<tr class="background-open-vacancies">
+
+														<th>S.No.</th>
+														<th>Language Id</th>
+														<th>Language Name</th>
+														 <th>Enroll Language</th>
+													</tr>
+												</thead>
+												<ct:forEach items="${LanguagesList}" var="LanguagesList"
+													varStatus="loop">
+													<tr>
+													<td>${loop.count}</td>
+												<td>${LanguagesList.languageId}</td>
+													<td >${LanguagesList.languageName}
+													</td>
+												
+													<td class="text-center" ><input type="checkbox" id="languagecheck_${LanguagesList.languageId}" onclick='selectLanguage(${LanguagesList.languageId})' >
+													</td>
+												</tr>
+												</ct:forEach>
+
+											</table>
+											
+											
 								</div>
+							</div>
+						</div>
+								<div class="modal-footer">
+											<div>
+												<input type="button"
+													class="btn login-btn show-details-vacancy collapsed"
+													data-toggle="collapse" data-target="#show-result"
+													aria-expanded="false" data-dismiss="modal" onclick="setAllLanguages();"  value="OK" />
 
-								<!-- modal -->
-								<!-- <div class="container"> -->
-
-									<!-- Trigger the modal with a button -->
-									<!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Select State</button> -->
-									<div class="col-md-6 col-xs-12" >
-									
-									<!-- 	<a href="#" data-toggle="modal" data-target="#myModal" style="margin-left: -13px;"><b>Select
-												State:</b></a> -->
-<button type="button" class="btn btn-primary btn-lg"
+											</div>
+										</div>
+</div>
+									</div>
+								</div>
+								
+								</div>
+							<!-- modal -->
+							<!-- Trigger the modal with a button -->
+										<div class="form-group">
+										<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>States for which trainer want to empanel:</strong></li>
+											<li class="style-li error-red"></li>	
+										</ul>
+										<button type="button" class="btn btn-primary btn-lg"
 												data-toggle="modal" data-target="#myModal" onclick="statecheckbox(); return false;">Select States</button>
 									</div>
-
+												
+												
+                                                
+									
+                                             </div>
 									<!-- Modal -->
 							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 								aria-labelledby="myModalLabel">
@@ -667,7 +722,7 @@
 							<div class="row">
 								<div class="col-xs-12">
 								<table class="table table-bordered table-responsive"
-												id="testTable">
+												id="testTable2">
 												<thead>
 													<tr class="background-open-vacancies">
 
@@ -712,17 +767,11 @@
 								</div>
 							
 <br>
-								</div>
-								
+</div>
 							<!-- </div> -->
 							<div class="col-md-6 col-xs-12">
 								<div class="form-group">
 									<label>Associated with any Training Institute ?</label> <br>
-									<!-- <label class="radio-inline"> <input type="radio"
-										name="optradio" checked="checked" /> Yes
-									</label> <label class="radio-inline"> <input type="radio"
-										name="optradio" /> No
-									</label> -->
 								</div>
 									<cf:radiobutton  path="radioTrainingInstitute" value="Y" onchange="radioYes(); return false;"  id="YesLabNotified" checked="true"/>
 									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -822,6 +871,7 @@
 
 
 		<cf:hidden path="trainingState" value="" />
+		<cf:hidden path="languages" value="" />
 					</form>
 					<!-- form ends -->
 
@@ -1054,17 +1104,24 @@
 			$("#resPincodeErr").css("display", "block");
 			return false;
 		} 
-		 if($("#languages").val() == 0){
+		 /* if($("#languages").val() == 0){
 			 $("#languagesErr").css("display" , "block");
 			return false;
 		 }
-		 if(isUpdate!='Y'){
+ */		 if(isUpdate!='Y'){
 			if($("#testTable").find('input[type=checkbox]:checked').length == 0)
 			{
-			    alert('Please select atleast one checkbox');
+			    alert('Please select atleast one Language');
 			     return false;
 			} 
 		 }
+ if(isUpdate!='Y'){
+		if($("#testTable2").find('input[type=checkbox]:checked').length == 0)
+		{
+		    alert('Please select atleast one State');
+		     return false;
+		} 
+	 }
 		 /* if(isUpdate=='Y'){
 			 return true;
 		 }
@@ -1130,6 +1187,7 @@
   
   var isUpdate = '${isUpdate}';
 	window.stateArray = [];
+	window.langArray = [];
 	function statecheckbox(){
 		if(isUpdate=='Y'){
 			window.stateArray='${PersonalInformationTrainer.trainingState}'.split(',');
@@ -1140,7 +1198,34 @@
 		}
 		}
 	}
- 	 function selectStates(stateId){
+	function Languagecheckbox(){
+		if(isUpdate=='Y'){
+			window.langArray='${PersonalInformationTrainer.languages}'.split(',');
+		if(window.langArray.length>0){
+			for(var i = 0 ; i < window.langArray.length ; i++){
+				$("#languagecheck_"+window.langArray[i]).prop("checked" , true);
+			}
+		}
+		}
+	}
+ 	 function selectLanguage(languageId){
+		 console.log(languageId);
+		 var ischecked = document.getElementById("languagecheck_"+languageId).checked;
+		 console.log(ischecked);
+		 
+		if(document.getElementById("languagecheck_"+languageId).checked  ){
+			window.langArray.push(languageId);	
+		}
+	else if(!document.getElementById("languagecheck_"+languageId).checked){
+			 var index = window.langArray.indexOf(""+languageId+"");
+			if(index != -1){
+				window.langArray.splice(index , 1);	
+			}
+		}langArray
+	 }
+ 	 
+ 	 
+	 function selectStates(stateId){
 		 console.log(stateId);
 		 var ischecked = document.getElementById("statecheck_"+stateId).checked;
 		 console.log(ischecked);
@@ -1160,6 +1245,10 @@
 	 var a=window.stateArray;
 		 $('#trainingState').val(a);
 	 } 
+	 function setAllLanguages(){
+		 var a=window.langArray;
+			 $('#languages').val(a);
+		 } 
 	 
 	 
 
