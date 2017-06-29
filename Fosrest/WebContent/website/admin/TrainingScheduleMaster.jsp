@@ -47,12 +47,13 @@
 	function addRow(thisId){
 	
 		var noOfSubjects='${allSubjects}'.split(",").length;
+		
 		var getSrNo= $(thisId).closest('tr').attr('id');
 		//alert(getSrNo);
 		
 		
 		//alert("getSrNo<noOfSubjects------"+getSrNo+"<"+noOfSubjects);
-		if(getSrNo<noOfSubjects){
+		if(getSrNo<noOfSubjects){ 
 			rowString = ""; 
 		 	var mystrr;
 		 	 mystrr="";
@@ -65,7 +66,7 @@
 		 for(var i=1;i<=getSrNo;i++){
 				var e = document.getElementById("subject"+i);
 				var strUser = e.options[e.selectedIndex].value;
-				//alert("werere "+strUser);
+				
 				sId='${aaa[0]}';
 				sName='${aaa[1]}';
 				
@@ -90,7 +91,7 @@
 		var nextId = parseInt(getSrNo)+1;
 		
 		//var sTime=generateOptionTexts( '01:00' );
-		var eTime=generateOptionTexts( '12:00' );	
+		//var eTime=generateOptionTexts( '12:00' );	
 		var days=dayNumbers();
 		rowString = rowString + "<tr id="+nextId+"><td><select id='subject"+nextId+"' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'>"+mystrr+"</select></td><td><select id='day"+nextId+"' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime"+nextId+"' name='startTime' class='form-control' onchange='return calDuration(this);'>"+generateOptionTexts(document.getElementById("endTime"+(nextId-1)).value)+"</select></td><td><select id='endTime"+nextId+"' name='endTime' class='form-control' onchange='return calDuration(this);'>"+defaultEndTime(document.getElementById("endTime"+(nextId-1)).value)+"</select></td><td><input type='text' class='form-control' id='dispDuration"+nextId+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+nextId+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+nextId+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+nextId+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>";
 		 
@@ -121,9 +122,8 @@
 
 	
 	function defaultEndTime(prevEndTime){
-		//alert(prevEndTime);
 		var timeArr=prevEndTime.split(":");
-		return generateOptionTexts((parseInt(timeArr[0])+1)+":00"); 
+		return generateOptionTexts((parseInt(timeArr[0])+1)+":"+timeArr[1]);   
 		
 	}
 	 	
@@ -273,7 +273,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 			 } 
 			 return false;
 	 } 
-		function OnStart() {  
+		function OnStart() { 
 		addSubSchedule();
 		}
 		window.onload = OnStart;
@@ -329,7 +329,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 	 
 </script>
 	<%-- <ct:url var="addAction" value="/activateAssessmentOfTraineelist.fssai"></ct:url> --%>
-	<ct:url var="addAction" value="/saveTrainingScheduleMaster.fssai"></ct:url>
+	<ct:url var="addAction" value="/saveEditTrainingScheduleMaster.fssai"></ct:url>
 	<cf:form action="${addAction}" name="myForm" method="POST"
 		commandName="TrainingScheduleForm" onsubmit="return validateFields();"> 
 	
@@ -367,7 +367,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 									<div class="row">
 										<div class="col-xs-12">
 											<fieldset>
-												<legend>Create Schedule <label id="result" class=" error-red">${result }</label>&nbsp </legend>
+												<legend>Create/Edit Schedule <label id="result" class=" error-red">${result }</label>&nbsp </legend>
 												<!-- left side -->
 												<div class="col-xs-6">
 												<div class="form-group">
@@ -457,13 +457,13 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 	                                      		</table>
 														</fieldset>
 														<div class="col-md-06 col-xs-12" style="margin-top: 39px;">
-															<input type="submit" id="searchbtn" value="Create"
+															<input type="submit" id="commonbtn" value="Create"
 																style="float: right; padding: 10px 50px 10px 50px"
 																class="btn login-btn" onclick="return chkDates();" />
 														</div>
 												</div>
 											</fieldset>
-										</div> 
+										</div>  
 									</div>
 								</div>
 								<!-- search Results -->
@@ -485,6 +485,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 																<th>Schedule Code</th>
 																
 																<th>Total Days</th>
+																<th>Edit</th>
 																
 			                                                </tr>
 														</thead>
@@ -497,6 +498,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 																<td>${listtrainingScheduleMaster[2]}</td>
 																<td>${listtrainingScheduleMaster[3]}</td>
 																<td>${listtrainingScheduleMaster[4]} </td>
+																<td><button class="btn login-btn"  onclick='editSchedule(${listtrainingScheduleMaster[5]});return false;' >Edit</button></td>
 																
 															</tr>
 														</ct:forEach>
@@ -516,7 +518,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 				</div>
 			</div>
 		</section>
-		<input type="hidden" id="idH" value="" /> 
+		<cf:hidden path="trainingScheduleId"/> 
 		
 		<script>
 	
@@ -617,7 +619,69 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 			
 	
 		}
-	</script> 
+	/* 	<td><button onclick='editState(${StateMaster.stateId});return false;' >Edit</button></td>
+		<td><a href="<ct:url value='/StateMaster/remove/${StateMaster.stateId}.fssai' />" >Delete</a></td>
+	 */
+	    function editSchedule(id){
+            var name1=JSON.stringify({
+        		courseName:0
+          })
+        	$.ajax({
+        	      type: 'post',
+        	      url: 'trainingSchedule/edit/'+id+'.fssai',
+        	      contentType : "application/json",
+        		  data:name1,
+        		  async: false, 
+        			success: function (response){
+        				  var mainData1 = jQuery.parseJSON(response);
+                	      $("#trainingScheduleId").val(id); 
+                	     $("#designation").val(mainData1[0][0]);  
+                	    $("#trainingType").val(mainData1[0][1]);
+                	    $("#trainingPhase").val(mainData1[0][2]);
+                	    $("#status").val(mainData1[0][3]);
+        			$('#subjectTable').show();
+
+        			$('#subjectTable tr').remove();
+    				$('#subjectTable').append('<tr><th>Subject Name</th><th>Day</th><th>Start Time</th><th>End Time</th><th>Duration</th><th>Operation</th></tr>');
+    				var days=dayNumbers();
+					var sTime=generateOptionTexts( mainData1[0][6] );
+					var eTime=generateOptionTexts( mainData1[0][7]  ); 
+					//alert(asasasas +'${allSubjects}');
+					$('#subjectTable').append("<tr id='1'><td><select id='subject1' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);' ><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' label='${subb[1]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' onclick='return deleteRow(this);'>Remove Row</button></td></tr>");
+					$('#subject1').val(mainData1[0][4]); 
+					$('#day1').val(mainData1[0][5]);
+					$('#startTime1').val(mainData1[0][6]);
+					$('#endTime1').val(mainData1[0][7]); 
+					$('#duration1').val(mainData1[0][8]);  
+					$("#dispDuration1").val(mainData1[0][8]); 
+					
+        				$.each(mainData1 , function(i , obj)
+        				{	
+        					if(i!=0){
+        					addRow($("#subject"+(i)));  
+        					$('#subject'+(i+1)).val(obj[4]); 
+        					$('#day'+(i+1)).val(obj[5]);
+        					$('#startTime'+(i+1)).val(obj[6]);
+        					$('#endTime'+(i+1)).val(obj[7]); 
+        					$('#duration'+(i+1)).val(obj[8]);  
+        					$("#dispDuration"+(i+1)).val(obj[8]);
+        					 } 
+        					//$('#subjectTable').append('<tr  id="tableRow"><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[9]+'</td></tr>');  
+        					//$('#subjectTable').append("<tr id="+(i+1)+"><td><select id='subject"+(i+1)+"' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'></select></td><td><select id='day"+(i+1)+"' name='day' class='form-control'></select></td><td><select id='startTime"+(i+1)+"' name='startTime' class='form-control' onchange='return calDuration(this);'></select></td><td><select id='endTime"+(i+1)+"' name='endTime' class='form-control' onchange='return calDuration(this);'></select></td><td><input type='text' class='form-control' id='dispDuration"+(i+1)+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+(i+1)+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+(i+1)+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+(i+1)+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>");
+   
+        			});  
+
+        			
+        			
+        		}
+        	 
+        	      }); 
+            $("#commonbtn").val("SAVE edited schedule");
+            alert("Data has been loaded for Edit");
+            } 
+	</script>
+	
+	
 	<!-- <script type="text/javascript">
 	 $('.clockpicker').clockpicker()
 		.find('input').change(function(){

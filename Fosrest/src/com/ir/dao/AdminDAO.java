@@ -397,7 +397,7 @@ public interface AdminDAO {
 
 	public TreeMap<String, List<ModuleMaster>>  allUnitModules();
 
-	public String saveTrainingSchedule(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form);
+	public String saveEditTrainingScheduleMaster(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form);
 
 	public String addTrainingCalendar(TrainingCalendar p);
 	public String shareInitiativesave(ContactTrainee contactTrainee, String id);
@@ -425,6 +425,8 @@ public interface AdminDAO {
 
 	public List<PersonalInformationTrainer> listpendingTrainer(int id, int profileId);
 	public List<PersonalInformationTrainingInstitute> listpendingTrainingInstitute(int id, int profileid);
+
+	public List editTrainingSchedule2(int id);
 
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
 }

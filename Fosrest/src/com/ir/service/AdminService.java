@@ -516,7 +516,7 @@ List<PersonalInformationTrainer> trainingNameList2(String s);
 
 public List<StateMaster> listStateMaster2(int sid);
 
-public String saveTrainingSchedule(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form);
+public String saveEditTrainingScheduleMaster(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form);
 public List<ModuleMaster>  allSubjects();
 
 public List listCalendarSearch(TrainingCalendarForm form);
@@ -536,6 +536,8 @@ public List<TrainingCalendar> listBatchcodeInfo(String batchCode);
 public List<PersonalInformationTrainer> listpendingTrainer(int id, int profileid);
 
 public List<PersonalInformationTrainingInstitute> listpendingTrainingInstitute(int id, int profileid);
+
+List editTrainingSchedule2(int id);
 
 
 }

@@ -3614,7 +3614,7 @@ public class AdminDAOImpl implements AdminDAO {
 			//temp=allchapters.get(i=i+1);
 		}*/
 		
-		List <TrainingScheduleForm> resulList = session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),scheduleCode,days from trainingSchedule").list();
+		List <TrainingScheduleForm> resulList = session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),scheduleCode,days,trainingscheduleid from trainingSchedule").list();
 		
 		
 		return resulList;
@@ -3652,51 +3652,58 @@ public class AdminDAOImpl implements AdminDAO {
 
 
 	@Override
-	public String saveTrainingSchedule(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form) {
+	public String saveEditTrainingScheduleMaster(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		
-		
-		
-		TrainingSchedule ts= new TrainingSchedule();
-		String totalDur="";
+		TrainingSchedule ts=null;
+		SubjectMapping sm=null;
+		if(form.getTrainingScheduleId()==0)
+			ts= new TrainingSchedule();
+		else{
+			ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
+			Query query = session.createQuery("delete SubjectMapping where scheduleCode = :sch");
+			query.setParameter("sch", ts.getScheduleCode());
+			query.executeUpdate(); 
+		}
+
+		String totalDur=""; 
 		int hrs=0;
 		int min=0;
 		int days=0;
 		String subjects="";
-		
-		SubjectMapping sm;
 		
 		
 		for(int i=0;i<subject.length;i++){
 			subjects=subjects+subject[i]+"|";
 			
 		}
-		ts.setDesignation(form.getDesignation());
-		ts.setStatus(form.getStatus());
-		ts.setTrainingType(form.getTrainingType());
-		ts.setTrainingPhase(form.getTrainingPhase());
+		
 		//check if same subjectSchedule exists
 		List chkSch= session
 				.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and subjects='"+subjects+"'").list();
-	
-		
-		if(chkSch.size()==0)
-		{
-		
 
+		if(chkSch.size()==0||chkSch.get(0).equals(form.getTrainingScheduleId()))//or condtion related to edit funtionality
+		{
 			
 			List l= session
 					.createSQLQuery("select designationName from Designation where designationId='"+form.getDesignation()+"'").list();
 		
 			List l2= session
 					.createSQLQuery("select trainingTypeName from TrainingType where trainingTypeId='"+form.getTrainingType()+"'").list();
-		
-			
+			String trainingCodeGen="";
+			if(form.getTrainingScheduleId()==0)
+			{
 			String start1=((l.get(0).toString().substring(0, 2)+l2.get(0).toString().substring(0, 2)).toUpperCase());
-			String trainingCodeGen = pageLoadService.getNextCombinationId(start1, "trainingSchedule" , "000000");
-			
-			
+			trainingCodeGen = pageLoadService.getNextCombinationId(start1, "trainingSchedule" , "000000");
+			}
+			else{
+				System.out.println("edit sch"+ts.getScheduleCode());
+				String start1=((l.get(0).toString().substring(0, 2)+l2.get(0).toString().substring(0, 2)).toUpperCase());
+				trainingCodeGen = start1+ts.getScheduleCode().substring(4);
+				System.out.println(trainingCodeGen);
+				}
+		
 		
 		for(int i=0;i<subject.length;i++){
 			sm=new SubjectMapping();
@@ -3739,7 +3746,11 @@ public class AdminDAOImpl implements AdminDAO {
 		ts.setStartTime(form.getStartTime());
 		ts.setEndTime(form.getEndTime());*/
 		
-		session.save(ts);
+		if(form.getTrainingScheduleId()==0)
+			session.save(ts);
+		else
+		session.update(ts);
+
 		return "created";
 		}
 		else
@@ -3938,7 +3949,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
   
     	String arr[]=startDate.split("-");
     	int plusDays=Integer.parseInt(arr[0]);  
-    	plusDays=plusDays+Integer.parseInt(days);  
+    	plusDays=plusDays+(Integer.parseInt(days)-1);  
     	 
     	String abcEnd=plusDays+"-"+arr[1]+"-"+arr[2];
     	
@@ -4055,6 +4066,18 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 				" select ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName from PersonalInformationTrainingInstitute as pitp inner join loginDetails as ld on pitp.loginDetails = ld.id where ld.status='I'  ").list();
 		
 		return mccList;
+	}
+
+	@Override
+	public List editTrainingSchedule2(int id) {
+		// TODO Auto-generated method stub
+		System.out.println("editTrainingSchedule2: id " + id);
+		Session session = this.sessionFactory.getCurrentSession();
+
+		Query query = session.createSQLQuery("select designation,trainingType,trainingPhase,status,subject,sm.day,sm.startTime,sm.endTime,sm.duration from trainingschedule ts join subjectmapping sm on ts.scheduleCode=sm.scheduleCode where trainingscheduleid=" + id);
+
+		List list = query.list();
+		return list;
 	}
 
 	

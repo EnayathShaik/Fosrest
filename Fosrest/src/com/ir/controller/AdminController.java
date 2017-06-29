@@ -3084,8 +3084,8 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping(value = "/saveTrainingScheduleMaster", method = RequestMethod.POST)
-	public String saveTrainingScheduleMaster(
+	@RequestMapping(value = "/saveEditTrainingScheduleMaster", method = RequestMethod.POST)
+	public String saveEditTrainingScheduleMaster(
 			@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm form, Model model,
 			HttpSession session,HttpServletRequest request) {
 		
@@ -3100,8 +3100,8 @@ public class AdminController {
 		String endTime[]=request.getParameterValues("endTime");
 		
 		
-	
-		String result = adminService.saveTrainingSchedule(subject,duration,day,startTime,endTime,form);
+	//saveupdate name
+		String result = adminService.saveEditTrainingScheduleMaster(subject,duration,day,startTime,endTime,form);
 		
 		model.addAttribute(	"result", result);
 		System.out.println("saveTrainingScheduleMaster result= " +result);
@@ -3255,13 +3255,12 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   	    	if(!(result.equals("clash"))){
   	    
   	  	model.addAttribute("endDate",result);
-			
       	model.addAttribute("listCalendarSearch", list);
      	model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
       	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
     	model.addAttribute("institute", form.getTrainingInstitute());
     	model.addAttribute("startDate", form.getTrainingStartDate());
-    	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
+    	//model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
     	
   	    	}
   	    	else{
@@ -3277,5 +3276,19 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		return "trainingcalendar";
 	}
    
-  	
+ @RequestMapping(value = "/trainingSchedule/edit/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public void editTrainingSchedule2(@PathVariable("id") int id,
+			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
+			HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {
+		new ZLogger("trainingSchedule/edit", "trainingSchedule/edit............" + id, "AdminController.java");
+		List hm = this.adminService.editTrainingSchedule2(id);
+		// List courseList = adminService.searchFeedbackMaster(data);
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		String newList = g.toJson(hm);
+		out.write(newList);
+		out.flush();
+
+	}
 }
