@@ -23,7 +23,7 @@
 		<th >Subject Name</th>
 		<!-- <th >Content Name</th>
 		<th >Content Type</th> -->
-		<th >Content Link</th>
+		<th >Study Material</th>
 	</tr>
 	</thead>
 	<ct:forEach items="${learningResourceList}" var="Lrlist" varStatus="loop">

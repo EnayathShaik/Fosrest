@@ -18,6 +18,7 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.ModuleMaster;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPhase;
 import com.ir.model.TrainingType;
 import com.ir.model.Utility;
@@ -61,6 +62,7 @@ public interface PageLoadService {
 	public List<TrainingType> loadTrainingType();
 	public List<TrainingPhase> loadTrainingPhase();
 	public List<Languages> loadLanguages();
+	public List  totCalendarlist();
 	public List masterTrainer();
 	//public Object masterTrainer();
 }

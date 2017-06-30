@@ -34,7 +34,9 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPhase;
+import com.ir.model.TrainingSchedule;
 import com.ir.model.TrainingType;
 import com.ir.model.Utility;
 @Service
@@ -415,6 +417,17 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			List LanguagesList = query.list();
 			System.out.println("business  ************* list dao     :"+ LanguagesList);
 			return LanguagesList;
+		}
+
+
+		@Override
+		public List totCalendarlist() {
+			// TODO Auto-generated method stub
+			System.out.println("inside totCalendarlist");
+			Session session = this.sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery("select distinct m.moduleName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where tc.trainingtype='4'");
+					List list = query.list();
+		       return list;
 		}
 
 

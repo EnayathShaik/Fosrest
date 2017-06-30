@@ -224,6 +224,13 @@ public class MainRedirect {
 		   model.addAttribute("learningResourceList",pageLoadService.learningResource());
 		   return "learningresource";
 	   }
+	   
+	   @RequestMapping(value="/TotCalendar" ,method = RequestMethod.GET)
+	   public String TotCalendar(Model model) {
+		   System.out.println( "inside TotCalendar");
+		   model.addAttribute("listTotCalendar",pageLoadService.totCalendarlist());
+		   return "TotCalendar";
+	   }
 	   @RequestMapping(value="/mastertrainer" ,method = RequestMethod.GET)
 	   public String mastertrainer(Model model) {
 		   System.out.println("mastertrainer");

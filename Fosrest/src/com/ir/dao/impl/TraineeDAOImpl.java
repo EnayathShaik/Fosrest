@@ -1401,6 +1401,31 @@ public class TraineeDAOImpl implements TraineeDAO {
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
 		}
+						p = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class,p.getId());
+						Query query = session.createSQLQuery("delete from  MappingMasterTrainer where personalinformationtrainer ='"+p.getId()+"'");
+						//query.setParameter("state", p.getTrainingState());
+						query.executeUpdate();
+						
+						MappingMasterTrainer mmt;
+						try{
+							
+							String s=p.getTrainingState();
+							String a[]=s.split(",");
+							for(int i=0;i<a.length;i++)
+							{
+								mmt=new MappingMasterTrainer();
+								mmt.setTrainerId(p);
+								mmt.setFirstName(p.getFirstName());
+								mmt.setState(a[i]);
+								session.save(mmt);
+								
+							}
+						}
+						catch(Exception e){
+							e.printStackTrace();
+						}
+						session.save(p);
+				    
 		session.update(personalInformationTrainer);
 		return "updated";
 	}	

@@ -20,40 +20,72 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPhase;
 import com.ir.model.TrainingType;
 import com.ir.model.Utility;
 
 public interface PageLoadDao {
 	public List<State> loadState();
+
 	public List<City> loadCity();
+
 	public List<Title> loadTitle();
+
 	public List<KindOfBusiness> loadKindOfBusiness();
+
 	public List<CourseName> loadCourseName();
+
 	public List<District> District();
+
 	public List<CourseName> basicCourseName();
+
 	public List<CourseName> advanceCourseName();
+
 	public List<CourseName> specialCourseList();
+
 	public List<ManageTrainingPartner> tpList();
+
 	public List<ManageAssessmentAgency> aaList();
+
 	public List basicCourseList();
+
 	public List<CourseName> getCouserNameList(int coursetypeid);
+
 	public List<String> getTrainingPartnerNameList();
+
 	public List<ManageCourseContent> getManageCourseContentList(int coursetypeid);
+
 	public List<IntStringBean> getTrainingPartnerList(int courseTypeId);
+
 	public List<Object[]> loadTrainingDetails(Utility utility);
-	public  List<String> loadCaste(); 
-	public String getNextCombinationId(String prefix , String tableName , String pattern);
+
+	public List<String> loadCaste();
+
+	public String getNextCombinationId(String prefix, String tableName, String pattern);
+
 	List<CourseType> courseTypeList();
+
 	public List<District> District(String stateId);
+
 	public List<City> loadCity(String distId);
+
 	public List<PersonalInformationTrainer> loadTrainer(String instituteId);
+
 	public List<PersonalInformationTrainingInstitute> trainingInstituteList();
+
 	public List<TrainerForm> listTrainer();
+
 	public List<ModuleMaster> learningResource();
+
 	public List<Designation> loadDesignation();
+
 	public List<TrainingType> loadTrainingType();
+
 	public List<TrainingPhase> loadTrainingPhase();
+
 	public List<Languages> loadLanguages();
+
+	public List totCalendarlist();
 	public List masterTrainer();
 }

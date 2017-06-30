@@ -466,8 +466,8 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 </div>
 <div class="col-sm-4">
 <div class="feature-wrap panelimg">
-<img class="img-responsive center-block" style="height: 25px;"><a href="training-of-trainers.html">
-<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer</h3></a></div>
+<img class="img-responsive center-block" style="height: 25px;"><a href="TotCalendar.fssai">
+<h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer Calendar</h3></a></div>
 </div>
 <div class="col-sm-2"></div>
 </div>         

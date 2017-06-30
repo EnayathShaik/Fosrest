@@ -14,7 +14,7 @@
                                     <div class="container-fluid">
                            
             
-<fieldset><legend><h2>Learning Resources</h2></legend>
+<fieldset><legend><h2>Master Trainer</h2></legend>
 <ct:if test="${!empty mastertrainerList}">
 	  <table id="datatablesfosrest" class="table table-bordered table-responsive">
 	<thead>

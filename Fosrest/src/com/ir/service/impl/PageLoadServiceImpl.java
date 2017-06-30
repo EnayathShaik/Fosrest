@@ -28,6 +28,7 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPhase;
 import com.ir.model.TrainingType;
 import com.ir.model.Utility;
@@ -266,6 +267,14 @@ public class PageLoadServiceImpl implements PageLoadService {
 	public List<Languages> loadLanguages() {
 		List<Languages> LanguagesList = pageLoadDao.loadLanguages();
 		return LanguagesList;
+	}
+
+	@Override
+	@Transactional
+	public List totCalendarlist() {
+		// TODO Auto-generated method stub
+		List totCalendarlist=pageLoadDao.totCalendarlist();
+		return totCalendarlist;
 	}
 
 	@Override

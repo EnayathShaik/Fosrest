@@ -1349,6 +1349,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/shareInitiative.jsp" />
 	</definition>
+	<definition name="TotCalendar" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/TotCalendar.jsp" />
+	</definition>
 		<definition name="mastertrainer" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body"
