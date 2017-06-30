@@ -3569,7 +3569,7 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
-		Query query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDays,trainingStartDate,trainingEndDate from trainingCalendar");
+		Query query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDays,trainingStartDate,trainingEndDate,trainingcalendarid from trainingCalendar");
 		
 		List list = query.list();
 		return list;
@@ -3614,7 +3614,7 @@ public class AdminDAOImpl implements AdminDAO {
 			//temp=allchapters.get(i=i+1);
 		}*/
 		
-		List <TrainingScheduleForm> resulList = session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),scheduleCode,days,trainingscheduleid from trainingSchedule").list();
+		List <TrainingScheduleForm> resulList = session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),scheduleCode,days,trainingscheduleid from trainingSchedule where isActive='Y'").list();
 		
 		
 		return resulList;
@@ -3702,7 +3702,7 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		//check if same subjectSchedule exists
 		List chkSch= session
-				.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and subjects='"+subjects+"'").list();
+				.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and subjects='"+subjects+"' and isActive='Y'").list();
 
 		if(chkSch.size()==0)//or condtion related to edit funtionality
 		{
@@ -3750,6 +3750,7 @@ public class AdminDAOImpl implements AdminDAO {
 		ts.setSubjects(subjects);
 		ts.setScheduleCode(trainingCodeGen);
 		ts.setDays(days);
+		ts.setIsActive("Y");
 	/*	ts.setChapterId(form.getChapterId());
 		ts.setTrainingType(form.getTrainingType2());
 		ts.setTrainingPhase(form.getTrainingPhase2());
@@ -3862,11 +3863,17 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		
+		System.out.println(form.getTrainingCalendarId()+" qwqwqwqwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
 		Query query = 	session.createSQLQuery("select trainingcalendarid from trainingcalendar where traininginstitute='"+form.getTrainingInstitute()+"' and scheduleCode='"+form.getScheduleCode()+"' and trainingstartdate='"+form.getTrainingStartDate()+"'");
 		List list = query.list();
+		
 		System.out.println(list);
-			if(list.size()!=0)
+		
+		
+			if(list.size()!=0 && !(list.get(0).equals(form.getTrainingCalendarId()))){
+			System.out.println("nulllllllllllllll");
 				return null;
+			}
 			else 
 				System.out.println("else");
 		
@@ -3934,7 +3941,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 	}
 
 	@Override
-	public String calculateEndDate(String startDate,String days,String institute) {
+	public String calculateEndDate(String startDate,String days,String institute,int tcId) {
 		// TODO Auto-generated method stub
 
 		System.out.println("calculate End date");
@@ -4011,6 +4018,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 	
 	if((!(newStartDate<startdb&&newEndDate<startdb || newStartDate>enddb&&newEndDate>enddb)&&(i.getTrainingInstitute().equals(institute)))){
 		//System.out.println(i.getTrainingInstitute()+" "+institute+" -->"+i.getTrainingInstitute().equals(institute));
+		if(tcId==0 || tcId!=i.getTrainingCalendarId())
 		flag=1;//calendar exists;
 		}
 		
@@ -4092,7 +4100,92 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		return list;
 	}
 
+	@Override
+	public void removeTrainingSchedule2(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = null;
+		TrainingSchedule p = (TrainingSchedule) session.load(TrainingSchedule.class, new Integer(id));
+		if (null != p) {
+			sql = "update TrainingSchedule set isactive='N' where trainingScheduleId=" + id;
+		}
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+	}
+
+	@Override
+	public List editTrainingCalendar(int id) {
+		// TODO Auto-generated method stub
+		System.out.println("editTrainingCalendar: id " + id);
+		Session session = this.sessionFactory.getCurrentSession();
+
+	Query query1 = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration,trainingStartDate,trainingEndDate  from trainingCalendar  where trainingCalendarId='"+id+"'");
+
+		
+		List list1 = query1.list();
+		return list1;
+	}
+
+	@Override
+	public TrainingCalendarForm getTrainingCalendar(int id){
+		// TODO Auto-generated method stub
+		System.out.println("editTrainingCalendar: id " + id);
+		Session session = this.sessionFactory.getCurrentSession();
+
+	///Query query1 = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration,trainingStartDate,trainingEndDate  from trainingCalendar  where trainingCalendarId='"+id+"'");
+
+		List p = session.createSQLQuery(" select *  from trainingCalendar  where trainingCalendarId='"+id+"'").list();
+
+		TrainingCalendarForm tc=new TrainingCalendarForm();
+		if (p.size() > 0) {
+			for (int i = 0; i < p.size(); i++) {
+				Object[] obj = (Object[]) p.get(i);
+				tc.setTrainingCalendarId((int)obj[0]);
+				tc.setDesignation((String)obj[2]);
+				tc.setTrainingType((String)obj[11]);
+				tc.setTrainingPhase((String)obj[9]);
+				tc.setScheduleCode((String)obj[4]);
+				tc.setTrainingInstitute((String)obj[8]);
+				tc.setTrainingStartDate((String)obj[10]);
+				tc.setTrainingEndDate((String)obj[7]);
+				
+			}
+		
+		} 
+		//List list1 = query1.list();
+		return tc;
+	
+
 	
 	
 	
+}
+
+	@Override
+	public String updateTrainingCalendar(int trainingCalendarId, String[] trainers, String trainingStartDate2,
+			String trainingEndDate2) {
+		// TODO Auto-generated method stub
+		Session session =sessionFactory.getCurrentSession();
+		
+		TrainingCalendar tc = (TrainingCalendar) session.load(TrainingCalendar.class, new Integer(trainingCalendarId));
+		TrainingCalendarMapping tcm=null;
+		tc.setTrainingStartDate(trainingStartDate2);
+		tc.setTrainingEndDate(trainingEndDate2);
+		
+		Query query = session.createSQLQuery("select tcmappingid from TrainingCalendarMapping where batchCode='"+tc.getBatchCode()+"' order by tcmappingid");
+		List list1 = query.list();
+		
+		for(int i=0;i<trainers.length;i++){
+			
+			tcm = (TrainingCalendarMapping) session.load(TrainingCalendarMapping.class,(int)list1.get(i));
+			tcm.setTrainerId(Integer.parseInt(trainers[i]));
+			session.update(tcm);
+			
+		}
+		
+		
+		session.update(tc);
+		
+		return null;
+	}
 }

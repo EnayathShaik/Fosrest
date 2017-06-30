@@ -4,19 +4,48 @@
 <script src="website/js/commonController.js"></script>
 <script>
 	function OnStart() {
-
+		
 		flatpickr("#trainingStartDate", {
 
 		});
 
 		/* if ('${profileId}' == 2) {
-			$("#searchbtn").css("display" , 'none');
-			$("#createbtn").css("display" , 'block'); 
-		} */
+		$("#searchbtn").css("display" , 'none');
+		$("#createbtn").css("display" , 'block'); 
+	} */
+	
+	if('${search}'=='Y'){ 
+		var trPhase=$("#trainingPhase").val();
+		redirectScheduleCode2(trPhase,'scheduleCode');
+	}
+	if('${isEdit}'=='Y'){
+			 
+		$("#designation").val('${TrainingCalendarForm.designation}');
+		$("#trainingType").val('${TrainingCalendarForm.trainingType}');
+
+		var trPhase='${TrainingCalendarForm.trainingCalendarId}';
+		redirectScheduleCode2(trPhase,'${TrainingCalendarForm.trainingCalendarId}');
+		$("#trainingPhase").val('${TrainingCalendarForm.trainingPhase}');
+		 $("#trainingPhase").trigger("change");
+         window.setTimeout(function() { 
+        	 alert("timeptu");  
+         	$("#scheduleCode").val('${TrainingCalendarForm.scheduleCode}');
+         }, 1000); 
+		$("#trainingInstitute").val('${TrainingCalendarForm.trainingInstitute}');
+		$("#trainingStartDate").val('${TrainingCalendarForm.trainingStartDate}');
+		//$("#endDate").val();
+		$("#trainingCalendarId").val('${TrainingCalendarForm.trainingCalendarId}'); 
 		
-		if('${search}'=='Y'){
-			var trPhase=$("#trainingPhase").val();
-			redirectScheduleCode2(trPhase,'scheduleCode');
+		
+	 /* 	$("#designation").prop("disabled", "disabled"); 
+	 	 $("#trainingType").prop("disabled", "disabled"); 
+	 	$("#trainingPhase").prop("disabled", "disabled");  
+		$("#trainingInstitute").prop("disabled", "disabled"); 
+		$("#scheduleCode").prop("disabled", "disabled");  */  
+		
+		
+		alert('${endDate}'); 
+		alert('${startDate}'); 
 		}
 	}
 	window.onload = OnStart;
@@ -58,11 +87,11 @@
 								<fieldset>
 									<legend>
 										<h1>Training Calendar</h1>
+										<cf:hidden path="trainingCalendarId" />
 									</legend>
 									<div class="row">
 										
 										<div class="col-xs-12">
-											<%-- <cf:input type="hidden" path="trainingScheduleId" /> --%>
 											<!-- left side -->
 											
 											<div class="col-xs-6">
@@ -234,7 +263,7 @@
 													<!-- <input type="submit" id="createbtn"
 														style="display: none; float: right; margin-right: 122px;"
 														value="Create" class="btn login-btn" /> -->
-													<input type="submit" id="searchbtn" value="Search"
+													<input type="submit" id="searchbtn" value="Search Date Availability" 
 														class="btn login-btn"
 														formaction="trainingcalendarsearch.fssai"
 														onclick="return validateFields();" />
@@ -328,8 +357,8 @@
 																			<ct:forEach items="${listPersonalInfoTrainer}"
 																				var="listPersonalInfoTrainer" varStatus="loop">
 
-																				<option
-																					value="${listPersonalInfoTrainer.id}">${listPersonalInfoTrainer.firstName}</option>
+																				<option 
+																					value="${listPersonalInfoTrainer.trainerId.id}">${listPersonalInfoTrainer.firstName}</option>
 																			</ct:forEach>
 																		</select>
 																	</ct:forEach>
@@ -340,7 +369,7 @@
 														</tr>
 													</ct:forEach>
 												</table><!--     margin-top: 96px; -->
-												<div    style="margin-left: 868px; "><input type="submit" id="searchbtn" value="create"
+												<div    style="margin-left: 868px; "><input type="submit" id="createbtn" value="create"
 													class="btn login-btn" onclick="return validate2();" />
 													</div>
 												<cf:hidden path="trainingInstitute2" value="${institute}" />
@@ -379,9 +408,10 @@
 
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
+															<th>Edit</th>
 
 
-
+ 
 
 														</tr>
 													</thead>
@@ -398,10 +428,14 @@
 															<td>${listCalendar[5]}</td>
 															<td>${listCalendar[6]}</td>
 															<td>${listCalendar[7]}</td>
-
+															<td><input type="submit" id="searchbtn" value="Edit" 
+														class="btn login-btn"
+														formaction="edittrainingcalendar.fssai?id=${listCalendar[8]}"
+														 /></td>	
+														 														<%-- <td><a href="remove/trainingcalendar/${listCalendar[8]}.fssai">Delete</a></td> --%>
 
 														</tr>
-													</ct:forEach>
+													</ct:forEach> 
 												</table>
 											</ct:if>
 										</fieldset>
@@ -419,6 +453,80 @@
 
 
 </cf:form>
+
+<script>
+  function editCalendar(id){
+	  alert("editCalendar"+id);  
+            var name1=JSON.stringify({
+        		courseName:0
+          })
+        	$.ajax({
+        	      type: 'post',
+        	      url: 'trainingcalendar/edit/'+id+'.fssai',
+        	      contentType : "application/json",
+        		  data:name1,
+        		  async: false, 
+        			success: function (response){
+        				  var mainData1 = jQuery.parseJSON(response);
+                	      $("#trainingScheduleId").val(id); 
+                	     $("#designation").val(mainData1[0][0]);  
+                	    $("#trainingType").val(mainData1[0][1]);
+                	    $("#trainingPhase").val(mainData1[0][2]);
+                	    $("#status").val(mainData1[0][3]);
+                		$("#designation").prop("disabled", "disabled");
+    					$("#trainingType").prop("disabled", "disabled");
+    					$("#trainingPhase").prop("disabled", "disabled"); 
+    					$("#status").prop("disabled", "disabled"); 
+        			
+    					$('#subjectTable').show();
+
+        			$('#subjectTable tr').remove();
+    				$('#subjectTable').append('<tr><th>Subject Name</th><th>Day</th><th>Start Time</th><th>End Time</th><th>Duration</th><th>Operation</th></tr>');
+    				var days=dayNumbers();
+					var sTime=generateOptionTexts( mainData1[0][6] );
+					var eTime=generateOptionTexts( mainData1[0][7]  ); 
+					//alert(asasasas +'${allSubjects}');
+					$('#subjectTable').append("<tr id='1'><td><select id='subject1' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);' ><ct:forEach items="${allSubjects}" var="subb" varStatus="loop"><option value='${subb[0]}' label='${subb[1]}' >${subb[1]}</option></ct:forEach></select></td><td><select id='day1' name='day' class='form-control'>"+days+"</select></td><td><select id='startTime1' name='startTime' class='form-control' onchange='return calDuration(this);'>"+sTime+"</select></td><td><select id='endTime1' name='endTime' class='form-control' onchange='return calDuration(this);'>"+eTime+"</select><td><input type='text' class='form-control' id='dispDuration1' value='1 hrs 0 mins' disabled='disabled'><input type='hidden' class='form-control' id='duration1' name='duration' value='1 hrs 0 mins' hidden='true'></td><td><button id='addRow1' class='btn login-btn' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow1' class='btn login-btn'  onclick='return deleteRow(this);'>Remove Row</button></td></tr>");
+					$('#subject1').val(mainData1[0][4]); 
+					$('#day1').val(mainData1[0][5]);
+					$('#startTime1').val(mainData1[0][6]);
+					$('#endTime1').val(mainData1[0][7]); 
+					$('#duration1').val(mainData1[0][8]);  
+					$("#dispDuration1").val(mainData1[0][8]); 
+					$("#subject1").prop("disabled", "disabled");  
+				//	$("#deleteRow1").prop("value","aaaa");  
+					$("#deleteRow1").prop("disabled", true); 
+					  
+					
+        				$.each(mainData1 , function(i , obj)
+        				{	
+        					if(i!=0){
+        					addRow($("#subject"+(i)));  
+        					$('#subject'+(i+1)).val(obj[4]); 
+        					$('#day'+(i+1)).val(obj[5]);
+        					$('#startTime'+(i+1)).val(obj[6]);
+        					$('#endTime'+(i+1)).val(obj[7]); 
+        					$('#duration'+(i+1)).val(obj[8]);  
+        					$("#dispDuration"+(i+1)).val(obj[8]);
+        					
+        					$("#subject" +(i+1)).prop("disabled", "disabled");
+        					$("#addRow" +(i+1)).prop("disabled", true);
+        					$("#deleteRow" +(i+1)).prop("disabled", true); 
+        					 } 
+        					//$('#subjectTable').append('<tr  id="tableRow"><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[9]+'</td></tr>');  
+        					//$('#subjectTable').append("<tr id="+(i+1)+"><td><select id='subject"+(i+1)+"' name='subject' class='form-control' onfocus='return onclick2(this);' onblur='return removeSingleOption(this);'></select></td><td><select id='day"+(i+1)+"' name='day' class='form-control'></select></td><td><select id='startTime"+(i+1)+"' name='startTime' class='form-control' onchange='return calDuration(this);'></select></td><td><select id='endTime"+(i+1)+"' name='endTime' class='form-control' onchange='return calDuration(this);'></select></td><td><input type='text' class='form-control' id='dispDuration"+(i+1)+"' value='1 hrs 0 mins' disabled='disabled' ><input type='hidden' class='form-control' id='duration"+(i+1)+"' name='duration' value='1 hrs 0 mins'  ></td><td><button id='addRow"+(i+1)+"' onclick='return addRow(this);'>Add Row</button><button style='display:none;' id='deleteRow"+(i+1)+"' onclick='return deleteRow(this);'>Remove Row</button></td></tr>");
+   
+        			});  
+
+        			
+        			
+        		}
+        	 
+        	      }); 
+            $("#commonbtn").val("SAVE edited schedule");
+            alert("Data has been loaded for Edit");
+            } 
+	</script>
 <!-- 
 <script>
 	function editTrainingSchedule(id) {

@@ -200,7 +200,7 @@ public class CommonDaoImpl implements CommonDao{
 		String trPhaseId=arr[2];
 		
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select scheduleCode from  trainingSchedule where designation= '"+designationId+"' and trainingType='"+trTypeId+"' and trainingPhase='"+trPhaseId+"'";		
+		String sql = "select scheduleCode from  trainingSchedule where designation= '"+designationId+"' and trainingType='"+trTypeId+"' and trainingPhase='"+trPhaseId+"' and isActive='Y'";		
 		Query query = session.createSQLQuery(sql);
 		List shList = query.list();
 		return shList;

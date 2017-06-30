@@ -1611,9 +1611,9 @@ public List listSchCodeSubjects(String scheduleCode) {
 
 @Override
 @Transactional
-public String calculateEndDate(String startDate,String duration,String institute) {
+public String calculateEndDate(String startDate,String duration,String institute,int tcId) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.calculateEndDate(startDate, duration,institute);
+	return this.adminDAO.calculateEndDate(startDate, duration,institute,tcId);
 }
 
 @Override
@@ -1650,4 +1650,34 @@ public List editTrainingSchedule2(int id) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.editTrainingSchedule2(id);
 }
+
+@Override
+@Transactional
+public void removeTrainingSchedule2(int id) {
+	// TODO Auto-generated method stub
+	this.adminDAO.removeTrainingSchedule2(id);
+
+}
+
+@Override
+@Transactional
+public List editTrainingCalendar(int id) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.editTrainingCalendar(id);
+}
+@Override
+@Transactional
+public TrainingCalendarForm getTrainingCalendar(int id){
+	// TODO Auto-generated method stub
+	return this.adminDAO.getTrainingCalendar(id);
+}
+
+@Override
+@Transactional
+public String updateTrainingCalendar(int trainingCalendarId, String[] trainers, String trainingStartDate2,
+		String trainingEndDate2) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.updateTrainingCalendar(trainingCalendarId,trainers,trainingStartDate2,trainingEndDate2);
+}
+
 }

@@ -526,7 +526,7 @@ public List<MappingMasterTrainer> trainerMappingState(String sid);
 
 public List listSchCodeSubjects(String scheduleCode);
 
-public String calculateEndDate(String startDate,String duration,String institute);
+public String calculateEndDate(String startDate,String duration,String institute,int tcId);
 
 public List<TrainingCalendar> listBatchCodeList();
 
@@ -537,7 +537,15 @@ public List<PersonalInformationTrainer> listpendingTrainer(int id, int profileid
 
 public List<PersonalInformationTrainingInstitute> listpendingTrainingInstitute(int id, int profileid);
 
-List editTrainingSchedule2(int id);
+public List editTrainingSchedule2(int id);
+
+public void removeTrainingSchedule2(int id);
+
+public List editTrainingCalendar(int id);
+public TrainingCalendarForm getTrainingCalendar(int id);
+
+String updateTrainingCalendar(int trainingCalendarId, String[] trainers, String trainingStartDate2,
+		String trainingEndDate2);
 
 
 }

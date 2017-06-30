@@ -3204,11 +3204,15 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		}
 		int profileId=(int) session.getAttribute("profileId");
 	   
-	
+		if(p.getTrainingCalendarId()!=0){
+			String  trainers[]=  request.getParameterValues("trainer");
+			String result = this.adminService.updateTrainingCalendar(p.getTrainingCalendarId(),trainers,p.getTrainingStartDate2(),p.getTrainingEndDate2());
+		}
+		else{
 	String  trainers[]=  request.getParameterValues("trainer");
 	String  subjects[]=  request.getParameterValues("subject");
 	         String result = this.adminService.createTrainingCalendar(trainers,subjects,p);
-    
+		}
 		return "redirect:trainingcalendar.fssai";
 	}
 
@@ -3250,7 +3254,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   	    	//String Duration=obj[7].toString();
   	    	String days=obj[8].toString();
   	    	
-  	    	String result=this.adminService.calculateEndDate(form.getTrainingStartDate(),days,form.getTrainingInstitute());
+  	    	String result=this.adminService.calculateEndDate(form.getTrainingStartDate(),days,form.getTrainingInstitute(),form.getTrainingCalendarId());
   	    	
   	    	if(!(result.equals("clash"))){
   	    
@@ -3291,4 +3295,48 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		out.flush();
 
 	}
+ 
+ 
+	@RequestMapping("/remove/trainingschedule/{id}")
+	public String removeTrainingSchedule2(@PathVariable("id") int id) {
+		this.adminService.removeTrainingSchedule2(id);
+		return "redirect:/trainingschedulemaster.fssai"; 
+
+	}
+	
+	
+	   
+	 @RequestMapping(value = "/edittrainingcalendar", method = RequestMethod.POST)
+		public String editTrainingCalendar(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm form,
+				Model model, HttpSession session,HttpServletRequest request) {
+		   System.out.println("editTrainingCalendar contorller"+request.getParameter("id"));
+			  String s=(String) session.getAttribute("stateId");
+		   int editId=Integer.parseInt(request.getParameter("id"));
+		   List list = this.adminService.editTrainingCalendar(editId);
+		   TrainingCalendarForm p = this.adminService.getTrainingCalendar(editId);
+		   System.out.println("startDate"+p.getTrainingStartDate());
+			model.addAttribute("listCalendarSearch", list);
+			
+			/*Gson gson=new Gson();
+			String tclist=gson.toJson(p);
+			  model.addAttribute("TrainingCalendar",tclist);*/
+			model.addAttribute("DesignationList", pageLoadService.loadDesignation());
+	  		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
+	  		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
+	  		model.addAttribute("listCalendar", this.adminService.listCalendar());	
+	  		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+			 model.addAttribute("TrainingCalendarForm",p);
+			
+			 model.addAttribute("endDate",p.getTrainingEndDate());
+			
+		   model.addAttribute("startDate",p.getTrainingStartDate()); 
+		   model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(p.getScheduleCode()));
+	      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
+
+			model.addAttribute("isEdit","Y");
+			
+			
+		   return "trainingcalendar";		
+		   }
+	 
 }

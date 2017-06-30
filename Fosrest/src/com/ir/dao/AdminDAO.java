@@ -417,7 +417,7 @@ public interface AdminDAO {
 
 	public List listSchCodeSubjects(String scheduleCode);
 
-	public String calculateEndDate(String startDate,String duration,String institute);
+	public String calculateEndDate(String startDate,String duration,String institute,int tcId);
 
 	public List<TrainingCalendar> listBatchCodeList();
 
@@ -428,5 +428,13 @@ public interface AdminDAO {
 
 	public List editTrainingSchedule2(int id);
 
+	public void removeTrainingSchedule2(int id);
+
+	public List editTrainingCalendar(int id);
+
+	public TrainingCalendarForm getTrainingCalendar(int id);
 	/*public StateAdmin FullDetailStateAdmin(int loginId);*/
+
+	public String updateTrainingCalendar(int trainingCalendarId, String[] trainers, String trainingStartDate2,
+			String trainingEndDate2);
 }

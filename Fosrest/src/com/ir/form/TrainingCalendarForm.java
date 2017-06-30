@@ -10,6 +10,15 @@ public class TrainingCalendarForm {
 	private String trainingEndDate;
 	private String totalDuration;
 	private String totalDays;
+	private int trainingCalendarId;
+	public int getTrainingCalendarId() {
+		return trainingCalendarId;
+	}
+	public void setTrainingCalendarId(int trainingCalendarId) {
+		this.trainingCalendarId = trainingCalendarId;
+	}
+
+
 	/*private String assessmentDateTime;
 	private String assessmentAgencyName;
 	private int assessor;
