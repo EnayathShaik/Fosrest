@@ -268,4 +268,12 @@ public class PageLoadServiceImpl implements PageLoadService {
 		return LanguagesList;
 	}
 
+	@Override
+	@Transactional
+	public List masterTrainer() {
+		// TODO Auto-generated method stub
+		List masterTrainerList=pageLoadDao.masterTrainer();
+		return masterTrainerList;
+	}
+
 }

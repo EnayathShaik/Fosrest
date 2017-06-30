@@ -61,4 +61,6 @@ public interface PageLoadService {
 	public List<TrainingType> loadTrainingType();
 	public List<TrainingPhase> loadTrainingPhase();
 	public List<Languages> loadLanguages();
+	public List masterTrainer();
+	//public Object masterTrainer();
 }

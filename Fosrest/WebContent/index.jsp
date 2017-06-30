@@ -461,7 +461,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 
 <div class="col-sm-4">
 	<div class="feature-wrap panelimg" >
-<img class="img-responsive center-block" style="height: 39px;"><a href="">
+<img class="img-responsive center-block" style="height: 39px;"><a href="mastertrainer.fssai">
 <h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3></a></div>
 </div>
 <div class="col-sm-4">
@@ -591,7 +591,13 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 						<ul>
 							<li><a href="fostac.fssai">Home</a></li>
 							<li><a href="about.fssai">About</a></li>
-							<li ><a href="courses.html">Courses</a></li>
+							<li class="dropdown"> <a href="courses.html" class="dropdown-toggle" data-toggle="dropdown">Courses<i class="fa fa-angle-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="basic-level.fssai">Basic Level</a></li>
+                <li><a href="advance-level.fssai">Advance Level</a></li>
+                <li><a href="special-level.fssai">Special Level</a></li>
+              </ul>
+            </li>
 							<!-- <li><a href="#">Risk & Solutions</a></li>
 							<li><a href="#">Help</a></li> -->
 							<li><a href="contact.fssai">Contact</a></li>

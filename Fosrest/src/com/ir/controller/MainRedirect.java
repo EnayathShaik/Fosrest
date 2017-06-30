@@ -220,11 +220,15 @@ public class MainRedirect {
 	  
 	   @RequestMapping(value="/learningresource" ,method = RequestMethod.GET)
 	   public String learningResource(Model model) {
-		   System.out.println("aaaaaa");
-		  
-		   System.out.println( pageLoadService.learningResource());
+		 System.out.println( pageLoadService.learningResource());
 		   model.addAttribute("learningResourceList",pageLoadService.learningResource());
 		   return "learningresource";
+	   }
+	   @RequestMapping(value="/mastertrainer" ,method = RequestMethod.GET)
+	   public String mastertrainer(Model model) {
+		   System.out.println("mastertrainer");
+		   model.addAttribute("mastertrainerList",pageLoadService.masterTrainer());
+		   return "mastertrainer";
 	   }
 	  
 }

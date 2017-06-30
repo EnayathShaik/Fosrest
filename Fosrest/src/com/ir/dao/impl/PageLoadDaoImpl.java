@@ -416,4 +416,15 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			System.out.println("business  ************* list dao     :"+ LanguagesList);
 			return LanguagesList;
 		}
+
+
+		@Override
+		public List masterTrainer() {
+			System.out.println("inside masterTrainer");
+			Session session = this.sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery("select pit.firstName,pit.Email,pit.mobile,mm.moduleName from personalInformationTrainer pit inner join trainingcalendar tc on tc.trainingType='4' inner join trainingcalendarmapping tcm on tcm.batchcode=tc.batchcode and tcm.trainerId=pit.logindetails inner join modulemaster mm on mm.moduleId=tcm.subjectId  ");
+			List list = query.list();
+			System.out.println(list);
+			return list; 
+		}
 }

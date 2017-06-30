@@ -55,4 +55,5 @@ public interface PageLoadDao {
 	public List<TrainingType> loadTrainingType();
 	public List<TrainingPhase> loadTrainingPhase();
 	public List<Languages> loadLanguages();
+	public List masterTrainer();
 }
