@@ -486,7 +486,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 																
 																<th>Total Days</th>
 																<th>Edit</th>
-																<th>Delete</th>
+																<!-- <th>Delete</th> --> 
 																
 			                                                </tr>
 														</thead>
@@ -500,7 +500,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 																<td>${listtrainingScheduleMaster[3]}</td>
 																<td>${listtrainingScheduleMaster[4]} </td>
 																<td><button class="btn login-btn"  onclick='editSchedule(${listtrainingScheduleMaster[5]});return false;' >Edit</button></td>
-																<td><a href="remove/trainingschedule/${listtrainingScheduleMaster[5]}.fssai">Delete</a></td>
+																<%-- <td><a href="remove/trainingschedule/${listtrainingScheduleMaster[5]}.fssai">Delete</a></td> --%>
 															
 															</tr> 
 														</ct:forEach>
