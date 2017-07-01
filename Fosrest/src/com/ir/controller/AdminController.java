@@ -2736,7 +2736,9 @@ public class AdminController {
 
 	@RequestMapping(value = "/ListEligibleUser", method = RequestMethod.POST)
 	public String ListEligibleUser(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm,
-			Model model) {
+			Model model, HttpSession session) {
+		String stateId=(String) session.getAttribute("stateId");
+		
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
 		List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
@@ -2745,7 +2747,7 @@ public class AdminController {
 		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
 		model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
 		System.out.println("admin controller ListEligibleUser" + nominateTraineeForm.getDesignation());
-		model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getDesignation()));
+		model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getDesignation(),stateId));
 		
 		return "NominateTrainee";
 	}
@@ -2767,10 +2769,12 @@ public class AdminController {
 			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
 			HttpServletRequest httpServletRequest, HttpServletResponse response, HttpSession session)
 			throws IOException {
+		int stateAdminId=(int)session.getAttribute("stateAdminId");
+		System.out.println("iddddddd333333333333333dddddddddddddddddddd"+stateAdminId);
 		new ZLogger("getModule", "getModule............" + data, "CommonController.java");
 		String courseName = data;
 		// int id=session.;
-		String data1 = adminService.enrollUser(courseName);
+		String data1 = adminService.enrollUser(courseName,stateAdminId);
 		PrintWriter out = response.getWriter();
 		Gson g = new Gson();
 		String newList = g.toJson(data1);

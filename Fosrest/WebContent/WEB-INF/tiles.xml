@@ -1358,4 +1358,8 @@
 		<put-attribute name="body"
 			value="/website/masterTrainer.jsp" />
 	</definition>
+	<definition name="UploadAssessment" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainer/uploadAssessment.jsp" />
+	</definition>
 </tiles-definitions>

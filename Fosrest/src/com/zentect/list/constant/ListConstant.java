@@ -294,4 +294,11 @@ public class ListConstant {
         auserTypeMap.put("DO", "DO");
         TrainerUserType = Collections.unmodifiableMap(auserTypeMap);
     }
+    public static final Map<String, String> Result;
+    static {
+        Map<String, String> auserTypeMap = new HashMap<String, String>();
+        auserTypeMap.put("P", "Pass");
+        auserTypeMap.put("F", "Fail");
+        Result = Collections.unmodifiableMap(auserTypeMap);
+    }
 }

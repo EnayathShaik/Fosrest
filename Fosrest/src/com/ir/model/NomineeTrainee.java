@@ -38,6 +38,14 @@ public class NomineeTrainee {
 	private String status;
 	private String traineeName;
 	private int trainingCalendarId;
+	private int nominatedBy;
+	private int loginId;
+	public int getNominatedBy() {
+		return nominatedBy;
+	}
+	public void setNominatedBy(int nominatedBy) {
+		this.nominatedBy = nominatedBy;
+	}
 	public int getTrainingCalendarId() {
 		return trainingCalendarId;
 	}

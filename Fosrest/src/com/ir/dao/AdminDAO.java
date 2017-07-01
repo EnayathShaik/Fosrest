@@ -351,9 +351,9 @@ public interface AdminDAO {
 
 	public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges();
 
-	public List<PersonalInformationTrainee> listEligibleuser(String userType);
+	public List<PersonalInformationTrainee> listEligibleuser(String userType, String stateId);
 
-	public String enrollUser(String data);
+	public String enrollUser(String data, int stateAdminId);
 
 	public AssessmentQuestions getAssessmentQuestionById(int id);
 

@@ -20,19 +20,25 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.form.StateForm;
 import com.ir.form.TrainerRequestForm;
+import com.ir.form.UploadAssessmentForm;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CourseName;
 import com.ir.model.Designation;
+import com.ir.model.EmployeeMonthlyCharges;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.Languages;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPartner_old;
+import com.ir.model.TrainingPhase;
+import com.ir.model.TrainingType;
 import com.ir.model.Utility;
 import com.ir.service.AdminService;
 import com.ir.service.AssessmentAgencyService;
@@ -590,6 +596,32 @@ public class TrainerController {
 	 * 
 	 * }
 	 */
+	@RequestMapping(value = "/UploadAssessment", method = RequestMethod.GET)
+	public String UploadAssessment(
+			@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm, Model model, HttpSession session) {
+		int trainerId=(int) session.getAttribute("loginUser2");
+				System.out.println("UploadAssessment");
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
+		Map<String , String> trainingType = lst.trainingTypeMap;
+		Map<String , String> userType = lst.userTypeMap;
+		model.addAttribute("batchCodeList", this.trainerService.listBatchCodeListforTrainer(trainerId));
+
+		model.addAttribute("trainingType",trainingType);
+		model.addAttribute("userType",userType);
+
+		return "UploadAssessment";
+	}
+	@RequestMapping(value = "/searchuploadassessment", method = RequestMethod.POST)
+	public String saveuploadassessment(@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm,
+			Model model, HttpSession session) {
+	int trainerId=(int) session.getAttribute("loginUser2");
+int trainingCalendarId=UploadAssessmentForm.getTrainingCalendarId();
+Map<String , String> result = lst.Result;
+model.addAttribute("result",result);
+	model.addAttribute("listofTrainer", this.trainerService.listofTrainer(trainerId,trainingCalendarId));
+		return "UploadAssessment";
+	}
 	
 }
  

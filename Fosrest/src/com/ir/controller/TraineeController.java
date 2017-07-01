@@ -973,8 +973,8 @@ public String ListTrainingRequest(@ModelAttribute("TrainingRequestForm") Trainin
 @RequestMapping(value = "/MarkAttendance", method = RequestMethod.GET)
 public String markAttendance(@ModelAttribute("MarkAttendanceForm") MarkAttendanceForm markAttendanceForm ,Model model, HttpSession session) {
 		System.out.println("start get");
-		if(checkAccess(session))
-			return "redirect:login.fssai";
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
 		Map<String , String> trainingType = lst.trainingTypeMap;
 		Map<String , String> userType = lst.userTypeMap;
 		

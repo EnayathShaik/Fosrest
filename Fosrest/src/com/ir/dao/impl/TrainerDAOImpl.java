@@ -2,14 +2,19 @@ package com.ir.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.ir.dao.TrainerDAO;
+import com.ir.form.NominateTraineeForm;
 import com.ir.form.TrainerRequestForm;
-
+import com.ir.form.UploadAssessmentForm;
+import com.ir.model.PersonalInformationTrainee;
+import com.ir.model.TrainingCalendar;
 import com.ir.service.PageLoadService;
 import com.ir.util.ChangePasswordUtility;
 
@@ -50,6 +55,30 @@ public class TrainerDAOImpl implements TrainerDAO {
 		}
 		System.out.println("list " + list);
 		return list;
+	}
+
+	@Override
+	public List<TrainingCalendar> listBatchCodeListforTrainer(int trainerId) {
+		// TODO Auto-generated method stub
+		System.out.println("inside listBatchCodeListforTrainer wo parameter");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<TrainingCalendar> mccList = session
+				.createSQLQuery("select tc.batchCode,tc.trainingCalendarId from TrainingCalendar tc inner join TrainingCalendarMapping tcm on tc.batchCode=tcm.batchCode where trainerId='"+trainerId+"'").list();
+				return mccList;
+	}
+
+	@Override
+	public List<UploadAssessmentForm> listofTrainer(int trainerId, int trainingCalendarId) {
+		System.out.println("inside listEligibleuser" );
+		Session session = this.sessionFactory.getCurrentSession();
+		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
+		Query query=session.createSQLQuery("select traineename,nt.logindetails from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) where tcmap.trainerid='"+trainerId+"'and  tc.trainingcalendarid='"+trainingCalendarId+"'");
+		System.out.println("!!!!!!!!!!!!!!!!!!11");
+		uas = query.list();
+		System.out.println("222222222222222222");
+		System.out.println(uas);
+		return uas; 
+
 	}
 
 /*	@Override

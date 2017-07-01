@@ -1190,16 +1190,16 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public List<PersonalInformationTrainee> listEligibleuser(String userType) {
+	public List<PersonalInformationTrainee> listEligibleuser(String userType,String stateId) {
 		// TODO Auto-generated method stub
-		return this.adminDAO.listEligibleuser(userType);
+		return this.adminDAO.listEligibleuser(userType,stateId);
 	}
 
 	@Override
 	@Transactional
-	public String enrollUser(String data) {
+	public String enrollUser(String data,int stateAdminId) {
 		// TODO Auto-generated method stub
-		return this.adminDAO.enrollUser(data);
+		return this.adminDAO.enrollUser(data,stateAdminId);
 	}
 
 

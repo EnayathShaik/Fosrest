@@ -41,8 +41,8 @@
 	<ul class="sidebar-nav">
 		<!-- <li><a href="search-and-apply.fssai">Search	& Apply Vacancy</a></li> -->
 	<li><a href="loginProcess.fssai">Upcoming Training</a></li>
-	<li><a href="loginProcess.fssai">Mark Attendance</a></li>
-	<li><a href="loginProcess.fssai">Upload Assessment</a></li>
+	<li><a href="MarkAttendance.fssai">Mark Attendance</a></li>
+	<li><a href="UploadAssessment.fssai">Upload Assessment</a></li>
 	<li><a href="PersonalInformationTrainer.fssai">Update Profile</a></li>
 	</ul>
 </div>

@@ -166,6 +166,7 @@ public class LoginController {
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
 			session.setAttribute("stateId",stateadmin.getState() );
+			session.setAttribute("stateAdminId",stateadmin.getId() );
 			int s=Integer.parseInt( (String) session.getAttribute("stateId"));
 			model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(s,2));
 			return "stateAdminHomepage";

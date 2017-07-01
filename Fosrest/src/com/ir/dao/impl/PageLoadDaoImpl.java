@@ -435,7 +435,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List masterTrainer() {
 			System.out.println("inside masterTrainer");
 			Session session = this.sessionFactory.getCurrentSession();
-			Query query = session.createSQLQuery("select p.firstName,p.Email,p.mobile,m.modulename from personalinformationtrainer p  inner join trainingcalendarmapping tcm on p.id=tcm.trainerid inner join trainingcalendar tc on tc.batchcode=tcm.batchcode inner join modulemaster m on m.moduleid=tcm.subjectid where tc.trainingtype='4'  ");
+			Query query = session.createSQLQuery(" select p.firstName,p.Email,p.mobile,m.modulename from personalinformationtrainer p  inner join trainingcalendarmapping tcm on p.id=tcm.trainerid inner join trainingcalendar tc on tc.batchcode=tcm.batchcode inner join modulemaster m on m.moduleid=tcm.subjectid where tc.trainingtype='4'  and tc.trainingenddate>= cast(now() as character varying); ");
 			List list = query.list();
 			System.out.println(list);
 			return list; 

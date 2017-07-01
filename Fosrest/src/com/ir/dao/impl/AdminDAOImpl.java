@@ -3118,7 +3118,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<PersonalInformationTrainee> listEligibleuser(String userType) {
+	public List<PersonalInformationTrainee> listEligibleuser(String userType,String stateId) {
 		// TODO Auto-generated method stub
 		System.out.println("inside listEligibleuser" + userType);
 		List<PersonalInformationTrainee> personalInfoList = new ArrayList<PersonalInformationTrainee>();
@@ -3132,12 +3132,12 @@ public class AdminDAOImpl implements AdminDAO {
 		if (list.size() > 0) {
 			query = session.createSQLQuery(
 					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.userType as numeric) = d.designationId)  where pit.steps=0 and pit.usertype='"
-							+ userType + "'");
+							+ userType + "' and pit.correspondenceState='"+stateId+"'");
 			System.out.println("data der " + query);
 		} else {
 			query = session.createSQLQuery(
 					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.userType as numeric) = d.designationId) where  pit.usertype='"
-							+ userType + "'");
+							+ userType + "'and pit.correspondenceState='"+stateId+"'");
 			System.out.println("data not der " + query);
 
 		}
@@ -3158,7 +3158,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public String enrollUser(String data) {
+	public String enrollUser(String data,int stateAdminId) {
 		// TODO Auto-generated method stub
 		System.out.println("inside listEligibleuser " + data);
 		Session session = this.sessionFactory.getCurrentSession();
@@ -3184,7 +3184,7 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("id " + s.split("@")[0]);
 
 			String result = addNomineeTrainee( trainingCalendarId, Integer.parseInt(s.split("@")[0]),
-					s.split("@")[1]);
+					s.split("@")[1],stateAdminId);
 
 		}
 		System.out.println("6:1 st return created");
@@ -3193,7 +3193,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	// addNomineeTrainee
 	// @Override
-	public String addNomineeTrainee( int trainingCalendarId, int loginId, String traineeName) {
+	public String addNomineeTrainee( int trainingCalendarId, int loginId, String traineeName,int stateAdminId) {
 
 		System.out.println( " trainingScheduleId " + trainingCalendarId + " loginId "
 				+ loginId + " traineeName " + traineeName);
@@ -3219,6 +3219,7 @@ public class AdminDAOImpl implements AdminDAO {
 		nt.setTraineeName(traineeName);
 		nt.setTrainingCalendarId(trainingCalendarId);
 		nt.setCertificateStatus("N");
+		nt.setNominatedBy(stateAdminId);
 		int id = (int) session.save(nt);
 		tx.commit();
 
