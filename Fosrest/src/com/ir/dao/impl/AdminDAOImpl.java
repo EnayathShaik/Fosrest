@@ -3701,11 +3701,34 @@ public class AdminDAOImpl implements AdminDAO {
 			
 		}
 		
+		ArrayList arrL=new ArrayList();
+		String newArr[]=subjects.split("\\|");
+		for(String a:newArr)
+		System.out.println(a); 
+		
+		
+		///////////////////////
+		Boolean flag=false;
+		
+		List chkSch1= session
+				.createSQLQuery("select subjects from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and  length(subjects)="+subjects.length()+" and isActive='Y'").list();
+		
+		if(chkSch1.size()!=0)
+		for(int i=0;i<newArr.length && i<chkSch1.size();i++){
+			if(chkSch1.get(i).toString().contains(newArr[i]))
+				flag=true;
+		}
+		
+		System.out.println("flag="+flag);
+		
+		//////////////////////////
 		//check if same subjectSchedule exists
-		List chkSch= session
+		/* for sub order matters 
+		  List chkSch= session
 				.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and subjects='"+subjects+"' and isActive='Y'").list();
 
-		if(chkSch.size()==0)//or condtion related to edit funtionality
+		if(chkSch.size()==0)*/
+		if(flag==false)
 		{
 			List l= session
 					.createSQLQuery("select designationName from Designation where designationId='"+form.getDesignation()+"'").list();
@@ -3865,6 +3888,17 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		System.out.println(form.getTrainingCalendarId()+" qwqwqwqwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+		
+		if(form.getTrainingCalendarId()!=0){
+			form.setDesignation(form.getDesignation2());
+			form.setTrainingType(form.getTrainingType2());
+			form.setTrainingPhase(form.getTrainingPhase2());
+			form.setScheduleCode(form.getScheduleCode2());
+			form.setTrainingInstitute(form.getTrainingInstitute2());
+			form.setTrainingStartDate(form.getTrainingStartDate()); 
+		}
+		
+		
 		Query query = 	session.createSQLQuery("select trainingcalendarid from trainingcalendar where traininginstitute='"+form.getTrainingInstitute()+"' and scheduleCode='"+form.getScheduleCode()+"' and trainingstartdate='"+form.getTrainingStartDate()+"'");
 		List list = query.list();
 		
@@ -3873,6 +3907,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		
 			if(list.size()!=0 && !(list.get(0).equals(form.getTrainingCalendarId()))){
 			System.out.println("nulllllllllllllll");
+			if((list.get(0).equals(form.getTrainingCalendarId())))
 				return null;
 			}
 			else 
