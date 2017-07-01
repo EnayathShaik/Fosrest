@@ -3259,8 +3259,8 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   	    	String days=obj[8].toString();
   	    	
   	    	String result=this.adminService.calculateEndDate(form.getTrainingStartDate(),days,form.getTrainingInstitute(),form.getTrainingCalendarId());
-  	    	
-  	    	if(!(result.equals("clash"))){
+  	    	//System.out.println("qqqqqqqqqqqqqqqqq"+result);
+  	    	if(!(result.equals("clash"))|| form.getTrainingCalendarId()!=0){
   	    
   	  	model.addAttribute("endDate",result);
       	model.addAttribute("listCalendarSearch", list);
@@ -3269,6 +3269,14 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
     	model.addAttribute("institute", form.getTrainingInstitute());
     	model.addAttribute("startDate", form.getTrainingStartDate());
     	//model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
+    	
+    	if(result.equals("clash")){
+    		model.addAttribute("startDate",form.getTrainingStartDate2());
+    		model.addAttribute("endDate",form.getTrainingEndDate2());
+	    	model.addAttribute("errorTime", "Change Start-Date");
+	    		
+    	}
+    	
     	
   	    	}
   	    	else{
@@ -3281,6 +3289,10 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   		
   		
       }
+      
+      if(form.getTrainingCalendarId()!=0)
+    	  model.addAttribute("searchwhileedit","Y");
+      
 		return "trainingcalendar";
 	}
    
@@ -3332,7 +3344,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 			 model.addAttribute("TrainingCalendarForm",p);
 			
 			 model.addAttribute("endDate",p.getTrainingEndDate());
-			
+			 model.addAttribute("institute",p.getTrainingInstitute());
 		   model.addAttribute("startDate",p.getTrainingStartDate()); 
 		   model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(p.getScheduleCode()));
 	      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
