@@ -1,9 +1,12 @@
 package com.ir.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,13 +16,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
+import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.form.StateForm;
@@ -621,6 +629,22 @@ Map<String , String> result = lst.Result;
 model.addAttribute("result",result);
 	model.addAttribute("listofTrainer", this.trainerService.listofTrainer(trainerId,trainingCalendarId));
 		return "UploadAssessment";
+	}
+	@RequestMapping(value = "/uploadassessmentresult/{data}", method = RequestMethod.POST)
+	public String uploadassessmentresult(@PathVariable("data") String data,
+			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm,
+			Model model, HttpSession session,HttpServletResponse response) throws IOException {
+	int trainerId=(int) session.getAttribute("loginUser2");
+ System.out.println("aaaaaaaaaaaaaaaaMMM"+data);
+ this.trainerService.uploadinfo(data,trainerId);
+/* PrintWriter out = response.getWriter();
+ Gson g = new Gson();
+ String newList = g.toJson(data1);
+ System.out.println("newList " + newList);
+ out.write(newList);
+ out.flush();*/
+ return "redirect:UploadAssessment.fssai";
+		//return "UploadAssessment";
 	}
 	
 }

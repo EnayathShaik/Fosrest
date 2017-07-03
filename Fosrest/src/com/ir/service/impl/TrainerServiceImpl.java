@@ -45,6 +45,14 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 
+	@Override
+	@Transactional
+	public String uploadinfo(String data, int trainerId) {
+		// TODO Auto-generated method stub
+		return this.trainerDAO.uploadinfo(data,trainerId);
+	}
+
+
 	
 	/*@Override
 	@Transactional

@@ -14,6 +14,8 @@ public interface TrainerDAO {
 
 	public List<UploadAssessmentForm> listofTrainer(int trainerId, int trainingCalendarId);
 
+	public String uploadinfo(String data, int trainerId);
+
 	//public List<MyCalendarForm> listMyCalendar();
 
 }

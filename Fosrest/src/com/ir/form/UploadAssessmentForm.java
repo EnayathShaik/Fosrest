@@ -3,6 +3,13 @@ package com.ir.form;
 public class UploadAssessmentForm {
 private String BatchCode;
 private int trainingCalendarId;
+private int logindetails;
+public int getLogindetails() {
+	return logindetails;
+}
+public void setLogindetails(int logindetails) {
+	this.logindetails = logindetails;
+}
 private String traineeName;
 private double marks;
 private String Result;

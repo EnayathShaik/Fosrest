@@ -13,6 +13,7 @@ import com.ir.dao.TrainerDAO;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.TrainerRequestForm;
 import com.ir.form.UploadAssessmentForm;
+import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.TrainingCalendar;
 import com.ir.service.PageLoadService;
@@ -72,13 +73,36 @@ public class TrainerDAOImpl implements TrainerDAO {
 		System.out.println("inside listEligibleuser" );
 		Session session = this.sessionFactory.getCurrentSession();
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
-		Query query=session.createSQLQuery("select traineename,nt.logindetails from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) where tcmap.trainerid='"+trainerId+"'and  tc.trainingcalendarid='"+trainingCalendarId+"'");
-		System.out.println("!!!!!!!!!!!!!!!!!!11");
+		 //select traineename,nt.logindetails from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) where tcmap.trainerid='28'and  tc.trainingcalendarid='600'and coalesce(nt.result,'') <> 'p' and coalesce(nt.result,'') <> 'F'
+
+		Query query=session.createSQLQuery("select traineename,nt.logindetails from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) where tcmap.trainerid='"+trainerId+"'and  tc.trainingcalendarid='"+trainingCalendarId+"'and nt.score=0");
 		uas = query.list();
-		System.out.println("222222222222222222");
 		System.out.println(uas);
 		return uas; 
 
+	}
+
+	@Override
+	public String uploadinfo(String data, int trainerId) {
+		
+			// TODO Auto-generated method stub
+			Session session = this.sessionFactory.getCurrentSession();
+			String[] arrData = data.split("-");
+			int loginId = Integer.parseInt(arrData[0]);
+			int marks = Integer.parseInt(arrData[1]);
+			String score =arrData[2];
+			String sql;
+			String sql2;
+			sql = "update nomineetrainee set result = '"+score+"',score='"+marks+"',assignedByTrainer='"+trainerId+"' where  logindetails =" + loginId;
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+/*sql2 = "update personalinformationtrainee set steps = 5 where  logindetails =" + loginId;
+Query query2 = session.createSQLQuery(sql2);
+query2.executeUpdate();*/
+			return null;
+
+		
+		
 	}
 
 /*	@Override

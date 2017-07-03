@@ -86,7 +86,7 @@
                                                 
                                                 <div class="col-md-6 col-xs-12">
 
-                                                    <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Search"/> 
+                                                    <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Search" style="margin-top: 26px;"/> 
                                                
                                                 </div>
                                             </div>
@@ -118,14 +118,15 @@
 													<tr>
 													<td>${loop.count}</td>
 													<td>${EligibleUser[0]}</td>
-													<input type="hidden" id="userId_${loop.index}"
-														value="${EligibleUser[1]}" />
-													<td><input type="text" path="marks"/></td>
-													<td> <cf:select path="result" class="form-control">
-													<cf:option value="" label="Select Result" />
-													<cf:options items="${result}"/>	
-												</cf:select></td>
-													 <td> <input type="button"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="uploadinfo();" value="Upload"/> 
+												<cf:hidden path="logindetails" id="userId_${loop.index}"
+																value="${EligibleUser[1]}" />
+													<td><input type="text" path="marks" id="marks_${loop.index}"  minlength="1" maxlength="2" required=""/></td>
+													<td id="abc"> <cf:select path="result" class="form-control" id="result_${loop.index}">
+													<cf:option value="0" label="Select Result" />
+													
+													 <cf:options items="${result}" id="result"/>	</td>
+												</cf:select>
+													 <td> <input type="button"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="uploadinfo(${loop.index}); return false;" value="Upload"/> 
                                                </tr>
 												</ct:forEach>
 
@@ -141,24 +142,11 @@
                                             <!-- right side -->
                                             <div class="col-xs-6">
 
-											<%--  <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>Training Date:</strong></li>
-                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
-                                                        	<li> <span id="name_status" class = "clear-label"> </span>
-                                                            ${trainingDate}</li>
-                                                            <cf:input path="trainingDate" type="text" class="form-control" />
-                                                
-                                                        </ul>
-                                                    </div>
-                                                
-                                                </div> --%>
                                                                                  
                                                 
                                             </div> <!-- rigth side ends -->
                                             
-                                            <!-- button -->
+                                            
                                           
                                            
                                         </div>
@@ -168,84 +156,8 @@
                                 </div>
 
                                </fieldset>
-                                <!-- search Results -->
-                                            <%-- <div class="col-xs-12 " id="testt">
-
-                                                <!-- table -->
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                            <fieldset>
-                                           <legend>Attendance Search Result</legend>
-                                        
-                                            <ct:if test="${!empty listMarkAttendance}">
-                                            <table id="datatablesfosrest" class="table table-bordered table-responsive">
-                                               <thead>
-                                                    <tr class="background-open-vacancies">
-                                                        
-                                                        
-                                                 <th>S.No.</th>
-                                                        <th>Training Type</th>
-                                                        <th>User Type</th>
-                                                        <th>Training Date</th>
-                                                        <th>Training Start Time</th>
-                                                        <th>Participant Name</th>
-                                                          <th>Aadhar Number</th>
-                                                        <th>Attendance</th>
-                                                        
-                                                       
-                                                        
-                                                    </tr>
-                                                </thead>
-                                                
-                                                <ct:forEach items="${listMarkAttendance}" var="ti">
-                                                <tr>
-												
-													<td>${ti.srNo}</td>
-												<td>${ti.trainingType}</td>
-												<td>${ti.userType}</td>
-												<td>${ti.trainingDate}</td>
-												<td>${ti.startTime}</td>
-												<td>${ti.participantName}</td>
-												  <td><cf:input path="aadharNo" type="text" class="form-control" /></td>
-										 		<td><cf:select path="attendance" class="form-control">
-													
-														<cf:options items="${attendance1}" />
-												</cf:select></td>  
-												  <!-- <td>
-                                                            <select class="form-control">
-                                                                <option>Present</option>
-                                                                <option>Absent</option>
-                                                            </select>
-                                                        </td> -->
-												
-				
-                                                     
-												
-											</tr>
-										</ct:forEach>
-										 
-                                            </table>
-                                             <div class="col-md-6 col-xs-12"></div>
-                                               
-                                                 <div class="col-md-6 col-xs-12">
-
-                                                    <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="save"/> 
-                                               
-                                                </div>
-                                                    </div>
-                                            </ct:if>
-                                           
-                                        
-                                           
-                                        </fieldset>
-                                        
-                                                </div>
-                                                 
-                                           
-                                            </div> --%>
-                                             
-                                                                                        
-                                           
+                               
+										    
                                         </div>
                              <!-- search div ends -->
                         </div><!-- row ends -->
@@ -258,17 +170,29 @@
  <input type="hidden" id="idHidden" value="" />
  <input type="hidden" id="hiddenCourseType" value="" />                                             
    </cf:form>
-<!--    <script>
-   function uploadinfo(id) {
-	   alert("HHHHHHHHHHHHHHHHh");
-alert("aaaaaaaaaaaaaaaaaaaaa"+$("#userId_").val());
-// console.log($("#userId_"+i).val());
+  <script>
+   function uploadinfo(index) {
+	   
+	   
+		var id=document.getElementById("userId_"+index).value;
+		var marks=document.getElementById("marks_"+index).value;
+	var result=$("#result_"+index).val();
+	
+	if(marks.match(/^[0-9]{2}$/) == null){
+  		alert("Enter Valid Marks");
+   		 return false;
+     	 }
+	if(result==0){
+		alert("Please Select result");
+		return false;
+	}
+	var data=id+"-"+marks+"-"+result;
 		var name1 = JSON.stringify({
 			courseName : 0
 		})
 		$.ajax({
 			type : 'post',
-			url : 'uploadInfo' + id + '.fssai',
+			url : 'uploadassessmentresult/'+data+'.fssai',
 			contentType : "application/json",
 			data : name1,
 			success : function(response) {
@@ -278,4 +202,4 @@ alert("aaaaaaaaaaaaaaaaaaaaa"+$("#userId_").val());
 		});
 
 	}
-   </script> -->
+   </script> 

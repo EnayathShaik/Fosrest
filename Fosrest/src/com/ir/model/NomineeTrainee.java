@@ -40,6 +40,14 @@ public class NomineeTrainee {
 	private int trainingCalendarId;
 	private int nominatedBy;
 	private int loginId;
+	private int assignedByTrainer;
+	public int getAssignedByTrainer() {
+		return assignedByTrainer;
+	}
+
+	public void setAssignedByTrainer(int assignedByTrainer) {
+		this.assignedByTrainer = assignedByTrainer;
+	}
 	public int getNominatedBy() {
 		return nominatedBy;
 	}
