@@ -635,14 +635,8 @@ model.addAttribute("result",result);
 			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm,
 			Model model, HttpSession session,HttpServletResponse response) throws IOException {
 	int trainerId=(int) session.getAttribute("loginUser2");
- System.out.println("aaaaaaaaaaaaaaaaMMM"+data);
  this.trainerService.uploadinfo(data,trainerId);
-/* PrintWriter out = response.getWriter();
- Gson g = new Gson();
- String newList = g.toJson(data1);
- System.out.println("newList " + newList);
- out.write(newList);
- out.flush();*/
+
  return "redirect:UploadAssessment.fssai";
 		//return "UploadAssessment";
 	}

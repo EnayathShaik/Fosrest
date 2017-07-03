@@ -8,7 +8,13 @@
 		flatpickr("#trainingStartDate", {
 
 		});
-
+		
+		
+		/* if(${profileId}==1){  
+			 
+			$("#datatablesfosrest th:last-child, #datatablesfosrest td:last-child").remove();
+		}
+  */ 
 		/* if ('${profileId}' == 2) {
 		$("#searchbtn").css("display" , 'none');
 		$("#createbtn").css("display" , 'block'); 
@@ -425,7 +431,7 @@
 
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
-															<th>Edit</th>
+														<%if ((Integer)session.getAttribute("profileId")==2) {%>	<th>Edit</th>   <%} %>
 
 
  
@@ -445,10 +451,10 @@
 															<td>${listCalendar[5]}</td>
 															<td>${listCalendar[6]}</td>
 															<td>${listCalendar[7]}</td>
-															<td><input type="submit" id="searchbtn" value="Edit" 
+														<%if ((Integer)session.getAttribute("profileId")==2) {%>	<td><input type="submit" id="searchbtn" value="Edit" 
 														class="btn login-btn"
 														formaction="edittrainingcalendar.fssai?id=${listCalendar[8]}"
-														 /></td>	
+														 /></td>	<%} %>
 														 														<%-- <td><a href="remove/trainingcalendar/${listCalendar[8]}.fssai">Delete</a></td> --%>
 
 														</tr>

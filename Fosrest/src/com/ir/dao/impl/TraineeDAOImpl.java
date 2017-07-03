@@ -1173,11 +1173,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public  List getAttendanceDeatilsByID(String data){
 		System.out.println("data "+data);
 		Session session = sessionFactory.getCurrentSession();
-		String sql ="select  loginid as traineeName , batchcode, trainingstartdate  trainingStartDate , trainingenddate trainingEndDate , D.modulecode , att.attendancedate  from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) "+
-		"inner join logindetails login on  (nt.logindetails =  login.id)"+
-		"inner join modulemaster D on(ts.moduleid=D.moduleid)"+
-		"inner join traineedailyattendance att on (att.rollnumber = nt.rollno)"+
-		"where rollno ='"+data+"'";
+		String sql ="select  login.loginid as traineeName , batchcode, trainingstartdate  trainingStartDate , trainingenddate trainingEndDate , D.modulecode ,"+
+ "att.attendancedate  from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid = tc.trainingcalendarid) "+
+ "inner join logindetails login on  (nt.logindetails =  login.id)inner join subjectmapping sm on (tc.scheduleCode=sm.schedulecode)inner join modulemaster D on(cast(sm.subject as numeric)=D.moduleid)"+
+ "inner join traineedailyattendance att on (att.rollnumber = nt.rollno)where rollno='"+data+"'";
 		Query query = session.createSQLQuery(sql);
 		List courseTypeList = query.list();
 		return courseTypeList;

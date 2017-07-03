@@ -1248,7 +1248,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 	
 		Session session = sessionFactory.getCurrentSession();
 		String result = null;
-		String sql="select  to_date(trainingstartdate , 'DD-MM-YYYY') trainingdate ,  to_date(trainingenddate , 'DD-MM-YYYY') trainingtime,cast(now() as date)  today from trainingschedule as ts inner join nomineetrainee nt on nt.trainingscheduleid = ts.trainingscheduleid where rollno ='"+rollNo+"' ";
+		String sql="select  to_date(trainingstartdate , 'DD-MM-YYYY') trainingdate ,  to_date(trainingenddate , 'DD-MM-YYYY') trainingtime,cast(now() as date)  today from trainingcalendar as ts inner join nomineetrainee nt on nt.trainingcalendarid = ts.trainingcalendarid where rollno ='"+rollNo+"' ";
 		try{
 			Query query = session.createSQLQuery(sql);
 			List<Object[]> list = query.list();
