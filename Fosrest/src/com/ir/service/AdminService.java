@@ -547,6 +547,8 @@ public TrainingCalendarForm getTrainingCalendar(int id);
 String updateTrainingCalendar(int trainingCalendarId, String[] trainers, String trainingStartDate2,
 		String trainingEndDate2);
 
+List getTrainingCalendarMappingTrainer(int editId);
+
 
 }
 

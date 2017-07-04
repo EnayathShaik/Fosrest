@@ -136,9 +136,8 @@ function getDistrict(val , idName)
 	      var mainData1 = jQuery.parseJSON(response);
 	    
 	      $('#'+idName+' option').remove();
-	      $('#'+idName).append('<option value="0" label="Select District" />');
-	      $('#'+idName+' option').remove();
-	      $('#'+idName).append('<option value="0" label="Select City" />');
+	      $('#'+idName).append('<option value="0" label="Select District" >Select District</option>');
+	      
 	  	 
 	      $.each(mainData1 , function(i , obj)
 	  		{

@@ -437,4 +437,6 @@ public interface AdminDAO {
 
 	public String updateTrainingCalendar(int trainingCalendarId, String[] trainers, String trainingStartDate2,
 			String trainingEndDate2);
+
+	public List getTrainingCalendarMappingTrainer(int editId);
 }

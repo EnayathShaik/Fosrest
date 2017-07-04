@@ -3226,7 +3226,6 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
  @RequestMapping(value = "/trainingcalendarsearch", method = RequestMethod.POST)
 	public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm form,
 			Model model, HttpSession session) {
-	   System.out.println("aaass");
 		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
 			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
 		return "redirect:login.fssai";
@@ -3268,11 +3267,16 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
       	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
     	model.addAttribute("institute", form.getTrainingInstitute());
     	model.addAttribute("startDate", form.getTrainingStartDate());
+      	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
+
     	//model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
     	
     	if(result.equals("clash")){
+    		
     		model.addAttribute("startDate",form.getTrainingStartDate2());
     		model.addAttribute("endDate",form.getTrainingEndDate2());
+	      	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
+
 	    	model.addAttribute("errorTime", "Change Start-Date");
 	    		
     	}
@@ -3348,6 +3352,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		   model.addAttribute("startDate",p.getTrainingStartDate()); 
 		   model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(p.getScheduleCode()));
 	      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
+	      	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(editId));
 
 			model.addAttribute("isEdit","Y");
 			

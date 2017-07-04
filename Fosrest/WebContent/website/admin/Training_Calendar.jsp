@@ -25,7 +25,8 @@
 		redirectScheduleCode2(trPhase,'scheduleCode');
 	}
 	if('${isEdit}'=='Y'){
-			 
+
+		alert("Data loaded for edit");
 		$("#designation").val('${TrainingCalendarForm.designation}');
 		$("#trainingType").val('${TrainingCalendarForm.trainingType}');
 
@@ -34,12 +35,12 @@
 		$("#trainingPhase").val('${TrainingCalendarForm.trainingPhase}');
 		 $("#trainingPhase").trigger("change");
          window.setTimeout(function() { 
-        	 //alert("timeptu");  
+        	  
          	$("#scheduleCode").val('${TrainingCalendarForm.scheduleCode}');
          }, 1000); 
 		$("#trainingInstitute").val('${TrainingCalendarForm.trainingInstitute}');
 		$("#trainingStartDate").val('${TrainingCalendarForm.trainingStartDate}');
-		//$("#endDate").val();
+		
 		$("#trainingCalendarId").val('${TrainingCalendarForm.trainingCalendarId}'); 
 		
 		
@@ -50,11 +51,13 @@
 		$("#scheduleCode").prop("disabled", "disabled");    
         $("#createbtn").val("Save");
 
-		
-		}
-	
-	if('${searchwhileedit}'=='Y'){  
-		//alert("search while edit");
+       
+        <ct:forEach items="${listPreSelectedTrainers}" var="lpt" varStatus="loop" > 
+        $("#trainer_"+'${loop.count}').val('${lpt}');  
+		</ct:forEach>
+ 
+	}
+	if('${searchwhileedit}'=='Y'){
 		
 		  window.setTimeout(function() { 
 	        	 
@@ -65,10 +68,13 @@
 	 	 $("#trainingType").prop("disabled", "disabled"); 
 	 	$("#trainingPhase").prop("disabled", "disabled");  
 		$("#trainingInstitute").prop("disabled", "disabled"); 
-		$("#scheduleCode").prop("disabled", "disabled"); 
+		$("#scheduleCode").prop("disabled", "disabled");  
         $("#createbtn").val("Save");
 
-		 
+        <ct:forEach items="${listPreSelectedTrainers}" var="lpt" varStatus="loop" > 
+        $("#trainer_"+'${loop.count}').val('${lpt}');   
+		</ct:forEach> 
+        
 	}
 	}
 	window.onload = OnStart;

@@ -571,7 +571,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 							</div>
 							<div style="margin-top: 42px; padding: 0px;">
 							<span style="background-color: #000070;
-    padding: 28px;
+    padding: 26px;
     color: #fff;
     font-weight: bold;
     font-size: 15px;">Download training guidelines</span>

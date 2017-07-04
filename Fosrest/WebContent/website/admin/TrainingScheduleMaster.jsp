@@ -100,7 +100,7 @@
 		var e = document.getElementById("subject"+getSrNo); 
 		  
 		if(typeof e.options[e.selectedIndex+1] =='undefined'){
-			alert("####################################################");  
+			//alert("####################################################");  
 			return false;
 		}
 		var strUser = e.options[e.selectedIndex+1].value;
@@ -536,7 +536,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 	
 			$("#trainingTypeErr").css("display", "none");
 			$("#trainingPhaseErr").css("display", "none");
-			$("#trErr").css("display", "none");
+		//	$("#trErr").css("display", "none");
 			
 			
 			 var idval = $('#subjectTable tr:last').attr('id');

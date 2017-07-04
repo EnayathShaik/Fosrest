@@ -1680,4 +1680,11 @@ public String updateTrainingCalendar(int trainingCalendarId, String[] trainers, 
 	return this.adminDAO.updateTrainingCalendar(trainingCalendarId,trainers,trainingStartDate2,trainingEndDate2);
 }
 
+@Override
+@Transactional
+public List getTrainingCalendarMappingTrainer(int editId) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.getTrainingCalendarMappingTrainer(editId);
+}
+
 }

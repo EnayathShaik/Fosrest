@@ -13,9 +13,9 @@ function getDistrict(val , idName)
 	      var mainData1 = jQuery.parseJSON(response);
 	    
 	      $('#'+idName+' option').remove();
-	      $('#'+idName).append('<option value="0" label="Select District" />');
+	      $('#'+idName).append('<option value="0" label="Select District" >Select District</option>');
 	      $('#'+idName+' option').remove();
-	      $('#'+idName).append('<option value="0" label="Select City" />');
+	      $('#'+idName).append('<option value="0" label="Select City" >Select City</option>');
 	  	 
 	      $.each(mainData1 , function(i , obj)
 	  		{
@@ -40,7 +40,7 @@ function getCity(val , idName)
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	      $('#'+idName+' option').remove();
-	      $('#'+idName).append('<option value="0" label="Select City" />');
+	      $('#'+idName).append('<option value="0" label="Select City" >Select City</option>');
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
 	  		$('#'+idName).append('<option value='+obj.cityId+' >'+obj.cityName+'</option>');	
@@ -230,9 +230,9 @@ function getTrainingInstitude(val , idName) {
 	    data:name,
 		success : function(response) {
 			var mainData1 = jQuery.parseJSON(response);
-			$('#'+idName+' option').remove();
+			$('#'+idName+' option').remove(); 
 			$('#'+idName).append(
-					'<option value="0" label="--Select Training Institude--" />');
+					'<option value="0" label="--Select Training Institute--" >Select Training Institute</option>');
 			$.each(mainData1, function(i, obj) {
 				$('#'+idName)
 						.append(
@@ -261,7 +261,7 @@ function getModule(val , idName) {
 			var mainData1 = jQuery.parseJSON(response);
 			$('#'+idName+' option').remove();
 			$('#'+idName).append(
-					'<option value="0" label="--Select Training Institude--" />');
+					'<option value="0" label="--Select Module--" />Select Module</option>');
 			$.each(mainData1, function(i, obj) {
 				$('#'+idName)
 						.append(
@@ -326,9 +326,9 @@ function getTrainingPhase(val , idName) {
 		success : function(response) {
 			var mainData1 = jQuery.parseJSON(response);
 			
-			$('#'+idName+' option').remove();
+			$('#'+idName+' option').remove(); 
 			$('#'+idName).append(
-					'<option value="0" label="--Select Training Institude--" />');
+					'<option value="0" label="--Select Training Phase--" >--Select Training Phase--</option>');
 			$.each(mainData1, function(i, obj) {
 				$('#'+idName)
 						.append(
@@ -359,7 +359,7 @@ $.ajax({
 		var mainData1 = jQuery.parseJSON(response);
 		$('#'+idName+' option').remove();
 		$('#'+idName).append(
-				'<option value="0" label="--Select Schedule Code--" />');
+				'<option value="0" label="--Select Schedule Code--" >--Select Schedule Code--</option>');
 		$.each(mainData1, function(i, obj) {
 		
 			$('#'+idName) 

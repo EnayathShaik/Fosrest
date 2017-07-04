@@ -155,6 +155,12 @@ function editAssessmentQuestion(id,Qcount){
 function validateFields(){
 		
 	$(':focus').blur();// this is required for to call answerno() method
+	
+
+	$("#designationErr").css("display", "none");
+
+	$("#trainingTypeErr").css("display", "none");
+	$("#trainingPhaseErr").css("display", "none"); 
 	// $("#unitCodeErr").css("display" , "none");
 	 $("#moduleCodeErr").css("display" , "none");
 	$("#questionNumberErr").css("display" , "none");
@@ -165,7 +171,18 @@ $("#assAnsTableErr").css("display" , "none");
 $("#correctAnswerErr").css("display" , "none");
 
 
-
+if ($("#designation2").val() == 0) {
+	$("#designationErr").css("display", "block"); 
+	return false;
+}
+if ($("#trainingType2").val() == 0) {
+	$("#trainingTypeErr").css("display", "block");
+	return false;
+}
+if ($("#trainingType2").val() == 3 && $("#trainingPhase2").val() == 0) {// 3 for induction 
+	$("#trainingPhaseErr").css("display", "block");
+	return false;
+}
 
 /* if($("#unitCode2").val() == 0){
 	 
@@ -361,8 +378,7 @@ function getQuestionNo(val){
 															<div>
 																<ul class="lab-no">
 																	<li class="style-li"><strong>Designation:</strong></li>
-																	<li id="designationErr" style="display: none;"
-																	class="style-li error-red">Select Designation.</li>
+																	
 																</ul>
 															</div>
 															<cf:select path="designation1" class="form-control">
@@ -377,8 +393,7 @@ function getQuestionNo(val){
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training Type:</strong></li>
-															<li id="trainingTypeErr" style="display: none;"
-																class="style-li error-red">Select Training Type.</li>
+															
 															
 														</ul>
 													</div>
@@ -394,8 +409,7 @@ function getQuestionNo(val){
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training
 																	Phase:</strong></li>
-															<li id="trainingPhaseErr" style="display: none;"
-																class="style-li error-red">Select Training Phase.</li>
+															
 																
 														</ul>
 													</div>

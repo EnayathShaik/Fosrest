@@ -4224,4 +4224,16 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		
 		return null;
 	}
+
+	@Override
+	public List getTrainingCalendarMappingTrainer(int editId) {
+		// TODO Auto-generated method stub
+		
+		Session session=sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("select trainerId from trainingCalendarMapping tcm join trainingCalendar tc on(tcm.batchCode=tc.batchCode) where tc.trainingCalendarId='"+editId+"'");
+		List list1 = query.list();
+		
+		return list1;
+		
+	}
 }
