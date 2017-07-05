@@ -39,9 +39,9 @@ public class TrainerServiceImpl implements TrainerService {
 
 	@Override
 	@Transactional
-	public List<UploadAssessmentForm> listofTrainer(int trainerId, int trainingCalendarId) {
+	public List<UploadAssessmentForm> listofTrainer(int trainerId, String batchCode) {
 		// TODO Auto-generated method stub
-		return this.trainerDAO.listofTrainer(trainerId,trainingCalendarId);
+		return this.trainerDAO.listofTrainer(trainerId,batchCode);
 	}
 
 
@@ -52,7 +52,12 @@ public class TrainerServiceImpl implements TrainerService {
 		return this.trainerDAO.uploadinfo(data,trainerId);
 	}
 
-
+	@Override
+	@Transactional
+	public List<UploadAssessmentForm> listofSubjects(int trainerId, String batchCode) {
+		// TODO Auto-generated method stub
+		return this.trainerDAO.listofSubjects(trainerId,batchCode);
+	}
 	
 	/*@Override
 	@Transactional

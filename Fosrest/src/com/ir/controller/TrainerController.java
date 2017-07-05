@@ -604,7 +604,7 @@ public class TrainerController {
 	 * 
 	 * }
 	 */
-	@RequestMapping(value = "/UploadAssessment", method = RequestMethod.GET)
+	@RequestMapping(value = "/trainerUpdateResult", method = RequestMethod.GET)
 	public String UploadAssessment(
 			@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm, Model model, HttpSession session) {
 		int trainerId=(int) session.getAttribute("loginUser2");
@@ -614,21 +614,21 @@ public class TrainerController {
 		Map<String , String> trainingType = lst.trainingTypeMap;
 		Map<String , String> userType = lst.userTypeMap;
 		model.addAttribute("batchCodeList", this.trainerService.listBatchCodeListforTrainer(trainerId));
-
-		model.addAttribute("trainingType",trainingType);
+model.addAttribute("trainingType",trainingType);
 		model.addAttribute("userType",userType);
 
-		return "UploadAssessment";
+		return "trainerUpdateResult";
 	}
-	@RequestMapping(value = "/searchuploadassessment", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchupdateresult", method = RequestMethod.POST)
 	public String saveuploadassessment(@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm,
 			Model model, HttpSession session) {
 	int trainerId=(int) session.getAttribute("loginUser2");
-int trainingCalendarId=UploadAssessmentForm.getTrainingCalendarId();
-Map<String , String> result = lst.Result;
-model.addAttribute("result",result);
-	model.addAttribute("listofTrainer", this.trainerService.listofTrainer(trainerId,trainingCalendarId));
-		return "UploadAssessment";
+String batchCode=UploadAssessmentForm.getBatchCode();
+System.out.println("batchcode          "+batchCode);
+model.addAttribute("batchCodeList", this.trainerService.listBatchCodeListforTrainer(trainerId));
+model.addAttribute("SubjectList", this.trainerService.listofSubjects(trainerId,batchCode));
+	model.addAttribute("listofTrainer", this.trainerService.listofTrainer(trainerId,batchCode));
+		return "trainerUpdateResult";
 	}
 	@RequestMapping(value = "/uploadassessmentresult/{data}", method = RequestMethod.POST)
 	public String uploadassessmentresult(@PathVariable("data") String data,
@@ -636,9 +636,7 @@ model.addAttribute("result",result);
 			Model model, HttpSession session,HttpServletResponse response) throws IOException {
 	int trainerId=(int) session.getAttribute("loginUser2");
  this.trainerService.uploadinfo(data,trainerId);
-
- return "redirect:UploadAssessment.fssai";
-		//return "UploadAssessment";
+return "redirect:trainerUpdateResult.fssai";
 	}
 	
 }

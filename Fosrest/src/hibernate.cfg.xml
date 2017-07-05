@@ -98,5 +98,6 @@
 	  
 	 	 <mapping class="com.ir.model.SubjectMapping" />
 	 	 <mapping class="com.ir.model.TrainingCalendarMapping" />
+	 	  <mapping class="com.ir.model.ViewResult" />
 	</session-factory>
 </hibernate-configuration>

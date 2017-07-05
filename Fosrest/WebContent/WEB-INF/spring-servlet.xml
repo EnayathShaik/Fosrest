@@ -183,7 +183,8 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				  	  <value>com.ir.model.SubjectMapping</value>
 			 <value>com.ir.model.Languages</value>
 			  <value>com.ir.model.MappingMasterTrainer</value>
-			  			  <value>com.ir.model.TrainingCalendarMapping</value>
+			   <value>com.ir.model.TrainingCalendarMapping</value>
+			   <value>com.ir.model.ViewResult</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

@@ -28,6 +28,7 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingRequestForm;
 import com.ir.form.TrainingScheduleForm;
+import com.ir.form.UploadAssessmentForm;
 import com.ir.form.stateAdminForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
@@ -64,6 +65,7 @@ import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
+import com.ir.model.ViewResult;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 
@@ -439,4 +441,12 @@ public interface AdminDAO {
 			String trainingEndDate2);
 
 	public List getTrainingCalendarMappingTrainer(int editId);
+
+	public List<UploadAssessmentForm> listofTrainee(int trainingCalendarId);
+
+	public List listofTraineeforResult(String data);
+
+	
+
+
 }

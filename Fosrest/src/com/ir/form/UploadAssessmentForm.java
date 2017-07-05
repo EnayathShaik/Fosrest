@@ -1,9 +1,16 @@
 package com.ir.form;
 
 public class UploadAssessmentForm {
-private String BatchCode;
+private String batchCode;
 private int trainingCalendarId;
 private int logindetails;
+private String subject;
+public String getSubject() {
+	return subject;
+}
+public void setSubject(String subject) {
+	this.subject = subject;
+}
 public int getLogindetails() {
 	return logindetails;
 }
@@ -12,7 +19,7 @@ public void setLogindetails(int logindetails) {
 }
 private String traineeName;
 private double marks;
-private String Result;
+private String result;
 
 public double getMarks() {
 	return marks;
@@ -20,11 +27,12 @@ public double getMarks() {
 public void setMarks(double marks) {
 	this.marks = marks;
 }
+
 public String getResult() {
-	return Result;
+	return result;
 }
 public void setResult(String result) {
-	Result = result;
+	this.result = result;
 }
 public String getTraineeName() {
 	return traineeName;
@@ -32,11 +40,12 @@ public String getTraineeName() {
 public void setTraineeName(String traineeName) {
 	this.traineeName = traineeName;
 }
+
 public String getBatchCode() {
-	return BatchCode;
+	return batchCode;
 }
 public void setBatchCode(String batchCode) {
-	BatchCode = batchCode;
+	this.batchCode = batchCode;
 }
 public int getTrainingCalendarId() {
 	return trainingCalendarId;

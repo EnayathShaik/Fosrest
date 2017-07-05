@@ -59,6 +59,7 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
+import com.ir.form.UploadAssessmentForm;
 import com.ir.form.stateAdminForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestions;
@@ -103,6 +104,7 @@ import com.ir.model.TrainingCalendarMapping;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
+import com.ir.model.ViewResult;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.LoginService;
@@ -3210,8 +3212,14 @@ public class AdminDAOImpl implements AdminDAO {
 			maxId = (int) list.get(0);
 
 		}
+		//Query query2 = null;
+		//String sql2="select distinct tcm.subjectid from nomineetrainee nt inner join trainingCalendar tc on tc.trainingcalendarId=nt.trainingcalendarId inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode";
+		//System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDDD"+sql2);
 		NomineeTrainee nt = new NomineeTrainee();
+		
+		
 
+	
 		nt.setStatus("N");
 		nt.setRollNo( StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		nt.setRollSeqNo(maxId);
@@ -3228,10 +3236,34 @@ public class AdminDAOImpl implements AdminDAO {
 		query.executeUpdate();
 
 		session.close();
+		addviewResult(loginId);
 		System.out.println("before return");
 		return "created";
 	}
-
+	public void addviewResult( int loginId) {
+		System.out.println("addviewResult      "+loginId);
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query2 = session.createSQLQuery(
+				"select tcm.subjectid,tcm.trainerId,tcm.batchCode from nomineetrainee nt inner join trainingCalendar tc on tc.trainingcalendarId=nt.trainingcalendarId inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where nt.logindetails='"+loginId+"'");
+		List<Object[]> ss = query2.list();
+		ViewResult vr;
+		for (Object[] li : ss) {
+			vr=new ViewResult();
+			int a=(int) li[0];
+			int b=(int) li[1];
+			String c=(String) li[2];
+			System.out.println("AAAAAAAAAAAAAAAAAAAaaa "+a+" BBBBBBBBBBBBBBBBBBBBBBB "+b+" CCCCCCCCCCCCCCcc "+c);
+			vr.setTraineeId(loginId);
+			vr.setBatchCode(c);
+			vr.setSubject(a);
+			vr.setTrainerId(b);
+			session.save(vr);
+		System.out.println("saveeeeeeeeeeeeeeeeeeeee");
+		}
+		tx.commit();
+		System.out.println("LASTTTTTTTTTTTTTTTTTTTTTTT");
+	}
 	
 
 	@Override
@@ -3615,7 +3647,7 @@ public class AdminDAOImpl implements AdminDAO {
 			//temp=allchapters.get(i=i+1);
 		}*/
 		
-		List <TrainingScheduleForm> resulList = session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),scheduleCode,days,trainingscheduleid from trainingSchedule where isActive='Y'").list();
+		List <TrainingScheduleForm> resulList = session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),scheduleCode,days,trainingscheduleid from TrainingSchedule where isActive='Y'").list();
 		
 		
 		return resulList;
@@ -3941,16 +3973,23 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		Session session=this.sessionFactory.getCurrentSession();
 		
 			TrainingCalendarMapping tcm;
+			
 		for(int i=0;i<subjects.length;i++){
 			
 			tcm=new TrainingCalendarMapping();
+			tcm.setTrainerId(Integer.parseInt(trainers[i]));
 			tcm.setBatchCode(batchCode);
 			tcm.setSubjectId(Integer.parseInt(subjects[i]));
-			tcm.setTrainerId(Integer.parseInt(trainers[i]));
-
+			
 			session.save(tcm);
+			
 		}
 		session.save(tc);
+	
+		System.out.println("MMMMMMMMMMMMggggggggggggggggggggggggggggMMMMMMMMMMMMMMMMMMMM");
+		
+		
+		
 		return "created";
 	}
 
@@ -4236,4 +4275,33 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		return list1;
 		
 	}
+
+	@Override
+	public List<UploadAssessmentForm> listofTrainee(int trainingCalendarId) {
+		System.out.println("inside listofTrainee" );
+		Session session = this.sessionFactory.getCurrentSession();
+		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
+		Query query=session.createSQLQuery("select distinct nt.rollno, nt.traineename,nt.logindetails from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid )  inner join viewResult vr on vr.batchCode=tc.batchCode where  nt.trainingCalendarId='"+trainingCalendarId+"'");
+		uas = query.list();
+		System.out.println(uas);
+		return uas; 
+		
+	}
+
+	@Override
+	public List listofTraineeforResult(String data) {
+		System.out.println("inside listofTraineeforResult" );
+		Session session = this.sessionFactory.getCurrentSession();
+		String[] arrData = data.split("-");
+		int loginId = Integer.parseInt(arrData[0]);
+		int trainingCalendarId = Integer.parseInt(arrData[1]);
+		List uas =new ArrayList();
+		 Query query=session.createSQLQuery("select distinct nt.traineeName,mm.moduleName,vr.marks from viewResult vr inner join trainingcalendar tc on (vr.batchCode=tc.batchCode ) inner join nomineetrainee nt on (nt.trainingCalendarId=tc.trainingCalendarId) inner join moduleMaster mm on mm.moduleId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'");
+		uas = query.list();
+		System.out.println(uas);
+		return uas; 
+	}
+
+	
+
 }

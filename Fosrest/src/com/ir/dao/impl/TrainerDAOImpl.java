@@ -15,7 +15,9 @@ import com.ir.form.TrainerRequestForm;
 import com.ir.form.UploadAssessmentForm;
 import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.model.StateAdmin;
 import com.ir.model.TrainingCalendar;
+import com.ir.model.ViewResult;
 import com.ir.service.PageLoadService;
 import com.ir.util.ChangePasswordUtility;
 
@@ -64,18 +66,16 @@ public class TrainerDAOImpl implements TrainerDAO {
 		System.out.println("inside listBatchCodeListforTrainer wo parameter");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingCalendar> mccList = session
-				.createSQLQuery("select tc.batchCode,tc.trainingCalendarId from TrainingCalendar tc inner join TrainingCalendarMapping tcm on tc.batchCode=tcm.batchCode where trainerId='"+trainerId+"'").list();
+				.createSQLQuery("select distinct tc.batchCode from TrainingCalendar tc inner join TrainingCalendarMapping tcm on tc.batchCode=tcm.batchCode where trainerId='"+trainerId+"'").list();
 				return mccList;
 	}
 
 	@Override
-	public List<UploadAssessmentForm> listofTrainer(int trainerId, int trainingCalendarId) {
+	public List<UploadAssessmentForm> listofTrainer(int trainerId, String batchCode) {
 		System.out.println("inside listEligibleuser" );
 		Session session = this.sessionFactory.getCurrentSession();
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
-		 //select traineename,nt.logindetails from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) where tcmap.trainerid='28'and  tc.trainingcalendarid='600'and coalesce(nt.result,'') <> 'p' and coalesce(nt.result,'') <> 'F'
-
-		Query query=session.createSQLQuery("select traineename,nt.logindetails from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) where tcmap.trainerid='"+trainerId+"'and  tc.trainingcalendarid='"+trainingCalendarId+"'and nt.score=0");
+		Query query=session.createSQLQuery("select distinct traineename,nt.logindetails from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid )  inner join viewResult vr on vr.batchCode=tc.batchCode where vr.trainerid='"+trainerId+"'and  vr.batchCode='"+batchCode+"'and vr.marks=0");
 		uas = query.list();
 		System.out.println(uas);
 		return uas; 
@@ -86,25 +86,33 @@ public class TrainerDAOImpl implements TrainerDAO {
 	public String uploadinfo(String data, int trainerId) {
 		
 			// TODO Auto-generated method stub
+		System.out.println("Inside upload info");
 			Session session = this.sessionFactory.getCurrentSession();
 			String[] arrData = data.split("-");
 			int loginId = Integer.parseInt(arrData[0]);
 			int marks = Integer.parseInt(arrData[1]);
-			String score =arrData[2];
+			String subject =arrData[2];
+			String batchCode=arrData[3];
 			String sql;
-			String sql2;
-			sql = "update nomineetrainee set result = '"+score+"',score='"+marks+"',assignedByTrainer='"+trainerId+"' where  logindetails =" + loginId;
+			sql = "update ViewResult set marks = '"+marks+"' where  batchCode='"+batchCode+"' and subject='"+subject+"'and traineeId='"+loginId+"'";
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
-/*sql2 = "update personalinformationtrainee set steps = 5 where  logindetails =" + loginId;
-Query query2 = session.createSQLQuery(sql2);
-query2.executeUpdate();*/
 			return null;
+}
 
-		
-		
+	@Override
+	public List<UploadAssessmentForm> listofSubjects(int trainerId, String batchCode) {
+		System.out.println("inside listofSubjects" );
+		Session session = this.sessionFactory.getCurrentSession();
+		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
+		Query query=session.createSQLQuery("select distinct mm.moduleName,mm.moduleId from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) inner join modulemaster mm on (tcmap.subjectId=mm.moduleId) where tcmap.trainerid='"+trainerId+"'and  tc.batchCode='"+batchCode+"'and nt.score=0");
+		uas = query.list();
+		System.out.println(uas);
+		return uas; 
+
 	}
-
+	
+	
 /*	@Override
 	public List<MyCalendarForm> listMyCalendar() {
 		// TODO Auto-generated method stub

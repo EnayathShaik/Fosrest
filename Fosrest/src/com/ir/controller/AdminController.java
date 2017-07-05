@@ -74,7 +74,7 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
-
+import com.ir.form.UploadAssessmentForm;
 import com.ir.form.stateAdminForm;
 
 import com.ir.model.AssessmentQuestions;
@@ -112,6 +112,7 @@ import com.ir.model.TrainingPhase;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.TrainingType;
 import com.ir.model.UnitMaster;
+import com.ir.model.ViewResult;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
@@ -1806,7 +1807,7 @@ public class AdminController {
 	public String addModuleMaster(@RequestParam CommonsMultipartFile file,@Valid @ModelAttribute("ModuleMasterForm") ModuleMasterForm p, BindingResult result,
 			Model model,HttpSession session) {
 		System.out.println("..............." + p.getModuleId());
-		
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWW"+p.getModuleName());
 		System.out.println("result " + result.hasErrors());
 		if (result.hasErrors()) {
 
@@ -3359,5 +3360,47 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 			
 		   return "trainingcalendar";		
 		   }
+	 
+		@RequestMapping(value = "/stateAdminUpdateResult", method = RequestMethod.GET)
+		public String UploadAssessment(
+				@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm, Model model, HttpSession session) {
+			//int trainerId=(int) session.getAttribute("loginUser2");
+					System.out.println("UploadAssessment");
+			/*if(checkAccess(session))
+				return "redirect:login.fssai";*/
+		
+					model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
+					Map<String , String> result = lst.Result;
+					model.addAttribute("result",result);
+			return "stateAdminUpdateResult";
+		}
+		@RequestMapping(value = "/stateadminsearchupdateresult", method = RequestMethod.POST)
+		public String saveuploadassessment(@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm,
+				Model model, HttpSession session) {
+		//int trainerId=(int) session.getAttribute("loginUser2");
+	int trainingCalendarId=UploadAssessmentForm.getTrainingCalendarId();
+	//String batchCode=UploadAssessmentForm.getBatchCode();
+	System.out.println("batchcode          "+trainingCalendarId);
+	model.addAttribute("listofTrainee", this.adminService.listofTrainee(trainingCalendarId));
+	model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
+	Map<String , String> result = lst.Result;
+	model.addAttribute("result",result);
+			return "stateAdminUpdateResult";
+		}
+		@RequestMapping(value = "/searchByRollNo/{data}", method = RequestMethod.POST)
+		public void searchByRollNo(@PathVariable("data") String data,
+				@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm, Model model, HttpSession session
+				,HttpServletResponse response) throws IOException {
+			/*	if(checkAccess(session))
+				return "redirect:login.fssai";*/
+			Map<String , String> result = lst.Result;
+			model.addAttribute("result",result);
+			List hm= this.adminService.listofTraineeforResult(data);
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		String newList = g.toJson(hm);
+		out.write(newList);
+		out.flush();
+		}
 	 
 }

@@ -12,9 +12,11 @@ public interface TrainerDAO {
 
 	public List<TrainingCalendar> listBatchCodeListforTrainer(int trainerId);
 
-	public List<UploadAssessmentForm> listofTrainer(int trainerId, int trainingCalendarId);
+	public List<UploadAssessmentForm> listofTrainer(int trainerId, String batchCode);
 
 	public String uploadinfo(String data, int trainerId);
+
+	public List<UploadAssessmentForm> listofSubjects(int trainerId, String batchCode);
 
 	//public List<MyCalendarForm> listMyCalendar();
 

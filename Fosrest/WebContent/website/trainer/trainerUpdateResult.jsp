@@ -14,7 +14,7 @@
 
             </script>
  
-<cf:form action="searchuploadassessment.fssai" name="maForm" method="POST" commandName="UploadAssessmentForm" onsubmit="return validateFields();"> 
+<cf:form action="searchupdateresult.fssai" name="maForm" method="POST" commandName="UploadAssessmentForm" onsubmit="return validateFields();"> 
 
     <section>
          <%@include file="../roles/top-menu.jsp"%>
@@ -41,9 +41,9 @@
                         <div class="row">
 
                                 <div class="col-xs-12">
-                                    <h1>Mark Attendance</h1>
+                                    <h1>Update Result</h1>
                                      <fieldset>
-                                           <legend>Attendance Search Result</legend>
+                                           <legend>Update Result</legend>
                                     <div class="row">
                                         <div class="col-xs-12">
 
@@ -57,30 +57,15 @@
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
-												<cf:select path="trainingCalendarId" class="form-control" id="batchCode">
+												<cf:select path="batchCode" class="form-control"   id="batchCodeid">
 													<cf:option value="0" label="Select Batch Code" />
-												<ct:forEach items="${batchCodeList}" var="abc">
-													<cf:option value="${abc[1] }" label="${abc[0]}" />
+												<ct:forEach items="${batchCodeList}" var="bc" >
+													<cf:option value="${bc}" label="${bc}" /> 
 													</ct:forEach> 
-												<%--  <cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="batchCode" />  --%>
-												</cf:select>
+												</cf:select> 
 											</div>
-                                                
-                                          <%--      <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>User Type:</strong></li>
-                                                            <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
-                                                        </ul>
-                                                    </div>
-                                                 <cf:select path="userType" class="form-control">
-													<cf:option value="" label="FSO" />
-													<cf:options items="${userType}"/>	
-												</cf:select>
-                                                </div> --%>
-                                                
-                                            
-                                            </div> <!-- left side ends -->
+                                          
+                                           </div> <!-- left side ends -->
                                               <div class="row">
                                                 <div class="col-md-6 col-xs-12"></div>
                                                 
@@ -93,7 +78,7 @@
 <div class="row">
 								<div class="col-xs-12">
 									<fieldset>
-										<legend>Eligible User List</legend>
+										<legend>Trainer List</legend>
 										<ct:if test="${!empty listofTrainer}">
 											<table class="table table-bordered table-responsive"
 												id="testTable">
@@ -101,64 +86,46 @@
 													<tr class="background-open-vacancies">
 
 														<th>S.No.</th>
-														<!-- <th>User Type</th> -->
 														<th>Trainee Name</th>
 														<th>Marks</th>
-														<th>Result</th>
+														<th>Subjects</th>
 														 <th>Upload</th> 
-
-
-
-													</tr>
+												</tr>
 												</thead>
 												  <ct:set var="count" value="0" scope="page" />
                                                 <ct:set var="count" value="${count + 1}" scope="page"/>
-												<ct:forEach items="${listofTrainer}" var="EligibleUser"
+												<ct:forEach items="${listofTrainer}" var="trainerList"
 													varStatus="loop">
 													<tr>
 													<td>${loop.count}</td>
 													<td>${EligibleUser[0]}</td>
 												<cf:hidden path="logindetails" id="userId_${loop.index}"
-																value="${EligibleUser[1]}" />
+																value="${trainerList[1]}" />
 													<td><input type="text" path="marks" id="marks_${loop.index}"  minlength="1" maxlength="2" required=""/></td>
-													<td id="abc"> <cf:select path="result" class="form-control" id="result_${loop.index}">
-													<cf:option value="0" label="Select Result" />
-													
-													 <cf:options items="${result}" id="result"/>	</td>
+													<td> <cf:select path="subject" class="form-control" id="subject_${loop.index}">
+													<cf:option value="0" label="Select Subject" />
+													<ct:forEach items="${SubjectList}" var="SubjectList">
+													<cf:option value="${SubjectList[1] }" label="${SubjectList[0]}" />
+													</ct:forEach>
+													<%-- <cf:options value="${SubjectList[1] }" label="${SubjectList[0]}" /> --%>
+													 <%-- <cf:options items="${SubjectList}" id="SubjectList"/> --%>	</td>
 												</cf:select>
 													 <td> <input type="button"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="uploadinfo(${loop.index}); return false;" value="Upload"/> 
                                                </tr>
 												</ct:forEach>
 
 											</table>
-											<div class="col-md-6 col-xs-12"></div>
-
-											<!-- <button type="button" class="btn btn-primary btn-lg"
-												data-toggle="modal" data-target="#myModal" onClick="validateFields();  return false;" >Enroll</button> -->
 								</div>
 							</div>
 							</ct:if>
 							
                                             <!-- right side -->
-                                            <div class="col-xs-6">
-
-                                                                                 
-                                                
-                                            </div> <!-- rigth side ends -->
                                             
-                                            
-                                          
-                                           
                                         </div>
-
-                                       
-                                    </div>
+</div>
                                 </div>
-
-                               </fieldset>
-                               
-										    
-                                        </div>
+</fieldset>
+                               </div>
                              <!-- search div ends -->
                         </div><!-- row ends -->
                     </div>
@@ -176,17 +143,17 @@
 	   
 		var id=document.getElementById("userId_"+index).value;
 		var marks=document.getElementById("marks_"+index).value;
-	var result=$("#result_"+index).val();
-	
+	var subject=$("#subject_"+index).val();
+		var batchCode=document.getElementById("batchCodeid").value;
 	if(marks.match(/^[0-9]{2}$/) == null){
   		alert("Enter Valid Marks");
    		 return false;
      	 }
-	if(result==0){
-		alert("Please Select result");
+	if(subject==0){
+		alert("Please Select subject");
 		return false;
 	}
-	var data=id+"-"+marks+"-"+result;
+	var data=id+"-"+marks+"-"+subject+"-"+batchCode;
 		var name1 = JSON.stringify({
 			courseName : 0
 		})
@@ -202,4 +169,5 @@
 		});
 
 	}
+   
    </script> 

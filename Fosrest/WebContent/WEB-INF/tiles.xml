@@ -1358,8 +1358,12 @@
 		<put-attribute name="body"
 			value="/website/masterTrainer.jsp" />
 	</definition>
-	<definition name="UploadAssessment" extends="base.user.afterLogin">
+	<definition name="trainerUpdateResult" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/trainer/uploadAssessment.jsp" />
+		<put-attribute name="body" value="/website/trainer/trainerUpdateResult.jsp" />
+	</definition>
+	<definition name="stateAdminUpdateResult" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/stateAdminUpdateResult.jsp" />
 	</definition>
 </tiles-definitions>

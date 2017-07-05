@@ -32,7 +32,7 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
-
+import com.ir.form.UploadAssessmentForm;
 import com.ir.form.verifyTraineeEnrollmentForm;
 import com.ir.form.viewEnrolledCoursesForm;
 import com.ir.form.ViewTrainingCalendarForm;
@@ -77,6 +77,7 @@ import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
+import com.ir.model.ViewResult;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 
@@ -548,6 +549,14 @@ String updateTrainingCalendar(int trainingCalendarId, String[] trainers, String 
 		String trainingEndDate2);
 
 List getTrainingCalendarMappingTrainer(int editId);
+
+public List<UploadAssessmentForm> listofTrainee( int trainingCalendarId);
+
+public List listofTraineeforResult( String data);
+
+
+
+
 
 
 }

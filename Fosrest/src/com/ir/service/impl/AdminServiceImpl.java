@@ -37,6 +37,7 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.TrainingClosureForm;
 import com.ir.form.TrainingScheduleForm;
+import com.ir.form.UploadAssessmentForm;
 import com.ir.form.ViewTrainingCalendarForm;
 import com.ir.form.activateTrainingOfTraineeForm;
 import com.ir.form.stateAdminForm;
@@ -79,6 +80,7 @@ import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingPartner;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
+import com.ir.model.ViewResult;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
@@ -1686,5 +1688,22 @@ public List getTrainingCalendarMappingTrainer(int editId) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.getTrainingCalendarMappingTrainer(editId);
 }
+
+@Override
+@Transactional
+public List<UploadAssessmentForm> listofTrainee(int trainingCalendarId) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listofTrainee(trainingCalendarId);
+}
+
+@Override
+@Transactional
+public List listofTraineeforResult(String data) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listofTraineeforResult(data);
+}
+
+
+
 
 }
