@@ -232,7 +232,7 @@ function getTrainingInstitude(val , idName) {
 			var mainData1 = jQuery.parseJSON(response);
 			$('#'+idName+' option').remove(); 
 			$('#'+idName).append(
-					'<option value="0" label="--Select Training Institute--" >Select Training Institute</option>');
+					'<option value="0" label="Select Training Institute" >Select Training Institute</option>');
 			$.each(mainData1, function(i, obj) {
 				$('#'+idName)
 						.append(
@@ -328,7 +328,7 @@ function getTrainingPhase(val , idName) {
 			
 			$('#'+idName+' option').remove(); 
 			$('#'+idName).append(
-					'<option value="0" label="--Select Training Phase--" >--Select Training Phase--</option>');
+					'<option value="0" label="Select Training Phase" >Select Training Phase</option>');
 			$.each(mainData1, function(i, obj) {
 				$('#'+idName)
 						.append(
@@ -359,7 +359,7 @@ $.ajax({
 		var mainData1 = jQuery.parseJSON(response);
 		$('#'+idName+' option').remove();
 		$('#'+idName).append(
-				'<option value="0" label="--Select Schedule Code--" >--Select Schedule Code--</option>');
+				'<option value="0" label="Select Schedule Code" >Select Schedule Code</option>');
 		$.each(mainData1, function(i, obj) {
 		
 			$('#'+idName) 
@@ -438,4 +438,28 @@ function dayNumbers(){
 
 }
 
+function getRollNo(batchCode,id){
+	   $('#'+id+' option').remove();
+	   
+		
+	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+})
+$.ajax({ 
+	type : 'post',
+	url : 'gettraineerollno.fssai?data='+ batchCode,
+	contentType : "application/json",
+data:name,
+	success : function(response) {
+		var mainData1 = jQuery.parseJSON(response);
+		$('#'+id).append(
+				'<option value="0" label="Select Roll No" >Select Roll No</option>');
+		$.each(mainData1, function(i, obj) {
+		
+			$('#'+id).append('<option value='+obj+' >' +obj+ '</option>');
+		});
+	}
+});
 
+}

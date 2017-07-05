@@ -1607,5 +1607,27 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		
 		return newList;
 	}
+	@Override
+	public List listNominatedTraineeBatchCode() {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createSQLQuery("select distinct batchCode from trainingCalendar tc join nomineetrainee nt on(tc.trainingcalendarid=nt.trainingcalendarid) ");
+		List lst=query.list(); 
+		
+		
+		return lst;
+	}
+	@Override
+	public List listTraineeRollNo(String batchCode) {
+		// TODO Auto-generated method stub
+Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createSQLQuery("select rollno from nomineetrainee nt where trainingCalendarId=(select TrainingCalendarId from trainingCalendar where batchCode='"+batchCode+"')");
+		List lst=query.list();
+		
+		
+		return lst;
+	}
 	
 }

@@ -837,7 +837,29 @@ public class TrainingPartnerController {
 	
 	@RequestMapping(value="/traineeAttendance" , method={RequestMethod.GET , RequestMethod.POST} )
 	public String traineeAttendance(@ModelAttribute("traineeAttendanceForm") TraineeAttendanceForm traineeAttendanceForm,HttpSession session,BindingResult result , Model model ){
-		return "traineeAttendance";
+		
+		model.addAttribute("listBatchCode", trainingPartnerService.listNominatedTraineeBatchCode());
+		//model.addAttribute("listRollNo", trainingPartnerService.listTraineeRollNo());
+
+
+return "traineeAttendance";
+
+	}
+	
+	
+	@RequestMapping(value="/gettraineerollno" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getTraineeRollNo(@RequestParam("data") String data  , @RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		
+		String rollNo =data;
+		System.out.println("roll number "+rollNo);
+		List lst=trainingPartnerService.listTraineeRollNo(data);
+		
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		String newList = g.toJson(lst);
+		System.out.println("newList " + newList);
+		out.write(newList);
 		
 	}
 	

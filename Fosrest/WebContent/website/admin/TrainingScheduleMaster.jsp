@@ -566,6 +566,8 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 						return false;
 					}
 					
+					 
+					if(dayCurr==dayPrev)
 					if(idval!=1 && i!=1){
 					var prevEndTime=$("#endTime"+(i-1)).val();
 					var currStartTime=$("#startTime"+i).val();

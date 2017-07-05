@@ -1807,7 +1807,8 @@ public class AdminController {
 	public String addModuleMaster(@RequestParam CommonsMultipartFile file,@Valid @ModelAttribute("ModuleMasterForm") ModuleMasterForm p, BindingResult result,
 			Model model,HttpSession session) {
 		System.out.println("..............." + p.getModuleId());
-		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWW"+p.getModuleName());
+		String linkName="No Study-Material";
+		
 		System.out.println("result " + result.hasErrors());
 		if (result.hasErrors()) {
 
@@ -1833,6 +1834,41 @@ public class AdminController {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
+		
+		//upload file
+		try{
+			String name = p.getModuleName();
+			//String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "Fostac/Trainee");
+			String ss = session.getServletContext().getRealPath("Subject");
+			
+			File dir = new File(ss);
+			if (!dir.exists())
+				dir.mkdirs();
+			String extension = "";
+			String fileName = file.getOriginalFilename();
+			int i = fileName.lastIndexOf('.');
+			if (i > 0) {
+				extension = fileName.substring(i + 1);
+				linkName="Subject/"+name+"."+extension;
+			}
+			
+			
+	    byte[] bytes = file.getBytes();  
+	    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
+	         new File(ss + File.separator + name+ "." +extension)));  
+	    stream.write(bytes);  
+	    stream.flush();  
+	    stream.close();  
+		}catch(Exception e){
+			e.printStackTrace();
+			new ZLogger("saveImage", "Exception while  saveFile "+e.getMessage(), "AdminController.java");
+		}
+
+		//upload file end
+		
+		 
+		moduleMaster.setContentLink(linkName); 
 		if (p.getModuleId() == 0) {
 			// new person, add it
 			String result1 = this.adminService.addModuleMaster(moduleMaster);
@@ -1849,32 +1885,7 @@ public class AdminController {
 		}
 		System.out.println("after insert");
 		// String subject = null;
-		//upload file
-				try{
-					String name = p.getModuleName();
-					//String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "Fostac/Trainee");
-					String ss = session.getServletContext().getRealPath("Subject");
-					File dir = new File(ss);
-					if (!dir.exists())
-						dir.mkdirs();
-					String extension = "";
-					String fileName = file.getOriginalFilename();
-					int i = fileName.lastIndexOf('.');
-					if (i > 0) {
-						extension = fileName.substring(i + 1);
-					}
-			    byte[] bytes = file.getBytes();  
-			    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
-			         new File(ss + File.separator + name+ "." +extension)));  
-			    stream.write(bytes);  
-			    stream.flush();  
-			    stream.close();  
-				}catch(Exception e){
-					e.printStackTrace();
-					new ZLogger("saveImage", "Exception while  saveFile "+e.getMessage(), "AdminController.java");
-				}
-
-				//upload file end
+		
 		
 		return "redirect:/ModuleMaster.fssai";
 		// return "ModuleMaster";

@@ -71,18 +71,29 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Subject Name:</strong></li>
 															<li class="style-li error-red"></li>
-															<li id="moduleNameErr" style="display:none;" class="style-li error-red" >Please Select Subject Name.</li>
+															<li id="moduleNameErr" style="display:none;" class="style-li error-red" >Insert Subject Name.</li>
 															<li id="moduleNameErr2" style="display:none;" class="style-li error-red" >Subject Name should be minimum 3 characters.</li>
 
 														</ul>
 													</div>
 													<cf:input type="text" path="moduleName"
-														placeholder="Select Subject Name" class="form-control" />
+														placeholder="Subject Name" class="form-control" />
 												</div>
+												
+													<div class="form-group" id="studyMaterial" style="display: none;">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Stored Study Material:</strong></li>
+															<li class="style-li error-red"></li>
+														</ul>
+													</div>
+													<cf:input type="text" path="contentLink"
+														 class="form-control" readonly="true"/> 
+												</div> 
 												<br>
 												 <div class="col-md-12 col-xs-12">
 												
-									              <input class="btn login-btn" type="file" id="file" name="file"/>
+									              <input class="btn login-btn" type="file" id="file" name="file"/> 
 									          
                                                   <!-- <input type="submit" class="btn login-btn" value="Upload"> -->
                                                                
@@ -155,13 +166,25 @@
 															<td>${loop.count}</td>
 															
 															<td>${ModuleMaster[8]}</td>
-															<td><a href="">Fosrest/Subject</a></td>
-															<td><ct:choose>
-														<ct:when test="${ ModuleMaster[10]== 'A'}">Active</ct:when>
-																	<ct:otherwise>In-Active</ct:otherwise>
+															
+															
+															
+															
+																<td><ct:choose>
+														<ct:when test="${ ModuleMaster[1]== 'No Study-Material'}">No Study-Material</ct:when>
+																	<ct:otherwise><a href="${ModuleMaster[1]}" target="_blank" >${ModuleMaster[1]}</a></ct:otherwise> 
 															</ct:choose></td>
 															
-															<td><button 
+															
+												 			
+															
+ 															<%-- <td><a href="${ModuleMaster[1]}" target="_blank" >${ModuleMaster[1]}</a></td>   --%>
+ 															<td><ct:choose>
+														<ct:when test="${ ModuleMaster[10]== 'A'}">Active</ct:when>
+																	<ct:otherwise>In-Active</ct:otherwise> 
+															</ct:choose></td>
+															
+															<td><button  class="btn login-btn" 
 																	onclick='editModule(${ModuleMaster[0]});return false;'>Edit</button></td>
 															<td>
 															<a href="<ct:url value='/ModuleMaster/remove/${ModuleMaster[0]}.fssai' />">Delete</a></td>
@@ -202,14 +225,19 @@
             	    $("#moduleId").val(mainData1.moduleId);
             	    $("#moduleName").val(mainData1.moduleName);
             	    $("#status").val(mainData1.status);
+            	    $("#contentLink").val(mainData1.contentLink);  
             	  /*   $("#contentName").val(mainData1.contentName);
-            	    $("#contentLink").val(mainData1.contentLink);
+            	    $("#contentLink").val();
             	    $("#contentType").val(mainData1.contentType); */
             	   /*  $("#unitId").val(mainData1.unitMaster.unitId); */
             	    
             	    
             	      $("#updatebtn").css("display" , "block");
             	     $("#createbtn").css("display" , "none");
+            	     
+            	    //$("#moduleName").prop("readonly","true"); 
+            	     $("#studyMaterial").css("display" , "block");
+            	       
             	    
             	      }
             	      });     
@@ -220,18 +248,21 @@
             
             function validateFields(){
             	
-           	 $("#unitIdErr").css("display" , "none");
-           	 $("#contentNameErr").css("display" , "none");
+            	
+            	
+            	
+         //  	 $("#unitIdErr").css("display" , "none");
+          // 	 $("#contentNameErr").css("display" , "none");
            	 $("#moduleNameErr").css("display" , "none");
-           	 $("#contentTypeErr").css("display" , "none"); 
+           ///	 $("#contentTypeErr").css("display" , "none"); 
            	 $("#contentLinkErr").css("display" , "none");
            
-          
+          /* 
            	 if($("#unitId").val() == 0){
            		 $("#unitIdErr").css("display" , "block");
               		return false; 
            	 } 
-           	else if($("#moduleName").val()== ''){
+           	else  */if($("#moduleName").val()== ''){
           		 $("#moduleNameErr").css("display" , "block");
         		return false; 
        	 }
@@ -239,7 +270,7 @@
       		 $("#moduleNameErr2").css("display" , "block");
      		return false; 
     	 }
-            else if($("#contentType").val() == 0){
+         /*    else if($("#contentType").val() == 0){
           		 $("#contentTypeErr").css("display" , "block");
          		return false; 
        	 } 	 
@@ -254,9 +285,9 @@
            		 $("#contentLinkErr").css("display" , "block");
            		return false;
         	 }
-        	
-           }
-            
+           	 */
+           	 
+            }
         
             </script>
 

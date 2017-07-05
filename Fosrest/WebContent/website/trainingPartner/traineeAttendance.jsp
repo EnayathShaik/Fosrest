@@ -5,12 +5,28 @@
 <script>
 function markTraineeAttendance(){
 	
+	/* $("#batchCodeErr").css("display", "none"); 
+	$("#traineeUniqueCodeErr").css("display", "none"); 
+	 */
+	
+	var batchCode = $("#batchCode").val();
 	var rollNo = $("#traineeUniqueCode").val();
 	//alert(rollNo);
-	if(rollNo == ""){
-		alert("Enter Trainee Roll Number");
-		$("#traineeUniqueCode").focus();
-		$("#traineeUniqueCode").val("");
+	if(batchCode == 0){
+		alert("Select Batch Code");
+
+		//$("#batchCodeErr").css("display", "block"); 
+		$("#batchCode").focus(); 
+ 
+		
+		return false;
+	}
+	
+	if(rollNo == 0){
+		alert("Select Trainee Roll Number");
+				//$("#traineeUniqueCodeErr").css("display", "block"); 
+				$("#traineeUniqueCode").focus(); 
+		
 		return false;
 	}else{
 		console.log("else "+rollNo );
@@ -68,11 +84,11 @@ function getCourseEnrolledDetails(rollNo){
     					batchCode = obj[1];
     					trainingStartDate = obj[2];
     					trainingEndDate = obj[3];
-    					modulecode = obj[4];
+    					attendance = obj[4];
     					
-    					$('#newTable1').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[5]+'</td></tr>');	
+    					$('#newTable1').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+attendance+'</td></tr>');	 
     				});
-    				$('#newTable').append('<tr id="tableRow"><td>'+traineeId+'</td><td>'+batchCode+'</td><td>'+modulecode+'</td><td>'+trainingStartDate+'</td><td>'+trainingEndDate+'</td></tr>');
+    				$('#newTable').append('<tr id="tableRow"><td>'+traineeId+'</td><td>'+batchCode+'</td><td>'+trainingStartDate+'</td><td>'+trainingEndDate+'</td></tr>');
     				
     				
     		      }
@@ -126,6 +142,27 @@ function getCourseEnrolledDetails(rollNo){
 
                                                 <!-- left side -->
                                                 <div class="col-md-6 col-xs-12">
+                                                <div class="form-group">
+														<div>
+															<ul class="lab-no"> 
+																<li class="style-li"><strong>Batch Code:<span style="color: red;">*</span>
+																</strong></li>
+																<li id="batchCodeErr" style="display: none;"
+																	class="style-li error-red">Select BatchCode.</li>
+																
+	
+															</ul>
+														</div>
+											 <cf:select path="batchCode" class="form-control" onchange="getRollNo(this.value,'traineeUniqueCode'); return false;"> 
+												<cf:option value="0">Select Batch Code</cf:option> 
+												<ct:forEach items="${listBatchCode }" var="bCode">	
+												<cf:option value="${bCode }" label="${bCode }"> ${bCode} </cf:option>  
+												</ct:forEach>
+														</cf:select>
+													</div> 
+													
+                                                
+                                                
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
@@ -136,11 +173,18 @@ function getCourseEnrolledDetails(rollNo){
 											<label id="AadharNumberError" class="error visibility">*
 												enter trainee Roll No</label> <cf:errors path="traineeUniqueCode"
 												cssclass="error" /></li>
+													<li id="traineeUniqueCodeErr" style="display: none;"
+																	class="style-li error-red">Select Trainee Roll No.</li>
+												
 	
-															</ul>
+															</ul> 
 														</div>
-														 <cf:input path="traineeUniqueCode" id="traineeUniqueCode" name="traineeUniqueCode" type="text"
-															placeholder="Trainee Unique Code" value="" class="form-control" /> 
+														  <cf:select path="traineeUniqueCode" class="form-control" > 
+														  	<cf:option value="0">Select Roll No</cf:option> 
+												<ct:forEach items="${listRollNo }" var="rollNo">	
+												<cf:option value="${rollNo }" label="${rollNo }"> ${rollNo} </cf:option>  
+												</ct:forEach>
+														</cf:select>	
 															
 														
 													</div>
@@ -183,7 +227,7 @@ function getCourseEnrolledDetails(rollNo){
                           <tr class="background-open-vacancies">
                             <th>Trainee ID</th>
                             <th>Batch Code</th>
-                            <th>Subject Code</th>
+                            
                             <th>Training Start Date</th>
                             <th>Training End Date</th>
                           
@@ -207,7 +251,8 @@ function getCourseEnrolledDetails(rollNo){
                       <table  class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
-                            <th>SR No</th>
+                            <th>SR No</th> 
+                           
                             <th>Attendance Date</th>
 
                           </tr>

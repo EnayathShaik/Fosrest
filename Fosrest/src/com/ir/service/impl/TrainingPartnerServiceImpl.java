@@ -372,4 +372,18 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		String loadTrainingList = trainingPartnerDAO.updateMTP(searchData);
 		return loadTrainingList;
 	}
+
+	@Override
+	@Transactional
+	public List listNominatedTraineeBatchCode() {
+		// TODO Auto-generated method stub
+		return trainingPartnerDAO.listNominatedTraineeBatchCode();
+	}
+
+	@Override
+	@Transactional
+	public List listTraineeRollNo(String data) {
+		// TODO Auto-generated method stub
+		return trainingPartnerDAO.listTraineeRollNo(data);
+	}
 }

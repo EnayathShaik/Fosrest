@@ -2138,8 +2138,9 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		ModuleMaster mm = (ModuleMaster) session.load(ModuleMaster.class, p.getModuleId());
 		mm.setModuleName(p.getModuleName());
-		mm.setStatus(p.getStatus());
-		//mm.setContentLink(p.getContentLink());
+		mm.setStatus(p.getStatus()); 
+		if(!(p.getContentLink().equals("No Study-Material")))
+		mm.setContentLink(p.getContentLink());
 		//mm.setContentType(p.getContentType());
 		session.update(mm);
 
@@ -3973,23 +3974,16 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		Session session=this.sessionFactory.getCurrentSession();
 		
 			TrainingCalendarMapping tcm;
-			
 		for(int i=0;i<subjects.length;i++){
 			
 			tcm=new TrainingCalendarMapping();
-			tcm.setTrainerId(Integer.parseInt(trainers[i]));
 			tcm.setBatchCode(batchCode);
 			tcm.setSubjectId(Integer.parseInt(subjects[i]));
-			
+			tcm.setTrainerId(Integer.parseInt(trainers[i]));
+
 			session.save(tcm);
-			
 		}
 		session.save(tc);
-	
-		System.out.println("MMMMMMMMMMMMggggggggggggggggggggggggggggMMMMMMMMMMMMMMMMMMMM");
-		
-		
-		
 		return "created";
 	}
 

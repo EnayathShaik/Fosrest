@@ -101,6 +101,8 @@ public interface TrainingPartnerDao {
 	public List editMTP(String data);
 	
 	public String updateMTP(String data);
+	public List listNominatedTraineeBatchCode();
+	public List listTraineeRollNo(String data);
 	
 	
 }
