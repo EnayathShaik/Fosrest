@@ -1703,7 +1703,18 @@ public List listofTraineeforResult(String data) {
 	return this.adminDAO.listofTraineeforResult(data);
 }
 
+@Override
+@Transactional
+public String saveTraineeResult(String data) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.saveTraineeResult(data);
+}
 
-
+@Override
+@Transactional
+public StateAdmin FullDetailStateAdmin(int loginId) {
+	StateAdmin stateAdmin = adminDAO.FullDetailStateAdmin(loginId);
+	return stateAdmin;
+}
 
 }

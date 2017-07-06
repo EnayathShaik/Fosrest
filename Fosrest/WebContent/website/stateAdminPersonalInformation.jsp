@@ -7,7 +7,37 @@
 
 
  <script src="website/js/commonController.js"></script>
-
+<script>
+function OnStart() {
+var isUpdate = '${isUpdate}';
+alert("VVVVVVVVVVVVVVVVvv"+isUpdate);
+if (isUpdate != null && isUpdate == "Y") {
+	
+	var name = '${StateAdmin.id}';
+	alert("MMMMMMMMM"+name);
+	$("#id").val('${StateAdmin.id}');
+	$("#firstName").val('${StateAdmin.firstName}');
+	$("#middleName").val('${StateAdmin.middleName}');
+	$("#lastName").val('${StateAdmin.lastName}');
+	$("#address1").val('${StateAdmin.address1}');
+	$("#address2").val('${StateAdmin.address2}');
+	$("#aadharNumber").val('${StateAdmin.aadharNumber}');
+	$("#empID").val('${StateAdmin.empID}');
+	$("#email").val('${StateAdmin.email}');
+	$("#stateid").val('${StateAdmin.state}');
+	
+	$("#pincode").val('${StateAdmin.pincode}');
+	$("#title").val('${StateAdmin.title}');
+	$("#mobileNo").val('${StateAdmin.mobileNo}');
+	$("#landLine").val('${StateAdmin.landLine}');
+	$("#designation").val('${StateAdmin.designation}');
+	$("#createUpdateBtn").val("Update");
+	 document.getElementById("stateid").disabled=true;
+	//document.getElementById("state").readOnly = true;
+	}
+}
+window.onload = OnStart;
+</script>
 
 <ct:url var="addAction" value="/stateadminadd.fssai"></ct:url>
 <cf:form action="${addAction}" name="myForm" method="POST"
@@ -39,6 +69,7 @@
 
 					
                                          <div class="row">
+                                         <cf:input type="hidden" path="id" />
                                                     <div class="col-xs-12">
 						<!-- personal information -->
 						<fieldset>
@@ -107,7 +138,7 @@
 				                                              <span id="state_status" ></span></li>
 				                                        </ul>
 				                                    </div>
-				                                    <cf:select id="state" path="state" class="form-control"  onblur="ck_state('StateAdmin');" >
+				                                    <cf:select id="stateid" path="state" class="form-control"  onblur="ck_state('StateAdmin');" >
 				                                	<cf:option value="0" label="Select state Name" />
 													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
 				                                    </cf:select>
@@ -273,7 +304,7 @@
 													<input type="submit" id="updatebtn"
 														style="display: none; float: right; margin-right: 122px;"
 														value="Update" class="btn login-btn" /> <input
-														type="submit" id="createbtn" value="Create"
+														type="submit"  value="Create" id="createUpdateBtn"
 														class="btn login-btn" />
 												</div>
 											</div>

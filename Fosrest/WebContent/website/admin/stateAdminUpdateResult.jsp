@@ -123,16 +123,8 @@
 							</ct:if>
 							
                                             <!-- right side -->
-                                      
-                                            
-                                          
-                                        
-                                          
-                                           
-                                        </div>
-  
-                                       
-                                    </div>
+                              </div>
+     </div>
                                     <div class="row">
 									<div class="col-xs-12 ">
 										<fieldset>
@@ -157,8 +149,8 @@
                                                    
                                                 </ul>
                                             </div>
-                                          	<cf:select path="result" class="form-control">
-													<cf:option value="" label="Select Trainee Type" />
+                                          	<cf:select path="result" class="form-control" id="resultid">
+													<cf:option value="" label="Select Result" />
 													<cf:options items="${result}"  />
 												</cf:select>
                                         </div> 
@@ -169,7 +161,7 @@
                                                 
                                                 <div class="col-md-6 col-xs-12">
 
-                                                    <input type="button"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Save Result" style="margin-top: 26px;"/> 
+                                                    <input type="button"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Save Result" style="margin-top: 26px;" onclick="uploadResult(); return false;"/> 
                                                
                                                 </div>
                                             </div>
@@ -190,15 +182,13 @@
    </cf:form>
   <script>
  
-   
+   var id;
+   var tid;
   function searchByRollNo(index){
-	
-	 var id=document.getElementById("userId_"+index).value;
-	 
-	 var tid=$("#batchCodeid").val();
-	   
+	id=document.getElementById("userId_"+index).value;
+	 tid=$("#batchCodeid").val();
 	   var data=id+"-"+tid;
-	   alert("DATAAAAAAA"+data);
+	 //  alert("DATAAAAAAA"+data);
 	   var name1 = JSON.stringify({
 			courseName : 0
 		})
@@ -221,8 +211,29 @@
 		});
 	   $('#newTable').show();
 	     return result;
-  }
-   
-
+	 }
+function uploadResult(){
+	 var result=$("#resultid").val();
+	 if(result==0){
+			alert("Please Select Result");
+			return false;
+		}
+	  var data=id+"-"+tid+"-"+result;
+	   alert("Result Uploaded");
+	   var name1 = JSON.stringify({
+			courseName : 0
+		})
+	  $.ajax({
+			type : 'post',
+			url : 'saveTraineeResult/'+data+'.fssai',
+			contentType : "application/json",
+			data : name1,
+			success : function(response) {
+				var mainData1 = jQuery.parseJSON(response);
+			 	
+			}
+		}); 
+	 
+}
   
    </script> 

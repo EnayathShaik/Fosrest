@@ -335,9 +335,7 @@ public class TrainerController {
 		String pid="";
 		if(session.getAttribute("profileId")==null)
 			pid=(String) session.getAttribute("profileId");
-	
 		try {
-
 			if (p.getId() == 0) {
 				personalInformationTrainer = this.traineeService
 						.addPersonalInfoTrainer(p,pid);

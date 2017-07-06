@@ -60,7 +60,7 @@
 												<cf:select path="batchCode" class="form-control"   id="batchCodeid">
 													<cf:option value="0" label="Select Batch Code" />
 												<ct:forEach items="${batchCodeList}" var="bc" >
-													<cf:option value="${bc}" label="${bc}" /> 
+													<cf:option value="${bc[1]}" label="${bc[0]}" /> 
 													</ct:forEach> 
 												</cf:select> 
 											</div>
@@ -98,17 +98,16 @@
 													varStatus="loop">
 													<tr>
 													<td>${loop.count}</td>
-													<td>${EligibleUser[0]}</td>
+													<td>${trainerList[0]}</td>
 												<cf:hidden path="logindetails" id="userId_${loop.index}"
 																value="${trainerList[1]}" />
 													<td><input type="text" path="marks" id="marks_${loop.index}"  minlength="1" maxlength="2" required=""/></td>
-													<td> <cf:select path="subject" class="form-control" id="subject_${loop.index}">
+													<td>
+													 <cf:select path="subject" class="form-control" id="subject_${loop.index}">
 													<cf:option value="0" label="Select Subject" />
 													<ct:forEach items="${SubjectList}" var="SubjectList">
 													<cf:option value="${SubjectList[1] }" label="${SubjectList[0]}" />
 													</ct:forEach>
-													<%-- <cf:options value="${SubjectList[1] }" label="${SubjectList[0]}" /> --%>
-													 <%-- <cf:options items="${SubjectList}" id="SubjectList"/> --%>	</td>
 												</cf:select>
 													 <td> <input type="button"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="uploadinfo(${loop.index}); return false;" value="Upload"/> 
                                                </tr>
@@ -139,12 +138,11 @@
    </cf:form>
   <script>
    function uploadinfo(index) {
-	   
-	   
-		var id=document.getElementById("userId_"+index).value;
+	   var id=document.getElementById("userId_"+index).value;
 		var marks=document.getElementById("marks_"+index).value;
 	var subject=$("#subject_"+index).val();
 		var batchCode=document.getElementById("batchCodeid").value;
+		alert("Marks Uploaded");
 	if(marks.match(/^[0-9]{2}$/) == null){
   		alert("Enter Valid Marks");
    		 return false;

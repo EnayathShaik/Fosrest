@@ -25,7 +25,14 @@ public class ViewResult {
 	private int viewResultId;
 	
 	
-	private String batchCode;
+	//private String batchCode;
+	private int trainingcalendarId;
+	public int getTrainingcalendarId() {
+		return trainingcalendarId;
+	}
+	public void setTrainingcalendarId(int trainingcalendarId) {
+		this.trainingcalendarId = trainingcalendarId;
+	}
 	private int marks;
 	private int Subject;
 	private int traineeId;
@@ -37,12 +44,6 @@ public class ViewResult {
 		this.viewResultId = viewResultId;
 	}
 	
-	public String getBatchCode() {
-		return batchCode;
-	}
-	public void setBatchCode(String batchCode) {
-		this.batchCode = batchCode;
-	}
 	public int getMarks() {
 		return marks;
 	}

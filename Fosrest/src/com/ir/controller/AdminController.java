@@ -587,9 +587,10 @@ public class AdminController {
 	@RequestMapping(value = "/stateAdminPersonalInformation", method = RequestMethod.GET)
 	public String stateAdminPersonalInformation(StateAdmin StateAdmin ,Model model,HttpServletRequest request, HttpSession session) {
 		System.out.println("stateAdminPersonalInformation");
-		if(checkAccess(session))
-			return "redirect:login.fssai";
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
 		//String userId = request.getParameter("userId");
+		System.out.println("11111111111111111111111111111");
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		model.addAttribute("DesignationList", DesignationList);
 		Map<String, String> titleMap = lst.titleMap;
@@ -610,6 +611,15 @@ public class AdminController {
 					new StateAdmin());
 		}
 		System.out.println("aalaaaaaaaaagggggggggggggaaaaa");*/
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWwww  "+session.getAttribute("Id"));
+		if (session.getAttribute("Id")!=null) {
+			System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+			StateAdmin = this.adminService
+						.FullDetailStateAdmin((int)session.getAttribute("Id"));
+				model.addAttribute("StateAdmin",
+						StateAdmin);
+				model.addAttribute("isUpdate", "Y");
+			}
 		return "stateAdminPersonalInformation";
 		
 	
@@ -619,8 +629,9 @@ public class AdminController {
 	@RequestMapping(value = "/stateadmin", method = RequestMethod.GET)
 	public String stateadmin(@ModelAttribute("stateAdminForm") stateAdminForm StateAdminForm ,Model model,HttpServletRequest request, HttpSession session) {
 		System.out.println("stateadmin");
-		if(checkAccess(session))
-			return "redirect:login.fssai";
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
+		System.out.println("2222222222222222222222222");
 		model.addAttribute("stateAdminForm", new stateAdminForm());
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		Map<String, String> titleMap = lst.titleMap;
@@ -636,7 +647,8 @@ public class AdminController {
 	// For add and update state both
 	@RequestMapping(value = "/stateadminadd", method = RequestMethod.POST)
 	public String addstateadmin(@ModelAttribute("stateAdminForm") stateAdminForm p,Model model) {
-		System.out.println("id1" + p.getId());
+		System.out.println("id" + p.getId());
+		
 		String stateadmin=null;
 		if (p.getId() == 0) {
 			// new person, add it
@@ -3388,9 +3400,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		@RequestMapping(value = "/stateadminsearchupdateresult", method = RequestMethod.POST)
 		public String saveuploadassessment(@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm,
 				Model model, HttpSession session) {
-		//int trainerId=(int) session.getAttribute("loginUser2");
 	int trainingCalendarId=UploadAssessmentForm.getTrainingCalendarId();
-	//String batchCode=UploadAssessmentForm.getBatchCode();
 	System.out.println("batchcode          "+trainingCalendarId);
 	model.addAttribute("listofTrainee", this.adminService.listofTrainee(trainingCalendarId));
 	model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
@@ -3406,7 +3416,27 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 				return "redirect:login.fssai";*/
 			Map<String , String> result = lst.Result;
 			model.addAttribute("result",result);
+			String[] arrData2 = data.split("-");
+			int trainingCalendarId2 = Integer.parseInt(arrData2[1]);
+			model.addAttribute("listofTrainee", this.adminService.listofTrainee(trainingCalendarId2));
 			List hm= this.adminService.listofTraineeforResult(data);
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		String newList = g.toJson(hm);
+		out.write(newList);
+		out.flush();
+		}
+		
+		@RequestMapping(value = "/saveTraineeResult/{data}", method = RequestMethod.POST)
+		public void saveTraineeResult(@PathVariable("data") String data,
+				@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm, Model model, HttpSession session
+				,HttpServletResponse response) throws IOException {
+			/*	if(checkAccess(session))
+				return "redirect:login.fssai";*/
+			System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+			Map<String , String> result = lst.Result;
+			model.addAttribute("result",result);
+			String hm= this.adminService.saveTraineeResult(data);
 		PrintWriter out = response.getWriter();
 		Gson g = new Gson();
 		String newList = g.toJson(hm);

@@ -556,6 +556,10 @@ public List listofTraineeforResult( String data);
 
 
 
+public String saveTraineeResult(String data);
+
+
+public StateAdmin FullDetailStateAdmin(int loginId);
 
 
 

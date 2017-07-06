@@ -66,7 +66,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		System.out.println("inside listBatchCodeListforTrainer wo parameter");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingCalendar> mccList = session
-				.createSQLQuery("select distinct tc.batchCode from TrainingCalendar tc inner join TrainingCalendarMapping tcm on tc.batchCode=tcm.batchCode where trainerId='"+trainerId+"'").list();
+				.createSQLQuery("select distinct tc.batchCode,tc.trainingCalendarId from TrainingCalendar tc inner join TrainingCalendarMapping tcm on tc.batchCode=tcm.batchCode where trainerId='"+trainerId+"'").list();
 				return mccList;
 	}
 
@@ -75,7 +75,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		System.out.println("inside listEligibleuser" );
 		Session session = this.sessionFactory.getCurrentSession();
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
-		Query query=session.createSQLQuery("select distinct traineename,nt.logindetails from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid )  inner join viewResult vr on vr.batchCode=tc.batchCode where vr.trainerid='"+trainerId+"'and  vr.batchCode='"+batchCode+"'and vr.marks=0");
+		Query query=session.createSQLQuery("select pit.firstName,pit.loginDetails from viewResult vr inner join PersonalInformationTrainee pit on vr.traineeId=pit.logindetails where vr.marks<0 and vr.trainerid='"+trainerId+"'");
 		uas = query.list();
 		System.out.println(uas);
 		return uas; 
@@ -94,9 +94,13 @@ public class TrainerDAOImpl implements TrainerDAO {
 			String subject =arrData[2];
 			String batchCode=arrData[3];
 			String sql;
-			sql = "update ViewResult set marks = '"+marks+"' where  batchCode='"+batchCode+"' and subject='"+subject+"'and traineeId='"+loginId+"'";
+			sql = "update ViewResult set marks = '"+marks+"' where  trainingcalendarId='"+batchCode+"' and subject='"+subject+"'and traineeId='"+loginId+"'";
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
+			/*String sql2;
+			sql2 = "update NomineeTrainee set assignedByTrainer = '"+trainerId+"' where  trainingCalendarId='"+batchCode+"'and logindetails='"+loginId+"'";
+			Query query2 = session.createSQLQuery(sql2);
+			query2.executeUpdate();*/
 			return null;
 }
 
@@ -105,7 +109,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		System.out.println("inside listofSubjects" );
 		Session session = this.sessionFactory.getCurrentSession();
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
-		Query query=session.createSQLQuery("select distinct mm.moduleName,mm.moduleId from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) inner join modulemaster mm on (tcmap.subjectId=mm.moduleId) where tcmap.trainerid='"+trainerId+"'and  tc.batchCode='"+batchCode+"'and nt.score=0");
+		Query query=session.createSQLQuery("select distinct mm.moduleName,mm.moduleId from NomineeTrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) inner join modulemaster mm on (tcmap.subjectId=mm.moduleId) where tcmap.trainerid='"+trainerId+"'and  tc.trainingCalendarId='"+batchCode+"'and nt.score=0");
 		uas = query.list();
 		System.out.println(uas);
 		return uas; 
