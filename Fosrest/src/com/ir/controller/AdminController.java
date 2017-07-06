@@ -610,12 +610,10 @@ public class AdminController {
 			model.addAttribute("StateAdmin",
 					new StateAdmin());
 		}
-		System.out.println("aalaaaaaaaaagggggggggggggaaaaa");*/
-		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWwww  "+session.getAttribute("Id"));
-		if (session.getAttribute("Id")!=null) {
-			System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-			StateAdmin = this.adminService
-						.FullDetailStateAdmin((int)session.getAttribute("Id"));
+	*/
+		if (session.getAttribute("stateAdminLoginId")!=null) {
+		StateAdmin = this.adminService
+						.FullDetailStateAdmin((int)session.getAttribute("stateAdminLoginId"));
 				model.addAttribute("StateAdmin",
 						StateAdmin);
 				model.addAttribute("isUpdate", "Y");
@@ -631,7 +629,6 @@ public class AdminController {
 		System.out.println("stateadmin");
 		/*if(checkAccess(session))
 			return "redirect:login.fssai";*/
-		System.out.println("2222222222222222222222222");
 		model.addAttribute("stateAdminForm", new stateAdminForm());
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		Map<String, String> titleMap = lst.titleMap;
@@ -1217,9 +1214,10 @@ public class AdminController {
 	@RequestMapping("/activateDeActivateTrainee")
 	public String activateDeActivateTrainee(
 			@Valid @ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm, HttpSession session) {
-		if(checkAccess(session))
-			return "redirect:login.fssai";
-		String status = (traineeUserManagementForm.getStatus().equalsIgnoreCase("I") ? "N" : "Y");
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
+		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+		String status = (traineeUserManagementForm.getStatus().equalsIgnoreCase("I") ? "I" : "A");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(traineeUserManagementForm.getProfileID()))
 				.tableName();
 		adminService.updateUser(traineeUserManagementForm.getLogindetails(), tableName, status);
@@ -3433,7 +3431,6 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 				,HttpServletResponse response) throws IOException {
 			/*	if(checkAccess(session))
 				return "redirect:login.fssai";*/
-			System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
 			Map<String , String> result = lst.Result;
 			model.addAttribute("result",result);
 			String hm= this.adminService.saveTraineeResult(data);

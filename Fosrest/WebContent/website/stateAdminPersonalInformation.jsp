@@ -10,11 +10,7 @@
 <script>
 function OnStart() {
 var isUpdate = '${isUpdate}';
-alert("VVVVVVVVVVVVVVVVvv"+isUpdate);
 if (isUpdate != null && isUpdate == "Y") {
-	
-	var name = '${StateAdmin.id}';
-	alert("MMMMMMMMM"+name);
 	$("#id").val('${StateAdmin.id}');
 	$("#firstName").val('${StateAdmin.firstName}');
 	$("#middleName").val('${StateAdmin.middleName}');
