@@ -2738,7 +2738,6 @@ public class AdminController {
 	public String nominateTrainee(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm,
 			Model model, HttpSession session) {
 		System.out.println("admin controller NominateTrainee");
-
 		if((int)session.getAttribute("profileId")!=2){	
 			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"TrainerController.java");
 		return "redirect:login.fssai";
@@ -2749,7 +2748,8 @@ public class AdminController {
 		model.addAttribute("DesignationList", DesignationList);
 		model.addAttribute("TrainingTypeList", TrainingTypeList);
 		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
-		model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
+		//model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
+		
 		/*Map<String, String> userTypeMap = lst.userTypeMap;
 		model.addAttribute("userTypeMap", userTypeMap);*/
 		model.addAttribute("NominateTraineeForm", new NominateTraineeForm());
@@ -2763,14 +2763,14 @@ public class AdminController {
 	public String ListEligibleUser(@ModelAttribute("NominateTraineeForm") NominateTraineeForm nominateTraineeForm,
 			Model model, HttpSession session) {
 		String stateId=(String) session.getAttribute("stateId");
-		
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		List<TrainingType> TrainingTypeList = pageLoadService.loadTrainingType();
 		List<TrainingPhase> TrainingPhaseList = pageLoadService.loadTrainingPhase();
 		model.addAttribute("DesignationList", DesignationList);
 		model.addAttribute("TrainingTypeList", TrainingTypeList);
 		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
-		model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
+		model.addAttribute("batchCodeList", this.adminService.listBatchCodeListNomineeTrainee(nominateTraineeForm));
+		//model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
 		System.out.println("admin controller ListEligibleUser" + nominateTraineeForm.getDesignation());
 		model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getDesignation(),stateId));
 		
@@ -2795,7 +2795,6 @@ public class AdminController {
 			HttpServletRequest httpServletRequest, HttpServletResponse response, HttpSession session)
 			throws IOException {
 		int stateAdminId=(int)session.getAttribute("stateAdminId");
-		System.out.println("iddddddd333333333333333dddddddddddddddddddd"+stateAdminId);
 		new ZLogger("getModule", "getModule............" + data, "CommonController.java");
 		String courseName = data;
 		// int id=session.;
@@ -3393,7 +3392,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 			/*if(checkAccess(session))
 				return "redirect:login.fssai";*/
 		
-					model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
+					model.addAttribute("batchCodeList", this.adminService.listBatchCodeListStateAdmin());
 					Map<String , String> result = lst.Result;
 					model.addAttribute("result",result);
 			return "stateAdminUpdateResult";
@@ -3404,7 +3403,9 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 	int trainingCalendarId=UploadAssessmentForm.getTrainingCalendarId();
 	System.out.println("batchcode          "+trainingCalendarId);
 	model.addAttribute("listofTrainee", this.adminService.listofTrainee(trainingCalendarId));
-	model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
+
+	model.addAttribute("batchCodeList", this.adminService.listBatchCodeListStateAdmin());
+	//model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
 	Map<String , String> result = lst.Result;
 	model.addAttribute("result",result);
 			return "stateAdminUpdateResult";

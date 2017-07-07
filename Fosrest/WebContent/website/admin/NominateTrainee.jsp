@@ -75,7 +75,6 @@
 															<li class="style-li"><strong>Training Type:</strong></li>
 															<li id="trainingTypeErr" style="display: none;"
 																class="style-li error-red">Select Training Type.</li>
-																
 															<li class="style-li error-red"><span
 																id="name_status" class="clear-label"> </span> ${created }</li>
 														</ul>
@@ -153,7 +152,7 @@
 							<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
 								aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
-									<div class="modal-content">
+									<div class="modal-content" style="  width: 750px;">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
 												aria-label="Close">
@@ -333,12 +332,13 @@
 				});
 
 		console.log(loginIds);
-	
+	var trainingPhase= $("#trainingPhase").val();
+	alert("ffffffffffffffffffff"+trainingPhase);
 		var batchCode = $("#batchCode").val();
 		var name = JSON.stringify({
 			courseType : 0
 		});
-		var result = loginIds + "-" +batchCode;
+		var result = loginIds + "-" +batchCode+"-"+trainingPhase;
 				
 		$.ajax({
 			type : 'post',
@@ -373,6 +373,7 @@
 
 
  function batchcodeinfo(){
+	
 	var a=document.getElementById("batchCode2").value;
      var name1=JSON.stringify({
  		courseName:0
@@ -385,12 +386,12 @@
  	  success: function (response) { 
  	      var mainData1 = jQuery.parseJSON(response);
  	    $('#newTable tr').remove();
- 	 $('#newTable').append( '<tr  class="background-open-vacancies"><th>S.No.</th><th>Trainer Name</th><th>Subject</th><th>Training Institute</th><th>Training Start Date</th><th>Training End Date</th></tr>')
+ 	 $('#newTable').append( '<tr  class="background-open-vacancies"><th>S.No.</th><th>Trainer Name</th><th>Subject</th><th>Training Institute</th><th>Training Type</th><th>Training Phase</th>  <th>Training Start Date</th><th>Training End Date</th></tr>')
  	       var j = 1;
 			 $.each(mainData1,function(i, obj) {$('#newTable').append(
 			    		
                                '<tr id="tableRow"><td>' + j++
-                               + '</td><td>' + obj[1] + '</td><td>' + obj[0] + '</td><td>' + obj[4] +'<br>'+ obj[5] + '</td><td>' + obj[2] + '</td><td>' + obj[3] + '</td></tr>');
+                               + '</td><td>' + obj[0] + '</td><td>' + obj[1] + '</td><td>' + obj[2] +'<br>'+ obj[3] + '</td><td>' + obj[4] + '</td><td>' + obj[5] + '</td><td>' + obj[6] + '</td><td>' + obj[7] + '</td></tr>');
                    });
 			    
  	      }
@@ -417,5 +418,21 @@
 		   		$("#userTypeErr").css("display" , "block");
 		   		return false;
 		   	 } 
+		 if($("#trainingType").val() == 0){
+	   		 
+		   		$("#trainingTypeErr").css("display" , "block");
+		   		return false;
+		   	 } 
+		 var tt=$("#trainingType").val();
+		 
+		 if(tt==3){
+			 alert("KKKKKKKKKKKKK");
+			 if($("#trainingPhase").val() == 0){
+		   		 
+			   		$("#trainingPhaseErr").css("display" , "block");
+			   		return false;
+			   	 } 
+		 } 
+		 
 	}
 </script>

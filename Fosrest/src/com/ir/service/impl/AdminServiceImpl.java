@@ -29,6 +29,7 @@ import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
 import com.ir.form.ManageTrainingPartnerForm;
+import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
 import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
@@ -1716,5 +1717,16 @@ public StateAdmin FullDetailStateAdmin(int loginId) {
 	StateAdmin stateAdmin = adminDAO.FullDetailStateAdmin(loginId);
 	return stateAdmin;
 }
-
+@Override
+@Transactional
+public List<TrainingCalendar> listBatchCodeListNomineeTrainee(NominateTraineeForm nominateTraineeForm) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listBatchCodeListNomineeTrainee(nominateTraineeForm);
+}
+@Override
+@Transactional
+public List<TrainingCalendar> listBatchCodeListStateAdmin() {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listBatchCodeListStateAdmin();
+}
 }

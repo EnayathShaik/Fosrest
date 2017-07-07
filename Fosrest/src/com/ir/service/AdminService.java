@@ -24,6 +24,7 @@ import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
 import com.ir.form.ManageTrainingPartnerForm;
+import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
 import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
@@ -562,6 +563,9 @@ public String saveTraineeResult(String data);
 public StateAdmin FullDetailStateAdmin(int loginId);
 
 
+public List<TrainingCalendar> listBatchCodeListNomineeTrainee(NominateTraineeForm nominateTraineeForm);
+
+public List<TrainingCalendar>  listBatchCodeListStateAdmin();
 
 }
 

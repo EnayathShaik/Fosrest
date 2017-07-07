@@ -3168,6 +3168,7 @@ public class AdminDAOImpl implements AdminDAO {
 		List<String> loginDetails = new ArrayList<String>();
 		String[] loginIdName = arrData[0].split(",");
 		int trainingCalendarId = Integer.parseInt(arrData[1]);
+		int trainingPhase=Integer.parseInt(arrData[2]);
 		TrainingCalendar ts = (TrainingCalendar) session.load(TrainingCalendar.class, trainingCalendarId);
 		//int unitCode = ts.getChapterId();
 		//String moduleId = ts.getSubjects();
@@ -3186,7 +3187,7 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("id " + s.split("@")[0]);
 
 			String result = addNomineeTrainee( trainingCalendarId, Integer.parseInt(s.split("@")[0]),
-					s.split("@")[1],stateAdminId);
+					s.split("@")[1],stateAdminId,trainingPhase);
 
 		}
 		System.out.println("6:1 st return created");
@@ -3195,7 +3196,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	// addNomineeTrainee
 	// @Override
-	public String addNomineeTrainee( int trainingCalendarId, int loginId, String traineeName,int stateAdminId) {
+	public String addNomineeTrainee( int trainingCalendarId, int loginId, String traineeName,int stateAdminId,int trainingPhase) {
 
 		System.out.println( " trainingScheduleId " + trainingCalendarId + " loginId "
 				+ loginId + " traineeName " + traineeName);
@@ -3237,7 +3238,14 @@ public class AdminDAOImpl implements AdminDAO {
 		query.executeUpdate();
 
 		session.close();
-		addviewResult(loginId);
+		if(trainingPhase!=3){
+			addviewResult(loginId);
+		}
+		else {
+			
+			
+		}
+		
 		System.out.println("before return");
 		return "created";
 	}
@@ -4120,7 +4128,9 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingCalendar> mccList = null;
 		mccList = session.createSQLQuery(
-				"select distinct m.moduleName,p.firstName,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where tc.trainingCalendarId='"
+				"select distinct p.firstName,m.moduleName,pit.trainingcentername,pit.correspondenceaddress1,tt.trainingTypeName,tp.trainingPhaseName,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id               "
+				+ "inner join TrainingType tt on tt.trainingTypeId =cast(tc.trainingType as numeric)"
+				+ " inner join TrainingPhase tp on cast(tc.trainingPhase as numeric)=tp.trainingPhaseId where tc.trainingCalendarId='"
 						+ batchCode + "'  ")
 				.list();
 		return mccList;
@@ -4314,6 +4324,31 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 
 	}
 	
+	@Override
+	public List<TrainingCalendar> listBatchCodeListNomineeTrainee(NominateTraineeForm nominateTraineeForm) {
+		System.out.println("inside listBatchCodeList wo parameter");
+		Session session = this.sessionFactory.getCurrentSession();
+		int des=Integer.parseInt(nominateTraineeForm.getDesignation());
+		int ttype=Integer.parseInt(nominateTraineeForm.getTrainingType());
+		int tphase=Integer.parseInt(nominateTraineeForm.getTrainingPhase());
+		List<TrainingCalendar> mccList = session
+				.createQuery("from TrainingCalendar where coalesce(isactive,'') <> 'I' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"' and designation='"+des+"' ").list();
+		for (TrainingCalendar p : mccList) {
+			System.out.println("TrainingSchedule List::" + p);
+		}
+		return mccList;
+	}
 	
+	@Override
+	public List<TrainingCalendar> listBatchCodeListStateAdmin() {
+		System.out.println("inside listBatchCodeList wo parameter");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<TrainingCalendar> mccList = session
+				.createQuery("from TrainingCalendar where coalesce(isactive,'') <> 'I' and coalesce(trainingPhase,'')<> '3' ").list();
+		for (TrainingCalendar p : mccList) {
+			System.out.println("TrainingSchedule List::" + p);
+		}
+		return mccList;
+	}
 	
 }
