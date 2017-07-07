@@ -2098,13 +2098,13 @@ public class AdminDAOImpl implements AdminDAO {
 	public String addSubjectMaster(SubjectMaster p) {
 		
 		Session session = this.sessionFactory.getCurrentSession();
-		/*Query isempty = session.createSQLQuery("select * from ModuleMaster where isActive='Y' and modulename='"+ p.getModuleName()  + "'");
+		Query isempty = session.createSQLQuery("select * from subjectMaster where  subjectname='"+ p.getSubjectName()  + "'");
 		
 				
 		List list1 = isempty.list();
 		if (list1 != null && list1.size() > 0) {
 			return "error";
-		}*/
+		}
 
 		String sql = "select coalesce(max(seqNo) + 1,1) from SubjectMaster ";
 		int maxId = 0;
