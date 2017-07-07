@@ -340,8 +340,15 @@ public class TrainerController {
 				personalInformationTrainer = this.traineeService
 						.addPersonalInfoTrainer(p,pid);
 			} else {
-				personalInformationTrainer = this.traineeService
-						.updatePersonalInfoTrainer(p);
+				if(session.getAttribute("Id")==null){
+					System.out.println("trrrrrrrrrrrrrrrr");
+					return "redirect:/trainerUserManagementForm.fssai";
+				}else{
+					System.out.println("trrrrrrrrrrrrrrrr111111111111111111");
+					personalInformationTrainer = this.traineeService
+							.updatePersonalInfoTrainer(p);
+				}
+				
 			}
 
 		} catch (Exception e) {
@@ -451,8 +458,17 @@ public class TrainerController {
 				personalInformationTrainingInstitute = this.traineeService
 						.addPersonalInfoTrainingInstitute(p,pid);
 			} else {
-				personalInformationTrainingInstitute = this.traineeService
-						.updatePersonalInfoTrainingInstitute(p);
+				if(session.getAttribute("Id")==null)
+				{
+					System.out.println("tcccccccccccc");
+					return "redirect:/trainingCenterUserManagementForm.fssai";
+				}
+				else{
+					System.out.println("tcccccccccccc111111111111111");
+					personalInformationTrainingInstitute = this.traineeService
+							.updatePersonalInfoTrainingInstitute(p);
+				}
+				
 			}
 
 		} catch (Exception e) {

@@ -52,7 +52,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		strIds=strIds.replace("]", ")");
 		System.out.println(strIds);
 		try{
-			Query query = session.createQuery("from AssessmentQuestions where isActive='Y' and modulemaster in "+ strIds+" order by assessmentquestionid");
+			Query query = session.createQuery("from AssessmentQuestions where isActive='Y' and subjectmaster in "+ strIds+" order by assessmentquestionid");
 			 assessmentQuestions = query.list();
 			 //System.out.println(" assessmentQuestions "+assessmentQuestions);
 		}catch(Exception e){
@@ -129,12 +129,12 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		if(questionIds.length() >2){
 			questionIds = questionIds.substring(1,questionIds.length()-1);
 		}
-		System.out.println(" modulecode "+subIds);
-String strIds=subIds.toString();
+		System.out.println(" subjectcode "+subIds);
+         String strIds=subIds.toString();
 		
 		strIds=strIds.replace("[", "(");
 		strIds=strIds.replace("]", ")");
-		Query query = session.createQuery(" from AssessmentQuestions where moduleMaster in "+ strIds +" and assessmentQuestionid in ("+questionIds+")");
+		Query query = session.createQuery(" from AssessmentQuestions where subjectMaster in "+ strIds +" and assessmentQuestionid in ("+questionIds+")");
 		List<AssessmentQuestions> listAssessmentQuestions = query.list();
 		
 		return listAssessmentQuestions;
@@ -147,9 +147,9 @@ String strIds=subIds.toString();
 	}
 
 	@Override
-	public int getElegibilityForAssessment(int moduleid){
+	public int getElegibilityForAssessment(int subjectid){
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select eligibility from assessmenteligibility where moduleid="+moduleid;
+		String sql = "select eligibility from assessmenteligibility where subjectId="+subjectid;
 		Query query = session.createSQLQuery(sql);
 		List listEligibility = query.list();
 		if(listEligibility.size() > 0)
@@ -468,8 +468,8 @@ String strIds=subIds.toString();
 	@Override
 	public TraineeAssessmentEvaluation evaluate(Map<String, String> questions, List<AssessmentQuestions> answers,
 			List<Integer> lst) {
+			Session session = sessionFactory.getCurrentSession();
 		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
-		Session session=sessionFactory.getCurrentSession();
 		//int totalQuestion = answers.size();
 		Map<String, Integer> answersMap = new HashMap<String, Integer>();
 		for (int i = 0; i < answers.size(); i++) {
@@ -483,7 +483,7 @@ String strIds=subIds.toString();
 		Set<String> questionKeys = questions.keySet();
 		Iterator<String> keysIterator = questionKeys.iterator();
 		int i=0;
-		String moduleIds="";
+		String subjectIds="";
 		while(keysIterator.hasNext()){
 			
 			String key = keysIterator.next();
@@ -509,10 +509,10 @@ String strIds=subIds.toString();
 		System.out.println(lst);
 		for(int j=0;j<lst.size();j++){
 			System.out.println(lst.get(j));
-			 moduleIds=moduleIds+lst.get(j)+"|";
+			subjectIds=subjectIds+lst.get(j)+"|";
 
 		} 
-		traineeEvaluation.setModuleIds(moduleIds);
+		traineeEvaluation.setSubjectIds(subjectIds);
 		int eligibility = getElegibilityForAssessment(lst.get(i++)); 
 		if(eligibility > -1){
 			if(totalScore >= eligibility){
@@ -520,14 +520,13 @@ String strIds=subIds.toString();
 			}else{
 				traineeEvaluation.setResult("Fail");
 			}
-			String sql;
-			sql = "update NomineeTrainee set result = '"+traineeEvaluation.getResult()+"' where  logindetails='"+traineeEvaluation.getLogindetails()+"'";
-			Query query = session.createSQLQuery(sql);
-			query.executeUpdate();
 		}else{
 			traineeEvaluation.setResult("Eligibility yet to declare");
 		}
-	
+String sql;
+			sql = "update NomineeTrainee set result = '"+traineeEvaluation.getResult()+"' where  logindetails='"+traineeEvaluation.getLogindetails()+"'";
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
 		return traineeEvaluation;
 	}
 }

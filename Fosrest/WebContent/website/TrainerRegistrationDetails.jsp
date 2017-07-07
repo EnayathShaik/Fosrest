@@ -35,7 +35,10 @@
 		}  */
 		// $("#otherTrainingInstitute").css("display" , "none");
 		var isUpdate = '${isUpdate}';
-		if (isUpdate != null && isUpdate == "Y") {
+		 var profileId = '${profileId}';
+		// alert("profileId"+profileId);
+		 
+		 if (isUpdate != null && isUpdate == "Y") {
 			if ( $('#YesLabNotified').is(':checked')==false) {
 				$("#Oti").css("display", "none");
 			 	$("#Ati").css("display", "none");
@@ -73,11 +76,17 @@
 			$("#resCity").val('');
 			$("#ResidentialLine1").val('');
 			$("#ResidentialLine2").val(''); */
-			$("#createUpdateBtn").val("Update");
 			$("#captcha").css("display", "none");
 			$("#chkunit").css("display", "none");
 			$("#check").attr("checked", "checked");
-
+			 
+			if(profileId==2 || profileId==1){
+				 $("#createUpdateBtn").val("Back");
+			 }
+			 else if(profileId==4)
+				 {
+				 $("#createUpdateBtn").val("Update");
+				 }
 			}
 		DrawCaptcha();
 

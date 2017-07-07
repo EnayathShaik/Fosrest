@@ -58,7 +58,7 @@
 			$(window).load(function () {
 				var assessmentQuestions = []; 
 				for(var index=0;index<questionList.listAssessmentQuestion.length;index++){
-					$('#questionsTable').append('<input type="hidden" name="moduleId" value = "'+questionList.moduleId[index]+'">');   
+					$('#questionsTable').append('<input type="hidden" name="subjectId" value = "'+questionList.subjectId[index]+'">');   
 					$('#questionsTable').append('<ol>');
 					$('#questionsTable').append('<li><strong>Question No.'+questionList.listAssessmentQuestion[index].questionNumber+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
 					

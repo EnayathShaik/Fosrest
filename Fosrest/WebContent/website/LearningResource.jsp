@@ -33,7 +33,11 @@
 		<%-- <td>${Lrlist[1]}</td>
 			<td>${Lrlist[2]}</td> --%>
 			<%-- <td><a href="${Lrlist[3]}" target="_blank">${Lrlist[3]}</a></td> --%>
-           <td><a href="" >Fosrest/Subject/${Lrlist[0]}</a></td>
+			<td><ct:choose>
+			<ct:when test="${ Lrlist[1]== 'No Study-Material'}">No Study-Material</ct:when>
+			<ct:otherwise><a href="${Lrlist[1]}" target="_blank" >${Lrlist[1]}</a></ct:otherwise> 
+			</ct:choose></td>
+         <%--   <td><a href="" >Fosrest/Subject/${Lrlist[0]}</a></td> --%>
 		</tr>
 	</ct:forEach>
 	</table>

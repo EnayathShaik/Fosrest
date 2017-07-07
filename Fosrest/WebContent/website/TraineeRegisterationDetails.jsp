@@ -31,6 +31,7 @@
 	 
 	 var isUpdate = '${isUpdate}';
 	 var profileId = '${profileId}';
+	// alert("profileId"+profileId);
 	 if(profileId ==2 || profileId == 1 ){ 
 		
 		 $("#statusDIV").css("display" , "block");
@@ -67,10 +68,19 @@
         $("#resCity").val('');
         $("#ResidentialLine1").val('');
         $("#ResidentialLine2").val('');  */
-		 $("#createUpdateBtn").val("Update");
+		
 		$("#captcha").css("display" , "none");
 		 $("#chkunit").css("display" , "none");
 		 $("#check").attr("checked","checked");
+		 if(profileId==2 || profileId==1){
+			 $("#createUpdateBtn").val("Back");
+		 }
+		 else if(profileId==3)
+			 {
+			 $("#createUpdateBtn").val("Update");
+			 }
+		
+		
 	 }
 
 	
@@ -157,11 +167,11 @@
                                                 <ul class="lab-no">
                                                     <li class="style-li"><strong>Trainee Type:</strong></li> <li class="style-li error-red"> * </li>
                                                      <!--  valid -->
-                                                            <li id="userTypeErr" style="display:none;" class="style-li error-red" >Trainee Type can not be blank.</li>
+                                                            <li id="designationErr" style="display:none;" class="style-li error-red" >Trainee Type can not be blank.</li>
                                                    
                                                 </ul>
                                             </div>
-                                          	<cf:select path="userType" class="form-control">
+                                          	<cf:select path="designation" class="form-control">
 													<cf:option value="" label="Select Trainee Type" />
 													<cf:options items="${DesignationList}"  itemLabel="designationName" itemValue="designationId"/>
 												</cf:select>
@@ -701,9 +711,8 @@
    function validateFields(){
 	   var isUpdate = '${isUpdate}';
 
-   	 //alert($("#userType").val());
-   	// alert($("#holidayReason").val());
-   		 $("#userTypeErr").css("display" , "none");
+   	
+   		 $("#designationErr").css("display" , "none");
 			$("#titleErr").css("display" , "none");
 		$("#correspondencePincodeErr").css("display", "none");
 		$("#correspondencePincodeErr1").css("display", "none");
@@ -732,9 +741,9 @@
 		 $("#postDistrictErr").css("display" , "none");
 		 $("#aadharNumberErr2").css("display", "none");
 		 
-   	    if($("#userType").val() == ''){
+   	    if($("#designation").val() == ''){
    		 
-   		$("#userTypeErr").css("display" , "block");
+   		$("#designationErr").css("display" , "block");
    		return false;
    	 }  
    	 if ($("#AadharNumber").val() == 0) {

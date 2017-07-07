@@ -6,17 +6,19 @@ public class AssessmentEvaluationForm {
 
 	/**Course name for which the assessment has been processing */
 	//public int moduleId;
-	private List<Integer> moduleId;
+	private List<Integer> subjectId;
 	/**List of questions id */
 	public List<Integer> assessmentQuestionsList;
 
 
-	public List<Integer> getModuleId() {
-		return moduleId;
+	
+
+	public List<Integer> getSubjectId() {
+		return subjectId;
 	}
 
-	public void setModuleId(List<Integer> moduleId) {
-		this.moduleId = moduleId;
+	public void setSubjectId(List<Integer> subjectId) {
+		this.subjectId = subjectId;
 	}
 
 	/**

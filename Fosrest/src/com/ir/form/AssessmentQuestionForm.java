@@ -7,7 +7,7 @@ public class AssessmentQuestionForm {
 
 	//private int unitCode1,moduleCode1,unitCode2,moduleCode2;
 	
-	private int moduleCode1,moduleCode2;
+	private int subjectCode1,subjectCode2;
 	private int designation1,designation2;
 	private int trainingType1,trainingType2;
 	private int trainingPhase1,trainingPhase2;
@@ -81,22 +81,24 @@ public class AssessmentQuestionForm {
 	@NotNull
 	private int correctAnswer;
 
-	public int getModuleCode1() {
-		return moduleCode1;
+	
+
+
+	public int getSubjectCode1() {
+		return subjectCode1;
 	}
 
-	public void setModuleCode1(int moduleCode1) {
-		this.moduleCode1 = moduleCode1;
+	public void setSubjectCode1(int subjectCode1) {
+		this.subjectCode1 = subjectCode1;
 	}
 
-	public int getModuleCode2() {
-		return moduleCode2;
+	public int getSubjectCode2() {
+		return subjectCode2;
 	}
 
-	public void setModuleCode2(int moduleCode2) {
-		this.moduleCode2 = moduleCode2;
+	public void setSubjectCode2(int subjectCode2) {
+		this.subjectCode2 = subjectCode2;
 	}
-
 
 	public String getQuestionTitle() {
 		return questionTitle;

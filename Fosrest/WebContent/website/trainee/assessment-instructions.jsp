@@ -1,4 +1,7 @@
+<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <script type="text/javascript">
+
 function OnStart(){
 	var steps = 2;
 	var traineeSteps =
@@ -46,10 +49,15 @@ function OnStart(){
             <div class="row btm-margin">
                   <div class="col-md-6  col-xs-12"> 
                       <fieldset>
-                    <legend><h3>Training Details</h3></legend>
-                    <h4>Training Name: <span class="f16">${trainingDetails.moduleName }</span></h4>
-                    <h4>Training Phase: <span class="f16">${trainingDetails.trainingPhase}</span></h4>
-                    <h4>Training Duration: <span class="f16">${trainingDetails.trainingstartdate} -  ${trainingDetails.trainingenddate}</span></h4>
+                    <legend>Training Details</legend>
+                    <h4>Training Type: <span class="f16">${listOnlineTraining.trainingType }</span></h4>
+                    <h4>Training Phase: <span class="f16">${listOnlineTraining.trainingPhase}</span></h4>
+                    <h4>Training Duration: <span class="f16">${listOnlineTraining.trainingstartdate} -  ${listOnlineTraining.trainingenddate}</span></h4>
+                    <h4>Subjects:</h4>
+                    <ct:forEach var="subjects" items="${listsubjects}">
+                    <li> <ct:out value="${subjects}"/><br></li>
+                     </ct:forEach>
+                    
                   </fieldset>
                      <br>
               <h3 class="text-capitalize heading-3-padding">Assesment Instructions</h3>
@@ -65,11 +73,11 @@ function OnStart(){
                        <div class="col-md-12  col-xs-12">
                        <p>The test consists of 60 (5 point Likert scale) items across the Big 5 personality factors</p>
                             <ol>
-                            <li>1.Extraversion</li>
-                            <li>2.Agreeableness</li>
-                            <li>3.Conscientiousness</li>
-                            <li>4.Emotional Stability and</li>
-                            <li>5.Openness to Experience</li>                    
+                            <li>Extraversion</li>
+                            <li>Agreeableness</li>
+                            <li>Conscientiousness</li>
+                            <li>Emotional Stability and</li>
+                            <li>Openness to Experience</li>                    
                             </ol>      
                         </div>
                         <div class="col-md-2 hidden-xs"></div>

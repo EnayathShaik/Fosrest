@@ -13,7 +13,7 @@ import com.ir.dao.TrainerDAO;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.TrainerRequestForm;
 import com.ir.form.UploadAssessmentForm;
-import com.ir.model.ModuleMaster;
+//import com.ir.model.ModuleMaster;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.StateAdmin;
 import com.ir.model.TrainingCalendar;
@@ -104,16 +104,19 @@ public class TrainerDAOImpl implements TrainerDAO {
 			return null;
 }
 
+
 	@Override
 	public List<UploadAssessmentForm> listofSubjects(int trainerId, String batchCode) {
 		System.out.println("inside listofSubjects" );
 		Session session = this.sessionFactory.getCurrentSession();
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
-		Query query=session.createSQLQuery("select distinct mm.moduleName,mm.moduleId from NomineeTrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) inner join modulemaster mm on (tcmap.subjectId=mm.moduleId) where tcmap.trainerid='"+trainerId+"'and  tc.trainingCalendarId='"+batchCode+"'and nt.score=0");
+		//Query query=session.createSQLQuery("select distinct mm.subjectName,mm.subjectId from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) inner join subjectmaster mm on (tcmap.subjectId=mm.subjectId) where tcmap.trainerid='"+trainerId+"'and  tc.batchCode='"+batchCode+"'and nt.score=0");
+		Query query=session.createSQLQuery("select distinct mm.subjectName,mm.subjectId from NomineeTrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) inner join subjectmaster mm on (tcmap.subjectId=mm.subjectId) where tcmap.trainerid='"+trainerId+"'and  tc.trainingCalendarId='"+batchCode+"'and nt.score=0");
 		uas = query.list();
 		System.out.println(uas);
 		return uas; 
 
+	
 	}
 	
 	

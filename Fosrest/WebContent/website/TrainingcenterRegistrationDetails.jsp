@@ -12,6 +12,7 @@
 
  function validateFields(){
 	 var isUpdate = '${isUpdate}';
+	 
 	
 
 	
@@ -225,6 +226,9 @@
  function OnStart(){
 	 
 	 var isUpdate = '${isUpdate}';
+	 var profileId = '${profileId}';
+	 //alert("profileId"+profileId);
+	 
 	 if(isUpdate !=null && isUpdate== "Y"){
 		 
 		 var name = '${PersonalInformationTrainingInstitute.firstName}';
@@ -242,8 +246,16 @@
             }, 1000);
         }, 1000);
 	
-		 $("#createUpdateBtn").val("Update");
+		
 		 $("#captcha").css("display" , "none");
+		
+		 if(profileId==2 || profileId==1){
+			 $("#createUpdateBtn").val("Back");
+		 }
+		 else if(profileId==5)
+			 {
+			 $("#createUpdateBtn").val("Update");
+			 }
 		 
 	 }
 		DrawCaptcha();

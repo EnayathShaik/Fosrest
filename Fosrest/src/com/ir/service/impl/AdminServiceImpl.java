@@ -63,7 +63,7 @@ import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ManageTraining;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.MappingMasterTrainer;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -642,16 +642,16 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public String addModuleMaster(ModuleMaster p) {
-		return this.adminDAO.addModuleMaster(p);
+	public String addSubjectMaster(SubjectMaster p) {
+		return this.adminDAO.addSubjectMaster(p);
 
 	}
 
 	// updateModuleMaster
 	@Override
 	@Transactional
-	public void updateModuleMaster(ModuleMaster p) {
-		this.adminDAO.updateModuleMaster(p);
+	public void updateSubjectMaster(SubjectMaster p) {
+		this.adminDAO.updateSubjectMaster(p);
 
 	}
 
@@ -659,16 +659,16 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public void removeModuleMaster(int id) {
-		this.adminDAO.removeModuleMaster(id);
+	public void removeSubjectMaster(int id) {
+		this.adminDAO.removeSubjectMaster(id);
 
 	}
 
 	// /getModuleMasterById
 	@Override
 	@Transactional
-	public ModuleMaster getModuleMasterById(int id) {
-		return this.adminDAO.getModuleMasterById(id);
+	public SubjectMaster getSubjectMasterById(int id) {
+		return this.adminDAO.getSubjectMasterById(id);
 
 	}
 
@@ -676,9 +676,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public List<ModuleMaster> listModuleMaster() {
+	public List<SubjectMaster> listSubjectMaster() {
 		// TODO Auto-generated method stub
-		return this.adminDAO.listModuleMaster();
+		return this.adminDAO.listSubjectMaster();
 	}
 
 	/**
@@ -1193,9 +1193,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public List<PersonalInformationTrainee> listEligibleuser(String userType,String stateId) {
+	public List<PersonalInformationTrainee> listEligibleuser(String designation,String stateId) {
 		// TODO Auto-generated method stub
-		return this.adminDAO.listEligibleuser(userType,stateId);
+		return this.adminDAO.listEligibleuser(designation,stateId);
 	}
 
 	@Override
@@ -1531,7 +1531,7 @@ public List<UnitMaster> listUnitMaster() {
 
 @Override
 @Transactional
-public TreeMap<String, List<ModuleMaster>>  allUnitModules() {
+public TreeMap<String, List<SubjectMaster>>  allUnitModules() {
 	// TODO Auto-generated method stub
 	return this.adminDAO.allUnitModules();
 }
@@ -1579,7 +1579,7 @@ public List<StateMaster> listStateMaster2(int sid) {
 
 @Override
 @Transactional
-public List<ModuleMaster> allSubjects() {
+public List<SubjectMaster> allSubjects() {
 	// TODO Auto-generated method stub
 	return this.adminDAO.allSubjects();
 }

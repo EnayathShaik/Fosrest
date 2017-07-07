@@ -49,7 +49,7 @@ import com.ir.model.InvoiceMaster;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.MappingMasterTrainer;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -225,15 +225,15 @@ public interface AdminDAO {
 
 	public List<UnitMaster> listUnitMaster2();
 
-	public String addModuleMaster(ModuleMaster p);
+	public String addSubjectMaster(SubjectMaster p);
 
-	public void updateModuleMaster(ModuleMaster p);
+	public void updateSubjectMaster(SubjectMaster p);
 
-	public void removeModuleMaster(int id);
+	public void removeSubjectMaster(int id);
 
-	public ModuleMaster getModuleMasterById(int id);
+	public SubjectMaster getSubjectMasterById(int id);
 
-	public List<ModuleMaster> listModuleMaster();
+	public List<SubjectMaster> listSubjectMaster();
 
 	/*public String addSubjectMaster(SubjectMaster p);
 
@@ -354,7 +354,7 @@ public interface AdminDAO {
 
 	public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges();
 
-	public List<PersonalInformationTrainee> listEligibleuser(String userType, String stateId);
+	public List<PersonalInformationTrainee> listEligibleuser(String designation, String stateId);
 
 	public String enrollUser(String data, int stateAdminId);
 
@@ -398,7 +398,7 @@ public interface AdminDAO {
 
 	public List<UnitMaster> listUnitMaster();
 
-	public TreeMap<String, List<ModuleMaster>>  allUnitModules();
+	public TreeMap<String, List<SubjectMaster>>  allUnitModules();
 
 	public String saveEditTrainingScheduleMaster(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form);
 
@@ -411,7 +411,7 @@ public interface AdminDAO {
 
 	public List<StateMaster> listStateMaster2(int sid);
 
-	public List<ModuleMaster> allSubjects();
+	public List<SubjectMaster> allSubjects();
 
 	List listCalendarSearch(TrainingCalendarForm form);
 

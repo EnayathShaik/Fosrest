@@ -475,11 +475,11 @@ public class TraineeController {
 		if(loginId > 0){
 			TraineeAssessment traineeAssessment = new TraineeAssessment();
 			int courseType = 1;
-			List<Integer> subIds = 	traineeService.getCurrentModuleId(loginId);
+			List<Integer> subIds = 	traineeService.getCurrentSubjectId(loginId);
 			System.out.println("subIds "+subIds);
 			List<AssessmentQuestions> assessmentQuestions =  assessmentService.getAssessmentQuestions(subIds);
 			traineeAssessment.setListAssessmentQuestion(assessmentQuestions);
-			traineeAssessment.setModuleId(subIds);
+			traineeAssessment.setSubjectId(subIds);
 			Gson gson=new Gson();
 			String list=gson.toJson(traineeAssessment);
 			responseText = "traineeAssessmentOnline";
@@ -552,9 +552,10 @@ public class TraineeController {
 		Integer userId = 0;
 		try{
 			userId = (Integer) session.getAttribute("userId");
-			OnlineTrainingForm trainingDetails = traineeService.listOnlineTraining(userId);
+			OnlineTrainingForm listOnlineTraining = traineeService.listOnlineTraining(userId);
 			
-			model.addAttribute("trainingDetails", trainingDetails);
+			model.addAttribute("listOnlineTraining", listOnlineTraining);
+			model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
 		
 		}catch(Exception e){
 			e.printStackTrace();
@@ -723,6 +724,7 @@ public class TraineeController {
 				personalInformationTrainee = traineeService.FullDetail(Integer.parseInt(userId));	
 				model.addAttribute("PersonalInformationTrainee", personalInformationTrainee);
 				model.addAttribute("isUpdate", "Y");
+		
 			}
 			else if (session.getAttribute("Id")!=null) {
 				personalInformationTrainee = this.traineeService
@@ -758,7 +760,13 @@ public class TraineeController {
 			if(p.getId() == 0){
 				personalInformationTrainee = this.traineeService.addPersonalInfoTrainee(p);
 			}else{
-				personalInformationTrainee = this.traineeService.updatePersonalInfoTrainee(p);
+				if(session.getAttribute("Id")==null){
+					return "redirect:/traineeUserManagementForm.fssai";
+				}
+				else{
+					personalInformationTrainee = this.traineeService.updatePersonalInfoTrainee(p);
+				}
+				
 			}
 			
 		}catch(Exception e){

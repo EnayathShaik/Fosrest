@@ -23,7 +23,7 @@ import com.ir.model.Languages;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
@@ -233,7 +233,7 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 	@Override
 	@Transactional
-	public List<ModuleMaster> learningResource() {
+	public List<SubjectMaster> learningResource() {
 		// TODO Auto-generated method stub
 		return  pageLoadDao.learningResource();
 	}

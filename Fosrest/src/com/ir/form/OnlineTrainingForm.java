@@ -7,7 +7,7 @@ public class OnlineTrainingForm {
 	private String trainingDuration;
 	private String trainingTopic;
 	private String TopicModule;
-	private String moduleName;
+	private String subjectName;
 	private String trainingstartdate;
 	private String trainingenddate;
 	private String designation;
@@ -30,11 +30,12 @@ public class OnlineTrainingForm {
 	public void setTrainingenddate(String trainingenddate) {
 		this.trainingenddate = trainingenddate;
 	}
-	public String getModuleName() {
-		return moduleName;
+	
+	public String getSubjectName() {
+		return subjectName;
 	}
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
 	}
 	public String getTopicModule() {
 		return TopicModule;

@@ -33,7 +33,7 @@ import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
@@ -192,8 +192,8 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 	@Override
 	@Transactional
-	public List<Integer>  getCurrentModuleId(int loginId){
-		return traineeDAO.getCurrentModuleId(loginId);
+	public List<Integer>  getCurrentSubjectId(int loginId){
+		return traineeDAO.getCurrentSubjectId(loginId);
 	}
 	@Override
 	@Transactional

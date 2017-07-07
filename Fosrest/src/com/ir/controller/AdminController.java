@@ -61,7 +61,7 @@ import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
 import com.ir.form.ManageTrainingPartnerForm;
-import com.ir.form.ModuleMasterForm;
+import com.ir.form.SubjectMasterForm;
 import com.ir.form.MyTrainingForm;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
@@ -93,7 +93,7 @@ import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.KindOfBusiness;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
@@ -590,7 +590,6 @@ public class AdminController {
 		/*if(checkAccess(session))
 			return "redirect:login.fssai";*/
 		//String userId = request.getParameter("userId");
-		System.out.println("11111111111111111111111111111");
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		model.addAttribute("DesignationList", DesignationList);
 		Map<String, String> titleMap = lst.titleMap;
@@ -617,7 +616,6 @@ public class AdminController {
 				model.addAttribute("StateAdmin",
 						StateAdmin);
 				model.addAttribute("isUpdate", "Y");
-				//return "redirect:/loginProcess.fssai";
 			}
 		return "stateAdminPersonalInformation";
 		
@@ -701,13 +699,6 @@ public class AdminController {
 		}
 		return "stateadmin";
 	}*/
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	@RequestMapping("/stateadmin/remove/{id}")
@@ -1205,9 +1196,10 @@ public class AdminController {
 	@RequestMapping("/activateDeActivateTrainer")
 	public String activateDeActivateTrainer(
 			@Valid @ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm, HttpSession session) {
-		if(checkAccess(session))
-			return "redirect:login.fssai";
-		String status = (trainerUserManagementForm.getStatus().equalsIgnoreCase("I") ? "N" : "Y");
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
+		System.out.println("trrrrrrrrrrrrrrrr");
+		String status = (trainerUserManagementForm.getStatus().equalsIgnoreCase("I") ? "I" : "A");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(trainerUserManagementForm.getProfileID()))
 				.tableName();
 		adminService.updateUser(trainerUserManagementForm.getLogindetails(), tableName, status);
@@ -1219,7 +1211,7 @@ public class AdminController {
 			@Valid @ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm, HttpSession session) {
 		/*if(checkAccess(session))
 			return "redirect:login.fssai";*/
-		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+		System.out.println("teeeeeeeeeeeeeeeeeeeeeeeee");
 		String status = (traineeUserManagementForm.getStatus().equalsIgnoreCase("I") ? "I" : "A");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(traineeUserManagementForm.getProfileID()))
 				.tableName();
@@ -1230,9 +1222,10 @@ public class AdminController {
 	@RequestMapping("/activateDeActivateTrainingCenter")
 	public String activateDeActivateTrainingCenter(
 			@Valid @ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainingCenterUserManagementForm, HttpSession session) {
-		if(checkAccess(session))
-			return "redirect:login.fssai";
-		String status = (trainingCenterUserManagementForm.getStatus().equalsIgnoreCase("I") ? "N" : "Y");
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
+		System.out.println("tcccccccccccccccccccccc");
+		String status = (trainingCenterUserManagementForm.getStatus().equalsIgnoreCase("I") ? "I" : "A");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(trainingCenterUserManagementForm.getProfileID()))
 				.tableName();
 		adminService.updateUser(trainingCenterUserManagementForm.getLogindetails(), tableName, status);
@@ -1242,8 +1235,8 @@ public class AdminController {
 	@RequestMapping("/activateDeActivateAssessor")
 	public String activateDeActivateAssessor(
 			@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm, HttpSession session) {
-		if(checkAccess(session))
-			return "redirect:login.fssai";
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
 		new ZLogger("activateDeActivateAssessor", "status " + assessorUserManagementForm.getStatus() + "  profileid "
 				+ assessorUserManagementForm.getProfileID(), "AdminController.java");
 		new ZLogger("activateDeActivateAssessor", "Login ID Details :  " + assessorUserManagementForm.getLogindetails(),
@@ -1794,32 +1787,24 @@ public class AdminController {
 	/**
 	 * @author Jyoti Mekal
 	 *
-	 *         All Add Edit delete for Module Master
+	 *         All Add Edit delete for Subject Master
 	 */
 
-	@RequestMapping(value = "/ModuleMaster", method = RequestMethod.GET)
-	public String listModuleMaster(@ModelAttribute("ModuleMasterForm") ModuleMasterForm moduleMasterForm, Model model, HttpSession session) {
-		System.out.println("listModuleMaster");
+	@RequestMapping(value = "/SubjectMaster", method = RequestMethod.GET)
+	public String SubjectMaster(@ModelAttribute("SubjectMasterForm") SubjectMasterForm SubjectMasterForm, Model model, HttpSession session) {
+		System.out.println("listSubjectMaster");
 		if(checkAccess(session))
 			return "redirect:login.fssai";
-		/*Map<String, String> userType = lst.userTypeMap;
-		Map<String, String> trainingType = lst.trainingTypeMap;
-		Map<String, String> trainingPhase = lst.trainingPhaseMap;
-		Map<String, String> contentType = lst.contentType;
-		model.addAttribute("userType", userType);
-		model.addAttribute("trainingType", trainingType);
-		model.addAttribute("trainingPhase", trainingPhase);
-		model.addAttribute("contentType", contentType);*/
-		//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
-		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
-	model.addAttribute("ModuleMasterForm", moduleMasterForm);
-		return "ModuleMaster";
+		
+		model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
+	model.addAttribute("SubjectMasterForm", SubjectMasterForm);
+		return "SubjectMaster";
 	}
 
-	@RequestMapping(value = "/ModuleMaster/add", method = RequestMethod.POST)
-	public String addModuleMaster(@RequestParam CommonsMultipartFile file,@Valid @ModelAttribute("ModuleMasterForm") ModuleMasterForm p, BindingResult result,
+	@RequestMapping(value = "/SubjectMaster/add", method = RequestMethod.POST)
+	public String addSubjectMaster(@RequestParam CommonsMultipartFile file,@Valid @ModelAttribute("SubjectMasterForm") SubjectMasterForm p, BindingResult result,
 			Model model,HttpSession session) {
-		System.out.println("..............." + p.getModuleId());
+		System.out.println("..............." + p.getSubjectId());
 		String linkName="No Study-Material";
 		
 		System.out.println("result " + result.hasErrors());
@@ -1829,16 +1814,16 @@ public class AdminController {
 			new ZLogger("StateMaster",
 					"bindingResult.hasErrors  " + result.getErrorCount() + " All Errors " + result.getAllErrors(),
 					"AdminController.java");
-			ValidationUtils.rejectIfEmpty(result, "moduleName", "Name can not be empty.");
-			return "redirect:/ModuleMaster.fssai";
-			// return "ModuleMaster";
+			ValidationUtils.rejectIfEmpty(result, "subjectName", "Name can not be empty.");
+			return "redirect:/SubjectMaster.fssai";
+			
 		}
-		ModuleMaster moduleMaster = new ModuleMaster();
+		SubjectMaster subjectMaster = new SubjectMaster();
 		try{
-			System.out.println("p.getId() " + p.getModuleId());
-			moduleMaster.setModuleId(p.getModuleId());
-			moduleMaster.setModuleName(p.getModuleName());
-			moduleMaster.setStatus(p.getStatus());
+			System.out.println("p.getId() " + p.getSubjectId());
+			subjectMaster.setSubjectId(p.getSubjectId());
+			subjectMaster.setSubjectName(p.getSubjectName());
+			subjectMaster.setStatus(p.getStatus());
 			//moduleMaster.setContentName(p.getContentName());
 			//moduleMaster.setContentLink(p.getContentLink());
 			//moduleMaster.setContentType(p.getContentType());
@@ -1848,10 +1833,9 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		
-		
 		//upload file
 		try{
-			String name = p.getModuleName();
+			String name =  p.getSubjectName();
 			//String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "Fostac/Trainee");
 			String ss = session.getServletContext().getRealPath("Subject");
 			
@@ -1881,10 +1865,10 @@ public class AdminController {
 		//upload file end
 		
 		 
-		moduleMaster.setContentLink(linkName); 
-		if (p.getModuleId() == 0) {
+		subjectMaster.setContentLink(linkName); 
+		if (p.getSubjectId() == 0) {
 			// new person, add it
-			String result1 = this.adminService.addModuleMaster(moduleMaster);
+			String result1 = this.adminService.addSubjectMaster(subjectMaster);
 			System.out.println("result1: " + result1);
 				if (result1.equalsIgnoreCase("created")) {
 					model.addAttribute("created", " New Unit insertion successful !!!");
@@ -1894,77 +1878,20 @@ public class AdminController {
 			}
 		 else {
 			// existing person, call update
-			this.adminService.updateModuleMaster(moduleMaster);
+			this.adminService.updateSubjectMaster(subjectMaster);
 		}
 		System.out.println("after insert");
 		// String subject = null;
 		
 		
-		return "redirect:/ModuleMaster.fssai";
-		// return "ModuleMaster";
-	}
-
-	@RequestMapping("/ModuleMaster/remove/{id}")
-	public String removeModuleMaster(@PathVariable("id") int id) {
-		this.adminService.removeModuleMaster(id);
-		
-		return "redirect:/ModuleMaster.fssai";
-	}
-
-	@RequestMapping(value = "/ModuleMaster/edit/{id}", method = RequestMethod.POST)
-	@ResponseBody
-	public void editModuleMaster(@PathVariable("id") int id,
-			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
-			HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {
-		new ZLogger("/ModuleMaster/edit", "/ModuleMaster/edit............" + id, "AdminController.java");
-		ModuleMaster hm = this.adminService.getModuleMasterById(id);
-		// List courseList = adminService.searchFeedbackMaster(data);
-		PrintWriter out = response.getWriter();
-		Gson g = new Gson();
-		String newList = g.toJson(hm);
-		System.out.println("newList " + newList);
-		out.write(newList);
-		out.flush();
-
-	}
-
-	/**
-	 * @author Jyoti Mekal
-	 *
-	 *         All Add Edit delete for Subject Master
-	 */
-
-	/*@RequestMapping(value = "/SubjectMaster", method = RequestMethod.GET)
-	public String listSubjectMaster(@ModelAttribute("SubjectMaster") SubjectMaster SubjectMaster, Model model) {
-		System.out.println("listSubjectMaster");
-		Map<String, String> userType = lst.userTypeMap;
-		Map<String, String> trainingType = lst.trainingTypeMap;
-		Map<String, String> trainingPhase = lst.trainingPhaseMap;
-		model.addAttribute("userType", userType);
-		model.addAttribute("trainingType", trainingType);
-		model.addAttribute("SubjectMaster", new SubjectMaster());
-		model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
-		return "SubjectMaster";
-	}
-
-	@RequestMapping(value = "/SubjectMaster/add", method = RequestMethod.POST)
-	public String addSubjectMaster(@ModelAttribute("SubjectMaster") SubjectMaster p) {
-		System.out.println("p.getId() " + p.getSubjectId());
-		if (p.getSubjectId() == 0) {
-			// new person, add it
-			this.adminService.addSubjectMaster(p);
-		} else {
-			// existing person, call update
-			this.adminService.updateSubjectMaster(p);
-		}
-		System.out.println("after insert");
 		return "redirect:/SubjectMaster.fssai";
+		
 	}
 
 	@RequestMapping("/SubjectMaster/remove/{id}")
 	public String removeSubjectMaster(@PathVariable("id") int id) {
-
 		this.adminService.removeSubjectMaster(id);
+		
 		return "redirect:/SubjectMaster.fssai";
 	}
 
@@ -1974,7 +1901,6 @@ public class AdminController {
 			@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
 			HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {
 		new ZLogger("/SubjectMaster/edit", "/SubjectMaster/edit............" + id, "AdminController.java");
-
 		SubjectMaster hm = this.adminService.getSubjectMasterById(id);
 		// List courseList = adminService.searchFeedbackMaster(data);
 		PrintWriter out = response.getWriter();
@@ -1985,7 +1911,9 @@ public class AdminController {
 		out.flush();
 
 	}
-*/
+
+	
+	
 	/**
 	 * @author Jyoti Mekal
 	 *
@@ -2015,7 +1943,7 @@ public class AdminController {
 		model.addAttribute("listTrainingInstitude", this.adminService.listTrainingInstitude());
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster2());
-		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
+		model.addAttribute("listModuleMaster", this.adminService.listSubjectMaster());
 		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());
 		return "TrainingSchedule";
 	}
@@ -2826,7 +2754,7 @@ public class AdminController {
 		 */
 		// model.addAttribute("ModuleMasterForm", new ModuleMasterForm());
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
-		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
+		model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
 
 		return "assessmentquestions";
 	}
@@ -2876,7 +2804,7 @@ public class AdminController {
 		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
   		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
   		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
-		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
+		model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
 		return "manageAssessmentQuestions";
 	}
 
@@ -2912,7 +2840,7 @@ public class AdminController {
 		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
   		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
   		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
-		model.addAttribute("listModuleMaster", this.adminService.listModuleMaster());
+		model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
 
 		return "manageAssessmentQuestions";
 	}
@@ -3072,7 +3000,7 @@ public class AdminController {
    @RequestMapping(value="/getQuestionNumber" , method=RequestMethod.POST)
 	@ResponseBody
 	public void getQuestionNumber(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		new ZLogger("getModule","getModule............" + data  , "CommonController.java");
+		new ZLogger("getSubject","getSubject............" + data  , "CommonController.java");
 	
 		//System.out.println("aaaaaaaawqqqqqqq");
 		int qNO = this.adminService.getQuestionNumber(data);
@@ -3282,7 +3210,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
   	    	String days=obj[8].toString();
   	    	
   	    	String result=this.adminService.calculateEndDate(form.getTrainingStartDate(),days,form.getTrainingInstitute(),form.getTrainingCalendarId());
-  	    	//System.out.println("qqqqqqqqqqqqqqqqq"+result);
+  	    	
   	    	if(!(result.equals("clash"))|| form.getTrainingCalendarId()!=0){
   	    
   	  	model.addAttribute("endDate",result);

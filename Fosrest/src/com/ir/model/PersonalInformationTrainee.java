@@ -29,12 +29,33 @@ public class PersonalInformationTrainee {
 	private int id;
 	
 
-	private String userType;
+	private String designation;
+	//private String userType;
+	
+	
+	
+	
 	
 	/*@NotNull
 	@Size(min=1, max=50 , message="Select Induction Trainee")
 	private String inductionTrainee;*/
 	
+	/*public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+*/
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
 	
@@ -74,13 +95,6 @@ public class PersonalInformationTrainee {
 
 
 
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
 
 	/*public String getInductionTrainee() {
 		return inductionTrainee;

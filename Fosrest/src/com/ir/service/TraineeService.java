@@ -26,7 +26,7 @@ import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
@@ -103,7 +103,7 @@ public interface TraineeService {
 	public List<FeedbackForm> getFeedbackDetails(Utility utility);
 	
 	
-	public List<Integer> getCurrentModuleId(int loginId);
+	public List<Integer> getCurrentSubjectId(int loginId);
 	
 	
 	public AdmitCardForm generateTrainerAdmitCard(int loginId,int profileId);

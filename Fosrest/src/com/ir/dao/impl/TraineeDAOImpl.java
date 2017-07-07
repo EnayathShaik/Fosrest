@@ -52,7 +52,7 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.MappingMasterTrainer;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
@@ -746,14 +746,14 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	@Override
-	public List<Integer> getCurrentModuleId(int loginId) {
+	public List<Integer> getCurrentSubjectId(int loginId) {
 		Session session = sessionFactory.getCurrentSession();
 		/**
 		 * TODO - add training status change training status as 'A' while course
 		 * enrollment
 		 **/
 		//String sql = "select subjectid from trainingcalendarmapping where batchcode=(select batchcode from trainingcalendar where trainingcalendarid=(select nt.trainingcalendarid  from nomineetrainee nt inner join trainingcalendar ts on (nt.trainingcalendarid = ts.trainingcalendarid)  where nt.status='N' and nt.logindetails="+loginId+"))";
-		String sql = "select moduleMaster from assessmentQuestions where isactive='Y' and modulemaster in(select subjectid from trainingcalendarmapping where batchcode=(select batchcode from trainingcalendar where trainingcalendarid=(select nt.trainingcalendarid  from nomineetrainee nt inner join trainingcalendar ts on (nt.trainingcalendarid = ts.trainingcalendarid)  where nt.status='N' and nt.logindetails= "+loginId+")))";
+		String sql = "select subjectMaster from assessmentQuestions where isactive='Y' and subjectmaster in(select subjectid from trainingcalendarmapping where batchcode=(select batchcode from trainingcalendar where trainingcalendarid=(select nt.trainingcalendarid  from nomineetrainee nt inner join trainingcalendar ts on (nt.trainingcalendarid = ts.trainingcalendarid)  where nt.status='N' and nt.logindetails= "+loginId+")))";
 
 		Query query = session. createSQLQuery(sql);
 		List<Integer> subId = query.list();
@@ -1240,7 +1240,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		int id =  p.getId();
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session.load(PersonalInformationTrainee.class, id);
-		personalInformationTrainee.setUserType(p.getUserType());
+		personalInformationTrainee.setDesignation(p.getDesignation());
 		personalInformationTrainee.setTitle(p.getTitle());
 		personalInformationTrainee.setAadharNumber(p.getAadharNumber());
 		personalInformationTrainee.setEmpID(p.getEmpID());
@@ -1271,13 +1271,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainee.setPostDistrict(p.getPostDistrict());
 		
 		System.out.println(" status "+p.getStatus());
-		if(p.getStatus() != null){
+		/*if(p.getStatus() != null){
 			System.out.println(" loginId"+p.getLogId() );
 			int loginId = Integer.parseInt(p.getLogId());
 			String sql = "update logindetails set status ='"+p.getStatus()+"'  where id =("+loginId+")";
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
-		}
+		}*/
 		session.update(personalInformationTrainee);
 		return "updated";
 	}	
@@ -1390,13 +1390,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainer.setAssociatedWithAnyTrainingInstitute(p.getAssociatedWithAnyTrainingInstitute());
 		personalInformationTrainer.setOtherTrainingInstitute(p.getOtherTrainingInstitute());
 		System.out.println(" status "+p.getStatus());
-		if(p.getStatus() != null){
+		/*if(p.getStatus() != null){
 			System.out.println(" loginId "+p.getLogId() );
 			int loginId = Integer.parseInt(p.getLogId());
 			String sql = "update logindetails set status ='"+p.getStatus()+"'  where id =("+loginId+")";
 			Query query = session.createSQLQuery(sql);
-			query.executeUpdate();
-		}
+			query.executeUpdate();}*/
+		
 						p = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class,p.getId());
 						Query query = session.createSQLQuery("delete from  MappingMasterTrainer where personalinformationtrainer ='"+p.getId()+"'");
 						//query.setParameter("state", p.getTrainingState());
@@ -1457,13 +1457,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 		//personalInformationTrainingInstitute.setNoOfYearExp(p.getNoOfYearExp());
 		//personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
 		System.out.println(" statusssssssssssssssssssssss "+p.getStatus());
-		if(p.getStatus() != null){
+		/*if(p.getStatus() != null){
 			System.out.println(" loginId "+p.getLogId() );
 			int loginId = Integer.parseInt(p.getLogId());
 			String sql = "update logindetails set status ='"+p.getStatus()+"'  where id =("+loginId+")";
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
-		}
+		}*/
 		session.update(personalInformationTrainingInstitute);
 		return "updated";
 	}	
@@ -1652,7 +1652,7 @@ System.out.println("list "+list);
 		//	List<OnlineTrainingForm> list = new ArrayList<OnlineTrainingForm>();
 			Session session = this.sessionFactory.getCurrentSession();
 			/*List<Object[]> lst = session.createSQLQuery("select trainingtype , trainingphase ,mm.modulename,  trainingstartdate , trainingenddate  from nomineetrainee nt  left join trainingschedule ts on  (nt.trainingscheduleid = ts.trainingscheduleid) left join modulemaster mm on (mm.moduleid = ts.moduleid) where nt.logindetails ='"+ id +"'").list();*/
-			List<Object[]> lst = session.createSQLQuery("select tt.trainingtypeName , tp.trainingphaseName ,d.designationName,tc.trainingstartdate , tc.trainingenddate , mm.modulename from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join modulemaster mm on (mm.moduleid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'").list();
+			List<Object[]> lst = session.createSQLQuery("select tt.trainingtypeName , tp.trainingphaseName ,d.designationName,tc.trainingstartdate , tc.trainingenddate , s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'").list();
 			if(lst.size() > 0){
 			 Object[] obj=	lst.get(0);
 			 bean.setTrainingType((String)obj[0]);
@@ -1660,7 +1660,7 @@ System.out.println("list "+list);
 			 bean.setDesignation((String)obj[2]);
 			 bean.setTrainingstartdate((String)obj[3]);
 			 bean.setTrainingenddate((String)obj[4]);
-			 bean.setModuleName((String)obj[5]);
+			 bean.setSubjectName((String)obj[5]);
 			
 			}
 			    
@@ -1741,7 +1741,7 @@ System.out.println("list "+list);
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
 			//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
-			Query query =session.createSQLQuery(" select mm.modulename from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join modulemaster mm on (mm.moduleid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'");
+			Query query =session.createSQLQuery(" select s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'");
 			
 			List list = query.list();
 			return list;

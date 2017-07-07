@@ -61,7 +61,7 @@
 														<li class="style-li"><strong>Designation:</strong></li>
 														<li class="style-li error-red"><span id="name_status"
 															class="clear-label"> </span> ${created }</li>
-															 <li id="userTypeErr" style="display:none;" class="style-li error-red" >Please Select Designation.</li>
+															 <li id="designationErr" style="display:none;" class="style-li error-red" >Please Select Designation.</li>
 													</ul>
 												</div>
 												<cf:select path="designation" class="form-control">
@@ -262,7 +262,7 @@
 													<tr class="background-open-vacancies">
 
 														<th>S.No.</th>
-														<th>User Type</th>
+														<th>Designation</th>
 														<th>Trainee Name</th>
 														<th>Enroll for Trainee</th>
 
@@ -276,7 +276,7 @@
 													varStatus="loop">
 													<tr>
 													<td>${loop.count}</td>
-													<td>${EligibleUser.userType}</td>
+													<td>${EligibleUser.designation}</td>
 													<td id="userName_${loop.index}">${EligibleUser.firstName}
 														<input type="hidden" id="userId_${loop.index}"
 														value="${EligibleUser.id}" />
@@ -333,7 +333,6 @@
 
 		console.log(loginIds);
 	var trainingPhase= $("#trainingPhase").val();
-	alert("ffffffffffffffffffff"+trainingPhase);
 		var batchCode = $("#batchCode").val();
 		var name = JSON.stringify({
 			courseType : 0
@@ -415,7 +414,7 @@
 		}  */
 		 if($("#designation").val() == ''){
 	   		 
-		   		$("#userTypeErr").css("display" , "block");
+		   		$("#designationErr").css("display" , "block");
 		   		return false;
 		   	 } 
 		 if($("#trainingType").val() == 0){
@@ -426,7 +425,6 @@
 		 var tt=$("#trainingType").val();
 		 
 		 if(tt==3){
-			 alert("KKKKKKKKKKKKK");
 			 if($("#trainingPhase").val() == 0){
 		   		 
 			   		$("#trainingPhaseErr").css("display" , "block");

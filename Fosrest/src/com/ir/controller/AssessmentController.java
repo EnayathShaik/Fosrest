@@ -58,8 +58,8 @@ public class AssessmentController {
 			Map<String, String> questionMap = new HashMap<>();
 			List<AssessmentAnswerCriteria> listAnswerCriteria = new ArrayList<AssessmentAnswerCriteria>();
 			AssessmentAnswerCriteria assessmentAnswerCriteria = new AssessmentAnswerCriteria();
-			System.out.println(" module id "+assessmentEvaluationForm.getModuleId());
-			List<AssessmentQuestions> answers = assessmentService.getAssessmentAnswers(assessmentEvaluationForm.getModuleId(),assessmentEvaluationForm.getAssessmentQuestionsList());
+			System.out.println(" subject id "+assessmentEvaluationForm.getSubjectId());
+			List<AssessmentQuestions> answers = assessmentService.getAssessmentAnswers(assessmentEvaluationForm.getSubjectId(),assessmentEvaluationForm.getAssessmentQuestionsList());
 			Enumeration<String> enumeration = request.getParameterNames();
 			HttpSession httpSession = request.getSession(false);
 			int loginIdUniuqe = (Integer) httpSession.getAttribute("loginIdUnique");
@@ -67,7 +67,7 @@ public class AssessmentController {
 			while (enumeration.hasMoreElements()) {
 				String parameterName = (String) enumeration.nextElement();
 				System.out.println("parameterName "+parameterName);
-				if (!parameterName.equalsIgnoreCase("moduleId")
+				if (!parameterName.equalsIgnoreCase("subjectId")
 						&& !parameterName.equalsIgnoreCase("assessmentQuestions")
 						&& !parameterName
 								.equalsIgnoreCase("assessmentQuestionsList")) {
@@ -78,8 +78,8 @@ public class AssessmentController {
 					assessmentAnswerCriteria.setSelectedAnswer(Integer
 							.parseInt(request.getParameter(parameterName)));
 
-				} else if (parameterName.equalsIgnoreCase("moduleId")) {
-					assessmentAnswerCriteria.setModuleId(Integer
+				} else if (parameterName.equalsIgnoreCase("subjectId")) {
+					assessmentAnswerCriteria.setSubjectId(Integer
 							.parseInt(request.getParameter(parameterName)));
 				}
 				assessmentAnswerCriteria.setLoginId(loginIdUniuqe);
@@ -88,7 +88,7 @@ public class AssessmentController {
 			new ZLogger("submitAssessment","Assessment save begin.."+questionMap, "AssessmentController.java");
 			assessmentService.saveAssessment(listAnswerCriteria);
 
-			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService.evaluate(questionMap, answers,assessmentEvaluationForm.getModuleId());
+			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService.evaluate(questionMap, answers,assessmentEvaluationForm.getSubjectId());
 			traineeAssessmentEvaluation.setLogindetails(loginIdUniuqe);
 			assessmentService.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);
 			

@@ -15,7 +15,7 @@ import com.ir.model.Languages;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.TrainingCalendar;
@@ -57,7 +57,7 @@ public interface PageLoadService {
 	public List trainingInstituteList();
 	public List listTrainer();
 
-	public List<ModuleMaster> learningResource();
+	public List<SubjectMaster> learningResource();
 	public List<Designation> loadDesignation();
 	public List<TrainingType> loadTrainingType();
 	public List<TrainingPhase> loadTrainingPhase();

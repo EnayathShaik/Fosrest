@@ -5,11 +5,10 @@ package com.ir.form;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class ModuleMasterForm {
+public class SubjectMasterForm {
 	
-	private int moduleId;
-	
-	private String moduleName;
+	private int subjectId;
+	private String subjectName;
 	private String status;
 	private int unitId;
 	private String contentType;
@@ -20,27 +19,25 @@ public class ModuleMasterForm {
 	
 	
 	
+	public int getSubjectId() {
+		return subjectId;
+	}
+	public void setSubjectId(int subjectId) {
+		this.subjectId = subjectId;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
 	public String getUnitName() {
 		return unitName;
 	}
 	public void setUnitName(String unitName) {
 		this.unitName = unitName;
 	}
-	public int getModuleId() {
-		return moduleId;
-	}
-	public void setModuleId(int moduleId) {
-		this.moduleId = moduleId;
-	}
 	
-	
-
-	public String getModuleName() {
-		return moduleName;
-	}
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
-	}
 	public String getStatus() {
 		return status;
 	}

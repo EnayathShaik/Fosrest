@@ -3,12 +3,12 @@
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 
              
-             <style>
+             <!-- <style>
              a.disabled {
    pointer-events: none;color:#000;
    cursor: default;
 }
-             </style>
+             </style> -->
            
            
             <cf:form action="traineeUserManagementSearch.fssai" name="myForm" method="POST" commandName="traineeUserManagementForm">
@@ -169,15 +169,15 @@
                                                                         <ct:forEach var="listValue" items="${searchTraineeUsermanagement}" varStatus="loop">
                                                                             <tr>
                                                                                 <td>
-                                                                                    <%-- <label><a href="updateInformation.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label> --%>
-                                                                              <% if(session.getAttribute("profileId").equals(1)){%>
+                                                                                   <%--  <label><a href="updateInformation.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>  --%>
+                                                                             <%--  <% if(session.getAttribute("profileId").equals(1)){%>
                                                                             	   <label><a class="disabled" href="PersonalInformationTrainee.fssai?userId=${listValue[6]}&logId=${listValue[9]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                               <%  }else{%>
                                                                                     <label><a  href="PersonalInformationTrainee.fssai?userId=${listValue[6]}&logId=${listValue[9]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                                    <%    }%> 
+                                                                                    --%>
                                                                                    
-                                                                                   
-                                                                                    <%-- <label><a  href="PersonalInformationTrainee.fssai?userId=${listValue[6]}&logId=${listValue[9]}" value="${listValue[0]}">${listValue[1]}</a></label> --%>
+                                                                                    <label><a  href="PersonalInformationTrainee.fssai?userId=${listValue[6]}&logId=${listValue[9]}" value="${listValue[0]}">${listValue[1]}</a></label> 
                                                                                     </td>
                                                                                 
                                                                                 <td>

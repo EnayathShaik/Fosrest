@@ -60,7 +60,7 @@ import com.ir.model.ManageTraining;
 import com.ir.model.ManageCourseCarricullum;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.MappingMasterTrainer;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -227,15 +227,15 @@ public interface AdminService {
 
 	public List<UnitMaster> listUnitMaster2();
 
-	public String addModuleMaster(ModuleMaster p);
+	public String addSubjectMaster(SubjectMaster p);
 
-	public void updateModuleMaster(ModuleMaster p);
+	public void updateSubjectMaster(SubjectMaster p);
 
-	public void removeModuleMaster(int id);
+	public void removeSubjectMaster(int id);
 
-	public ModuleMaster getModuleMasterById(int id);
+	public SubjectMaster getSubjectMasterById(int id);
 
-	public List<ModuleMaster> listModuleMaster();
+	public List<SubjectMaster> listSubjectMaster();
 
 	/*public String addSubjectMaster(SubjectMaster p);
 
@@ -372,7 +372,7 @@ public interface AdminService {
 
 	public List<EmployeeMonthlyCharges> listEmployeeMonthlyCharges();
 
-	public List<PersonalInformationTrainee> listEligibleuser(String userType, String stateId);
+	public List<PersonalInformationTrainee> listEligibleuser(String designation, String stateId);
 
 	public String enrollUser(String data, int stateAdminId);
 
@@ -501,7 +501,7 @@ public List<TrainingScheduleForm> listtrainingScheduleMaster( );
 
 public List<UnitMaster> listUnitMaster();
 
-TreeMap<String, List<ModuleMaster>>  allUnitModules();
+TreeMap<String, List<SubjectMaster>>  allUnitModules();
 
 
 
@@ -519,7 +519,7 @@ List<PersonalInformationTrainer> trainingNameList2(String s);
 public List<StateMaster> listStateMaster2(int sid);
 
 public String saveEditTrainingScheduleMaster(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form);
-public List<ModuleMaster>  allSubjects();
+public List<SubjectMaster>  allSubjects();
 
 public List listCalendarSearch(TrainingCalendarForm form);
 

@@ -48,11 +48,11 @@ import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
 import com.ir.form.ManageTrainingCalendarForm;
 import com.ir.form.ManageTrainingPartnerForm;
-import com.ir.form.ModuleMasterForm;
 import com.ir.form.NominateTraineeForm;
 import com.ir.form.RegionForm;
 import com.ir.form.RegionMasterForm;
 import com.ir.form.StateForm;
+import com.ir.form.SubjectMasterForm;
 import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
@@ -84,7 +84,6 @@ import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.MappingMasterTrainer;
-import com.ir.model.ModuleMaster;
 import com.ir.model.NomineeTrainee;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -535,7 +534,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String like = " where upper(pitp.firstname) like '" + FirstName.toUpperCase() + "' and pitp.MiddleName like '"
 				+ MiddleName + "' and pitp.LastName like '" + LastName + "' and " + "pitp.AadharNumber like '"
 				+ AadharNumber + "' and ld.status like '" + status + "'";
-		String select = "pitp.id,ld.loginid,pitp.firstname,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus  , ld.id as loginDetailId";
+		String select = "pitp.id,ld.loginid,pitp.firstname,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.status = 'A' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.status = 'A' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus  , ld.id as loginDetailId";
 
 		String sql = "Select " + select + "  from PersonalInformationTrainee as pitp " + join + like;
 		System.out.println("sql " + sql);
@@ -580,7 +579,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String like = " where upper(pitp.FirstName) like '" + FirstName.toUpperCase() + "' and pitp.MiddleName like '"
 				+ MiddleName + "' and pitp.LastName like '" + LastName + "' and " + "pitp.AadharNumber like '"
 				+ AadharNumber + "' and ld.status like '" + status + "'";
-		String select = "pitp.id,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
+		String select = "pitp.id,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ,(CASE WHEN ld.status = 'A' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.status = 'A' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 
 		String sql = "Select " + select + "  from PersonalInformationTrainer as pitp " + join + like;
 		Query query = session.createSQLQuery(sql);
@@ -692,7 +691,7 @@ public class AdminDAOImpl implements AdminDAO {
 				+ MiddleName + "' and pitp.LastName like '" + LastName +
 				"' and ld.status like '" + status + "'";
 		like = like + userBuffer.toString();
-		String select = "pitp.id,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
+		String select = "pitp.id,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.logindetails ,(CASE WHEN ld.status = 'I' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.status = 'I' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 
 		String sql = "Select " + select + "  from PersonalInformationTrainingInstitute as pitp " + join + like;
 		Query query = session.createSQLQuery(sql);
@@ -1055,13 +1054,13 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 
 		//UnitMaster uc = getUnitMasterById(assessmentQuestionForm.getUnitCode2());
-		ModuleMaster mm = getModuleMasterById(assessmentQuestionForm.getModuleCode2());
+		SubjectMaster mm = getSubjectMasterById(assessmentQuestionForm.getSubjectCode2());
 
 		assessmentQuestion.setDesignationId(assessmentQuestionForm.getDesignation2());
 		assessmentQuestion.setTrainingTypeId(assessmentQuestionForm.getTrainingType2());
 		assessmentQuestion.setTrainingPhaseId(assessmentQuestionForm.getTrainingPhase2());
 		//assessmentQuestion.setUnitCode(uc);
-		assessmentQuestion.setModuleCode(mm);
+		assessmentQuestion.setSubjectCode(mm);
 		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
 		//assessmentQuestion.setQuestionHint(assessmentQuestionForm.getQuestionHint());
 		assessmentQuestion.setQuestionTitle(assessmentQuestionForm.getQuestionTitle());
@@ -1269,9 +1268,10 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void updateUser(String userid, String tableName, String status) {
 		Session session = sessionFactory.getCurrentSession();
+		System.out.println("1111111111111111111111");
 		new ZLogger("contactTrainigPartnerSave",
-				"update " + tableName + " set isActive='" + status + "' where id=" + userid, "AdminDAOImpl.java");
-		String sql = "update " + tableName + " set isActive='" + status + "' where id=" + userid;
+				"update " + tableName + " set status='" + status + "' where id=" + userid, "AdminDAOImpl.java");
+		String sql = "update " + tableName + " set status='" + status + "' where id=" + userid;
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
 
@@ -1701,10 +1701,10 @@ public class AdminDAOImpl implements AdminDAO {
 		int designationSearch = Integer.parseInt((totalConnected[0].split("="))[1]);
 		int trainingTypeSearch = Integer.parseInt((totalConnected[1].split("="))[1]);
 		int trainingPhaseSearch = Integer.parseInt((totalConnected[2].split("="))[1]);
-		int moduleCodeSearch = Integer.parseInt((totalConnected[3].split("="))[1]);
+		int subjectCodeSearch = Integer.parseInt((totalConnected[3].split("="))[1]);
 
 		//int moduleCodeSearch = Integer.parseInt(data);
-		String unitCodeSearch1, moduleCodeSearch1,designationSearch1,trainingTypeSearch1,trainingPhaseSearch1;
+		String unitCodeSearch1, subjectCodeSearch1,designationSearch1,trainingTypeSearch1,trainingPhaseSearch1;
 		
 /*	if (unitCodeSearch == 0) {
 			unitCodeSearch1 = "%";
@@ -1727,10 +1727,10 @@ public class AdminDAOImpl implements AdminDAO {
 		} else {
 			trainingPhaseSearch1 = (totalConnected[2].split("="))[1];
 		}
-		if (moduleCodeSearch == 0) {
-			moduleCodeSearch1 = "%";
+		if (subjectCodeSearch == 0) {
+			subjectCodeSearch1 = "%";
 		} else {
-			moduleCodeSearch1 = (totalConnected[3].split("="))[1];
+			subjectCodeSearch1 = (totalConnected[3].split("="))[1];
 		}
 		
 		/*if (moduleCodeSearch == 0) {
@@ -1740,7 +1740,7 @@ public class AdminDAOImpl implements AdminDAO {
 		}*/
 
 		//System.out.println("unitcodesearch  " + unitCodeSearch + "  " + unitCodeSearch1);
-		System.out.println("modulecodesearch   " + moduleCodeSearch + "  " + moduleCodeSearch1);
+		System.out.println("modulecodesearch   " + subjectCodeSearch + "  " + subjectCodeSearch1);
 		StringBuffer wherebuffer = new StringBuffer();
 		wherebuffer.append(" WHERE 1=1 ");
 		/*if (unitCodeSearch > 0) {
@@ -1757,8 +1757,8 @@ public class AdminDAOImpl implements AdminDAO {
 			wherebuffer.append(" AND aq.trainingphaseid=" + trainingPhaseSearch);
 		}
 		
-		if (moduleCodeSearch > 0) {
-			wherebuffer.append(" AND mm.moduleid=" + moduleCodeSearch);
+		if (subjectCodeSearch > 0) {
+			wherebuffer.append(" AND mm.subjectId=" + subjectCodeSearch);
 		}
 		
 		
@@ -1777,9 +1777,9 @@ public class AdminDAOImpl implements AdminDAO {
 		*/
 		
 		
-		String sql = "select  mm.modulename ,  aq.assessmentquestionid, mm.modulecode ,aq.questiontitle, aq.questionNumber from assessmentquestions as aq "
+		String sql = "select  mm.subjectname ,  aq.assessmentquestionid, mm.subjectcode ,aq.questiontitle, aq.questionNumber from assessmentquestions as aq "
 				
-				+ " inner join modulemaster as mm on mm.moduleid= aq.modulemaster ";
+				+ " inner join subjectmaster as mm on mm.subjectid= aq.subjectmaster ";
 		
 		sql = sql + wherebuffer.toString();
 		Query query = session.createSQLQuery(sql);
@@ -2095,7 +2095,7 @@ public class AdminDAOImpl implements AdminDAO {
 	 */
 
 	@Override
-	public String addModuleMaster(ModuleMaster p) {
+	public String addSubjectMaster(SubjectMaster p) {
 		
 		Session session = this.sessionFactory.getCurrentSession();
 		/*Query isempty = session.createSQLQuery("select * from ModuleMaster where isActive='Y' and modulename='"+ p.getModuleName()  + "'");
@@ -2106,7 +2106,7 @@ public class AdminDAOImpl implements AdminDAO {
 			return "error";
 		}*/
 
-		String sql = "select coalesce(max(seqNo) + 1,1) from ModuleMaster ";
+		String sql = "select coalesce(max(seqNo) + 1,1) from SubjectMaster ";
 		int maxId = 0;
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
@@ -2119,10 +2119,10 @@ public class AdminDAOImpl implements AdminDAO {
 		//System.out.println("ModuleMaster " + p.getModuleId() + " p.getUnitMaster() " + p.getUnitMaster().getUnitId());
 
 		//UnitMaster um = getUnitMasterById(p.getUnitMaster().getUnitId());
-		System.out.println(p.getModuleName().substring(0, 2) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+		System.out.println(p.getSubjectName().substring(0, 2) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		/*p.setModuleCode(p.getUnitMaster().getUnitName().substring(0, 2).toUpperCase()
 				+ p.getModuleName().toUpperCase().substring(0, 2) + StringUtils.leftPad(String.valueOf(maxId), 2, "0"));*/
-		p.setModuleCode(p.getModuleName().toUpperCase().substring(0, 3) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+		p.setSubjectCode(p.getSubjectName().toUpperCase().substring(0, 3) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		p.setSeqNo(maxId);
 		//p.setUnitMaster(um);
 		p.setIsActive("Y");
@@ -2132,14 +2132,13 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public void updateModuleMaster(ModuleMaster p) {
+	public void updateSubjectMaster(SubjectMaster p) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		ModuleMaster mm = (ModuleMaster) session.load(ModuleMaster.class, p.getModuleId());
-		mm.setModuleName(p.getModuleName());
-		mm.setStatus(p.getStatus()); 
-		if(!(p.getContentLink().equals("No Study-Material")))
-		mm.setContentLink(p.getContentLink());
+		SubjectMaster mm = (SubjectMaster) session.load(SubjectMaster.class, p.getSubjectId());
+		mm.setSubjectName(p.getSubjectName());
+		mm.setStatus(p.getStatus());
+		//mm.setContentLink(p.getContentLink());
 		//mm.setContentType(p.getContentType());
 		session.update(mm);
 
@@ -2148,13 +2147,13 @@ public class AdminDAOImpl implements AdminDAO {
 	// removeModuleMaster
 
 	@Override
-	public void removeModuleMaster(int id) {
+	public void removeSubjectMaster(int id) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		ModuleMaster p = (ModuleMaster) session.load(ModuleMaster.class, new Integer(id));
+		SubjectMaster p = (SubjectMaster) session.load(SubjectMaster.class, new Integer(id));
 		String sql = null;
 		if (null != p) {
-			sql = "update ModuleMaster set isactive='N' where moduleid=" + id;
+			sql = "update SubjectMaster set isactive='N' where subjectId=" + id;
 		}
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
@@ -2162,27 +2161,27 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public ModuleMaster getModuleMasterById(int id) {
+	public SubjectMaster getSubjectMasterById(int id) {
 		// TODO Auto-generated method stub
 		System.out.println(" id " + id);
 		Session session = this.sessionFactory.getCurrentSession();
 
-		Query query = session.createQuery("from ModuleMaster where ModuleId=" + id);
+		Query query = session.createQuery("from SubjectMaster where subjectId=" + id);
 
-		List<ModuleMaster> ModuleMasterList = query.list();
-		ModuleMaster hm = ModuleMasterList.get(0);
+		List<SubjectMaster> SubjectMasterList = query.list();
+		SubjectMaster hm = SubjectMasterList.get(0);
 		return hm;
 
 	}
 
 	@Override
-	public List<ModuleMaster> listModuleMaster() {
-		System.out.println("inside listModuleMaster");
-		List<ModuleMasterForm> list = new ArrayList<ModuleMasterForm>();
+	public List<SubjectMaster> listSubjectMaster() {
+		System.out.println("inside listSubjectMaster");
+		List<SubjectMasterForm> list = new ArrayList<SubjectMasterForm>();
 		Session session = this.sessionFactory.getCurrentSession();
 		
 /*		List<ModuleMaster> lst = session.createSQLQuery("select m.moduleName ,u.unitName,m.status,m.moduleId from modulemaster m join unitmaster u on(u.unitid=m.unitid) where m.isactive='Y'").list();*/		
-		List<ModuleMaster> lst = session.createSQLQuery("select * from ModuleMaster where isActive='Y'").list();
+		List<SubjectMaster> lst = session.createSQLQuery("select * from SubjectMaster where isActive='Y'").list();
 		return lst;
 	}
 
@@ -2446,21 +2445,18 @@ public class AdminDAOImpl implements AdminDAO {
 							+ id + "'  ")
 					.list();*/
 		mccList = session.createSQLQuery(
-				" select distinct m.moduleName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric) inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid  where s.trainerid='"
-						+ id + "'  ")
+				" select distinct sm.subjectName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join subjectmaster sm on sm.subjectId=tcm.subjectid  where  to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date and  tcm.trainerid='"+ id + "'  ")
 				.list();
 		} else if (profileId == 5) {
 
 			mccList = session.createSQLQuery(
-					"  select distinct m.moduleName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where pit.id='"
-							+ id + "'  ")
+					" select distinct sm.subjectName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join subjectmaster sm on sm.subjectId=tcm.subjectid inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date and pit.id='"+ id + "'  ")
 					.list();
 		}
 	      
 		else{
 			mccList = session.createSQLQuery(
-					"select distinct m.moduleName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where cast(mmt.state as numeric)='"
-							+ id + "'  ")
+					"select distinct sm.subjectName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join subjectmaster sm on sm.subjectId=tcm.subjectid inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date and cast(mmt.state as numeric)='" + id + "'  ")
 					.list();
 		}
 		/*for (TrainingSchedule p : mccList) {
@@ -3120,9 +3116,9 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<PersonalInformationTrainee> listEligibleuser(String userType,String stateId) {
+	public List<PersonalInformationTrainee> listEligibleuser(String designation,String stateId) {
 		// TODO Auto-generated method stub
-		System.out.println("inside listEligibleuser" + userType);
+		System.out.println("inside listEligibleuser" + designation);
 		List<PersonalInformationTrainee> personalInfoList = new ArrayList<PersonalInformationTrainee>();
 		Session session = this.sessionFactory.getCurrentSession();
 
@@ -3133,13 +3129,13 @@ public class AdminDAOImpl implements AdminDAO {
 
 		if (list.size() > 0) {
 			query = session.createSQLQuery(
-					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.userType as numeric) = d.designationId)  where pit.steps=0 and pit.usertype='"
-							+ userType + "' and pit.correspondenceState='"+stateId+"'");
+					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.designation as numeric) = d.designationId)  where pit.steps=0 and pit.designation='"
+							+ designation + "' and pit.correspondenceState='"+stateId+"'");
 			System.out.println("data der " + query);
 		} else {
 			query = session.createSQLQuery(
-					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.userType as numeric) = d.designationId) where  pit.usertype='"
-							+ userType + "'and pit.correspondenceState='"+stateId+"'");
+					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) where  pit.designation='"
+							+ designation + "'and pit.correspondenceState='"+stateId+"'");
 			System.out.println("data not der " + query);
 
 		}
@@ -3149,7 +3145,7 @@ public class AdminDAOImpl implements AdminDAO {
 			PersonalInformationTrainee pit = new PersonalInformationTrainee();
 			Object[] obj = list11.get(i);
 			pit.setId((int) obj[0]);
-			pit.setUserType((String) obj[1]);
+			pit.setDesignation((String) obj[1]);
 			pit.setFirstName((String) obj[2]);
 			System.out.println(obj[3]);
 			pit.setId((int) obj[3]);
@@ -3217,10 +3213,7 @@ public class AdminDAOImpl implements AdminDAO {
 		//String sql2="select distinct tcm.subjectid from nomineetrainee nt inner join trainingCalendar tc on tc.trainingcalendarId=nt.trainingcalendarId inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode";
 		//System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDDD"+sql2);
 		NomineeTrainee nt = new NomineeTrainee();
-		
-		
 
-	
 		nt.setStatus("N");
 		nt.setRollNo( StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		nt.setRollSeqNo(maxId);
@@ -3594,7 +3587,7 @@ public class AdminDAOImpl implements AdminDAO {
 		int i=0;
 		try{
 		//Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where unitMaster="+codes[0]+" and moduleMaster="+codes[1]+"and isactive='Y'");
-			Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where moduleMaster="+data+"and isactive='Y'");
+			Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where subjectMaster="+data+"and isactive='Y'");
 
 			List list = query.list();
 		i=((BigInteger)list.get(0)).intValue();
@@ -3675,15 +3668,15 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public TreeMap<String, List<ModuleMaster>> allUnitModules() {
+	public TreeMap<String, List<SubjectMaster>> allUnitModules() {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		
-		TreeMap<String, List<ModuleMaster>>  UMmap= new TreeMap<>();
-		List <String> allchapters = session.createSQLQuery("  select distinct unitname  from unitmaster u join modulemaster m on(u.unitId=m.unitId) order by unitName").list();
+		TreeMap<String, List<SubjectMaster>>  UMmap= new TreeMap<>();
+		List <String> allchapters = session.createSQLQuery("  select distinct unitname  from unitmaster u join subjectmaster m on(u.unitId=m.unitId) order by unitName").list();
 		System.out.println("inside allUnitModules"+allchapters.size());
 		for(int i=0;i<allchapters.size();i++){
-			List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename from modulemaster where unitId= (select unitId from unitMaster where unitname='"+allchapters.get(i)+"')").list();
+			List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname from subjectmaster where unitId= (select unitId from unitMaster where unitname='"+allchapters.get(i)+"')").list();
 			UMmap.put(allchapters.get(i), mod);
 			}
 		
@@ -3914,11 +3907,11 @@ p.setBatchCode(batchCode);
 	}
 
 	@Override
-	public List<ModuleMaster> allSubjects() {
+	public List<SubjectMaster> allSubjects() {
 		// TODO Auto-generated method stub
 Session session = this.sessionFactory.getCurrentSession();
 		
-List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename from modulemaster where isActive='Y'").list();
+List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname from subjectmaster where isActive='Y'").list();
 
 		return mod;
 		 
@@ -4011,7 +4004,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 	public List listSchCodeSubjects(String scheduleCode) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = 	session.createSQLQuery("select (select moduleName from moduleMaster where moduleId=cast(subject as numeric)),subject from SubjectMapping where scheduleCode='"+scheduleCode+"'");
+		Query query = 	session.createSQLQuery("select (select subjectName from subjectMaster where subjectId=cast(subject as numeric)),subject from SubjectMapping where scheduleCode='"+scheduleCode+"'");
 
 		
 		List list = query.list();
@@ -4128,7 +4121,7 @@ List <ModuleMaster> mod = session.createSQLQuery("select  moduleId,modulename fr
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingCalendar> mccList = null;
 		mccList = session.createSQLQuery(
-				"select distinct p.firstName,m.moduleName,pit.trainingcentername,pit.correspondenceaddress1,tt.trainingTypeName,tp.trainingPhaseName,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id               "
+				"select distinct p.firstName,m.subjectName,pit.trainingcentername,pit.correspondenceaddress1,tt.trainingTypeName,tp.trainingPhaseName,tc.trainingstartdate,tc.trainingenddate from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join subjectmaster m on m.subjectId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id               "
 				+ "inner join TrainingType tt on tt.trainingTypeId =cast(tc.trainingType as numeric)"
 				+ " inner join TrainingPhase tp on cast(tc.trainingPhase as numeric)=tp.trainingPhaseId where tc.trainingCalendarId='"
 						+ batchCode + "'  ")
@@ -4284,7 +4277,8 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		int loginId = Integer.parseInt(arrData[0]);
 		int trainingCalendarId = Integer.parseInt(arrData[1]);
 		List uas =new ArrayList();
-		 Query query=session.createSQLQuery("select distinct nt.traineeName,mm.moduleName,vr.marks from viewResult vr inner join nomineetrainee nt on (nt.trainingCalendarId=vr.trainingCalendarId) inner join moduleMaster mm on mm.moduleId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'");
+		 //Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join trainingcalendar tc on (vr.batchCode=tc.batchCode ) inner join nomineetrainee nt on (nt.trainingCalendarId=tc.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'");
+		 Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join nomineetrainee nt on (nt.trainingCalendarId=vr.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'");
 		uas = query.list();
 		System.out.println(uas);
 		return uas; 

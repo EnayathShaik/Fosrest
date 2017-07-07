@@ -29,7 +29,7 @@ import com.ir.model.Languages;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
-import com.ir.model.ModuleMaster;
+import com.ir.model.SubjectMaster;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
@@ -367,11 +367,11 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	
 		
 		@Override
-		public List<ModuleMaster> learningResource() {
+		public List<SubjectMaster> learningResource() {
 			// TODO Auto-generated method stub
 			System.out.println("inside learningResourceDaoimpl");
 			Session session = this.sessionFactory.getCurrentSession();
-			Query query = session.createSQLQuery("select moduleName,contentName,contentType,contentLink from ModuleMaster ");
+			Query query = session.createSQLQuery("select subjectName,contentLink from subjectMaster ");
 			List list = query.list();
 			System.out.println(list);
 			return list; 
@@ -425,7 +425,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			// TODO Auto-generated method stub
 			System.out.println("inside totCalendarlist");
 			Session session = this.sessionFactory.getCurrentSession();
-			Query query = session.createSQLQuery("select distinct m.moduleName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join modulemaster m on m.moduleId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where tc.trainingtype='4'");
+			Query query = session.createSQLQuery(" select distinct m.subjectName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping s on tc.batchcode=s.batchcode inner join subjectmaster m on m.subjectId=s.subjectid inner join personalinformationtrainer p on p.id=s.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where tc.trainingtype='4' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date");
 					List list = query.list();
 		       return list;
 		}
@@ -435,7 +435,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List masterTrainer() {
 			System.out.println("inside masterTrainer");
 			Session session = this.sessionFactory.getCurrentSession();
-			Query query = session.createSQLQuery(" select p.firstName,p.Email,p.mobile,m.modulename from personalinformationtrainer p  inner join trainingcalendarmapping tcm on p.id=tcm.trainerid inner join trainingcalendar tc on tc.batchcode=tcm.batchcode inner join modulemaster m on m.moduleid=tcm.subjectid where tc.trainingtype='4'  and tc.trainingenddate>= cast(now() as character varying); ");
+			Query query = session.createSQLQuery(" select p.firstName,p.Email,p.mobile,m.subjectname from personalinformationtrainer p  inner join trainingcalendarmapping tcm on p.id=tcm.trainerid inner join trainingcalendar tc on tc.batchcode=tcm.batchcode inner join subjectmaster m on m.subjectid=tcm.subjectid where tc.trainingtype='4'  and tc.trainingenddate>= cast(now() as character varying); ");
 			List list = query.list();
 			System.out.println(list);
 			return list; 

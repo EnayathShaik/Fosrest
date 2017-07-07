@@ -23,8 +23,8 @@ public class AssessmentQuestions {
 	/*@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="UnitMaster")
 	private UnitMaster unitCode;
 	
-	*/@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="ModuleMaster")
-	private ModuleMaster moduleCode;
+	*/@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="SubjectMaster")
+	private SubjectMaster subjectCode;
 	
 	private int questionNumber;
 	private String questionTitle;
@@ -76,16 +76,16 @@ public void setTrainingPhaseId(int trainingPhaseId) {
 	}
 	
 	
-	public ModuleMaster getModuleCode() {
-		return moduleCode;
+	
+
+
+
+	public SubjectMaster getSubjectCode() {
+		return subjectCode;
 	}
-
-	public void setModuleCode(ModuleMaster moduleCode) {
-		this.moduleCode = moduleCode;
+	public void setSubjectCode(SubjectMaster subjectCode) {
+		this.subjectCode = subjectCode;
 	}
-
-
-
 	public String getQuestionTitle() {
 		return questionTitle;
 	}

@@ -71,7 +71,7 @@
 		<mapping class="com.ir.model.TraineeDailyAttendance"/>
 		<mapping class="com.ir.model.HolidayMaster"/>
 		<mapping class="com.ir.model.UnitMaster"/>
-		<mapping class="com.ir.model.ModuleMaster"/>
+		<!-- <mapping class="com.ir.model.ModuleMaster"/> -->
 		<mapping class="com.ir.model.SubjectMaster"/>
 		<mapping class="com.ir.model.StateMaster"/>
 		<mapping class="com.ir.model.DistrictMaster"/>

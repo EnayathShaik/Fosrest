@@ -7,18 +7,19 @@ import javax.persistence.Table;
 @Table(name="assessmentanswers")
 public class AssessmentAnswerCriteria {
 	
-	private int moduleId;
+	private int subjectId;
 	private int questionId;
 	private int questionNumber;
 	private int selectedAnswer;
 	private int loginId;
 	
 
-	public int getModuleId() {
-		return moduleId;
+	
+	public int getSubjectId() {
+		return subjectId;
 	}
-	public void setModuleId(int moduleId) {
-		this.moduleId = moduleId;
+	public void setSubjectId(int subjectId) {
+		this.subjectId = subjectId;
 	}
 	/**
 	 * @return the questionId

@@ -5,8 +5,12 @@
 
 <script>
 function OnStart(){
+	
 document.getElementById('id').value = 0;
-document.getElementById('moduleCode2').value = 0;
+document.getElementById('subjectCode2').value = 0;
+document.getElementById('designation2').value = 0;
+document.getElementById('trainingType2').value = 0;
+document.getElementById('trainingPhase2').value = 0;
 /* document.getElementById('unitCode').value = 0;
 document.getElementById('moduleCode').value = 0; */
 document.getElementById('questionNumber').value = '';
@@ -25,12 +29,12 @@ window.onload = OnStart;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function getQuestions(){
 //	var unitCodeSearch =  $("#unitCode1").val();
-	var moduleCodeSearch =  $("#moduleCode1").val();
+	var subjectCodeSearch =  $("#subjectCode1").val();
 	var designationSearch =  $("#designation1").val();
 	var trainingTypeSearch =  $("#trainingType1").val();
 	var trainingPhaseSearch =  $("#trainingPhase1").val();
 	//var total = "unitCodeSearch="+unitCodeSearch+"-moduleCodeSearch="+moduleCodeSearch;
-	var total = "designationSearch="+designationSearch+"-trainingTypeSearch="+trainingTypeSearch+"-trainingPhaseSearch="+trainingPhaseSearch+"-moduleCodeSearch="+moduleCodeSearch;
+	var total = "designationSearch="+designationSearch+"-trainingTypeSearch="+trainingTypeSearch+"-trainingPhaseSearch="+trainingPhaseSearch+"-subjectCodeSearch="+subjectCodeSearch;
 	//alert(total);
 	var result="";
 	var name1=JSON.stringify({ 
@@ -55,7 +59,7 @@ function getQuestions(){
 	if(!(data=="[]")){ 
 	    //alert("What follows is NOT blank: " + data);
 		//$('#newTable').append('<tr  class="background-open-vacancies"><th>Sr. No.</th><th>Subject Name (Edit)</th><th>Question No</th><th>Question Title</th><th>Delete</th></tr>')
-						$('#newTable').append('<tr  class="background-open-vacancies"><th>Question No</th><th>Question Title</th><th>Delete</th></tr>')
+						$('#newTable').append('<tr  class="background-open-vacancies"><th>Question No</th><th>Question Title (Edit)</th><th>Delete</th></tr>')
 
 		
 		$.each(mainData1 , function(i , obj)
@@ -117,7 +121,7 @@ function editAssessmentQuestion(id,Qcount){
 		window.setTimeout(function(){
 			document.getElementById('moduleCode2').value = obj[2];
 	    }, 3000); */
-	    document.getElementById('moduleCode2').value = obj[4];
+	    document.getElementById('subjectCode2').value = obj[4];
 		document.getElementById('designation2').value = obj[1];
 		document.getElementById('trainingType2').value = obj[2];
 		document.getElementById('trainingPhase2').value = obj[3];
@@ -162,7 +166,7 @@ function validateFields(){
 	$("#trainingTypeErr").css("display", "none");
 	$("#trainingPhaseErr").css("display", "none"); 
 	// $("#unitCodeErr").css("display" , "none");
-	 $("#moduleCodeErr").css("display" , "none");
+	 $("#subjectCodeErr").css("display" , "none");
 	$("#questionNumberErr").css("display" , "none");
 $("#questionTitleErr").css("display" , "none");
 //$("#questionHintErr").css("display" , "none");
@@ -189,9 +193,9 @@ if ($("#trainingType2").val() == 3 && $("#trainingPhase2").val() == 0) {// 3 for
 		$("#unitCodeErr").css("display" , "block");
 		return false;
 	 }  */
-if($("#moduleCode2").val() == 0){
+if($("#subjectCode2").val() == 0){
 	 
-		$("#moduleCodeErr").css("display" , "block");
+		$("#subjectCodeErr").css("display" , "block");
 		return false;
 	 } 
  /*if($("#questionNumber").val() == 0){
@@ -451,10 +455,10 @@ function getQuestionNo(val){
                                                            <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select  path="moduleCode1"   class="form-control">
+												<cf:select  path="subjectCode1"   class="form-control">
 										<%-- 		 <cf:option value="0" label="Select Subject"></cf:option> --%>
-												   <ct:forEach var="twofields" items="${listModuleMaster}">
-												   <cf:option value="${twofields[0]}"><ct:out value="${twofields[7]} - ${twofields[8]}"/></cf:option>
+												   <ct:forEach var="twofields" items="${listSubjectMaster}">
+												   <cf:option value="${twofields[0]}"><ct:out value="${twofields[9]} - ${twofields[10]}"/></cf:option>
     												</ct:forEach>
 												 </cf:select>
 											</div>
@@ -573,17 +577,17 @@ function getQuestionNo(val){
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Subject Name:</strong></li>
-                                                             <li id="moduleCodeErr" style="display:none;" class="style-li error-red" > Select Subject</li>
+                                                             <li id="subjectCodeErr" style="display:none;" class="style-li error-red" > Select Subject</li>
                                             
                                                             <li class="style-li error-red">
                                                             <span id="name_status" class = "clear-label"> </span>
                                                             <%-- ${created } --%></li>
                                                         </ul>
                                                     </div>
-												<cf:select  path="moduleCode2"   class="form-control"  onchange="getQuestionNo(this.value);" >
+												<cf:select  path="subjectCode2"   class="form-control"  onchange="getQuestionNo(this.value);" >
 												   	 <cf:option value="0" label="Select Subject"></cf:option>
-												   <ct:forEach var="twofields" items="${listModuleMaster}">
-       												 <cf:option value="${twofields[0]}"><ct:out value="${twofields[7]} - ${twofields[8]}"/></cf:option>
+												   <ct:forEach var="twofields" items="${listSubjectMaster}">
+       												 <cf:option value="${twofields[0]}"><ct:out value="${twofields[9]} - ${twofields[10]}"/></cf:option>
     												</ct:forEach>
 												 </cf:select>
 											</div> 

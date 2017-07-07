@@ -161,7 +161,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.TraineeDailyAttendance</value>
 				<value>com.ir.model.HolidayMaster</value>
 				<value>com.ir.model.UnitMaster</value>
-				<value>com.ir.model.ModuleMaster</value>
+				<!-- <value>com.ir.model.ModuleMaster</value> -->
 				<value>com.ir.model.SubjectMaster</value>
 				<value>com.ir.model.StateMaster</value>
 				<value>com.ir.model.DistrictMaster</value>
@@ -277,9 +277,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="postVacancyTrainingCenterBeanS" class="com.ir.model.PostVacancyTrainingCenterBean"  scope="prototype"/>
 	<bean id="assessmentEvaluationTrainee" class="com.ir.model.trainee.TraineeAssessmentEvaluation"  scope="prototype"/>
 	<bean id="assessmentEvaluationTrainer" class="com.ir.model.trainer.TrainerAssessmentEvaluation"  scope="prototype"/>
-	<!-- 	 <bean id="designation" class="com.ir.model.Designation" scope="prototype" />
-			<bean id="trainingType" class="com.ir.model.TrainingType" scope="prototype" /> 
-				<bean id="trainingPhase" class="com.ir.model.TrainingPhase" scope="prototype" /> -->
+	
 	<!-- <bean id="generateID" class="com.ir.util.GenerateUniqueID">
     <property name="sessionFactory" ref="sessionFactory"></property>
 </bean> -->
