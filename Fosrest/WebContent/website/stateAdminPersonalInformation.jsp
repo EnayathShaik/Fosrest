@@ -20,15 +20,17 @@ if (isUpdate != null && isUpdate == "Y") {
 	$("#aadharNumber").val('${StateAdmin.aadharNumber}');
 	$("#empID").val('${StateAdmin.empID}');
 	$("#email").val('${StateAdmin.email}');
-	$("#stateid").val('${StateAdmin.state}');
+	$("#state").val('${StateAdmin.state}');
 	
 	$("#pincode").val('${StateAdmin.pincode}');
 	$("#title").val('${StateAdmin.title}');
 	$("#mobileNo").val('${StateAdmin.mobileNo}');
 	$("#landLine").val('${StateAdmin.landLine}');
 	$("#designation").val('${StateAdmin.designation}');
-	$("#createUpdateBtn").val("Update");
-	 document.getElementById("stateid").disabled=true;
+	//$("#createbtn").val("Update");
+	 $("#updatebtn").css("display" , "block");
+ 	$("#createbtn").css("display" , "none");
+	 document.getElementById("state").disabled=true;
 	//document.getElementById("state").readOnly = true;
 	}
 }
@@ -50,6 +52,7 @@ window.onload = OnStart;
               <div id="page-content-wrapper">
                      <div class="container-fluid">
                        <div class="row">
+                        <cf:input type="hidden" path="id" />
                                             <div class="col-lg-12">
                                                 <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName}</span>
                                                 </a>
@@ -65,7 +68,6 @@ window.onload = OnStart;
 
 					
                                          <div class="row">
-                                         <cf:input type="hidden" path="id" />
                                                     <div class="col-xs-12">
 						<!-- personal information -->
 						<fieldset>
@@ -134,7 +136,7 @@ window.onload = OnStart;
 				                                              <span id="state_status" ></span></li>
 				                                        </ul>
 				                                    </div>
-				                                    <cf:select id="stateid" path="state" class="form-control"  onblur="ck_state('StateAdmin');" >
+				                                    <cf:select id="state" path="state" class="form-control"  onblur="ck_state('StateAdmin');" >
 				                                	<cf:option value="0" label="Select state Name" />
 													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
 				                                    </cf:select>
@@ -300,7 +302,7 @@ window.onload = OnStart;
 													<input type="submit" id="updatebtn"
 														style="display: none; float: right; margin-right: 122px;"
 														value="Update" class="btn login-btn" /> <input
-														type="submit"  value="Create" id="createUpdateBtn"
+														type="submit" id="createbtn" value="Create"
 														class="btn login-btn" />
 												</div>
 											</div>
@@ -331,6 +333,8 @@ window.onload = OnStart;
                  function validateFields(){
                 
                	
+                		
+   	             
                 	 $("#titleErr").css("display" , "none");
                 	$("#firstNameErr").css("display" , "none");
                 	$("#middleNameErr").css("display" , "none");
@@ -421,10 +425,10 @@ window.onload = OnStart;
    			      		return false;
    			  	       }
     					
-    				var el = document.getElementById('state');
-	               	 var text = el.options[el.selectedIndex].innerHTML;
-	               
-	            	 document.getElementById("stateName").value=text;
+    			var el = document.getElementById('state');
+   	               	 var text = el.options[el.selectedIndex].innerHTML;
+   	               
+   	            	 document.getElementById("stateName").value=text;
 					
               }  
                 </script>

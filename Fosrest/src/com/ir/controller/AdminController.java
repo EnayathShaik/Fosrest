@@ -617,6 +617,7 @@ public class AdminController {
 				model.addAttribute("StateAdmin",
 						StateAdmin);
 				model.addAttribute("isUpdate", "Y");
+				//return "redirect:/loginProcess.fssai";
 			}
 		return "stateAdminPersonalInformation";
 		
@@ -654,6 +655,7 @@ public class AdminController {
 			// existing person, call update
 			
 			this.adminService.updatestateadmin(p);
+			return "redirect:/loginProcess.fssai";
 		}
 		System.out.println("StateAdmin "+stateadmin);
 		if(stateadmin != null && ! stateadmin.equalsIgnoreCase("updated")){
@@ -668,6 +670,7 @@ public class AdminController {
 			return "redirect:/adminUserManagementForm.fssai";
 		
 		}*/
+		
 		return "redirect:/stateadmin.fssai";
 	}
 
