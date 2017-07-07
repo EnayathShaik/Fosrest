@@ -1,8 +1,13 @@
 package com.ir.dao.impl;
 
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -458,5 +463,71 @@ String strIds=subIds.toString();
 			result = "Oops , something went wrong try ageain !!!";
 		}
 		return result;
+	}
+
+	@Override
+	public TraineeAssessmentEvaluation evaluate(Map<String, String> questions, List<AssessmentQuestions> answers,
+			List<Integer> lst) {
+		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
+		Session session=sessionFactory.getCurrentSession();
+		//int totalQuestion = answers.size();
+		Map<String, Integer> answersMap = new HashMap<String, Integer>();
+		for (int i = 0; i < answers.size(); i++) {
+			//System.out.println("qqqq "+answers.get(i).getAssessmentQuestionId());  
+			answersMap.put(String.valueOf(answers.get(i).getAssessmentQuestionId()), answers.get(i).getCorrectAnswer());
+		}
+		int totalQuestions = answers.size();
+		int correctAnswers = 0;
+		int wrongAnswers = 0;
+		double totalScore = 0.00;
+		Set<String> questionKeys = questions.keySet();
+		Iterator<String> keysIterator = questionKeys.iterator();
+		int i=0;
+		String moduleIds="";
+		while(keysIterator.hasNext()){
+			
+			String key = keysIterator.next();
+			int correctAnswer = answersMap.get(key);
+			int providedAnswer = Integer.parseInt(questions.get(key));
+			System.out.println("For Question "+key +" #Provided answer :" + providedAnswer + " & Correct answer :"+ correctAnswer);
+			
+			if(providedAnswer == correctAnswer){
+				correctAnswers++;
+			}
+		}
+			wrongAnswers = totalQuestions - correctAnswers;
+		if(totalQuestions > 0)
+		{
+			totalScore = (double)correctAnswers/totalQuestions*100;
+			DecimalFormat f = new DecimalFormat("##.00");
+			totalScore = Double.valueOf(f.format(totalScore));
+		}
+		traineeEvaluation.setTotalQuestions(totalQuestions);
+		traineeEvaluation.setCorrectAnswers(correctAnswers);
+		traineeEvaluation.setIncorrectAnswers(wrongAnswers);
+		traineeEvaluation.setTotalScore(totalScore);
+		System.out.println(lst);
+		for(int j=0;j<lst.size();j++){
+			System.out.println(lst.get(j));
+			 moduleIds=moduleIds+lst.get(j)+"|";
+
+		} 
+		traineeEvaluation.setModuleIds(moduleIds);
+		int eligibility = getElegibilityForAssessment(lst.get(i++)); 
+		if(eligibility > -1){
+			if(totalScore >= eligibility){
+				traineeEvaluation.setResult("Pass");
+			}else{
+				traineeEvaluation.setResult("Fail");
+			}
+			String sql;
+			sql = "update NomineeTrainee set result = '"+traineeEvaluation.getResult()+"' where  logindetails='"+traineeEvaluation.getLogindetails()+"'";
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+		}else{
+			traineeEvaluation.setResult("Eligibility yet to declare");
+		}
+	
+		return traineeEvaluation;
 	}
 }

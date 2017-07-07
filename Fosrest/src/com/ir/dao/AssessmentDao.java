@@ -1,6 +1,7 @@
 package com.ir.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AssessmentAnswerCriteria;
@@ -32,4 +33,6 @@ public interface AssessmentDao {
 	public List editMAA(String data);
 	
 	public String updateMAA(String data);
+	public TraineeAssessmentEvaluation evaluate(Map<String, String> questions, List<AssessmentQuestions> answers,
+			List<Integer> lst);
 }

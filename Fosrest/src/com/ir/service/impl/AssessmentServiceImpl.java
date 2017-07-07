@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.mail.Session;
 import javax.transaction.Transactional;
 
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -75,61 +77,8 @@ public class AssessmentServiceImpl implements AssessmentService {
 	@Override
 	@Transactional
 	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestions> answers, List <Integer> lst){
-		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
-		//int totalQuestion = answers.size();
-		Map<String, Integer> answersMap = new HashMap<String, Integer>();
-		for (int i = 0; i < answers.size(); i++) {
-			//System.out.println("qqqq "+answers.get(i).getAssessmentQuestionId());  
-			answersMap.put(String.valueOf(answers.get(i).getAssessmentQuestionId()), answers.get(i).getCorrectAnswer());
-		}
-		int totalQuestions = answers.size();
-		int correctAnswers = 0;
-		int wrongAnswers = 0;
-		double totalScore = 0.00;
-		Set<String> questionKeys = questions.keySet();
-		Iterator<String> keysIterator = questionKeys.iterator();
-		int i=0;
-		String moduleIds="";
-		while(keysIterator.hasNext()){
-			
-			String key = keysIterator.next();
-			int correctAnswer = answersMap.get(key);
-			int providedAnswer = Integer.parseInt(questions.get(key));
-			System.out.println("For Question "+key +" #Provided answer :" + providedAnswer + " & Correct answer :"+ correctAnswer);
-			
-			if(providedAnswer == correctAnswer){
-				correctAnswers++;
-			}
-		}
-			wrongAnswers = totalQuestions - correctAnswers;
-		if(totalQuestions > 0)
-		{
-			totalScore = (double)correctAnswers/totalQuestions*100;
-			DecimalFormat f = new DecimalFormat("##.00");
-			totalScore = Double.valueOf(f.format(totalScore));
-		}
-		traineeEvaluation.setTotalQuestions(totalQuestions);
-		traineeEvaluation.setCorrectAnswers(correctAnswers);
-		traineeEvaluation.setIncorrectAnswers(wrongAnswers);
-		traineeEvaluation.setTotalScore(totalScore);
-		System.out.println(lst);
-		for(int j=0;j<lst.size();j++){
-			System.out.println(lst.get(j));
-			 moduleIds=moduleIds+lst.get(j)+"|";
-
-		} 
-		traineeEvaluation.setModuleIds(moduleIds);
-		int eligibility = assessmentDao.getElegibilityForAssessment(lst.get(i++)); 
-		if(eligibility > -1){
-			if(totalScore >= eligibility){
-				traineeEvaluation.setResult("Pass");
-			}else{
-				traineeEvaluation.setResult("Fail");
-			}
-		}else{
-			traineeEvaluation.setResult("Eligibility yet to declare");
-		}
-		return traineeEvaluation;
+		TraineeAssessmentEvaluation evaluate = assessmentDao.evaluate(questions,answers,lst);
+		return evaluate;
 	}
 	@Override
 	@Transactional
