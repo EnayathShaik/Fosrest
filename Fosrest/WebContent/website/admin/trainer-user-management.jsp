@@ -150,12 +150,12 @@
                                                                     <ct:forEach var="listValue" items="${searchTrainerUsermanagement}" varStatus="loop">
                                                                         <tr>
                                                                             <td>
-                                                                            <% if(session.getAttribute("profileId").equals(1)){%>
+                                                                            <%-- <% if(session.getAttribute("profileId").equals(1)){%>
                                                                             	   <label><a  class="disabled" href="PersonalInformationTrainer.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                               <%  }else{%>
                                                                                    <label><a href="PersonalInformationTrainer.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
-                                                                                   <%    }%> 
-                                                                                <%-- <label><a  class="disabled" href="PersonalInformationTrainer.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label> --%>
+                                                                                   <%    }%> --%> 
+                                                                                <label><a href="PersonalInformationTrainer.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                             </td>
                                                                             <td>
                                                                                 <label>${listValue[2] }</label>
