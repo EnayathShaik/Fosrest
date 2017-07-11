@@ -1071,6 +1071,7 @@ public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") Perso
 		model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 		model.addAttribute("traineeCertificateName", certificateInfo.getName());
 		model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
+		model.addAttribute("calendarDetail", this.traineeService.getCalendarDetails((int)session.getAttribute("userId")));
 	
 		
 	return "certificatetraineeGEN";

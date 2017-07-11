@@ -35,6 +35,7 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
 import com.ir.model.Utility;
@@ -143,4 +144,5 @@ public interface TraineeDAO {
 	
 	public List<FotestCertificationForm> listcertification();
 	 public List listsubjects(int id);
+	public TrainingCalendar getCalendarDetails(int userId);
 }

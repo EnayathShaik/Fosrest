@@ -34,6 +34,7 @@ import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.SubjectMaster;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
@@ -450,6 +451,13 @@ public class TraineeServiceImpl implements TraineeService {
 		public List listsubjects(int id) {
 			// TODO Auto-generated method stub
 			return this.traineeDAO.listsubjects( id);
+		}
+
+		@Override
+		@Transactional
+		public TrainingCalendar getCalendarDetails(int userId) {
+			// TODO Auto-generated method stub
+			return this.traineeDAO.getCalendarDetails( userId);
 		}
 
 }

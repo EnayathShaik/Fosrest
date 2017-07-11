@@ -49,10 +49,10 @@
 							<p>
 								<ct:choose>
 									<ct:when test="${traineeSteps < 2}">
-										<a href="OnlineTraining.fssai">Get Online Training Content</a>
+										<a href="OnlineTraining.fssai">Get Training Content</a>
 									</ct:when>
 									<ct:otherwise>
-                  Get Online Training Content
+                  Get Training Content
                       </ct:otherwise>
 								</ct:choose>
 							</p>
@@ -80,10 +80,9 @@
 							<p>
 								<ct:choose>
 									<ct:when test="${traineeSteps < 3}">
-										<a href="assessment-instructions-trainee.fssai"> Online Assessment</a>
+										<a href="assessment-instructions-trainee.fssai"> Assessment</a>
 									</ct:when>
-									<ct:otherwise>
-Online Assessment
+									<ct:otherwise> Assessment
 </ct:otherwise>
 								</ct:choose>
 							</p>

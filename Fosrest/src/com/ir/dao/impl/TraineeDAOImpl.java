@@ -1756,6 +1756,24 @@ System.out.println("list "+list);
 			List list = query.list();
 			return list;
 		}*/
+
+		@Override
+		public TrainingCalendar getCalendarDetails(int userId) {
+			// TODO Auto-generated method stub
+			Session session=sessionFactory.getCurrentSession();
+			Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)), (select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)) from trainingcalendar where trainingcalendarid=(Select trainingcalendarid from nomineetrainee where logindetails="+userId+")" );
+			List<Object[]> list=query.list();
+			System.out.println(list);
+			TrainingCalendar tcl=new TrainingCalendar();
+			
+			for (Object[] li :list){
+				tcl.setDesignation((String)li[0]);
+				tcl.setTrainingType((String)li[1]);
+				tcl.setTrainingPhase((String)li[2]);
+			}
+			
+			return tcl;
+		}
 		}
 		
 		

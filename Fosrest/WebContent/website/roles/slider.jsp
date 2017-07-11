@@ -21,8 +21,8 @@
 %>
 <div id="sidebar-wrapper">
 	<ul class="sidebar-nav">
-		        <li><a href="OnlineTraining.fssai">Online Training </a></li>
-				<li><a href="assessment-instructions-trainee.fssai">Online Assessment</a></li>
+		        <li><a href="OnlineTraining.fssai">Training </a></li>
+				<li><a href="assessment-instructions-trainee.fssai">Assessment</a></li>
 				<li><a href="GetScoreCard.fssai">Get Score Card </a></li>
 				<li><a href="Certificate.fssai">Certificate</a></li>
 				<li><a href="PersonalInformationTrainee.fssai">Update Profile</a></li>
