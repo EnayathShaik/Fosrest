@@ -175,6 +175,36 @@ body {
 </style>
 
 <script>
+function OnStart(){
+	
+
+		
+	     var name1=JSON.stringify({
+	 		courseName:0
+	   })
+	  
+	 	$.ajax({
+	 	      type: 'get',
+	 	     url : 'upcomingevents.fssai',
+	 	      contentType : "application/json",
+	 		  data:name1,
+	 	  success: function (response) { 
+	 	      var mainData1 = jQuery.parseJSON(response);
+	 	     $('#newTable tr').remove();
+	 	 $('#newTable').append( '<tr  class="background-open-vacancies"> <th title="Institute Name & Address">Training Start Date</th><th>Training End Date</th><th>State</th></tr>')
+	 	       var j = 1;
+				 $.each(mainData1,function(i, obj) {$('#newTable').append(
+				    		
+	                               '<tr id="tableRow"><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[0] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[1] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[4] + '</td></tr>');
+	                   });
+				    
+	 	      }
+	 	      });  
+	     $('#newTable').show();
+	     return result;
+	     
+}
+window.onload = OnStart;
 $(document).ready(function() {
 	 $("#readFile").click(function() {
 	    $.get('test.txt', function(data) {
@@ -520,11 +550,18 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 					
 					<div class="col-sm-3">
     <h3 class="text-center">Upcoming Events</h3>
-    <div class="newstape">
+    <div class="newstape" style="overflow-x:scroll !important;">
         <div class="newstape-content">
             <div class="news-block">
                 <p class="text-justify">
-                 <a href="#" style="cursor:pointer">  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</a>
+                                                                               
+<table class="table table-bordered table-responsive" id="newTable" >
+												  <thead>
+                                                
+                                                </thead>
+										<tbody></tbody>
+												</table>
+               <!--   <a href="#" style="cursor:pointer">  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</a>
                 </p>
                 <hr />
             </div>
@@ -537,7 +574,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
                 <p class="text-justify">
   <a href="#" style="cursor:pointer">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.                </p>
             </a>    <hr />
-            </div>
+            </div> -->
         </div>
     </div>
 <script type="text/javascript">
@@ -554,6 +591,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
   })();
 
 </script>
+</div>
 </div>
 	<!-- <div class="col-md-3  wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" style="margin-left:-45px;">
 						<div class="page">
@@ -769,3 +807,19 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 </script>
 </body>
 </html>
+
+
+
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+

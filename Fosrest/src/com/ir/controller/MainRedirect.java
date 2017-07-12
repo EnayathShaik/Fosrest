@@ -28,6 +28,7 @@ import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.PropertyUtils;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.LoginForm;
+import com.ir.form.NominateTraineeForm;
 import com.ir.form.TrainerForm;
 import com.ir.model.City;
 import com.ir.model.CourseName;
@@ -37,13 +38,18 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
+import com.ir.model.TrainingCalendar;
+import com.ir.model.TrainingSchedule;
 import com.ir.model.Utility;
+import com.ir.service.AdminService;
 import com.ir.service.PageLoadService;
 import com.zentech.logger.ZLogger;
 
 @Controller
 public class MainRedirect {
-	
+	@Autowired
+	@Qualifier("adminService")
+	AdminService adminService;
 	
 	@Autowired
 	@Qualifier("pageLoadService")
@@ -236,6 +242,20 @@ public class MainRedirect {
 		   System.out.println("mastertrainer");
 		   model.addAttribute("mastertrainerList",pageLoadService.masterTrainer());
 		   return "mastertrainer";
+	   }
+	   @RequestMapping(value="/upcomingevents" ,method = RequestMethod.GET)
+	   public void mastertrainer2(@ModelAttribute("TrainingSchedule") TrainingSchedule TrainingSchedule,Model model,HttpServletResponse response) throws IOException {
+		   System.out.println("mastertrainer");
+		   //model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(0, 0));
+		   List<TrainingSchedule> data1=this.adminService.listTrainingSchedule(0, 0);
+			PrintWriter out = response.getWriter();
+			Gson g = new Gson();
+			String newList = g.toJson(data1);
+			System.out.println("newList " + newList);
+			out.write(newList);
+			out.flush();
+		  // return "index";
+		  // return "redirect:index.fssai";
 	   }
 	  
 }

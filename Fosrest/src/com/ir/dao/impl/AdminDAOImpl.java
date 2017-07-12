@@ -2439,6 +2439,7 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("inside listTrainingSchedule with parameter");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingSchedule> mccList = null;
+		System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS "+profileId);
 	       if (profileId == 4) {
 			/*mccList = session.createQuery(
 					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"
@@ -2454,9 +2455,14 @@ public class AdminDAOImpl implements AdminDAO {
 					.list();
 		}
 	      
-		else{
+		else if(profileId==2){
 			mccList = session.createSQLQuery(
 					"select distinct sm.subjectName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join subjectmaster sm on sm.subjectId=tcm.subjectid inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date and cast(mmt.state as numeric)='" + id + "'  ")
+					.list();
+		}
+		else {
+			mccList = session.createSQLQuery(
+					"select  distinct tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1,s.stateName from trainingcalendar tc inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join stateMaster s on s.stateId =cast(pit.correspondenceState as numeric) where to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date order by tc.trainingstartdate asc Limit 5")
 					.list();
 		}
 		/*for (TrainingSchedule p : mccList) {
