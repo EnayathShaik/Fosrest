@@ -51,7 +51,7 @@
                                                         <th>S.No.</th>
                                                         <th>First Name</th>
                                                         <th>Email</th>
-                                                        <th>Contact No. & Address</th>
+                                                        <th>Contact No.</th>
                                                      <th>State</th> 
                                                         <!-- <th>Organization Name</th> -->
                                                        <!--  <th>No. of Trainings Conducted</th> -->

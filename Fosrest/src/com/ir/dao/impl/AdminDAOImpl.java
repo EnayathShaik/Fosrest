@@ -2439,8 +2439,7 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("inside listTrainingSchedule with parameter");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingSchedule> mccList = null;
-		System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS "+profileId);
-	       if (profileId == 4) {
+		 if (profileId == 4) {
 			/*mccList = session.createQuery(
 					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"
 							+ id + "'  ")
