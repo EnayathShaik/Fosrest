@@ -52,7 +52,7 @@
                                                         <th>First Name</th>
                                                         <th>Email</th>
                                                         <th>Contact No. & Address</th>
-                                                      <!--  <th>Specialised Area</th> -->
+                                                     <th>State</th> 
                                                         <!-- <th>Organization Name</th> -->
                                                        <!--  <th>No. of Trainings Conducted</th> -->
                                                     </tr> 
@@ -65,8 +65,8 @@
 												<td>${loop.count}</td>
 												<td>${listTrainer[0]}</td>
 												<td>${listTrainer[1]}</td>
-												<td>${listTrainer[2]} <br> ${listTrainer[3]},${listTrainer[4]},${listTrainer[5]},${listTrainer[6]}</td>
-											<%--  <td>${listTrainer[7]}</td>   --%>
+												<td>${listTrainer[2]}</td>
+										 <td>${listTrainer[3]}</td>   
 												<%-- <td>${listTrainer[8]}</td> --%>
 												<%-- <td>${listTrainer[9]}</td> --%>
 											</tr>

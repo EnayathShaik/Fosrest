@@ -361,7 +361,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		@Override
 		public List<TrainerForm> listTrainer() {
 			Session session = this.sessionFactory.getCurrentSession();
-			List<TrainerForm> mccList = session.createSQLQuery("select pit.firstName,pit.Email,pit.mobile,pit.correspondenceAddress1,c.cityname,d.districtname,s.statename from personalinformationtrainer pit inner join StateMaster s on cast(pit.correspondencestate as numeric ) =s.stateid inner join DistrictMaster d on cast(pit.correspondencedistrict as numeric ) =d.districtid inner join CityMaster c on cast(pit.correspondencecity as numeric ) =c.cityid where pit.createdBy=4").list();
+			List<TrainerForm> mccList = session.createSQLQuery("select distinct pit.firstName,pit.Email,pit.mobile,s.statename from personalinformationtrainer pit inner join mappingMasterTrainer mmt on mmt.personalInformationTrainer =pit.id inner join StateMaster s on cast(mmt.state as numeric ) =s.stateid inner join logindetails ld on ld.id=pit.logindetails where ld.status='A' order by pit.firstName ").list();
 			return mccList;
 		}
 	
