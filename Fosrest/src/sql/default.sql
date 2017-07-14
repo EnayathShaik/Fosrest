@@ -83,6 +83,7 @@ INSERT INTO designation(  designationId, designationName) VALUES (1, 'AO');
 INSERT INTO designation(  designationId, designationName) VALUES (2, 'DO');
 INSERT INTO designation(  designationId, designationName) VALUES (3, 'RO');
 INSERT INTO designation(  designationId, designationName) VALUES (4, 'FSO');
+INSERT INTO designation(  designationId, designationName) VALUES (5, 'Others');
 
 
 INSERT INTO trainingType(  trainingTypeId, trainingTypeName) VALUES (1, 'Refresher');

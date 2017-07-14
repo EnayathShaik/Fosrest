@@ -341,10 +341,8 @@ public class TrainerController {
 						.addPersonalInfoTrainer(p,pid);
 			} else {
 				if(session.getAttribute("Id")==null){
-					System.out.println("trrrrrrrrrrrrrrrr");
 					return "redirect:/trainerUserManagementForm.fssai";
 				}else{
-					System.out.println("trrrrrrrrrrrrrrrr111111111111111111");
 					personalInformationTrainer = this.traineeService
 							.updatePersonalInfoTrainer(p);
 				}

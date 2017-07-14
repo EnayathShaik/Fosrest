@@ -722,7 +722,7 @@
 		$("#MiddleNameErr").css("display" , "none");
 		$("#LastNameErr").css("display" , "none");
 		$("#FatherNameErr").css("display" , "none");
-		$("#empIDErr").css("display" , "none");
+		//$("#empIDErr").css("display" , "none");
 		$("#dobErr").css("display" , "none");
 		$("#correspondenceAddress1Err").css("display" , "none");
 		$("#correspondenceStateErr").css("display" , "none");
@@ -757,10 +757,11 @@
  	     return false;
    	 } 
    	
-   	if($("#empID").val() == ''){
+   	/* if($("#empID").val() == ''){
    		 $("#empIDErr").css("display" , "block");
  		return false; 
-   	 } if($("#dob").val() == ''){
+   	 }  */
+   	 if($("#dob").val() == ''){
    		 $("#dobErr").css("display" , "block");
   		return false;
    	 } 

@@ -350,7 +350,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		@Override
 		public List<PersonalInformationTrainingInstitute> trainingInstituteList() {
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createSQLQuery("select st.stateName,pit.trainingCenterName,pit.seatingCapacity from PersonalInformationTrainingInstitute pit inner join statemaster st on cast(pit.correspondencestate as numeric)=st.stateid");
+			Query query = session.createSQLQuery("select st.stateName,pit.trainingCenterName,pit.seatingCapacity,pit.firstName,pit.correspondenceAddress1,pit.correspondenceAddress2,d.districtName,c.cityName,pit.mobile from PersonalInformationTrainingInstitute pit inner join statemaster st on cast(pit.correspondencestate as numeric)=st.stateid inner join citymaster c on cast(pit.correspondencecity as numeric)=c.cityid inner join districtMaster d on cast(pit.correspondencedistrict as numeric)=d.districtid");
 			List trainingInstituteList = query.list();
 			
 			System.out.println("CourseName  ************* list dao     :"+ trainingInstituteList);

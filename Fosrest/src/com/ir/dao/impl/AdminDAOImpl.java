@@ -1268,7 +1268,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void updateUser(String userid, String tableName, String status) {
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("1111111111111111111111");
 		new ZLogger("contactTrainigPartnerSave",
 				"update " + tableName + " set status='" + status + "' where id=" + userid, "AdminDAOImpl.java");
 		String sql = "update " + tableName + " set status='" + status + "' where id=" + userid;

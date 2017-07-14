@@ -67,7 +67,11 @@
 															<th>S.No.</th>
 															<th>State Name</th>
 															 <th>Institute Name</th>
+															 <th>Nodal Incharge Name</th>
 															<th>Seating Capacity</th>
+															<th>Address</th>
+															<th>Contact No.</th>
+															
 														</tr>
 													</thead>
 													<ct:if test="${!empty trainingInstituteList}">
@@ -77,7 +81,10 @@
 															<td>${loop.count}</td>
 															 <td>${trainingInstitute[0]}</td>
 														    <td>${trainingInstitute[1]}</td>
+															<td>${trainingInstitute[3]}</td>
 															<td>${trainingInstitute[2]}</td>
+															<td>${trainingInstitute[4]},&nbsp${trainingInstitute[5]},&nbsp${trainingInstitute[6]},&nbsp${trainingInstitute[7]},&nbsp${trainingInstitute[0]}</td>
+															<td>${trainingInstitute[8]}</td>
 														</tr>
 													</ct:forEach>
 													</ct:if>

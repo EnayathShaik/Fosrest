@@ -324,7 +324,7 @@
                                  <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>First Name:(Training Center Head) </strong></li>
+                                            <li class="style-li"><strong>First Name:(Nodal Person Name) </strong></li>
                                              <li id="firstNameErr" style="display:none;" class="style-li error-red" > first Name can not be blank.</li>
                                            
                                             <li class="style-li error-red"> *</li>
@@ -713,4 +713,3 @@
 
 		<div class="col-md-2 hidden-xs"></div>
 	</cf:form>
-                                   

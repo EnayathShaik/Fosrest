@@ -973,7 +973,7 @@
 		//$("#MiddleNameErr").css("display", "none");
 		$("#LastNameErr").css("display", "none");
 		$("#FatherNameErr").css("display", "none");
-		$("#empIDErr").css("display", "none");
+		//$("#empIDErr").css("display", "none");
 		$("#dobErr").css("display", "none");
 		$("#correspondenceAddress1Err").css("display", "none");
 		$("#correspondenceStateErr").css("display", "none");
@@ -1008,11 +1008,11 @@
 	   		 $("#aadharNumberErr2").css("display" , "block");
 	    		 return false;
 	      	 }
-			if ($("#empID").val() == 0) {
+			/* if ($("#empID").val() == 0) {
 
 				$("#empIDErr").css("display", "block");
 				return false;
-			}
+			} */
 			if ($("#dob").val() == 0) {
 
 				$("#dobErr").css("display", "block");

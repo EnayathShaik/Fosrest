@@ -317,6 +317,11 @@
 </cf:form>
 <script>
 	function getUser() {
+
+		if($("#batchCode").val()==0)
+			{
+			return false;
+			}
 		var loginIds = "";
 		$('#testTable').find('input[type="checkbox"]').each(
 				function(i) {

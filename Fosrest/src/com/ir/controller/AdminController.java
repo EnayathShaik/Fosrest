@@ -1199,7 +1199,6 @@ public class AdminController {
 			@Valid @ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm, HttpSession session) {
 		/*if(checkAccess(session))
 			return "redirect:login.fssai";*/
-		System.out.println("trrrrrrrrrrrrrrrr");
 		String status = (trainerUserManagementForm.getStatus().equalsIgnoreCase("I") ? "I" : "A");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(trainerUserManagementForm.getProfileID()))
 				.tableName();
@@ -1212,7 +1211,6 @@ public class AdminController {
 			@Valid @ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm, HttpSession session) {
 		/*if(checkAccess(session))
 			return "redirect:login.fssai";*/
-		System.out.println("teeeeeeeeeeeeeeeeeeeeeeeee");
 		String status = (traineeUserManagementForm.getStatus().equalsIgnoreCase("I") ? "I" : "A");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(traineeUserManagementForm.getProfileID()))
 				.tableName();

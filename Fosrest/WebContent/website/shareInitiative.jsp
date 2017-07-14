@@ -18,6 +18,7 @@
             </script>
               <script type='text/javascript'>
                 function validateFields() {
+                	
                     /* if(document.getElementById("emailAddress").value=="") {
                     document.getElementById("emailAddress").style.borderColor = "red";
                     document.getElementById("emailAddressError").style.display = 'block';
@@ -27,7 +28,12 @@
                         document.getElementById('emailAddress').style.borderColor = "#ccc";
                         document.getElementById("emailAddressError").style.display = 'none';
                         } */
+                    
                     var x = document.getElementById('emailAddress').value;
+                        var a=document.getElementById("messageDetails").value;
+                      alert("PPPPPPPPPPPP "+a); 
+                      var c=a.length;
+                      alert((document.getElementById("messageDetails").value).length +" OOOOOOOOO");
                     var atpos = x.indexOf("@");
                     var dotpos = x.lastIndexOf(".");
                     if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length) {
@@ -41,11 +47,16 @@
                         document.getElementById("emailAddressError").style.display = 'none';
                     }
                     if (document.getElementById("messageDetails").value == "") {
+                    	alert("MMMMMMMMMMMMMMMMMMMMM");
                         document.getElementById("messageDetails").style.borderColor = "red";
                         document.getElementById("messageDetailsError").style.display = 'block';
                         document.getElementById("messageDetails").focus();
                         return false;
-                    } else {
+                    } else if((document.getElementById("messageDetails").value).length>4000){
+                    	//alert("mmmmmmmmmmmmmm");
+                    	  document.getElementById("messageDetailsError2").style.display = 'block';
+                    } 
+                    else {
                         document.getElementById('messageDetails').style.borderColor = "#ccc";
                         document.getElementById("messageDetailsError").style.display = 'none';
                     }
@@ -100,7 +111,8 @@
                                                             <div class="form-group">
                                                                 <label>Message Details</label>
                                                                 <label class="error visibility" id="messageDetailsError" style="color:red;">* write your message</label>
-                                                                <cf:textarea class="form-control" path="messageDetails" placeholder="Enter Your Message (250 Words)" />
+                                                                <label class="error visibility" id="messageDetailsError2" style="color:red;">* Message should be in 4000 characters</label>
+                                                                <cf:textarea class="form-control" path="messageDetails" placeholder="Enter Your Message (4000 Words)"/>
                                                             </div>
                                                             <input style="margin-top:20px; width:100px;" type="submit" class="form-control login-btn btn" value="Submit" />
                                                         </form>
