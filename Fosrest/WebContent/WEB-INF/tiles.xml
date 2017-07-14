@@ -1366,4 +1366,8 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/stateAdminUpdateResult.jsp" />
 	</definition>
+	<definition name="ResetPassword" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/ResetPassword.jsp" />
+	</definition>
 </tiles-definitions>

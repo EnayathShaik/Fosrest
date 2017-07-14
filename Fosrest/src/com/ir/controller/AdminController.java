@@ -93,6 +93,7 @@ import com.ir.model.FeedbackMaster;
 import com.ir.model.HolidayMaster;
 import com.ir.model.InvoiceMaster;
 import com.ir.model.KindOfBusiness;
+import com.ir.model.LoginDetails;
 import com.ir.model.SubjectMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -3371,6 +3372,35 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		String newList = g.toJson(hm);
 		out.write(newList);
 		out.flush();
+		}
+		
+		@RequestMapping(value = "/ResetPassword", method = RequestMethod.GET)
+		public String ResetPassword(@ModelAttribute("LoginDetails") LoginDetails loginDetails, HttpSession session) {
+			
+			return "ResetPassword";
+		}
+		
+		@RequestMapping(value = "/addResetPassword", method = RequestMethod.POST)
+		public String addResetPassword(@ModelAttribute("LoginDetails") LoginDetails l, HttpSession session,Model model) {
+			
+			String loginid=(String) session.getAttribute("logId");
+			System.out.println("LoginId "+loginid);
+			String pass=null;
+			try{
+				 pass=l.getPassword();
+				 System.out.println("Password " +pass);
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			String resetpass = this.adminService.addResetPassword(pass,loginid);
+			System.out.println("result1: " + resetpass);
+			if (resetpass.equalsIgnoreCase("created")) {
+				model.addAttribute("created", " Your password has been changed successfully  !!!");
+			} else {
+				model.addAttribute("created", "Oops, something went wrong !!!");
+			}
+			return "redirect:ResetPassword.fssai";
 		}
 		
 

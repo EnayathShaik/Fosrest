@@ -455,6 +455,8 @@ public interface AdminDAO {
 
 	public List<TrainingCalendar> listBatchCodeListStateAdmin();
 
+	public String addResetPassword(String pass ,String loginid);
+
 	public List getTrainingCalendarById(int id);
 
 	

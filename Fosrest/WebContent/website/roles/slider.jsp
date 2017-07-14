@@ -130,6 +130,7 @@
 		<li><a href="manageAssessmentQuestions.fssai">Assessment Questions</a></li>
 		<!-- <li><a href="SubjectMaster.fssai">Subject Master</a></li>-->
 		<li><a href="trainingcalendar.fssai">Training Calendar</a></li> 
+		<li><a href="ResetPassword.fssai">Reset Password</a></li>
 	
                    
 	</ul>

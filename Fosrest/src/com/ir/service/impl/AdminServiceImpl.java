@@ -1732,6 +1732,13 @@ public List<TrainingCalendar> listBatchCodeListStateAdmin() {
 
 @Override
 @Transactional
+public String addResetPassword(String pass,String loginid) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.addResetPassword(pass,loginid);
+}
+
+@Override
+@Transactional
 public List getTrainingCalendarById(int id) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.getTrainingCalendarById(id);

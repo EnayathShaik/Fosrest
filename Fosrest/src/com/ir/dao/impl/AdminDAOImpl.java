@@ -2116,15 +2116,19 @@ public class AdminDAOImpl implements AdminDAO {
 			maxId = (int) list.get(0);
 			// eligible = (String) list.get(0);
 		}
-		//System.out.println("ModuleMaster " + p.getModuleId() + " p.getUnitMaster() " + p.getUnitMaster().getUnitId());
-
-		//UnitMaster um = getUnitMasterById(p.getUnitMaster().getUnitId());
-		System.out.println(p.getSubjectName().substring(0, 2) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
-		/*p.setModuleCode(p.getUnitMaster().getUnitName().substring(0, 2).toUpperCase()
-				+ p.getModuleName().toUpperCase().substring(0, 2) + StringUtils.leftPad(String.valueOf(maxId), 2, "0"));*/
+		
+		int sub=p.getSubjectName().length();
+		if(sub>=3)
+		{
+		System.out.println(p.getSubjectName().substring(0, 3) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		p.setSubjectCode(p.getSubjectName().toUpperCase().substring(0, 3) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
 		p.setSeqNo(maxId);
-		//p.setUnitMaster(um);
+		}else{
+			System.out.println(p.getSubjectName().substring(0, 1) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+			p.setSubjectCode(p.getSubjectName().toUpperCase().substring(0, 1) + StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+			p.setSeqNo(maxId);
+		}
+		
 		p.setIsActive("Y");
 
 		session.persist(p);
@@ -3860,7 +3864,7 @@ p.setBatchCode(batchCode);
 		ContactTraineee contactTraineeModel = new ContactTraineee();
 		String email = contactTrainee.getEmailAddress();
 		String msg = contactTrainee.getMessageDetails();
-		new ZLogger("contactTraineeSave", "user id in dao impl  :::::" + id, "AdminDAOImpl.java");
+		//new ZLogger("contactTraineeSave", "user id in dao impl  :::::" + id, "AdminDAOImpl.java");
 		traineeMaail.mailProperty(msg, email, id);
 		contactTraineeModel.setEmailAddress(email);
 		contactTraineeModel.setMessageDetails(msg);
@@ -4320,7 +4324,6 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 			stateAdmin=stateAdmin1;
 		}
 		return stateAdmin;
-
 	}
 	
 	@Override
@@ -4370,5 +4373,28 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		return list;
 		
 	}
+	
+	
+	@Override
+	public  String addResetPassword(String pass ,String loginid) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		String encryprPassword = null;
+		try{
+			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
+			encryprPassword = encryptionPasswordANDVerification.encryptPass(pass);
+			System.out.println("encryptpass "+encryprPassword);
+			
+		}catch(NoSuchAlgorithmException e){
+			System.out.println( " no such algo exception error catch ");
+		}
+		String newPassword=null;
+		String sql = "update logindetails set password='"+pass+"',encrypted_password='"+encryprPassword+"' where loginid='"+loginid+"' ";
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+
+		
+		return "created";
+	}	
 	
 }

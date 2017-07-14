@@ -70,9 +70,9 @@
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Subject Name:</strong></li>
-															<li class="style-li error-red"></li>
+															<li class="style-li error-red">*</li>
 															<li id="subjectNameErr" style="display:none;" class="style-li error-red" >Subject name can not be blank.</li>
-															<li id="subjectNameErr2" style="display:none;" class="style-li error-red" >Subject Name should be minimum 3 characters.</li>
+															<!-- <li id="subjectNameErr2" style="display:none;" class="style-li error-red" >Subject Name should be minimum 3 characters.</li> -->
 
 														</ul>
 													</div>
@@ -80,13 +80,19 @@
 														placeholder="Select Subject Name" class="form-control" />
 												</div>
 												<br>
-												 <div class="col-md-12 col-xs-12">
 												
+												 <div class="form-group">
+												    <div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Upload Study Material:</strong></li>
+															<li class="style-li error-red"></li>
+														</ul>
+													</div>
 									              <input class="btn login-btn" type="file" id="file" name="file"/>
 									          
                                                   <!-- <input type="submit" class="btn login-btn" value="Upload"> -->
-                                                               
-								                 </div> 
+                                                     </div>          
+								                  
 								             
                                              
 											</div>
@@ -240,10 +246,10 @@
           		 $("#subjectNameErr").css("display" , "block");
         		return false; 
        	 }
-           	else 	if($("#subjectName").val().match(/^[a-zA-Z]{3,}/ )== null){
+           	/* else 	if($("#subjectName").val().match(/^[a-zA-Z]{3,}/ )== null){
       		 $("#subjectNameErr2").css("display" , "block");
      		return false; 
-    	 }
+    	 } */
             else if($("#contentType").val() == 0){
           		 $("#contentTypeErr").css("display" , "block");
          		return false; 
