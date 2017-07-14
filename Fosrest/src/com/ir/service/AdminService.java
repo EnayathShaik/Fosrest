@@ -567,6 +567,8 @@ public List<TrainingCalendar> listBatchCodeListNomineeTrainee(NominateTraineeFor
 
 public List<TrainingCalendar>  listBatchCodeListStateAdmin();
 
+public List getTrainingCalendarById(int id);
+
 }
 
 

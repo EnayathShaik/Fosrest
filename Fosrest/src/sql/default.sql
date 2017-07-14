@@ -65,6 +65,19 @@ INSERT INTO ASSESSMENTELIGIBILITYTRAINER(COURSENAMEID, ELIGIBILITY) VALUES (?, ?
 --ALTER TABLE public.personalinformationtrainingpartner drop COLUMN noofinhousetrainers
 
 
+INSERT INTO logindetails( id, encrypted_password, password, loginid, profileid, status) VALUES (2, 'jhjhj', 'Password', 'SUPERADMIN', 1, 'A');
+
+
+INSERT INTO stateMaster(  stateid, statename, status) VALUES (100, 'UP', 'A');
+INSERT INTO stateMaster(  stateid, statename, status) VALUES (99, 'MP', 'A');
+
+INSERT INTO districtMaster( districtid, districtname, stateid, status) VALUES (100000, 'Agra', 100, 'A');
+INSERT INTO districtMaster( districtid, districtname, stateid, status) VALUES (100001, 'Aligarh', 100, 'A');
+INSERT INTO districtMaster( districtid, districtname, stateid, status) VALUES (100002, 'Gwalior', 99, 'A');
+INSERT INTO districtMaster( districtid, districtname, stateid, status) VALUES (100003, 'Morena', 99, 'A');
+
+INSERT INTO cityMaster(  cityid, cityname, districtid, status) VALUES (1000000, 'Agra_Cantt', 100000, 'A');
+INSERT INTO cityMaster(  cityid, cityname, districtid, status) VALUES (1000001, 'Agra_City', 100000, 'A');
 
 INSERT INTO designation(  designationId, designationName) VALUES (1, 'AO');
 INSERT INTO designation(  designationId, designationName) VALUES (2, 'DO');

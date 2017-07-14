@@ -4349,5 +4349,26 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		}
 		return mccList;
 	}
+
+	@Override
+	public List getTrainingCalendarById(int id) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createSQLQuery("select d.designationName,trainingTypeName,trainingPhaseName,tc.batchCode,tc.scheduleCode,trainingStartDate,trainingEndDate,totalDays,trainingCenterName,subjectName,pit.firstName,pit.lastName,smmm.startTime,smmm.endTime from TrainingCalendar tc"
++" join TrainingCalendarmapping tcm on(tc.batchCode=tcm.batchCode)"
+ +"join designation d on (designationId=cast (designation as numeric))"
++"join trainingType tt on (trainingTypeId=cast (trainingType as numeric))"
+ +"join trainingPhase tp on (trainingPhaseId=cast (trainingPhase as numeric))"
+ +"join personalinformationtraininginstitute piti on (id=cast (traininginstitute as numeric))"
+  +"join subjectmaster sm on (sm.subjectId=cast (tcm.subjectId as numeric))"
+   +"join personalinformationtrainer pit on (pit.id=cast (trainerId as numeric))"
+  +"join subjectmapping smmm on (cast(smmm.subject as numeric)=sm.subjectId) "
+   +" where trainingCalendarId="+id+" and tc.scheduleCode=smmm.scheduleCode");
+		
+		List list=query.list();
+		return list;
+		
+	}
 	
 }

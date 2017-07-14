@@ -17,9 +17,7 @@
 <script type="text/javascript">
 	function printDiv() {
 		var printContents = document.getElementById('dvContainer').innerHTML;
-		alert(printContents);
 		var originalContents = document.body.innerHTML;
-		alert(originalContents);
 		document.body.innerHTML = printContents;
 		window.print();
 		document.body.innerHTML = originalContents;

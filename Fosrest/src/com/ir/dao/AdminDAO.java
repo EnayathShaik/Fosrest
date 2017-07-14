@@ -455,6 +455,8 @@ public interface AdminDAO {
 
 	public List<TrainingCalendar> listBatchCodeListStateAdmin();
 
+	public List getTrainingCalendarById(int id);
+
 	
 
 

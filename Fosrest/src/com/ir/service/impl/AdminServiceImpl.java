@@ -1729,4 +1729,11 @@ public List<TrainingCalendar> listBatchCodeListStateAdmin() {
 	// TODO Auto-generated method stub
 	return this.adminDAO.listBatchCodeListStateAdmin();
 }
+
+@Override
+@Transactional
+public List getTrainingCalendarById(int id) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.getTrainingCalendarById(id);
+}
 }

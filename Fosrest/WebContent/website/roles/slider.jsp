@@ -124,7 +124,7 @@
 		</li>
 		<!-- <li><a href="UpdateTrainingSchedule.fssai">Update Training
 				Schedule</a></li> -->
-		<li><a href="HolidayMaster.fssai">Holiday Master</a></li>
+		<!-- <li><a href="HolidayMaster.fssai">Holiday Master</a></li> -->
 		<!-- <li><a href="UnitMaster.fssai">Chapter Master</a></li> -->
 		<li><a href="SubjectMaster.fssai">Subject Master</a></li>
 		<li><a href="manageAssessmentQuestions.fssai">Assessment Questions</a></li>

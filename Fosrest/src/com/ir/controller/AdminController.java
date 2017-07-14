@@ -3372,5 +3372,20 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		out.write(newList);
 		out.flush();
 		}
+		
+
+		@RequestMapping("/viewtrainingcalendar/{id}")
+		public void viewtrainingcalendar(@PathVariable("id") int id, Model model, HttpServletRequest httpServletRequest,
+				HttpServletResponse response) throws IOException {
+			
+			System.out.println("viewtrainingcalendar id " + id);
+			List tc = this.adminService.getTrainingCalendarById(id);
+			PrintWriter out = response.getWriter();
+			Gson g = new Gson();
+			String newList = g.toJson(tc);
+			System.out.println("newList " + newList);
+			out.write(newList);
+			out.flush();
+		}
 	 
 }

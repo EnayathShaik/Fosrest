@@ -461,5 +461,39 @@ data:name,
 		});
 	}
 });
-
 }
+
+
+
+function generateOptionTexts_15mins( Selectvalue ){
+  
+    
+    var str="";
+    var interval=["00","15","30","45"];
+    var optionTxt = "";
+
+    for(var i=0;i<24;i++){
+    	
+    	for(var j=0;j<4;j++){
+    		if(i<10)
+    			str=str+"0"+i+":"+interval[j]+",";
+    		else
+    			str=str+i+":"+interval[j]+",";
+    	}
+    	
+    	
+    }
+     
+   var options=str.split(",");
+    for(var i  = 0; i < options.length-1; i++)
+    {
+           
+           if(options[i] == Selectvalue)
+                  optionTxt = optionTxt + '<option value ="'+options[i]+'" selected > '+ options[i] + '</option>';
+           else 
+                  optionTxt = optionTxt + '<option value ="'+options[i]+'" > '+ options[i] + '</option>';
+    }
+    
+    return optionTxt;
+}
+
