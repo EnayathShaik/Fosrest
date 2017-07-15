@@ -3746,9 +3746,8 @@ Boolean flag=false;
 		{
 			
 				ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
-				List chkSch=null;
-				if(flag==false) 
-				chkSch= session.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+ts.getDesignation()+"' and trainingType='"+ts.getTrainingType()+"' and trainingPhase='"+ts.getTrainingPhase()+"' and subjects='"+chkSch1.get(foundAt).toString()+"' and isActive='Y'").list();
+				 List chkSch= session
+							.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and subjects='"+chkSch1.get(foundAt).toString()+"' and isActive='Y'").list();
 				 
 				if((flag==false)||(int)chkSch.get(0)==ts.getTrainingScheduleId() )
 				{
