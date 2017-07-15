@@ -3,8 +3,7 @@
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
             <script>
                 function OnStart() {
-                    //alert('kk');
-                    BlankFields();
+                   BlankFields();
                 }
                 window.onload = OnStart;
 
@@ -31,14 +30,11 @@
                     
                     var x = document.getElementById('emailAddress').value;
                         var a=document.getElementById("messageDetails").value;
-                      alert("PPPPPPPPPPPP "+a); 
                       var c=a.length;
-                      alert((document.getElementById("messageDetails").value).length +" OOOOOOOOO");
                     var atpos = x.indexOf("@");
                     var dotpos = x.lastIndexOf(".");
                     if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length) {
-                        //  alert("Not a valid e-mail address");
-                        document.getElementById('emailAddress').style.borderColor = "red";
+                      document.getElementById('emailAddress').style.borderColor = "red";
                         document.getElementById("emailAddressError").style.display = 'block';
                         document.getElementById("emailAddress").focus();
                         return false;
@@ -47,14 +43,12 @@
                         document.getElementById("emailAddressError").style.display = 'none';
                     }
                     if (document.getElementById("messageDetails").value == "") {
-                    	alert("MMMMMMMMMMMMMMMMMMMMM");
-                        document.getElementById("messageDetails").style.borderColor = "red";
+                    	document.getElementById("messageDetails").style.borderColor = "red";
                         document.getElementById("messageDetailsError").style.display = 'block';
                         document.getElementById("messageDetails").focus();
                         return false;
                     } else if((document.getElementById("messageDetails").value).length>4000){
-                    	//alert("mmmmmmmmmmmmmm");
-                    	  document.getElementById("messageDetailsError2").style.display = 'block';
+                     document.getElementById("messageDetailsError2").style.display = 'block';
                     } 
                     else {
                         document.getElementById('messageDetails').style.borderColor = "#ccc";

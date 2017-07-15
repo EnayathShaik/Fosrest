@@ -108,11 +108,7 @@
                 <input type="hidden" id="idH" value="" />
             </cf:form>
             <script>
-             
-            loginIdErr
-                 
-
-                 function validateFields(){
+               function validateFields(){
                 		$("#PasswordErr").css("display" , "none");
                 		$("#loginIdErr").css("display" , "none");
                 		
