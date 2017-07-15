@@ -3381,7 +3381,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		@RequestMapping(value = "/addResetPassword", method = RequestMethod.POST)
 		public String addResetPassword(@ModelAttribute("LoginDetails") LoginDetails l, HttpSession session,Model model) {
 			
-			String loginid=(String) session.getAttribute("logId");
+			String loginid=l.getLoginId();
 			System.out.println("LoginId "+loginid);
 			String pass=null;
 			try{
@@ -3398,7 +3398,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 			} else {
 				model.addAttribute("created", "Oops, something went wrong !!!");
 			}
-			return "redirect:ResetPassword.fssai";
+			return "ResetPassword";
 		}
 		
 
