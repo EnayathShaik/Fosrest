@@ -1743,4 +1743,11 @@ public List getTrainingCalendarById(int id) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.getTrainingCalendarById(id);
 }
+
+@Override
+@Transactional
+public List<String> getAllEndDates(String trainingStartDate) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.getAllEndDates(trainingStartDate);
+}
 }

@@ -3060,7 +3060,7 @@ public class AdminController {
 		
 		model.addAttribute(	"result", result);
 		System.out.println("saveTrainingScheduleMaster result= " +result);
-		if(result.equals("Schedule Already Exists")){
+		if(result.equals("Schedule Already Exists")||result.equals("Cannot Edit:Training Calendar Exists")){
 			model.addAttribute("DesignationList", pageLoadService.loadDesignation());
 			model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
 			model.addAttribute("TrainingPhaseList", pageLoadService.loadTrainingPhase());
@@ -3219,14 +3219,15 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
     	model.addAttribute("institute", form.getTrainingInstitute());
     	model.addAttribute("startDate", form.getTrainingStartDate());
       	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
-
+      	System.out.println("validateCalendarEndDate entered by user");
+      		model.addAttribute("dbEndDates",this.adminService.getAllEndDates(form.getTrainingStartDate()));	
     	//model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
     	
     	if(result.equals("clash")){
     		
     		model.addAttribute("startDate",form.getTrainingStartDate2());
     		model.addAttribute("endDate",form.getTrainingEndDate2());
-	      	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
+	      	//model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
 
 	    	model.addAttribute("errorTime", "Change Start-Date");
 	    		
@@ -3415,6 +3416,18 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 			out.write(newList);
 			out.flush();
 		}
+		
+		
+		@RequestMapping(value = "/validateCalendarEndDate", method = RequestMethod.POST)
+		public String validateCalendarEndDate(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm p,
+				Model model, HttpSession session,HttpServletRequest request) {
+		   System.out.println("validateCalendarEndDate");
+System.out.println(p.getTrainingEndDate2());
+		 //  model.addAttribute("errorTime", this.adminService.validateCalendarEndDate(p.getTrainingEndDate2()));
+		   
+			return "trainingcalendar.fssai";
+		}
+
 		@RequestMapping(value = "/photogallery", method = RequestMethod.GET)
 		public String photogallery( Model model, HttpSession session) {
 			System.out.println("photogallery");

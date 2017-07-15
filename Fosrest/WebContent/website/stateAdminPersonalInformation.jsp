@@ -352,11 +352,11 @@ window.onload = OnStart;
                 	$("#mobileErr").css("display" , "none");
                 	$("#landLineErr").css("display" , "none");
                 	$("#empIDErr1").css("display" , "none");
-                	
+                	/* 
                 	if($("#empID").val() == 0){
     				$("#empIDErr1").css("display" , "block");
     				return false;
-    				}
+    				} */
                 	if($("#aadharNumber").val()==0){
                 		$("#aadharNumberErr").css("display" , "block");
                 		  return false;

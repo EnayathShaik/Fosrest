@@ -693,12 +693,36 @@
 
 	function validate2() {
 		$("#trainingEndDateErr").css("display" , 'none');
+		$("#trainerErr").css("display" , 'none');
 
 		if ($("#trainingEndDate2").val() == 0) {
 			$("#trainingEndDateErr").css("display", "block");
 			$("#trainingEndDate2").focus();
 			return false;
 		}
+		
+		var d1=$("#trainingStartDate2").val().split('-');
+		var d2=$("#trainingEndDate2").val().split('-');
+
+		var temp=d1[0];
+		d1[0]=d1[1];
+		d1[1]=temp;
+		
+		var temp=d2[0];
+		d2[0]=d2[1];
+		d2[1]=temp;
+		
+		var sd=new Date(d1).getTime();
+		 var ed=new Date(d2).getTime();
+	
+		 if(sd>ed){
+			 alert("start Date cannot be greater than end Date");
+				$("#trainingEndDate2").focus();
+
+		 return false;
+		 }
+		
+		
 		
 		<ct:forEach items="${listSchCodeSubjects}" 
 			var="subjects" varStatus="loop2"> // just for iteration 

@@ -3693,8 +3693,6 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 
-
-
 	@Override
 	public String saveEditTrainingScheduleMaster(String subject[],String duration[],String day[],String startTime[],String endTime[],TrainingScheduleForm form) {
 		// TODO Auto-generated method stub
@@ -3708,36 +3706,89 @@ public class AdminDAOImpl implements AdminDAO {
 		String subjects="";
 		
 		
-		if(form.getTrainingScheduleId()!=0)
-		{
-			ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
-			
-			Query query = session.createSQLQuery("select subjectmappingid from subjectmapping where scheduleCode='"+ts.getScheduleCode()+"' order by subjectmappingid");
-			List list1 = query.list();
-			
-			for(int i=0;i<duration.length;i++){
+		if(form.getTrainingScheduleId()!=0){
+			List chkSch1= session.createSQLQuery("select trainingScheduleId from trainingSchedule ts join trainingCalendar tc on(ts.scheduleCode=tc.scheduleCode) where trainingScheduleId="+form.getTrainingScheduleId()).list();
+			if(chkSch1.size()!=0){
 				
-				sm = (SubjectMapping) session.load(SubjectMapping.class,(int)list1.get(i));
-
-				sm.setDuration(duration[i]);
-				sm.setDay(day[i]);
-				sm.setStartTime(startTime[i]);
-				sm.setEndTime(endTime[i]);
-				
-				if(Integer.parseInt(day[i])>days)
-					days=Integer.parseInt(day[i]);
-				
-				session.update(sm);
+				return "Cannot Edit:Training Calendar Exists";
 			}
-			ts.setDays(days);
+		}
+		
+
+		for(int i=0;i<subject.length;i++){
+			subjects=subjects+subject[i]+"|";
 			
+		}
+		
+		ArrayList arrL=new ArrayList();
+		String newArr[]=subjects.split("\\|");
+		for(String a:newArr)
+		System.out.println(a); 
+		
+	
+Boolean flag=false;
+		int foundAt=0;
+		List chkSch1= session
+				.createSQLQuery("select subjects from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and  length(subjects)="+subjects.length()+" and isActive='Y'").list();
+		
+		if(chkSch1.size()!=0)
+		for(int i=0;i<newArr.length && i<chkSch1.size();i++){
+			if(chkSch1.get(i).toString().contains(newArr[i])){
+				flag=true;
+				foundAt=i;
+			}
+		}
+		
+		System.out.println("flag="+flag);
+		
+		
+		if(form.getTrainingScheduleId()!=0 )
+		{
+			
+				ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
+				List chkSch=null;
+				if(flag==false) 
+				chkSch= session.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+ts.getDesignation()+"' and trainingType='"+ts.getTrainingType()+"' and trainingPhase='"+ts.getTrainingPhase()+"' and subjects='"+chkSch1.get(foundAt).toString()+"' and isActive='Y'").list();
+				 
+				if((flag==false)||(int)chkSch.get(0)==ts.getTrainingScheduleId() )
+				{
+					Query query = session.createQuery("delete SubjectMapping where scheduleCode = :sch");
+					query.setParameter("sch", ts.getScheduleCode());
+				query.executeUpdate(); 
+						
+			
+			for(int i=0;i<subject.length;i++){
+	 			sm=new SubjectMapping();
+	 			sm.setScheduleCode(ts.getScheduleCode());
+	 			sm.setDuration(duration[i]);
+	 			sm.setDay(day[i]);
+	 			sm.setStartTime(startTime[i]);
+	 			sm.setEndTime(endTime[i]);
+	 			sm.setSubject(subject[i]);
+	 			
+	 			
+	 			//sm.setDuration(duration[i]);
+	 			//String arr[]=duration[i].split(":");
+	 			//System.out.println("opop "+arr.length);
+	 			//hrs=hrs+Integer.parseInt(arr[0]);
+	 			//min=min+Integer.parseInt(arr[1]);
+	 			
+	 			if(Integer.parseInt(day[i])>days)
+	 				days=Integer.parseInt(day[i]);
+	 			
+	 			session.save(sm);
+	 		}
+			ts.setSubjects(subjects);
 			session.update(ts);
 			return "updated";
+				}
+
+				return "Schedule Already Exists";
 		}
 		else{
 			ts= new TrainingSchedule();
 		
-
+/*
 		
 		for(int i=0;i<subject.length;i++){
 			subjects=subjects+subject[i]+"|";
@@ -3763,7 +3814,7 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 		System.out.println("flag="+flag);
-		
+		*/
 		//////////////////////////
 		//check if same subjectSchedule exists
 		/* for sub order matters 
@@ -4395,5 +4446,18 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		
 		return "created";
 	}	
+
+
+	@Override
+	public List<String> getAllEndDates(String trainingStartDate) {
+Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createSQLQuery(" select trainingstartdate from trainingcalendar where to_date(trainingstartdate, 'DD/MM/YYYY') > to_date('"+trainingStartDate+"', 'DD/MM/YYYY')");
+		
+		List<String> list=query.list();
+		
+		System.out.println(list);
+		return list;
+	}
 	
 }
