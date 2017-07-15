@@ -49,6 +49,7 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>UserName/UserID:</strong></li>
 															<li class="style-li error-red">*</li>
+															<li id="loginIdErr" style="display:none;" class="style-li error-red" >UserName/UserID can not be blank.</li>
 														</ul>
 													</div>
 													<cf:input type="text" path="loginId" 
@@ -108,17 +109,25 @@
             </cf:form>
             <script>
              
-                
+            loginIdErr
                  
 
                  function validateFields(){
                 		$("#PasswordErr").css("display" , "none");
+                		$("#loginIdErr").css("display" , "none");
+                		
+                		if($("#loginId").val() == ''){
+                   		 
+                     		$("#loginIdErr").css("display" , "block");
+                     		return false;
+                     	 } 
                 		
                 	 if($("#Password").val() == ''){
                 		 
                 		$("#PasswordErr").css("display" , "block");
                 		return false;
                 	 } 
+                	 
 
                  }
 
