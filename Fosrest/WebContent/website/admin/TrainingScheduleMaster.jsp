@@ -644,10 +644,10 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
                 	    $("#trainingType").val(mainData1[0][1]);
                 	    $("#trainingPhase").val(mainData1[0][2]);
                 	    $("#status").val(mainData1[0][3]);
-                		/* $("#designation").prop("disabled", "disabled");
+                		 $("#designation").prop("disabled", "disabled");
     					$("#trainingType").prop("disabled", "disabled");
     					$("#trainingPhase").prop("disabled", "disabled"); 
-    					$("#status").prop("disabled", "disabled");  */
+    					$("#status").prop("disabled", "disabled"); 
         			
     					$('#subjectTable').show();
 

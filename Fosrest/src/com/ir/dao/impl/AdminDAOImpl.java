@@ -3727,28 +3727,32 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	
 Boolean flag=false;
-		int foundAt=0;
+		
+		String sql=null;
+		if(form.getTrainingScheduleId()!=0 ){
+			ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
+		sql="select subjects from trainingSchedule where designation='"+ts.getDesignation()+"' and trainingType='"+ts.getTrainingType()+"' and trainingPhase='"+ts.getTrainingPhase()+"' and  length(subjects)="+subjects.length()+" and isActive='Y'";
+		}
+		else
+		sql="select subjects from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and  length(subjects)="+subjects.length()+" and isActive='Y'";
+		
 		List chkSch1= session
-				.createSQLQuery("select subjects from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and  length(subjects)="+subjects.length()+" and isActive='Y'").list();
+				.createSQLQuery(sql).list();
 		
 		if(chkSch1.size()!=0)
 		for(int i=0;i<newArr.length && i<chkSch1.size();i++){
 			if(chkSch1.get(i).toString().contains(newArr[i])){
 				flag=true;
-				foundAt=i;
+			
 			}
 		}
 		
 		System.out.println("flag="+flag);
 		
-		
 		if(form.getTrainingScheduleId()!=0 )
-		{
-			
-				ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
+		{//edit
 				 List chkSch= session
-							.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and subjects='"+chkSch1.get(foundAt).toString()+"' and isActive='Y'").list();
-				 
+							.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+ts.getDesignation()+"' and trainingType='"+ts.getTrainingType()+"' and trainingPhase='"+ts.getTrainingPhase()+"' and subjects='"+subjects+"' and isActive='Y'").list();
 				if((flag==false)||(int)chkSch.get(0)==ts.getTrainingScheduleId() )
 				{
 					Query query = session.createQuery("delete SubjectMapping where scheduleCode = :sch");
@@ -3764,8 +3768,6 @@ Boolean flag=false;
 	 			sm.setStartTime(startTime[i]);
 	 			sm.setEndTime(endTime[i]);
 	 			sm.setSubject(subject[i]);
-	 			
-	 			
 	 			//sm.setDuration(duration[i]);
 	 			//String arr[]=duration[i].split(":");
 	 			//System.out.println("opop "+arr.length);
@@ -3784,7 +3786,7 @@ Boolean flag=false;
 
 				return "Schedule Already Exists";
 		}
-		else{
+		else{//create
 			ts= new TrainingSchedule();
 		
 /*
