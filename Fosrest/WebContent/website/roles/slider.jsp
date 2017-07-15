@@ -131,6 +131,7 @@
 		<!-- <li><a href="SubjectMaster.fssai">Subject Master</a></li>-->
 		<li><a href="trainingcalendar.fssai">Training Calendar</a></li> 
 		<li><a href="ResetPassword.fssai">Reset Password</a></li>
+		<li><a href="photogallery.fssai">Upload Photo Gallery</a></li>
 	
                    
 	</ul>

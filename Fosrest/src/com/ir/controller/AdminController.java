@@ -3415,5 +3415,35 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 			out.write(newList);
 			out.flush();
 		}
-	 
+		@RequestMapping(value = "/photogallery", method = RequestMethod.GET)
+		public String photogallery( Model model, HttpSession session) {
+			System.out.println("photogallery");
+			if(checkAccess(session))
+				return "redirect:login.fssai";
+			return "photogallery";
+		}
+
+		@RequestMapping(value = "/uploadphotogallery", method = RequestMethod.POST)
+		public String uploadphotogallery(@ModelAttribute("LoginDetails") LoginDetails l,@RequestParam CommonsMultipartFile file , BindingResult result,
+				Model model,HttpSession session) {
+			try{
+			String ss = session.getServletContext().getRealPath("Photo_Gallery");
+				File dir = new File(ss);
+				if (!dir.exists())
+					dir.mkdirs();
+				String fileName = file.getOriginalFilename();
+				
+		    byte[] bytes = file.getBytes();  
+		    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
+		         new File(ss + File.separator + fileName )));  
+		    stream.write(bytes);  
+		    stream.flush();  
+		    stream.close();  
+			}catch(Exception e){
+				e.printStackTrace();
+				new ZLogger("saveImage", "Exception while  saveFile "+e.getMessage(), "AdminController.java");
+			}
+			return "redirect:/photogallery.fssai";
+			
+		}
 }

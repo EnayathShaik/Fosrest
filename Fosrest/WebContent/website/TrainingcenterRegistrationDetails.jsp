@@ -309,7 +309,7 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Title:(Training Center Head)</strong></li>
+                                            <li class="style-li"><strong>Title:</strong></li>
                                             <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
                                              
                                             <li class="style-li error-red"> *</li>
@@ -369,7 +369,7 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Middle Name:(Training Center Head)</strong></li>
+                                            <li class="style-li"><strong>Middle Name:(Nodal Person Name)</strong></li>
                                              <li id="middleNameErr" style="display:none;" class="style-li error-red" > Middle Name can not be blank.</li>
                                             <li class="style-li error-red"> </li>
                                         </ul>
@@ -380,7 +380,7 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Last Name:(Training Center Head)</strong></li>
+                                            <li class="style-li"><strong>Last Name:(Nodal Person Name)</strong></li>
                                             <li id="lastNameErr" style="display:none;" class="style-li error-red" > Last Name can not be blank.</li>
                                             <li class="style-li error-red"> </li>
                                         </ul>

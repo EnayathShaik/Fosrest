@@ -1370,4 +1370,8 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/ResetPassword.jsp" />
 	</definition>
+	<definition name="photogallery" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/uploadPhotoGallery.jsp" />
+	</definition>
 </tiles-definitions>
