@@ -37,7 +37,7 @@
                                                     <div class="col-xs-12">
 													<fieldset>
                                         <legend>Reset Password</legend>
-                                        
+                                        <span id="name_status" class = "style-li error-red"><h3>${created } </h3></span>
                                         <!-- table starts here -->
                                         <!-- left side -->
                                         
