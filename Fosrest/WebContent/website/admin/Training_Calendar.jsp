@@ -669,7 +669,29 @@
 			return false;
 		}
 	 	
+		var currDate=new Date();
+		
+		var currDateFormat=(currDate.getMonth()+1)+"-"+currDate.getDate()+"-"+currDate.getFullYear();
+	
+		var currmili=new Date(currDateFormat).getTime();
+		var d1=$("#trainingStartDate").val().split('-');
+		var temp=d1[0];
+		d1[0]=d1[1];
+		d1[1]=temp;
+		
+		var d1mili=new Date(d1).getTime();
+		
+		if(d1mili<currmili){
+			alert("Today is "+currDate.getDate()+"-"+(currDate.getMonth()+1)+"-"+currDate.getFullYear()+". Selected Date("+$("#trainingStartDate").val()+") is a past Date.");
+			$("#trainingStartDate").val("");
+			$("#trainingStartDate").focus();
+			return false;
+			
+		}
  
+
+		
+		
 	}
 
 	function redirectScheduleCode1(trType, id) {
@@ -716,7 +738,8 @@
 		 var ed=new Date(d2).getTime();
 	
 		 if(sd>ed){
-			 alert("start Date cannot be greater than end Date");
+			 alert("End Date cannot be less than Start Date  ");
+			 $("#trainingEndDate2").val("");
 				$("#trainingEndDate2").focus();
 
 		 return false;
@@ -748,7 +771,7 @@
 	
 		  $('#calendarTable tr').remove();
 		  $('#calendarTable2 tr').remove();
-		 	$('#calendarTable').append( '<tr  class="background-open-vacancies"><th>Training Details</th><th>BatchCode</th><th>ScheduleCode</th><th>StartDate</th><th>End Date</th><th>Total Days</th><th>Training Institute</th></tr>')
+		 	$('#calendarTable').append( '<tr  class="background-open-vacancies"><th>Training Details</th><th>BatchCode</th><th>ScheduleCode</th><th>Start Date</th><th>End Date</th><th>Total Days</th><th>Training Institute</th></tr>')
 		 	var row1="<tr><td style='text-align:left;'><ul><li>"+mainData1[0][0]+"</li><br /><li>"+mainData1[0][1]+"</li><br /><li>"+mainData1[0][2]+"</li></td><td>"+mainData1[0][3]+"</td><td>"+mainData1[0][4]+"</td><td>"+mainData1[0][5]+"</td><td>"+mainData1[0][6]+"</td><td>"+mainData1[0][7]+"</td><td>"+mainData1[0][8]+"</td></tr>";
 		 	 $('#calendarTable').append(row1); 
 			 

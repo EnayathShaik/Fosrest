@@ -4448,7 +4448,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		return "created";
 	}	
 
-
+/*
 	@Override
 	public List<String> getAllEndDates(String trainingStartDate) {
 Session session=sessionFactory.getCurrentSession();
@@ -4459,6 +4459,6 @@ Session session=sessionFactory.getCurrentSession();
 		
 		System.out.println(list);
 		return list;
-	}
+	}*/
 	
 }

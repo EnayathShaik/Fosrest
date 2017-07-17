@@ -3219,8 +3219,8 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
     	model.addAttribute("institute", form.getTrainingInstitute());
     	model.addAttribute("startDate", form.getTrainingStartDate());
       	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
-      	System.out.println("validateCalendarEndDate entered by user");
-      		model.addAttribute("dbEndDates",this.adminService.getAllEndDates(form.getTrainingStartDate()));	
+      	//System.out.println("validateCalendarEndDate entered by user");
+      		//model.addAttribute("dbEndDates",this.adminService.getAllEndDates(form.getTrainingStartDate()));	
     	//model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
     	
     	if(result.equals("clash")){

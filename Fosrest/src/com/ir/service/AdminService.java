@@ -571,7 +571,7 @@ public String addResetPassword(String a,String loginid);
 
 public List getTrainingCalendarById(int id);
 
-public List<String> getAllEndDates(String trainingStartDate);
+/*public List<String> getAllEndDates(String trainingStartDate);*/
 
 }
 
