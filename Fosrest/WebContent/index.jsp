@@ -191,11 +191,11 @@ function OnStart(){
 	 	  success: function (response) { 
 	 	      var mainData1 = jQuery.parseJSON(response);
 	 	     $('#newTable tr').remove();
-	 	 $('#newTable').append( '<tr  class="background-open-vacancies"> <th title="Institute Name & Address">Training Start Date</th><th>Training End Date</th><th>State</th></tr>')
+	 	 $('#newTable').append( '<tr  class="background-open-vacancies" style="font-size:14px;"> <th title="Institute Name & Address">Training Start Date</th><th>Training End Date</th><th>State</th></tr>')
 	 	       var j = 1;
 				 $.each(mainData1,function(i, obj) {$('#newTable').append(
 				    		
-	                               '<tr id="tableRow"><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[0] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[1] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[4] + '</td></tr>');
+	                               '<tr style="background-color:#ccc;font-size:14px;" id="tableRow"><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[0] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[1] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[4] + '</td></tr>');
 	                   });
 				    
 	 	      }
@@ -382,7 +382,7 @@ $(function(){
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="fostac.fssai">HOME</a></li>
 						<li><a href="about.fssai">ABOUT</a></li>
-						<li class="dropdown"><a href="courses.html"
+						<li class="dropdown"><a href=""
 							class="dropdown-toggle" data-toggle="dropdown">Training<i
 								class="fa fa-angle-down"></i></a>
 							<ul class="dropdown-menu">
@@ -548,14 +548,14 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 						</div>
 					</div>
 					
-					<div class="col-sm-3">
+					<div class="col-sm-4">
     <h3 class="text-center">Upcoming Events</h3>
-    <div class="newstape" style="overflow-x:scroll !important;">
+    <div class="newstape">
         <div class="newstape-content">
             <div class="news-block">
                 <p class="text-justify">
                                                                                
-<table class="table table-bordered table-responsive" id="newTable" >
+<table class="table  table-responsive" id="newTable" background="#f5f5f5">
 												  <thead>
                                                 
                                                 </thead>
@@ -600,7 +600,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 							</div>
 						</div>	
 				</div> -->
-	<div class="col-sm-3" style="margin-left:25px;">
+	<div class="col-sm-3">
 	<div style="margin-top: 10px; padding: 0px;">
 								<a href="shareInitiative.fssai"><img src="website/images/share-intitiave.jpg" class="img-responsive"></a>
 							</div>
@@ -608,11 +608,8 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 								<a href="http://www.fssai.gov.in/home" target="blank"><img src="website/images/fssai-blog.jpg" class="img-responsive"></a>
 							</div>
 							<div style="margin-top: 42px; padding: 0px;">
-							<span style="background-color: #000070;
-    padding: 26px;
-    color: #fff;
-    font-weight: bold;
-    font-size: 15px;">Download training guidelines</span>
+							<a href="website/android/Manual.docx" target="blank">
+							<span style="background-color: #000070; padding: 26px; color: #fff; font-weight: bold; font-size: 15px;">Download training guidelines</span></a>
 							</div>
 	</div>
 	</div>
@@ -653,6 +650,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 							<li><a href="#">Useful Links</a></li> -->
 							<li><a href="#">FAQ's</a></li>
 							<li><a href="#">Feedback</a></li>
+							<li><a href="#">Help</a></li>
 						</ul>
 					</div>
 				</div>
@@ -669,7 +667,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 				</div>
 				<!--/.col-md-3-->
 
-				<div class="col-md-3 col-sm-6">
+			<!-- 	<div class="col-md-3 col-sm-6">
 							<div class="widget center-block text-center"
 						style="border-right: none;">
 						<ul>
@@ -685,7 +683,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 						
 						</ul>
 					</div>
-				</div>
+				</div> -->
 				
 				<!--/.col-md-3-->
 			</div>

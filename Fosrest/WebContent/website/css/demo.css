@@ -15,7 +15,8 @@ body { font-family: 'roboto', Arial, Helvetica, sans-serif }
 .text-justify { text-align: justify; }
 
 .newstape {
-  background-color: #3BB0D6;
+  background-color:#f1eff0;
+  border:1px solid #ccc;
   color: #fff;
   height: 238px;
   overflow: hidden;

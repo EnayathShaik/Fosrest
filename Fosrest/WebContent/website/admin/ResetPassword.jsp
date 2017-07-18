@@ -56,7 +56,7 @@
 														placeholder="UserName/UserID" class="form-control" />
 												</div>
            
-                                            <div class="form-group">
+                                          <div class="input-group">
                                                 <div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>New Password:</strong></li>
@@ -64,12 +64,20 @@
 															<li id="PasswordErr" style="display:none;" class="style-li error-red" >New Password can not be blank.</li>
 															</ul>
 													</div>
-													<cf:input type="password" class="form-control" path="Password" placeholder="New Password"/>
-												</div>
-                                           
+													<cf:input type="password" id = "password" class="form-control" path="Password" placeholder="New Password"/>
+													 <%-- <cf:input id = "password" type="password" path="Password" class="form-control" placeholder="password" /> --%>
+													<span class="input-group-btn">
+													  <button id= "show_password" class="btn btn-secondary" type="button" style="margin-bottom: -26px; height: 36px;margin-left:0px;">
+								                        <span class="glyphicon glyphicon-eye-open"></span>
+							                          </button></span>
+												</div> 
+												
+			  </div>
+			</div>
+		</div>
                                             
                                                <!-- left -->
-                                          <br>
+                                          <br> 
 												<div class="form-group">
                                                     <input type="submit" class="btn login-btn" style="margin-left: 140px;" value="Reset Password" />
                                                      </div>
@@ -80,7 +88,7 @@
                                             
                                         <!-- right side -->
                                         <div class="col-md-6 hidden-xs"> </div>
-                                    </fieldset>
+                                   
                          
 
                                                     </div>
@@ -126,5 +134,16 @@
                 	 
 
                  }
+               
+               $('#show_password').hover(function functionName() {
+					//Change the attribute to text
+					$('#password').attr('type', 'text');
+					$('.glyphicon').removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close');
+				}, function () {
+					//Change the attribute back to password
+					$('#password').attr('type', 'password');
+					$('.glyphicon').removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open');
+				}
+			);
 
             </script>

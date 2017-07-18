@@ -14,8 +14,8 @@
                 <li><a href="special-level.fssai">Special Level</a></li>
               </ul>
             </li>
-            <li><a href="#">Risk & Solutions</a></li>
-            <li><a href="#">Help</a></li>
+            <!-- <li><a href="#">Risk & Solutions</a></li>
+            <li><a href="#">Help</a></li> -->
             <li><a href="contact.fssai">Contact</a></li>
           </ul>
         </div>
@@ -24,11 +24,15 @@
       <div class="col-md-3 col-sm-6">
         <div class="widget center-block">
           <ul>
-            <li><a href="disclaimer.fssai">Disclaimer</a></li>
+            <!-- <li><a href="disclaimer.fssai">Disclaimer</a></li>
             <li><a href="#">Archives</a></li>
-            <li><a href="#">Useful Links</a></li>
-            <li><a href="#">Faqs</a></li>
-            <li><a href="feedback.fssai">Feedback</a></li>
+            <li><a href="#">Useful Links</a></li> -->
+                            <li><a href="#">Sitemap</a></li>
+							<li><a href="#">FAQ's</a></li>
+							<li><a href="feedback.fssai">Feedback</a></li>
+							<li><a href="#">Help</a></li>
+            <!-- <li><a href="#">Faqs</a></li>
+            <li><a href="feedback.fssai">Feedback</a></li> -->
           </ul>
         </div>
       </div>
@@ -50,11 +54,11 @@
       </div>
       <!--/.col-md-3-->      
       <div class="col-md-3 col-sm-6">
-        <div class="widget center-block text-center" style="border-right:none;">
+        <!-- <div class="widget center-block text-center" style="border-right:none;">
           <ul>
             <li><a href="http://www.fssai.gov.in/" target="_blank"><img src="website/images/fssai.png" alt="FSSAI" width="151" height="86"></a></li>
           </ul>
-        </div>
+        </div> -->
       </div>
       <!--/.col-md-3--> 
     </div>
