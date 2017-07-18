@@ -13,6 +13,12 @@
 
 		});
 		
+		<ct:forEach items="${listSchCodeSubjects}"
+			var="subjects" varStatus="loop2">
+		flatpickr("#subjectDates_"+'${loop2.count}', {
+
+		});
+		</ct:forEach>
 		/* if(${profileId}==1){  
 			 
 			$("#datatablesfosrest th:last-child, #datatablesfosrest td:last-child").remove();
@@ -55,9 +61,12 @@
 		$("#scheduleCode").prop("disabled", "disabled");    
         $("#createbtn").val("Save");
 
-       
         <ct:forEach items="${listPreSelectedTrainers}" var="lpt" varStatus="loop" > 
-        $("#trainer_"+'${loop.count}').val('${lpt}');  
+        $("#trainer_"+'${loop.count}').val('${lpt}');   
+		</ct:forEach> 
+        
+        <ct:forEach items="${listEnteredSubjectDates}" var="lesd" varStatus="loop" > 
+        $("#subjectDates_"+'${loop.count}').val('${lesd}');  
 		</ct:forEach>
  
 	}
@@ -78,6 +87,10 @@
         <ct:forEach items="${listPreSelectedTrainers}" var="lpt" varStatus="loop" > 
         $("#trainer_"+'${loop.count}').val('${lpt}');   
 		</ct:forEach> 
+		
+        <ct:forEach items="${listEnteredSubjectDates}" var="lesd" varStatus="loop" > 
+        $("#subjectDates_"+'${loop.count}').val('${lesd}');  
+		</ct:forEach>
         
 	}
 	}
@@ -325,18 +338,20 @@
 										<fieldset>
 											<legend>Search Result and Create Calendar </legend>
 											<ct:if test="${!empty listCalendarSearch}">
-												<table border="1" 
+												<table border="1"  style='text-align:center;'
 													class="table table-bordered table-responsive">
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
-															<th>Designation</th>
-															<th>Training Type</th>
+															<!-- <th>Designation</th>
+															<th>Training Type</th> -->
 															<th>Schedule Code</th>
 															<!-- <th>Training Duration</th> -->
 															<th>Training Start Date</th>
 															<th><ul><li id="trainingEndDateErr" style="display: none;"
 																class="style-li error-red">Select End Date.</li></ul>Training End Date</th>
+															<th>Day</th>
+															<th>On Date</th>
 															<th>Subject</th>
 															<th>	<ul><li id="trainerErr" style="display: none;"
 																class="style-li error-red">Select TRAINER for each subject.</li></ul>Trainer</th>
@@ -350,16 +365,16 @@
 														var="listCalendarSearch" varStatus="loop">
 														<tr>
 															<td>${loop.count}</td>
-															<td>${listCalendarSearch[0]}</td>
-															<td>${listCalendarSearch[1]}</td>
+															<%-- <td>${listCalendarSearch[0]}</td>
+															<td>${listCalendarSearch[1]}</td> --%>
 															<td>${listCalendarSearch[6]}</td>
 															<%-- <td>${listCalendarSearch[7]} hrs</td> --%>
-															<cf:hidden path="designation2"
+															 <cf:hidden path="designation2"
 																value="${listCalendarSearch[3]}" />
 															<cf:hidden path="trainingType2"
 																value="${listCalendarSearch[4]}" />
 															<cf:hidden path="trainingPhase2"
-																value="${listCalendarSearch[5]}" />
+																value="${listCalendarSearch[5]}" /> 
 															<cf:hidden path="scheduleCode2"
 																value="${listCalendarSearch[6]}" />
 
@@ -371,13 +386,38 @@
 
 															<td>${startDate}</td>
 															<%-- <td>${endDate}</td> --%>
-															<td><cf:input path="trainingEndDate2"  class="form-control" /></td>
+															<td ><cf:input path="trainingEndDate2"  class="form-control"  /></td>
+																
+																<td    style=" width: 75px; padding-top: 14px;"><ct:forEach items="${listSchCodeSubjects}"
+																	var="subjects" varStatus="loop2">
+																	Day ${subjects[2]}
+															<input id="days" type="hidden" name="days"  class="form-Control" value="${subjects[2]}"  />
+																	
+													<br /><br /><br />
+																	 
+																</ct:forEach></td>
+																
+																
+																<td><ct:forEach items="${listSchCodeSubjects}"
+																	var="subjects" varStatus="loop2">
+																	<ct:choose>
+																	<ct:when test="${subjects[2]!=i}">
+																	<div style="margin-bottom: 8px;"><input  id="subjectDates_${loop2.count}" type="text" name="subjectDates"  class="form-Control"  /></div>
+																	</ct:when>
+																	<ct:otherwise>
+																	<p style="padding-top: 6px;
+    padding-bottom: 6px;">Same as above </p>
+																	</ct:otherwise>
+																	</ct:choose>
+																	<ct:set var="i" value="${subjects[2]}" />
+													<br />
+																	 
+																</ct:forEach></td>
 
-
-															<td><ct:forEach items="${listSchCodeSubjects}"
+															<td style="    padding-top: 14px;"> <ct:forEach items="${listSchCodeSubjects}"
 																	var="subjects" varStatus="loop2">
 																	<input type="hidden" name="subject"
-																		value="${subjects[1]}" />
+																		value="${subjects[1]}"/>
 													${subjects[0]}<br />
 																	<br />
 																	<br />
@@ -386,7 +426,7 @@
 															<td><div class="form-group">
 																	<ct:forEach items="${listSchCodeSubjects}"
 																		var="subjects" varStatus="loop2">
-																		<select id="trainer_${loop2.count}" name='trainer'
+																		<select style="margin-top:2px; margin-bottom: 30px;" id="trainer_${loop2.count}" name='trainer'
 																			class="form-control">
 																			<option value="" label="Select Trainer" />
 																			<ct:forEach items="${listPersonalInfoTrainer}"
@@ -512,7 +552,7 @@
 										<tbody></tbody>
 												</table>
 												<br />
-												<table class="table table-bordered table-responsive"  id="calendarTable2" style=" margin-left:91px; width:700px; text-align: center;">
+												<table  class="table table-bordered table-responsive"  id="calendarTable2" style=" margin-left:91px; width:700px; text-align: center;">
 												  <thead>
 												<th> </th>
                                                 <th> </th>
@@ -775,7 +815,7 @@
 		 	var row1="<tr><td style='text-align:left;'><ul><li>"+mainData1[0][0]+"</li><br /><li>"+mainData1[0][1]+"</li><br /><li>"+mainData1[0][2]+"</li></td><td>"+mainData1[0][3]+"</td><td>"+mainData1[0][4]+"</td><td>"+mainData1[0][5]+"</td><td>"+mainData1[0][6]+"</td><td>"+mainData1[0][7]+"</td><td>"+mainData1[0][8]+"</td></tr>";
 		 	 $('#calendarTable').append(row1); 
 			 
-			 $('#calendarTable2').append( '<tr  class="background-open-vacancies"><th>Sr.No.</th><th>Start & End Time</th><th>Subject</th><th>Trainer</th></tr>');
+			 $('#calendarTable2').append( '<tr  class="background-open-vacancies"><th>Sr.No.</th><th>Day</th><th>Date</th><th>Start & End Time</th><th>Subject</th><th>Trainer</th></tr>');
 			 var row2=""; 
 		 	var subjects="";
 		 	 var trainers="";  
@@ -790,7 +830,7 @@
 					 $('#calendarTable2').append(row2);  */
 					 
 			 $.each(mainData1,function(i, obj) { 
-				 $('#calendarTable2').append("<tr><td>"+(i+1)+"</td><td>"+obj[12]+"-"+obj[13]+"</td><td>"+obj[9]+"</td><td>"+obj[10]+" "+obj[11]+"</td></tr>"); 
+				 $('#calendarTable2').append("<tr><td>"+(i+1)+")</td><td>"+obj[14]+"</td><td>"+obj[15]+"</td><td>"+obj[12]+"-"+obj[13]+"</td><td>"+obj[9]+"</td><td>"+obj[10]+" "+obj[11]+"</td></tr>"); 
 
 				 });
 					

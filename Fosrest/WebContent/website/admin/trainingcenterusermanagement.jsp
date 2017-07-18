@@ -171,13 +171,13 @@
                                                                             <label>${listValue[4]}</label>
                                                                         </td>
                                                                         <td>
-                                                                            <label>${listValue[6]}</label>
+                                                                            <label>${listValue[7]}</label>
                                                                         </td>
                                                                            <%--  <td>
                                                                                     <label>${listValue[8]}</label>
                                                                                 </td> --%>
                                                                                 <td>
-                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[5]}','${listValue[6]}','1');" value="${listValue[7]}"/></label>
+                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[5]}','${listValue[6]}','1');" value="${listValue[6]}"/></label>
                                                                                 </td>
                                                                     </tr>
                                                                 </ct:forEach>

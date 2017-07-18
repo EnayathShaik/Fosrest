@@ -1594,9 +1594,9 @@ public List listCalendarSearch(TrainingCalendarForm form) {
 
 @Override
 @Transactional
-public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p) {
+public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.createTrainingCalendar( trainers,subjects,p);
+	return this.adminDAO.createTrainingCalendar( days,subjectDates,trainers,subjects,p);
 }
 
 @Override
@@ -1743,6 +1743,13 @@ public String addResetPassword(String pass,String loginid) {
 public List getTrainingCalendarById(int id) {
 	// TODO Auto-generated method stub
 	return this.adminDAO.getTrainingCalendarById(id);
+}
+
+@Override
+@Transactional
+public List getEnteredSubjectDates(int editId) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.getEnteredSubjectDates(editId);
 }
 
 @Override

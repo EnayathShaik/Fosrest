@@ -3167,7 +3167,10 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		else{
 	String  trainers[]=  request.getParameterValues("trainer");
 	String  subjects[]=  request.getParameterValues("subject");
-	         String result = this.adminService.createTrainingCalendar(trainers,subjects,p);
+	String subjectDates[]=request.getParameterValues("subjectDates");
+	String days[]=request.getParameterValues("days");
+
+	         String result = this.adminService.createTrainingCalendar(days,subjectDates,trainers,subjects,p);
 		}
 		return "redirect:trainingcalendar.fssai";
 	}
@@ -3175,84 +3178,89 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 
 
  
- @RequestMapping(value = "/trainingcalendarsearch", method = RequestMethod.POST)
-	public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm form,
-			Model model, HttpSession session) {
-		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
-			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
-		return "redirect:login.fssai";
-		}
-		int profileId=(int) session.getAttribute("profileId");
-	   if(profileId==1){
-			System.out.println("admin");
-			//model.addAttribute("listCalendarSearch", this.adminService.listCalendarSearch(form.getScheduleCode()));
-	
-		}
-      if(profileId==2){
-    	  String s=(String) session.getAttribute("stateId");
-  	
-  		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
-  		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
-  		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
-  		model.addAttribute("listCalendar", this.adminService.listCalendar());	
-  		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
-  		/*model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
-  		System.out.println( this.adminService.listtrainingScheduleMaster()+" yuyuyuyuuyuyu");*/
-		model.addAttribute("search", "Y");
-  		
-  		List list=	this.adminService.listCalendarSearch(form);
-  		
-  		if(list!=null){
-  			
-  			Object[] obj = (Object[]) list.get(0);
-  	    	
-  	    	//String Duration=obj[7].toString();
-  	    	String days=obj[8].toString();
-  	    	
-  	    	String result=this.adminService.calculateEndDate(form.getTrainingStartDate(),days,form.getTrainingInstitute(),form.getTrainingCalendarId());
-  	    	
-  	    	if(!(result.equals("clash"))|| form.getTrainingCalendarId()!=0){
-  	    
-  	  	model.addAttribute("endDate",result);
-      	model.addAttribute("listCalendarSearch", list);
-     	model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
-      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
-    	model.addAttribute("institute", form.getTrainingInstitute());
-    	model.addAttribute("startDate", form.getTrainingStartDate());
-      	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
-      	//System.out.println("validateCalendarEndDate entered by user");
-      		//model.addAttribute("dbEndDates",this.adminService.getAllEndDates(form.getTrainingStartDate()));	
-    	//model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
-    	
-    	if(result.equals("clash")){
-    		
-    		model.addAttribute("startDate",form.getTrainingStartDate2());
-    		model.addAttribute("endDate",form.getTrainingEndDate2());
-	      	//model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
-
-	    	model.addAttribute("errorTime", "Change Start-Date");
-	    		
-    	}
-    	
-    	
-  	    	}
-  	    	else{
-  	    		model.addAttribute("errorTime", "Change Start-Date");
-  	    	}
-  	    }
-  		else{
-	    		model.addAttribute("errorTime", "Same Start-Date exists for ScheduleCode "+form.getScheduleCode());
-	    }
-  		
-  		
-      }
-      
-      if(form.getTrainingCalendarId()!=0)
-    	  model.addAttribute("searchwhileedit","Y");
-      
-		return "trainingcalendar";
+@RequestMapping(value = "/trainingcalendarsearch", method = RequestMethod.POST)
+public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm form,
+		Model model, HttpSession session) {
+	if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+		new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+	return "redirect:login.fssai";
 	}
-   
+	int profileId=(int) session.getAttribute("profileId");
+   if(profileId==1){
+		System.out.println("admin");
+	}
+  if(profileId==2){
+	  String s=(String) session.getAttribute("stateId");
+	
+		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
+		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
+		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
+		model.addAttribute("listCalendar", this.adminService.listCalendar());	
+		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+		model.addAttribute("search", "Y");
+		
+		List list=	this.adminService.listCalendarSearch(form);
+		if(list!=null){
+			
+			Object[] obj = (Object[]) list.get(0);
+	    	String days=obj[8].toString();
+	    	
+	    	//String result=this.adminService.calculateEndDate(form.getTrainingStartDate(),days,form.getTrainingInstitute(),form.getTrainingCalendarId());
+	    	
+//	    	if(!(result.equals("clash"))|| form.getTrainingCalendarId()!=0){
+	    
+	  //	model.addAttribute("endDate",result);
+  	model.addAttribute("listCalendarSearch", list);
+ 	model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
+  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
+	model.addAttribute("institute", form.getTrainingInstitute());
+	model.addAttribute("startDate", form.getTrainingStartDate());
+  	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
+	model.addAttribute("listEnteredSubjectDates", this.adminService.getEnteredSubjectDates(form.getTrainingCalendarId()));
+
+  	//System.out.println("validateCalendarEndDate entered by user");
+  		//model.addAttribute("dbEndDates",this.adminService.getAllEndDates(form.getTrainingStartDate()));	
+	
+/*    	if(result.equals("clash")){
+		
+		model.addAttribute("startDate",form.getTrainingStartDate2());
+		model.addAttribute("endDate",form.getTrainingEndDate2());
+      	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
+
+    	model.addAttribute("errorTime", "Change Start-Date");
+    		
+	}
+	
+	
+	    	}
+	    	else{
+	    		model.addAttribute("errorTime", "Change Start-Date");
+	    	}
+*/
+	    }
+		else if(form.getTrainingCalendarId()!=0){
+			System.out.println("error + load for edit");
+		  List list1 = this.adminService.editTrainingCalendar(form.getTrainingCalendarId());
+		model.addAttribute("startDate",form.getTrainingStartDate2());
+		model.addAttribute("endDate",form.getTrainingEndDate2());
+		model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
+  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
+	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
+	model.addAttribute("listEnteredSubjectDates", this.adminService.getEnteredSubjectDates(form.getTrainingCalendarId()));
+	model.addAttribute("listCalendarSearch", list1);
+	model.addAttribute("errorTime", "Same Start-Date exists for ScheduleCode "+form.getScheduleCode());
+    }
+		else 
+		model.addAttribute("errorTime", "Same Start-Date exists for ScheduleCode "+form.getScheduleCode());
+
+		
+  }
+  
+  if(form.getTrainingCalendarId()!=0)
+	  model.addAttribute("searchwhileedit","Y");
+  
+	return "trainingcalendar";
+}   
  @RequestMapping(value = "/trainingSchedule/edit/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public void editTrainingSchedule2(@PathVariable("id") int id,
@@ -3306,6 +3314,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		   model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(p.getScheduleCode()));
 	      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
 	      	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(editId));
+	      	model.addAttribute("listEnteredSubjectDates", this.adminService.getEnteredSubjectDates(editId));
 
 			model.addAttribute("isEdit","Y");
 			
@@ -3418,7 +3427,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 			out.flush();
 		}
 		
-		
+	/*	
 		@RequestMapping(value = "/validateCalendarEndDate", method = RequestMethod.POST)
 		public String validateCalendarEndDate(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm p,
 				Model model, HttpSession session,HttpServletRequest request) {
@@ -3427,7 +3436,7 @@ System.out.println(p.getTrainingEndDate2());
 		 //  model.addAttribute("errorTime", this.adminService.validateCalendarEndDate(p.getTrainingEndDate2()));
 		   
 			return "trainingcalendar.fssai";
-		}
+		}*/
 
 		@RequestMapping(value = "/photogallery", method = RequestMethod.GET)
 		public String photogallery( Model model, HttpSession session) {

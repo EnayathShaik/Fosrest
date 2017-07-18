@@ -524,7 +524,7 @@ public List<SubjectMaster>  allSubjects();
 
 public List listCalendarSearch(TrainingCalendarForm form);
 
-public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
+public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p);
 public List<MappingMasterTrainer> trainerMappingState(String sid);
 
 public List listSchCodeSubjects(String scheduleCode);
@@ -571,6 +571,8 @@ public List<TrainingCalendar>  listBatchCodeListStateAdmin();
 public String addResetPassword(String a,String loginid);
 
 public List getTrainingCalendarById(int id);
+
+public List getEnteredSubjectDates(int editId);
 
 String photogallery(String linkName);
 

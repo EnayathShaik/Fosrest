@@ -20,6 +20,22 @@ package com.ir.model;
 			private int subjectId;
 			private String batchCode;
 			private int trainerId;
+			private String subjectDate;
+			private int day;
+			
+			
+			public String getSubjectDate() {
+				return subjectDate;
+			}
+			public void setSubjectDate(String subjectDate) {
+				this.subjectDate = subjectDate;
+			}
+			public int getDay() {
+				return day;
+			}
+			public void setDay(int day) {
+				this.day = day;
+			}
 			public int getTCMappingId() {
 				return TCMappingId;
 			}

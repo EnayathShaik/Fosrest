@@ -26,9 +26,9 @@
 	/*  $("#correspondenceAddress2Err").css("display" , "none"); */
 	 $("#correspondenceStateErr").css("display" , "none"); 
 	 $("#correspondenceDistrictErr").css("display" , "none");
-	 $("#correspondenceCityErr").css("display" , "none");
+	 $("#correspondenceCityErr").css("display" , "none");	
 	 $("#correspondencePincodeErr").css("display" , "none");
-	 $("#correspondencePincodeErr2").css("display" , "none");
+	// $("#correspondencePincodeErr2").css("display" , "none");
 	 $("#EmailErr").css("display" , "none");
 	 $("#mobileErr").css("display" , "none");
 	 $("#seatingCapacityErr").css("display" , "none");
@@ -45,6 +45,22 @@
 		$("#trainingCenterNameErr").css("display" , "block");
 		return false;
 	 } 
+	 
+	  if($("#Email").val() == ''){
+		 
+			$("#EmailErr").css("display" , "block");
+			return false;
+		 }
+	  if($("#mobile").val() == ''){
+		 
+			$("#mobileErr").css("display" , "block");
+			return false;
+		 }
+	  if($("#mobile").val().match(/^[0-9]{10}$/)==null)
+	 {
+		 alert("Invalid Mobile no");
+		 return false;
+	 }
 	/*   if($("#trainingPartnerName").val() == '0'){
 		 
 			$("#trainingPartnerNameErr").css("display" , "block");
@@ -83,6 +99,18 @@
 			$("#correspondenceAddress1Err").css("display" , "block");
 			return false;
 		 }
+		  if($("#correspondencePincode").val() == ''){
+				 $("#correspondencePincodeErr").css("display" , "block");
+					return false;
+				 }
+			
+		  
+		/*   if(($("#correspondencePincode").val()).match(/^[0-9]{6}$/)==null)
+			 {alert("aaa");
+			  $("#correspondencePincodeErr2").css("display" , "block");
+			 return false;
+			 }
+		 */
 	 
 	  if($("#correspondenceState").val() == 0){
 		 
@@ -100,31 +128,7 @@
 			$("#correspondenceCityErr").css("display" , "block");
 			return false;
 		 }
-	  if($("#correspondencePincode").val() == ''){
-		 $("#correspondencePincodeErr").css("display" , "block");
-			return false;
-		 }
-	  if(($("#correspondencePincode").val()).match(/^[0-9]{6}$/)==null)
-		 {
-		  $("#correspondencePincodeErr2").css("display" , "block");
-		 return false;
-		 }
-		 
-	  if($("#Email").val() == ''){
-		 
-			$("#EmailErr").css("display" , "block");
-			return false;
-		 }
-	  if($("#mobile").val() == ''){
-		 
-			$("#mobileErr").css("display" , "block");
-			return false;
-		 }
-	  if($("#mobile").val().match(/^[0-9]{10}$/)==null)
-	 {
-		 alert("Invalid Mobile no");
-		 return false;
-	 }
+	
 	 
 	/*   if($("#trainingType").val() == ''){
 		 
@@ -306,33 +310,30 @@
                                     </div>
                                     <cf:input type="text" path="trainingCenterName" class="form-control" placeholder="Training Center Name" required=""/>
                                 </div>
+                                     <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Email:</strong></li>
+                                            <li id="EmailErr" style="display:none;" class="style-li error-red" > Email cannot be empty.</li>
+                                          
+                                            <li class="style-li error-red">* </li>
+                                        </ul>
+                                    </div>
+                                     <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="emailVal(this.id,this.value);return false;" required=""/>
+                                </div>
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Title:</strong></li>
-                                            <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
-                                             
+                                            <li class="style-li"><strong>Mobile:</strong></li>
+                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile cannot be blank</li>
+                                          
                                             <li class="style-li error-red"> *</li>
                                         </ul>
                                     </div>
-                                   <cf:select path="title" class="form-control">
-													<cf:option value="" label="Select Title" />
-													<cf:options items="${titleMap}" />
-												</cf:select>
+                                    <cf:input type="text" path="mobile" class="form-control" minlength="10" maxlength="10" placeholder="Mobile" required=""
+                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
                                 
-                                 <div class="form-group">
-                                    <div>
-                                        <ul class="lab-no">
-                                            <li class="style-li"><strong>First Name:(Nodal Person Name) </strong></li>
-                                             <li id="firstNameErr" style="display:none;" class="style-li error-red" > first Name can not be blank.</li>
-                                           
-                                            <li class="style-li error-red"> *</li>
-                                        </ul>
-                                    </div>
-                                    <cf:input type="text" class="form-control" path="firstName" placeholder="First Name" required=""
-                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
-                                </div>
                               <%--   <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
@@ -364,14 +365,43 @@
                             <!-- right side -->
                             <div class="col-md-6 col-xs-12">
                              
-
+                              <div class="col-md-3 col-xs-12" style="padding-left: 0px;">
+								<div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Title:</strong></li>
+                                            <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
+                                             
+                                            <li class="style-li error-red"> *</li>
+                                        </ul>
+                                    </div>
+                                   <cf:select path="title" class="form-control">
+													<cf:option value="" label="Select Title" />
+													<cf:options items="${titleMap}" />
+												</cf:select>
+                                </div>
+                                </div>
+                                 <div class="col-md-9 col-xs-12"  style="padding-right: 0px;">
+                                 <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>First Name:(Nodal Person Name) </strong></li>
+                                             <li id="firstNameErr" style="display:none;" class="style-li error-red" > first Name can not be blank.</li>
+                                           
+                                            <li class="style-li error-red"> *</li>
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" class="form-control" path="firstName" placeholder="First Name" required=""
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
+                                </div>
+                               </div>
                                
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Middle Name:(Nodal Person Name)</strong></li>
+                                            <li class="style-li"><strong    style=" margin-left: -108px; ">Middle Name:(Nodal Person Name)</strong></li>
                                              <li id="middleNameErr" style="display:none;" class="style-li error-red" > Middle Name can not be blank.</li>
-                                            <li class="style-li error-red"> </li>
+                                            <li class="style-li error-red"></li>
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="middleName" class="form-control" placeholder="Middle Name" required=""
@@ -382,8 +412,8 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Last Name:(Nodal Person Name)</strong></li>
                                             <li id="lastNameErr" style="display:none;" class="style-li error-red" > Last Name can not be blank.</li>
-                                            <li class="style-li error-red"> </li>
-                                        </ul>
+                                            <li class="style-li error-red"> * </li>
+                                        </ul>	
                                     </div>
                                     <cf:input type="text" path="lastName" class="form-control" placeholder="Last Name" required=""
                                     onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
@@ -422,7 +452,28 @@
                                     <cf:input type="text" path="correspondenceAddress2" class="form-control" placeholder="Training Center Line 2" required=""/>
                                 </div>
                                
+
+
                                 <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>PIN Code:</strong></li>
+                                            <li id="correspondencePincodeErr" style="display:none;" class="style-li error-red" > Pincode cannot be empty.</li>
+											<!-- <li id="correspondencePincodeErr2" style="display:none;" class="style-li error-red" >PinCode should contain 6 digits.</li> -->
+                                          
+                                            <li class="style-li error-red">* </li>
+                                        </ul>
+                                    </div>
+                                    <cf:input type="text" path="correspondencePincode" class="form-control" minlength="6"  maxlength="6" placeholder="Pincode" required=""
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>
+                               
+                            </div>
+                            <!-- left side ends -->
+                            <!-- right side -->
+                            <div class="col-md-6 col-xs-12">
+								
+								 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>State:</strong></li>
@@ -449,11 +500,6 @@
                                  <cf:option value="0" label="Select District" />
                                     </cf:select>
                                 </div>
-                            </div>
-                            <!-- left side ends -->
-                            <!-- right side -->
-                            <div class="col-md-6 col-xs-12">
-
 
                                 <div class="form-group">
                                     <div>
@@ -472,43 +518,7 @@
 
 
 
-
-                                <div class="form-group">
-                                    <div>
-                                        <ul class="lab-no">
-                                            <li class="style-li"><strong>PIN Code:</strong></li>
-                                            <li id="correspondencePincodeErr" style="display:none;" class="style-li error-red" > Pincode cannot be empty.</li>
-                                          
-                                            <li class="style-li error-red">* </li>
-                                        </ul>
-                                    </div>
-                                    <cf:input type="text" path="correspondencePincode" class="form-control" minlength="6"  maxlength="6" placeholder="Pincode" required=""
-                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
-                                </div>
-
-                                <div class="form-group">
-                                    <div>
-                                        <ul class="lab-no">
-                                            <li class="style-li"><strong>Email:</strong></li>
-                                            <li id="EmailErr" style="display:none;" class="style-li error-red" > Email cannot be empty.</li>
-                                          
-                                            <li class="style-li error-red">* </li>
-                                        </ul>
-                                    </div>
-                                     <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="emailVal(this.id,this.value);return false;" required=""/>
-                                </div>
-                                <div class="form-group">
-                                    <div>
-                                        <ul class="lab-no">
-                                            <li class="style-li"><strong>Mobile:</strong></li>
-                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile cannot be blank</li>
-                                          
-                                            <li class="style-li error-red"> *</li>
-                                        </ul>
-                                    </div>
-                                    <cf:input type="text" path="mobile" class="form-control" minlength="10" maxlength="10" placeholder="Mobile" required=""
-                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
-                                </div>
+                           
                                 <!-- right side ends -->
                             </div>
                         </fieldset>

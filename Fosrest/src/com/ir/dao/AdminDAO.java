@@ -416,7 +416,7 @@ public interface AdminDAO {
 
 	List listCalendarSearch(TrainingCalendarForm form);
 
-	public String createTrainingCalendar(String[] trainers, String[] subjects, TrainingCalendarForm p);
+	public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p);
 	public List<MappingMasterTrainer> trainerMappingState(String sid);
 
 	public List listSchCodeSubjects(String scheduleCode);
@@ -459,6 +459,8 @@ public interface AdminDAO {
 	public String addResetPassword(String pass ,String loginid);
 
 	public List getTrainingCalendarById(int id);
+
+	public List getEnteredSubjectDates(int editId);
 
 	public String photogallery(String linkName);
 
