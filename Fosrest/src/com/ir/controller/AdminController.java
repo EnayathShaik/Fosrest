@@ -22,6 +22,7 @@ import javax.validation.Valid;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpRequest;
@@ -100,7 +101,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
-
+import com.ir.model.PhotoGallery;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateAdmin;
@@ -3433,19 +3434,22 @@ System.out.println(p.getTrainingEndDate2());
 			System.out.println("photogallery");
 			if(checkAccess(session))
 				return "redirect:login.fssai";
+			model.addAttribute("listPhotoGallery", this.adminService.listPhotoGallery());
 			return "photogallery";
 		}
 
 		@RequestMapping(value = "/uploadphotogallery", method = RequestMethod.POST)
-		public String uploadphotogallery(@ModelAttribute("LoginDetails") LoginDetails l,@RequestParam CommonsMultipartFile file , BindingResult result,
+		public String uploadphotogallery(@ModelAttribute("PhotoGallery") PhotoGallery pg,@RequestParam CommonsMultipartFile file , BindingResult result,
 				Model model,HttpSession session) {
 			try{
 			String ss = session.getServletContext().getRealPath("Photo_Gallery");
-				File dir = new File(ss);
+			File dir = new File(ss);
 				if (!dir.exists())
 					dir.mkdirs();
 				String fileName = file.getOriginalFilename();
-				
+			String linkName;
+				linkName="Photo_Gallery/"+fileName;
+				String data1 = adminService.photogallery(linkName);
 		    byte[] bytes = file.getBytes();  
 		    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
 		         new File(ss + File.separator + fileName )));  
@@ -3456,7 +3460,13 @@ System.out.println(p.getTrainingEndDate2());
 				e.printStackTrace();
 				new ZLogger("saveImage", "Exception while  saveFile "+e.getMessage(), "AdminController.java");
 			}
+			model.addAttribute("listPhotoGallery", this.adminService.listPhotoGallery());
 			return "redirect:/photogallery.fssai";
 			
+		}
+		@RequestMapping("/DeletePhotoGallery/{id}")
+		public String DeletePhotoGallery(@PathVariable("id") int id) {
+		this.adminService.removePhotoGallery(id);
+			return "redirect:/photogallery.fssai";
 		}
 }

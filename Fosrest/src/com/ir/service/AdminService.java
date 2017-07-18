@@ -67,6 +67,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.PhotoGallery;
 import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
@@ -571,8 +572,13 @@ public String addResetPassword(String a,String loginid);
 
 public List getTrainingCalendarById(int id);
 
+String photogallery(String linkName);
+
+
+public List<PhotoGallery> listPhotoGallery();
 /*public List<String> getAllEndDates(String trainingStartDate);*/
 
+public void removePhotoGallery(int id);
 }
 
 

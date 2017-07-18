@@ -56,6 +56,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.PhotoGallery;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
 import com.ir.model.StateAdmin;
@@ -458,6 +459,12 @@ public interface AdminDAO {
 	public String addResetPassword(String pass ,String loginid);
 
 	public List getTrainingCalendarById(int id);
+
+	public String photogallery(String linkName);
+
+	public List<PhotoGallery> listPhotoGallery();
+
+	public void removePhotoGallery(int id);
 
 /*	public List<String> getAllEndDates(String trainingStartDate);
 */

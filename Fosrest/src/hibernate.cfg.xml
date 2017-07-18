@@ -99,5 +99,6 @@
 	 	 <mapping class="com.ir.model.SubjectMapping" />
 	 	 <mapping class="com.ir.model.TrainingCalendarMapping" />
 	 	  <mapping class="com.ir.model.ViewResult" />
+	 	  <mapping class="com.ir.model.PhotoGallery" />
 	</session-factory>
 </hibernate-configuration>

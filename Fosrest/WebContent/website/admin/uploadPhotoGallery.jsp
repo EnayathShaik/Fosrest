@@ -79,47 +79,31 @@
 							</div>
 
 							<!-- search Results -->
-							<%-- <div class="col-xs-12 " id="testt">
+						 <div class="col-xs-12 " id="testt">
 
 								<!-- table -->
 								<div class="row">
 									<div class="col-xs-12">
 										<fieldset>
-											<legend>Subject Master</legend>
-										<ct:if test="${!empty listSubjectMaster}">
+											<legend>Photo Gallery</legend>
+										<ct:if test="${!empty listPhotoGallery}">
 									<table border="1" id="datatablesfosrest" class="table table-bordered table-responsive">
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
-															 <th>Subject Name</th>
-															<th>Study Material</th>
-															<th>Status</th>
-															<th>Edit</th>
+															<th>Link Name</th>
 															<th>Delete</th>
 														</tr>
 													</thead>
 													
-													<ct:forEach items="${listSubjectMaster}" var="SubjectMaster" varStatus="loop">
+													<ct:forEach items="${listPhotoGallery}" var="PhotoGallery" varStatus="loop">
 														<tr>
 															<td>${loop.count}</td>
-															
-															<td>${SubjectMaster[10]}</td>
-															
-															<td><ct:choose>
-														<ct:when test="${ SubjectMaster[1]== 'No Study-Material'}">No Study-Material</ct:when>
-																	<ct:otherwise><a href="${SubjectMaster[1]}" target="_blank" >${SubjectMaster[1]}</a></ct:otherwise> 
-															</ct:choose></td>
-															
-															<td><a href="">Fosrest/Subject/${SubjectMaster[10]}</a></td>
-															<td><ct:choose>
-														<ct:when test="${ SubjectMaster[8]== 'A'}">Active</ct:when>
-																	<ct:otherwise>In-Active</ct:otherwise>
-															</ct:choose></td>
-															
-															<td><button 
-																	onclick='editSubject(${SubjectMaster[0]});return false;'>Edit</button></td>
 															<td>
-															<a href="<ct:url value='/SubjectMaster/remove/${SubjectMaster[0]}.fssai' />">Delete</a></td>
+														<a href="${PhotoGallery[1]}" target="_blank" >${PhotoGallery[1]}</a>
+															</td>
+															<td>
+															<a href="<ct:url value='/DeletePhotoGallery/${PhotoGallery[0]}.fssai' />">Delete</a></td>
 														</tr>
 													</ct:forEach>
 												</table>
@@ -127,7 +111,7 @@
 										</fieldset>
 									</div>
 								</div>
-							</div> --%>
+							</div>
 							<!-- search div ends -->
 
 						</div>
@@ -153,7 +137,20 @@
         	 return false;
           }
       }
-            
-            
-            </script>
+             function deletePhoto(id){
+              var name1=JSON.stringify({
+             		courseName:0
+               })
+             	$.ajax({
+             	      type: 'post',
+             	    url: 'DeletePhotoGallery/'+id+'.fssai',
+             	      contentType : "application/json",
+             		  data:name1,
+             	      success: function (response) {      
+             	      var mainData1 = jQuery.parseJSON(response);
+             	    }
+             	      });     
+                  
+                 }      
+</script>
 

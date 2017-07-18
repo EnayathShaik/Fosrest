@@ -1568,7 +1568,7 @@ System.out.println("list "+list);
 			List<CertificateForm> list = new ArrayList<CertificateForm>();
 			Session session = this.sessionFactory.getCurrentSession();
 			StringBuffer sqlQuery  = new StringBuffer();
-			 sqlQuery.append("select tt.trainingtypeName, case when coalesce(a.result , 'Fail') = '' then cast('Pending' as varchar(20)) else cast('Completed' as varchar(20)) end as status,  case when a.result = 'Pass' then cast('YES' as varchar(3)) else cast('NO' as varchar(2)) end as cerificateAvailable  , pit.id from nomineetrainee nt inner join trainingCalendar tc on (nt.trainingcalendarid = tc.trainingcalendarid) inner join trainingType tt on (cast(tc.trainingType as numeric) = tt.trainingTypeId) inner join assessmentevaluationtrainee a on (nt.logindetails = a.logindetails)  ");
+			 sqlQuery.append("select tt.trainingtypeName, case when coalesce(nt.result , 'F') = '' then cast('Pending' as varchar(20)) else cast('Completed' as varchar(20)) end as status,  case when nt.result = 'P' then cast('YES' as varchar(3)) else cast('NO' as varchar(2)) end as cerificateAvailable  , pit.id from nomineetrainee nt inner join trainingCalendar tc on (nt.trainingcalendarid = tc.trainingcalendarid) inner join trainingType tt on (cast(tc.trainingType as numeric) = tt.trainingTypeId)  ");
 			 sqlQuery.append("left join personalinformationtrainee pit on (nt.logindetails = pit.logindetails) where nt.logindetails =  '"+loginId+"'");
 			List<Object[]> lst = session.createSQLQuery(sqlQuery.toString()).list();
 			for (Object[] li : lst ) {
@@ -1761,7 +1761,7 @@ System.out.println("list "+list);
 		public TrainingCalendar getCalendarDetails(int userId) {
 			// TODO Auto-generated method stub
 			Session session=sessionFactory.getCurrentSession();
-			Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)), (select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)) from trainingcalendar where trainingcalendarid=(Select trainingcalendarid from nomineetrainee where logindetails="+userId+")" );
+			Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)), (select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)) from trainingcalendar where trainingcalendarid=(Select trainingcalendarid from nomineetrainee where logindetails="+userId+" and certificateStatus='N')" );
 			List<Object[]> list=query.list();
 			System.out.println(list);
 			TrainingCalendar tcl=new TrainingCalendar();
@@ -1800,5 +1800,4 @@ System.out.println("list "+list);
 			}
 			return resulList;
 		}*/
-		
-
+	

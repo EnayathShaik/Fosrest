@@ -185,6 +185,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 			  <value>com.ir.model.MappingMasterTrainer</value>
 			   <value>com.ir.model.TrainingCalendarMapping</value>
 			   <value>com.ir.model.ViewResult</value>
+			    <value>com.ir.model.PhotoGallery</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -291,4 +292,3 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
-

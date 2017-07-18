@@ -70,6 +70,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.PhotoGallery;
 import com.ir.model.RegionMapping;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
@@ -1744,6 +1745,24 @@ public List getTrainingCalendarById(int id) {
 	return this.adminDAO.getTrainingCalendarById(id);
 }
 
+@Override
+public String photogallery(String linkName) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.photogallery(linkName);
+}
+
+@Override
+@Transactional
+public List<PhotoGallery> listPhotoGallery() {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listPhotoGallery();
+}
+@Override
+@Transactional
+public void removePhotoGallery(int id) {
+	this.adminDAO.removePhotoGallery(id);
+
+}
 /*@Override
 @Transactional
 public List<String> getAllEndDates(String trainingStartDate) {

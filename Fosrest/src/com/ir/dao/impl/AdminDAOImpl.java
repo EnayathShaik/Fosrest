@@ -90,6 +90,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.PhotoGallery;
 import com.ir.model.Region;
 import com.ir.model.RegionMaster;
 import com.ir.model.State;
@@ -3137,12 +3138,12 @@ public class AdminDAOImpl implements AdminDAO {
 
 		if (list.size() > 0) {
 			query = session.createSQLQuery(
-					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.designation as numeric) = d.designationId)  where pit.steps=0 and pit.designation='"
+					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.designation as numeric) = d.designationId)  where pit.steps=0 and pit.designation='"
 							+ designation + "' and pit.correspondenceState='"+stateId+"'");
 			System.out.println("data der " + query);
 		} else {
 			query = session.createSQLQuery(
-					"select pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) where  pit.designation='"
+					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) where  pit.designation='"
 							+ designation + "'and pit.correspondenceState='"+stateId+"'");
 			System.out.println("data not der " + query);
 
@@ -3240,7 +3241,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 		session.close();
 		if(trainingPhase!=3){
-			addviewResult(loginId);
+			addviewResult(loginId,trainingCalendarId);
 		}
 		else {
 			
@@ -3250,12 +3251,12 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("before return");
 		return "created";
 	}
-	public void addviewResult( int loginId) {
-		System.out.println("addviewResult      "+loginId);
+	public void addviewResult( int loginId,int trainingCalendarId) {
+		System.out.println("addviewResult  "+loginId);
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		Query query2 = session.createSQLQuery(
-				"select tcm.subjectid,tcm.trainerId,tc.trainingcalendarId from nomineetrainee nt inner join trainingCalendar tc on tc.trainingcalendarId=nt.trainingcalendarId inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where nt.logindetails='"+loginId+"'");
+				"select distinct tcm.subjectid,tcm.trainerId,tc.trainingcalendarId from nomineetrainee nt inner join trainingCalendar tc on tc.trainingcalendarId=nt.trainingcalendarId inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where nt.logindetails='"+loginId+"'and nt.trainingCalendarId='"+trainingCalendarId+"'");
 		List<Object[]> ss = query2.list();
 		ViewResult vr;
 		for (Object[] li : ss) {
@@ -3263,17 +3264,14 @@ public class AdminDAOImpl implements AdminDAO {
 			int a=(int) li[0];
 			int b=(int) li[1];
 			int c=(int) li[2];
-			System.out.println("AAAAAAAAAAAAAAAAAAAaaa "+a+" BBBBBBBBBBBBBBBBBBBBBBB "+b+" CCCCCCCCCCCCCCcc "+c);
 			vr.setTraineeId(loginId);
 			vr.setTrainingcalendarId(c);
 			vr.setSubject(a);
 			vr.setTrainerId(b);
 			vr.setMarks(-1);
 			session.save(vr);
-		System.out.println("saveeeeeeeeeeeeeeeeeeeee");
 		}
 		tx.commit();
-		System.out.println("LASTTTTTTTTTTTTTTTTTTTTTTT");
 	}
 	
 
@@ -4358,7 +4356,12 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		sql = "update NomineeTrainee set result = '"+result+"' where  trainingCalendarId='"+trainingCalendarId+"'and logindetails='"+loginId+"'";
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
-		System.out.println("6:1 st return created");
+		System.out.println("qqqqqqqqqqqqqqqqqqqqqqq");
+		String sql2;
+		sql2 = "update PersonalInformationTrainee set steps = 5 where  logindetails='"+loginId+"'";
+		Query query2 = session.createSQLQuery(sql2);
+		query2.executeUpdate();
+		System.out.println("qqqqqqqqqqqqqqqqqqq");
 		return "created";
 	}
 	
@@ -4446,8 +4449,47 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 
 		
 		return "created";
-	}	
+	}
 
+	@Override
+	public String photogallery(String linkName) {
+		// TODO Auto-generated method stub
+	Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		PhotoGallery pg = new PhotoGallery();
+		pg.setLinkname(linkName);
+		 session.persist(pg);
+		 tx.commit();
+		return null;
+	}
+
+		
+	@Override
+	public List<PhotoGallery> listPhotoGallery() {
+		System.out.println("inside PhotoGallery");
+		List<PhotoGallery> list = new ArrayList<PhotoGallery>();
+		Session session = this.sessionFactory.getCurrentSession();
+		List<PhotoGallery> lst = session.createSQLQuery("select * from photoGallery").list();
+		return lst;
+	}
+	
+	@Override
+	public void removePhotoGallery(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		PhotoGallery p = (PhotoGallery) session.load(PhotoGallery.class, new Integer(id));
+		String sql = null;
+		if (null != p) {
+			sql = "delete from PhotoGallery where Id=" + id;
+			//session.delete(p);
+		}
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+
+	}
+	
+	
+	
 /*
 	@Override
 	public List<String> getAllEndDates(String trainingStartDate) {
