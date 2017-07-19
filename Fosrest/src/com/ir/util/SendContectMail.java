@@ -32,13 +32,52 @@ public class SendContectMail {
 		boolean flag = false;
 		this.body = msg;
 		String toEmail = "fics@fssai.gov.in";
+		System.out.println(email);
+		if(email.contains("e###E"))
+		
+		{
+			String s[]=email.split("e###E");
+			System.out.println(s[0]+" "+s[1]);
+			
+			try {
+				Session session = Session.getDefaultInstance(properties,
+						new javax.mail.Authenticator() {
+							protected PasswordAuthentication getPasswordAuthentication() {
+								return new PasswordAuthentication(from, password);
+							}
+						});
+				Message message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(from));
+				message.setRecipients(Message.RecipientType.TO,
+						InternetAddress.parse(s[0]));
+				message.setSubject(subject);
+				System.out.println("in send mail class");
+			
+				message.setText("Hello "
+						+ ",  My EmailId is :- " + s[1]
+						+ ", My message to You:-  " + body);
+				Transport.send(message);
+				System.out.println("after sent mail");
 
+				flag = true;
+			} catch (Exception e) {
+				flag = false;
+
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+		}
+		else
+		{
 		this.to = toEmail;
 		try {
 			Session session = Session.getDefaultInstance(properties,
 					new javax.mail.Authenticator() {
 						protected PasswordAuthentication getPasswordAuthentication() {
-							return new PasswordAuthentication(from, password);
+							return new PasswordAuthentication(from, password); 
 						}
 					});
 			Message message = new MimeMessage(session);
@@ -47,7 +86,8 @@ public class SendContectMail {
 					InternetAddress.parse(email));
 			message.setSubject(subject);
 			System.out.println("in send mail class");
-			message.setText("Hello my  Id is  :- " + id
+		
+			message.setText("Hello   :- " + id
 					+ ",  My EmailId is :- " + email
 					+ ", My message to You:-  " + body);
 			Transport.send(message);
@@ -58,6 +98,7 @@ public class SendContectMail {
 			flag = false;
 
 			e.printStackTrace();
+		}
 		}
 		// return ret;
 		return flag;

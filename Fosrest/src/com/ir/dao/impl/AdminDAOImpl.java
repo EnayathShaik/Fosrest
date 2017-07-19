@@ -4537,18 +4537,23 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 	
 	@Override
 	public String Helpsave(ContactTrainee contactTrainee, String id) {
+		System.out.println("qqqqqqqqqqqqqqqqqqqqqqq");
 		SendContectMail traineeMaail = new SendContectMail();
 		Session session = sessionFactory.getCurrentSession();
 		ContactTraineee contactTraineeModel = new ContactTraineee();
-		//String email = contactTrainee.getEmailAddress();
+		System.out.println("iiiiiiiiiiiiiiiiiiiii");
+		String email1 = contactTrainee.getEmailAddress();
+		System.out.println("mmmmmmmmmmmm "+email1);
 		String msg = contactTrainee.getMessageDetails();
 		//new ZLogger("contactTraineeSave", "user id in dao impl  :::::" + id, "AdminDAOImpl.java");
-		String email="enforcement1@fssai.gov.in";
-		traineeMaail.mailProperty(msg, email, id);
+		String email="niranjanvaity@gmail.com";
+		String twoEmails=email+"e###E"+email1; 
+		
+		traineeMaail.mailProperty(msg, twoEmails, id);
 		contactTraineeModel.setEmailAddress(email);
 		contactTraineeModel.setMessageDetails(msg);
 		contactTraineeModel.setUserId(id);
-		contactTraineeModel.setDescription("My EmailId is :- " + email + " My message to You:-  "
+		contactTraineeModel.setDescription("My EmailId is :- " + email1 + " My message to You:-  "
 				+ msg);
 		
 		Integer contactTraineeModelId = (Integer) session

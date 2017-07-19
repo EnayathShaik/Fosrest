@@ -59,7 +59,7 @@
             </script> 
 
             <!-- horizontal navigation -->
-            <cf:form action="shareInitiativesave.fssai" name="myForm" method="POST" commandName="ContactTrainee" onsubmit="return validateFields();">
+            <cf:form action="Helpsave.fssai" name="myForm" method="POST" commandName="ContactTrainee" onsubmit="return validateFields();">
                <%--  <section>
                     <%@include file="website/roles/top-menu.jsp"%>
                 </section> --%> 
