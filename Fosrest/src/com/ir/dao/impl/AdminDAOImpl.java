@@ -4071,6 +4071,8 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 				tcm.setSubjectDate(subjectDates[j]);
 			}
 
+			
+			
 			session.save(tcm);
 		}
 		session.save(tc);
@@ -4533,12 +4535,30 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 
 	}
 	
-	
-	
-
+	@Override
+	public String Helpsave(ContactTrainee contactTrainee, String id) {
+		SendContectMail traineeMaail = new SendContectMail();
+		Session session = sessionFactory.getCurrentSession();
+		ContactTraineee contactTraineeModel = new ContactTraineee();
+		//String email = contactTrainee.getEmailAddress();
+		String msg = contactTrainee.getMessageDetails();
+		//new ZLogger("contactTraineeSave", "user id in dao impl  :::::" + id, "AdminDAOImpl.java");
+		String email="enforcement1@fssai.gov.in";
+		traineeMaail.mailProperty(msg, email, id);
+		contactTraineeModel.setEmailAddress(email);
+		contactTraineeModel.setMessageDetails(msg);
+		contactTraineeModel.setUserId(id);
+		contactTraineeModel.setDescription("My EmailId is :- " + email + " My message to You:-  "
+				+ msg);
+		
+		Integer contactTraineeModelId = (Integer) session
+				.save(contactTraineeModel);
+		if (contactTraineeModelId > 0 && contactTraineeModelId != null) {
+			return "created";
+		} else {
+			return "error";
+		}
 	}
-	
-	
 	
 /*
 	@Override
@@ -4553,4 +4573,4 @@ Session session=sessionFactory.getCurrentSession();
 		return list;
 	}*/
 	
-
+}

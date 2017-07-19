@@ -3478,4 +3478,40 @@ System.out.println(p.getTrainingEndDate2());
 		this.adminService.removePhotoGallery(id);
 			return "redirect:/photogallery.fssai";
 		}
+		
+		@RequestMapping(value = "/Help", method = RequestMethod.GET)
+		public String Help(@ModelAttribute("ContactTrainee") ContactTrainee contactTrainee,Model model, HttpSession session) {
+			System.out.println("Help....................!");
+			/*if(checkAccess(session))
+				return "redirect:login.fssai";*/
+			//model.addAttribute("listPhotoGallery", this.adminService.listPhotoGallery());
+			return "Help";
+		}
+		@RequestMapping(value="/Helpsave" , method=RequestMethod.POST)
+		public String Helpsave(@ModelAttribute("ContactTraineee") ContactTrainee contactTrainee
+				,BindingResult result , HttpSession session, Model model
+				){
+			if(result.hasErrors()){
+				new ZLogger("Helpsave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+				new ZLogger("Helpsave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+				return "shareInitiativesave";
+			}
+			model.addAttribute("ContactTrainee",  new ContactTrainee());
+			try{
+				//String id=(String) session.getAttribute("userName");
+				String id="public";
+				//int id1=(int) session.getAttribute("userId");
+				new ZLogger("Helpsave","userid   "+ id  , "AdminController.java");
+				String Helpsave = adminService.Helpsave(contactTrainee , id);
+				if(Helpsave.equalsIgnoreCase("created")){
+					model.addAttribute("created" , "Your request has been sent successfully !!!");
+				}else{
+					model.addAttribute("created" , "Oops, something went wrong !!!");
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				new ZLogger("Helpsave", "Exception while Helpsave  "+e.getMessage() , "AdminController.java");
+			}
+			return "Help";
+		}
 }

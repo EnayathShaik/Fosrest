@@ -650,7 +650,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 							<li><a href="#">Useful Links</a></li> -->
 							<li><a href="#">FAQ's</a></li>
 							<li><a href="#">Feedback</a></li>
-							<li><a href="#">Help</a></li>
+							<li><a href="Help.fssai">Help</a></li>
 						</ul>
 					</div>
 				</div>
