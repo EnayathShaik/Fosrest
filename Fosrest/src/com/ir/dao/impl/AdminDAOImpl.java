@@ -3269,6 +3269,7 @@ public class AdminDAOImpl implements AdminDAO {
 			vr.setSubject(a);
 			vr.setTrainerId(b);
 			vr.setMarks(-1);
+			vr.setStatus("I");
 			session.save(vr);
 		}
 		tx.commit();
@@ -4071,8 +4072,6 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 				tcm.setSubjectDate(subjectDates[j]);
 			}
 
-			
-			
 			session.save(tcm);
 		}
 		session.save(tc);
@@ -4371,7 +4370,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		int trainingCalendarId = Integer.parseInt(arrData[1]);
 		List uas =new ArrayList();
 		 //Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join trainingcalendar tc on (vr.batchCode=tc.batchCode ) inner join nomineetrainee nt on (nt.trainingCalendarId=tc.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'");
-		 Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join nomineetrainee nt on (nt.trainingCalendarId=vr.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'");
+		 Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join nomineetrainee nt on (nt.trainingCalendarId=vr.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'and vr.status='I'");
 		uas = query.list();
 		System.out.println(uas);
 		return uas; 
@@ -4391,12 +4390,14 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		sql = "update NomineeTrainee set result = '"+result+"' where  trainingCalendarId='"+trainingCalendarId+"'and logindetails='"+loginId+"'";
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
-		System.out.println("qqqqqqqqqqqqqqqqqqqqqqq");
 		String sql2;
 		sql2 = "update PersonalInformationTrainee set steps = 5 where  logindetails='"+loginId+"'";
 		Query query2 = session.createSQLQuery(sql2);
 		query2.executeUpdate();
-		System.out.println("qqqqqqqqqqqqqqqqqqq");
+		String sql3;
+		sql3 = "update ViewResult set status = 'A' where  trainingCalendarId='"+trainingCalendarId+"'and traineeId='"+loginId+"'";
+		Query query3 = session.createSQLQuery(sql3);
+		query3.executeUpdate();
 		return "created";
 	}
 	
@@ -4534,16 +4535,40 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		query.executeUpdate();
 
 	}
+
+	@Override
+	public List listNominatedTrainee(int profileId, int id) {
+		// TODO Auto-generated method stub
+				System.out.println("inside listNominatedTrainee");
+				Session session = this.sessionFactory.getCurrentSession();
+				List<NomineeTrainee> mccList = null;
+				if (profileId == 5) {
+
+					mccList = session.createSQLQuery(
+							" select distinct pit.id, pitr.firstName,pitr.lastName,pitr.email,pitr.mobile,tc.batchCode,pit.trainingCenterName from nomineetrainee nt inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join personalinformationtrainee pitr on pitr.logindetails=nt.logindetails where  pit.logindetails='"+ id + "'  ")
+							.list();
+				}
+			      
+				else if(profileId==2){
+					mccList = session.createSQLQuery(
+							"select distinct pit.id, pitr.firstName,pitr.lastName,pitr.email,pitr.mobile,tc.batchCode,pit.trainingCenterName from nomineetrainee nt inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join personalinformationtrainee pitr on pitr.logindetails=nt.logindetails inner join stateAdmin st on st.id=nt.nominatedBy where st.logindetails='" + id + "'  ")
+							.list();
+				}
+				else {
+					mccList = session.createSQLQuery(
+							" select distinct pit.id, pitr.firstName,pitr.lastName,pitr.email,pitr.mobile,tc.batchCode,pit.trainingCenterName from nomineetrainee nt inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join personalinformationtrainee pitr on pitr.logindetails=nt.logindetails  ")
+							.list();
+				}
+				return mccList;
+	}
+	
 	
 	@Override
 	public String Helpsave(ContactTrainee contactTrainee, String id) {
-		System.out.println("qqqqqqqqqqqqqqqqqqqqqqq");
 		SendContectMail traineeMaail = new SendContectMail();
 		Session session = sessionFactory.getCurrentSession();
 		ContactTraineee contactTraineeModel = new ContactTraineee();
-		System.out.println("iiiiiiiiiiiiiiiiiiiii");
 		String email1 = contactTrainee.getEmailAddress();
-		System.out.println("mmmmmmmmmmmm "+email1);
 		String msg = contactTrainee.getMessageDetails();
 		//new ZLogger("contactTraineeSave", "user id in dao impl  :::::" + id, "AdminDAOImpl.java");
 		String email="niranjanvaity@gmail.com";
@@ -4564,6 +4589,10 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 			return "error";
 		}
 	}
+
+	}
+	
+	
 	
 /*
 	@Override
@@ -4578,4 +4607,4 @@ Session session=sessionFactory.getCurrentSession();
 		return list;
 	}*/
 	
-}
+

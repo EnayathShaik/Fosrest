@@ -192,7 +192,7 @@
                                                 </ct:when>
                                               <ct:otherwise>
                                                 <td>${Certificate.generateCertificate}
-												<!-- <a href=""> -->NO CERTIFICATE</a> 
+											   <a id="nc" onclick="nocerti();" href="#" >NO CERTIFICATE</a>
                                                         </td>
                                                 </ct:otherwise> 
                                                 </ct:choose>
@@ -222,3 +222,10 @@
  <input type="hidden" id="idHidden" value="" />
  <input type="hidden" id="hiddenCourseType" value="" />                                             
    </cf:form>
+   <script>
+   function nocerti() {
+	   alert("Sorry, You have not cleared the exam,Please Try again!!!");
+      /*  href=document.getElementById("nc").href;
+       document.writeln(href); */
+}
+   </script>

@@ -57,6 +57,7 @@
                         <li><a href="loginProcess.fssai">Upcoming Training</a></li>
 		<!-- <li><a href="TrainingRequest.fssai">Training Request</a></li> -->
 	<li> <a href="traineeAttendance.fssai">Mark Attendance</a> </li>
+	<li> <a href="viewnominatedtrainee.fssai">View Nominated Trainee</a> </li>
 		<li><a href="PersonalInformationTrainingInstitute.fssai">Update Profile</a></li>
 	
 	</ul>
@@ -132,7 +133,7 @@
 		<li><a href="trainingcalendar.fssai">Training Calendar</a></li> 
 		<li><a href="ResetPassword.fssai">Reset Password</a></li>
 		<li><a href="photogallery.fssai">Upload Photo Gallery</a></li>
-	
+	<li> <a href="viewnominatedtrainee.fssai">View Nominated Trainee</a> </li>
                    
 	</ul>
 </div>
@@ -155,6 +156,7 @@
 		<!-- <li><a href="TrainingSchedule.fssai">Update Training Schedule</a></li> -->
 		  <li><a href="trainingcalendar.fssai">Training Calendar</a></li> 
 		  <li><a href="stateAdminUpdateResult.fssai">Update Result</a></li>
+		  <li> <a href="viewnominatedtrainee.fssai">View Nominated Trainee</a> </li>
 		  	<li><a href="stateAdminPersonalInformation.fssai">Update Profile</a></li>
 </ul>
 </div>

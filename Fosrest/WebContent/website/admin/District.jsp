@@ -35,7 +35,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
 												                           <fieldset>
-                                        <legend>Search District Master</legend>
+                                        <legend>District Master</legend>
                                         <!-- table starts here -->
                                         <!-- left side -->
                                         <div class="col-md-6 col-xs-12">

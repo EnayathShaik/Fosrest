@@ -94,7 +94,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 			String subject =arrData[2];
 			String batchCode=arrData[3];
 			String sql;
-			sql = "update ViewResult set marks = '"+marks+"' where  trainingcalendarId='"+batchCode+"' and subject='"+subject+"'and traineeId='"+loginId+"'";
+			sql = "update ViewResult set marks = '"+marks+"' where  trainingcalendarId='"+batchCode+"' and subject='"+subject+"'and traineeId='"+loginId+"'and status='I'";
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
 			/*String sql2;

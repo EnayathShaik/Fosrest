@@ -3479,6 +3479,19 @@ System.out.println(p.getTrainingEndDate2());
 			return "redirect:/photogallery.fssai";
 		}
 		
+		@RequestMapping(value = "/viewnominatedtrainee", method = RequestMethod.GET)
+		public String viewnominatedtrainee( Model model, HttpSession session) {
+			System.out.println("viewnominatedtrainee");
+			/*if(checkAccess(session))
+				return "redirect:login.fssai";*/
+			int profileId = (Integer) session.getAttribute("profileId");
+			int id= (int) session.getAttribute("userId");
+			model.addAttribute("listNominatedTrainee", this.adminService.listNominatedTrainee(profileId,id));
+			return "viewnominatedtrainee";
+		}
+		
+		
+		
 		@RequestMapping(value = "/Help", method = RequestMethod.GET)
 		public String Help(@ModelAttribute("ContactTrainee") ContactTrainee contactTrainee,Model model, HttpSession session) {
 			System.out.println("Help....................!");

@@ -222,9 +222,7 @@ window.onload = OnStart;
 													<div class="form-group">
 													<div>
 														<ul class="lab-no">
-															<li class="style-li"><strong>Middle Name: <span
-																	style="color: red;">*</span>
-
+															<li class="style-li"><strong>Middle Name: 
 															</strong></li>
 															<li id="middleNameErr" style="display: none;"
 																class="style-li error-red">Middle Name should not

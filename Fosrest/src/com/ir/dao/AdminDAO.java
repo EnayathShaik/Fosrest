@@ -468,6 +468,8 @@ public interface AdminDAO {
 
 	public void removePhotoGallery(int id);
 
+	public List listNominatedTrainee(int profileId, int id);
+
 	public String Helpsave(ContactTrainee contactTrainee, String id);
 
 /*	public List<String> getAllEndDates(String trainingStartDate);

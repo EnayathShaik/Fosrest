@@ -37,6 +37,14 @@ public class ViewResult {
 	private int Subject;
 	private int traineeId;
 	private int trainerId;
+	public String status;
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getViewResultId() {
 		return viewResultId;
 	}

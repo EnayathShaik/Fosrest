@@ -47,7 +47,7 @@
                         document.getElementById("messageDetailsError").style.display = 'block';
                         document.getElementById("messageDetails").focus();
                         return false;
-                    } else if((document.getElementById("messageDetails").value).length>4000){
+                    } else if((document.getElementById("messageDetails").value).length>2000){
                      document.getElementById("messageDetailsError2").style.display = 'block';
                     } 
                     else {
@@ -105,8 +105,8 @@
                                                             <div class="form-group">
                                                                 <label>Message Details</label>
                                                                 <label class="error visibility" id="messageDetailsError" style="color:red;">* write your message</label>
-                                                                <label class="error visibility" id="messageDetailsError2" style="color:red;">* Message should be in 4000 characters</label>
-                                                                <cf:textarea class="form-control" path="messageDetails" placeholder="Enter Your Message (4000 Words)"/>
+                                                                <label class="error visibility" id="messageDetailsError2" style="color:red;">* Message should be in 2000 characters</label>
+                                                                <cf:textarea class="form-control" path="messageDetails" placeholder="Enter Your Message (2000 Words)"/>
                                                             </div>
                                                             <input style="margin-top:20px; width:100px;" type="submit" class="form-control login-btn btn" value="Submit" />
                                                         </form>

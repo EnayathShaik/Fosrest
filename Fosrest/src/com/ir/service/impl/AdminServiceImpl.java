@@ -1779,6 +1779,13 @@ public List<String> getAllEndDates(String trainingStartDate) {
 
 @Override
 @Transactional
+public List listNominatedTrainee(int profileId, int id) {
+	// TODO Auto-generated method stub
+	return this.adminDAO.listNominatedTrainee(profileId,id);
+}
+
+@Override
+@Transactional
 public String Helpsave(ContactTrainee contactTrainee, String id) {
 	// TODO Auto-generated method stub
 	String Helpsave = adminDAO.Helpsave(contactTrainee , id);

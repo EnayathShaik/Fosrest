@@ -252,7 +252,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Employement Date:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                            <li id="empDateErr" style="display:none;" class="style-li error-red" >Employement Datecan not be blank.</li>
+                                            <li id="empDateErr" style="display:none;" class="style-li error-red" >Employement Date can not be blank.</li>
                                            
                                         </ul>
                                     </div>
@@ -310,7 +310,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>First Name:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                                            <li id="firstNameErr" style="display:none;" class="style-li error-red" >First Name can not be blank.</li>
+                                          <li id="firstNameErr" style="display:none;" class="style-li error-red" >First Name can not be blank.</li>
                                            
                                         </ul>
                                     </div>
@@ -323,7 +323,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Middle Name:</strong></li> <li class="style-li error-red"> </li>
                                              <!--  valid -->
-                                                            <li id="MiddleNameErr" style="display:none;" class="style-li error-red" >Middle Name can not be blank.</li>
+                                             <li id="MiddleNameErr" style="display:none;" class="style-li error-red" >Middle Name can not be blank.</li>
                                            
                                         </ul>
                                     </div>
@@ -335,8 +335,8 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Last Name:</strong></li><li class="style-li error-red"> </li>
-                                             <!--  valid -->
-                                                            <li id="LastNameErr" style="display:none;" class="style-li error-red" >Last Name can not be blank.</li>
+                                             <!--  valid --><li class="style-li error-red"> * </li>
+                                           <li id="LastNameErr" style="display:none;" class="style-li error-red" >Last Name can not be blank.</li>
                                             
                                         </ul>
                                     </div>
