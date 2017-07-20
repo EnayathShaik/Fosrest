@@ -463,7 +463,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Email:</strong></li> <li class="style-li error-red"> * </li>
                                             <!--  valid -->
-                                            <li id="EmailErr" style="display:none;" class="style-li error-red" >Email can not be blank.</li>
+                                            <li id="EmailErr" style="display:none;" class="style-li error-red" >Invalid Email.</li>
                                            
                                         </ul>
                                     </div>

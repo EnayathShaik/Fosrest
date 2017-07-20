@@ -472,6 +472,8 @@ public interface AdminDAO {
 
 	public String Helpsave(ContactTrainee contactTrainee, String id);
 
+	public List<String> getAllScheduleCode();
+
 /*	public List<String> getAllEndDates(String trainingStartDate);
 */
 	

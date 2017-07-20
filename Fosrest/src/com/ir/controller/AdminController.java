@@ -3035,6 +3035,8 @@ public class AdminController {
 		model.addAttribute("allSubjects", this.adminService.allSubjects());
 		
 		model.addAttribute("listtrainingScheduleMaster", this.adminService.listtrainingScheduleMaster());
+		model.addAttribute("listAllCalendarScheduleCodes",this.adminService.getAllScheduleCode());//getAllExistingScheduleCodeInTrainingCalendar
+
 		return "trainingschedulemaster";
 	}
 	

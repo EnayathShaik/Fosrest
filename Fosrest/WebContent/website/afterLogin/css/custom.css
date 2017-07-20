@@ -1329,12 +1329,12 @@ th {
         margin-right: -85px;
     }
     #wrapper {
-        padding-left: 250px;
+        padding-left: 200px;	
     }
     #wrapper.toggled {
         padding-left: 0;
     }
-    #sidebar-wrapper {
+    #sidebar-wrapper {	
         width: 197px;
     }
     #wrapper.toggled #sidebar-wrapper {

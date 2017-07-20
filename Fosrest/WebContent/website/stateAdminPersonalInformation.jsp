@@ -116,8 +116,7 @@ window.onload = OnStart;
 																<li class="style-li error-red">*</li>
 																<!--  valid -->
 																<li id="EmailErr" style="display: none;"
-																	class="style-li error-red">Email can not be
-																	blank.</li>
+																	class="style-li error-red">Invalid Email.</li>
 
 															</ul>
 														</div>

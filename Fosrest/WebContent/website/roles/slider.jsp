@@ -119,7 +119,7 @@
 %>
 <div id="sidebar-wrapper">
 	<ul class="sidebar-nav">
-		<li><a href="trainingschedulemaster.fssai">Training Schedule Master</a></li>
+		<li><a href="trainingschedulemaster.fssai"><p    style=" margin-left: -13px;">Training Schedule Master</p></a></li>
 	<!-- 	<li><a href="TrainingClosure.fssai">Training Closure Report</a></li> -->
 		<!-- <li><a href="GenerateCertificate.fssai">Generate Certificate</a> -->
 		</li>

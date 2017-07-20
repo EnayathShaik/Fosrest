@@ -411,7 +411,7 @@
 											<li class="style-li"><strong>Email:</strong></li>
 											<li class="style-li error-red">*</li>
 											<li id="EmailErr" style="display: none;"
-												class="style-li error-red">Please Enter Valid Email ID.</li>
+												class="style-li error-red">Invalid Email.</li>
 
 										</ul>
 									</div>

@@ -40,7 +40,8 @@ function emailVal(id, email) {
 	var regpan = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	if (regpan.test(email) == false) {
 		document.getElementById(id).value = "";
-		alert('INVALID EMAIL');
+		//alert('INVALID EMAIL');
+		$("#EmailErr").css("display" , "block");
 		return false;
 	}
 	

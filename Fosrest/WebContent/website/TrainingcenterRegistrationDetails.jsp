@@ -314,12 +314,12 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Email:</strong></li>
-                                            <li id="EmailErr" style="display:none;" class="style-li error-red" > Email cannot be empty.</li>
+                                            <li id="EmailErr" style="display:none;" class="style-li error-red" > Invalid Email.</li>
                                           
                                             <li class="style-li error-red">* </li>
                                         </ul>
                                     </div>
-                                     <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="emailVal(this.id,this.value);return false;" required=""/>
+                                     <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="return emailVal(this.id,this.value);return false; " required=""/>
                                 </div>
                                 <div class="form-group">
                                     <div>

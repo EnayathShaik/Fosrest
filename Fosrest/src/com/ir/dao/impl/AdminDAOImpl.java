@@ -3705,15 +3705,6 @@ public class AdminDAOImpl implements AdminDAO {
 		String subjects="";
 		
 		
-		if(form.getTrainingScheduleId()!=0){
-			List chkSch1= session.createSQLQuery("select trainingScheduleId from trainingSchedule ts join trainingCalendar tc on(ts.scheduleCode=tc.scheduleCode) where trainingScheduleId="+form.getTrainingScheduleId()).list();
-			if(chkSch1.size()!=0){
-				
-				return "Cannot Edit:Training Calendar Exists";
-			}
-		}
-		
-
 		for(int i=0;i<subject.length;i++){
 			subjects=subjects+subject[i]+"|";
 			
@@ -4255,6 +4246,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		// TODO Auto-generated method stub
 		System.out.println("editTrainingSchedule2: id " + id);
 		Session session = this.sessionFactory.getCurrentSession();
+		
 
 		Query query = session.createSQLQuery("select designation,trainingType,trainingPhase,status,subject,sm.day,sm.startTime,sm.endTime,sm.duration from trainingschedule ts join subjectmapping sm on ts.scheduleCode=sm.scheduleCode where trainingscheduleid=" + id+" order by subjectmappingid"); 
 
@@ -4590,6 +4582,14 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		}
 	}
 
+	@Override
+	public List<String> getAllScheduleCode() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		List<String> chkSch1= session.createSQLQuery("select tc.scheduleCode from trainingSchedule ts join trainingCalendar tc on(ts.scheduleCode=tc.scheduleCode)").list();
+		
+		return chkSch1;
+	}
 	}
 	
 	

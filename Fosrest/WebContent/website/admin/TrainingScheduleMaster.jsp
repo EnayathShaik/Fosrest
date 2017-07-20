@@ -486,7 +486,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 																
 																<th>Total Days</th>
 																<th>Edit</th>
-																<!-- <th>Delete</th> --> 
+																<th>Delete</th>
 																
 			                                                </tr>
 														</thead>
@@ -499,8 +499,8 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 																<td>${listtrainingScheduleMaster[2]}</td>
 																<td>${listtrainingScheduleMaster[3]}</td>
 																<td>${listtrainingScheduleMaster[4]} </td>
-																<td><button class="btn login-btn"  onclick='editSchedule(${listtrainingScheduleMaster[5]});return false;' >Edit</button></td>
-																<%-- <td><a href="remove/trainingschedule/${listtrainingScheduleMaster[5]}.fssai">Delete</a></td> --%>
+																<td><button class="btn login-btn"  onclick="return editSchedule('${listtrainingScheduleMaster[3]}',${listtrainingScheduleMaster[5]});return false;" >Edit</button></td>
+																 <td><a onclick="return chkIfExists('${listtrainingScheduleMaster[3]}','DELETE');" href="remove/trainingschedule/${listtrainingScheduleMaster[5]}.fssai">Delete</a></td>
 															
 															</tr> 
 														</ct:forEach>
@@ -530,6 +530,17 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 	</html>
 	
 	<script>
+	
+	function chkIfExists(schCode,opr){
+		<ct:forEach items="${listAllCalendarScheduleCodes}" var="schCode" > 
+		 if('${schCode}'==schCode){
+			 alert("CANNOT "+opr+": Training Calendar Exists for this ScheduleCode "+schCode);
+			 return false;
+		 }
+			</ct:forEach>
+		
+	}
+	
 		function validateFields() { 
 		
 			$("#designationErr").css("display", "none");
@@ -627,7 +638,14 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 		<td><a href="<ct:url value='/StateMaster/remove/${StateMaster.stateId}.fssai' />" >Delete</a></td>
 	 */
 
-	    function editSchedule(id){
+	    function editSchedule(schCode,id){
+		
+		 if(chkIfExists(schCode,"EDIT")==false){
+			 return false;
+		 }
+		 
+		 
+		 
             var name1=JSON.stringify({
         		courseName:0
           })
@@ -635,10 +653,12 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
         	      type: 'post',
         	      url: 'trainingSchedule/edit/'+id+'.fssai',
         	      contentType : "application/json",
-        		  data:name1,
+        		  data:name1,	
         		  async: false, 
         			success: function (response){
-        				  var mainData1 = jQuery.parseJSON(response);
+        				
+        			
+        				var mainData1 = jQuery.parseJSON(response);
                 	      $("#trainingScheduleId").val(id); 
                 	     $("#designation").val(mainData1[0][0]);  
                 	    $("#trainingType").val(mainData1[0][1]);
@@ -689,13 +709,13 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
    
         			});  
 
-        			
+        				  $("#commonbtn").val("SAVE edited schedule");
+        		            alert("Data has been loaded for Edit");
         			
         		}
         	 
         	      }); 
-            $("#commonbtn").val("SAVE edited schedule");
-            alert("Data has been loaded for Edit");
+          return false;
             } 
 	</script>
 	
