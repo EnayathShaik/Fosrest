@@ -375,12 +375,12 @@
  }
 
  function abcd(){
-	 alert("ABCDABCD");
+	 //alert("ABCDABCD");
 	 var b=document.getElementById("designation").value;
 	 var c=document.getElementById("trainingType").value;
 	var d=document.getElementById("trainingPhase").value;
 	var a=document.getElementById("batchCode2").value;
-	alert ("BBB  "+b+"CCC "+c+"DDD "+d);
+	//alert ("BBB  "+b+"CCC "+c+"DDD "+d);
 	if(b==''){
 		$("#designationErr").css("display", "block");
 		return false;
