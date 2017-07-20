@@ -57,7 +57,7 @@
 // 			$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "+JSON.stringify(assessmentQuestions)+">');
 			$(window).load(function () {
 				var assessmentQuestions = []; 
-				var str1="<ol start='1'>";
+				var str1="<ol >";
 				for(var index=0;index<questionList.listAssessmentQuestion.length;index++){
 					$('#questionsTable').append('<input type="hidden" name="subjectId" value = "'+questionList.subjectId[index]+'">');   
 				
@@ -165,7 +165,7 @@ $(window).load(function () {
 	    var numPages = Math.ceil(numRows / numPerPage);
 	    var $pager = $('<div class="pager"></div>');
 	    for (var page = 0; page < numPages; page++) {
-	        $('<span class="page-number"></span>').text(page + 1).bind('click', {
+	        $('<span class="page-number" style="width: 5.8em;" ></span>').text("Page- "+page + 1).bind('click', {
 	            newPage: page
 	        }, function(event) {
 	            currentPage = event.data['newPage'];
