@@ -1807,7 +1807,18 @@ public List listsubjects2(int id) {
 	List list = query.list();
 	return list;
 }
-		
+
+@Override
+public String listOfflineTraining(int userID) {
+	// TODO Auto-generated method stub
+			String eligible = "";
+			Session session = sessionFactory.getCurrentSession();
+			String sql = "select tc.trainingphase from nomineetrainee nt inner join trainingcalendar tc on tc.trainingcalendarid=nt.trainingcalendarid where nt.logindetails='"+userID+"'";
+			Query query = session.createSQLQuery(sql);
+		    List list = query.list();
+			String trainingPhase=(String) list.get(0);
+		return trainingPhase;
+}	
 }	
 		/*
 		@Override

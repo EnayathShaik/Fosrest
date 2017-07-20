@@ -201,6 +201,9 @@ public List<FotestFeedbackForm> listFotestFeedback();
 public TrainingCalendar getCalendarDetails(int userId);
 
 
+public String listOfflineTraining(int userId);
+
+
 	
 	
 	

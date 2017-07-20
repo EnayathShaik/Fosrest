@@ -283,7 +283,7 @@
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
-											<li class="style-li"><strong>First Nameccc:</strong></li>
+											<li class="style-li"><strong>First Name:</strong></li>
 											<li class="style-li error-red">*</li>
 											<li id="firstNameErr" style="display: none;"
 												class="style-li error-red">Please Enter First Name.</li>
@@ -331,7 +331,7 @@
 													Mother's Name:</strong></li>
 											<li class="style-li error-red">*</li>
 											<li id="FatherNameErr" style="display: none;"
-												class="style-li error-red">Please Enter Father's Name.</li>
+												class="style-li error-red">Please Enter Father's Name/Mother's Name.</li>
 
 										</ul>
 									</div>
@@ -955,6 +955,8 @@
 	function radioNo(){
 	 	$("#Oti").css("display", "none");
 	 	$("#Ati").css("display", "none");
+	 	$("#otherTrainingInstitute").val('');
+	 	$("#AssociatedWithAnyTrainingInstitute").val('');
 	 } 
   function radioYes(){
 	 	$("#Oti").css("display", "block");
@@ -1152,18 +1154,14 @@
 			return false;
 
 		}
-		
-		
-		/* if($("#otherTrainingInstitute").val() ==''){
-			 $("#otherTrainingInstituteErr").css("display" , "block");
-				return false;
-			 
-		 }  */
-		 if ($("#AssociatedWithAnyTrainingInstitute").val() == 0 && $('#YesLabNotified').is(':checked')) {
+		if ($("#AssociatedWithAnyTrainingInstitute").val() == 0 && $('#YesLabNotified').is(':checked')) {
 				$("#AssociatedWithAnyTrainingInstituteErr").css("display", "block");
 				return false;
 			} 
-		 
+		 var a = document.getElementById('AssociatedWithAnyTrainingInstitute').value;
+			if (a == -1) {
+				$("#otherTrainingInstituteErr").css("display", "Block");
+			}
 		if (!(isUpdate != null && isUpdate == "Y")) {
 
 			if ($("#txtInput").val() == '') {

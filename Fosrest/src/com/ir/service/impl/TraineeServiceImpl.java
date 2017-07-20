@@ -465,5 +465,11 @@ public class TraineeServiceImpl implements TraineeService {
 			// TODO Auto-generated method stub
 			return this.traineeDAO.listsubjects2( id);
 		}
+		@Override
+		@Transactional
+		public String listOfflineTraining(int userID) {
+			String trainingPhase = traineeDAO.listOfflineTraining(userID);
+			return trainingPhase;
+		}
 
 }

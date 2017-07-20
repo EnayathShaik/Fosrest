@@ -546,16 +546,31 @@ public class TraineeController {
 	{
 		if(checkAccess(session))
 			return "redirect:login.fssai";
+		
+		
+		
+		
+		
 		Utility utility=new Utility();
+		
 		//Need to write service for AsssessorAgency 
 		model.addAttribute("utility",utility);
 		Integer userId = 0;
 		try{
 			userId = (Integer) session.getAttribute("userId");
 			OnlineTrainingForm listOnlineTraining = traineeService.listOnlineTraining(userId);
-			
-			model.addAttribute("listOnlineTraining", listOnlineTraining);
-			model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
+			String tPhase=this.traineeService.listOfflineTraining(userId);
+			int trainingPhase=Integer.parseInt(tPhase);
+			if(trainingPhase!=3){
+				model.addAttribute("isOfflineTrainee", "Y");
+			}
+			else{
+				model.addAttribute("isOfflineTrainee", "N");
+				model.addAttribute("listOnlineTraining", listOnlineTraining);
+				model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
+				
+			}
+		
 		
 		}catch(Exception e){
 			e.printStackTrace();
@@ -845,6 +860,7 @@ public class TraineeController {
 				System.out.println("listGetScoreCard");
 				if(checkAccess(session))
 					return "redirect:login.fssai";
+				
 				int personalTraineeId=(int)session.getAttribute("personalTraineeId");
 				
 				model.addAttribute("GetScoreCardForm", new GetScoreCardForm());

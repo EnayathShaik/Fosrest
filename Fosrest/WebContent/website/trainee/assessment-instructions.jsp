@@ -3,6 +3,11 @@
 <script type="text/javascript">
 
 function OnStart(){
+	var trainingPhase='${isOfflineTrainee}';
+	 if(trainingPhase=='Y'){
+		alert( "Your Training is OFFLINE. You are  not Eligible for Online Assessment.");
+		window.location.href ='/Fosrest/loginProcess.fssai';
+	}
 	var steps = 2;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
