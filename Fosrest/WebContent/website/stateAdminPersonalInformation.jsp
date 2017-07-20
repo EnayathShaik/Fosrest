@@ -81,7 +81,7 @@ window.onload = OnStart;
 											 <div class="form-group">
 				                                    <div>
 				                                        <ul class="lab-no">
-				                                            <li class="style-li"><strong>Emp Id:</strong></li><li class="style-li error-red"> * </li>
+				                                            <li class="style-li"><strong>Emp Id:</strong></li><li class="style-li error-red">  </li>
 				                                              <!--  valid -->
 				                                            <li id="empIDErr1" style="display:none;" class="style-li error-red" >Emp Id can not be blank.</li>
 				                                            
@@ -97,9 +97,9 @@ window.onload = OnStart;
 																		Number:</strong></li>
 																<%-- <li class="style-li error-red"><cf:errors
 																		path="aadharNumber" cssClass="error" /></li> --%>
+																		<li class="style-li error-red"> * </li>
 																		<li id="aadharNumberErr" style="display: none;"
-																	class="style-li error-red">Aadhar No. can not be
-																	blank.</li>
+																	class="style-li error-red">Please Enter Aadhar Number.</li>
 																	<li id="aadharNumberErr2" style="display: none;"
 																	class="style-li error-red">Aadhar No. should be 12 digit</li>
 															</ul>
@@ -116,6 +116,7 @@ window.onload = OnStart;
 																<li class="style-li error-red">*</li>
 																<!--  valid -->
 																<li id="EmailErr" style="display: none;"
+																	
 																	class="style-li error-red">Invalid Email.</li>
 
 															</ul>
@@ -130,7 +131,7 @@ window.onload = OnStart;
 				                                        <ul class="lab-no">
 				                                            <li class="style-li"><strong>State:</strong></li><li class="style-li error-red"> * </li>
 				                                            <!--  valid -->
-				                                             <li id="stateErr" style="display:none;" class="style-li error-red" >correspondence State can not be blank.</li>
+				                                             <li id="stateErr" style="display:none;" class="style-li error-red" >Please Select State.</li>
 				                                             <li class="style-li error-red">
 				                                              <span id="state_status" ></span></li>
 				                                        </ul>
@@ -145,7 +146,7 @@ window.onload = OnStart;
 					                                        <ul class="lab-no">
 					                                            <li class="style-li"><strong>Address Line 1:</strong></li> <li class="style-li error-red"> * </li>
 					                                             <!--  valid -->
-					                                             <li id="address1Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
+					                                             <li id="address1Err" style="display:none;" class="style-li error-red" > Please Enter Address.</li>
 					                                           
 					                                        </ul>
 					                                    </div>
@@ -154,7 +155,7 @@ window.onload = OnStart;
 												<div class="form-group">
 					                                    <div>
 					                                        <ul class="lab-no">
-					                                            <li class="style-li"><strong>Address Line 2:</strong></li> <li class="style-li error-red"> * </li>
+					                                            <li class="style-li"><strong>Address Line 2:</strong></li> <li class="style-li error-red"> </li>
 					                                             <!--  valid -->
 					                                             <li id="address2Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
 					                                           
@@ -167,11 +168,12 @@ window.onload = OnStart;
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Pin Code:</strong></li> <li class="style-li error-red"> * </li>
                                            <!--  valid -->
-                                            <li id="pincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
+                                            <li id="pincodeErr" style="display:none;" class="style-li error-red" >Please Enter Pin code.</li>
+                                             <li id="pincodeErr1" style="display:none;" class="style-li error-red" >Please Enter Valid Pin code.</li>
                                            
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="pincode" class="form-control"  minlength="6"  maxlength="6" placeholder="Pin Code" 
+                                    <cf:input type="text" path="pincode" class="form-control"  maxlength="6" placeholder="Pin Code" 
                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
 
@@ -189,7 +191,7 @@ window.onload = OnStart;
 				                                    <div>
 				                                        <ul class="lab-no">
 				                                            <li class="style-li"><strong>Title:</strong></li>
-				                                            <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
+				                                            <li id="titleErr" style="display:none;" class="style-li error-red" >Please Select Title.</li>
 				                                             
 				                                            <li class="style-li error-red"> *</li>
 				                                        </ul>
@@ -208,8 +210,7 @@ window.onload = OnStart;
 
 															</strong></li>
 															<li id="firstNameErr" style="display: none;"
-																class="style-li error-red">First Name should not
-																be blank.</li>
+																class="style-li error-red">Please Enter First Name.</li>
 
 														</ul>
 													</div>
@@ -241,8 +242,7 @@ window.onload = OnStart;
 
 															</strong></li>
 															<li id="LastNameErr" style="display: none;"
-																class="style-li error-red">Last Name should not be
-																blank.</li>
+																class="style-li error-red">Please Enter Last Name.</li>
 
 														</ul>
 													</div>
@@ -259,8 +259,7 @@ window.onload = OnStart;
 
 															</strong></li>
 															<li id="designationErr" style="display: none;"
-																class="style-li error-red">designation should not
-																be blank.</li>
+																class="style-li error-red">Please Select Designation.</li>
 
 														</ul>
 													</div>
@@ -274,12 +273,14 @@ window.onload = OnStart;
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Landline:</strong></li>
-                                            <li id="landLineErr" style="display:none;" class="style-li error-red" > Landline cannot be blank</li>
+                                            <li class="style-li error-red"> * </li>
+                                            <li id="landLineErr" style="display:none;" class="style-li error-red" >Please Enter Landline No.</li>
+                                            <li id="landLineErr1" style="display:none;" class="style-li error-red" >Please Enter Valid Landline No.</li>
                                           
                                             <li class="style-li error-red"> </li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="landLine" class="form-control"  placeholder="landLine"  minlength="8"  maxlength="8"  required=""
+                                    <cf:input type="text" path="landLine" class="form-control"  placeholder="landLine"   maxlength="8"  required=""
                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
 
@@ -287,7 +288,8 @@ window.onload = OnStart;
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Mobile Number:</strong></li>
-                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile Number cannot be blank</li>
+                                            <li class="style-li error-red"> * </li>
+                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Please Enter Mobile Number</li>
                                           
                                             <li class="style-li error-red"> </li>
                                         </ul>
@@ -343,12 +345,14 @@ window.onload = OnStart;
                 	$("#designationErr").css("display" , "none");
                 	$("#stateErr").css("display" , "none");
                 	$("#pincodeErr").css("display" , "none");
+                	$("#pincodeErr1").css("display" , "none");
                 	$("#stateErr").css("display" , "none");
                 	$("#aadharNumberErr").css("display" , "none");
                 	$("#aadharNumberErr2").css("display" , "none");
                 	$("#mobileErr").css("display" , "none");
                 	$("#landLineErr").css("display" , "none");
                 	$("#empIDErr1").css("display" , "none");
+                	 $("#landLineErr1").css("display" , "none");
                 	/* 
                 	if($("#empID").val() == 0){
     				$("#empIDErr1").css("display" , "block");
@@ -377,8 +381,12 @@ window.onload = OnStart;
  						$("#address1Err").css("display" , "block");
  						return false;
  						}
-                	 if($("#pincode").val().match(/^[0-9]{6}$/) == null){
+                	 if($("#pincode").val()== 0){
 				  		 $("#pincodeErr").css("display" , "block");
+				  		return false;
+				  	 }
+                	 if($("#pincode").val().match(/^[0-9]{6}$/) == null){
+				  		 $("#pincodeErr1").css("display" , "block");
 				  		return false;
 				  	 }
                 	 if($("#title").val() == ''){
@@ -411,6 +419,11 @@ window.onload = OnStart;
     						$("#landLineErr").css("display" , "block");
     						return false;
     						}
+    					if($("#landLine").val().match(/^[0-9]{8}$/) == null){
+    				    	
+      			      		 $("#landLineErr1").css("display" , "block");
+      			      		return false;
+      			  	       }
     					/* if($("#address2").val() == 0){
     						 
     						$("#address2Err").css("display" , "block");

@@ -3109,7 +3109,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 	model.addAttribute("ContactTrainee",  new ContactTrainee());
 	try{
 		//String id=(String) session.getAttribute("userName");
-		String id="public";
+		String id="01";
 		//int id1=(int) session.getAttribute("userId");
 		new ZLogger("shareInitiativesave","userid   "+ id  , "AdminController.java");
 		String shareInitiativesave = adminService.shareInitiativesave(contactTrainee , id);
@@ -3509,12 +3509,12 @@ System.out.println(p.getTrainingEndDate2());
 			if(result.hasErrors()){
 				new ZLogger("Helpsave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
 				new ZLogger("Helpsave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
-				return "shareInitiativesave";
+				return "Helpsave";
 			}
 			model.addAttribute("ContactTrainee",  new ContactTrainee());
 			try{
 				//String id=(String) session.getAttribute("userName");
-				String id="public";
+				String id="0";
 				//int id1=(int) session.getAttribute("userId");
 				new ZLogger("Helpsave","userid   "+ id  , "AdminController.java");
 				String Helpsave = adminService.Helpsave(contactTrainee , id);

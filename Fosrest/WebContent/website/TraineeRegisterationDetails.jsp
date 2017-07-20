@@ -167,7 +167,7 @@
                                                 <ul class="lab-no">
                                                     <li class="style-li"><strong>Trainee Type:</strong></li> <li class="style-li error-red"> * </li>
                                                      <!--  valid -->
-                                                            <li id="designationErr" style="display:none;" class="style-li error-red" >Trainee Type can not be blank.</li>
+                                                            <li id="designationErr" style="display:none;" class="style-li error-red" >Please Select Trainee Type.</li>
                                                    
                                                 </ul>
                                             </div>
@@ -182,7 +182,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Aadhar Number:</strong></li><li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                            <li id="AadharNumberErr" style="display:none;" class="style-li error-red" >Aadhar Number can not be blank.</li>
+                                            <li id="AadharNumberErr" style="display:none;" class="style-li error-red" >Please Enter Aadhar Number.</li>
                                             <li id="aadharNumberErr2" style="display: none;"
 																	class="style-li error-red">Aadhar No. should be 12 digit</li>
                                             <li class="style-li error-red">
@@ -198,9 +198,9 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Emp Id:</strong></li><li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Emp Id:</strong></li><li class="style-li error-red">  </li>
                                               <!--  valid -->
-                                            <li id="empIDErr" style="display:none;" class="style-li error-red" >Emp Id can not be blank.</li>
+                                            <!-- <li id="empIDErr" style="display:none;" class="style-li error-red" >Emp Id can not be blank.</li> -->
                                             
                                         </ul>
                                     </div>
@@ -212,7 +212,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Date of Birth:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                            <li id="dobErr" style="display:none;" class="style-li error-red" >Date of Birth can not be blank.</li>
+                                            <li id="dobErr" style="display:none;" class="style-li error-red" >Please Select Date of Birth.</li>
                                            
                                         </ul>
                                     </div>
@@ -228,7 +228,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>DOJ of Service:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                            <li id="dojServiceErr" style="display:none;" class="style-li error-red" >DOJ of Service can not be blank.</li>
+                                            <li id="dojServiceErr" style="display:none;" class="style-li error-red" >Please Select DOJ of Service.</li>
                                            
                                         </ul>
                                     </div>
@@ -240,7 +240,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>DOJ This Post:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                            <li id="dojPostErr" style="display:none;" class="style-li error-red" >DOJ This Post can not be blank.</li>
+                                            <li id="dojPostErr" style="display:none;" class="style-li error-red" >Please Select DOJ This Post.</li>
                                            
                                         </ul>
                                     </div>
@@ -252,7 +252,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Employement Date:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                            <li id="empDateErr" style="display:none;" class="style-li error-red" >Employement Date can not be blank.</li>
+                                            <li id="empDateErr" style="display:none;" class="style-li error-red" >Please Select Employement Date.</li>
                                            
                                         </ul>
                                     </div>
@@ -295,8 +295,9 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Title:</strong></li>
                                             <!--  valid -->
-                                            <li id="titleErr" style="display:none;" class="style-li error-red" >Title can not be blank.</li>
                                             <li class="style-li error-red"> * </li>
+                                            <li id="titleErr" style="display:none;" class="style-li error-red" >Please Select Title.</li>
+                                            
                                         </ul>
                                     </div>
                                    	<cf:select path="title" class="form-control">
@@ -310,7 +311,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>First Name:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                          <li id="firstNameErr" style="display:none;" class="style-li error-red" >First Name can not be blank.</li>
+                                          <li id="firstNameErr" style="display:none;" class="style-li error-red" >Please Enter First Name.</li>
                                            
                                         </ul>
                                     </div>
@@ -323,7 +324,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Middle Name:</strong></li> <li class="style-li error-red"> </li>
                                              <!--  valid -->
-                                             <li id="MiddleNameErr" style="display:none;" class="style-li error-red" >Middle Name can not be blank.</li>
+                                             <li id="MiddleNameErr" style="display:none;" class="style-li error-red" >Please Enter Middle Name.</li>
                                            
                                         </ul>
                                     </div>
@@ -336,7 +337,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Last Name:</strong></li><li class="style-li error-red"> </li>
                                              <!--  valid --><li class="style-li error-red"> * </li>
-                                           <li id="LastNameErr" style="display:none;" class="style-li error-red" >Last Name can not be blank.</li>
+                                           <li id="LastNameErr" style="display:none;" class="style-li error-red" >Please Enter Last Name.</li>
                                             
                                         </ul>
                                     </div>
@@ -348,7 +349,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Father's Name/Mother's Name:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                             <li id="FatherNameErr" style="display:none;" class="style-li error-red" >Father Name can not be blank.</li>
+                                             <li id="FatherNameErr" style="display:none;" class="style-li error-red" >Please Enter Father's Name/Mother's Name.</li>
                                            
                                         </ul>
                                     </div>
@@ -361,7 +362,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Date of Retirement:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                            <li id="dateRetirementErr" style="display:none;" class="style-li error-red" >Date of Retirement can not be blank.</li>
+                                            <li id="dateRetirementErr" style="display:none;" class="style-li error-red" >Please Select Date of Retirement.</li>
                                            
                                         </ul>
                                     </div>
@@ -373,7 +374,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Posting District:</strong></li><li class="style-li error-red"> * </li>
                                               <!--  valid -->
-                                            <li id="postDistrictErr" style="display:none;" class="style-li error-red" >Posting District can not be blank.</li>
+                                            <li id="postDistrictErr" style="display:none;" class="style-li error-red" >Please Enter Posting District.</li>
                                             
                                         </ul>
                                     </div>
@@ -421,7 +422,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Correspondence Address Line 1:</strong></li> <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                             <li id="correspondenceAddress1Err" style="display:none;" class="style-li error-red" >correspondence Address can not be blank.</li>
+                                             <li id="correspondenceAddress1Err" style="display:none;" class="style-li error-red" >Please Enter correspondence Address.</li>
                                            
                                         </ul>
                                     </div>
@@ -448,7 +449,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>State:</strong></li><li class="style-li error-red"> * </li>
                                             <!--  valid -->
-                                             <li id="correspondenceStateErr" style="display:none;" class="style-li error-red" >correspondence State can not be blank.</li>
+                                             <li id="correspondenceStateErr" style="display:none;" class="style-li error-red" >Please Select State.</li>
                                             
                                         </ul>
                                     </div>
@@ -482,7 +483,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>District:</strong></li>  <li class="style-li error-red"> * </li>
                                              <!--  valid -->
-                                            <li id="correspondenceDistrictErr" style="display:none;" class="style-li error-red" >District can not be blank.</li>
+                                            <li id="correspondenceDistrictErr" style="display:none;" class="style-li error-red" >Please Select District.</li>
                                           
                                         </ul>
                                     </div>
@@ -496,7 +497,7 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>City:</strong></li> <li class="style-li error-red"> * </li>
                                             <!--  valid -->
-                                            <li id="correspondenceCityErr" style="display:none;" class="style-li error-red" >City can not be blank.</li>
+                                            <li id="correspondenceCityErr" style="display:none;" class="style-li error-red" >Please Select City.</li>
                                            
                                         </ul>
                                     </div>
@@ -512,20 +513,20 @@
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Pin Code:</strong></li> <li class="style-li error-red"> * </li>
                                            <!--  valid -->
-                                            <li id="correspondencePincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
-                                           
+                                            <li id="correspondencePincodeErr" style="display:none;" class="style-li error-red" >Please Enter Pin code.</li>
+                                           <li id="correspondencePincodeErr1" style="display:none;" class="style-li error-red" >Please Enter Valid Pin code.</li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="correspondencePincode" class="form-control"  minlength="6"  maxlength="6" placeholder="Pin Code" required=""
+                                    <cf:input type="text" path="correspondencePincode" class="form-control"    maxlength="6" placeholder="Pin Code" 
                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
 
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Mobile:</strong></li> <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Mobile No.:</strong></li> <li class="style-li error-red"> * </li>
                                               <!--  valid -->
-                                            <li id="mobileErr" style="display:none;" class="style-li error-red" >Mobile can not be blank.</li>
+                                            <li id="mobileErr" style="display:none;" class="style-li error-red" >Please Enter Mobile No.</li>
                                            
                                         </ul>
                                     </div>
@@ -561,7 +562,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Permanent Address Line 1:</strong></li>
-                                            <li id="ResidentialLine1Err" style="display:none;" class="style-li error-red" >Permanent Address can not be blank.</li>
+                                            <li id="ResidentialLine1Err" style="display:none;" class="style-li error-red" >Plese Enter Permanent Address.</li>
                                        </ul>
                                     </div>
                                     <cf:input type="text" path="ResidentialLine1" class="form-control" placeholder="Address" required=""/>
@@ -571,7 +572,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Permanent Address Line 2:</strong></li>
-                                             <li id="ResidentialLine2Err" style="display:none;" class="style-li error-red" >Permanent Address can not be blank.</li>
+                                             <li id="ResidentialLine2Err" style="display:none;" class="style-li error-red" >Please Enter Permanent Address.</li>
                                        </ul>
                                     </div>
                                     <cf:input type="text" path="ResidentialLine2" class="form-control" placeholder="Address" required=""/>
@@ -584,7 +585,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>State:</strong></li>
-                                            <li id="resStateErr" style="display:none;" class="style-li error-red" >State can not be blank.</li>
+                                            <li id="resStateErr" style="display:none;" class="style-li error-red" >Please Select State.</li>
                                        </ul>
                                     </div>
                                    <cf:select path="resState" class="form-control" onchange="getDistrict(this.value , 'residentialDistrict')">
@@ -604,7 +605,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>District:</strong></li>
-                                             <li id="residentialDistrictErr" style="display:none;" class="style-li error-red" >District can not be blank.</li>
+                                             <li id="residentialDistrictErr" style="display:none;" class="style-li error-red" >Please Select District.</li>
                                        </ul>
                                     </div>
                                    <cf:select path="residentialDistrict" class="form-control" onchange="getCity(this.value , 'resCity')">
@@ -616,7 +617,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>City:</strong></li>
-                                              <li id="resCityErr" style="display:none;" class="style-li error-red" >City can not be blank.</li>
+                                              <li id="resCityErr" style="display:none;" class="style-li error-red" >Please Select City.</li>
                                        </ul>
                                     </div>
                                    <cf:select path="resCity" class="form-control">
@@ -630,10 +631,11 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Pin Code:</strong></li>
-                                                <li id="resPincodeErr" style="display:none;" class="style-li error-red" >Pin code can not be blank.</li>
+                                                <li id="resPincodeErr" style="display:none;" class="style-li error-red" >Please Enter Pin code.</li>
+                                                <li id="resPincodeErr1" style="display:none;" class="style-li error-red" >Plese Enter Valid Pin code.</li>
                                       </ul>
                                     </div>
-                                    <cf:input type="text" path="resPincode" class="form-control"  minlength="6"  maxlength="6" placeholder="Pin Code" 
+                                    <cf:input type="text" path="resPincode" class="form-control"   maxlength="6" placeholder="Pin Code" 
                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" required=""/>
                                 </div>
                             </div>
@@ -716,6 +718,8 @@
 			$("#titleErr").css("display" , "none");
 		$("#correspondencePincodeErr").css("display", "none");
 		$("#correspondencePincodeErr1").css("display", "none");
+		$("#resPincodeErr1").css("display", "none");
+		$("#resPincodeErr").css("display", "none");
 		$("#mobileErr").css("display" , "none");
 		$("#AadharNumberErr").css("display" , "none");
 		$("#firstNameErr").css("display" , "none");
@@ -814,9 +818,14 @@
   	 } if($("#correspondenceCity").val() == 0){
    		 $("#correspondenceCityErr").css("display" , "block");
     		return false;
-  	 } if($("#correspondencePincode").val().match(/^[0-9]{6}$/) == null){
-  		 alert("invalid pin");
-  		 $("#correspondencePincodeErr").css("display" , "block");
+  	 } 
+  	    if($("#correspondencePincode").val()== 0){
+ 		 //alert("invalid pin");
+ 		 $("#correspondencePincodeErr").css("display" , "block");
+ 		return false;
+  	    }
+  	 if($("#correspondencePincode").val().match(/^[0-9]{6}$/) == null){
+  		 $("#correspondencePincodeErr1").css("display" , "block");
   		return false;
   	 }if($("#mobile").val().match(/^[0-9]{10}$/) == null){
     	
@@ -844,10 +853,16 @@
 		 $("#resCityErr").css("display" , "block");
 		return false;
 	 }
+	 if($("#resPincode").val()== 0){
+ 		 //alert("invalid pin");
+ 		 $("#resPincodeErr").css("display" , "block");
+ 		return false;
+  	    }
 	 if($("#resPincode").val().match(/^[0-9]{6}$/) == null){
-		 $("#resPincodeErr").css("display" , "block");
+		 $("#resPincodeErr1").css("display" , "block");
 		return false;
 	} 
+		
 		 if(!(isUpdate !=null && isUpdate== "Y")){
 			if($("#txtInput").val() == ''){
 			 $("#txtInputErr").css("display" , "block");

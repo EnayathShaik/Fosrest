@@ -30,7 +30,7 @@
                             <li><a href="#">Sitemap</a></li>
 							<li><a href="#">FAQ's</a></li>
 							<li><a href="feedback.fssai">Feedback</a></li>
-							<li><a href="#">Help</a></li>
+							<li><a href="Help.fssai">Help</a></li>
             <!-- <li><a href="#">Faqs</a></li>
             <li><a href="feedback.fssai">Feedback</a></li> -->
           </ul>
