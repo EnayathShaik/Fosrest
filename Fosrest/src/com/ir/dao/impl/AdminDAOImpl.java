@@ -4563,7 +4563,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		String email1 = contactTrainee.getEmailAddress();
 		String msg = contactTrainee.getMessageDetails();
 		//new ZLogger("contactTraineeSave", "user id in dao impl  :::::" + id, "AdminDAOImpl.java");
-		String email="mitalirade93@gmail.com";
+		String email="enforcement1@fssai.gov.in";
 		String twoEmails=email+"e###E"+email1; 
 		
 		traineeMaail.mailProperty(msg, twoEmails, id);
