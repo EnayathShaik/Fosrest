@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AssessmentQuestionForm;
+import com.ir.form.ContactTrainee;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
 import com.ir.model.CourseName;
@@ -65,4 +66,5 @@ public interface PageLoadService {
 	public List  totCalendarlist();
 	public List masterTrainer();
 	//public Object masterTrainer();
+	public String feedbacksave(ContactTrainee contactTrainee, String id);
 }

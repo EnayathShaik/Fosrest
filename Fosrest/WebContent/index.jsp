@@ -226,6 +226,7 @@ $(document).ready(function() {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FOSTAC - Food Safety Training and Certification</title>
 <!-- core CSS -->
+<link href="website/css/font-awesome.css" rel="stylesheet">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <link href="css/animate.min.css" rel="stylesheet">
@@ -400,11 +401,10 @@ $(function(){
 						<li><a href="login.fssai">LOGIN</a></li>
 					</ul>
 					<div class="search">
-						<form role="form" class="searchbar">
-							<input type="text" class="search-form" autocomplete="off"
-								placeholder="Search..."> <i style="color: #71b44b;"
-								class="fa fa-search"></i>
-						</form>
+						   <form role="form" class="searchbar">
+            <input type="text" name="search" class="search-form" autocomplete="off" placeholder="Search...">
+            <i style="color:#000;" class="fa fa-search"></i>
+          </form>
 					</div>
 				</div>
 			</div>
@@ -649,7 +649,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 							<li><a href="#">Archives</a></li>
 							<li><a href="#">Useful Links</a></li> -->
 							<li><a href="#">FAQ's</a></li>
-							<li><a href="#">Feedback</a></li>
+							<li><a href="feedback.fssai">Feedback</a></li>
 							<li><a href="Help.fssai">Help</a></li>
 						</ul>
 					</div>

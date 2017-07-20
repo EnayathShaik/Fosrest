@@ -59,11 +59,34 @@
       </div>
       /.carousel 
     </section> -->
-    <!--/#main-slider--> 
+    <!--/#main-slider-->
+    <style> 
+    p {
+    text-align: center;
+}
+
+
+
+</style>
     <section>
         <div class="row">
-        <div class="col-md-8">
-            <h1>About FOSREST</h1>        
+        <div class="col-md-8" style="width: 1178px;">
+            <h1 style="margin-left:185px;">About FOSREST</h1> 
+            <div style="margin-left:206px">
+          <p align="right"> Food  Safety  and Quality  Management is  rapidly  gaining  importance  both at  national  as well  as international  
+          levels  due  to  various  reasons  viz implementation    of    FSS   Act    2006,   globalization    of    food     trade, 
+          harmonization   of   national   standards  with   CODEX,    legal   changes  at national  and  international  levels  etc.  
+          The  Food   Safety  and  Standards Act  passed in  the Parliament  in  2006   came into  force  from  5th    August 
+          2011.  To  implement  the Act,  there is  a need for  human resources  at various  levels  involving   different  
+          stakeholders  in  the  food   chain  from farm to fork which  includes Regulators (Designated Officers, Adjudicating 
+          Officers and Food  Safety Officers), Food Auditors, Food Analysts (Microbiology/   Chemical),   Food    Handlers   (Manufacturer,   Wholesaler Retailer   etc.).   
+          The   Act   calls   for   an  enabling   environment   for   its successful implementation and movement towards a science based approach  to   assure  safety  and  the  quality  of  food.   
+          Development  of trained human resource in food safety sector is essential for speedy implementation  of  Act.
+          
+          </p>
+          <p>  Food   Safety  &  Standard  Authority   of  India  has  designed  a  Training Policy    for   different   levels   of   Food    Safety   Regulatory   Officials.   The Training  Policy   of  the  Regulatory  Staff  was discussed  by  17th   Central Advisory  Committee  and was approved by Food Authority in  its 21st Authority Meeting.             
+ </p><p>In the same line, this web portal has been developed to empower States/UTs to efficiently manage the training of Regulatory Staff without being dependent on FSSAI HQ.  </p>
+                </div>   
             </div>    
         </div>
         </section>    

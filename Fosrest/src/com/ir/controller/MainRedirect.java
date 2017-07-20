@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.PropertyUtils;
+import com.ir.form.ContactTrainee;
 import com.ir.form.GenerateCertificateForm;
 import com.ir.form.LoginForm;
 import com.ir.form.NominateTraineeForm;
@@ -156,10 +157,43 @@ public class MainRedirect {
 	   public String disclaimer() {
 		   return "disclaimer";
 	   }
-	   @RequestMapping(value="/feedback" ,method = RequestMethod.GET)
-	   public String feedback() {
-		   return "feedback";
+	   @RequestMapping(value = "/feedback", method = RequestMethod.GET)
+		public String feedback(@ModelAttribute("ContactTrainee") ContactTrainee contactTrainee,Model model, HttpSession session) {
+			System.out.println("Feedback....................!");
+			/*if(checkAccess(session))
+				return "redirect:login.fssai";*/
+			//model.addAttribute("listPhotoGallery", this.adminService.listPhotoGallery());
+			return "feedback";
+		}
+	   @RequestMapping(value="/feedbacksave" , method=RequestMethod.POST)
+	   public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee contactTrainee
+	   		,BindingResult result , HttpSession session, Model model
+	   		){
+	   	if(result.hasErrors()){
+	   		new ZLogger("feedbacksave", "bindingResult.hasErrors  "+result.hasErrors() , "MainRedirect.java");
+	   		new ZLogger("feedbacksave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "MainRedirect.java");
+	   		return "shareInitiativesave";
+	   	}
+	   	model.addAttribute("ContactTrainee",  new ContactTrainee());
+	   	try{
+	   		//String id=(String) session.getAttribute("userName");
+	   		String id="01";
+	   		//int id1=(int) session.getAttribute("userId");
+	   		//new ZLogger("feedbacksave","userid   "+ id  , "AdminController.java");
+	   		String feedbacksave = pageLoadService.feedbacksave(contactTrainee , id);
+	   		if(feedbacksave.equalsIgnoreCase("created")){
+	   			model.addAttribute("created" , "Your request has been sent successfully !!!");
+	   		}else{
+	   			model.addAttribute("created" , "Oops, something went wrong !!!");
+	   		}
+	   	}catch(Exception e){
+	   		e.printStackTrace();
+	   		
+	   	}
+	   	return "feedback";
+	   	
 	   }
+	   
 	   @RequestMapping(value="/faq" ,method = RequestMethod.GET)
 	   public String faq() {
 		   return "faq";

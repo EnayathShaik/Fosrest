@@ -3123,6 +3123,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		new ZLogger("shareInitiativesave", "Exception while shareInitiativesave  "+e.getMessage() , "AdminController.java");
 	}
 	return "shareInitiative";
+	
 }
 
 
@@ -3529,4 +3530,6 @@ System.out.println(p.getTrainingEndDate2());
 			}
 			return "Help";
 		}
+		
+		
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
+import com.ir.form.ContactTrainee;
 import com.ir.form.TrainerForm;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
@@ -284,5 +285,14 @@ public class PageLoadServiceImpl implements PageLoadService {
 		List masterTrainerList=pageLoadDao.masterTrainer();
 		return masterTrainerList;
 	}
+	
+	@Override
+	@Transactional
+	public String feedbacksave(ContactTrainee contactTrainee, String id) {
+		String feedbacksave = pageLoadDao.feedbacksave(contactTrainee , id);
+		return feedbacksave;
+	}
+
+	
 
 }

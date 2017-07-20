@@ -3,6 +3,7 @@ package com.ir.dao;
 import java.util.List;
 
 import com.ir.bean.common.IntStringBean;
+import com.ir.form.ContactTrainee;
 import com.ir.form.TrainerForm;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
@@ -88,4 +89,6 @@ public interface PageLoadDao {
 
 	public List totCalendarlist();
 	public List masterTrainer();
+
+	public String feedbacksave(ContactTrainee contactTrainee, String id);
 }

@@ -17,9 +17,11 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
+import com.ir.form.ContactTrainee;
 import com.ir.form.TrainerForm;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.City;
+import com.ir.model.ContactTraineee;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.Designation;
@@ -39,6 +41,7 @@ import com.ir.model.TrainingPhase;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.TrainingType;
 import com.ir.model.Utility;
+import com.ir.util.SendContectMail;
 @Service
 public class PageLoadDaoImpl implements PageLoadDao {
 
@@ -440,4 +443,31 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			System.out.println(list);
 			return list; 
 		}
+		
+		@Override
+		public String feedbacksave(ContactTrainee contactTrainee, String id) {
+			SendContectMail traineeMaail = new SendContectMail();
+			Session session = sessionFactory.getCurrentSession();
+			ContactTraineee contactTraineeModel = new ContactTraineee();
+			String email = contactTrainee.getEmailAddress();
+			String msg = contactTrainee.getMessageDetails();
+			//new ZLogger("contactTraineeSave", "user id in dao impl  :::::" + id, "AdminDAOImpl.java");
+			traineeMaail.mailProperty(msg, email, id);
+			contactTraineeModel.setEmailAddress(email);
+			contactTraineeModel.setMessageDetails(msg);
+			contactTraineeModel.setUserId(id);
+			contactTraineeModel.setDescription("My EmailId is :- " + email + " My message to You:-  "
+					+ msg);
+			
+			Integer contactTraineeModelId = (Integer) session
+					.save(contactTraineeModel);
+			if (contactTraineeModelId > 0 && contactTraineeModelId != null) {
+				return "created";
+			} else {
+				return "error";
+			}
+		}
+
+
+		
 }

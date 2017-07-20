@@ -87,7 +87,7 @@ public class SendContectMail {
 			message.setSubject(subject);
 			System.out.println("in send mail class");
 		
-			message.setText("Hello   :- " + id
+			message.setText("Hello My Id is  :- " + id
 					+ ",  My EmailId is :- " + email
 					+ ", My message to You:-  " + body);
 			Transport.send(message);

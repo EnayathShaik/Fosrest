@@ -136,7 +136,7 @@
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2"
-												 onclick=" return abcd(); ">View Batchcode Details</button>
+												 onclick=" return Validationbatchcode(); ">View Batchcode Details</button>
 													</div>
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 														<!--   <button  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button> -->
@@ -374,7 +374,7 @@
 		
  }
 
- function abcd(){
+ function Validationbatchcode(){
 	 //alert("ABCDABCD");
 	 var b=document.getElementById("designation").value;
 	 var c=document.getElementById("trainingType").value;

@@ -130,12 +130,14 @@
          if(fileName.charAt(n+1)=='j'||fileName.charAt(n+1)=='p'){
         	  if(fileName.charAt(n+2)=='p'||fileName.charAt(n+2)=='n')
         		  if(fileName.charAt(n+3)=='e'||fileName.charAt(n+3)=='g')
+        			  alert("Sucessfully Uploaded");
         			return true;   
           }
          else{
         	 alert("Please Select Image Only");
         	 return false;
           }
+         
       }
              function deletePhoto(id){
               var name1=JSON.stringify({
