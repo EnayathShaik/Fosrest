@@ -851,6 +851,7 @@ public class TraineeController {
 				//model.addAttribute("listTrainingTopic", this.traineeService.listTrainingTopic(userId));
 				model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
 				model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
+				model.addAttribute("listsubjects2", this.traineeService.listsubjects2(userId));
 				model.addAttribute("listGetScoreCard", this.traineeService.listGetScoreCard(userId));
 			if(session.getAttribute("traineeSteps").toString().equals("3")){
 				traineeService.updateSteps(personalTraineeId, 4);

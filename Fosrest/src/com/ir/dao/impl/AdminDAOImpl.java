@@ -4383,7 +4383,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
 		String sql2;
-		sql2 = "update PersonalInformationTrainee set steps = 5 where  logindetails='"+loginId+"'";
+		sql2 = "update PersonalInformationTrainee set steps = 4 where  logindetails='"+loginId+"'";
 		Query query2 = session.createSQLQuery(sql2);
 		query2.executeUpdate();
 		String sql3;

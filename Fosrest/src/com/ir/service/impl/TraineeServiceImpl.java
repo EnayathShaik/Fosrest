@@ -459,5 +459,11 @@ public class TraineeServiceImpl implements TraineeService {
 			// TODO Auto-generated method stub
 			return this.traineeDAO.getCalendarDetails( userId);
 		}
+		@Override
+		@Transactional
+		public List listsubjects2(int id) {
+			// TODO Auto-generated method stub
+			return this.traineeDAO.listsubjects2( id);
+		}
 
 }

@@ -105,12 +105,12 @@
 				 }
 			
 		  
-		/*   if(($("#correspondencePincode").val()).match(/^[0-9]{6}$/)==null)
-			 {alert("aaa");
+		  /*  if(($("#correspondencePincode").val()).match(/^[0-9]{6}$/)==null)
+			 {
 			  $("#correspondencePincodeErr2").css("display" , "block");
 			 return false;
-			 }
-		 */
+			 } */
+		
 	 
 	  if($("#correspondenceState").val() == 0){
 		 
@@ -303,10 +303,9 @@
 									<cf:input path="status"  type="hidden"/>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Center Name:</strong></li>
-                                              <li id="trainingCenterNameErr" style="display:none;" class="style-li error-red" > Training name can not be blank.</li>
-                                                  
-                                            <li class="style-li error-red">* </li>
-                                        </ul>
+                                              <li class="style-li error-red">* </li>
+                                              <li id="trainingCenterNameErr" style="display:none;" class="style-li error-red" >Please Enter Training Center Name.</li>
+                                         </ul>
                                     </div>
                                     <cf:input type="text" path="trainingCenterName" class="form-control" placeholder="Training Center Name" required=""/>
                                 </div>
@@ -314,21 +313,19 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Email:</strong></li>
-                                            <li id="EmailErr" style="display:none;" class="style-li error-red" > Invalid Email.</li>
-                                          
                                             <li class="style-li error-red">* </li>
-                                        </ul>
+                                            <li id="EmailErr" style="display:none;" class="style-li error-red" >Please Enter Email ID.</li>
+                                          </ul>
                                     </div>
                                      <cf:input type="text" path="Email" class="form-control" placeholder="Email" onblur="return emailVal(this.id,this.value);return false; " required=""/>
                                 </div>
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Mobile:</strong></li>
-                                            <li id="mobileErr" style="display:none;" class="style-li error-red" > Mobile cannot be blank</li>
-                                          
+                                            <li class="style-li"><strong>Mobile No.:</strong></li>
                                             <li class="style-li error-red"> *</li>
-                                        </ul>
+                                            <li id="mobileErr" style="display:none;" class="style-li error-red" >Please Enter Mobile No.</li>
+                                           </ul>
                                     </div>
                                     <cf:input type="text" path="mobile" class="form-control" minlength="10" maxlength="10" placeholder="Mobile" required=""
                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
@@ -370,10 +367,9 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Title:</strong></li>
-                                            <li id="titleErr" style="display:none;" class="style-li error-red" > Title can not be blank.</li>
-                                             
-                                            <li class="style-li error-red"> *</li>
-                                        </ul>
+                                             <li class="style-li error-red"> *</li>
+                                            <li id="titleErr" style="display:none;" class="style-li error-red" >Please Select Title.</li>
+                                         </ul>
                                     </div>
                                    <cf:select path="title" class="form-control">
 													<cf:option value="" label="Select Title" />
@@ -385,13 +381,13 @@
                                  <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>First Name:(Nodal Person Name) </strong></li>
-                                             <li id="firstNameErr" style="display:none;" class="style-li error-red" > first Name can not be blank.</li>
-                                           
+                                         <li class="style-li"><strong>First Name:(Nodal Person Name) </strong></li>
                                             <li class="style-li error-red"> *</li>
-                                        </ul>
+                                            <li id="firstNameErr" style="display:none;" class="style-li error-red" >Please Enter First Name.</li>
+                                            
+                                           </ul>
                                     </div>
-                                    <cf:input type="text" class="form-control" path="firstName" placeholder="First Name" required=""
+                                    <cf:input type="text" class="form-control" path="firstName" placeholder="First Name"
                                     onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
                                 </div>
                                </div>
@@ -400,22 +396,21 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong    style=" margin-left: -108px; ">Middle Name:(Nodal Person Name)</strong></li>
-                                             <li id="middleNameErr" style="display:none;" class="style-li error-red" > Middle Name can not be blank.</li>
-                                            <li class="style-li error-red"></li>
-                                        </ul>
+                                             <li id="middleNameErr" style="display:none;" class="style-li error-red" >Please Enter Middle Name.</li>
+                                           </ul>
                                     </div>
-                                    <cf:input type="text" path="middleName" class="form-control" placeholder="Middle Name" required=""
+                                    <cf:input type="text" path="middleName" class="form-control" placeholder="Middle Name"
                                     onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
                                 </div>
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Last Name:(Nodal Person Name)</strong></li>
-                                            <li id="lastNameErr" style="display:none;" class="style-li error-red" > Last Name can not be blank.</li>
-                                            <li class="style-li error-red"> * </li>
-                                        </ul>	
+                                             <li class="style-li error-red"> * </li>
+                                            <li id="lastNameErr" style="display:none;" class="style-li error-red" >Please Enter Last Name.</li>
+                                            </ul>	
                                     </div>
-                                    <cf:input type="text" path="lastName" class="form-control" placeholder="Last Name" required=""
+                                    <cf:input type="text" path="lastName" class="form-control" placeholder="Last Name"
                                     onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
                                 </div>
                             </div>
@@ -436,12 +431,11 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Training Center Address Line 1:</strong></li>
-                                            <li id="correspondenceAddress1Err" style="display:none;" class="style-li error-red" > Address can not be blank.</li>
-                                           
-                                            <li class="style-li error-red">* </li>
-                                        </ul>
+                                             <li class="style-li error-red">* </li>
+                                            <li id="correspondenceAddress1Err" style="display:none;" class="style-li error-red" >Please Enter Training Center Address.</li>
+                                           </ul>
                                     </div>
-                                    <cf:input type="text" path="correspondenceAddress1" class="form-control" placeholder="Training Center Line 1" required=""/>
+                                    <cf:input type="text" path="correspondenceAddress1" class="form-control" placeholder="Training Center Line 1" />
                                 </div>
                                 <div class="form-group">
                                     <div>
@@ -449,7 +443,7 @@
                                             <li class="style-li"><strong>Training Center Address Line 2:</strong></li>
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="correspondenceAddress2" class="form-control" placeholder="Training Center Line 2" required=""/>
+                                    <cf:input type="text" path="correspondenceAddress2" class="form-control" placeholder="Training Center Line 2" />
                                 </div>
                                
 
@@ -457,14 +451,15 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>PIN Code:</strong></li>
-                                            <li id="correspondencePincodeErr" style="display:none;" class="style-li error-red" > Pincode cannot be empty.</li>
-											<!-- <li id="correspondencePincodeErr2" style="display:none;" class="style-li error-red" >PinCode should contain 6 digits.</li> -->
-                                          
-                                            <li class="style-li error-red">* </li>
+                                            <li class="style-li"><strong>Pin Code:</strong></li>
+                                             <li class="style-li error-red">* </li>
+                                            <li id="correspondencePincodeErr" style="display:none;" class="style-li error-red" >Please Enter Pin code.</li>
+											  <li id="correspondencePincodeErr2" style="display: none;"
+												class="style-li error-red">Please Enter valid Pin Code.</li>
+                                           
                                         </ul>
                                     </div>
-                                    <cf:input type="text" path="correspondencePincode" class="form-control" minlength="6"  maxlength="6" placeholder="Pincode" required=""
+                                    <cf:input type="text" path="correspondencePincode" class="form-control" minlength="6" maxlength="6" placeholder="Pincode" required=""
                                      onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
                                
@@ -477,10 +472,9 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>State:</strong></li>
-                                            <li id="correspondenceStateErr" style="display:none;" class="style-li error-red" > Please select a Correspondence State.</li>
-                                           
                                             <li class="style-li error-red"> *</li>
-                                        </ul>
+                                            <li id="correspondenceStateErr" style="display:none;" class="style-li error-red" > Please select Correspondence State.</li>
+                                           </ul>
                                     </div>
                                       <cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value , 'correspondenceDistrict')">
                                   <cf:option value="0" label="Select state Name" />
@@ -491,10 +485,9 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>District:</strong></li>
-                                             <li id="correspondenceDistrictErr" style="display:none;" class="style-li error-red" > Please select a Correspondence District.</li>
-                                          
-                                            <li class="style-li error-red"> *</li>
-                                        </ul>
+                                             <li class="style-li error-red"> *</li>
+                                             <li id="correspondenceDistrictErr" style="display:none;" class="style-li error-red" > Please select Correspondence District.</li>
+                                          </ul>
                                     </div>
                                      <cf:select path="correspondenceDistrict" class="form-control" onchange="getCity(this.value , 'correspondenceCity')">
                                  <cf:option value="0" label="Select District" />
@@ -504,22 +497,16 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Closest City:</strong></li>
-                                            <li id="correspondenceCityErr" style="display:none;" class="style-li error-red" > Please select a Correspondence City.</li>
-                                          
-                                            <li class="style-li error-red"> *</li>
-                                        </ul>
+                                            <li class="style-li"><strong>City:</strong></li>
+                                             <li class="style-li error-red"> *</li>
+                                            <li id="correspondenceCityErr" style="display:none;" class="style-li error-red" > Please Select Correspondence City.</li>
+                                         </ul>
                                     </div>
-                                    
                                     <cf:select path="correspondenceCity" class="form-control">
                                    <cf:option value="0" label="Select City" />
                                     </cf:select>
                                 </div>
-
-
-
-                           
-                                <!-- right side ends -->
+							<!-- right side ends -->
                             </div>
                         </fieldset>
                         <!-- contact address ends -->
@@ -574,19 +561,17 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Seating capacity Per session?</strong></li>
-                                             <li id="seatingCapacityErr" style="display:none;" class="style-li error-red" >Seating capacity cannot be empty.</li>
-                                                  
-                                            <li class="style-li error-red">* </li>
-                                        </ul>
+                                             <li class="style-li error-red">* </li>
+                                             <li id="seatingCapacityErr" style="display:none;" class="style-li error-red" >Please Enter Seating Capacity.</li>
+                                           </ul>
                                     </div>
-                                    <cf:input type="text" path="seatingCapacity" class="form-control" placeholder="Number of Seats"/>
+                                    <cf:input type="text" path="seatingCapacity" class="form-control" placeholder="Number of Seats"
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
                                 <div class="form-group">
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>Availability of TV/ Projector in training center ?</strong></li>
-
-											<li class="style-li error-red">*</li>
 										</ul>
 									</div>
 									<cf:radiobutton path="availableTVProjector" value="Yes" checked="true" />
@@ -598,8 +583,6 @@
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>Availability of in-house trainers in food safety ?</strong></li>
-
-											<li class="style-li error-red">*</li>
 										</ul>
 									</div>
 									<cf:radiobutton path="availableInHouseTrainer" value="Yes" checked="true" />
@@ -617,24 +600,24 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Number of in-house trainers ?</strong></li>
-                                             <li id="noOfInHouseTrainerErr" style="display:none;" class="style-li error-red" > give the no of trainers.</li>
-                                            
-                                            <li class="style-li error-red">* </li>
-                                        </ul>
+                                             <li class="style-li error-red">* </li>
+                                             <li id="noOfInHouseTrainerErr" style="display:none;" class="style-li error-red" > Please Enter the No. of In-House Trainers.</li>
+                                           </ul>
                                     </div>
-                                    <cf:input type="text" path="noOfInHouseTrainer" placeholder="Number of trainers" class="form-control"/>
+                                    <cf:input type="text" path="noOfInHouseTrainer" placeholder="Number of trainers" class="form-control"
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
                                 
                                  <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Number of PC's</strong></li>
-                                             <li id="noOfPCErr" style="display:none;" class="style-li error-red" > Insert number of PC's.</li>
-                                            
-                                            <li class="style-li error-red">* </li>
-                                        </ul>
+                                             <li class="style-li error-red">* </li>
+                                             <li id="noOfPCErr" style="display:none;" class="style-li error-red" > Please Enter the No. of PC's.</li>
+                                            </ul>
                                     </div>
-                                    <cf:input type="text" path="noOfPC" placeholder="Number of Pc's" class="form-control"/>
+                                    <cf:input type="text" path="noOfPC" placeholder="Number of Pc's" class="form-control"
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
                                 </div>
                                 
                                

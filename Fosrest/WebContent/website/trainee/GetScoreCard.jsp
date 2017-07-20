@@ -69,14 +69,22 @@
                                         <h4>Designation: ${listOnlineTraining.designation}</h4>
                                         <h4>Training Type:${listOnlineTraining.trainingType}</h4>
                                         <h4>Training Phase:${listOnlineTraining.trainingPhase}</h4>
-                                         <h4>Subjects: </h4>
-                                         <ct:forEach var="subjects" items="${listsubjects}">
-                                           <li>  <ct:out value="${subjects}"/><br></li>
+                                         <h4> Subjects: </h4>
+                                      
+                                     <ct:choose>
+                                     <ct:when  test="${!empty listsubjects2}">
+                                     <ct:forEach var="subjects2" items="${listsubjects2}">
+                                           <li> <ct:out value="${subjects2[0]}"/>&nbsp;  <ct:out value="${subjects2[1]}"/></li>
                                              </ct:forEach>
-                                       
-                                        <h4>Score:${listGetScoreCard.score} </h4>
-                                       
-                                        <br> </fieldset>
+                                     </ct:when>
+                                     <ct:otherwise > 
+                                      <ct:forEach var="subjects" items="${listsubjects}">
+                                           <li>  <ct:out value="${subjects}"/></li>
+                                             </ct:forEach>
+                                              <h4>Score:${listGetScoreCard.score} </h4> 
+                                     </ct:otherwise>
+                                     </ct:choose>
+                                          <br> </fieldset>
                                     <br> </div>
                                            
                                       </fieldset>
@@ -94,3 +102,4 @@
  <input type="hidden" id="idHidden" value="" />
  <input type="hidden" id="hiddenCourseType" value="" />                                             
    </cf:form>
+   

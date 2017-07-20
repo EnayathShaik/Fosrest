@@ -196,7 +196,7 @@ public List<FotestFeedbackForm> listFotestFeedback();
  public List<FotestCertificationForm> listcertification();
  
  public List listsubjects(int id);
-
+ public List listsubjects2(int id);
 
 public TrainingCalendar getCalendarDetails(int userId);
 
