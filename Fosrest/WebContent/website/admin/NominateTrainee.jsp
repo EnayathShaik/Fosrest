@@ -135,8 +135,8 @@
 												
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
-													<!-- data-toggle="modal" data-target="#myModal2" -->
-<button type="button" id="batchDetails" class="btn btn-primary btn-lg" 
+													<!-- c data-target="#myModal2" -->
+<button type="button" id="batchDetails" class="btn btn-primary btn-lg"  data-toggle="modal"
 												 >View Batchcode Details</button>
 													</div>
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
@@ -446,7 +446,7 @@
 		
 		$("#batchDetails").click(function(){
 	       // ev.preventDefault();
- 	   	 var b=document.getElementById("designation").value;
+    	 var b=document.getElementById("designation").value;
 		 var c=document.getElementById("trainingType").value;
 		var d=document.getElementById("trainingPhase").value;
 		var a=document.getElementById("batchCode2").value;
@@ -468,11 +468,11 @@
 		if(a==''){
 			$("#batchCode2Err").css("display", "block");
 			   return false;
-		   }
+		   }	
 		else{ 
-			 batchcodeinfo();
 			 $("#myModal2").modal('show');
-		 } 
+			 batchcodeinfo();
+		 }  
 	    });
 		
 		
