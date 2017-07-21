@@ -3240,8 +3240,9 @@ public class AdminDAOImpl implements AdminDAO {
 		query.executeUpdate();
 
 		session.close();
+		String rollno=nt.getRollNo();
 		if(trainingPhase!=3){
-			addviewResult(loginId,trainingCalendarId);
+			addviewResult(loginId,trainingCalendarId,rollno);
 		}
 		else {
 			
@@ -3251,7 +3252,7 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("before return");
 		return "created";
 	}
-	public void addviewResult( int loginId,int trainingCalendarId) {
+	public void addviewResult( int loginId,int trainingCalendarId,String rollno) {
 		System.out.println("addviewResult  "+loginId);
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
@@ -3270,6 +3271,7 @@ public class AdminDAOImpl implements AdminDAO {
 			vr.setTrainerId(b);
 			vr.setMarks(-1);
 			vr.setStatus("I");
+			vr.setRollNo(rollno);
 			session.save(vr);
 		}
 		tx.commit();

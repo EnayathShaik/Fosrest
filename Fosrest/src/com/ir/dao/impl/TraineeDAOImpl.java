@@ -1062,6 +1062,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 					DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 					Date dateobj = new Date();
 					nomineeTrainee.setIssueDate(df.format(dateobj));
+					nomineeTrainee.setCertificateStatus("Y");
 					certificateInfo.setIssueDate(df.format(dateobj));
 					session.update(nomineeTrainee);
 				}
@@ -1753,7 +1754,7 @@ System.out.println("list "+list);
  a=1;
 			}*/
 			Query query=null;
-				 query =session.createSQLQuery(" select s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'");
+				 query =session.createSQLQuery(" select distinct s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'");
 				
 			
 			//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
@@ -1798,7 +1799,7 @@ public List listsubjects2(int id) {
 	Session session = this.sessionFactory.getCurrentSession();
 	Query query=null;
 	
-	query =session.createSQLQuery("  select  s.subjectname,case when coalesce(vr.marks , -1) = -1 then cast('Pending' as varchar(20)) else cast(vr.marks as varchar(20)) end as Marks from nomineetrainee nt inner join viewResult vr on vr.traineeId=nt.logindetails inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric) left join subjectmaster s on (s.subjectid = vr.subject) where nt.logindetails='"+ id +"'");
+	query =session.createSQLQuery("   select distinct s.subjectname,case when coalesce(vr.marks , -1) = -1 then cast('Pending' as varchar(20)) else cast(vr.marks as varchar(20)) end as Marks from nomineetrainee nt inner join viewResult vr on vr.rollno=nt.rollno inner join subjectmaster s on (s.subjectid = vr.subject) where nt.certificatestatus='N' and nt.logindetails='"+ id +"'");
 
 
 	
