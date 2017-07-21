@@ -186,7 +186,7 @@
                                             <li id="aadharNumberErr2" style="display: none;"
 																	class="style-li error-red">Aadhar No. should be 12 digit</li>
                                             <li class="style-li error-red">
-                                            <span id="aadhar_status" ></span>
+                                            <span id="aadhar_status" ></span></li>
 									
                                         </ul>
                                     </div>
