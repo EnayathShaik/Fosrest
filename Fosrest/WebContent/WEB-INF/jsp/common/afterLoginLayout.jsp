@@ -26,6 +26,7 @@
     <script src="website/js/jquery-2.1.0.min.js"></script>
     <script src="website/js/flatpickr.js"></script>
     <script src="website/js/JsBarcode.code128.min.js"></script>
+     <script src="website/afterLogin/js/bootstrap.js"></script>
    
    
       <!--  <script src="website/afterLogin/js/owl.carousel.js"></script>   -->

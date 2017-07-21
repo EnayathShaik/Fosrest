@@ -135,8 +135,9 @@
 												
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2"
-												 onclick=" return Validationbatchcode(); ">View Batchcode Details</button>
+													<!-- data-toggle="modal" data-target="#myModal2" -->
+<button type="button" id="batchDetails" class="btn btn-primary btn-lg" 
+												 >View Batchcode Details</button>
 													</div>
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 														<!--   <button  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button> -->
@@ -374,35 +375,6 @@
 		
  }
 
- function Validationbatchcode(){
-	 //alert("ABCDABCD");
-	 var b=document.getElementById("designation").value;
-	 var c=document.getElementById("trainingType").value;
-	var d=document.getElementById("trainingPhase").value;
-	var a=document.getElementById("batchCode2").value;
-	//alert ("BBB  "+b+"CCC "+c+"DDD "+d);
-	if(b==''){
-		$("#designationErr").css("display", "block");
-		return false;
-	}
-	if(c==''){
-		$("#trainingTypeErr").css("display", "block");
-		return false;
-	}
-	if(c==3){
-		if(d==0){
-		$("#trainingPhaseErr").css("display", "block");
-		return false;
-		}
-	}
-	if(a==''){
-		$("#batchCode2Err").css("display", "block");
-		   return false;
-	   }
-	else{
-		 batchcodeinfo();
-	}
- }
 
  function batchcodeinfo(){
 	
@@ -469,4 +441,42 @@
 		 } 
 		 
 	}
+	
+	jQuery(function($){
+		
+		$("#batchDetails").click(function(){
+	       // ev.preventDefault();
+ 	   	 var b=document.getElementById("designation").value;
+		 var c=document.getElementById("trainingType").value;
+		var d=document.getElementById("trainingPhase").value;
+		var a=document.getElementById("batchCode2").value;
+		//alert ("BBB  "+b+"CCC "+c+"DDD "+d);
+		if(b==''){
+			$("#designationErr").css("display", "block");
+			return false;
+		}
+		if(c==''){
+			$("#trainingTypeErr").css("display", "block");
+			return false;
+		}
+		if(c==3){
+			if(d==0){
+			$("#trainingPhaseErr").css("display", "block");
+			return false;
+			}
+		}
+		if(a==''){
+			$("#batchCode2Err").css("display", "block");
+			   return false;
+		   }
+		else{ 
+			 batchcodeinfo();
+			 $("#myModal2").modal('show');
+		 } 
+	    });
+		
+		
+	});
+	
+	
 </script>
