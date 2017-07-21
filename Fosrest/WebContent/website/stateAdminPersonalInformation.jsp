@@ -17,7 +17,7 @@ if (isUpdate != null && isUpdate == "Y") {
 	$("#lastName").val('${StateAdmin.lastName}');
 	$("#address1").val('${StateAdmin.address1}');
 	$("#address2").val('${StateAdmin.address2}');
-	$("#aadharNumber").val('${StateAdmin.aadharNumber}');
+	$("#AadharNumber").val('${StateAdmin.aadharNumber}');
 	$("#empID").val('${StateAdmin.empID}');
 	$("#email").val('${StateAdmin.email}');
 	$("#state").val('${StateAdmin.state}');
@@ -102,11 +102,13 @@ window.onload = OnStart;
 																	class="style-li error-red">Please Enter Aadhar Number.</li>
 																	<li id="aadharNumberErr2" style="display: none;"
 																	class="style-li error-red">Aadhar No. should be 12 digit</li>
+																			<li class="style-li error-red"><span id="aadhar_status" ></span></li>
 															</ul>
+													
 														</div>
-														<cf:input path="aadharNumber" maxlength="12"
+														<cf:input path="aadharNumber" id="AadharNumber" maxlength="12"
 															onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
-															placeholder="Aadhar Number" class="form-control"
+															 onblur="ck_aadhar('stateAdmin');" placeholder="Aadhar Number" class="form-control"
 															 />
 													</div>
 													<div class="form-group">
@@ -136,7 +138,7 @@ window.onload = OnStart;
 				                                              <span id="state_status" ></span></li>
 				                                        </ul>
 				                                    </div>
-				                                    <cf:select id="state" path="state" class="form-control"  onblur="ck_state('StateAdmin');" >
+				                                    <cf:select id="state" path="state" class="form-control"  onblur=" return ck_state('StateAdmin');" >
 				                                	<cf:option value="0" label="Select state Name" />
 													<cf:options items="${listStateMaster}" itemValue="stateId" itemLabel="stateName"/>
 				                                    </cf:select>
@@ -331,9 +333,8 @@ window.onload = OnStart;
                  
                  function validateFields(){
                 
-               	
-                		
-   	             
+                	 $(':focus').blur();
+                	 
                 	 $("#titleErr").css("display" , "none");
                 	$("#firstNameErr").css("display" , "none");
                 	$("#middleNameErr").css("display" , "none");
@@ -358,11 +359,11 @@ window.onload = OnStart;
     				$("#empIDErr1").css("display" , "block");
     				return false;
     				} */
-                	if($("#aadharNumber").val()==0){
+                	if($("#AadharNumber").val()==0){
                 		$("#aadharNumberErr").css("display" , "block");
                 		  return false;
                 	}
-                	 if($("#aadharNumber").val().match(/^[0-9]{12}$/) == null){
+                	 if($("#AadharNumber").val().match(/^[0-9]{12}$/) == null){
                 		 $("#aadharNumberErr2").css("display" , "block");
                  		 return false;
                    	 }
