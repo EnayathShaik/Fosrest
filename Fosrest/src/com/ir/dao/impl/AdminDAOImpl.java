@@ -3138,12 +3138,12 @@ public class AdminDAOImpl implements AdminDAO {
 
 		if (list.size() > 0) {
 			query = session.createSQLQuery(
-					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.designation as numeric) = d.designationId)  where pit.steps=0 and pit.designation='"
+					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails  where ld.status='A' and pit.steps=0 and pit.designation='"
 							+ designation + "' and pit.correspondenceState='"+stateId+"'");
 			System.out.println("data der " + query);
 		} else {
 			query = session.createSQLQuery(
-					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) where  pit.designation='"
+					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails where  ld.status='A' andpit.designation='"
 							+ designation + "'and pit.correspondenceState='"+stateId+"'");
 			System.out.println("data not der " + query);
 

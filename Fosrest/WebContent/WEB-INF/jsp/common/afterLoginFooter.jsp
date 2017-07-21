@@ -17,7 +17,7 @@
  <!-- scripts -->
 <!--  <script src="website/js/jquery.js"></script>  -->
     <script src="website/afterLogin/js/jquery-2.1.0.min.js"></script>
-    <script src="website/afterLogin/js/bootstrap.js"></script>
+  <!--   <script src="website/afterLogin/js/bootstrap.js"></script> -->
   <!--   <script src="website/afterLogin/js/jquery.isotope.min.js"></script> --> 
 
     <script src="website/afterLogin/js/wow.min.js"></script>

@@ -5,6 +5,19 @@
 
 <script type="text/javascript">
 	function OnStart() {
+		/* var des='${des}';
+		var ttype='${t}';
+		var tphase='${p}'; */
+		 var des=document.getElementById("designation").value;
+		 var ttype=document.getElementById("trainingType").value;
+		var tphase=document.getElementById("trainingPhase").value;
+		if(ttype!=3){
+			getBatch(des,ttype, 0, 'batchCode2');	
+		}
+		else{
+			getBatch(des, ttype, tphase, 'batchCode2');	
+		} 
+		 
 		var userList = '${listEligibleuser}';
 		if (userList != '') {
 			//alert("Y" +userList);
@@ -91,7 +104,7 @@
 												<input type="submit" class="btn btn-primary btn-lg" 
 													
 													style="margin-top: 24px;     margin-left: 350px;" aria-expanded="false"
-													value="Get List" />
+													value="Get List" onclick="abc('batchCode2')"/>
 
 											</div>
 											</div>
@@ -128,7 +141,7 @@
 												class="style-li error-red">Please Select BatchCode.</li>
 													</ul>
 												</div>
-												<cf:select path="batchCode2" class="form-control" >
+												<cf:select path="batchCode2" class="form-control">
 														<cf:option value="0" label="Select Batch Code" />
 													</cf:select>
 											</div>
@@ -478,5 +491,16 @@
 		
 	});
 	
-	
+/* 	 function abc(bc){
+		 var b=document.getElementById("designation").value;
+		 var c=document.getElementById("trainingType").value;
+		var d=document.getElementById("trainingPhase").value;
+		 if(c!=3){
+			getBatch(b,c, 0, bc);	
+		}
+		else{
+			getBatch(b, c, d, bc);	
+		} 
+		
+	} */
 </script>

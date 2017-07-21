@@ -2698,10 +2698,13 @@ public class AdminController {
 		model.addAttribute("TrainingTypeList", TrainingTypeList);
 		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
 		model.addAttribute("batchCodeList", this.adminService.listBatchCodeListNomineeTrainee(nominateTraineeForm));
+	/*	model.addAttribute("des",nominateTraineeForm.getDesignation());
+		model.addAttribute("ttype",nominateTraineeForm.getTrainingType());
+		model.addAttribute("tphase",nominateTraineeForm.getTrainingPhase());*/
 		//model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
 		System.out.println("admin controller ListEligibleUser" + nominateTraineeForm.getDesignation());
 		model.addAttribute("listEligibleuser", this.adminService.listEligibleuser(nominateTraineeForm.getDesignation(),stateId));
-		
+		//return "redirect:NominateTrainee.fssai";
 		return "NominateTrainee";
 	}
 	@RequestMapping(value = "/batchCodeInfo", method = RequestMethod.POST)
