@@ -198,22 +198,6 @@
 										onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
 										onblur="ck_aadhar('personalinformationtrainer');" />
 								</div>
-								<%-- <div class="form-group" id="on">
-									<div>
-										<ul class="lab-no">
-											<li class="style-li"><strong>Organization Name:</strong></li>
-											<li class="style-li error-red">*</li>
-											
-
-											<li id="s1" style="display: none;" class="style-li error-red">
-												Organization Name can not be blank.</li>
-
-										</ul>
-									</div>
-
-									<cf:input type="text" path="orgName" class="form-control"
-										placeholder="Organization Name" required="" />
-								</div> --%>
 								<div class="form-group">
 									<div>
 										<ul class="lab-no">
@@ -483,7 +467,7 @@
 											<li class="style-li"><strong>Mobile:</strong></li>
 											<li class="style-li error-red">*</li>
 											<li id="mobileErr" style="display: none;"
-												class="style-li error-red">Mobile cannot be blank</li>
+												class="style-li error-red">Please Enter Mobile No.</li>
 										</ul>
 									</div>
 									<cf:input type="text" path="mobile" class="form-control"
@@ -523,8 +507,7 @@
 													Line 1:</strong></li>
 											<li class="style-li error-red"></li>
 											<li id="ResidentialLine1Err" style="display: none;"
-												class="style-li error-red">Permanent Address can
-												not be blank.</li>
+												class="style-li error-red">Please Enter Permanent Address.</li>
 
 										</ul>
 									</div>
@@ -554,7 +537,7 @@
 											<li class="style-li"><strong>State:</strong></li>
 											<li class="style-li error-red"></li>
 											<li id="resStateErr" style="display: none;"
-												class="style-li error-red">State can not be blank.</li>
+												class="style-li error-red">Please Select State.</li>
 										</ul>
 									</div>
 									<cf:select path="resState" class="form-control"
@@ -578,7 +561,7 @@
 											<li class="style-li"><strong>District:</strong></li>
 											<li class="style-li error-red"></li>
 											<li id="residentialDistrictErr" style="display: none;"
-												class="style-li error-red">District can not be blank.</li>
+												class="style-li error-red">Please Select District.</li>
 										</ul>
 									</div>
 									<cf:select path="residentialDistrict" class="form-control"
@@ -593,7 +576,7 @@
 											<li class="style-li"><strong>City:</strong></li>
 											<li class="style-li error-red"></li>
 											<li id="resCityErr" style="display: none;"
-												class="style-li error-red">City can not be blank.</li>
+												class="style-li error-red">Please Select City.</li>
 										</ul>
 									</div>
 									<cf:select path="resCity" class="form-control">
@@ -609,7 +592,7 @@
 											<li class="style-li"><strong>Pin Code:</strong></li>
 											<li class="style-li error-red"></li>
 											<li id="resPincodeErr" style="display: none;"
-												class="style-li error-red">Pin code can not be blank.</li>
+												class="style-li error-red">Please Enter Pin Code.</li>
 										</ul>
 									</div>
 									<cf:input type="text" path="resPincode" class="form-control"
