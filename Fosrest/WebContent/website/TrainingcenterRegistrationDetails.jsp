@@ -191,6 +191,16 @@
 	 }
 	 
  }
+ 
+ function displayNone(){
+	 
+
+	 $("#titleErr").css("display" , "none");
+	 $("#firstNameErr").css("display" , "none");
+	 alert("ss");
+return false;
+	 
+ }
 
  // Remove the spaces from the entered and generated code
  function removeSpaces(string) {
@@ -371,7 +381,7 @@
                                             <li id="titleErr" style="display:none;" class="style-li error-red" >Please Select Title.</li>
                                          </ul>
                                     </div>
-                                   <cf:select path="title" class="form-control">
+                                   <cf:select path="title" class="form-control" onblur="return displayNone();">
 													<cf:option value="" label="Select Title" />
 													<cf:options items="${titleMap}" />
 												</cf:select>
@@ -388,7 +398,7 @@
                                            </ul>
                                     </div>
                                     <cf:input type="text" class="form-control" path="firstName" placeholder="First Name"
-                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'')"/>
+                                    onkeyup="if (/\d/g.test(this.value)) this.value = this.value.replace(/\d/g,'') " onblur="return displayNone();"/>
                                 </div>
                                </div>
                                

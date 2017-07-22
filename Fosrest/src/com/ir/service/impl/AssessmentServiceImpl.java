@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.mail.Session;
 import javax.transaction.Transactional;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
-import com.ir.form.AssessmentAnswerCriteria;
+import com.ir.model.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion_old;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.CourseName;
@@ -76,8 +77,8 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 	@Override
 	@Transactional
-	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestions> answers, List <Integer> lst){
-		TraineeAssessmentEvaluation evaluate = assessmentDao.evaluate(questions,answers,lst);
+	public TraineeAssessmentEvaluation evaluate(TreeMap<Integer,Integer> questions ,List<AssessmentQuestions> answers, List <Integer> lst,int loginIdUniuqe){
+		TraineeAssessmentEvaluation evaluate = assessmentDao.evaluate(questions,answers,lst,loginIdUniuqe);
 		return evaluate;
 	}
 	@Override

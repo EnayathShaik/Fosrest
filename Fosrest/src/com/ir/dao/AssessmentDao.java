@@ -2,9 +2,11 @@ package com.ir.dao;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import com.ir.bean.common.IntStringBean;
-import com.ir.form.AssessmentAnswerCriteria;
+import com.ir.model.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion_old;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.CourseName;
@@ -20,7 +22,6 @@ public interface AssessmentDao {
 	public List<IntStringBean> getTrainingPartners(int assessorId);
 	public List<AssessmentQuestions> getAssessmentAnswers(List<Integer> lst, List<Integer> questions);
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation);
-	public int getElegibilityForAssessment(int subjectid);
 	public List<CourseType> courseTypeList();
 	public List searchAssessorCalendar(String data);
 	public List viewAssessmentAgencyCalendar(String data);
@@ -33,6 +34,6 @@ public interface AssessmentDao {
 	public List editMAA(String data);
 	
 	public String updateMAA(String data);
-	public TraineeAssessmentEvaluation evaluate(Map<String, String> questions, List<AssessmentQuestions> answers,
-			List<Integer> lst);
+	public TraineeAssessmentEvaluation evaluate(TreeMap<Integer, Integer> questions, List<AssessmentQuestions> answers,
+			List<Integer> lst,int loginIdUniuqe);
 }

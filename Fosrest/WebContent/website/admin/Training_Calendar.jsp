@@ -351,7 +351,8 @@
 															<th><ul><li id="trainingEndDateErr" style="display: none;"
 																class="style-li error-red">Select End Date.</li></ul>Training End Date</th>
 															<th>Day</th>
-															<th>On Date</th>
+															<th><ul><li id="onDateErr" style="display: none;"
+																class="style-li error-red">Fill all the Dates.</li></ul>On-Date</th>
 															<th>Subject</th>
 															<th>	<ul><li id="trainerErr" style="display: none;"
 																class="style-li error-red">Select TRAINER for each subject.</li></ul>Trainer</th>
@@ -397,19 +398,21 @@
 																	 
 																</ct:forEach></td>
 																
-																
+																<ct:set var="subindex" value="1" />
 																<td><ct:forEach items="${listSchCodeSubjects}"
 																	var="subjects" varStatus="loop2">
 																	<ct:choose>
 																	<ct:when test="${subjects[2]!=i}">
-																	<div style="margin-bottom: 8px;"><input  id="subjectDates_${loop2.count}" type="text" name="subjectDates"  class="form-Control"  /></div>
+																	<div style="margin-bottom: 8px;"><input  id="subjectDates_${subindex}" type="text" name="subjectDates"  class="form-Control"  /></div>
+																	<ct:set var="subindex" value="${subindex+1}" />
 																	</ct:when>
 																	<ct:otherwise>
 																	<p style="padding-top: 6px;
-    padding-bottom: 6px;">Same as above </p>
+  																			  padding-bottom: 6px;">Same as above </p>
 																	</ct:otherwise>
 																	</ct:choose>
 																	<ct:set var="i" value="${subjects[2]}" />
+																	
 													<br />
 																	 
 																</ct:forEach></td>
@@ -756,6 +759,7 @@
 	function validate2() {
 		$("#trainingEndDateErr").css("display" , 'none');
 		$("#trainerErr").css("display" , 'none');
+		$("#onDateErr").css("display", "none");
 
 		if ($("#trainingEndDate2").val() == 0) {
 			$("#trainingEndDateErr").css("display", "block");
@@ -784,7 +788,29 @@
 
 		 return false;
 		 }
-		
+
+
+		var totalDays=$("#totalDays").val();
+		for(var i=0;i<totalDays;i++){
+			var chk=$("#subjectDates_"+(i+1)).val().split('-');
+			if(chk==''){
+				$("#onDateErr").css("display", "block");
+				return false;
+			}
+				
+			var temp=chk[0];
+			chk[0]=chk[1];
+			chk[1]=temp;
+			 var chkOnDate=new Date(chk).getTime();
+			 if(chkOnDate>ed || chkOnDate<sd){
+				alert("On-Date for Day"+(i+1)+" should be between "+$("#trainingStartDate2").val()+" and "+$("#trainingEndDate2").val());
+				 $("#subjectDates_"+(i+1)).val("");
+				 $("#subjectDates_"+(i+1)).focus();
+
+			 return false;
+			 }
+			 
+		}
 		
 		
 		<ct:forEach items="${listSchCodeSubjects}" 

@@ -7,6 +7,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
-import com.ir.form.AssessmentAnswerCriteria;
+import com.ir.model.AssessmentAnswerCriteria;
 import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.common.AssessmentEvaluationForm;
 import com.ir.model.AssessmentQuestion_old;
@@ -55,10 +56,10 @@ public class AssessmentController {
 		
 		try{
 			new ZLogger("submitAssessment",(String) request.getAttribute("questionNo1"), "AssessmentController.java");
-			Map<String, String> questionMap = new HashMap<>();
+			TreeMap<Integer, Integer> questionMap = new TreeMap<>();
 			List<AssessmentAnswerCriteria> listAnswerCriteria = new ArrayList<AssessmentAnswerCriteria>();
 			AssessmentAnswerCriteria assessmentAnswerCriteria = new AssessmentAnswerCriteria();
-			System.out.println(" subject id "+assessmentEvaluationForm.getSubjectId());
+			//System.out.println(" subject id "+assessmentEvaluationForm.getSubjectId());
 			List<AssessmentQuestions> answers = assessmentService.getAssessmentAnswers(assessmentEvaluationForm.getSubjectId(),assessmentEvaluationForm.getAssessmentQuestionsList());
 			Enumeration<String> enumeration = request.getParameterNames();
 			HttpSession httpSession = request.getSession(false);
@@ -66,13 +67,12 @@ public class AssessmentController {
 			int userId = (Integer) httpSession.getAttribute("userId");
 			while (enumeration.hasMoreElements()) {
 				String parameterName = (String) enumeration.nextElement();
-				System.out.println("parameterName "+parameterName);
 				if (!parameterName.equalsIgnoreCase("subjectId")
 						&& !parameterName.equalsIgnoreCase("assessmentQuestions")
 						&& !parameterName
 								.equalsIgnoreCase("assessmentQuestionsList")) {
-					questionMap.put(parameterName,
-							request.getParameter(parameterName));
+					questionMap.put(Integer.parseInt(parameterName),
+							Integer.parseInt(request.getParameter(parameterName)));
 					assessmentAnswerCriteria.setQuestionId(Integer
 							.parseInt(parameterName));
 					assessmentAnswerCriteria.setSelectedAnswer(Integer
@@ -85,12 +85,13 @@ public class AssessmentController {
 				assessmentAnswerCriteria.setLoginId(loginIdUniuqe);
 				listAnswerCriteria.add(assessmentAnswerCriteria);
 			}
+			System.out.println(listAnswerCriteria.toString());
 			new ZLogger("submitAssessment","Assessment save begin.."+questionMap, "AssessmentController.java");
 			assessmentService.saveAssessment(listAnswerCriteria);
 
-			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService.evaluate(questionMap, answers,assessmentEvaluationForm.getSubjectId());
-			traineeAssessmentEvaluation.setLogindetails(loginIdUniuqe);
-			assessmentService.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);
+			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService.evaluate(questionMap, answers,assessmentEvaluationForm.getSubjectId(),loginIdUniuqe);
+			//traineeAssessmentEvaluation.setLogindetails(loginIdUniuqe);
+			//assessmentService.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);
 			
 			//Update Result in Course Enrolled User
 			if(traineeAssessmentEvaluation != null && traineeAssessmentEvaluation.getResult() != null){

@@ -15,10 +15,17 @@ public class SubjectMasterForm {
 	private String contentName;
 	private String contentLink;
 	private String unitName;
+	private int eligibility;
 	
 	
 	
 	
+	public int getEligibility() {
+		return eligibility;
+	}
+	public void setEligibility(int eligibility) {
+		this.eligibility = eligibility;
+	}
 	public int getSubjectId() {
 		return subjectId;
 	}

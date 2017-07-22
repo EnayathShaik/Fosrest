@@ -8,9 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.group.interceptors.TwoPhaseCommitInterceptor.MapEntry;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,17 +24,20 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
-import com.ir.form.AssessmentAnswerCriteria;
+import com.ir.model.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion_old;
 import com.ir.model.AssessmentQuestions;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.NomineeTrainee;
+import com.ir.model.OnlineAssessmentSubjectsScore;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.util.HibernateUtil;
 import com.zentech.logger.ZLogger;
 import com.zentect.ajax.AjaxRequest;
+
+import sun.reflect.generics.tree.Tree;
 @Repository("AssessmentDao")
 @Service
 public class AssessmentDaoImpl implements AssessmentDao{
@@ -52,7 +57,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		strIds=strIds.replace("]", ")");
 		System.out.println(strIds);
 		try{
-			Query query = session.createQuery("from AssessmentQuestions where isActive='Y' and subjectmaster in "+ strIds+" order by assessmentquestionid");
+			Query query = session.createQuery("from AssessmentQuestions where isActive='Y' and subjectmaster in "+ strIds+" order by assessmentQuestionId");
 			 assessmentQuestions = query.list();
 			 //System.out.println(" assessmentQuestions "+assessmentQuestions);
 		}catch(Exception e){
@@ -146,18 +151,26 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		return traineeAssessmentEvaluationId;
 	}
 
-	@Override
-	public int getElegibilityForAssessment(int subjectid){
+	
+	public List<Integer> getElegibilityForAssessment(Set<Integer> distinctSubjectIds){
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select eligibility from assessmenteligibility where subjectId="+subjectid;
+		System.out.println("in getElegibilityForAssessment "+distinctSubjectIds);
+		String strIds=distinctSubjectIds.toString();
+		
+		strIds=strIds.replace("[", "(");
+		strIds=strIds.replace("]", ")");
+	//	String sql = "select eligibility from assessmenteligibility where subjectId="+subjectid;
+		String sql = "select eligibility from subjectMaster where subjectId in "+strIds;
+
 		Query query = session.createSQLQuery(sql);
-		List listEligibility = query.list();
+		List<Integer> listEligibility = query.list();
 		if(listEligibility.size() > 0)
 		{
-			System.out.println(" --->"+(int)listEligibility.get(0));
-			return (int)listEligibility.get(0);
+			for(int i:listEligibility)
+			System.out.println(" --->"+i);
+			return listEligibility;
 		}
-		return -1;
+		return null;
 	}
 	
 	
@@ -466,39 +479,105 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	}
 
 	@Override
-	public TraineeAssessmentEvaluation evaluate(Map<String, String> questions, List<AssessmentQuestions> answers,
-			List<Integer> lst) {
+	public TraineeAssessmentEvaluation evaluate(TreeMap<Integer, Integer> questions, List<AssessmentQuestions> answers,
+			List<Integer> lst,int loginIdUniuqe) {
 			Session session = sessionFactory.getCurrentSession();
 		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
 		//int totalQuestion = answers.size();
-		Map<String, Integer> answersMap = new HashMap<String, Integer>();
+		TreeMap<Integer, Integer> answersMap = new TreeMap<Integer, Integer>();
 		for (int i = 0; i < answers.size(); i++) {
-			//System.out.println("qqqq "+answers.get(i).getAssessmentQuestionId());  
-			answersMap.put(String.valueOf(answers.get(i).getAssessmentQuestionId()), answers.get(i).getCorrectAnswer());
+			answersMap.put(answers.get(i).getAssessmentQuestionId(), answers.get(i).getCorrectAnswer());
 		}
 		int totalQuestions = answers.size();
 		int correctAnswers = 0;
 		int wrongAnswers = 0;
 		double totalScore = 0.00;
-		Set<String> questionKeys = questions.keySet();
-		Iterator<String> keysIterator = questionKeys.iterator();
-		int i=0;
+		double sum = 0.00;
+		Set<Integer> questionKeys = questions.keySet();
+		Iterator<Integer> keysIterator = questionKeys.iterator();
 		String subjectIds="";
-		while(keysIterator.hasNext()){
+		int k=0;
+		int subId=lst.get(k);
+		TreeMap<Integer,Integer> abc=new TreeMap<>();
+		TreeMap<Integer,Integer> afterAbc=new TreeMap<>();
+		TreeMap<Integer,Double> subjectWiseScore=new TreeMap<>();
+
+	
+		int count=1;
+		for(int i1=1;i1<=lst.size();i1++){
+			try{
+			if(lst.get(i1-1).equals(lst.get(i1)))
+				count++;
+			else{
+				if(abc.containsKey(lst.get(i1-1))){
+					abc.replace(lst.get(i1-1), abc.get(lst.get(i1-1))+count);
+					afterAbc.replace(lst.get(i1-1), afterAbc.get(lst.get(i1-1))+count);
+
+				}
+				else{
+				abc.put(lst.get(i1-1), count);
+				afterAbc.put(lst.get(i1-1), count);
+
+				}
+				count=1;
+			}
+			}
+			catch(IndexOutOfBoundsException e){
+				//System.out.println("Catch exception "+lst.get(i1-1)+"="+count);
+				if(abc.containsKey(lst.get(i1-1))){
+					abc.replace(lst.get(i1-1), abc.get(lst.get(i1-1))+count);
+					afterAbc.replace(lst.get(i1-1), afterAbc.get(lst.get(i1-1))+count);
+
+				}
+				else{
+				abc.put(lst.get(i1-1), count);
+				afterAbc.put(lst.get(i1-1), count);
+
+				}
 			
-			String key = keysIterator.next();
-			int correctAnswer = answersMap.get(key);
-			int providedAnswer = Integer.parseInt(questions.get(key));
-			System.out.println("For Question "+key +" #Provided answer :" + providedAnswer + " & Correct answer :"+ correctAnswer);
-			
-			if(providedAnswer == correctAnswer){
-				correctAnswers++;
 			}
 		}
-			wrongAnswers = totalQuestions - correctAnswers;
+	
+		while(keysIterator.hasNext()){
+			
+			int key = keysIterator.next();
+			int correctAnswer = answersMap.get(key);
+			int providedAnswer = questions.get(key);
+			
+			if(providedAnswer == correctAnswer){
+			
+				correctAnswers++;
+				
+			}
+			else
+			{
+				if(subId==lst.get(k)){
+					afterAbc.replace(subId, afterAbc.get(subId)-1);
+				}
+				else
+				{
+					subId=lst.get(k);
+					afterAbc.replace(subId, afterAbc.get(subId)-1);
+				}
+			}
+			//System.out.println("For Question "+key +"subject="+subId+" #Provided answer :" + providedAnswer + " & Correct answer :"+ correctAnswer);
+
+			k++;
+		}
+	
+		wrongAnswers = totalQuestions - correctAnswers;
 		if(totalQuestions > 0)
 		{
-			totalScore = (double)correctAnswers/totalQuestions*100;
+			Set<Integer> s=abc.keySet();
+			double individualSubjectScore=0;
+			for(int subId2:s){
+				individualSubjectScore=(double)afterAbc.get(subId2)/abc.get(subId2)*100;
+				System.out.println(subId2+"--->"+individualSubjectScore);
+				subjectWiseScore.put(subId2,individualSubjectScore);
+				sum=sum+individualSubjectScore;
+			}
+			//totalScore = (double)correctAnswers/totalQuestions*100;
+			totalScore=sum/(abc.size());
 			DecimalFormat f = new DecimalFormat("##.00");
 			totalScore = Double.valueOf(f.format(totalScore));
 		}
@@ -506,16 +585,10 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		traineeEvaluation.setCorrectAnswers(correctAnswers);
 		traineeEvaluation.setIncorrectAnswers(wrongAnswers);
 		traineeEvaluation.setTotalScore(totalScore);
-		System.out.println(lst);
-		for(int j=0;j<lst.size();j++){
-			System.out.println(lst.get(j));
-			subjectIds=subjectIds+lst.get(j)+"|";
-
-		} 
-		traineeEvaluation.setSubjectIds(subjectIds);
-		int eligibility = getElegibilityForAssessment(lst.get(i++)); 
-		if(eligibility > -1){
-			if(totalScore >= eligibility){
+	
+		List<Integer> eligibility = getElegibilityForAssessment(abc.keySet()); 
+		if(eligibility.get(0) > -1){
+			if(totalScore >= eligibility.get(0)){
 				traineeEvaluation.setResult("Pass");
 			}else{
 				traineeEvaluation.setResult("Fail");
@@ -523,10 +596,32 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		}else{
 			traineeEvaluation.setResult("Eligibility yet to declare");
 		}
-String sql;
+			String sql;
 			sql = "update NomineeTrainee set result = '"+traineeEvaluation.getResult()+"' where  logindetails='"+traineeEvaluation.getLogindetails()+"'";
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
+			
+			List list = session.createSQLQuery("select id from nomineeTrainee where logindetails="+loginIdUniuqe+" and certificateStatus='N'").list();
+			
+			traineeEvaluation.setNomineeId((int)list.get(0));
+			traineeEvaluation.setLogindetails(loginIdUniuqe);
+			Integer traineeAssessmentEvaluationId = (Integer) session.save(traineeEvaluation);
+			
+			OnlineAssessmentSubjectsScore oass;
+			
+			Set <Map.Entry<Integer,Double>> set=subjectWiseScore.entrySet();
+
+			for(Map.Entry<Integer,Double> map: set){
+				System.out.println(map.getKey()+"="+map.getValue());
+				oass=new OnlineAssessmentSubjectsScore();
+				oass.setAssessmentResultId(traineeAssessmentEvaluationId);
+				oass.setSubjectId(map.getKey());
+				oass.setSubjectScore(map.getValue());
+				session.save(oass);
+			}
+			
+			
+			
 		return traineeEvaluation;
 	}
 }

@@ -8,7 +8,7 @@ function OnStart(){
 	
 document.getElementById('id').value = 0;
 document.getElementById('subjectCode2').value = 0;
-document.getElementById('designation2').value = 0;
+//document.getElementById('designation2').value = 0;
 document.getElementById('trainingType2').value = 0;
 document.getElementById('trainingPhase2').value = 0;
 /* document.getElementById('unitCode').value = 0;

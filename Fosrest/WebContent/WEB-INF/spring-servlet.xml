@@ -186,6 +186,10 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 			   <value>com.ir.model.TrainingCalendarMapping</value>
 			   <value>com.ir.model.ViewResult</value>
 			    <value>com.ir.model.PhotoGallery</value>
+			    			    <value>com.ir.model.AssessmentAnswerCriteria</value>
+			 <value>com.ir.model.OnlineAssessmentSubjectsScore</value>
+			    			    
+			    
 			</list>
 		</property>
 		<property name="hibernateProperties">

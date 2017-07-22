@@ -57,18 +57,18 @@
 // 			$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "+JSON.stringify(assessmentQuestions)+">');
 			$(window).load(function () {
 				var assessmentQuestions = []; 
-				var str1="<ol >";
+			//	var str1="<ol >";
 				for(var index=0;index<questionList.listAssessmentQuestion.length;index++){
 					$('#questionsTable').append('<input type="hidden" name="subjectId" value = "'+questionList.subjectId[index]+'">');   
 				
-				//	$('#questionsTable').append('<ol start="1">');
-					//$('#questionsTable').append('<li><strong>Question No.'+questionList.listAssessmentQuestion[index].questionNumber+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
+					$('#questionsTable').append('<ol start="1">');
+					$('#questionsTable').append('<li><strong>'+(index+1)+') </strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
 					/* <strong>Question No."+questionList.listAssessmentQuestion[index].questionNumber+":</strong> *///<<--subectwise qno
-					str1=str1+"<Strong><li>"+questionList.listAssessmentQuestion[index].questionTitle+"</li></strong>";
+					//str1=str1+"<Strong><li>"+questionList.listAssessmentQuestion[index].questionTitle+"</li></strong>";
 				 	assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentQuestionId);
 					var noOption=questionList.listAssessmentQuestion[index].noOfOption; 
-					//$('#questionsTable').append('<table width="200" border="0">');
-					str1=str1+"<table width='200' border='0'>";
+					$('#questionsTable').append('<table width="200" border="0">');
+					//str1=str1+"<table width='200' border='0'>";
 					for(var noOptionIndex=1; noOptionIndex<=noOption; noOptionIndex++){
 						var questionOption = "option";
 						var value= "";
@@ -94,16 +94,16 @@
 						}
 						questionOption += value;
 						var questionListRow = questionList.listAssessmentQuestion[index];
-				//	$('#questionsTable').append('<tr><td>'+noOptionIndex+')</td> <td><input name="'+questionList.listAssessmentQuestion[index].assessmentQuestionId+'" type="radio" value="'+noOptionIndex+'"></td><td>'+questionListRow[questionOption]+'</td></tr>')
-					str1=str1+"<tr><td>"+noOptionIndex+")</td> <td><input name="+questionList.listAssessmentQuestion[index].assessmentQuestionId+" type='radio' value="+noOptionIndex+"></td><td>"+questionListRow[questionOption]+"</td></tr>";
+					$('#questionsTable').append('<tr><td>'+noOptionIndex+')</td> <td><input name="'+questionList.listAssessmentQuestion[index].assessmentQuestionId+'" type="radio" value="'+noOptionIndex+'"></td><td>'+questionListRow[questionOption]+'</td></tr>')
+					//str1=str1+"<tr><td>"+noOptionIndex+")</td> <td><input name="+questionList.listAssessmentQuestion[index].assessmentQuestionId+" type='radio' value="+noOptionIndex+"></td><td>"+questionListRow[questionOption]+"</td></tr>";
 					}
-					str1=str1+"</table>";
-					//$('#questionsTable').append('</table>');
-				//	$('#questionsTable').append('</ol>')
+					//str1=str1+"</table>";
+					$('#questionsTable').append('</table>');
+					$('#questionsTable').append('</ol>')
 					
 				}
-				str1=str1+"</ol>";
-				$('#questionsTable').append(str1);
+				//str1=str1+"</ol>";
+				//$('#questionsTable').append(str1);
 				$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "'+assessmentQuestions+'">');
 				$('#questionsTable').append('<input type="hidden" name = "assessmentQuestions" value = "'+JSON.stringify(assessmentQuestions)+'">');
 			});
@@ -165,7 +165,7 @@ $(window).load(function () {
 	    var numPages = Math.ceil(numRows / numPerPage);
 	    var $pager = $('<div class="pager"></div>');
 	    for (var page = 0; page < numPages; page++) {
-	        $('<span class="page-number" style="width: 5.8em;" ></span>').text("Page- "+page + 1).bind('click', {
+	        $('<span class="page-number"  ></span>').text(page + 1).bind('click', {
 	            newPage: page
 	        }, function(event) {
 	            currentPage = event.data['newPage'];

@@ -100,5 +100,8 @@
 	 	 <mapping class="com.ir.model.TrainingCalendarMapping" />
 	 	  <mapping class="com.ir.model.ViewResult" />
 	 	  <mapping class="com.ir.model.PhotoGallery" />
+	 	    	 	    <mapping class="com.ir.model.AssessmentAnswerCriteria" />
+	 	    	 	     <mapping class="com.ir.model.OnlineAssessmentSubjectsScore" />
+	 	    
 	</session-factory>
 </hibernate-configuration>

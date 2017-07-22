@@ -753,7 +753,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		 * enrollment
 		 **/
 		//String sql = "select subjectid from trainingcalendarmapping where batchcode=(select batchcode from trainingcalendar where trainingcalendarid=(select nt.trainingcalendarid  from nomineetrainee nt inner join trainingcalendar ts on (nt.trainingcalendarid = ts.trainingcalendarid)  where nt.status='N' and nt.logindetails="+loginId+"))";
-		String sql = "select subjectMaster from assessmentQuestions where isactive='Y' and subjectmaster in(select subjectid from trainingcalendarmapping where batchcode=(select batchcode from trainingcalendar where trainingcalendarid=(select nt.trainingcalendarid  from nomineetrainee nt inner join trainingcalendar ts on (nt.trainingcalendarid = ts.trainingcalendarid)  where nt.status='N' and nt.logindetails= "+loginId+")))";
+		String sql = "select subjectMaster from assessmentQuestions where isactive='Y' and subjectmaster in(select subjectid from trainingcalendarmapping where batchcode=(select batchcode from trainingcalendar where trainingcalendarid=(select nt.trainingcalendarid  from nomineetrainee nt inner join trainingcalendar ts on (nt.trainingcalendarid = ts.trainingcalendarid)  where nt.status='N' and nt.logindetails= "+loginId+"))) order by assessmentquestionid";
 
 		Query query = session. createSQLQuery(sql);
 		List<Integer> subId = query.list();
@@ -1777,7 +1777,7 @@ System.out.println("list "+list);
 		public TrainingCalendar getCalendarDetails(int userId) {
 			// TODO Auto-generated method stub
 			Session session=sessionFactory.getCurrentSession();
-			Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)), (select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)) from trainingcalendar where trainingcalendarid=(Select trainingcalendarid from nomineetrainee where logindetails="+userId+" and certificateStatus='N')" );
+			Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)), (select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)) from trainingcalendar where trainingcalendarid=(Select trainingcalendarid from nomineetrainee where logindetails="+userId+" and certificateStatus='Y')" );
 			List<Object[]> list=query.list();
 			System.out.println(list);
 			TrainingCalendar tcl=new TrainingCalendar();

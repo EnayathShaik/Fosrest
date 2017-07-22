@@ -113,6 +113,18 @@
 														<cf:option value="I" label="In-Active" />
 													</cf:select>
 												</div>
+														<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Eligibility Criteria:</strong></li>
+															
+															<!-- <li id="subjectNameErr2" style="display:none;" class="style-li error-red" >Subject Name should be minimum 3 characters.</li> -->
+
+														</ul>
+													</div>
+													<cf:input type="text" path="eligibility" 
+														placeholder="Enter Eligibility" value="60" class="form-control" />
+												</div>
 												
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
@@ -160,7 +172,7 @@
 														<tr>
 															<td>${loop.count}</td>
 															
-															<td>${SubjectMaster[10]}</td>
+															<td>${SubjectMaster[11]}</td>
 															
 															<td><ct:choose>
 														<ct:when test="${ SubjectMaster[1]== 'No Study-Material'}">No Study-Material</ct:when>
@@ -169,7 +181,7 @@
 															
 															<%-- <td><a href="">Fosrest/Subject/${SubjectMaster[10]}</a></td> --%>
 															<td><ct:choose>
-														<ct:when test="${ SubjectMaster[8]== 'A'}">Active</ct:when>
+														<ct:when test="${ SubjectMaster[9]== 'A'}">Active</ct:when>
 																	<ct:otherwise>In-Active</ct:otherwise>
 															</ct:choose></td>
 															
@@ -214,6 +226,7 @@
             	    $("#subjectId").val(mainData1.subjectId);
             	    $("#subjectName").val(mainData1.subjectName);
             	    $("#status").val(mainData1.status);
+            	    $("#eligibility").val(mainData1.eligibility);
             	    $("#contentLink").val(mainData1.contentLink);
             	  /*   $("#contentName").val(mainData1.contentName);
             	    $("#contentLink").val(mainData1.contentLink);

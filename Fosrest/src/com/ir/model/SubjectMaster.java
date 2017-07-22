@@ -59,6 +59,8 @@ public class SubjectMaster {
 	private String contentName;
 	private String contentLink;
 	private String subjectCode;
+	private int eligibility;
+	
 	@Column(columnDefinition="int default 0")
 	private int seqNo;
 	
@@ -66,6 +68,12 @@ public class SubjectMaster {
 	private String isActive;
 	
 	
+	public int getEligibility() {
+		return eligibility;
+	}
+	public void setEligibility(int eligibility) {
+		this.eligibility = eligibility;
+	}
 	public String getIsActive() {
 		return isActive;
 	}

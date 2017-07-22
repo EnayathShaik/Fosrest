@@ -2142,6 +2142,7 @@ public class AdminDAOImpl implements AdminDAO {
 		SubjectMaster mm = (SubjectMaster) session.load(SubjectMaster.class, p.getSubjectId());
 		mm.setSubjectName(p.getSubjectName());
 		mm.setStatus(p.getStatus());
+		mm.setEligibility(p.getEligibility());
 		//mm.setContentLink(p.getContentLink());
 		//mm.setContentType(p.getContentType());
 		session.update(mm);
@@ -4275,7 +4276,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		System.out.println("editTrainingCalendar: id " + id);
 		Session session = this.sessionFactory.getCurrentSession();
 
-	Query query1 = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration,trainingStartDate,trainingEndDate  from trainingCalendar  where trainingCalendarId='"+id+"'");
+	Query query1 = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration,totaldays  from trainingCalendar  where trainingCalendarId='"+id+"'");
 
 		
 		List list1 = query1.list();

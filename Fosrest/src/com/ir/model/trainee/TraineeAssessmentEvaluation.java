@@ -15,8 +15,8 @@ public class TraineeAssessmentEvaluation {
 	private int assessmentresultid;
 	/**Login id of the trainee */
 	private int logindetails;
-	/**Course Id for which the assessment has been taken */
-	private String subjectIds;
+	/**Course Id for which the assessment has been taken *//*
+	private String subjectIds;*/
 	/**Total number of questions provided for assessment*/
 	private int totalQuestions;
 	/**Number of correct answers by trainee */
@@ -27,6 +27,17 @@ public class TraineeAssessmentEvaluation {
 	private double totalScore;
 	/**Final result - pass/fail */
 	private String result;
+	private int nomineeId;
+
+	
+	public int getNomineeId() {
+		return nomineeId;
+	}
+	public void setNomineeId(int nomineeId) {
+		this.nomineeId = nomineeId;
+	}
+	
+
 	/**
 	 * @return the assessmentresultid
 	 */
@@ -111,13 +122,7 @@ public class TraineeAssessmentEvaluation {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public String getSubjectIds() {
-		return subjectIds;
-	}
-	public void setSubjectIds(String subjectIds) {
-		this.subjectIds = subjectIds;
-	}
-	
+
 
 	
 }

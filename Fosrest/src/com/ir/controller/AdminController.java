@@ -1824,6 +1824,7 @@ public class AdminController {
 			subjectMaster.setSubjectId(p.getSubjectId());
 			subjectMaster.setSubjectName(p.getSubjectName());
 			subjectMaster.setStatus(p.getStatus());
+			subjectMaster.setEligibility(p.getEligibility());
 			//moduleMaster.setContentName(p.getContentName());
 			//moduleMaster.setContentLink(p.getContentLink());
 			//moduleMaster.setContentType(p.getContentType());
