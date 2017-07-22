@@ -193,11 +193,8 @@
  }
  
  function displayNone(){
-	 
-
-	 $("#titleErr").css("display" , "none");
+	$("#titleErr").css("display" , "none");
 	 $("#firstNameErr").css("display" , "none");
-	 alert("ss");
 return false;
 	 
  }
