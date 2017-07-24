@@ -497,7 +497,7 @@ public void deleteAssessmentQuestion(int id);
 
 int getQuestionNumber(String data);
 
-public List listCalendar();
+public List listCalendar(int profileId,int id);
 public List<TrainingScheduleForm> listtrainingScheduleMaster( );
 
 public List<UnitMaster> listUnitMaster();
@@ -512,9 +512,9 @@ public String shareInitiativesave(ContactTrainee contactTrainee, String id);
 
 
 
-public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s);
+public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(int profileId,int id);
 
-List<PersonalInformationTrainer> trainingNameList2(String s);
+List<PersonalInformationTrainer> trainingNameList2(int profileId,int id);
 
 
 public List<StateMaster> listStateMaster2(int sid);
@@ -525,7 +525,7 @@ public List<SubjectMaster>  allSubjects();
 public List listCalendarSearch(TrainingCalendarForm form);
 
 public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p);
-public List<MappingMasterTrainer> trainerMappingState(String sid);
+public List<MappingMasterTrainer> trainerMappingState(int profileId,int id);
 
 public List listSchCodeSubjects(String scheduleCode);
 
@@ -589,6 +589,8 @@ public String Helpsave(ContactTrainee contactTrainee, String id);
 List<String> getAllScheduleCode();
 
 List<String> disPhotoGallery();
+
+List getScheduleCodeDetails(String schCode);
 }
 
 

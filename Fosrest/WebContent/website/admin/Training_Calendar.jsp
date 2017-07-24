@@ -128,7 +128,7 @@
 						<!-- timeline  -->
 						<div class="row">
 
-<%if ((Integer)session.getAttribute("profileId")==2) {%>
+
 							<div class="col-xs-12">
 								<fieldset>
 									<legend>
@@ -202,27 +202,31 @@
 											<!-- right side -->
 											<div class="col-xs-6">
 
-
+												<div class="col-xs-9">
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
-															<li class="style-li"><strong>Schedule Code:</strong></li>
+															<li class="style-li"><strong>Select Schedule:</strong></li>
 															<li id="scheduleCodeErr" style="display: none;"
-																class="style-li error-red">Select Schedule Code.</li>
+																class="style-li error-red">Select Schedule.</li>
 															<li class="style-li error-red"><label
 																class="error visibility" id="courseError">*
 																	error</label></li>
 														</ul>
 													</div>
 													<cf:select path="scheduleCode" class="form-control">
-														<cf:option value="0" label="Select Schedeule Code" />
+														<cf:option value="0" label="Select Schedeule" />
 													<ct:forEach items="${listtrainingScheduleMaster}" var="ltsm">
 													<cf:option value="${ltsm[3]}" label="${ltsm[3]}" />
 													</ct:forEach>  
 													</cf:select>
 												</div>
+												</div>
+												<div class="col-md-3 col-xs-12">	
+												<input type="button" onclick="showSchedules();return false;" value="Show schedules" class="btn login-btn" style="margin-top: 26px; margin-left: -18px;">
+												</div>
 												<div class="form-group">
-													<div>
+													<div id="instituteField">
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training
 																	Institute:</strong></li>
@@ -231,12 +235,8 @@
 																Institute.</li>
 															<li class="style-li error-red"></li>
 														</ul>
-													</div>
-
-
-													<div class="form-group">
 														<cf:select path="trainingInstitute" class="form-control">
-															<cf:option value="" label="Select Training Institute" />
+															<cf:option value="0" label="Select Training Institute" />
 															<cf:options items="${listTrainingInstitute}"
 																itemValue="id" itemLabel="trainingCenterName" />
 														</cf:select>
@@ -247,6 +247,8 @@
 														itemLabel="trainingCenterName" />
 												</cf:select> --%>
 													</div>
+
+
 												</div>
 												<%-- 	<div class="form-group">
 													<div>
@@ -345,7 +347,7 @@
 															<th>S.No.</th>
 															<!-- <th>Designation</th>
 															<th>Training Type</th> -->
-															<th>Schedule Code</th>
+															<!-- <th>Schedule Code</th> -->
 															<!-- <th>Training Duration</th> -->
 															<th>Training Start Date</th>
 															<th><ul><li id="trainingEndDateErr" style="display: none;"
@@ -368,7 +370,7 @@
 															<td>${loop.count}</td>
 															<%-- <td>${listCalendarSearch[0]}</td>
 															<td>${listCalendarSearch[1]}</td> --%>
-															<td>${listCalendarSearch[6]}</td>
+															<%-- <td>${listCalendarSearch[6]}</td> --%>
 															<%-- <td>${listCalendarSearch[7]} hrs</td> --%>
 															 <cf:hidden path="designation2"
 																value="${listCalendarSearch[3]}" />
@@ -461,7 +463,7 @@
 
 
 							</div>
-							<%} %>
+						
 							
 							<div class="col-xs-12 " >
 
@@ -477,16 +479,16 @@
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
-															<th>BatchCode</th>
+															<!-- <th>BatchCode</th> -->
 															<!-- <th>Designation</th>
 															<th>Training Type</th> -->
-															<th>Schedule Code</th>
+															<!-- <th>Schedule Code</th> -->
 															<th>Training Institute</th>
 															<th>Total Days</th>
 
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
-														<%if ((Integer)session.getAttribute("profileId")==2) {%>	<th>Edit</th>   <%} %>
+													<th>Edit</th> 
 															<th>View</th> 
 														</tr>
 													</thead>
@@ -495,18 +497,18 @@
 														varStatus="loop">
 														<tr>
 															<td>${loop.count}</td>
-															<td>${listCalendar[0]}</td>
+															<%-- <td>${listCalendar[0]}</td> --%>
 															<%-- <td>${listCalendar[1]}</td>
 															<td>${listCalendar[2]}</td> --%>
-															<td>${listCalendar[3]}</td>
+															<%-- <td>${listCalendar[3]}</td> --%>
 															<td>${listCalendar[4]}</td>
 															<td>${listCalendar[5]}</td>
 															<td>${listCalendar[6]}</td>
 															<td>${listCalendar[7]}</td>
-														<%if ((Integer)session.getAttribute("profileId")==2) {%>	<td><input type="submit" id="searchbtn" value="Edit" 
+														<td><input type="submit" id="searchbtn" value="Edit" 
 														class="btn login-btn"
 														formaction="edittrainingcalendar.fssai?id=${listCalendar[8]}"
-														 /></td>	<%} %>
+														 /></td>
 														 														<%-- <td><a href="remove/trainingcalendar/${listCalendar[8]}.fssai">Delete</a></td> --%>
 															<td><input type="button" id="viewbtn" data-toggle="modal" data-target="#myModal2"  value="View" 
 														class="btn login-btn"
@@ -702,7 +704,7 @@
 			$("#scheduleCodeErr").css("display", "block");
 			return false;
 		}
-		if ($("#trainingInstitute").val() == 0) {
+		if ($("#trainingInstitute").val() == 0 && $("#trainingPhase").val() !=3) {
 			$("#trainingInstituteErr").css("display", "block");
 			return false;
 		}
@@ -737,6 +739,67 @@
 		
 	}
 
+	function showSchedules() {
+		var total=$("#scheduleCode").val();
+		 var name1=JSON.stringify({
+     		courseType:0,
+     		courseName:0
+       })
+         $.ajax({
+             type: 'post',
+             async: false,
+             url: 'getScheduleCodeDetails.fssai?data=' + total,
+             contentType : "application/json",
+		 	 	data:name1,
+             success: function(response) {
+        
+            	 var mainData1 = jQuery.parseJSON(response);
+           
+					alert("Subjects in selected Schedule are: "+mainData1);
+
+                // $('#name_status').html(response);
+             }
+         });
+		
+		
+		/* $.ajax({
+			type: 'post',
+			url: 'getScheduleCodeDetails.fssai?data=' + id,
+			 contentType : "application/json",
+			async: false, 
+			success: function (data){
+				alert("success");
+				alert(data);
+			/* var mainData1 = jQuery.parseJSON(data);
+		
+			  $('#calendarTable tr').remove();
+			  $('#calendarTable2 tr').remove();
+			 	$('#calendarTable').append( '<tr  class="background-open-vacancies"><th>Training Details</th><th>BatchCode</th><th>ScheduleCode</th><th>Start Date</th><th>End Date</th><th>Total Days</th><th>Training Institute</th></tr>')
+			 	var row1="<tr><td style='text-align:left;'><ul><li>"+mainData1[0][0]+"</li><br /><li>"+mainData1[0][1]+"</li><br /><li>"+mainData1[0][2]+"</li></td><td>"+mainData1[0][3]+"</td><td>"+mainData1[0][4]+"</td><td>"+mainData1[0][5]+"</td><td>"+mainData1[0][6]+"</td><td>"+mainData1[0][7]+"</td><td>"+mainData1[0][8]+"</td></tr>";
+			 	 $('#calendarTable').append(row1); 
+				 
+				 $('#calendarTable2').append( '<tr  class="background-open-vacancies"><th>Sr.No.</th><th>Day</th><th>Date</th><th>Start & End Time</th><th>Subject</th><th>Trainer</th></tr>');
+				 var row2=""; 
+			 	var subjects="";
+			 	 var trainers="";  
+				 var time=""; 
+			 	 
+						/*  $.each(mainData1,function(i, obj) { 
+							subjects=subjects+obj[9]+"<br /><br />";
+							trainers=trainers+obj[10]+" "+obj[11]+"<br /><br />";
+							time=time+obj[12]+"-"+obj[13]+"<br /><br />";
+						 });
+						 row2=row2+"<tr><td>"+time+"</td>"+"<td>"+subjects+"</td>"+"<td>"+trainers+"</td></tr>";
+						 $('#calendarTable2').append(row2);  */
+						 
+			/*	 $.each(mainData1,function(i, obj) { 
+					 $('#calendarTable2').append("<tr><td>"+(i+1)+")</td><td>"+obj[14]+"</td><td>"+obj[15]+"</td><td>"+obj[12]+"-"+obj[13]+"</td><td>"+obj[9]+"</td><td>"+obj[10]+" "+obj[11]+"</td></tr>"); 
+
+					 }); */
+	
+	}
+	
+	
 	function redirectScheduleCode1(trType, id) {
 		//alert(trType);
 
@@ -750,12 +813,22 @@
 
 	function redirectScheduleCode2(trPhase, id) {
 		//	alert(trPhase + id);
-
+		
+		if(trPhase==3)
+		hideInstitute();
+		
 		getScheduleCode(document.getElementById("designation").value, document
 				.getElementById("trainingType").value, trPhase, id);
 
 	}
-
+function hideInstitute(){
+	
+	alert("hideInstitute");
+		
+	//$("#trainingInstitute").val(-1);
+	$("#instituteField").css("display", "none");
+}
+	
 	function validate2() {
 		$("#trainingEndDateErr").css("display" , 'none');
 		$("#trainerErr").css("display" , 'none');
@@ -866,6 +939,7 @@
 	}
 
 	function viewtrainingcalendar(id){ 
+		alert("sssssvvv");
 		$.ajax({
 		type: 'post',
 		url: 'viewtrainingcalendar/'+id+'.fssai',

@@ -3611,12 +3611,18 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List listCalendar() {
+	public List listCalendar(int profileId,int id) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
-		Query query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDays,trainingStartDate,trainingEndDate,trainingcalendarid from trainingCalendar");
+		Query query ;
 		
+		if(profileId==1)
+			query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,CASE WHEN traininginstitute = '0' THEN 'Online Course' ELSE (select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)) END, totalDays,trainingStartDate,trainingEndDate,trainingcalendarid from trainingCalendar");
+		
+		else
+			query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,CASE WHEN traininginstitute = '0' THEN 'Online Course' ELSE (select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)) END, totalDays,trainingStartDate,trainingEndDate,trainingcalendarid from trainingCalendar where ((select correspondenceState from personalinformationtraininginstitute where id=cast(traininginstitute as numeric))='"+id+"' or traininginstitute='0')");
+
 		List list = query.list();
 		return list;
 	}
@@ -3928,21 +3934,32 @@ p.setBatchCode(batchCode);
 	
 
 	@Override
-	public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s) {
+	public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(int profileId,int id) {
 		// TODO Auto-generated method stub
 		System.out.println("inside listSubjectMaster");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<PersonalInformationTrainingInstitute> mccList = session
-				.createQuery("from PersonalInformationTrainingInstitute where correspondenceState='"+s+"'").list();
-		
+		List<PersonalInformationTrainingInstitute> mccList;
+		System.out.println(profileId);
+		if(profileId==1)
+			mccList = session.createQuery("from PersonalInformationTrainingInstitute ").list();
+		else
+		mccList = session.createQuery("from PersonalInformationTrainingInstitute where correspondenceState='"+id+"'").list();
+
+			
 		return mccList;
 	}
 
 	@Override
-	public List<PersonalInformationTrainer> trainingNameList2(String s) {
+	public List<PersonalInformationTrainer> trainingNameList2(int profileId,int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from PersonalInformationTrainer where correspondenceState='"+s+"'");
+		Query query;
+		
+		System.out.println(profileId);
+		if(profileId==1)
+		query= session.createQuery("from PersonalInformationTrainer");
+		else
+			query= session.createQuery("from PersonalInformationTrainer where correspondenceState='"+id+"'");
 		List<PersonalInformationTrainer> trainingNameList = query.list();
 		return trainingNameList;
 	}
@@ -4075,10 +4092,15 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 	
 
 	@Override
-	public List<MappingMasterTrainer> trainerMappingState(String s) {
+	public List<MappingMasterTrainer> trainerMappingState(int profileId,int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from MappingMasterTrainer where state='"+s+"'");
+		Query query;
+		
+		List list=session.createSQLQuery("select correspondenceState from PersonalInformationTrainingInstitute where id="+id).list();
+		
+		
+		query= session.createQuery("from MappingMasterTrainer where state='"+list.get(0)+"'");
 		List<MappingMasterTrainer> trainingNameList = query.list();
 		return trainingNameList;
 	}
@@ -4601,6 +4623,15 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		List<String> links= session.createSQLQuery("select linkName from photoGallery").list();
 		
 		return links;
+	}
+
+	@Override
+	public List getScheduleCodeDetails(String schCode) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		List subjectName= session.createSQLQuery("select s.subjectname from subjectmapping sm join subjectmaster s on(cast(sm.subject as numeric)=s.subjectId) where scheduleCode='"+schCode+"'").list();
+		
+		return subjectName;
 	}
 	}
 	

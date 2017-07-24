@@ -393,7 +393,7 @@ public interface AdminDAO {
 
 	public int getQuestionNumber(String data);
 
-	public List listCalendar();
+	public List listCalendar(int profileId,int id);
 
 	public List<TrainingScheduleForm> listtrainingScheduleMaster();
 
@@ -406,9 +406,9 @@ public interface AdminDAO {
 	public String addTrainingCalendar(TrainingCalendar p);
 	public String shareInitiativesave(ContactTrainee contactTrainee, String id);
 
-	public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s);
+	public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(int profileId,int id);
 
-	public List<PersonalInformationTrainer> trainingNameList2(String s);
+	public List<PersonalInformationTrainer> trainingNameList2(int profileId,int id);
 
 	public List<StateMaster> listStateMaster2(int sid);
 
@@ -417,7 +417,7 @@ public interface AdminDAO {
 	List listCalendarSearch(TrainingCalendarForm form);
 
 	public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p);
-	public List<MappingMasterTrainer> trainerMappingState(String sid);
+	public List<MappingMasterTrainer> trainerMappingState(int profileId,int id);
 
 	public List listSchCodeSubjects(String scheduleCode);
 
@@ -475,6 +475,8 @@ public interface AdminDAO {
 	public List<String> getAllScheduleCode();
 
 	public List<String> disPhotoGallery();
+
+	public List getScheduleCodeDetails(String schCode);
 
 /*	public List<String> getAllEndDates(String trainingStartDate);
 */

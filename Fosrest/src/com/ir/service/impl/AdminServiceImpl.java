@@ -1511,9 +1511,9 @@ public int getQuestionNumber(String data) {
 
 @Override
 @Transactional
-public List listCalendar() {
+public List listCalendar(int profileId,int id) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.listCalendar();
+	return this.adminDAO.listCalendar(profileId,id);
 }
 
 @Override
@@ -1559,16 +1559,16 @@ public String shareInitiativesave(ContactTrainee contactTrainee , String id) {
 
 @Override
 @Transactional
-public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(String s) {
+public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(int profileId,int id) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.listTrainingInstitude2(s);
+	return this.adminDAO.listTrainingInstitude2(profileId,id);
 }
 
 @Override
 @Transactional
-public List<PersonalInformationTrainer> trainingNameList2(String s) {
+public List<PersonalInformationTrainer> trainingNameList2(int profileId,int id) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.trainingNameList2(s);
+	return this.adminDAO.trainingNameList2(profileId,id);
 }
 
 @Override
@@ -1601,9 +1601,9 @@ public String createTrainingCalendar(String[] days,String[] subjectDates,String[
 
 @Override
 @Transactional
-public List<MappingMasterTrainer> trainerMappingState(String sid) {
+public List<MappingMasterTrainer> trainerMappingState(int profileId,int id) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.trainerMappingState(sid);
+	return this.adminDAO.trainerMappingState(profileId,id);
 }
 
 @Override
@@ -1804,5 +1804,12 @@ public List<String> getAllScheduleCode() {
 public List<String> disPhotoGallery() {
 	// TODO Auto-generated method stub
 	return adminDAO.disPhotoGallery();
+}
+
+@Override
+@Transactional
+public List getScheduleCodeDetails(String schCode) {
+	// TODO Auto-generated method stub
+	return adminDAO.getScheduleCodeDetails(schCode);
 }
 }

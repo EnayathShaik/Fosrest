@@ -3148,10 +3148,12 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 		model.addAttribute("TrainingTypeList", TrainingTypeList);
 		model.addAttribute("TrainingPhaseList", TrainingPhaseList);
 		String s=(String) session.getAttribute("stateId");
-		model.addAttribute("listCalendar", this.adminService.listCalendar());	
+		if(s==null)
+			s="0";
+		model.addAttribute("listCalendar", this.adminService.listCalendar((int)session.getAttribute("profileId"),Integer.parseInt(s)));	
 	    model.addAttribute("TrainingCalendarForm", new TrainingCalendarForm());
-	  model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
-		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2(s));
+	  model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2((int)session.getAttribute("profileId"),Integer.parseInt(s)));
+		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList2((int)session.getAttribute("profileId"),Integer.parseInt(s)));
 		return "trainingcalendar";
 	}
 	
@@ -3193,17 +3195,18 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 	return "redirect:login.fssai";
 	}
 	int profileId=(int) session.getAttribute("profileId");
-   if(profileId==1){
+  /* if(profileId==1){
 		System.out.println("admin");
 	}
-  if(profileId==2){
+  if(profileId==2){*/
 	  String s=(String) session.getAttribute("stateId");
-	
+	  if(s==null)
+			s="0";
 		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
 		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
 		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
-		model.addAttribute("listCalendar", this.adminService.listCalendar());	
-		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+		model.addAttribute("listCalendar", this.adminService.listCalendar((int)session.getAttribute("profileId"),Integer.parseInt(s)));	
+		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(profileId,Integer.parseInt(s)));
 		model.addAttribute("search", "Y");
 		
 		List list=	this.adminService.listCalendarSearch(form);
@@ -3219,7 +3222,7 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 	  //	model.addAttribute("endDate",result);
   	model.addAttribute("listCalendarSearch", list);
  	model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
-  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
+  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState((int)session.getAttribute("profileId"),Integer.parseInt(form.getTrainingInstitute())));
 	model.addAttribute("institute", form.getTrainingInstitute());
 	model.addAttribute("startDate", form.getTrainingStartDate());
   	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
@@ -3251,7 +3254,7 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 		model.addAttribute("startDate",form.getTrainingStartDate2());
 		model.addAttribute("endDate",form.getTrainingEndDate2());
 		model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
-  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
+  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState((int)session.getAttribute("profileId"),Integer.parseInt(form.getTrainingInstitute())));
 	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
 	model.addAttribute("listEnteredSubjectDates", this.adminService.getEnteredSubjectDates(form.getTrainingCalendarId()));
 	model.addAttribute("listCalendarSearch", list1);
@@ -3260,9 +3263,6 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 		else 
 		model.addAttribute("errorTime", "Same Start-Date exists for ScheduleCode "+form.getScheduleCode());
 
-		
-  }
-  
   if(form.getTrainingCalendarId()!=0)
 	  model.addAttribute("searchwhileedit","Y");
   
@@ -3299,6 +3299,8 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 				Model model, HttpSession session,HttpServletRequest request) {
 		   System.out.println("editTrainingCalendar contorller"+request.getParameter("id"));
 			  String s=(String) session.getAttribute("stateId");
+			  if(s==null)
+					s="0";
 		   int editId=Integer.parseInt(request.getParameter("id"));
 		   List list = this.adminService.editTrainingCalendar(editId);
 		   TrainingCalendarForm p = this.adminService.getTrainingCalendar(editId);
@@ -3311,15 +3313,15 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 			model.addAttribute("DesignationList", pageLoadService.loadDesignation());
 	  		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
 	  		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
-	  		model.addAttribute("listCalendar", this.adminService.listCalendar());	
-	  		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(s));
+	  		model.addAttribute("listCalendar", this.adminService.listCalendar((int)session.getAttribute("profileId"),Integer.parseInt(s)));	
+	  		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2((int)session.getAttribute("profileId"),Integer.parseInt(s)));
 			 model.addAttribute("TrainingCalendarForm",p);
 			
 			 model.addAttribute("endDate",p.getTrainingEndDate());
 			 model.addAttribute("institute",p.getTrainingInstitute());
 		   model.addAttribute("startDate",p.getTrainingStartDate()); 
 		   model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(p.getScheduleCode()));
-	      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(s));
+	      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState((int)session.getAttribute("profileId"),Integer.parseInt(p.getTrainingInstitute())));
 	      	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(editId));
 	      	model.addAttribute("listEnteredSubjectDates", this.adminService.getEnteredSubjectDates(editId));
 
@@ -3533,6 +3535,22 @@ System.out.println(p.getTrainingEndDate2());
 				new ZLogger("Helpsave", "Exception while Helpsave  "+e.getMessage() , "AdminController.java");
 			}
 			return "Help";
+		}
+
+		@RequestMapping(value = "/getScheduleCodeDetails", method = RequestMethod.POST)
+		@ResponseBody
+		public void changeStatusDistrict2(@RequestParam("data") String schCode,
+				@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,
+				HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {
+			new ZLogger("getScheduleCodeDetails", "getScheduleCodeDetails............" + schCode, "AdminController.java");
+			System.out.println("getScheduleCodeDetails id " + schCode);
+			List subName = this.adminService.getScheduleCodeDetails(schCode);
+			PrintWriter out = response.getWriter();
+			Gson g = new Gson();
+			String newList = g.toJson(subName);
+			System.out.println("newList " + newList);
+			out.write(newList);
+			out.flush();
 		}
 		
 		
