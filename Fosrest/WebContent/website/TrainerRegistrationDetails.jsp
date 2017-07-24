@@ -298,7 +298,7 @@
 									<div>
 										<ul class="lab-no">
 											<li class="style-li"><strong>Last Name:</strong></li>
-											<li class="style-li error-red"></li>
+											<li class="style-li error-red">*</li>
 											<li id="LastNameErr" style="display: none;"
 												class="style-li error-red">Please Enter Last Name.</li>
 

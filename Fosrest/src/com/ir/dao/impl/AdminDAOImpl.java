@@ -3144,7 +3144,7 @@ public class AdminDAOImpl implements AdminDAO {
 			System.out.println("data der " + query);
 		} else {
 			query = session.createSQLQuery(
-					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails where  ld.status='A' andpit.designation='"
+					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails where  ld.status='A' and pit.designation='"
 							+ designation + "'and pit.correspondenceState='"+stateId+"'");
 			System.out.println("data not der " + query);
 
@@ -4540,18 +4540,18 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 				if (profileId == 5) {
 
 					mccList = session.createSQLQuery(
-							" select distinct pit.id, pitr.firstName,pitr.lastName,pitr.email,pitr.mobile,tc.batchCode,pit.trainingCenterName from nomineetrainee nt inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join personalinformationtrainee pitr on pitr.logindetails=nt.logindetails where  pit.logindetails='"+ id + "'  ")
+							" select distinct pit.id, pitr.firstName,pitr.lastName,pitr.email,pitr.mobile,tc.batchCode,pit.trainingCenterName,s.stateName from nomineetrainee nt inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join personalinformationtrainee pitr on pitr.logindetails=nt.logindetails inner join stateMaster s on s.stateId=cast(pitr.correspondenceState as numeric) where  pit.logindetails='"+ id + "'  ")
 							.list();
 				}
 			      
 				else if(profileId==2){
 					mccList = session.createSQLQuery(
-							"select distinct pit.id, pitr.firstName,pitr.lastName,pitr.email,pitr.mobile,tc.batchCode,pit.trainingCenterName from nomineetrainee nt inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join personalinformationtrainee pitr on pitr.logindetails=nt.logindetails inner join stateAdmin st on st.id=nt.nominatedBy where st.logindetails='" + id + "'  ")
+							"select distinct pit.id, pitr.firstName,pitr.lastName,pitr.email,pitr.mobile,tc.batchCode,pit.trainingCenterName,s.stateName from nomineetrainee nt inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join personalinformationtrainee pitr on pitr.logindetails=nt.logindetails inner join stateAdmin st on st.id=nt.nominatedBy inner join stateMaster s on s.stateId=cast(pitr.correspondenceState as numeric) where st.logindetails='" + id + "'  ")
 							.list();
 				}
 				else {
 					mccList = session.createSQLQuery(
-							" select distinct pit.id, pitr.firstName,pitr.lastName,pitr.email,pitr.mobile,tc.batchCode,pit.trainingCenterName from nomineetrainee nt inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join personalinformationtrainee pitr on pitr.logindetails=nt.logindetails  ")
+							" select distinct pit.id, pitr.firstName,pitr.lastName,pitr.email,pitr.mobile,tc.batchCode,pit.trainingCenterName,s.stateName from nomineetrainee nt inner join trainingCalendar tc on tc.trainingCalendarId=nt.trainingCalendarId inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join personalinformationtrainee pitr on pitr.logindetails=nt.logindetails  inner join stateMaster s on s.stateId=cast(pitr.correspondenceState as numeric)")
 							.list();
 				}
 				return mccList;

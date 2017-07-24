@@ -181,19 +181,19 @@
 												<td>${Certificate.trainingType}</td>
 												<td>${Certificate.completionStatus}</td>
 												<td>${Certificate.certificateAvailable}</td>
-												
-												<%-- <a href="GetCertificate.fssai?userId=${Certificate.id}">GET CERTIFICATE</a> --%>
-                                                <!--  <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Get Certificate"/> --> 												
-                                                <ct:choose>
+												<ct:choose>
                                                 <ct:when test="${Certificate.certificateAvailable=='YES'}">
                                                 <td>${Certificate.generateCertificate}
                                                 <a href="GetCertificate.fssai?userId=${Certificate.id}" >GET CERTIFICATE</a>
                                                 </td>
                                                 </ct:when>
                                               <ct:otherwise>
-                                                <td>${Certificate.generateCertificate}
+                                              <td>${Certificate.generateCertificate}
+                                                <a id="nc" onclick="nocerti();" href="NoCertificate.fssai?userId=${Certificate.id}" >NO CERTIFICATE</a>
+                                                </td>
+                                               <%--  <td>${Certificate.generateCertificate}
 											   <a id="nc" onclick="nocerti();" href="#" >NO CERTIFICATE</a>
-                                                        </td>
+                                                        </td> --%>
                                                 </ct:otherwise> 
                                                 </ct:choose>
                                                 
@@ -224,6 +224,7 @@
    </cf:form>
    <script>
    function nocerti() {
+	   
 	   alert("Sorry, You have not cleared the exam,Please Try again!!!");
       /*  href=document.getElementById("nc").href;
        document.writeln(href); */

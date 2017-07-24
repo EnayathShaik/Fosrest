@@ -42,6 +42,7 @@ window.profileId = '${profileId}';
                                                         <th>Contact No.</th>
                                                         <th>BatchCode</th>
                                                         <th>Training Center Name</th>
+                                                         <th>State Name</th>
                                                         </tr>
                                                 </thead>
                                                 
@@ -53,6 +54,7 @@ window.profileId = '${profileId}';
 												<td>${nominatedTrainee[4]}</td>
 												<td>${nominatedTrainee[5]}</td>
 												<td>${nominatedTrainee[6]}</td>
+												<td>${nominatedTrainee[7]}</td>
 												</tr>
 										</ct:forEach>
                                             </table>

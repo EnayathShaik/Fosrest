@@ -1128,5 +1128,20 @@ public String listtraineeFeddback( Model model){
     return "fotestFeedback";
 } 
 
-
+@RequestMapping(value = "/NoCertificate", method = RequestMethod.GET)
+public String NoCertificate(@ModelAttribute("PersonalInformationTrainee") PersonalInformationTrainee personalInformationTrainee ,Model model , HttpServletRequest request, HttpSession session) {
+		System.out.println("No Certificate ");
+		if(checkAccess(session))
+			return "redirect:login.fssai";
+		String userId = request.getParameter("userId");
+		
+		traineeService.updateSteps(Integer.parseInt(userId),  0);
+		session.setAttribute("traineeSteps", 0);
+		/*CertificateInfo certificateInfo = traineeService.getCertificateID(Integer.parseInt(userId),"");
+		if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 5){
+			traineeService.closeCourse(Integer.parseInt(userId), "Y");
+		}
+			*/
+		return "redirect:login.fssai";
+}
 }
