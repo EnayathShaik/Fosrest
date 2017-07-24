@@ -118,12 +118,12 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong>Eligibility Criteria:</strong></li>
 															
-															<!-- <li id="subjectNameErr2" style="display:none;" class="style-li error-red" >Subject Name should be minimum 3 characters.</li> -->
+															 <li id="eligibilityErr" style="display:none;" class="style-li error-red" >Enter Eligibility to pass (eg: 60).</li> 
 
 														</ul>
 													</div>
 													<cf:input type="text" path="eligibility" 
-														placeholder="Enter Eligibility" value="60" class="form-control" />
+														placeholder="Passing percentage" value="60" class="form-control" />
 												</div>
 												
 												<div class="row">
@@ -161,6 +161,7 @@
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
 															 <th>Subject Name</th>
+															 <th>Eligibility</th>
 															<th>Study Material</th>
 															<th>Status</th>
 															<th>Edit</th>
@@ -173,6 +174,7 @@
 															<td>${loop.count}</td>
 															
 															<td>${SubjectMaster[11]}</td>
+															<td>${SubjectMaster[5]}</td>
 															
 															<td><ct:choose>
 														<ct:when test="${ SubjectMaster[1]== 'No Study-Material'}">No Study-Material</ct:when>
@@ -248,22 +250,27 @@
             function validateFields(){
             	
            	
-           	 $("#contentNameErr").css("display" , "none");
+           //	 $("#contentNameErr").css("display" , "none");
            	 $("#subjectNameErr").css("display" , "none");
-           	 $("#contentTypeErr").css("display" , "none"); 
-           	 $("#contentLinkErr").css("display" , "none");
-           
+           	// $("#contentTypeErr").css("display" , "none"); 
+           	 //$("#contentLinkErr").css("display" , "none");
+				$("#eligibilityErr").css("display" , "none");
+
           
            	 
            	 if($("#subjectName").val()== ''){
           		 $("#subjectNameErr").css("display" , "block");
         		return false; 
        	 }
+           	 else if($("#eligibility").val() == ''){
+           		 $("#eligibilityErr").css("display" , "block");
+           		return false;
+        	 }
            	/* else 	if($("#subjectName").val().match(/^[a-zA-Z]{3,}/ )== null){
       		 $("#subjectNameErr2").css("display" , "block");
      		return false; 
     	 } */
-            else if($("#contentType").val() == 0){
+          /*   else if($("#contentType").val() == 0){
           		 $("#contentTypeErr").css("display" , "block");
          		return false; 
        	 } 	 
@@ -278,7 +285,7 @@
            		 $("#contentLinkErr").css("display" , "block");
            		return false;
         	 }
-        	
+         */	
            }
             
         

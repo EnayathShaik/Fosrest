@@ -291,5 +291,22 @@ public class MainRedirect {
 		  // return "index";
 		  // return "redirect:index.fssai";
 	   }
+	   
+	   
+	   
+	   @RequestMapping(value="/disPhotoGallery" ,method = RequestMethod.GET)
+	   public void disPhotoGallery(@ModelAttribute("TrainingSchedule") TrainingSchedule TrainingSchedule,Model model,HttpServletResponse response) throws IOException {
+		   System.out.println("disPhotoGallery");
+		   //model.addAttribute("listTrainingSchedule", this.adminService.listTrainingSchedule(0, 0));
+		   List<String> links=this.adminService.disPhotoGallery();
+		 PrintWriter out = response.getWriter();
+			Gson g = new Gson();
+			String newList = g.toJson(links);
+			System.out.println("newList " + newList);
+			out.write(newList);
+			out.flush();
+		  // return "index";
+		  // return "redirect:index.fssai";
+	   }
 	  
 }

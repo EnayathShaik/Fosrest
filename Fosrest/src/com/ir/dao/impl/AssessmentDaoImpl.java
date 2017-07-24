@@ -167,7 +167,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		if(listEligibility.size() > 0)
 		{
 			for(int i:listEligibility)
-			System.out.println(" --->"+i);
+			//System.out.println(" --->"+i);
 			return listEligibility;
 		}
 		return null;
@@ -587,8 +587,16 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		traineeEvaluation.setTotalScore(totalScore);
 	
 		List<Integer> eligibility = getElegibilityForAssessment(abc.keySet()); 
-		if(eligibility.get(0) > -1){
-			if(totalScore >= eligibility.get(0)){
+		
+		int avgEligibility=0;
+		for(int i:eligibility)
+			avgEligibility=avgEligibility+i;
+		
+		avgEligibility=avgEligibility/eligibility.size();
+			
+		
+		if(avgEligibility > -1){
+			if(totalScore >= avgEligibility){
 				traineeEvaluation.setResult("Pass");
 			}else{
 				traineeEvaluation.setResult("Fail");

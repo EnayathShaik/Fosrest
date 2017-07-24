@@ -4593,6 +4593,15 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		
 		return chkSch1;
 	}
+
+	@Override
+	public List<String> disPhotoGallery() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		List<String> links= session.createSQLQuery("select linkName from photoGallery").list();
+		
+		return links;
+	}
 	}
 	
 	

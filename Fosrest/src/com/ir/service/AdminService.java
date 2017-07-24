@@ -587,6 +587,8 @@ public List listNominatedTrainee(int profileId, int id);
 public String Helpsave(ContactTrainee contactTrainee, String id);
 
 List<String> getAllScheduleCode();
+
+List<String> disPhotoGallery();
 }
 
 

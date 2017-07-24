@@ -1798,4 +1798,11 @@ public List<String> getAllScheduleCode() {
 	// TODO Auto-generated method stub
 	return adminDAO.getAllScheduleCode();
 }
+
+@Override
+@Transactional
+public List<String> disPhotoGallery() {
+	// TODO Auto-generated method stub
+	return adminDAO.disPhotoGallery();
+}
 }

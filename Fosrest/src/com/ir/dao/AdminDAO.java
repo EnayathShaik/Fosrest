@@ -474,6 +474,8 @@ public interface AdminDAO {
 
 	public List<String> getAllScheduleCode();
 
+	public List<String> disPhotoGallery();
+
 /*	public List<String> getAllEndDates(String trainingStartDate);
 */
 	

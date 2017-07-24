@@ -774,7 +774,7 @@
 		d1[0]=d1[1];
 		d1[1]=temp;
 		
-		var temp=d2[0];
+		temp=d2[0];
 		d2[0]=d2[1];
 		d2[1]=temp;
 		
@@ -809,8 +809,46 @@
 
 			 return false;
 			 }
-			 
+			
 		}
+		
+/* 		 for(var i=1;i<=totalDays;i++){
+				if($("#subjectDates_"+(i-1)).val()==$("#subjectDates_"+(i)).val()){
+					alert("Day"+(i-1)+" and Day"+i+" has same Date" );
+					return false;
+					
+				}
+
+			 } */
+		 
+		 for(var i=2;i<=totalDays;i++){
+			 d1=$("#subjectDates_"+(i-1)).val().split('-');
+			 d2=$("#subjectDates_"+(i)).val().split('-');
+	
+			  temp=d1[0];
+				d1[0]=d1[1];
+				d1[1]=temp;
+				
+
+				temp=d2[0];
+				d2[0]=d2[1];
+				d2[1]=temp;
+				
+				var d1milli=new Date(d1).getTime();
+				 var d2milli=new Date(d2).getTime();
+			
+
+				 if(d1milli>d2milli){
+				 alert("Date for Day"+(i-1)+" is should be LESS than Day"+i);
+				 return false;
+				 }
+
+				 if(d1milli==d2milli){ 
+					 alert("Date for Day"+(i-1)+" and Day"+i+" is EQUAL");
+					 return false;
+					 }
+		
+			 }
 		
 		
 		<ct:forEach items="${listSchCodeSubjects}" 

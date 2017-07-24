@@ -201,8 +201,8 @@ function OnStart(){
 	 	      }
 	 	      });  
 	     $('#newTable').show();
-	     return result;
 	     
+	displayPhotos();     
 }
 window.onload = OnStart;
 $(document).ready(function() {
@@ -212,6 +212,37 @@ $(document).ready(function() {
 	    }, 'text');
 	 });
 	});
+	
+	
+	
+	
+	function displayPhotos(){
+	//	alert("aaaaaaaaaaaaaaaaaaa");//disPhotoGallery
+		   var name1=JSON.stringify({
+		 		courseName:0
+		   })
+		  
+		 	$.ajax({
+		 	      type: 'get',
+		 	     url : 'disPhotoGallery.fssai',
+		 	      contentType : "application/json",
+		 		  data:name1,
+		 	  success: function (response) { 
+		 		//  alert("success");
+		 		//  alert(response);
+		 	       var mainData1 = jQuery.parseJSON(response);
+		 	    //	   alert("");
+		 	 /*     $('#newTable tr').remove();
+		 	 $('#newTable').append( '<tr  class="background-open-vacancies" style="font-size:14px;"> <th title="Institute Name & Address">Training Start Date</th><th>Training End Date</th><th>State</th></tr>')
+		 	       var j = 1;
+					 $.each(mainData1,function(i, obj) {$('#newTable').append(
+					    		
+		                               '<tr style="background-color:#ccc;font-size:14px;" id="tableRow"><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[0] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[1] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[4] + '</td></tr>');
+		                   }); */ 
+					    
+		 	      }
+		 	      });  
+	}
 	</script>
 <head>
 <base href="<%=basePath%>">
@@ -491,7 +522,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 
 <div class="col-sm-4">
 	<div class="feature-wrap panelimg" >
-<img class="img-responsive center-block" style="height: 39px;"><a href="mastertrainer.fssai">
+<img class="img-responsive center-block" style="height: 39px;"><a href="stateMaster.fssai">
 <h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3></a></div>
 </div>
 <div class="col-sm-4">
@@ -521,9 +552,9 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 						<div class="feature-wrap training-box">
 							<div id="gallery" class="owl-carousel">
 								<div class="item">
-									<a href="website/images/photo-gallery.jpg" class="swipebox"
+									<a href="Photo_Gallery/dummy-profile-pic.png" class="swipebox"
 										title="Event Name"> <img
-										src="website/images/photo-gallery.jpg" alt="image">
+										src="Photo_Gallery/dummy-profile-pic.png" alt="image">
 									</a>
 								</div>
 								<div class="item">
