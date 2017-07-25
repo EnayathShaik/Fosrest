@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
@@ -636,6 +637,7 @@ model.addAttribute("trainingType",trainingType);
 			Model model, HttpSession session) {
 	int trainerId=(int) session.getAttribute("loginUser2");
 String batchCode=UploadAssessmentForm.getBatchCode();
+System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBb "+batchCode);
 System.out.println("batchcode          "+batchCode);
 model.addAttribute("batchCodeList", this.trainerService.listBatchCodeListforTrainer(trainerId));
 model.addAttribute("SubjectList", this.trainerService.listofSubjects(trainerId,batchCode));
@@ -651,5 +653,20 @@ model.addAttribute("SubjectList", this.trainerService.listofSubjects(trainerId,b
 return "redirect:trainerUpdateResult.fssai";
 	}
 	
+	
+	@RequestMapping(value="/getTrainingStartDate" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getTrainingStartDate(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response,HttpSession session) throws IOException{
+		new ZLogger("getTrainingInstitute","getTrainingInstitute............" + data  , "CommonController.java");
+		String courseName =  data;
+		//int stateId=Integer.parseInt( (String) session.getAttribute("stateId"));
+		List batchCodeList = trainerService.getTrainingStartDate(courseName);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+	}
 }
  

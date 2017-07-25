@@ -83,8 +83,8 @@ public class CommonServiceImpl implements CommonService{
 	
 	@Override
 	@Transactional
-	public List getBatchCode(String module){
-		List  batchCodeList = commonDao.getBatchCode( module);
+	public List getBatchCode(String module,int stateId){
+		List  batchCodeList = commonDao.getBatchCode( module,stateId);
 		return batchCodeList;
 	}
 	@Override

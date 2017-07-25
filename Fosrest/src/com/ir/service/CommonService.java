@@ -20,7 +20,7 @@ public interface CommonService {
 	public List getTrainingInstitude(String data);
 	
 	public List getModule(String data);
-	public List getBatchCode(String data);
+	public List getBatchCode(String data,int stateId);
 
 	public List loadTrainingPhase(int trainingTypeId);
 

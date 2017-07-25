@@ -454,7 +454,7 @@ public interface AdminDAO {
 
 	public List<TrainingCalendar> listBatchCodeListNomineeTrainee(NominateTraineeForm nominateTraineeForm);
 
-	public List<TrainingCalendar> listBatchCodeListStateAdmin();
+	public List<TrainingCalendar> listBatchCodeListStateAdmin(int stateId);
 
 	public String addResetPassword(String pass ,String loginid);
 

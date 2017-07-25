@@ -4,17 +4,34 @@ public class NominateTraineeForm {
 private String designation;
 private String unit;
 private String module;
-private String batchCode;
 private String trainingPhase;
 private String trainingType;
-private String batchCode2;
+private String trainingInstitute;
+private String trainingStartDate;
+private String trainingStartDate2;
 
-public String getBatchCode2() {
-	return batchCode2;
+public String getTrainingStartDate2() {
+	return trainingStartDate2;
 }
 
-public void setBatchCode2(String batchCode2) {
-	this.batchCode2 = batchCode2;
+public void setTrainingStartDate2(String trainingStartDate2) {
+	this.trainingStartDate2 = trainingStartDate2;
+}
+
+public String getTrainingInstitute() {
+	return trainingInstitute;
+}
+
+public void setTrainingInstitute(String trainingInstitute) {
+	this.trainingInstitute = trainingInstitute;
+}
+
+public String getTrainingStartDate() {
+	return trainingStartDate;
+}
+
+public void setTrainingStartDate(String trainingStartDate) {
+	this.trainingStartDate = trainingStartDate;
 }
 
 public String getTrainingPhase() {
@@ -32,16 +49,6 @@ public String getTrainingType() {
 public void setTrainingType(String trainingType) {
 	this.trainingType = trainingType;
 }
-
-public String getBatchCode() {
-	return batchCode;
-}
-
-public void setBatchCode(String batchCode) {
-	this.batchCode = batchCode;
-}
-
-
 
 public String getDesignation() {
 	return designation;

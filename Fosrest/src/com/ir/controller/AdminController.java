@@ -3338,8 +3338,8 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 					System.out.println("UploadAssessment");
 			/*if(checkAccess(session))
 				return "redirect:login.fssai";*/
-		
-					model.addAttribute("batchCodeList", this.adminService.listBatchCodeListStateAdmin());
+					int stateId=Integer.parseInt( (String) session.getAttribute("stateId"));
+					model.addAttribute("batchCodeList", this.adminService.listBatchCodeListStateAdmin(stateId));
 					Map<String , String> result = lst.Result;
 					model.addAttribute("result",result);
 			return "stateAdminUpdateResult";
@@ -3348,10 +3348,10 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 		public String saveuploadassessment(@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm,
 				Model model, HttpSession session) {
 	int trainingCalendarId=UploadAssessmentForm.getTrainingCalendarId();
-	System.out.println("batchcode          "+trainingCalendarId);
+	System.out.println("batchcode    "+trainingCalendarId);
 	model.addAttribute("listofTrainee", this.adminService.listofTrainee(trainingCalendarId));
-
-	model.addAttribute("batchCodeList", this.adminService.listBatchCodeListStateAdmin());
+	int stateId=Integer.parseInt( (String) session.getAttribute("stateId"));
+	model.addAttribute("batchCodeList", this.adminService.listBatchCodeListStateAdmin(stateId));
 	//model.addAttribute("batchCodeList", this.adminService.listBatchCodeList());
 	Map<String , String> result = lst.Result;
 	model.addAttribute("result",result);

@@ -18,7 +18,7 @@ public interface CommonDao {
 	
 	public List getModule(String unit);
 
-	public List getBatchCode(String module);
+	public List getBatchCode(String module,int stateID);
 	public List loadTrainingPhase(int trainingTypeId);
 	public String checkState(String id, String tableName);
 	public List getSceduleCode(String data);

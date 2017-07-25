@@ -59,16 +59,12 @@
 												</div>
 										
 												
-												
-												 
-												
-												
-												
-											 <cf:select path="trainingCalendarId" class="form-control" id="batchCodeid">
-													<cf:option value="0" label="Select Batch Code" />
-													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingCalendarId" />
-												</cf:select> 
-											</div>
+												 <cf:select path="trainingCalendarId" class="form-control" id="batchCodeid">
+												<ct:forEach items="${batchCodeList}" var="batchcodelist">
+													<cf:option value="${batchcodelist[0] }" label="${batchcodelist[1] }" />
+												</ct:forEach>
+												</cf:select>
+												 </div>
                                           
                                            </div> <!-- left side ends -->
                                               <div class="row">

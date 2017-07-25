@@ -1653,7 +1653,7 @@ System.out.println("list "+list);
 		//	List<OnlineTrainingForm> list = new ArrayList<OnlineTrainingForm>();
 			Session session = this.sessionFactory.getCurrentSession();
 			/*List<Object[]> lst = session.createSQLQuery("select trainingtype , trainingphase ,mm.modulename,  trainingstartdate , trainingenddate  from nomineetrainee nt  left join trainingschedule ts on  (nt.trainingscheduleid = ts.trainingscheduleid) left join modulemaster mm on (mm.moduleid = ts.moduleid) where nt.logindetails ='"+ id +"'").list();*/
-			List<Object[]> lst = session.createSQLQuery("select tt.trainingtypeName , tp.trainingphaseName ,d.designationName,tc.trainingstartdate , tc.trainingenddate , s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'").list();
+			List<Object[]> lst = session.createSQLQuery("select tt.trainingtypeName , tp.trainingphaseName ,d.designationName,tc.trainingstartdate , tc.trainingenddate , s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.result='-1' and nt.logindetails='"+ id +"'").list();
 			if(lst.size() > 0){
 			 Object[] obj=	lst.get(0);
 			 bean.setTrainingType((String)obj[0]);
@@ -1814,7 +1814,7 @@ public String listOfflineTraining(int userID) {
 	// TODO Auto-generated method stub
 			String eligible = "";
 			Session session = sessionFactory.getCurrentSession();
-			String sql = "select tc.trainingphase from nomineetrainee nt inner join trainingcalendar tc on tc.trainingcalendarid=nt.trainingcalendarid where nt.logindetails='"+userID+"'";
+			String sql = "select tc.trainingphase from nomineetrainee nt inner join trainingcalendar tc on tc.trainingcalendarid=nt.trainingcalendarid where nt.result='-1' and nt.logindetails='"+userID+"'";
 			Query query = session.createSQLQuery(sql);
 		    List list = query.list();
 			String trainingPhase=(String) list.get(0);

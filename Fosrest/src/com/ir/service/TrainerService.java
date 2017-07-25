@@ -21,6 +21,8 @@ public interface TrainerService {
 
 	public List<UploadAssessmentForm> listofSubjects(int trainerId, String batchCode);
 
+	public List getTrainingStartDate(String courseName);
+
 	
 
 	

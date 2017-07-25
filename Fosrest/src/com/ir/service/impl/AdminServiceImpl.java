@@ -1726,9 +1726,9 @@ public List<TrainingCalendar> listBatchCodeListNomineeTrainee(NominateTraineeFor
 }
 @Override
 @Transactional
-public List<TrainingCalendar> listBatchCodeListStateAdmin() {
+public List<TrainingCalendar> listBatchCodeListStateAdmin(int stateId) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.listBatchCodeListStateAdmin();
+	return this.adminDAO.listBatchCodeListStateAdmin(stateId);
 }
 
 @Override

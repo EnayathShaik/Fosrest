@@ -2445,10 +2445,6 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingSchedule> mccList = null;
 		 if (profileId == 4) {
-			/*mccList = session.createQuery(
-					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"
-							+ id + "'  ")
-					.list();*/
 		mccList = session.createSQLQuery(
 				" select distinct sm.subjectName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,p.trainingcentername,p.correspondenceaddress1 from trainingcalendar tc inner join personalinformationtraininginstitute p on p.id=cast(tc.traininginstitute as numeric) inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join subjectmaster sm on sm.subjectId=tcm.subjectid  where  to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date and  tcm.trainerid='"+ id + "'  ")
 				.list();
@@ -2461,7 +2457,7 @@ public class AdminDAOImpl implements AdminDAO {
 	      
 		else if(profileId==2){
 			mccList = session.createSQLQuery(
-					"select distinct sm.subjectName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1 from trainingcalendar tc inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join subjectmaster sm on sm.subjectId=tcm.subjectid inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id where to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date and cast(mmt.state as numeric)='" + id + "'  ")
+					"select distinct sm.subjectName,p.firstName,tc.schedulecode,tc.trainingstartdate,tc.trainingenddate,pit.trainingcentername,pit.correspondenceaddress1,ts.trainingScheduleId from trainingcalendar tc inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode inner join subjectmaster sm on sm.subjectId=tcm.subjectid inner join personalinformationtrainer p on p.id=tcm.trainerid inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) inner join mappingmastertrainer mmt on cast(mmt.personalinformationtrainer as numeric)=p.id inner join trainingSchedule ts on ts.scheduleCode=tc.scheduleCode where to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date and cast(mmt.state as numeric)='" + id + "'  order by ts.trainingScheduleId ")
 					.list();
 		}
 		else {
@@ -4445,27 +4441,29 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 	public List<TrainingCalendar> listBatchCodeListNomineeTrainee(NominateTraineeForm nominateTraineeForm) {
 		System.out.println("inside listBatchCodeList wo parameter");
 		Session session = this.sessionFactory.getCurrentSession();
-		int des=Integer.parseInt(nominateTraineeForm.getDesignation());
-		int ttype=Integer.parseInt(nominateTraineeForm.getTrainingType());
-		int tphase=Integer.parseInt(nominateTraineeForm.getTrainingPhase());
-		List<TrainingCalendar> mccList = session
+		String des=nominateTraineeForm.getDesignation();
+		String ttype=nominateTraineeForm.getTrainingType();
+		String tphase=nominateTraineeForm.getTrainingPhase();
+		String trainingInstitute=nominateTraineeForm.getTrainingInstitute();
+		/*List<TrainingCalendar> mccList = session
 				.createQuery("from TrainingCalendar where coalesce(isactive,'') <> 'I' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"' and designation='"+des+"' ").list();
 		for (TrainingCalendar p : mccList) {
 			System.out.println("TrainingSchedule List::" + p);
-		}
-		return mccList;
+		}*/
+	String sql="select tc.trainingCalendarId,tc.trainingStartDate from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where coalesce(isactive,'') <> 'I' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"'and designation='"+des+"' and tc.trainingInstitute='"+trainingInstitute+"' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date";
+		Query query = session.createSQLQuery(sql);
+		List batchCodeList = query.list();
+		return batchCodeList;
 	}
 	
 	@Override
-	public List<TrainingCalendar> listBatchCodeListStateAdmin() {
-		System.out.println("inside listBatchCodeList wo parameter");
+	public List<TrainingCalendar> listBatchCodeListStateAdmin(int stateId) {
+		System.out.println("inside listBatchCodeList with parameter");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<TrainingCalendar> mccList = session
-				.createQuery("from TrainingCalendar where coalesce(isactive,'') <> 'I' and coalesce(trainingPhase,'')<> '3' ").list();
-		for (TrainingCalendar p : mccList) {
-			System.out.println("TrainingSchedule List::" + p);
-		}
-		return mccList;
+		String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where coalesce(isactive,'') <> 'I' and coalesce(trainingPhase,'')<> '3' and pit.correspondenceState='"+stateId+"'";
+		Query query = session.createSQLQuery(sql);
+		List batchCodeList = query.list();
+	return batchCodeList;
 	}
 
 	@Override

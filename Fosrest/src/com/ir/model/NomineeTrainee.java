@@ -39,8 +39,19 @@ public class NomineeTrainee {
 	private String traineeName;
 	private int trainingCalendarId;
 	private int nominatedBy;
-	private int loginId;
+	//private int loginId;
 	private int assignedByTrainer;
+
+	private String trainingStartDate2;
+	
+	public String getTrainingStartDate2() {
+		return trainingStartDate2;
+	}
+
+	public void setTrainingStartDate2(String trainingStartDate2) {
+		this.trainingStartDate2 = trainingStartDate2;
+	}
+
 	public int getAssignedByTrainer() {
 		return assignedByTrainer;
 	}

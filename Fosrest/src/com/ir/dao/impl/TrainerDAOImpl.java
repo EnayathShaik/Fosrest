@@ -118,6 +118,20 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	
 	}
+
+	@Override
+	public List getTrainingStartDate(String data) {
+		String arr[]=data.split("-");
+		String des=arr[0];
+		String ttype=arr[1];
+		String tphase=arr[2];
+		String trainingInstitute=arr[3];
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select tc.trainingCalendarId,tc.trainingStartDate from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where coalesce(isactive,'') <> 'I' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"'and designation='"+des+"' and tc.trainingInstitute='"+trainingInstitute+"' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date";
+		Query query = session.createSQLQuery(sql);
+		List batchCodeList = query.list();
+		return batchCodeList;
+	}
 	
 	
 /*	@Override

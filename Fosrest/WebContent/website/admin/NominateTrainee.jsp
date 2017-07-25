@@ -12,12 +12,12 @@
 		 var ttype=document.getElementById("trainingType").value;
 		var tphase=document.getElementById("trainingPhase").value;
 		if(ttype!=3){
-			getBatch(des,ttype, 0, 'batchCode2');	
+			getTrainingInstitute(des,ttype, '0', 'trainingInstitute');
 		}
 		else{
-			getBatch(des, ttype, tphase, 'batchCode2');	
+			getTrainingInstitute(des,ttype, tphase, 'trainingInstitute');
+			//TrainingInstituteInfo2(des, ttype, tphase, 'trainingInstitute');	
 		} 
-		 
 		var userList = '${listEligibleuser}';
 		if (userList != '') {
 			//alert("Y" +userList);
@@ -93,25 +93,13 @@
 														</ul>
 													</div>
 													<cf:select path="trainingType" class="form-control"
-														onchange="getTrainingPhase(this.value , 'trainingPhase'); batchInfo(this.value,'batchCode2')">
+														onchange="getTrainingPhase(this.value , 'trainingPhase'); TrainingInstituteInfo(this.value,'trainingInstitute')">
 														<cf:option value="" label="Select Training Type" />
 														<cf:options items="${TrainingTypeList}"
 															itemValue="trainingTypeId" itemLabel="trainingTypeName" />
 													</cf:select>
 												</div>
-												<div class="col-md-6 col-xs-12">
-
-												<input type="submit" class="btn btn-primary btn-lg" 
-													
-													style="margin-top: 24px;     margin-left: 350px;" aria-expanded="false"
-													value="Get List" onclick="abc('batchCode2')"/>
-
-											</div>
-											</div>
-											
-											<!-- right side -->
-											<div class="col-md-6 col-xs-12">
-											<div class="form-group">
+													<div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training
@@ -124,33 +112,62 @@
 														</ul>
 													</div>
 													<cf:select path="trainingPhase" class="form-control"
-														onchange="batchInfo2(this.value,'batchCode2')">
+														onchange="TrainingInstituteInfo2(this.value,'trainingInstitute')">
 														<cf:option value="0" label="Select Training Phase" />
 														<cf:options items="${TrainingPhaseList}"
 															itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
 													</cf:select>
 												</div>
+												<div class="col-md-6 col-xs-12">
+
+												<input type="submit" class="btn btn-primary btn-lg" 
+													
+													style="margin-top: 24px;     margin-left: 350px;" aria-expanded="false"
+													value="Get List"/>
+
+											</div>
+											</div>
+											
+											<!-- right side -->
+											<div class="col-md-6 col-xs-12">
+											<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong>Training
+																	Institute:</strong></li>
+																		<li class="style-li error-red"><label
+																class="error visibility" id="courseError">*
+																	error</label></li> 
+														<li id="trainingInstituteErr" style="display: none;"
+																class="style-li error-red">Please SelectTraining Institute.</li>
+														
+														</ul>
+													</div>
+													<cf:select path="trainingInstitute" class="form-control" onchange="getTrainingStartDate(this.value,'trainingStartDate')">
+														<cf:option value="0" label="Select  Training Institute" />
+												 </cf:select>
+												</div>
 												
 											  <div class="form-group">
 												<div>
 													<ul class="lab-no">
-														<li class="style-li"><strong>BatchCode:</strong></li>
+														<li class="style-li"><strong>Training Start Date:</strong></li>
 														<li class="style-li error-red"><span id="name_status"
 															class="clear-label"> </span> ${created }</li>
-															  <li id="batchCode2Err" style="display: none;"
-												class="style-li error-red">Please Select BatchCode.</li>
+															  <li id="trainingStartDateErr" style="display: none;"
+												class="style-li error-red">Please Select Training Start Date.</li>
 													</ul>
 												</div>
-												<cf:select path="batchCode2" class="form-control">
-														<cf:option value="0" label="Select Batch Code" />
+												<cf:select path="trainingStartDate" class="form-control">
+														<cf:option value="0" label="Select Training Start Date" />
 													</cf:select>
 											</div>
 												
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 													<!-- c data-target="#myModal2" -->
-<button type="button" id="batchDetails" class="btn btn-primary btn-lg"  data-toggle="modal"
-												 >View Batchcode Details</button>
+												<button type="button" id="batchDetails" class="btn btn-primary btn-lg"  data-toggle="modal" style="    margin-top: 82px;"
+												 >View Details</button>
 													</div>
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 														<!--   <button  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button> -->
@@ -174,7 +191,7 @@
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
-											<h4 class="modal-title" id="myModalLabel">Details of BatchCode</h4>
+											<h4 class="modal-title" id="myModalLabel">Details</h4>
 										</div>
 									<div class="modal-body">
 
@@ -222,7 +239,7 @@
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
-											<h4 class="modal-title" id="myModalLabel">Codes</h4>
+											<h4 class="modal-title" id="myModalLabel">Training Calendar</h4>
 										</div>
 									<div class="modal-body">
 
@@ -230,14 +247,15 @@
 												style="display: none">
 												<div>
 													<ul class="lab-no">
-														<li class="style-li"><strong>Batch Code:</strong></li>
+														<li class="style-li"><strong>Training Start Date:</strong></li>
 														<li class="style-li error-red"><span id="name_status"
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
-												<cf:select path="batchCode" class="form-control" id="batchCode">
-													<cf:option value="0" label="Select Batch Code" />
-													<cf:options items="${batchCodeList}" itemLabel="batchCode" itemValue="trainingCalendarId" />
+												<cf:select path="trainingStartDate2" class="form-control" id="batchCode">
+												<ct:forEach items="${batchCodeList}" var="batchcodelist">
+													<cf:option value="${batchcodelist[0] }" label="${batchcodelist[1] }" />
+												</ct:forEach>
 												</cf:select>
 											</div>
 										</div>
@@ -306,9 +324,9 @@
 
 											</table>
 											<div class="col-md-6 col-xs-12"></div>
-
-											<button type="button" class="btn btn-primary btn-lg"
-												data-toggle="modal" data-target="#myModal" onClick="validateFields();  return false;" >Enroll</button>
+											<button type="button" id="enrollId" class="btn btn-primary btn-lg" onClick="validateFields(); return false;"  >Enroll</button>
+											<!-- <button type="button" class="btn btn-primary btn-lg"
+												data-toggle="modal" data-target="#myModal" onClick="validateFields();validate2();  return false;" >Enroll</button> -->
 								</div>
 							</div>
 							</ct:if>
@@ -374,24 +392,48 @@
 	}
 </script>
 <script>
- function batchInfo(val, id){
+ function TrainingInstituteInfo(val, id){
 	if (val != 3) {// 3 for induction
-		getBatch(document.getElementById("designation").value,
+		getTrainingInstitute(document.getElementById("designation").value,
 				val, '0', id);
 
 	}
 	
 } 
- function batchInfo2(val, id){
-			getBatch(document.getElementById("designation").value, document
+ function TrainingInstituteInfo2(val, id){
+	getTrainingInstitute(document.getElementById("designation").value, document
 					.getElementById("trainingType").value, val, id);
 		
  }
+ function getTrainingStartDate(val, idName){
+	 var designation=document.getElementById("designation").value;
+	 var trType=document.getElementById("trainingType").value;
+	 var trPhase=document.getElementById("trainingPhase").value;
+	 var data=designation+"-"+trType+"-"+trPhase+"-"+val;
+	var name=JSON.stringify({
+			courseType:0
+	  })
+		$.ajax({
+		      type: 'post',
+		      url: 'getTrainingStartDate.fssai?data='+data,
+		      contentType : "application/json",
+			  data:name,
+		      success: function (response) {   
 
+		      var mainData1 = jQuery.parseJSON(response);
+	 	        $('#'+idName+' option').remove();
+		      $('#'+idName).append('<option value="" label="Select Training Start Date" />');
+		        $.each(mainData1 , function(i , obj)
+		  		{
+		        	console.log(obj[0]);
+		  				$('#'+idName).append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
+		  		});  
+		      }
+		      });
+ }
 
  function batchcodeinfo(){
-	
-	var a=document.getElementById("batchCode2").value;
+	var a=document.getElementById("trainingStartDate").value;
 	var name1=JSON.stringify({
  		courseName:0
    })
@@ -427,12 +469,10 @@
  
 
 	function validateFields() {
-	/* 	 if($("#testTable").find('input[type=checkbox]:checked').length == 0)
-		{
-		     alert('Please select atleast one Trainee');
-		    $("#batchCodeDIV").css("display" , "none");
-		     return false;
-		}  */
+		$("#designationErr").css("display" , "none");
+		$("#trainingTypeErr").css("display" , "none");
+		$("#trainingPhaseErr").css("display" , "none");
+		$("#trainingInstituteErr").css("display" , "none");
 		 if($("#designation").val() == ''){
 	   		 
 		   		$("#designationErr").css("display" , "block");
@@ -451,56 +491,65 @@
 			   		$("#trainingPhaseErr").css("display" , "block");
 			   		return false;
 			   	 } 
-		 } 
+		 }
+		 if($("#trainingInstitute").val() == 0){
+		   		$("#trainingInstituteErr").css("display" , "block");
+		   		return false;
+		   	 } 
 		 
 	}
-	
 	jQuery(function($){
 		
 		$("#batchDetails").click(function(){
+			$("#designationErr").css("display", "none");
+			$("#trainingTypeErr").css("display", "none");
+			$("#trainingPhaseErr").css("display", "none");
+			$("#trainingInstituteErr").css("display", "none");
+			$("#trainingStartDateErr").css("display", "none");
 	       // ev.preventDefault();
-    	 var b=document.getElementById("designation").value;
-		 var c=document.getElementById("trainingType").value;
-		var d=document.getElementById("trainingPhase").value;
-		var a=document.getElementById("batchCode2").value;
-		//alert ("BBB  "+b+"CCC "+c+"DDD "+d);
-		if(b==''){
+	       var tInstitute=document.getElementById("trainingInstitute").value;
+		 
+    	 var des=document.getElementById("designation").value;
+		 var tType=document.getElementById("trainingType").value;
+		var tPhase=document.getElementById("trainingPhase").value
+		var tStartDate=document.getElementById("trainingStartDate").value;
+		if(des==''){
 			$("#designationErr").css("display", "block");
 			return false;
 		}
-		if(c==''){
+		if(tType==''){
 			$("#trainingTypeErr").css("display", "block");
 			return false;
 		}
-		if(c==3){
-			if(d==0){
+		if(tPhase==3){
+			if(d==0){		 
 			$("#trainingPhaseErr").css("display", "block");
 			return false;
 			}
 		}
-		if(a==''){
-			$("#batchCode2Err").css("display", "block");
-			   return false;
-		   }	
+		if(tInstitute==''){
+			$("#trainingInstituteErr").css("display", "block");
+			return false;
+		}
+		if(tStartDate==''){
+			$("#trainingStartDateErr").css("display", "block");
+			return false;
+		}
 		else{ 
 			 $("#myModal2").modal('show');
 			 batchcodeinfo();
 		 }  
 	    });
 		
-		
+		$("#enrollId").click(function(){
+			  if($("#testTable").find('input[type=checkbox]:checked').length == 0)
+			{
+			     alert('Please select atleast one Trainee');
+			     return false;
+			}
+			  else{
+				  $("#myModal").modal('show');
+			  }
+		});
 	});
-	
-/* 	 function abc(bc){
-		 var b=document.getElementById("designation").value;
-		 var c=document.getElementById("trainingType").value;
-		var d=document.getElementById("trainingPhase").value;
-		 if(c!=3){
-			getBatch(b,c, 0, bc);	
-		}
-		else{
-			getBatch(b, c, d, bc);	
-		} 
-		
-	} */
 </script>

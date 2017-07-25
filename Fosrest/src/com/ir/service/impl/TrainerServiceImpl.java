@@ -58,6 +58,14 @@ public class TrainerServiceImpl implements TrainerService {
 		// TODO Auto-generated method stub
 		return this.trainerDAO.listofSubjects(trainerId,batchCode);
 	}
+
+
+	@Override
+	@Transactional
+	public List getTrainingStartDate(String courseName) {
+		// TODO Auto-generated method stub
+		return this.trainerDAO.getTrainingStartDate(courseName);
+	}
 	
 	/*@Override
 	@Transactional

@@ -204,12 +204,13 @@ public class CommonController {
 		
 	}
 
-@RequestMapping(value="/getBatchCode" , method=RequestMethod.POST)
+@RequestMapping(value="/getTrainingInstitute" , method=RequestMethod.POST)
 @ResponseBody
-public void getBatchCode(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-	new ZLogger("getBatchCode","getBatchCode............" + data  , "CommonController.java");
+public void getTrainingInstitute(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response,HttpSession session) throws IOException{
+	new ZLogger("getTrainingInstitute","getTrainingInstitute............" + data  , "CommonController.java");
 	String courseName =  data;
-	List batchCodeList = commonService.getBatchCode(courseName);
+	int stateId=Integer.parseInt( (String) session.getAttribute("stateId"));
+	List batchCodeList = commonService.getBatchCode(courseName,stateId);
 	PrintWriter out = response.getWriter();
 	Gson g =new Gson();
 	String newList = g.toJson(batchCodeList); 

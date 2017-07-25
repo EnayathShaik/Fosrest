@@ -18,6 +18,8 @@ public interface TrainerDAO {
 
 	public List<UploadAssessmentForm> listofSubjects(int trainerId, String batchCode);
 
+	public List getTrainingStartDate(String courseName);
+
 	//public List<MyCalendarForm> listMyCalendar();
 
 }

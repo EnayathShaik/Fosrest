@@ -371,21 +371,21 @@ $.ajax({
 });
   
 }
-function getBatch(designation,trType,trPhase,idName){
+function getTrainingInstitute(designation,trType,trPhase,idName){
 	 var data=designation+"-"+trType+"-"+trPhase;
 	var name=JSON.stringify({
 			courseType:0
 	  })
 		$.ajax({
 		      type: 'post',
-		      url: 'getBatchCode.fssai?data='+data,
+		      url: 'getTrainingInstitute.fssai?data='+data,
 		      contentType : "application/json",
 			  data:name,
 		      success: function (response) {   
 
 		      var mainData1 = jQuery.parseJSON(response);
 	 	        $('#'+idName+' option').remove();
-		      $('#'+idName).append('<option value="" label="Select Batch Code" />');
+		      $('#'+idName).append('<option value="" label="Select Training Institute" />');
 		        $.each(mainData1 , function(i , obj)
 		  		{
 		        	console.log(obj[0]);
@@ -462,8 +462,6 @@ data:name,
 	}
 });
 }
-
-
 
 function generateOptionTexts_15mins( Selectvalue ){
   

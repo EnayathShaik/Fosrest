@@ -147,14 +147,13 @@ public class CommonDaoImpl implements CommonDao{
 	}
 
 	@Override
-	public  List getBatchCode(String data){
+	public  List getBatchCode(String data,int stateId){
 		String arr[]=data.split("-");
 		String designationId=arr[0];
 		String trTypeId=arr[1];
 		String trPhaseId=arr[2];
 		Session session = sessionFactory.getCurrentSession();
-		//String sql = "select trainingscheduleid as value ,  batchCode as label  from  trainingschedule where moduleId= '"+data+"'";	
-		String sql="select trainingCalendarId as value,batchCode as label from trainingCalendar  where designation= '"+designationId+"' and trainingType='"+trTypeId+"' and trainingPhase='"+trPhaseId+"'";
+		String sql="select distinct tc.trainingInstitute ,pit.trainingCenterName from trainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.trainingInstitute as numeric) where designation= '"+designationId+"' and trainingType='"+trTypeId+"' and trainingPhase='"+trPhaseId+"'and pit.correspondenceState='"+stateId+"'";
 		Query query = session.createSQLQuery(sql);
 		List batchCodeList = query.list();
 		return batchCodeList;
