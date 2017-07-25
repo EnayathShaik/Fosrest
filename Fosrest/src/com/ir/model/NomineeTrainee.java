@@ -42,7 +42,7 @@ public class NomineeTrainee {
 	//private int loginId;
 	private int assignedByTrainer;
 
-	private String trainingStartDate2;
+	/*private String trainingStartDate2;
 	
 	public String getTrainingStartDate2() {
 		return trainingStartDate2;
@@ -50,7 +50,7 @@ public class NomineeTrainee {
 
 	public void setTrainingStartDate2(String trainingStartDate2) {
 		this.trainingStartDate2 = trainingStartDate2;
-	}
+	}*/
 
 	public int getAssignedByTrainer() {
 		return assignedByTrainer;
