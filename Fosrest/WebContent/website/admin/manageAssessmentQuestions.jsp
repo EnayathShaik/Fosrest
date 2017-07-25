@@ -458,7 +458,7 @@ function getQuestionNo(val){
 												<cf:select  path="subjectCode1"   class="form-control">
 										<%-- 		 <cf:option value="0" label="Select Subject"></cf:option> --%>
 												   <ct:forEach var="twofields" items="${listSubjectMaster}">
-												   <cf:option value="${twofields[0]}"><ct:out value="${twofields[9]} - ${twofields[10]}"/></cf:option>
+												   <cf:option value="${twofields[0]}"><ct:out value="${twofields[10]} - ${twofields[11]}"/></cf:option>
     												</ct:forEach>
 												 </cf:select>
 											</div>

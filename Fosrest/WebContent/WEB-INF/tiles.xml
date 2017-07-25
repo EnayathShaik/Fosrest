@@ -1374,9 +1374,9 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/uploadPhotoGallery.jsp" />
 	</definition>
-	<definition name="viewnominatedtrainee" extends="base.user.afterLogin">
+	<definition name="viewassessmentquestions" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/commonjsp/viewNominatedTrainee.jsp" />
+		<put-attribute name="body" value="/website/admin/ViewAssessmentQuestions.jsp" />
 	</definition>
 	<definition name="Help" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />

@@ -591,6 +591,8 @@ List<String> getAllScheduleCode();
 List<String> disPhotoGallery();
 
 List getScheduleCodeDetails(String schCode);
+
+List<AssessmentQuestions> listAllSubjectQuestion(int a);
 }
 
 

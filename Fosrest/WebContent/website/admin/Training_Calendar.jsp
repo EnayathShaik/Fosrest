@@ -441,9 +441,14 @@
 																					value="${listPersonalInfoTrainer.trainerId.id}">${listPersonalInfoTrainer.firstName}</option>
 																			</ct:forEach>
 																		</select>
-																	</ct:forEach>
+																	</ct:forEach>	
 																</div></td>
-
+																<%-- <td><ct:forEach items="${listSchCodeSubjects}"
+																	var="subjects" varStatus="loop2">
+																	<input type="checkbox" name="checkBox" value='${subjects[1] listPersonalInfoTrainer.trainerId.id}' >${subjects[1]}
+																	<br />
+																	</ct:forEach>
+																	</td>	 --%>		
 
 
 														</tr>
@@ -740,6 +745,8 @@
 	}
 
 	function showSchedules() {
+		
+		if($("#scheduleCode").val()!=0){
 		var total=$("#scheduleCode").val();
 		 var name1=JSON.stringify({
      		courseType:0,
@@ -754,15 +761,17 @@
              success: function(response) {
         
             	 var mainData1 = jQuery.parseJSON(response);
-           
-					alert("Subjects in selected Schedule are: "+mainData1);
+           	
+					alert("Schedule :  "+total+"\n\n Subjects: "+mainData1);
 
                 // $('#name_status').html(response);
              }
          });
 		
 	
-	
+		}
+		else
+			alert("Select schedule to display its subjects");
 	}
 	
 	
@@ -779,20 +788,20 @@
 
 	function redirectScheduleCode2(trPhase, id) {
 		//	alert(trPhase + id);
-			$("#instituteField").css("display", "block");
+		/* 	$("#instituteField").css("display", "block");
 			if(trPhase==3)
-			hideInstitute();
+			hideInstitute(); */
 		
 		getScheduleCode(document.getElementById("designation").value, document
 				.getElementById("trainingType").value, trPhase, id);
 
 	}
-function hideInstitute(){
+/* function hideInstitute(){
 	
 		
 	$("#trainingInstitute").val(0);
 	$("#instituteField").css("display", "none");
-}
+} */
 	
 	function validate2() {
 		$("#trainingEndDateErr").css("display" , 'none');
@@ -941,6 +950,31 @@ function hideInstitute(){
 		return false;
 	}
 
+	function getTrainingPhase(val , idName) {
+		$('#'+idName+' option').remove();
+	 	var name=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
+		$.ajax({
+			type : 'post',
+			url : 'loadTrainingPhase.fssai?data='+ val,
+			contentType : "application/json",
+		    data:name,
+			success : function(response) {
+				var mainData1 = jQuery.parseJSON(response);
+				
+				$('#'+idName+' option').remove(); 
+				$('#'+idName).append(
+						'<option value="0" label="Select Training Phase" >Select Training Phase</option>');
+				$.each(mainData1, function(i, obj) {
+					if((i+1)!=3)
+					$('#'+idName).append('<option value='+(i+1)+' >' + mainData1[i]+ '</option>');
+				});
+			}
+		});
+	}
+	
 	function printDiv() {
 		var printContents = document.getElementById('printDiv').innerHTML;
 		var originalContents = document.body.innerHTML;

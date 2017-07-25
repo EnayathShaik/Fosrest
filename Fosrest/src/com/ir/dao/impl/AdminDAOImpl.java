@@ -4639,6 +4639,16 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		
 		return subjectName;
 	}
+
+	@Override
+	public List<AssessmentQuestions> listAllSubjectQuestion(int a) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		List<AssessmentQuestions> allQuestions= session.createQuery("from AssessmentQuestions where subjectMaster="+a).list();
+			
+		return allQuestions;
+		
+	}
 	}
 	
 	

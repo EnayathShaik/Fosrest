@@ -478,6 +478,8 @@ public interface AdminDAO {
 
 	public List getScheduleCodeDetails(String schCode);
 
+	public List<AssessmentQuestions> listAllSubjectQuestion(int a);
+
 /*	public List<String> getAllEndDates(String trainingStartDate);
 */
 	

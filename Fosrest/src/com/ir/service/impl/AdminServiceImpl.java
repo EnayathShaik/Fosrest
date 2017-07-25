@@ -1812,4 +1812,11 @@ public List getScheduleCodeDetails(String schCode) {
 	// TODO Auto-generated method stub
 	return adminDAO.getScheduleCodeDetails(schCode);
 }
+
+@Override
+@Transactional
+public List<AssessmentQuestions> listAllSubjectQuestion(int a) {
+	// TODO Auto-generated method stub
+	return adminDAO.listAllSubjectQuestion(a);
+}
 }

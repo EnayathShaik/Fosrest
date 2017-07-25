@@ -3554,4 +3554,27 @@ System.out.println(p.getTrainingEndDate2());
 		}
 		
 		
+		@RequestMapping(value = "/viewassessmentquestions", method = RequestMethod.GET)
+		public String viewAssessmentQuestions(
+				@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model, HttpSession session) {
+			/*if(checkAccess(session))
+				return "redirect:login.fssai";*/
+			//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
+			model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
+			return "viewassessmentquestions";
+		}
+		
+		@RequestMapping(value = "/viewassessmentquestions", method = RequestMethod.POST)
+		public String viewAssessmentQuestions2(
+				@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model, HttpSession session) {
+			/*if(checkAccess(session))
+				return "redirect:login.fssai";*/
+			System.out.println("aaaaaaa"+assessmentQuestionForm.getSubjectCode1());
+			model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
+
+			model.addAttribute("listAllSubjectQuestion", this.adminService.listAllSubjectQuestion(assessmentQuestionForm.getSubjectCode1()));
+			System.out.println("wwwwwwwwwwwwww");
+			return "viewassessmentquestions";
+		}
+		
 }

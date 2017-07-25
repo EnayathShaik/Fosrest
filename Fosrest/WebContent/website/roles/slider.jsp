@@ -44,6 +44,7 @@
 
 	<li><a href="trainerUpdateResult.fssai">Update Result</a></li>
 	<li><a href="PersonalInformationTrainer.fssai">Update Profile</a></li>
+		<li> <a href="viewassessmentquestions.fssai">View Questions</a> </li>
 	</ul>
 </div>
 
@@ -158,6 +159,7 @@
 		  <li><a href="stateAdminUpdateResult.fssai">Update Result</a></li>
 		  <li> <a href="viewnominatedtrainee.fssai">View Nominated Trainee</a> </li>
 		  	<li><a href="stateAdminPersonalInformation.fssai">Update Profile</a></li>
+		  		<li> <a href="viewassessmentquestions.fssai">View Questions</a> </li>
 </ul>
 </div>
 
