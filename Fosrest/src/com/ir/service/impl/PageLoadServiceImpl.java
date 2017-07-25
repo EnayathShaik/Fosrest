@@ -278,13 +278,13 @@ public class PageLoadServiceImpl implements PageLoadService {
 		return totCalendarlist;
 	}
 
-	@Override
+	/*@Override
 	@Transactional
 	public List masterTrainer() {
 		// TODO Auto-generated method stub
 		List masterTrainerList=pageLoadDao.masterTrainer();
 		return masterTrainerList;
-	}
+	}*/
 	
 	@Override
 	@Transactional

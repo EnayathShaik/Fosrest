@@ -64,7 +64,7 @@ public interface PageLoadService {
 	public List<TrainingPhase> loadTrainingPhase();
 	public List<Languages> loadLanguages();
 	public List  totCalendarlist();
-	public List masterTrainer();
+	//public List masterTrainer();
 	//public Object masterTrainer();
 	public String feedbacksave(ContactTrainee contactTrainee, String id);
 }

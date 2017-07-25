@@ -114,8 +114,8 @@ public class PersonalInformationTrainee {
 	private String firstName;
 
 	private String MiddleName;
-	@NotNull
-	@Size(min=1, max=50 , message="enter your LastName ")
+	/*@NotNull
+	@Size(min=1, max=50 , message="enter your LastName ")*/
 	private String  LastName ;
 
 	@NotNull
@@ -139,8 +139,8 @@ public class PersonalInformationTrainee {
 	private String gender;
 	@NotNull 
 	private int profileCode;
-	@NotNull
-	@Size(min=1, max=100 , message="enter your ResidentialAddress1 ")
+	/*@NotNull
+	@Size(min=1, max=100 , message="enter your ResidentialAddress1 ")*/
 	private String ResidentialLine1; 
 	/*@NotNull 
 	@Size(min=1, max=100 , message="enter your ResidentialAddress2")*/
@@ -152,8 +152,8 @@ public class PersonalInformationTrainee {
 	
 	private String resCity;
 	
-	@NotNull
-	@Size(min=1, max=6 , message="enter your Pincode")
+	/*@NotNull
+	@Size(min=1, max=6 , message="enter your Pincode")*/
 	private String resPincode;
 	@NotNull
 	@Size(min=1, max=100 , message="enter your correspondenceAddress1")

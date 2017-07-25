@@ -88,7 +88,7 @@ public interface PageLoadDao {
 	public List<Languages> loadLanguages();
 
 	public List totCalendarlist();
-	public List masterTrainer();
+	//public List masterTrainer();
 
 	public String feedbacksave(ContactTrainee contactTrainee, String id);
 }

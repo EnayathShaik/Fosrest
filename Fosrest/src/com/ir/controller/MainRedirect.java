@@ -271,12 +271,12 @@ public class MainRedirect {
 		   model.addAttribute("listTotCalendar",pageLoadService.totCalendarlist());
 		   return "TotCalendar";
 	   }
-	   @RequestMapping(value="/mastertrainer" ,method = RequestMethod.GET)
+	  /* @RequestMapping(value="/mastertrainer" ,method = RequestMethod.GET)
 	   public String mastertrainer(Model model) {
 		   System.out.println("mastertrainer");
 		   model.addAttribute("mastertrainerList",pageLoadService.masterTrainer());
 		   return "mastertrainer";
-	   }
+	   }*/
 	   @RequestMapping(value="/upcomingevents" ,method = RequestMethod.GET)
 	   public void mastertrainer2(@ModelAttribute("TrainingSchedule") TrainingSchedule TrainingSchedule,Model model,HttpServletResponse response) throws IOException {
 		   System.out.println("mastertrainer");

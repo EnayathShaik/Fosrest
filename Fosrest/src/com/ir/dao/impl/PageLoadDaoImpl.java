@@ -434,7 +434,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		}
 
 
-		@Override
+		/*@Override
 		public List masterTrainer() {
 			System.out.println("inside masterTrainer");
 			Session session = this.sessionFactory.getCurrentSession();
@@ -442,7 +442,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			List list = query.list();
 			System.out.println(list);
 			return list; 
-		}
+		}*/
 		
 		@Override
 		public String feedbacksave(ContactTrainee contactTrainee, String id) {

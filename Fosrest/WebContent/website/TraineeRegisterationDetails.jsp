@@ -165,7 +165,7 @@
                                         <div class="form-group">
                                             <div>
                                                 <ul class="lab-no">
-                                                    <li class="style-li"><strong>Trainee Type:</strong></li> <li class="style-li error-red"> * </li>
+                                                    <li class="style-li"><strong>Trainee Type:</strong></li> <li class="style-li error-red">* </li>
                                                      <!--  valid -->
                                                             <li id="designationErr" style="display:none;" class="style-li error-red" >Please Select Trainee Type.</li>
                                                    
@@ -223,7 +223,7 @@
 
                                 
                                 
-                                <div class="form-group">
+                               <%--  <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>DOJ of Service:</strong></li> <li class="style-li error-red"> * </li>
@@ -233,7 +233,7 @@
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="dojService"  class="form-control"/>
-                                </div>
+                                </div> --%>
                                 
                                 <div class="form-group">
                                     <div>
@@ -247,7 +247,7 @@
                                     <cf:input type="text" path="dojPost" class="form-control"/>
                                 </div>
                                 
-                                 <div class="form-group">
+                                 <%-- <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Employement Date:</strong></li> <li class="style-li error-red"> * </li>
@@ -257,13 +257,13 @@
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="empDate" class="form-control"/>
-                                </div>
+                                </div> --%>
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Gender:</strong></li>
                                             
-                                            <li class="style-li error-red"> * </li>
+                                            <li class="style-li error-red">  </li>
                                         </ul>
                                     </div>
                                    <cf:radiobutton
@@ -336,7 +336,7 @@
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Last Name:</strong></li><li class="style-li error-red"> </li>
-                                             <!--  valid --><li class="style-li error-red"> * </li>
+                                             <!--  valid --><li class="style-li error-red">  </li>
                                            <li id="LastNameErr" style="display:none;" class="style-li error-red" >Please Enter Last Name.</li>
                                             
                                         </ul>
@@ -360,7 +360,7 @@
                                   <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Date of Retirement:</strong></li> <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Date of Retirement:</strong></li> <li class="style-li error-red"> </li>
                                              <!--  valid -->
                                             <li id="dateRetirementErr" style="display:none;" class="style-li error-red" >Please Select Date of Retirement.</li>
                                            
@@ -369,7 +369,7 @@
                                     <cf:input type="text" path="dateRetirement" class="form-control"/>
                                 </div>
                                 
-                                <div class="form-group">
+                               <%--  <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
                                             <li class="style-li"><strong>Posting District:</strong></li><li class="style-li error-red"> * </li>
@@ -379,7 +379,7 @@
                                         </ul>
                                     </div>
                                     <cf:input type="text" path="postDistrict" class="form-control" placeholder="Posting District"/>
-                                </div>
+                                </div> --%>
                                 
                                 
                                 
@@ -462,7 +462,7 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>Email:</strong></li> <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>Email:</strong></li> <li class="style-li error-red">*  </li>
                                             <!--  valid -->
                                             <li id="EmailErr" style="display:none;" class="style-li error-red" >Invalid Email.</li>
                                            
@@ -481,7 +481,7 @@
                                 <div class="form-group">
                                     <div>
                                         <ul class="lab-no">
-                                            <li class="style-li"><strong>District:</strong></li>  <li class="style-li error-red"> * </li>
+                                            <li class="style-li"><strong>District:</strong></li>  <li class="style-li error-red">*  </li>
                                              <!--  valid -->
                                             <li id="correspondenceDistrictErr" style="display:none;" class="style-li error-red" >Please Select District.</li>
                                           
@@ -544,7 +544,7 @@
 
 
                         <!-- permanent Address -->
-                        <fieldset>
+                        <%-- <fieldset>
                             <legend>Permanent Address</legend>
 
                             <!-- form field starts here -->
@@ -640,7 +640,7 @@
                                 </div>
                             </div>
                             <!-- right side ends -->
-                        </fieldset>
+                        </fieldset> --%>
                         <!-- Permanent address ends -->
 
 
@@ -714,36 +714,42 @@
 	   var isUpdate = '${isUpdate}';
 
    	
-   		 $("#designationErr").css("display" , "none");
-			$("#titleErr").css("display" , "none");
-		$("#correspondencePincodeErr").css("display", "none");
-		$("#correspondencePincodeErr1").css("display", "none");
-		$("#resPincodeErr1").css("display", "none");
-		$("#resPincodeErr").css("display", "none");
-		$("#mobileErr").css("display" , "none");
+	   $("#designationErr").css("display" , "none");
 		$("#AadharNumberErr").css("display" , "none");
+		$("#aadharNumberErr2").css("display", "none");
+		$("#FatherNameErr").css("display" , "none");
 		$("#firstNameErr").css("display" , "none");
+		$("#dojPostErr").css("display" , "none");
+		$("#dobErr").css("display" , "none");
+		 $("#titleErr").css("display" , "none");
+		
 		$("#MiddleNameErr").css("display" , "none");
 		$("#LastNameErr").css("display" , "none");
-		$("#FatherNameErr").css("display" , "none");
+		
+		$("#titleErr").css("display" , "none");
+	$("#correspondencePincodeErr").css("display", "none");
+	$("#correspondencePincodeErr1").css("display", "none");
+	/* $("#resPincodeErr1").css("display", "none");
+	$("#resPincodeErr").css("display", "none"); */
+	$("#mobileErr").css("display" , "none");
 		//$("#empIDErr").css("display" , "none");
-		$("#dobErr").css("display" , "none");
+		
 		$("#correspondenceAddress1Err").css("display" , "none");
 		$("#correspondenceStateErr").css("display" , "none");
 		$("#EmailErr").css("display" , "none");
 		 $("#correspondenceDistrictErr").css("display" , "none");
 		 $("#correspondenceCityErr").css("display" , "none");
 		 $("#txtInputErr").css("display" , "none");
-		 $("#ResidentialLine1Err").css("display" , "none");
+		/*  $("#ResidentialLine1Err").css("display" , "none");
 		 $("#resStateErr").css("display" , "none");
 		 $("#residentialDistrictErr").css("display" , "none");
-		 $("#resCityErr").css("display" , "none");
-		 $("#dojServiceErr").css("display" , "none");
+		 $("#resCityErr").css("display" , "none"); */
+		 
 		 $("#dojPostErr").css("display" , "none");
-		 $("#empDateErr").css("display" , "none");
+		 /* $("#empDateErr").css("display" , "none");
 		 $("#dateRetirementErr").css("display" , "none");
-		 $("#postDistrictErr").css("display" , "none");
-		 $("#aadharNumberErr2").css("display", "none");
+		 $("#postDistrictErr").css("display" , "none"); */
+		 
 		 
    	    if($("#designation").val() == ''){
    		 
@@ -769,39 +775,45 @@
    		 $("#dobErr").css("display" , "block");
   		return false;
    	 } 
-   	 if($("#dojService").val() == ''){
+   	/*  if($("#dojService").val() == ''){
    		 $("#dojServiceErr").css("display" , "block");
    		return false;
-   	}if($("#dojPost").val() == ''){
+   	} */
+   	  if($("#dojPost").val() == ''){
       		 $("#dojPostErr").css("display" , "block");
         		return false;
-        } if($("#empDate").val() == ''){
+        } 
+   	/*  if($("#empDate").val() == ''){
              $("#empDateErr").css("display" , "block");
              return false;
-        }
+        } */ 
    	  if($("#title").val() == ''){
    		 $("#titleErr").css("display" , "block");
     		return false; 
-   	 } if($("#firstName").val() == ''){
+   	 } 
+        if($("#firstName").val() == ''){
    		 $("#firstNameErr").css("display" , "block");
  		return false; 
 	 } /* if($("#MiddleName").val() == ''){
    		 $("#MiddleNameErr").css("display" , "block");
  		return false; 
 	 }  */ 
-	 if($("#LastName").val() == ''){
+	/*  if($("#LastName").val() == ''){
    		 $("#LastNameErr").css("display" , "block");
   		return false; 
- 	 } if($("#FatherName").val() == ''){
+ 	 } */
+	 if($("#FatherName").val() == ''){
    		 $("#FatherNameErr").css("display" , "block");
    		return false; 
-  	 } if($("#dateRetirement").val() == ''){
+  	 } 
+ 	 /* if($("#dateRetirement").val() == ''){
          $("#dateRetirementErr").css("display" , "block");
          return false;
-    }if($("#postDistrict").val() == ''){
+    }
+ 	 if($("#postDistrict").val() == ''){
         $("#postDistrictErr").css("display" , "block");
         return false;
-   }
+   } */
  	  if($("#correspondenceAddress1").val() == ''){
    		 $("#correspondenceAddress1Err").css("display" , "block");
     		return false; 
@@ -833,7 +845,7 @@
       		return false;
   	 }
    	   
-   	
+  	 /*
    	  if($("#ResidentialLine1").val() == ''){
   		 $("#ResidentialLine1Err").css("display" , "block");
    		return false;
@@ -861,7 +873,7 @@
 	 if($("#resPincode").val().match(/^[0-9]{6}$/) == null){
 		 $("#resPincodeErr1").css("display" , "block");
 		return false;
-	} 
+	}  */
 		
 		 if(!(isUpdate !=null && isUpdate== "Y")){
 			if($("#txtInput").val() == ''){

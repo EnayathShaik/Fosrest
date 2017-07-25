@@ -520,12 +520,12 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 </div>
 <div class="row">
 
-<div class="col-sm-4">
+<!-- <div class="col-sm-4">
 	<div class="feature-wrap panelimg" >
 <img class="img-responsive center-block" style="height: 39px;"><a href="stateMaster.fssai">
 <h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3></a></div>
-</div>
-<div class="col-sm-4">
+</div> -->
+<div class="col-sm-4" style="margin-left: 88px;">
 <div class="feature-wrap panelimg">
 <img class="img-responsive center-block" style="height: 25px;"><a href="TotCalendar.fssai">
 <h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer Calendar</h3></a></div>

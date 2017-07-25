@@ -1266,10 +1266,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainee.setResCity(p.getResCity());
 		personalInformationTrainee.setResPincode(p.getResPincode());
 		personalInformationTrainee.setDojService(p.getDojService());
-		personalInformationTrainee.setEmpDate(p.getEmpDate());
-		personalInformationTrainee.setDojPost(p.getDojPost());
+		//personalInformationTrainee.setEmpDate(p.getEmpDate());
+		//personalInformationTrainee.setDojPost(p.getDojPost());
 		personalInformationTrainee.setDateRetirement(p.getDateRetirement());
-		personalInformationTrainee.setPostDistrict(p.getPostDistrict());
+		//personalInformationTrainee.setPostDistrict(p.getPostDistrict());
 		
 		System.out.println(" status "+p.getStatus());
 		/*if(p.getStatus() != null){
