@@ -96,19 +96,18 @@
 																${calendarDetail.trainingType}-
 																${calendarDetail.trainingPhase} Programme </strong> </span>
 													</p>
-													<hr
-														style="margin-left: 369px; margin-top: -7px; width: 43%; border-top: 1px solid #bdbcbc;" />
-													<p>organised by Fssai & Commissionerate of Food Safety.
+													<hr style="margin-left: 369px; margin-top: -7px; width: 43%; border-top: 1px solid #bdbcbc;" />
+													<p>organised by Fssai & Commissionerate of Food Safety. The Training was held from <span class="on-dat-general"
+															style="border-bottom: 1px solid #ccc; left: 11px;">${trainingDate}</span>
 													</p>
 													<p>
-														The Training was held on <span class="on-dat-general"
-															style="border-bottom: 1px solid #ccc;">${trainingDate}</span>
-														<span style="margin-left: 33px;"> at</span> <span
+														to <span class="on-dat-general"
+															style="border-bottom: 1px solid #ccc; left: 15px;">${trainingDate}</span>
+														<span style="margin-left: 30px;"> at</span> <span
 															style="margin-left: 147px; left: 2%;"><strong>${trainingAddress}</strong>
 														</span> <span class="full-stop-general">.</span>
 													</p>
-													<hr
-														style="border-top: 1px solid #bdbcbc; width: 42%; margin-top: -10px; margin-left: 379px;">
+													<hr style="border-top: 1px solid #bdbcbc; width: 42%; margin-top: -10px; margin-left: 190px;">
 												</div>
 											</div>
 

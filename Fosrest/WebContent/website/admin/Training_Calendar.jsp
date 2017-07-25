@@ -57,7 +57,7 @@
 	 	$("#designation").prop("disabled", "disabled"); 
 	 	 $("#trainingType").prop("disabled", "disabled"); 
 	 	$("#trainingPhase").prop("disabled", "disabled");  
-		$("#trainingInstitute").prop("disabled", "disabled"); 
+		$("#trainingInstitute").prop("disabled", "disabled");
 		$("#scheduleCode").prop("disabled", "disabled");    
         $("#createbtn").val("Save");
 
@@ -202,7 +202,7 @@
 											<!-- right side -->
 											<div class="col-xs-6">
 
-												<div class="col-xs-9">
+												<div class="col-xs-9" style="padding-left: 0px;">
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -223,7 +223,7 @@
 												</div>
 												</div>
 												<div class="col-md-3 col-xs-12">	
-												<input type="button" onclick="showSchedules();return false;" value="Show schedules" class="btn login-btn" style="margin-top: 26px; margin-left: -18px;">
+												<input type="button" onclick="showSchedules();return false;" value="--> Show subject" class="btn login-btn" style="margin-top: 26px; margin-left: -18px; padding: 6px 6px;">
 												</div>
 												<div class="form-group">
 													<div id="instituteField">
@@ -761,41 +761,7 @@
              }
          });
 		
-		
-		/* $.ajax({
-			type: 'post',
-			url: 'getScheduleCodeDetails.fssai?data=' + id,
-			 contentType : "application/json",
-			async: false, 
-			success: function (data){
-				alert("success");
-				alert(data);
-			/* var mainData1 = jQuery.parseJSON(data);
-		
-			  $('#calendarTable tr').remove();
-			  $('#calendarTable2 tr').remove();
-			 	$('#calendarTable').append( '<tr  class="background-open-vacancies"><th>Training Details</th><th>BatchCode</th><th>ScheduleCode</th><th>Start Date</th><th>End Date</th><th>Total Days</th><th>Training Institute</th></tr>')
-			 	var row1="<tr><td style='text-align:left;'><ul><li>"+mainData1[0][0]+"</li><br /><li>"+mainData1[0][1]+"</li><br /><li>"+mainData1[0][2]+"</li></td><td>"+mainData1[0][3]+"</td><td>"+mainData1[0][4]+"</td><td>"+mainData1[0][5]+"</td><td>"+mainData1[0][6]+"</td><td>"+mainData1[0][7]+"</td><td>"+mainData1[0][8]+"</td></tr>";
-			 	 $('#calendarTable').append(row1); 
-				 
-				 $('#calendarTable2').append( '<tr  class="background-open-vacancies"><th>Sr.No.</th><th>Day</th><th>Date</th><th>Start & End Time</th><th>Subject</th><th>Trainer</th></tr>');
-				 var row2=""; 
-			 	var subjects="";
-			 	 var trainers="";  
-				 var time=""; 
-			 	 
-						/*  $.each(mainData1,function(i, obj) { 
-							subjects=subjects+obj[9]+"<br /><br />";
-							trainers=trainers+obj[10]+" "+obj[11]+"<br /><br />";
-							time=time+obj[12]+"-"+obj[13]+"<br /><br />";
-						 });
-						 row2=row2+"<tr><td>"+time+"</td>"+"<td>"+subjects+"</td>"+"<td>"+trainers+"</td></tr>";
-						 $('#calendarTable2').append(row2);  */
-						 
-			/*	 $.each(mainData1,function(i, obj) { 
-					 $('#calendarTable2').append("<tr><td>"+(i+1)+")</td><td>"+obj[14]+"</td><td>"+obj[15]+"</td><td>"+obj[12]+"-"+obj[13]+"</td><td>"+obj[9]+"</td><td>"+obj[10]+" "+obj[11]+"</td></tr>"); 
-
-					 }); */
+	
 	
 	}
 	
@@ -813,9 +779,9 @@
 
 	function redirectScheduleCode2(trPhase, id) {
 		//	alert(trPhase + id);
-		
-		if(trPhase==3)
-		hideInstitute();
+			$("#instituteField").css("display", "block");
+			if(trPhase==3)
+			hideInstitute();
 		
 		getScheduleCode(document.getElementById("designation").value, document
 				.getElementById("trainingType").value, trPhase, id);
@@ -823,9 +789,8 @@
 	}
 function hideInstitute(){
 	
-	alert("hideInstitute");
 		
-	//$("#trainingInstitute").val(-1);
+	$("#trainingInstitute").val(0);
 	$("#instituteField").css("display", "none");
 }
 	
@@ -939,7 +904,6 @@ function hideInstitute(){
 	}
 
 	function viewtrainingcalendar(id){ 
-		alert("sssssvvv");
 		$.ajax({
 		type: 'post',
 		url: 'viewtrainingcalendar/'+id+'.fssai',

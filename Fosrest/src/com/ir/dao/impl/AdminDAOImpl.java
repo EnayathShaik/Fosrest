@@ -4030,8 +4030,8 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 	public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p) {
 		// TODO Auto-generated method stub
 		TrainingCalendar tc = new TrainingCalendar();
-		
-		System.out.println("wewewewew "+p.getTotalDays());
+		String mailDetails[]=new String[days.length];
+	
 		tc.setDesignation(p.getDesignation());
 		tc.setTrainingPhase(p.getTrainingPhase2());
 		tc.setTrainingType(p.getTrainingType2());
@@ -4047,8 +4047,8 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		Session session=this.sessionFactory.getCurrentSession();
 		
 			TrainingCalendarMapping tcm;
-			for(String s:subjectDates)
-				System.out.println(s);
+		
+			
 			int j=0;
 			
 			for(int i=0;i<subjects.length;i++){
@@ -4061,31 +4061,39 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 			tcm.setDay(Integer.parseInt(days[i]));
 			
 			if(i==0){
-				System.out.println("i=0" +j);
 				tcm.setSubjectDate(subjectDates[j]);
+				mailDetails[i]=subjectDates[j]+" "+days[i]+" "+trainers[i]+" "+subjects[i];
 			}
 			else if(days[i].equals(days[i-1])){
-				System.out.println("equal" +j);
 
 				tcm.setSubjectDate(subjectDates[j]);
+				mailDetails[i]=subjectDates[j]+" "+days[i]+" "+trainers[i]+" "+subjects[i];
+
 			}
 			else
 			{
-				System.out.println("else" +j);
 
 				if(j+1<subjectDates.length){
-					System.out.println("++" +j);
 
 				j++;
 				}
-				System.out.println("final" +j);
 
 				tcm.setSubjectDate(subjectDates[j]);
+				mailDetails[i]=subjectDates[j]+" "+days[i]+" "+trainers[i]+" "+subjects[i];
+
 			}
 
 			session.save(tcm);
 		}
 		session.save(tc);
+		for(int i=0;i<mailDetails.length;i++)
+			System.out.println(mailDetails[i]);
+		
+		SendContectMail traineeMaail = new SendContectMail();
+		
+		//traineeMaail.mailProperty(msg, twoEmails, id);
+		
+		
 		return "created";
 	}
 
@@ -4511,7 +4519,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		// TODO Auto-generated method stub
 		System.out.println("getEnteredSubjectDates");
 		Session session=sessionFactory.getCurrentSession();
-		Query query = session.createSQLQuery("select subjectDate from trainingCalendarMapping tcm join trainingCalendar tc on(tcm.batchCode=tc.batchCode) where tc.trainingCalendarId='"+editId+"'");
+		Query query = session.createSQLQuery("select distinct subjectDate from trainingCalendarMapping tcm join trainingCalendar tc on(tcm.batchCode=tc.batchCode) where tc.trainingCalendarId='"+editId+"' order by subjectDate");
 		List list1 = query.list();
 		return list1;
 	}	
