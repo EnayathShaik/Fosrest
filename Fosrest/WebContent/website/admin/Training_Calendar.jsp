@@ -1088,7 +1088,6 @@ alert("Click on Nominate Trainee button to nominate Trainees into Training Calen
 		 var sid=$("#subj_"+ count).val();
         if(tid!=0){
 			var e1=$("#emailId_"+ tid).val();
-			alert("AAAA "+tid+" BBB "+sid+" CCC "+e1);
 		 }
 			var loginIds = "";
 			$('#testTable').find('input[type="checkbox"]').each(
@@ -1096,26 +1095,25 @@ alert("Click on Nominate Trainee button to nominate Trainees into Training Calen
 						if (this.checked) {
 							if (loginIds == "") {
 									loginIds = tid + "%"+ e1+"%"+sid;
-									alert(loginIds+" 111");
+									
 								window.trainerArray.push(loginIds);	
 							}
 							else {
 								
 							loginIds = loginIds + "," + tid+ "%" + e1+"%"+sid;
-							alert(loginIds+" 2222");
+							
 							}
 						}
 						 else{
 							window.trainerArray.splice(i , 1);
 						} 
 					});
-			alert("CCC "+loginIds);
+		
 			console.log(loginIds);
 	 }
 	 function allTrainerMailData(){
 		 
 		 var a=window.trainerArray;
-		 alert(a);
 		 $('#data').val(a);
 	
 	 }
