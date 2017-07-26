@@ -11,6 +11,21 @@ public class TrainingCalendarForm {
 	private String totalDuration;
 	private String totalDays;
 	private int trainingCalendarId;
+	private String email;
+	private String data;
+
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	private int stateId;
 	private int stateId2;
 	

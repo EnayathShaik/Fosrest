@@ -3166,7 +3166,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 	public String trainingCalendaradd(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm p,
 			Model model, HttpSession session,HttpServletRequest request) {
 	   System.out.println("traininigcalendaradd");
-
+      
 		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
 			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
 		return "redirect:login.fssai";
@@ -3264,6 +3264,7 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 		model.addAttribute("startDate",form.getTrainingStartDate2());
 		model.addAttribute("endDate",form.getTrainingEndDate2());
 		model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
+	
   	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(form.getStateId2()));
 	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
 	model.addAttribute("listEnteredSubjectDates", this.adminService.getEnteredSubjectDates(form.getTrainingCalendarId()));
@@ -3565,7 +3566,6 @@ System.out.println(p.getTrainingEndDate2());
 			out.write(newList);
 			out.flush();
 		}
-		
 		
 		@RequestMapping(value = "/viewassessmentquestions", method = RequestMethod.GET)
 		public String viewAssessmentQuestions(

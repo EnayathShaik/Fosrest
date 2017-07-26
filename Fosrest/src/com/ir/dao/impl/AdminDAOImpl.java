@@ -3984,9 +3984,6 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 	public List listCalendarSearch(TrainingCalendarForm form) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		
-		System.out.println(form.getTrainingCalendarId()+" qwqwqwqwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
-		
 		if(form.getTrainingCalendarId()!=0){
 			form.setDesignation(form.getDesignation2());
 			form.setTrainingType(form.getTrainingType2());
@@ -4022,8 +4019,16 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 	public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p) {
 		// TODO Auto-generated method stub
 		TrainingCalendar tc = new TrainingCalendar();
+		Session session=this.sessionFactory.getCurrentSession();
 		String mailDetails[]=new String[days.length];
-	
+		 String data=p.getData();
+		String[] arrData = data.split(",");
+		//String q1=null,q2=null,s=null;
+		String email[]=	new String[days.length];
+		String tr[]=new String[days.length];
+		String subj[]=new String[days.length];
+		String subjName[]=new String[days.length];
+		
 		tc.setDesignation(p.getDesignation());
 		tc.setTrainingPhase(p.getTrainingPhase2());
 		tc.setTrainingType(p.getTrainingType2());
@@ -4036,8 +4041,6 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
 		tc.setBatchCode(batchCode);
 		//p.setIsActive("Y");
-			
-		Session session=this.sessionFactory.getCurrentSession();
 		
 			TrainingCalendarMapping tcm;
 		
@@ -4065,9 +4068,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 			}
 			else
 			{
-
 				if(j+1<subjectDates.length){
-
 				j++;
 				}
 
@@ -4079,14 +4080,49 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 			session.save(tcm);
 		}
 		session.save(tc);
+		String finalData[]=new String[days.length];
+	   
+		
+					if (data.contains(",")) {
+				for (int i = 0; i < arrData.length; i++) {
+					System.out.println(" DATA::::::::::::::: " + arrData[i]);
+					String d=arrData[i];
+					 String[] q=d.split("%");
+					 	/* q1=q[0];
+						 q2=q[1];
+						 s=q[2];*/
+						 tr[i]=q[0];
+						 subj[i]=q[2];
+                         email[i]=q[1];
+							String sql = "select subjectName from subjectMaster  where subjectId='"+subj[i]+"'";
+							Query query2 = session.createSQLQuery(sql);
+						    List list2 = query2.list();
+						    System.out.println("SUBJECT NAME:::::::::::::: "+list2.get(0));
+						    String subject=(String) list2.get(0);
+							subjName[i]=subject; 
+							
+							
+						
+						}
+			}
+		
+		for(int i=0;i<arrData.length;i++){
+			
+				finalData[i]=subjName[i]+","+p.getTrainingStartDate2();
+			
+		}
+		for(int t=0;t<arrData.length;t++){
+			String id="";
+			System.out.println("FINAL ::: "+finalData[t]);
+			SendContectMail traineeMaail = new SendContectMail();
+			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
+			traineeMaail.mailProperty(finalData[t], email[t], id);
+		}
+		
 		for(int i=0;i<mailDetails.length;i++)
 			System.out.println(mailDetails[i]);
 		
 		SendContectMail traineeMaail = new SendContectMail();
-		
-		//traineeMaail.mailProperty(msg, twoEmails, id);
-		
-		
 		return "created";
 	}
 

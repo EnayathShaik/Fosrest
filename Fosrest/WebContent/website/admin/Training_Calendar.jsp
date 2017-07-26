@@ -206,7 +206,20 @@
 															itemValue="trainingPhaseId" itemLabel="trainingPhaseName" />
 													</cf:select>
 												</div>
-
+ 											<%-- 	  <div class="form-group">
+												<div>
+													<ul class="lab-no">
+														<li class="style-li"><strong>email:</strong></li>
+														<li class="style-li error-red"><span id="name_status"
+															class="clear-label"> </span> ${created }</li>
+													</ul>
+												</div>
+												 <cf:select path="email" class="form-control" id="batchCode">
+												<ct:forEach items="${listPersonalInfoTrainer}" var="listPersonalInfoTrainer">
+													<cf:option value="${listPersonalInfoTrainer }" label="${listPersonalInfoTrainer }" />
+												</ct:forEach>
+												</cf:select> 
+											</div> --%>
 
 
 											</div>
@@ -335,7 +348,7 @@
 
 												</div>
 
-
+                                      
 											</div>
 											<!-- rigth side ends -->
 
@@ -379,7 +392,7 @@
 											<legend>Search Result and Create Calendar </legend>
 											<ct:if test="${!empty listCalendarSearch}">
 												<table border="1"  style='text-align:center;'
-													class="table table-bordered table-responsive">
+													class="table table-bordered table-responsive" id="testTable">
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
@@ -396,7 +409,7 @@
 															<th>Subject</th>
 															<th>	<ul><li id="trainerErr" style="display: none;"
 																class="style-li error-red">Select TRAINER for each subject.</li></ul>Trainer</th>
-
+															<th>Checkbox</th>
 
 
 														</tr>
@@ -459,7 +472,7 @@
 
 															<td style="    padding-top: 14px;"> <ct:forEach items="${listSchCodeSubjects}"
 																	var="subjects" varStatus="loop2">
-																	<input type="hidden" name="subject"
+																	<input type="hidden" name="subject"  id="subj_${loop2.count}"
 																		value="${subjects[1]}"/>
 													${subjects[0]}<br />
 																	<br />
@@ -472,28 +485,43 @@
 																		<select style="margin-top:2px; margin-bottom: 30px;" id="trainer_${loop2.count}" name='trainer'
 																			class="form-control">
 																			<option value="" label="Select Trainer" />
-																			<ct:forEach items="${listPersonalInfoTrainer}"
+																			<%--  <ct:forEach items="${listPersonalInfoTrainer}"
 																				var="listPersonalInfoTrainer" varStatus="loop">
 
 																				<option 
 																					value="${listPersonalInfoTrainer.trainerId.id}">${listPersonalInfoTrainer.firstName}</option>
+																			</ct:forEach> --%>
+																			<ct:forEach items="${listPersonalInfoTrainer}"
+																				var="listPersonalInfoTrainer" varStatus="loop">
+
+																				<option 
+																					value="${listPersonalInfoTrainer[0]}">${listPersonalInfoTrainer[1]}</option>
 																			</ct:forEach>
+																			
 																		</select>
-																	</ct:forEach>	
-																</div></td>
-																<%-- <td><ct:forEach items="${listSchCodeSubjects}"
-																	var="subjects" varStatus="loop2">
-																	<input type="checkbox" name="checkBox" value='${subjects[1] listPersonalInfoTrainer.trainerId.id}' >${subjects[1]}
-																	<br />
+																		
 																	</ct:forEach>
-																	</td>	 --%>		
-
-
+																</div></td>
+																<td>
+																<ct:forEach items="${listSchCodeSubjects}" 	var="subjects" varStatus="loop2">
+																<input type="checkbox" onclick="trainerMailData('${loop2.count}');" >
+											<br><br><br>					
+																<ct:forEach items="${listPersonalInfoTrainer}"
+																				var="listPersonalInfoTrainer" varStatus="loop1">
+																				
+															
+                                                                  <input type="hidden" id="mail_${loop1.count}" value="${listPersonalInfoTrainer[0]}">
+														<input type="hidden" id="emailId_${listPersonalInfoTrainer[0]}"
+														value="${listPersonalInfoTrainer[2]}"/>
+																			</ct:forEach>
+																	</ct:forEach>		
+														
+														</td>
 														</tr>
 													</ct:forEach>
 												</table><!--     margin-top: 96px; -->
 												<div    style="margin-left: 868px; "><input type="submit" id="createbtn" value="create"
-													class="btn login-btn" onclick="return validate2();" />
+													class="btn login-btn" onclick="allTrainerMailData(); return validate2();" />
 													</div>
 													
 												<cf:hidden path="trainingInstitute2" value="${institute}" />
@@ -643,7 +671,7 @@
 		</div>
 	</section>
 
-
+<cf:hidden path="data" value="" />
 </cf:form>
 
 <script>
@@ -875,10 +903,6 @@
 } */
 	
 	function validate2() {
-	
-	
-
-
 		$("#trainingEndDateErr").css("display" , 'none');
 		$("#trainerErr").css("display" , 'none');
 		$("#onDateErr").css("display", "none");
@@ -984,7 +1008,7 @@
 			return false;
 		}
 		</ct:forEach>
-
+alert("Click on Nominate Trainee button to nominate Trainees into Training Calendar if needed.");
 	}
 
 	function viewtrainingcalendar(id){ 
@@ -1055,4 +1079,38 @@
 	 document.getElementById(id).value=endDate;
 	
 	 }  */
+	 
+	 window.trainerArray = [];
+	 function trainerMailData(count){
+
+		 var tid=$("#trainer_"+ count).val();
+		// var q=$("#mail_"+ count).val();
+		 var sid=$("#subj_"+ count).val();
+ if(tid!=0){
+			var e1=$("#emailId_"+ tid).val();
+		 }
+			var loginIds = "";
+			$('#testTable').find('input[type="checkbox"]').each(
+					function(i) {
+						if (this.checked) {
+							if (loginIds == "") {
+									loginIds = tid + "%"+ e1+"%"+sid;
+								window.trainerArray.push(loginIds);	
+							}
+							else {
+							loginIds = loginIds + "," + tid+ "%" + e1+"%"+sid;
+							}
+						}
+						 else{
+							window.trainerArray.splice(i , 1);
+						} 
+					});
+			
+			console.log(loginIds);
+	 }
+	 function allTrainerMailData(){
+		 var a=window.trainerArray;
+		 $('#data').val(a);
+	
+	 }
 </script>
