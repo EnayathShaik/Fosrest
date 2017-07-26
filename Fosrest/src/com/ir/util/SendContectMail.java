@@ -86,13 +86,13 @@ public class SendContectMail {
 				Message message = new MimeMessage(session);
 				message.setFrom(new InternetAddress(from));
 				message.setRecipients(Message.RecipientType.TO,
-						InternetAddress.parse(s[0]));
+						InternetAddress.parse(email));
 				message.setSubject(subject);
 				System.out.println("in send mail class");
 			
 				message.setText("You have been selected as Trainer for : "+s[0]
-						+ "this subject and Training Start Date is : " + s[1]
-						+ "for other Information Please Contact to StateAdmin  " + body);
+						+ " this subject and Training Start Date is : " + s[1]
+						+ " for other Information Please Contact to StateAdmin  " + body);
 				Transport.send(message);
 				System.out.println("after sent mail");
 
