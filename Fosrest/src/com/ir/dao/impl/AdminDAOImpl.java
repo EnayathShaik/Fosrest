@@ -4022,6 +4022,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		Session session=this.sessionFactory.getCurrentSession();
 		String mailDetails[]=new String[days.length];
 		 String data=p.getData();
+		 System.out.println("INFOOOOOO::::::::::::::: "+p.getData());
 		String[] arrData = data.split(",");
 		//String q1=null,q2=null,s=null;
 		String email[]=	new String[days.length];
@@ -4135,7 +4136,14 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		Query query;
 		query= session.createQuery("from MappingMasterTrainer where state='"+id+"'");
 		List<MappingMasterTrainer> trainingNameList = query.list();
-		return trainingNameList;
+		
+		
+		String sql = "select mmt.personalinformationtrainer,mmt.firstName,pit.email from MappingMasterTrainer mmt inner join personalinformationtrainer pit on pit.id=mmt.personalinformationtrainer where state='"+id+"'";
+		Query query2 = session.createSQLQuery(sql);
+	    List list2 = query2.list();
+
+        return list2;
+		//return trainingNameList;
 	}
 
 	@Override
