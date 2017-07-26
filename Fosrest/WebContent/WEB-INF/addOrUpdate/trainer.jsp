@@ -4,6 +4,32 @@
 <%-- <ct:url var="addAction" value="/PersonalInformationTrainer.fssai" ></ct:url> --%>
 <%--  <cf:form action="PersonalInformationTrainer.fssai" name="myForm" method="POST" commandName="TrainerForm" > --%>
  
+ <script>
+
+	 function myFunction() {
+		    var searchText = document.getElementById('myInput').value;
+		    var targetTable = document.getElementById('datatablesfosrest');
+		    var targetTableColCount;
+		    for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+		        var rowData = '';
+
+		        if (rowIndex == 0) {
+		           targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+		           continue; //do not execute further code for header row.
+		        }
+		        for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
+		        	rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).innerText.toLowerCase();
+		        	 
+		        }
+		        if (rowData.toLowerCase().indexOf(searchText) == -1)
+		            targetTable.rows.item(rowIndex).style.display = 'none';
+		        else
+		            targetTable.rows.item(rowIndex).style.display = 'table-row';
+		    }
+		}
+</script>
+ 
+ 
 <section id="main-slider" class="no-margin">
   <div class="carousel-inner innerpage">
     <div class="container">
@@ -45,6 +71,10 @@
                                                             <fieldset>
                                             <legend>View List of Empanelled Trainers</legend>
                                             <ct:if test="${!empty listTrainer}">
+                                            <div>
+                                            <span style="font-weight:bold;margin-left: 784px;">Search:</span>
+                                            <input type="text" onkeyup="myFunction();this.value = this.value.toLowerCase();" id="myInput"  placeholder="Enter search text">
+                                             </div>
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                 <thead>
                                                     <tr class="background-open-vacancies">
