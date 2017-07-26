@@ -90,9 +90,9 @@ public class SendContectMail {
 				message.setSubject(subject);
 				System.out.println("in send mail class");
 			
-				message.setText("You have been selected as Trainer for : "+s[0]
-						+ " this subject and Training Start Date is : " + s[1]
-						+ " for other Information Please Contact to StateAdmin  " + body);
+				message.setText("You have been selected as Trainer for "+s[0]
+						+ " subject. The Training Start Date is : " + s[1]
+						+ ". For other Information Please Contact to StateAdmin.  ");
 				Transport.send(message);
 				System.out.println("after sent mail");
 
