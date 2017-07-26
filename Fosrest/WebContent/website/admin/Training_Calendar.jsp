@@ -29,6 +29,13 @@
 		$("#createbtn").css("display" , 'block'); 
 	} */
 	
+	
+	if('${profileId}'==2){ 
+ 		$("#stateId").val('${stateId}');
+	 	$("#stateId").prop("disabled", "disabled"); 
+}
+	
+	
 	if('${search}'=='Y'){ 
 		var trPhase=$("#trainingPhase").val();
 		redirectScheduleCode2(trPhase,'scheduleCode');
@@ -47,6 +54,8 @@
         	  
          	$("#scheduleCode").val('${TrainingCalendarForm.scheduleCode}');
          }, 1000); 
+ 		$("#stateId").val('${TrainingCalendarForm.stateId}');
+
 		$("#trainingInstitute").val('${TrainingCalendarForm.trainingInstitute}');
 		$("#trainingStartDate").val('${TrainingCalendarForm.trainingStartDate}');
 		$("#trainingEndDate2").val('${TrainingCalendarForm.trainingEndDate}'); 
@@ -57,6 +66,7 @@
 	 	$("#designation").prop("disabled", "disabled"); 
 	 	 $("#trainingType").prop("disabled", "disabled"); 
 	 	$("#trainingPhase").prop("disabled", "disabled");  
+	 	$("#stateId").prop("disabled", "disabled"); 
 		$("#trainingInstitute").prop("disabled", "disabled");
 		$("#scheduleCode").prop("disabled", "disabled");    
         $("#createbtn").val("Save");
@@ -66,7 +76,7 @@
 		</ct:forEach> 
         
         <ct:forEach items="${listEnteredSubjectDates}" var="lesd" varStatus="loop" > 
-        $("#subjectDates_"+'${loop.count}').val('${lesd}');  
+        $("#subjectDates_"+'${loop.count}').val('${lesd[0]}');  
 		</ct:forEach>
  
 	}
@@ -79,7 +89,10 @@
 		 
 		  $("#designation").prop("disabled", "disabled"); 
 	 	 $("#trainingType").prop("disabled", "disabled"); 
-	 	$("#trainingPhase").prop("disabled", "disabled");  
+	 	$("#trainingPhase").prop("disabled", "disabled");
+		$("#stateId").val('${stateId}');//jo
+	 	$("#stateId").prop("disabled", "disabled"); 
+
 		$("#trainingInstitute").prop("disabled", "disabled"); 
 		$("#scheduleCode").prop("disabled", "disabled");  
         $("#createbtn").val("Save");
@@ -89,7 +102,7 @@
 		</ct:forEach> 
 		
         <ct:forEach items="${listEnteredSubjectDates}" var="lesd" varStatus="loop" > 
-        $("#subjectDates_"+'${loop.count}').val('${lesd}');  
+        $("#subjectDates_"+'${loop.count}').val('${lesd[0]}');  
 		</ct:forEach>
         
 	}
@@ -226,6 +239,29 @@
 												<input type="button" onclick="showSchedules();return false;" value="--> Show subject" class="btn login-btn" style="margin-top: 26px; margin-left: -18px; padding: 6px 6px;">
 												</div>
 												<div class="form-group">
+													<div >
+														<ul class="lab-no">
+															<li class="style-li"><strong>Select State:&nbsp&nbsp&nbsp&nbsp</strong></li>
+															<li id="statesErr" style="display: none;"
+																class="style-li error-red">Select state.</li>
+															<li class="style-li error-red"></li>
+														</ul>
+														<cf:select path="stateId" class="form-control" onchange="getTrainingInstitude(this.value,'trainingInstitute');">
+															<cf:option value="0" label="Select state" />
+															<cf:options items="${listStateMaster}"
+																itemValue="stateId" itemLabel="stateName" />
+														</cf:select>
+														<%-- <cf:select path="trainingInstitude" class="form-control"
+													onchange="getTrainer(this.value , 'trainer_id')">
+													<cf:option value="0" label="Select Training Institute" />
+													<cf:options items="${listTrainingInstitude}" itemValue="id"
+														itemLabel="trainingCenterName" />
+												</cf:select> --%>
+													</div>
+
+
+												</div>
+												<div class="form-group">
 													<div id="instituteField">
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training
@@ -315,6 +351,8 @@
 														class="btn login-btn"
 														formaction="trainingcalendarsearch.fssai"
 														onclick="return validateFields();" />
+													<cf:hidden path="stateId2" />
+														
 													<!--  <input type="submit"
 													class="btn login-btn show-details-vacancy collapsed"
 													data-toggle="collapse" style="margin-left: 381px;"
@@ -457,6 +495,7 @@
 												<div    style="margin-left: 868px; "><input type="submit" id="createbtn" value="create"
 													class="btn login-btn" onclick="return validate2();" />
 													</div>
+													
 												<cf:hidden path="trainingInstitute2" value="${institute}" />
 												<cf:hidden path="trainingStartDate2" value="${startDate}" />
 												<%-- <cf:hidden path="trainingEndDate2" value="${endDate}" /> --%>
@@ -609,6 +648,31 @@
 
 <script>
 
+/* function getTrainingPhase2(val , idName) {
+	$('#'+idName+' option').remove();
+ 	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	$.ajax({
+		type : 'post',
+		url : 'loadTrainingPhase.fssai?data='+ val,
+		contentType : "application/json",
+	    data:name,
+		success : function(response) {
+			var mainData1 = jQuery.parseJSON(response);
+			
+			$('#'+idName+' option').remove(); 
+			$('#'+idName).append(
+					'<option value="0" label="Select Training Phase" >Select Training Phase</option>');
+			$.each(mainData1, function(i, obj) {
+				if((i+1)!=3)
+				$('#'+idName).append('<option value='+(i+1)+' >' + mainData1[i]+ '</option>');
+			});
+		}
+	});
+}
+ */
 	</script>
 <!-- 
 <script>
@@ -681,7 +745,13 @@
 </script> -->
 
 <script>
+
+
+
 	function validateFields() {
+		$("#stateId2").val($("#stateId").val());
+		
+		
 		$("#designationErr").css("display", "none");
 
 		$("#trainingTypeErr").css("display", "none");
@@ -707,6 +777,7 @@
 		}
 		if ($("#scheduleCode").val() == 0) {
 			$("#scheduleCodeErr").css("display", "block");
+			$("#scheduleCode").focus();
 			return false;
 		}
 		if ($("#trainingInstitute").val() == 0 && $("#trainingPhase").val() !=3) {
@@ -804,6 +875,10 @@
 } */
 	
 	function validate2() {
+	
+	
+
+
 		$("#trainingEndDateErr").css("display" , 'none');
 		$("#trainerErr").css("display" , 'none');
 		$("#onDateErr").css("display", "none");
@@ -950,31 +1025,6 @@
 		return false;
 	}
 
-	function getTrainingPhase(val , idName) {
-		$('#'+idName+' option').remove();
-	 	var name=JSON.stringify({
-			courseType:0,
-			courseName:0
-	  })
-		$.ajax({
-			type : 'post',
-			url : 'loadTrainingPhase.fssai?data='+ val,
-			contentType : "application/json",
-		    data:name,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				
-				$('#'+idName+' option').remove(); 
-				$('#'+idName).append(
-						'<option value="0" label="Select Training Phase" >Select Training Phase</option>');
-				$.each(mainData1, function(i, obj) {
-					if((i+1)!=3)
-					$('#'+idName).append('<option value='+(i+1)+' >' + mainData1[i]+ '</option>');
-				});
-			}
-		});
-	}
-	
 	function printDiv() {
 		var printContents = document.getElementById('printDiv').innerHTML;
 		var originalContents = document.body.innerHTML;

@@ -11,6 +11,9 @@ public class TrainingCalendarForm {
 	private String totalDuration;
 	private String totalDays;
 	private int trainingCalendarId;
+	private int stateId;
+	private int stateId2;
+	
 	public int getTrainingCalendarId() {
 		return trainingCalendarId;
 	}
@@ -62,6 +65,18 @@ public class TrainingCalendarForm {
 	
 	
 	
+	public int getStateId() {
+		return stateId;
+	}
+	public void setStateId(int stateId) {
+		this.stateId = stateId;
+	}
+	public int getStateId2() {
+		return stateId2;
+	}
+	public void setStateId2(int stateId2) {
+		this.stateId2 = stateId2;
+	}
 	public String getScheduleCode2() {
 		return scheduleCode2;
 	}

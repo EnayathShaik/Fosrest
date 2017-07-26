@@ -177,8 +177,8 @@ public class CommonController {
 	@ResponseBody
 	public void getTrainingInstitude(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
 		new ZLogger("getTrainingInstitude","getTrainingInstitude............" + data  , "CommonController.java");
-		String courseName =  data;
-		List trainingInstitudeList = commonService.getTrainingInstitude(courseName);
+		String stateId =  data;
+		List trainingInstitudeList = commonService.getTrainingInstitude(stateId);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();
 		String newList = g.toJson(trainingInstitudeList); 

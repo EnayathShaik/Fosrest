@@ -107,10 +107,24 @@
 				$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "'+assessmentQuestions+'">');
 				$('#questionsTable').append('<input type="hidden" name = "assessmentQuestions" value = "'+JSON.stringify(assessmentQuestions)+'">');
 			});
+			
+			
+			function validateRGroup(){
+
+for(var index=0;index<questionList.listAssessmentQuestion.length;index++){
+				if (!$("input[name="+questionList.listAssessmentQuestion[index].assessmentQuestionId+"]:checked").val()) {
+				   alert('Select an option for question No '+(index+1));
+				   return false;
+				   
+				}
+				
+				}
+				return true;
+			}
 			 </script>
 			 
 	</section>
-	<INPUT TYPE="submit" class="btn login-btn pull-right" VALUE="Save">
+	<INPUT TYPE="submit" class="btn login-btn pull-right" VALUE="Save" onclick="return validateRGroup();">
 </FORM>
 </div>
 </div>

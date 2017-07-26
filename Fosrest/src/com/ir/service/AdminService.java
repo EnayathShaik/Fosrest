@@ -512,7 +512,7 @@ public String shareInitiativesave(ContactTrainee contactTrainee, String id);
 
 
 
-public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(int profileId,int id);
+public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(int id);
 
 List<PersonalInformationTrainer> trainingNameList2(int profileId,int id);
 
@@ -525,7 +525,7 @@ public List<SubjectMaster>  allSubjects();
 public List listCalendarSearch(TrainingCalendarForm form);
 
 public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p);
-public List<MappingMasterTrainer> trainerMappingState(int profileId,int id);
+public List<MappingMasterTrainer> trainerMappingState(int id);
 
 public List listSchCodeSubjects(String scheduleCode);
 
@@ -547,7 +547,7 @@ public void removeTrainingSchedule2(int id);
 public List editTrainingCalendar(int id);
 public TrainingCalendarForm getTrainingCalendar(int id);
 
-String updateTrainingCalendar(int trainingCalendarId, String[] trainers, String trainingStartDate2,
+String updateTrainingCalendar(int trainingCalendarId,String[] days,String[] subjectDates, String[] trainers, String trainingStartDate2,
 		String trainingEndDate2);
 
 List getTrainingCalendarMappingTrainer(int editId);

@@ -1559,9 +1559,9 @@ public String shareInitiativesave(ContactTrainee contactTrainee , String id) {
 
 @Override
 @Transactional
-public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(int profileId,int id) {
+public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(int id) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.listTrainingInstitude2(profileId,id);
+	return this.adminDAO.listTrainingInstitude2(id);
 }
 
 @Override
@@ -1601,9 +1601,9 @@ public String createTrainingCalendar(String[] days,String[] subjectDates,String[
 
 @Override
 @Transactional
-public List<MappingMasterTrainer> trainerMappingState(int profileId,int id) {
+public List<MappingMasterTrainer> trainerMappingState(int id) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.trainerMappingState(profileId,id);
+	return this.adminDAO.trainerMappingState(id);
 }
 
 @Override
@@ -1678,10 +1678,10 @@ public TrainingCalendarForm getTrainingCalendar(int id){
 
 @Override
 @Transactional
-public String updateTrainingCalendar(int trainingCalendarId, String[] trainers, String trainingStartDate2,
+public String updateTrainingCalendar(int trainingCalendarId,String[] days,String[] subjectDates, String[] trainers, String trainingStartDate2,
 		String trainingEndDate2) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.updateTrainingCalendar(trainingCalendarId,trainers,trainingStartDate2,trainingEndDate2);
+	return this.adminDAO.updateTrainingCalendar(trainingCalendarId,days,subjectDates,trainers,trainingStartDate2,trainingEndDate2);
 }
 
 @Override

@@ -129,10 +129,10 @@ public class CommonDaoImpl implements CommonDao{
 	@Override
 	public  List getTrainingInstitude(String data){
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select id ,  trainingcentername  from  personalinformationtraininginstitute where trainingpartnername= '"+data+"'";		
+		String sql = "select id ,  trainingcentername  from  personalinformationtraininginstitute where correspondenceState= '"+data+"'";		
 		Query query = session.createSQLQuery(sql);
-		List courseTypeList = query.list();
-		return courseTypeList;
+		List list = query.list();
+		return list;
 	}
 	
 	

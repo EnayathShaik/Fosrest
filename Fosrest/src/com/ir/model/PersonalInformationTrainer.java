@@ -28,6 +28,7 @@ public class PersonalInformationTrainer {
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "PERSONALINFOTRAINEE_SEQ", allocationSize=1, initialValue=1)
 	private int id;
 	
+	private boolean fssai_tot;
 
 
 	//private String userType;
@@ -159,6 +160,14 @@ public class PersonalInformationTrainer {
 	private String correspondenceDistrict;
 
 	
+
+	public boolean isFssai_tot() {
+		return fssai_tot;
+	}
+
+	public void setFssai_tot(boolean fssai_tot) {
+		this.fssai_tot = fssai_tot;
+	}
 
 	public int getId() {
 		return id;

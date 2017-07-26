@@ -696,6 +696,20 @@
                                                 
 									
                                              </div>
+                                             <div class="form-group">
+										<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Undergone Fssai approved TOT course:&nbsp&nbsp</strong> <cf:checkbox path="fssai_tot" value="Yes" ></cf:checkbox></li>
+									
+										</ul>
+										
+									</div>
+												
+												
+                                                
+									
+                                             </div>
+                                             
 									<!-- Modal -->
 							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 								aria-labelledby="myModalLabel">

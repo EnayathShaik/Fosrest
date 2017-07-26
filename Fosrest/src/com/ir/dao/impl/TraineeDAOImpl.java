@@ -1390,6 +1390,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainer.setRadioTrainingInstitute(p.getRadioTrainingInstitute());
 		personalInformationTrainer.setAssociatedWithAnyTrainingInstitute(p.getAssociatedWithAnyTrainingInstitute());
 		personalInformationTrainer.setOtherTrainingInstitute(p.getOtherTrainingInstitute());
+		personalInformationTrainer.setFssai_tot(p.isFssai_tot());;
 		System.out.println(" status "+p.getStatus());
 		/*if(p.getStatus() != null){
 			System.out.println(" loginId "+p.getLogId() );
