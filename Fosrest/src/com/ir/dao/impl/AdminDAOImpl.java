@@ -4107,17 +4107,17 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 						}
 			}
 		
-		for(int i=0;i<arrData.length;i++){
-			
-				finalData[i]=subjName[i]+","+p.getTrainingStartDate2();
-			
-		}
-		for(int t=0;t<arrData.length;t++){
+	for(int t=0;t<arrData.length;t++){
 			String id="";
-			System.out.println("FINAL ::: "+finalData[t]);
-			SendContectMail traineeMaail = new SendContectMail();
-			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
-			traineeMaail.mailProperty(finalData[t], email[t], id);
+			if(subjName[t]==null){
+			}
+			else{
+				finalData[t]=subjName[t]+","+p.getTrainingStartDate2();
+		        SendContectMail traineeMaail = new SendContectMail();
+				TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
+				traineeMaail.mailProperty(finalData[t], email[t], id);
+			}
+			
 		}
 		
 		for(int i=0;i<mailDetails.length;i++)
