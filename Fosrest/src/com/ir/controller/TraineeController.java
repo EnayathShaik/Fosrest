@@ -1081,7 +1081,7 @@ public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") Perso
 		session.setAttribute("traineeSteps", 0);
 		CertificateInfo certificateInfo = traineeService.getCertificateID(Integer.parseInt(userId),"");
 		if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 5){
-			traineeService.closeCourse(Integer.parseInt(userId), "Y");
+			traineeService.closeCourse((int)session.getAttribute("userId"), "Y");
 		}
 		
 		model.addAttribute("certificateID", certificateInfo.getCertificateID());

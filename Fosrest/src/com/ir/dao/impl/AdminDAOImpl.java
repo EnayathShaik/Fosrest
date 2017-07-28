@@ -3135,8 +3135,8 @@ public class AdminDAOImpl implements AdminDAO {
 
 		if (list.size() > 0) {
 			query = session.createSQLQuery(
-					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails  where ld.status='A' and pit.steps=0 and pit.designation='"
-							+ designation + "' and pit.correspondenceState='"+stateId+"'");
+					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) inner join trainingCalendar tc on tc.trainingcalendarId=eu.trainingCalendarId left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails  where ld.status='A' and pit.steps=0 and pit.designation='"
+							+ designation + "' and pit.correspondenceState='"+stateId+"'and  to_date(tc.trainingenddate, 'DD/MM/YYYY') <current_date");
 			System.out.println("data der " + query);
 		} else {
 			query = session.createSQLQuery(
@@ -4501,7 +4501,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		for (TrainingCalendar p : mccList) {
 			System.out.println("TrainingSchedule List::" + p);
 		}*/
-	String sql="select tc.trainingCalendarId,tc.trainingStartDate from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where coalesce(isactive,'') <> 'I' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"'and designation='"+des+"' and tc.trainingInstitute='"+trainingInstitute+"' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') > current_date";
+	String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where coalesce(isactive,'') <> 'I' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"'and designation='"+des+"' and tc.trainingInstitute='"+trainingInstitute+"' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') >=current_date";
 		Query query = session.createSQLQuery(sql);
 		List batchCodeList = query.list();
 		return batchCodeList;

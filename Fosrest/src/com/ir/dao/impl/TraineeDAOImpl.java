@@ -1470,9 +1470,30 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainingInstitute.setAvailableInHouseTrainer(p.isAvailableInHouseTrainer());
 		personalInformationTrainingInstitute.setNoOfInHouseTrainer(p.getNoOfInHouseTrainer());
 		personalInformationTrainingInstitute.setNoOfPC(p.getNoOfPC());
+		personalInformationTrainingInstitute.setAc(p.isAc());
+		personalInformationTrainingInstitute.setLcd(p.isLcd());
+		personalInformationTrainingInstitute.setLaptop(p.isLaptop());
+		personalInformationTrainingInstitute.setProjector(p.isProjector());
+		personalInformationTrainingInstitute.setPrinter(p.isPrinter());
+		personalInformationTrainingInstitute.setPhotoCopier(p.isPhotoCopier());
+		personalInformationTrainingInstitute.setWhiteBoard(p.isWhiteBoard());
+		personalInformationTrainingInstitute.setPowerBackup(p.isPowerBackup());
+		personalInformationTrainingInstitute.setTrTool(p.isTrTool());
+		personalInformationTrainingInstitute.setInternetFacility(p.isInternetFacility());
+		personalInformationTrainingInstitute.setLight(p.isLight());
+		personalInformationTrainingInstitute.setSound(p.isSound());
+		personalInformationTrainingInstitute.setFssaiLab(p.isFssaiLab());
+		personalInformationTrainingInstitute.setLastYearTrainings(p.getLastYearTrainings());
+		personalInformationTrainingInstitute.setLastYearParticipants(p.getLastYearParticipants());
+		personalInformationTrainingInstitute.setConHall(p.isConHall());
+		personalInformationTrainingInstitute.setNoOfHall(p.getNoOfHall());
+		personalInformationTrainingInstitute.setPerHall(p.getPerHall());
+		personalInformationTrainingInstitute.setHostelRooms(p.getHostelRooms());
+		personalInformationTrainingInstitute.setMess(p.isMess());
+		personalInformationTrainingInstitute.setPowerHostel(p.isPowerHostel());
+		personalInformationTrainingInstitute.setHostel(p.isHostel());
 		//personalInformationTrainingInstitute.setNoOfYearExp(p.getNoOfYearExp());
 		//personalInformationTrainingInstitute.setSessWishToConduct(p.getSessWishToConduct());
-		System.out.println(" statusssssssssssssssssssssss "+p.getStatus());
 		/*if(p.getStatus() != null){
 			System.out.println(" loginId "+p.getLogId() );
 			int loginId = Integer.parseInt(p.getLogId());
@@ -1668,7 +1689,7 @@ System.out.println("list "+list);
 		//	List<OnlineTrainingForm> list = new ArrayList<OnlineTrainingForm>();
 			Session session = this.sessionFactory.getCurrentSession();
 			/*List<Object[]> lst = session.createSQLQuery("select trainingtype , trainingphase ,mm.modulename,  trainingstartdate , trainingenddate  from nomineetrainee nt  left join trainingschedule ts on  (nt.trainingscheduleid = ts.trainingscheduleid) left join modulemaster mm on (mm.moduleid = ts.moduleid) where nt.logindetails ='"+ id +"'").list();*/
-			List<Object[]> lst = session.createSQLQuery("select tt.trainingtypeName , tp.trainingphaseName ,d.designationName,tc.trainingstartdate , tc.trainingenddate , s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.result='-1' and nt.logindetails='"+ id +"'").list();
+			List<Object[]> lst = session.createSQLQuery("select tt.trainingtypeName , tp.trainingphaseName ,d.designationName,tc.trainingstartdate , tc.trainingenddate , s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'and nt.status='N'").list();
 			if(lst.size() > 0){
 			 Object[] obj=	lst.get(0);
 			 bean.setTrainingType((String)obj[0]);
@@ -1769,7 +1790,7 @@ System.out.println("list "+list);
  a=1;
 			}*/
 			Query query=null;
-				 query =session.createSQLQuery(" select distinct s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'");
+				 query =session.createSQLQuery(" select distinct s.subjectname from nomineetrainee nt  left join trainingcalendar tc on  (nt.trainingcalendarid = tc.trainingcalendarid)left join trainingtype tt on tt.trainingtypeId = cast(tc.trainingtype as numeric) left join trainingPhase tp on tp.trainingPhaseId= cast(tc.trainingPhase as numeric) left join designation d on d.designationId= cast(tc.designation as numeric)left join trainingschedule ts on (ts.schedulecode = tc.schedulecode) left join subjectmapping sm on (sm.schedulecode = ts.schedulecode) left join subjectmaster s on (s.subjectid = cast(sm.subject as numeric)) where nt.logindetails='"+ id +"'and nt.status='N'");
 				
 			
 			//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
@@ -1814,7 +1835,7 @@ public List listsubjects2(int id) {
 	Session session = this.sessionFactory.getCurrentSession();
 	Query query=null;
 	
-	query =session.createSQLQuery("   select distinct s.subjectname,case when coalesce(vr.marks , -1) = -1 then cast('Pending' as varchar(20)) else cast(vr.marks as varchar(20)) end as Marks from nomineetrainee nt inner join viewResult vr on vr.rollno=nt.rollno inner join subjectmaster s on (s.subjectid = vr.subject) where nt.certificatestatus='N' and nt.logindetails='"+ id +"'");
+	query =session.createSQLQuery("   select distinct s.subjectname,case when coalesce(vr.marks , -1) = -1 then cast('Pending' as varchar(20)) else cast(vr.marks as varchar(20)) end as Marks from nomineetrainee nt inner join viewResult vr on vr.rollno=nt.rollno inner join subjectmaster s on (s.subjectid = vr.subject) where nt.status='N' and nt.logindetails='"+ id +"'");
 
 
 	

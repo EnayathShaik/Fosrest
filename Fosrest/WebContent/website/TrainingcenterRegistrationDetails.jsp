@@ -235,13 +235,34 @@ return false;
  
  
  function OnStart(){
-	 
+	 $("#noofhallid").css("display", "none");
+	 	$("#perhallid").css("display", "none");
+	 	$("#hostelroomsid").css("display", "none");
+	 	$("#power").css("display", "none");
+	 	$("#messid").css("display", "none");
 	 var isUpdate = '${isUpdate}';
 	 var profileId = '${profileId}';
 	 //alert("profileId"+profileId);
-	 
 	 if(isUpdate !=null && isUpdate== "Y"){
-		 
+		 if($('#YesConHallid').is(':checked')==true){
+				
+				$("#noofhallid").css("display", "block");
+			 	$("#perhallid").css("display", "block");
+			}
+		 else	if ( $('#YesConHallid').is(':checked')==false) {
+				$("#noofhallid").css("display", "none");
+			 	$("#perhallid").css("display", "none");
+			}
+		 if($('#yesHostelid').is(':checked')==true){
+				$("#hostelroomsid").css("display", "block");
+			 	$("#power").css("display", "block");
+			 	$("#messid").css("display", "block");
+			}
+		 else 	if ( $('#yesHostelid').is(':checked')==false) {
+			$("#hostelroomsid").css("display", "none");
+			 	$("#power").css("display", "none");
+			 	$("#messid").css("display", "none");
+			}
 		 var name = '${PersonalInformationTrainingInstitute.firstName}';
 			$("#logId").val('${PersonalInformationTrainingInstitute.loginDetails.id}');
 			$("#status").val('${PersonalInformationTrainingInstitute.status}');
@@ -657,6 +678,197 @@ return false;
                         </fieldset>
 <!-- Experience end -->
 
+<!--Eligibility start  -->
+<fieldset>
+                            <legend>Eligibility Criteria</legend>
+                            <!-- left side -->
+                            <div class="col-md-6 col-xs-12">
+
+                                <div class="col-xs-12 remove-padding">
+
+                                 
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        </legend> <strong>Experience of conducting training programme</strong>
+                                    
+                                     
+                                    </div>
+                                    <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li">&nbsp;&nbsp; No. of Trainings conducted last year</li>
+                                             <li id="noOfInHouseTrainerErr" style="display:none;" class="style-li error-red" > Please Enter the No. of In-House Trainers.</li>
+                                           </ul>
+                                    </div>
+                                    <cf:input type="text" path="lastYearTrainings" placeholder="Number of Trainings" class="form-control"
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li">&nbsp;&nbsp;No. of participants trained during last year</li>
+                                             <li id="noOfInHouseTrainerErr" style="display:none;" class="style-li error-red" > Please Enter the No. of In-House Trainers.</li>
+                                           </ul>
+                                    </div>
+                                    <cf:input type="text" path="lastYearParticipants" placeholder="Number of Participants" class="form-control"
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>       
+                                </div>
+                                <div class="form-group">
+									
+							 <div class="form-group">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Availability of conference Hall : </strong></li>
+										</ul>
+									</div>
+									<cf:radiobutton path="conHall" value="Yes" checked="true" onclick="radioYes();" id="YesConHallid" />
+									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="conHall" value="No"  onclick="radioNo();"/>
+									No
+								</div>
+								<div class="form-group" id="noofhallid">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li">&nbsp;&nbsp;No. of hall</li>
+                                             <li id="noOfInHouseTrainerErr" style="display:none;" class="style-li error-red" > Please Enter the No. of In-House Trainers.</li>
+                                           </ul>
+                                    </div>
+                                    <cf:input type="text" path="noOfHall" placeholder="Number of hall" class="form-control"
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>
+                                    <div class="form-group" id="perhallid">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li">&nbsp;&nbsp;Seating capacity per hall</li>
+                                             <li id="noOfInHouseTrainerErr" style="display:none;" class="style-li error-red" > Please Enter the No. of In-House Trainers.</li>
+                                           </ul>
+                                    </div>
+                                    <cf:input type="text" path="perHall" placeholder="Seating capacity" class="form-control"
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>
+								</div>
+								 <div class="form-group">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Hostel Facility  :</strong></li>
+										</ul>
+									</div>
+									<cf:radiobutton path="hostel" value="Yes" checked="true" onclick="radioYesHostel(); " id="yesHostelid" />
+									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="hostel" value="No"   onclick="radioNoHostel();"/>
+									No
+								</div>
+                                <div class="form-group" id="hostelroomsid">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li">&nbsp;&nbsp;No. of Rooms</li>
+                                            </ul>
+                                    </div>
+                                    <cf:input type="text" path="hostelRooms" placeholder="Number of Rooms" class="form-control"
+                                     onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+                                </div>
+                                 <div class="form-group" id="messid">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Mess/Canteen :</strong></li>
+										</ul>
+									</div>
+									<cf:radiobutton path="mess" value="Yes" checked="true" />
+									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="mess" value="No"  />
+									No
+								</div>
+                                 
+                                  <div class="form-group" id="power">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Power backup : </strong></li>
+										</ul>
+									</div>
+									<cf:radiobutton path="powerHostel" value="Yes" checked="true" />
+									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="powerHostel" value="No"  />
+									No
+								</div>
+                            </div>
+                            <!-- left side ends -->
+                            <!-- right side -->
+                            <div class="col-md-6 col-xs-12">
+
+								<strong>Availability of following items in each hall</strong>					
+								  <div class="form-group">
+                                    <div>
+                                        <ul >
+                                         <li ><cf:checkbox path="lcd" />LCD.</li>	
+                                             <li><cf:checkbox path="laptop" />Laptop</li>
+                                              <li><cf:checkbox path="projector" />Projector with screen.</li>
+                                              <li ><cf:checkbox path="printer" />Printer.</li>
+                                              <li ><cf:checkbox path="photoCopier" />PhotoCopier.</li>
+                                              <li ><cf:checkbox path="whiteBoard" />WhiteBoard.</li>
+                                             <li ><cf:checkbox path="powerBackup" />Power Backup.</li>
+                                             <li><cf:checkbox path="trTool" />Arrangement of other training tool as required :</li> 
+                                               <li><cf:checkbox path="internetFacility" />Internet facility  :</li>
+                                             <li><cf:checkbox path="light" />Sufficient light and airflow  :</li>
+                                           <li><cf:checkbox path="sound" />Good sound system  :</li>
+                                             <li ><cf:checkbox path="ac" />Air condition :</li>
+                                           </ul>
+                                    </div>
+                                    
+                             
+                                </div>
+                               
+                              <%--  <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Availability of FSSAI notified laboratory.</strong> :</li>
+                                          </ul>
+                                    </div>
+                                    <cf:radiobutton
+										path="fssaiLab" value="" />Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="fssaiLab" value="" checked="true"  />No
+                                </div> --%>
+									  <div class="form-group">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Availability of FSSAI notified laboratory. </strong></li>
+										</ul>
+									</div>
+									<cf:radiobutton path="fssaiLab" value="Yes" checked="true" />
+									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="fssaiLab" value="No"  />
+									No
+								</div>
+								
+									  <%--  <div class="form-group">
+                                    <div>
+                                        <ul class="lab-no">
+                                            <li class="style-li"><strong>Transport facility.</strong> :</li>
+                                          </ul>
+                                    </div>
+                                    <cf:radiobutton
+										path="transport" value="" />Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="transport" value="" checked="true"  />No
+                                </div> --%>
+                                <div class="form-group">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Transport facility. </strong></li>
+										</ul>
+									</div>
+									<cf:radiobutton path="transport" value="Yes"  checked="true"/>
+									Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="transport" value="No"  />
+									No
+								</div>
+                               
+                            </div> 
+                            <!-- right side ends -->
+                        </fieldset>
+<!-- Eligibility end -->
+
                         <!-- captcha -->
                         <fieldset id="captcha">
                         <div
@@ -713,3 +925,28 @@ return false;
 
 		<div class="col-md-2 hidden-xs"></div>
 	</cf:form>
+	<script>
+	function radioNo(){
+	 	$("#noofhallid").css("display", "none");
+	 	$("#perhallid").css("display", "none");
+	 	$("#noOfHall").val('');
+	 	$("#perHall").val('');
+	 } 
+  function radioYes(){
+	 	$("#noofhallid").css("display", "block");
+	 	$("#perhallid").css("display", "block");
+	  }
+  function radioNoHostel(){
+	 	$("#hostelroomsid").css("display", "none");
+	 	$("#power").css("display", "none");
+	 	$("#messid").css("display", "none");
+	 	$("#hostelRooms").val('');
+	 	$("#powerHostel").val('');
+		$("#mess").val('');
+	 } 
+function radioYesHostel(){
+	 	$("#messid").css("display", "block");
+	 	$("#power").css("display", "block");
+	 	$("#hostelroomsid").css("display", "block");
+	  }
+	</script>

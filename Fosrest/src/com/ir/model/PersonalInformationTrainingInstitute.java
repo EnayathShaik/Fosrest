@@ -28,134 +28,68 @@ public class PersonalInformationTrainingInstitute {
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "PERSONALINFOTRAINIGINSTITUTE_SEQ", allocationSize=1, initialValue=1)
 	private int id;
 	private int createdBy;
-
-//	private String userType;
-	
-
-	
-
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
-	
-	
-
-	//private String empID;
-	
-	
-
-
-
 	private String title;
 	private int noOfPC;
-	
-
-
-	
-
 	@NotNull
-	
 	@Size(min=1, max=50 , message="enter your Training Center Name")
 	private String trainingCenterName;
-
-	//private int trainingPartnerName;
-	
-
-
-	 @Email
+	@Email
 	private String Email;
-	
-
 	@Size(max=10 , message = "enter your mobile Number")
 	private String mobile;
-	
-
-
-
-	//private String pan;
-	
 	private String firstName;
 	private String middleName;
 	private String lastName;
-	
-	
-	
-	
-
 	@NotNull
 	@Size(min=1, max=100 , message="enter your correspondenceAddress1")
 	private String correspondenceAddress1;
-	/*@NotNull
-	@Size(min=1, max=100 , message="enter your correspondenceAddress1")*/
 	private String correspondenceAddress2;
-
-	
 	private String correspondenceState;
-	
 	private String correspondenceCity;
 	@NotNull @Size(min=6, max=6 , message="* enter your correspondencePincode ")
 	private String correspondencePincode;
-
-
-	/*private String residentialDistrict;*/
 	@NotNull
-
-
 	private String correspondenceDistrict;
-
-	
-
-	
-
-
-
-	
-
-	/*public String getResidentialDistrict() {
-		return residentialDistrict;
-	}
-
-	public void setResidentialDistrict(String residentialDistrict) {
-		this.residentialDistrict = residentialDistrict;
-	}*/
-
-
-	
 	private int steps;
-
-	//private int sessWishToConduct;
-	
-	
-	
-	//private String trainingType;
-	
 	private int seatingCapacity;
-	
-	
-	
-	
-	
 	private int noOfInHouseTrainer;
-	
-	//private int noOfYearExp;
-	
 	private boolean availableTVProjector;
 	
 	private boolean availableInHouseTrainer;
-	
-	
-	
-	
-	
-	
-
-	//private String tpName;
 	private String logId;
+	private String Status;
+	private boolean lcd;
+	private boolean laptop;
+	private boolean projector;
+	private boolean printer;
+	private boolean photoCopier;
+	private boolean whiteBoard;
+	private boolean powerBackup;
+	private boolean trTool;
+	private boolean internetFacility;
+	private boolean light;
+	private boolean sound;
+	private boolean ac;
+	private boolean fssaiLab;
+	private boolean transport;
+	private String lastYearTrainings;
+	private String lastYearParticipants;
+	private boolean conHall;
+	private String noOfHall;
+	private String perHall;
+	private String hostelRooms;
+	private boolean mess;
+	private boolean powerHostel;
+	private boolean hostel;
 
-private String Status;
 	
 	
 
-	
+
+
+
 	public int getId() {
 	return id;
 }
@@ -490,6 +424,327 @@ public void setStatus(String status) {
 }
 
 
+public boolean isLcd() {
+	return lcd;
+}
+
+
+
+
+public void setLcd(boolean lcd) {
+	this.lcd = lcd;
+}
+
+
+
+
+public boolean isLaptop() {
+	return laptop;
+}
+
+
+
+
+public void setLaptop(boolean laptop) {
+	this.laptop = laptop;
+}
+
+
+
+
+public boolean isProjector() {
+	return projector;
+}
+
+
+
+
+public void setProjector(boolean projector) {
+	this.projector = projector;
+}
+
+
+
+
+public boolean isPrinter() {
+	return printer;
+}
+
+
+
+
+public void setPrinter(boolean printer) {
+	this.printer = printer;
+}
+
+
+
+
+public boolean isPhotoCopier() {
+	return photoCopier;
+}
+
+
+
+
+public void setPhotoCopier(boolean photoCopier) {
+	this.photoCopier = photoCopier;
+}
+
+
+
+
+public boolean isWhiteBoard() {
+	return whiteBoard;
+}
+
+
+
+
+public void setWhiteBoard(boolean whiteBoard) {
+	this.whiteBoard = whiteBoard;
+}
+
+
+
+
+public boolean isPowerBackup() {
+	return powerBackup;
+}
+
+
+
+
+public void setPowerBackup(boolean powerBackup) {
+	this.powerBackup = powerBackup;
+}
+
+
+
+
+public boolean isTrTool() {
+	return trTool;
+}
+
+
+
+
+public void setTrTool(boolean trTool) {
+	this.trTool = trTool;
+}
+
+
+
+
+public boolean isInternetFacility() {
+	return internetFacility;
+}
+
+
+
+
+public void setInternetFacility(boolean internetFacility) {
+	this.internetFacility = internetFacility;
+}
+
+
+
+
+public boolean isLight() {
+	return light;
+}
+
+
+
+
+public void setLight(boolean light) {
+	this.light = light;
+}
+
+
+
+
+public boolean isSound() {
+	return sound;
+}
+
+
+
+
+public void setSound(boolean sound) {
+	this.sound = sound;
+}
+
+
+
+
+public boolean isAc() {
+	return ac;
+}
+
+
+
+
+public void setAc(boolean ac) {
+	this.ac = ac;
+}
+
+
+
+
+public String getLastYearTrainings() {
+	return lastYearTrainings;
+}
+
+
+
+
+public void setLastYearTrainings(String lastYearTrainings) {
+	this.lastYearTrainings = lastYearTrainings;
+}
+
+
+
+
+public String getLastYearParticipants() {
+	return lastYearParticipants;
+}
+
+
+
+
+public void setLastYearParticipants(String lastYearParticipants) {
+	this.lastYearParticipants = lastYearParticipants;
+}
+
+
+
+
+
+public String getNoOfHall() {
+	return noOfHall;
+}
+
+
+
+
+public void setNoOfHall(String noOfHall) {
+	this.noOfHall = noOfHall;
+}
+
+
+
+
+public String getPerHall() {
+	return perHall;
+}
+
+
+
+
+public void setPerHall(String perHall) {
+	this.perHall = perHall;
+}
+
+
+
+
+public String getHostelRooms() {
+	return hostelRooms;
+}
+
+
+
+
+public void setHostelRooms(String hostelRooms) {
+	this.hostelRooms = hostelRooms;
+}
+
+
+	
+	
+	public boolean isFssaiLab() {
+	return fssaiLab;
+}
+
+
+
+
+public void setFssaiLab(boolean fssaiLab) {
+	this.fssaiLab = fssaiLab;
+}
+
+
+
+
+public boolean isTransport() {
+	return transport;
+}
+
+
+
+
+public void setTransport(boolean transport) {
+	this.transport = transport;
+}
+
+
+
+
+public boolean isConHall() {
+	return conHall;
+}
+
+
+
+
+public void setConHall(boolean conHall) {
+	this.conHall = conHall;
+}
+
+
+
+
+public boolean isMess() {
+	return mess;
+}
+
+
+
+
+public void setMess(boolean mess) {
+	this.mess = mess;
+}
+
+
+
+
+public boolean isPowerHostel() {
+	return powerHostel;
+}
+
+
+
+
+public void setPowerHostel(boolean powerHostel) {
+	this.powerHostel = powerHostel;
+}
+
+
+
+
+public boolean isHostel() {
+	return hostel;
+}
+
+
+
+
+public void setHostel(boolean hostel) {
+	this.hostel = hostel;
+}
+
+
 
 
 	@Override
@@ -497,6 +752,4 @@ public void setStatus(String status) {
 		return trainingCenterName;
 	}
 
-	
-	
 }

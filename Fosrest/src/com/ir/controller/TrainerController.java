@@ -637,7 +637,6 @@ model.addAttribute("trainingType",trainingType);
 			Model model, HttpSession session) {
 	int trainerId=(int) session.getAttribute("loginUser2");
 String batchCode=UploadAssessmentForm.getBatchCode();
-System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBb "+batchCode);
 System.out.println("batchcode          "+batchCode);
 model.addAttribute("batchCodeList", this.trainerService.listBatchCodeListforTrainer(trainerId));
 model.addAttribute("SubjectList", this.trainerService.listofSubjects(trainerId,batchCode));

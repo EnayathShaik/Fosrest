@@ -143,7 +143,7 @@
 														
 														</ul>
 													</div>
-													<cf:select path="trainingInstitute" class="form-control" onchange="getTrainingStartDate(this.value,'trainingStartDate')">
+													<cf:select path="trainingInstitute" class="form-control" onchange="getTrainingStartDate(this.value,'batchCode2')">
 														<cf:option value="0" label="Select  Training Institute" />
 												 </cf:select>
 												</div>
@@ -151,15 +151,15 @@
 											  <div class="form-group">
 												<div>
 													<ul class="lab-no">
-														<li class="style-li"><strong>Training Start Date:</strong></li>
+														<li class="style-li"><strong>Batch:</strong></li>
 														<li class="style-li error-red"><span id="name_status"
 															class="clear-label"> </span> ${created }</li>
-															  <li id="trainingStartDateErr" style="display: none;"
-												class="style-li error-red">Please Select Training Start Date.</li>
+															  <li id="batchCode2Err" style="display: none;"
+												class="style-li error-red">Please Select Batch.</li>
 													</ul>
 												</div>
-												<cf:select path="trainingStartDate" class="form-control">
-														<cf:option value="0" label="Select Training Start Date" />
+												<cf:select path="batchCode2" class="form-control" >
+														<cf:option value="0" label="Select Batch" />
 													</cf:select>
 											</div>
 												
@@ -247,13 +247,14 @@
 												style="display: none">
 												<div>
 													<ul class="lab-no">
-														<li class="style-li"><strong>Training Start Date:</strong></li>
+														<li class="style-li"><strong>Batch:</strong></li>
 														<li class="style-li error-red"><span id="name_status"
 															class="clear-label"> </span> ${created }</li>
 													</ul>
 												</div>
-												<cf:select path="trainingStartDate2" class="form-control" id="batchCode">
+												<cf:select path="batchCode" class="form-control" id="batchCode">
 												<ct:forEach items="${batchCodeList}" var="batchcodelist">
+												<cf:option value="0" label="Select Batch" />
 													<cf:option value="${batchcodelist[0] }" label="${batchcodelist[1] }" />
 												</ct:forEach>
 												</cf:select>
@@ -422,7 +423,7 @@
 
 		      var mainData1 = jQuery.parseJSON(response);
 	 	        $('#'+idName+' option').remove();
-		      $('#'+idName).append('<option value="" label="Select Training Start Date" />');
+		      $('#'+idName).append('<option value="" label="Select Batch" />');
 		        $.each(mainData1 , function(i , obj)
 		  		{
 		        	console.log(obj[0]);
@@ -433,7 +434,7 @@
  }
 
  function batchcodeinfo(){
-	var a=document.getElementById("trainingStartDate").value;
+	var a=document.getElementById("batchCode2").value;
 	var name1=JSON.stringify({
  		courseName:0
    })
@@ -505,14 +506,14 @@
 			$("#trainingTypeErr").css("display", "none");
 			$("#trainingPhaseErr").css("display", "none");
 			$("#trainingInstituteErr").css("display", "none");
-			$("#trainingStartDateErr").css("display", "none");
+			$("#batchCode2Err").css("display", "none");
 	       // ev.preventDefault();
 	       var tInstitute=document.getElementById("trainingInstitute").value;
 		 
     	 var des=document.getElementById("designation").value;
 		 var tType=document.getElementById("trainingType").value;
 		var tPhase=document.getElementById("trainingPhase").value
-		var tStartDate=document.getElementById("trainingStartDate").value;
+		var tStartDate=document.getElementById("batchCode2").value;
 		if(des==''){
 			$("#designationErr").css("display", "block");
 			return false;
@@ -521,8 +522,8 @@
 			$("#trainingTypeErr").css("display", "block");
 			return false;
 		}
-		if(tPhase==3){
-			if(d==0){		 
+		if(tType==3){
+			if(tPhase==0){	
 			$("#trainingPhaseErr").css("display", "block");
 			return false;
 			}
@@ -532,7 +533,7 @@
 			return false;
 		}
 		if(tStartDate==''){
-			$("#trainingStartDateErr").css("display", "block");
+			$("#batchCode2Err").css("display", "block");
 			return false;
 		}
 		else{ 

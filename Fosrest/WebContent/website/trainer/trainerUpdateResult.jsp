@@ -142,7 +142,7 @@
 		var marks=document.getElementById("marks_"+index).value;
 	var subject=$("#subject_"+index).val();
 		var batchCode=document.getElementById("batchCodeid").value;
-		alert("Marks Uploaded");
+		
 	if(marks.match(/^[0-9]{2}$/) == null){
   		alert("Enter Valid Marks");
    		 return false;
@@ -165,7 +165,7 @@
 				
 			}
 		});
-
+		alert("Marks Uploaded");
 	}
    
    </script> 
