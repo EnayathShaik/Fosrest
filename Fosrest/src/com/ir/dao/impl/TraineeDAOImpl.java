@@ -1359,7 +1359,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		int id =  p.getId();
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class, id);
-		//personalInformationTrainer.setUserType(p.getUserType());
+		
 		personalInformationTrainer.setTitle(p.getTitle());
 		personalInformationTrainer.setTrainingState(p.getTrainingState());
 		personalInformationTrainer.setAadharNumber(p.getAadharNumber());
@@ -1390,7 +1390,21 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainer.setRadioTrainingInstitute(p.getRadioTrainingInstitute());
 		personalInformationTrainer.setAssociatedWithAnyTrainingInstitute(p.getAssociatedWithAnyTrainingInstitute());
 		personalInformationTrainer.setOtherTrainingInstitute(p.getOtherTrainingInstitute());
-		personalInformationTrainer.setFssai_tot(p.isFssai_tot());;
+		personalInformationTrainer.setFssai_tot(p.isFssai_tot());
+		personalInformationTrainer.setGraduation(p.getGraduation());
+		personalInformationTrainer.setPostGraduation(p.getPostGraduation());
+		personalInformationTrainer.setTotalExp(p.getTotalExp());
+		personalInformationTrainer.setFoodSafetyAct(p.isFoodSafetyAct());
+		personalInformationTrainer.setPOF(p.isPOF());
+		personalInformationTrainer.setNovelDev(p.isNovelDev());
+		personalInformationTrainer.setFoodNutrition(p.isFoodNutrition());
+		personalInformationTrainer.setFunctional(p.isFunctional());
+		personalInformationTrainer.setRiskAss(p.isRiskAss());
+		personalInformationTrainer.setFoodLab(p.isFoodLab());
+		personalInformationTrainer.setLabelling(p.isLabelling());
+		personalInformationTrainer.setCaseStudy(p.isCaseStudy());
+		personalInformationTrainer.setGlobalPerspective(p.isGlobalPerspective());
+		personalInformationTrainer.setOtherExp(p.isOtherExp());
 		System.out.println(" status "+p.getStatus());
 		/*if(p.getStatus() != null){
 			System.out.println(" loginId "+p.getLogId() );

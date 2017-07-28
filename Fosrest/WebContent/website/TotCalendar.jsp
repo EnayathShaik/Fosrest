@@ -5,7 +5,30 @@
 
 <!-- horizontal navigation -->
 
+<script>
 
+	 function myFunction() {
+		    var searchText = document.getElementById('myInput').value;
+		    var targetTable = document.getElementById('datatablesfosrest');
+		    var targetTableColCount;
+		    for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+		        var rowData = '';
+
+		        if (rowIndex == 0) {
+		           targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+		           continue;
+		        }
+		        for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
+		        	rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).innerText.toLowerCase();
+		        	 
+		        }
+		        if (rowData.toLowerCase().indexOf(searchText) == -1)
+		            targetTable.rows.item(rowIndex).style.display = 'none';
+		        else
+		            targetTable.rows.item(rowIndex).style.display = 'table-row';
+		    }
+		}
+</script>
 <section>
 
       <div id="page-content-wrapper">
@@ -15,6 +38,10 @@
                                             <div class="col-xs-12">
                                            <fieldset>
                                            <legend>Training of Trainer Calendar</legend>
+                                            <div>
+                                            <span style="font-weight:bold;margin-left: 936px;">Search:</span>
+                                            <input type="text" onkeyup="myFunction();this.value = this.value.toLowerCase();" id="myInput"  placeholder="Enter search text">
+                                             </div>
                                             <ct:if test="${!empty listTotCalendar}">
                                             <table id="datatablesfosrest" class="table table-bordered table-responsive">
                                                <thead>

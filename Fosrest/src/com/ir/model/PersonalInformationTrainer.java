@@ -379,32 +379,6 @@ public class PersonalInformationTrainer {
 		this.steps = steps;
 	}
 	
-	
-	/*private String ExpBackground;
-	
-	
-
-	public String getExpBackground() {
-		return ExpBackground;
-	}
-
-	public void setExpBackground(String expBackground) {
-		ExpBackground = expBackground;
-	}*/
-
-	
-	/*private int sessWishToConduct;
-	
-	
-	public int getSessWishToConduct() {
-		return sessWishToConduct;
-	}
-
-	public void setSessWishToConduct(int sessWishToConduct) {
-		this.sessWishToConduct = sessWishToConduct;
-	}*/
-	
-	
 	private int expInYear;
 	private int expInMonth;
 	
@@ -440,18 +414,7 @@ public class PersonalInformationTrainer {
 		AssociatedWithAnyTrainingInstitute = associatedWithAnyTrainingInstitute;
 	}
 
-	/*private int noOfSessionConducted;
 	
-	
-	
-	
-	public int getNoOfSessionConducted() {
-		return noOfSessionConducted;
-	}
-
-	public void setNoOfSessionConducted(int noOfSessionConducted) {
-		this.noOfSessionConducted = noOfSessionConducted;
-	}*/
 	private int createdBy;
 	public int getCreatedBy() {
 	return createdBy;
@@ -460,34 +423,7 @@ public class PersonalInformationTrainer {
 public void setCreatedBy(int createdBy) {
 	this.createdBy = createdBy;
 }
-/*	public String getSpecialisedArea() {
-	return specialisedArea;
-}
 
-public void setSpecialisedArea(String specialisedArea) {
-	this.specialisedArea = specialisedArea;
-}
-*/
-/*public String getOrgName() {
-	return orgName;
-}
-
-public void setOrgName(String orgName) {
-	this.orgName = orgName;
-}*/
-
-/*public String getNoOfTrainings() {
-	return noOfTrainings;
-}
-
-public void setNoOfTrainings(String noOfTrainings) {
-	this.noOfTrainings = noOfTrainings;
-}*/
-
-	//private String specialisedArea;
-	//private String orgName;
-	//private String noOfTrainings;
-	
 private String Status;
 	
 	
@@ -531,6 +467,136 @@ public void setTrainingState(String trainingState) {
 
 public void setOtherTrainingInstitute(String otherTrainingInstitute) {
 	this.otherTrainingInstitute = otherTrainingInstitute;
+}
+
+private String TotalExp;
+private String Graduation;
+private String PostGraduation;
+private boolean FoodSafetyAct;
+private boolean POF;
+private boolean NovelDev;
+private boolean FoodNutrition;
+private boolean Functional;
+private boolean RiskAss;
+private boolean FoodLab;
+private boolean Labelling;
+private boolean CaseStudy;
+private boolean GlobalPerspective;
+private boolean OtherExp;
+
+
+	public String getTotalExp() {
+	return TotalExp;
+}
+
+public void setTotalExp(String totalExp) {
+	TotalExp = totalExp;
+}
+
+
+
+	public String getGraduation() {
+	return Graduation;
+}
+
+public void setGraduation(String graduation) {
+	Graduation = graduation;
+}
+
+public String getPostGraduation() {
+	return PostGraduation;
+}
+
+public void setPostGraduation(String postGraduation) {
+	PostGraduation = postGraduation;
+}
+
+	public boolean isFoodSafetyAct() {
+	return FoodSafetyAct;
+}
+
+public void setFoodSafetyAct(boolean foodSafetyAct) {
+	FoodSafetyAct = foodSafetyAct;
+}
+
+public boolean isPOF() {
+	return POF;
+}
+
+public void setPOF(boolean pOF) {
+	POF = pOF;
+}
+
+public boolean isNovelDev() {
+	return NovelDev;
+}
+
+public void setNovelDev(boolean novelDev) {
+	NovelDev = novelDev;
+}
+
+public boolean isFoodNutrition() {
+	return FoodNutrition;
+}
+
+public void setFoodNutrition(boolean foodNutrition) {
+	FoodNutrition = foodNutrition;
+}
+
+public boolean isFunctional() {
+	return Functional;
+}
+
+public void setFunctional(boolean functional) {
+	Functional = functional;
+}
+
+public boolean isRiskAss() {
+	return RiskAss;
+}
+
+public void setRiskAss(boolean riskAss) {
+	RiskAss = riskAss;
+}
+
+public boolean isFoodLab() {
+	return FoodLab;
+}
+
+public void setFoodLab(boolean foodLab) {
+	FoodLab = foodLab;
+}
+
+public boolean isLabelling() {
+	return Labelling;
+}
+
+public void setLabelling(boolean labelling) {
+	Labelling = labelling;
+}
+
+public boolean isCaseStudy() {
+	return CaseStudy;
+}
+
+public void setCaseStudy(boolean caseStudy) {
+	CaseStudy = caseStudy;
+}
+
+public boolean isGlobalPerspective() {
+	return GlobalPerspective;
+}
+
+public void setGlobalPerspective(boolean globalPerspective) {
+	GlobalPerspective = globalPerspective;
+}
+
+public boolean isOtherExp() {
+	return OtherExp;
+}
+
+public void setOtherExp(boolean otherExp) {
+	OtherExp = otherExp;
 }
 
 	@Override

@@ -162,6 +162,22 @@
 						Registration Form</h3>
 
 					<form>
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 						<!-- personal information -->
 						<fieldset>
@@ -604,6 +620,15 @@
 						</fieldset>
 						<!-- Permanent address ends -->
 
+
+
+
+
+
+
+
+
+
 						<!-- Experience starts -->
 
 						<fieldset>
@@ -699,7 +724,8 @@
                                              <div class="form-group">
 										<div>
 										<ul class="lab-no">
-											<li class="style-li"><strong>Undergone Fssai approved TOT course:&nbsp&nbsp</strong> <cf:checkbox path="fssai_tot" value="Yes" ></cf:checkbox></li>
+											<li class="style-li"><strong>Undergone Fssai approved TOT course:&nbsp&nbsp</strong> 
+											<cf:checkbox path="fssai_tot" value="Yes" ></cf:checkbox></li>
 									
 										</ul>
 										
@@ -829,6 +855,96 @@
 							<!-- right side ends -->
 						</fieldset> 
 						<!-- Experience end -->
+						
+						<!-- Eligibility Criteria -->
+						<fieldset>
+							<legend>Eligibility Criteria</legend>
+
+							<!-- form field starts here -->
+
+							<!-- left side -->
+							<div class="col-md-6 col-xs-12">
+
+								
+									<strong>Field of Expertise</strong>
+										
+									
+									 <div class="form-group">
+									 <div>
+                                        <ul >
+                                        <li><cf:checkbox path="FoodSafetyAct" ></cf:checkbox>Food Safety Act,2006 and FSS Regulation, 2011</li>	
+                                             <li><cf:checkbox path="POF" />Principles of Food Processing</li>
+                                              <li ><cf:checkbox path="NovelDev" />Novel Development in food.</li>
+                                              <li ><cf:checkbox path="FoodNutrition" />Food Science and nutrition.</li>
+                                              <li ><cf:checkbox path="Functional" />Functional foods,nutraceuticals, dietetic products and other similar products.</li>
+                                             <li ><cf:checkbox path="RiskAss" />Risk assessment and analysis,food recall and surveillance</li>
+                                             <li><cf:checkbox path="FoodLab" />Food laboratories,techniques of sampling</li> 
+                                               <li><cf:checkbox path="Labelling" />Labelling,claims/advertisement</li>
+                                             <li><cf:checkbox path="CaseStudy" />Case studies related to FSS Regulation,2011</li>
+                                           <li><cf:checkbox path="GlobalPerspective" />Global perspective on food safety: international laws</li>
+                                             <li ><cf:checkbox path="OtherExp" />Any other relevant experience</li>
+                                           </ul>
+                                    </div>
+                                    </div> 
+								
+
+								
+							</div>
+							
+							<!-- left side ends -->
+
+							<!-- right side -->
+							<div class="col-md-6 col-xs-12">
+
+								
+								<div class="form-group">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Educational and professional qualifications:</strong></li>
+											<li class="style-li error-red"></li>
+										</ul>
+									</div>
+									<div>
+										<ul class="lab-no">
+											<li class="style-li">Graduation:</li>
+											<li class="style-li error-red"></li>
+										</ul>
+									
+									<cf:input type="text" path="Graduation"
+										class="form-control" placeholder="Enter Graduation details" />
+										
+										<ul class="lab-no">
+											<li class="style-li">Post Graduation:</li>
+											<li class="style-li error-red"></li>
+										</ul>
+									
+									<cf:input type="text" path="PostGraduation"
+										class="form-control" placeholder="Enter Post Graduation details" />
+										</div>
+								</div>
+								<div class="form-group">
+									<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Total Experience:</strong></li>
+												</ul> 
+									</div>
+									<cf:input type="text" path="TotalExp" class="form-control"
+										placeholder="Enter Experience in years and month" required="" />
+
+								</div>
+								
+							</div>
+							
+							<!-- right side ends -->
+							<div  style="float: right; width: 99%;">
+									
+									In case of organization, it should have been in existence for a period of at least 1 year on the date of the application.
+									<!-- </a> -->
+								</div>
+							
+						</fieldset>
+						<!-- Eligibility Criteria ends -->
+						
 
 						<!-- captcha -->
 						<fieldset id="captcha">
