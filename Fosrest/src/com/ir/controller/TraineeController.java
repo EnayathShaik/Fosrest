@@ -1134,7 +1134,8 @@ public String NoCertificate(@ModelAttribute("PersonalInformationTrainee") Person
 		
 		traineeService.updateSteps(Integer.parseInt(userId),  0);
 		session.setAttribute("traineeSteps", 0);
-		/*CertificateInfo certificateInfo = traineeService.getCertificateID(Integer.parseInt(userId),"");
+			traineeService.closeCourse((int)session.getAttribute("userId"), "Y");
+	/*CertificateInfo certificateInfo = traineeService.getCertificateID(Integer.parseInt(userId),"");
 		if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 5){
 			traineeService.closeCourse(Integer.parseInt(userId), "Y");
 		}

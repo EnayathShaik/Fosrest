@@ -104,6 +104,8 @@
 													<tr>
 													<td>${loop.count}</td>
 													<td><a href="#" onclick="searchByRollNo(${loop.index}); return false;">${traineeList[0]}</a></td>
+													<cf:hidden path="rollno" id="rollno_${loop.index}"
+																value="${traineeList[0]}" />
 													<cf:hidden path="logindetails" id="userId_${loop.index}"
 																value="${traineeList[2]}" />
 													<td>${traineeList[1]}</td>
@@ -180,11 +182,13 @@
  
    var id;
    var tid;
+   var rollno;
   function searchByRollNo(index){
+	  rollno =document.getElementById("rollno_"+index).value;
 	id=document.getElementById("userId_"+index).value;
 	 tid=$("#batchCodeid").val();
 	   var data=id+"-"+tid;
-	 //  alert("DATAAAAAAA"+data);
+	  //  alert("DATAAAAAAA"+data);
 	   var name1 = JSON.stringify({
 			courseName : 0
 		})
@@ -214,7 +218,7 @@ function uploadResult(){
 			alert("Please Select Result");
 			return false;
 		}
-	  var data=id+"-"+tid+"-"+result;
+	  var data=id+"-"+tid+"-"+result+"-"+rollno;
 	   alert("Result Uploaded");
 	   var name1 = JSON.stringify({
 			courseName : 0

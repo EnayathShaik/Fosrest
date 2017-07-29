@@ -5,6 +5,14 @@ private String batchCode;
 private int trainingCalendarId;
 private int logindetails;
 private String subject;
+private int  rollno;
+
+public int getRollno() {
+	return rollno;
+}
+public void setRollno(int rollno) {
+	this.rollno = rollno;
+}
 public String getSubject() {
 	return subject;
 }
