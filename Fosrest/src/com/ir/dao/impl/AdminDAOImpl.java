@@ -4042,7 +4042,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		tc.setTrainingInstitute(p.getTrainingInstitute2());
 		String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
 		tc.setBatchCode(batchCode);
-		tc.setActive(true);
+		tc.setActive(false);
 		
 			TrainingCalendarMapping tcm;
 		

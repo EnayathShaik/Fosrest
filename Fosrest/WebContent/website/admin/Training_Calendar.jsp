@@ -531,7 +531,8 @@
 
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
-															
+															<th>Current Status</th> 
+															<th>Update Status</th> 
 															<th>Edit</th> 
 															<th>View</th> 
 														</tr>
@@ -549,6 +550,9 @@
 															<td>${listCalendar[5]}</td>
 															<td>${listCalendar[6]}</td>
 															<td>${listCalendar[7]}</td>
+															<td>${listCalendar[9]}</td>
+															 <td><label><input  type="submit" class="btn login-btn" onclick=" return activateTrainingCalendar('${listCalendar[8]}','${listCalendar[10]}');" value="${listCalendar[10]}"/></label>
+                                                                                </td>  
 															                                     
 														<td><input type="submit" id="searchbtn" value="Edit" 
 														class="btn login-btn"
@@ -1091,6 +1095,14 @@ alert("Click on Nominate Trainee button to nominate Trainees into Training Calen
 	
 	 }
 	 
-
+	   function activateTrainingCalendar(tcId,status){
+	       	if(confirm("Are you Sure ? You want to "+status )){
+	       		$("#trainingCalendarId").val(tcId);	
+	       		$("#isActive").val((status=="ACTIVATE"?"TRUE":"FALSE"));
+	       		$("#TrainingCalendarForm").attr("action" , "activateDeActivateTrainingCalendar.fssai");
+	           } else{
+	               return false;
+	           }
+	       }
 	 
 </script>
