@@ -480,6 +480,8 @@ public interface AdminDAO {
 
 	public List<AssessmentQuestions> listAllSubjectQuestion(int a);
 
+	public void activateDeActivateTrainingCalendar(int trainingCalendarId, String tableName, String status);
+
 /*	public List<String> getAllEndDates(String trainingStartDate);
 */
 	

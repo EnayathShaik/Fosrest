@@ -992,14 +992,14 @@ public class TraineeDAOImpl implements TraineeDAO {
 					maxIdSeq = (int) list.get(0);
 					// eligible = (String) list.get(0);
 				}
-				whereCondition = "AND A.status='N' AND D.id = "
+				whereCondition = "AND A.status='N'  AND D.id = "
 						+ userID;
 			}
 
 			// max SeqNo
 			String sql = "Select B.trainingstartdate,B.schedulecode,"
 					+ " A.id  as nomineeId , cast(D.firstname || ' '|| D.middlename ||' '|| D.lastname as varchar (50)) ,A.issueDate,A.certificateid  "
-					+" , concat(E.trainingcentername , ' ' , s.statename, ' ' , ds.districtname) as address "
+					+" , concat(E.trainingcentername , ' ' , s.statename, ' ' , ds.districtname) as address ,B.trainingEndDate as trainingStart,designationName||'-'||trainingTypeName||''||(CASE WHEN tPhase.trainingPhaseId =0 THEN '' ELSE '-'||tPhase.trainingPhaseName END) "
 					+ " from nomineetrainee A "
 					+ " inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) "
 					//+"	inner join trainingcalendarmapping tcm on(tcm.batchcode=B.batchcode) "
@@ -1007,7 +1007,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 					+ " inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "
 					+ " inner join personalinformationtraininginstitute E on(cast(B.traininginstitute as numeric)=E.id)  "
 					+ " inner join statemaster as s on s.stateid = cast( E.correspondencestate as int) "
-					+ " inner join districtmaster as ds on ds.districtid = cast( E.correspondencedistrict as int)  "
+					+ " inner join districtmaster as ds on ds.districtid = cast( E.correspondencedistrict as int) inner join designation desg on (desg.designationid=cast(B.designation as numeric))"
+       +" inner join trainingType ttype on (ttype.trainingTypeid=cast(B.trainingType as numeric))"
+           +" inner join trainingPhase tphase on (tphase.trainingPhaseid=cast(B.trainingPhase as numeric)) "
 					+ " " + whereCondition;
 			int nomineeTraineeUserID = 0;
 			String schedulecode = "";
@@ -1021,7 +1023,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 					Object[] obj = records.get(0);
 					
 					schedulecode = obj[1] == null ? "" : obj[1].toString();
-					certificateInfo.setTrainingDate(obj[0] == null ? ""
+					certificateInfo.setTrainingStart(obj[0] == null ? ""
 							: obj[0].toString());
 					nomineeTraineeUserID = (int) obj[2];
 					certificateInfo.setName(obj[3] == null ? "" : obj[3]
@@ -1033,6 +1035,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 					
 					certificateInfo.setTrainingAddress(obj[6] == null ? ""
 							: obj[6].toString());
+					certificateInfo.setTrainingEnd((String)obj[7]);
+					certificateInfo.setProgramme((String)obj[8]);
 				/*	certificateInfo.setTrainingPartnerName(obj[7] == null ? ""
 							: obj[6].toString());*/
 					
@@ -1606,7 +1610,7 @@ System.out.println("list "+list);
 			Session session = this.sessionFactory.getCurrentSession();
 			StringBuffer sqlQuery  = new StringBuffer();
 			 sqlQuery.append("select tt.trainingtypeName, case when coalesce(nt.result , 'F') = '' then cast('Pending' as varchar(20)) else cast('Completed' as varchar(20)) end as status,  case when nt.result = 'P' then cast('YES' as varchar(3)) else cast('NO' as varchar(2)) end as cerificateAvailable  , pit.id from nomineetrainee nt inner join trainingCalendar tc on (nt.trainingcalendarid = tc.trainingcalendarid) inner join trainingType tt on (cast(tc.trainingType as numeric) = tt.trainingTypeId)  ");
-			 sqlQuery.append("left join personalinformationtrainee pit on (nt.logindetails = pit.logindetails) where nt.logindetails =  '"+loginId+"'");
+			 sqlQuery.append("left join personalinformationtrainee pit on (nt.logindetails = pit.logindetails) where nt.logindetails =  '"+loginId+"' and nt.status='N'");
 			List<Object[]> lst = session.createSQLQuery(sqlQuery.toString()).list();
 			for (Object[] li : lst ) {
 				CertificateForm bean = new CertificateForm();
@@ -1809,23 +1813,7 @@ System.out.println("list "+list);
 			return list;
 		}*/
 
-		@Override
-		public TrainingCalendar getCalendarDetails(int userId) {
-			// TODO Auto-generated method stub
-			Session session=sessionFactory.getCurrentSession();
-			Query query =session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)), (select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)) from trainingcalendar where trainingcalendarid=(Select trainingcalendarid from nomineetrainee where logindetails="+userId+" and certificateStatus='Y')" );
-			List<Object[]> list=query.list();
-			System.out.println(list);
-			TrainingCalendar tcl=new TrainingCalendar();
-			
-			for (Object[] li :list){
-				tcl.setDesignation((String)li[0]);
-				tcl.setTrainingType((String)li[1]);
-				tcl.setTrainingPhase((String)li[2]);
-			}
-			
-			return tcl;
-		}
+
 		
 		
 		

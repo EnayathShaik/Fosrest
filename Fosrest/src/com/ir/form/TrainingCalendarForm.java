@@ -13,7 +13,15 @@ public class TrainingCalendarForm {
 	private int trainingCalendarId;
 	private String email;
 	private String data;
+	private String isActive;
 
+
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 	public String getData() {
 		return data;
 	}
@@ -207,7 +215,7 @@ public class TrainingCalendarForm {
 	
 	private String trainingType;
 	private String trainingPhase;
-	private String status;
+	//private String status;
 	private String scheduleCode;
 	
 	public String getScheduleCode() {
@@ -241,15 +249,7 @@ public class TrainingCalendarForm {
 	public void setTotalDuration(String totalDuration) {
 		this.totalDuration = totalDuration;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	
-	
+
 	
 	
 }

@@ -39,6 +39,11 @@
 	if('${search}'=='Y'){ 
 		var trPhase=$("#trainingPhase").val();
 		redirectScheduleCode2(trPhase,'scheduleCode');
+		window.setTimeout(function() { 
+      	  
+			$("#scheduleCode").val('${schCode}');
+			}, 1000); 
+		
 	}
 	if('${isEdit}'=='Y'){
 
@@ -147,6 +152,7 @@
 									<legend>
 										<h1>Training Calendar</h1>
 										<cf:hidden path="trainingCalendarId" />
+										<cf:hidden path="isActive" />
 									</legend>
 									<div class="row">
 										
@@ -264,12 +270,7 @@
 															<cf:options items="${listStateMaster}"
 																itemValue="stateId" itemLabel="stateName" />
 														</cf:select>
-														<%-- <cf:select path="trainingInstitude" class="form-control"
-													onchange="getTrainer(this.value , 'trainer_id')">
-													<cf:option value="0" label="Select Training Institute" />
-													<cf:options items="${listTrainingInstitude}" itemValue="id"
-														itemLabel="trainingCenterName" />
-												</cf:select> --%>
+														
 													</div>
 
 
@@ -289,42 +290,12 @@
 															<cf:options items="${listTrainingInstitute}"
 																itemValue="id" itemLabel="trainingCenterName" />
 														</cf:select>
-														<%-- <cf:select path="trainingInstitude" class="form-control"
-													onchange="getTrainer(this.value , 'trainer_id')">
-													<cf:option value="0" label="Select Training Institute" />
-													<cf:options items="${listTrainingInstitude}" itemValue="id"
-														itemLabel="trainingCenterName" />
-												</cf:select> --%>
+														
 													</div>
 
 
 												</div>
-												<%-- 	<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Trainer:</strong></li>
-															<li id="trainingInstitudeErr" style="display: none;"
-																class="style-li error-red">  Select Training
-																Institute.</li>
-															<li class="style-li error-red"></li>
-														</ul>
-													</div>
-
-
-													<div class="form-group">
-														<cf:select path="trainerName" class="form-control">
-															<cf:option value="" label="Select training phase" />
-															<cf:options items="${listPersonalInfoTrainer}"
-																itemValue="firstName" itemLabel="firstName" />
-														</cf:select>
-															<cf:select path="trainingInstitude" class="form-control"
-													onchange="getTrainer(this.value , 'trainer_id')">
-													<cf:option value="0" label="Select Training Institute" />
-													<cf:options items="${listTrainingInstitude}" itemValue="id"
-														itemLabel="trainingCenterName" />
-												</cf:select>
-													</div>
-												</div> --%>
+												
 
 
 												<div class="form-group">
@@ -495,7 +466,7 @@
 																				var="listPersonalInfoTrainer" varStatus="loop">
 
 																				<option 
-																					value="${listPersonalInfoTrainer[0]}">${listPersonalInfoTrainer[1]}</option>
+																					value="${listPersonalInfoTrainer[0]}">${listPersonalInfoTrainer[1]}&nbsp ${listPersonalInfoTrainer[3]}</option>
 																			</ct:forEach>
 																			
 																		</select>
@@ -560,7 +531,8 @@
 
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
-													<th>Edit</th> 
+															
+															<th>Edit</th> 
 															<th>View</th> 
 														</tr>
 													</thead>
@@ -577,6 +549,7 @@
 															<td>${listCalendar[5]}</td>
 															<td>${listCalendar[6]}</td>
 															<td>${listCalendar[7]}</td>
+															                                     
 														<td><input type="submit" id="searchbtn" value="Edit" 
 														class="btn login-btn"
 														formaction="edittrainingcalendar.fssai?id=${listCalendar[8]}"
@@ -1117,4 +1090,7 @@ alert("Click on Nominate Trainee button to nominate Trainees into Training Calen
 		 $('#data').val(a);
 	
 	 }
+	 
+
+	 
 </script>

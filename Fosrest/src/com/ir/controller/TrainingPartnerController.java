@@ -180,7 +180,7 @@ public class TrainingPartnerController {
 			int userId = (Integer) session.getAttribute("userId");
 			CertificateInfo certificateInfo = traineeService.getCertificateID(userId, certificateID);
 			model.addAttribute("certificateID", certificateInfo.getCertificateID());
-			model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
+			//model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 			model.addAttribute("traineeCertificateName", certificateInfo.getName());
 			model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
 			if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
@@ -202,7 +202,7 @@ public class TrainingPartnerController {
 			//	traineeService.updateSteps(traineeId, profileID, 0);
 				CertificateInfo certificateInfo = traineeService.getCertificateID(loginId, "");
 				model.addAttribute("certificateID", certificateInfo.getCertificateID());
-				model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
+				//model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 				model.addAttribute("traineeCertificateName", certificateInfo.getName());
 				model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
 				if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){

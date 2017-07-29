@@ -3613,11 +3613,11 @@ public class AdminDAOImpl implements AdminDAO {
 		//Query query = 	session.createSQLQuery("select c.batchCode,c.designation,t.trainingTypeName,p.trainingPhaseName,c.trainingInstitute,c.trainerName,c.trainingStartDate from TrainingCalendar c inner join TrainingType t on cast(c.trainingType as numeric)=t.trainingTypeId  inner join TrainingPhase p on cast(c.trainingPhase as numeric)=p.trainingPhaseId order by trainingCalendarId ");
 		Query query ;
 		
-		if(profileId==1)
-			query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,CASE WHEN traininginstitute = '0' THEN 'Online Course' ELSE (select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)) END, totalDays,trainingStartDate,trainingEndDate,trainingcalendarid from trainingCalendar");
+		if(profileId==1)  
+			query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDays,trainingStartDate,trainingEndDate,trainingcalendarid,(CASE WHEN isActive = 'TRUE' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus, (CASE WHEN isActive = 'TRUE' THEN 'DEACTIVATE' ELSE 'ACTIVATE' END) as updateStatus   from trainingCalendar");
 		
 		else
-			query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,CASE WHEN traininginstitute = '0' THEN 'Online Course' ELSE (select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)) END, totalDays,trainingStartDate,trainingEndDate,trainingcalendarid from trainingCalendar where (select correspondenceState from personalinformationtraininginstitute where id=cast(traininginstitute as numeric))='"+id+"' ");
+			query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDays,trainingStartDate,trainingEndDate,trainingcalendarid,(CASE WHEN isActive = 'TRUE' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus, (CASE WHEN isActive = 'TRUE' THEN 'DEACTIVATE' ELSE 'ACTIVATE' END) as updateStatus    from trainingCalendar where stateId='"+id+"' ");
 
 		List list = query.list();
 		return list;
@@ -3888,18 +3888,19 @@ Boolean flag=false;
 
 	@Override
 	public String addTrainingCalendar(TrainingCalendar p) {
-		Session session = this.sessionFactory.getCurrentSession();
+		/*Session session = this.sessionFactory.getCurrentSession();
 		System.out.println("DistrictMaster " + p.getTrainingCalendarId());
 		
 		TrainingCalendarForm d = new TrainingCalendarForm();
-/*if(p.getTrainingPhase()==null){
+if(p.getTrainingPhase()==null){
 	p.setTrainingPhase("0");
-}*/
+}
 String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
 p.setBatchCode(batchCode);
 		p.setIsActive("Y");
 		session.persist(p);
-		return "created";
+		return "created";*/
+		return "commented";
 	}
 
 	
@@ -4041,7 +4042,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		tc.setTrainingInstitute(p.getTrainingInstitute2());
 		String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
 		tc.setBatchCode(batchCode);
-		//p.setIsActive("Y");
+		tc.setActive(true);
 		
 			TrainingCalendarMapping tcm;
 		
@@ -4064,7 +4065,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 			else if(days[i].equals(days[i-1])){
 
 				tcm.setSubjectDate(subjectDates[j]);
-				mailDetails[i]=subjectDates[j]+" "+days[i]+" "+trainers[i]+" "+subjects[i];
+				//mailDetails[i]=subjectDates[j]+" "+days[i]+" "+trainers[i]+" "+subjects[i];
 
 			}
 			else
@@ -4074,7 +4075,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 				}
 
 				tcm.setSubjectDate(subjectDates[j]);
-				mailDetails[i]=subjectDates[j]+" "+days[i]+" "+trainers[i]+" "+subjects[i];
+			//	mailDetails[i]=subjectDates[j]+" "+days[i]+" "+trainers[i]+" "+subjects[i];
 
 			}
 
@@ -4134,11 +4135,11 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		Query query;
-		query= session.createQuery("from MappingMasterTrainer where state='"+id+"'");
+		/*query= session.createQuery("from MappingMasterTrainer where state='"+id+"'");
 		List<MappingMasterTrainer> trainingNameList = query.list();
 		
-		
-		String sql = "select mmt.personalinformationtrainer,mmt.firstName,pit.email from MappingMasterTrainer mmt inner join personalinformationtrainer pit on pit.id=mmt.personalinformationtrainer where state='"+id+"'";
+		*/
+		String sql = "select mmt.personalinformationtrainer,mmt.firstName,pit.email,pit.lastName from MappingMasterTrainer mmt inner join personalinformationtrainer pit on pit.id=mmt.personalinformationtrainer join logindetails ld on (ld.id=pit.logindetails)  where state='"+id+"' and ld.status='A'";
 		Query query2 = session.createSQLQuery(sql);
 	    List list2 = query2.list();
 
@@ -4501,17 +4502,17 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		for (TrainingCalendar p : mccList) {
 			System.out.println("TrainingSchedule List::" + p);
 		}*/
-	String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where coalesce(isactive,'') <> 'I' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"'and designation='"+des+"' and tc.trainingInstitute='"+trainingInstitute+"' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') >=current_date";
+	String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where isActive='TRUE' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"'and designation='"+des+"' and tc.trainingInstitute='"+trainingInstitute+"' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') >= current_date";
 		Query query = session.createSQLQuery(sql);
 		List batchCodeList = query.list();
 		return batchCodeList;
 	}
 	
-	@Override
+	@Override 
 	public List<TrainingCalendar> listBatchCodeListStateAdmin(int stateId) {
 		System.out.println("inside listBatchCodeList with parameter");
 		Session session = this.sessionFactory.getCurrentSession();
-		String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where coalesce(isactive,'') <> 'I' and coalesce(trainingPhase,'')<> '3' and pit.correspondenceState='"+stateId+"'";
+		String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where isActive='TRUE' and coalesce(trainingPhase,'')<> '3' and pit.correspondenceState='"+stateId+"'";
 		Query query = session.createSQLQuery(sql);
 		List batchCodeList = query.list();
 	return batchCodeList;
@@ -4700,6 +4701,17 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 			
 		return allQuestions;
 		
+	}
+
+	@Override
+	public void activateDeActivateTrainingCalendar(int trainingCalendarId, String tableName, String status) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		new ZLogger("activateDeActivateTrainingCalendar",
+				"update " + tableName + " set isActive='" + status + "' where trainingCalendarId=" + trainingCalendarId, "AdminDAOImpl.java");
+		String sql = "update " + tableName + " set isActive='" + status + "' where trainingCalendarId=" + trainingCalendarId;
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
 	}
 	}
 	

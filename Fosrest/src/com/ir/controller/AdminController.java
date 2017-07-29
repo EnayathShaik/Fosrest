@@ -1224,7 +1224,6 @@ public class AdminController {
 			@Valid @ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainingCenterUserManagementForm, HttpSession session) {
 		/*if(checkAccess(session))
 			return "redirect:login.fssai";*/
-		System.out.println("tcccccccccccccccccccccc");
 		String status = (trainingCenterUserManagementForm.getStatus().equalsIgnoreCase("I") ? "I" : "A");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(trainingCenterUserManagementForm.getProfileID()))
 				.tableName();
@@ -3215,6 +3214,8 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 		model.addAttribute("listCalendar", this.adminService.listCalendar((int)session.getAttribute("profileId"),Integer.parseInt(s)));
 		model.addAttribute("listTrainingInstitute", this.adminService.listTrainingInstitude2(form.getStateId2()));
 		  model.addAttribute("listStateMaster", this.adminService.listStateMaster());
+			model.addAttribute("schCode", form.getScheduleCode());
+
 
 		model.addAttribute("search", "Y");
 		
@@ -3237,6 +3238,7 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
   	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
 	model.addAttribute("listEnteredSubjectDates", this.adminService.getEnteredSubjectDates(form.getTrainingCalendarId()));
 	model.addAttribute("stateId", form.getStateId2());//jo
+	model.addAttribute("schCode", form.getScheduleCode());
 
   	//System.out.println("validateCalendarEndDate entered by user");
   		//model.addAttribute("dbEndDates",this.adminService.getAllEndDates(form.getTrainingStartDate()));	
@@ -3582,12 +3584,22 @@ System.out.println(p.getTrainingEndDate2());
 				@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model, HttpSession session) {
 			/*if(checkAccess(session))
 				return "redirect:login.fssai";*/
-			System.out.println("aaaaaaa"+assessmentQuestionForm.getSubjectCode1());
 			model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
 
 			model.addAttribute("listAllSubjectQuestion", this.adminService.listAllSubjectQuestion(assessmentQuestionForm.getSubjectCode1()));
-			System.out.println("wwwwwwwwwwwwww");
 			return "viewassessmentquestions";
 		}
+		
+		@RequestMapping("/activateDeActivateTrainingCalendar")
+		public String activateDeActivateTrainingCalendar(
+				@Valid @ModelAttribute("TrainingCalendarForm") TrainingCalendarForm form, HttpSession session) {
+			/*if(checkAccess(session))
+				return "redirect:login.fssai";*/
+			String status = form.getIsActive();
+			String tableName = "TrainingCalendar";
+			adminService.activateDeActivateTrainingCalendar(form.getTrainingCalendarId(), tableName, status);
+			return "redirect:/trainingcalendar.fssai";
+		}
+		
 		
 }

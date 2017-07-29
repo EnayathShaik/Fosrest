@@ -144,7 +144,7 @@ public interface TraineeDAO {
 	
 	public List<FotestCertificationForm> listcertification();
 	 public List listsubjects(int id);
-	public TrainingCalendar getCalendarDetails(int userId);
+	
 	public List listsubjects2(int id);
 	public String listOfflineTraining(int userID);
 }

@@ -94,7 +94,7 @@ function OnStart(){
                                                 <div class="col-md-6 col-xs-12"></div>
                                                 
                                                 <div class="col-md-6 col-xs-12">
-                                                <input type="submit"  class="btn login-btn" value="View All Questions" > 
+                                                <input type="submit"  class="btn login-btn" value="View Questions" > 
                                                                                                         </div>
                                             </div>
                                              </div> <!-- rigth side ends -->
@@ -116,7 +116,7 @@ function OnStart(){
                                         <!-- question list -->
                                         <div class="col-xs-12 table-overflow-responsive">
                                         
-                                <fieldset><legend>All Questions </legend>
+                                <fieldset><legend>Assessment Questions </legend>
                                 <ct:if test="${!empty listAllSubjectQuestion }">
                                  <div id="printDiv">
                                  <h3><strong><span id="name_status" class = "clear-label" style=" margin-left: 240px;"> </span></strong></h3>
@@ -141,25 +141,7 @@ function OnStart(){
                                 <li>${aa.optionSix}</li>
                                 </ct:if>
                                 </ol>	
-                                Correct Answer: 
-                                <ct:if test="${aa.correctAnswer==1}">
-                                a
-                                </ct:if>
-                                <ct:if test="${aa.correctAnswer==2}">
-                                b
-                                </ct:if>
-                                <ct:if test="${aa.correctAnswer==3}">
-                                c
-                                </ct:if>
-                                <ct:if test="${aa.correctAnswer==4}">
-                                d
-                                </ct:if>
-                                <ct:if test="${aa.correctAnswer==5}">
-                                e
-                                </ct:if>
-                                <ct:if test="${aa.correctAnswer==6}">
-                                f
-                                </ct:if>
+                               
                                 <br /><br />
                                 </div>
                                  </ct:forEach>

@@ -900,17 +900,12 @@ public class TraineeController {
         	if(checkAccess(session))
     			return "redirect:login.fssai";
         	int userId = (int) session.getAttribute("userId");
-        	System.out.println("aaaaaaaa"+session.getAttribute("userId"));
+        	System.out.println("OnlineTraining "+session.getAttribute("userId"));
         	int personalTraineeId = (int)session.getAttribute("personalTraineeId");
         	if(session.getAttribute("traineeSteps").toString().equals("1")){
 				traineeService.updateSteps(personalTraineeId, 2);
 				session.setAttribute("traineeSteps", 2);
 				} 
-        	
-   			
-   			System.out.println(" list online training "+this.traineeService.listOnlineTraining(userId));
-   			
-        	
         	model.addAttribute("listOnlineTraining", this.traineeService.listOnlineTraining(userId));
         	model.addAttribute("listsubjects", this.traineeService.listsubjects(userId));
         	
@@ -1084,11 +1079,13 @@ public String GetCertificate(@ModelAttribute("PersonalInformationTrainee") Perso
 			traineeService.closeCourse((int)session.getAttribute("userId"), "Y");
 		}
 		
+		model.addAttribute("certificateInfo",certificateInfo );
+
 		model.addAttribute("certificateID", certificateInfo.getCertificateID());
-		model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
+		//model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 		model.addAttribute("traineeCertificateName", certificateInfo.getName());
 		model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
-		model.addAttribute("calendarDetail", this.traineeService.getCalendarDetails((int)session.getAttribute("userId")));
+		//model.addAttribute("calendarDetail", this.traineeService.getCalendarDetails((int)session.getAttribute("userId")));
 		//String data1 = adminService.updateCertificate(userId);
 		
 	return "certificatetraineeGEN";

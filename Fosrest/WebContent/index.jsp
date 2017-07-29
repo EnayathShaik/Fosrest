@@ -551,12 +551,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 						</div>
 						<div class="feature-wrap training-box">
 							<div id="gallery" class="owl-carousel">
-								<div class="item">
-									<a href="Photo_Gallery/dummy-profile-pic.png" class="swipebox"
-										title="Event Name"> <img
-										src="Photo_Gallery/dummy-profile-pic.png" alt="image">
-									</a>
-								</div>
+								
 								<div class="item">
 									<a href="website/images/photo-gallery.jpg" class="swipebox"
 										title="Event Name"> <img

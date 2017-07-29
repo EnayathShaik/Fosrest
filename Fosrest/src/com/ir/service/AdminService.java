@@ -593,6 +593,8 @@ List<String> disPhotoGallery();
 List getScheduleCodeDetails(String schCode);
 
 List<AssessmentQuestions> listAllSubjectQuestion(int a);
+
+void activateDeActivateTrainingCalendar(int trainingCalendarId, String tableName, String status);
 }
 
 

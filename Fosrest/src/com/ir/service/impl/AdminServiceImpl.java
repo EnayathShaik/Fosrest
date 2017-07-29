@@ -1819,4 +1819,11 @@ public List<AssessmentQuestions> listAllSubjectQuestion(int a) {
 	// TODO Auto-generated method stub
 	return adminDAO.listAllSubjectQuestion(a);
 }
+
+@Override
+@Transactional
+public void activateDeActivateTrainingCalendar(int trainingCalendarId, String tableName, String status) {
+	// TODO Auto-generated method stub
+	 adminDAO.activateDeActivateTrainingCalendar(trainingCalendarId, tableName, status);
+}
 }

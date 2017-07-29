@@ -92,17 +92,15 @@
 													<p>
 														has attended and successfully completed the <span><strong
 															style="margin-left: 34px;">
-																${calendarDetail.designation}-
-																${calendarDetail.trainingType}-
-																${calendarDetail.trainingPhase} Programme </strong> </span>
+																${certificateInfo.programme}  Programme </strong> </span>
 													</p>
 													<hr style="margin-left: 369px; margin-top: -7px; width: 43%; border-top: 1px solid #bdbcbc;" />
 													<p>organised by Fssai & Commissionerate of Food Safety. The Training was held from <span class="on-dat-general"
-															style="border-bottom: 1px solid #ccc; left: 11px;">${trainingDate}</span>
+															style="border-bottom: 1px solid #ccc; left: 11px;">${certificateInfo.trainingStart}</span>
 													</p>
 													<p>
 														to <span class="on-dat-general"
-															style="border-bottom: 1px solid #ccc; left: 15px;">${trainingDate}</span>
+															style="border-bottom: 1px solid #ccc; left: 15px;">${certificateInfo.trainingEnd}</span>
 														<span style="margin-left: 30px;"> at</span> <span
 															style="margin-left: 147px; left: 2%;"><strong>${trainingAddress}</strong>
 														</span> <span class="full-stop-general">.</span>

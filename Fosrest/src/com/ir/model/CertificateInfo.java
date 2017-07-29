@@ -3,13 +3,28 @@ package com.ir.model;
 public class CertificateInfo {
 	private String certificateID;
 	private String name;
-	private String trainingDate;
+	private String trainingStart;
 	private String trainingAddress;
 	private String issueDate;
 	private String trainingPartnerName;
+
+	private String programme;
+	private String trainingEnd;
 	
 	
 	
+	public String getTrainingStart() {
+		return trainingStart;
+	}
+	public String getProgramme() {
+		return programme;
+	}
+	public void setProgramme(String programme) {
+		this.programme = programme;
+	}
+	public void setTrainingStart(String trainingStart) {
+		this.trainingStart = trainingStart;
+	}
 	public String getTrainingPartnerName() {
 		return trainingPartnerName;
 	}
@@ -28,11 +43,12 @@ public class CertificateInfo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getTrainingDate() {
-		return trainingDate;
+
+	public String getTrainingEnd() {
+		return trainingEnd;
 	}
-	public void setTrainingDate(String trainingDate) {
-		this.trainingDate = trainingDate;
+	public void setTrainingEnd(String trainingEnd) {
+		this.trainingEnd = trainingEnd;
 	}
 	public String getTrainingAddress() {
 		return trainingAddress;

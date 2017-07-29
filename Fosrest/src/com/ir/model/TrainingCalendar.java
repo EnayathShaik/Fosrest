@@ -26,6 +26,7 @@ public class TrainingCalendar {
 			private String trainingPhase;
 			private String designation;
 			private int stateId;
+			private boolean isActive;
 			
 			@CreationTimestamp
 			@Temporal(TemporalType.TIMESTAMP)
@@ -39,6 +40,12 @@ public class TrainingCalendar {
 			
 			
 			
+			public boolean isActive() {
+				return isActive;
+			}
+			public void setActive(boolean isActive) {
+				this.isActive = isActive;
+			}
 			public int getStateId() {
 				return stateId;
 			}
@@ -94,7 +101,7 @@ public class TrainingCalendar {
 			public void setScheduleCode(String scheduleCode) {
 				this.scheduleCode = scheduleCode;
 			}
-			private String isActive;
+			
 			private String batchCode;
 			private String scheduleCode;
 		
@@ -106,12 +113,7 @@ public class TrainingCalendar {
 			public void setBatchCode(String batchCode) {
 				this.batchCode = batchCode;
 			}
-			public String getIsActive() {
-				return isActive;
-			}
-			public void setIsActive(String isActive) {
-				this.isActive = isActive;
-			}
+		
 			public int getTrainingCalendarId() {
 				return trainingCalendarId;
 			}

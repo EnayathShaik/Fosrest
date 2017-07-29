@@ -162,22 +162,6 @@
 						Registration Form</h3>
 
 					<form>
-					
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 						<!-- personal information -->
 						<fieldset>
@@ -620,15 +604,6 @@
 						</fieldset>
 						<!-- Permanent address ends -->
 
-
-
-
-
-
-
-
-
-
 						<!-- Experience starts -->
 
 						<fieldset>
@@ -724,8 +699,7 @@
                                              <div class="form-group">
 										<div>
 										<ul class="lab-no">
-											<li class="style-li"><strong>Undergone Fssai approved TOT course:&nbsp&nbsp</strong> 
-											<cf:checkbox path="fssai_tot" value="Yes" ></cf:checkbox></li>
+											<li class="style-li"><strong>Undergone Fssai approved TOT course:&nbsp&nbsp</strong> <cf:checkbox path="fssai_tot" ></cf:checkbox></li>
 									
 										</ul>
 										
