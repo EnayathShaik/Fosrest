@@ -1582,10 +1582,14 @@ System.out.println("list "+list);
 		public GetScoreCardForm listGetScoreCard(int id) {
 			// TODO Auto-generated method stub
 			System.out.println("inside listGetScoreCardForm");
+			Session session = sessionFactory.getCurrentSession();
 			GetScoreCardForm bean = new GetScoreCardForm();
 			/*List<GetScoreCardForm> list = new ArrayList<GetScoreCardForm>();*/
-			Session session = this.sessionFactory.getCurrentSession();
-			List<Object[]> lst = session.createSQLQuery("select * from assessmentevaluationtrainee where logindetails='"+ id +"'").list();
+			String sql = "select  max(nomineeid) from assessmentevaluationtrainee GROUP BY logindetails='"+ id +"' ";
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			int nomineeid=(int) list.get(0);
+			List<Object[]> lst = session.createSQLQuery("select * from assessmentevaluationtrainee where nomineeid='"+ nomineeid +"' ").list();
 			
 			System.out.println(lst);
 			if(lst.size() >0){
