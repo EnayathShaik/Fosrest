@@ -473,10 +473,7 @@ public interface AdminDAO {
 	public String Helpsave(ContactTrainee contactTrainee, String id);
 
 	public List<String> getAllScheduleCode();
-
-	public List<String> disPhotoGallery();
-
-	public List getScheduleCodeDetails(String schCode);
+public List getScheduleCodeDetails(String schCode);
 
 	public List<AssessmentQuestions> listAllSubjectQuestion(int a);
 

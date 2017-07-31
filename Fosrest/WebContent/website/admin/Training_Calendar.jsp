@@ -380,7 +380,7 @@
 															<th>Subject</th>
 															<th>	<ul><li id="trainerErr" style="display: none;"
 																class="style-li error-red">Select TRAINER for each subject.</li></ul>Trainer</th>
-															<th>Checkbox</th>
+															<th>Send Email</th>
 
 
 														</tr>
@@ -531,8 +531,9 @@
 
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
-															<th>Current Status</th> 
+												<%if(session.getAttribute("profileId").equals(1)){ %>	<th>Current Status</th> 
 															<th>Update Status</th> 
+															<%} %>
 															<th>Edit</th> 
 															<th>View</th> 
 														</tr>
@@ -550,9 +551,10 @@
 															<td>${listCalendar[5]}</td>
 															<td>${listCalendar[6]}</td>
 															<td>${listCalendar[7]}</td>
-															<td>${listCalendar[9]}</td>
+														<%if(session.getAttribute("profileId").equals(1)){ %>		<td>${listCalendar[9]}</td>
 															 <td><label><input  type="submit" class="btn login-btn" onclick=" return activateTrainingCalendar('${listCalendar[8]}','${listCalendar[10]}');" value="${listCalendar[10]}"/></label>
                                                                                 </td>  
+                                                                                <%} %>
 															                                     
 														<td><input type="submit" id="searchbtn" value="Edit" 
 														class="btn login-btn"

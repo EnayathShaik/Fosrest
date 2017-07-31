@@ -67,4 +67,7 @@ public interface PageLoadService {
 	//public List masterTrainer();
 	//public Object masterTrainer();
 	public String feedbacksave(ContactTrainee contactTrainee, String id);
+	List disPhotoGallery();
+
+
 }

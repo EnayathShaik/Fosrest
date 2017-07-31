@@ -294,5 +294,11 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 	
+	@Override
+	@Transactional
+	public List disPhotoGallery() {
+		// TODO Auto-generated method stub
+		return pageLoadDao.disPhotoGallery();
+	}
 
 }

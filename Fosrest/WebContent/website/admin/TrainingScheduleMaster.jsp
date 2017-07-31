@@ -562,14 +562,14 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 			 
 				for(var i=1;i<=idval;i++){
 					
-					var dayCurr=$("#day"+i).val();
+					var dayCurr=parseInt($("#day"+i).val());
 					var dayPrev=0;
 					
 					if(i==1)
 						dayPrev	=1;
 					else
-						dayPrev=$("#day"+(i-1)).val();
-					//alert(dayCurr+" "+dayPrev);
+						dayPrev=parseInt($("#day"+(i-1)).val());
+					
 					if(dayCurr<dayPrev){
 						alert("Invalid DAY");
 						$("#day"+i).focus();  

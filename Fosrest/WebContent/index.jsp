@@ -201,8 +201,9 @@ function OnStart(){
 	 	      }
 	 	      });  
 	     $('#newTable').show();
+	    // return result;
+	     displayPhotos();
 	     
-	displayPhotos();     
 }
 window.onload = OnStart;
 $(document).ready(function() {
@@ -213,36 +214,65 @@ $(document).ready(function() {
 	 });
 	});
 	
-	
-	
-	
-	function displayPhotos(){
+function displayPhotos(){
 	//	alert("aaaaaaaaaaaaaaaaaaa");//disPhotoGallery
 		   var name1=JSON.stringify({
 		 		courseName:0
 		   })
-		  
+		  ///////////////////////////////////////////////////////////////////////////////
 		 	$.ajax({
 		 	      type: 'get',
 		 	     url : 'disPhotoGallery.fssai',
 		 	      contentType : "application/json",
 		 		  data:name1,
 		 	  success: function (response) { 
-		 		//  alert("success");
-		 		//  alert(response);
+		 		  
 		 	       var mainData1 = jQuery.parseJSON(response);
-		 	    //	   alert("");
-		 	 /*     $('#newTable tr').remove();
-		 	 $('#newTable').append( '<tr  class="background-open-vacancies" style="font-size:14px;"> <th title="Institute Name & Address">Training Start Date</th><th>Training End Date</th><th>State</th></tr>')
-		 	       var j = 1;
-					 $.each(mainData1,function(i, obj) {$('#newTable').append(
-					    		
-		                               '<tr style="background-color:#ccc;font-size:14px;" id="tableRow"><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[0] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[1] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[4] + '</td></tr>');
-		                   }); */ 
-					    
-		 	      }
+		 	  //	$("#galleryDiv").append("<div id='gallery' class='owl-carousel' ></div>");
+						var str="<div id='gallery' class='owl-carousel'>";	
+						
+						 if(mainData1!=''){
+							 $.each(mainData1,function(i, obj) {
+								// $(".owl-carousel").append("<div class='item'><a href="+obj+" class='swipebox' title='Event Name'><img src="+obj+" alt='image'></a></div>");
+
+								 str=str+"<div class='item'><a href="+obj[0]+" class='swipebox' title="+obj[2]+"><img  style='height:246px; width:480px;' src="+obj[0]+" alt='image'></a></div>";
+	
+							 });  	
+						 }
+						 else
+							 str=str+"<h3 style='margin-top: 97px;'>No Images were Found</h3>";
+							str=str+"</div>";
+							//alert("strsrrrr "+str);
+						
+							 var div = document.getElementById('galleryDiv');
+							 		div.innerHTML=div.innerHTML+str;
+									///alert("www|"+div.innerHTML+"|www");
+										$("#gallery").owlCarousel({
+
+											navigation : false, // Show next and prev buttons
+											slideSpeed : 300,
+											paginationSpeed : 400,
+											singleItem : true,
+											autoPlay : true,
+											responsive : true
+							
+										// "singleItem:true" is a shortcut for:
+										// items : 1, 
+										// itemsDesktop : false,
+										// itemsDesktopSmall : false,
+										// itemsTablet: false,
+										// itemsMobile : false
+							
+										});
+								 $('.owl-carousel').owlCarousel('update');
+									   
+							} 
+		 	
 		 	      });  
+		 
+	
 	}
+	
 	</script>
 <head>
 <base href="<%=basePath%>">
@@ -322,7 +352,7 @@ $(document).ready(function() {
 	display: block;
 	width: 100%;
 	height: auto;
-	7
+	
 }
 body{
 overflow-x:hidden;}
@@ -522,7 +552,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 
 <!-- <div class="col-sm-4">
 	<div class="feature-wrap panelimg" >
-<img class="img-responsive center-block" style="height: 39px;"><a href="stateMaster.fssai">
+<img class="img-responsive center-block" style="height: 39px;"><a href="mastertrainer.fssai">
 <h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3></a></div>
 </div> -->
 <div class="col-sm-4" style="margin-left: 88px;">
@@ -549,30 +579,18 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 						<div class="row">
 							<div class="course-heading"> Gallery</div>
 						</div>
-						<div class="feature-wrap training-box">
-							<div id="gallery" class="owl-carousel">
-								
-								<div class="item">
-									<a href="website/images/photo-gallery.jpg" class="swipebox"
-										title="Event Name"> <img
-										src="website/images/photo-gallery.jpg" alt="image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="website/images/photo-gallery.jpg" class="swipebox"
-										title="Event Name"> <img
-										src="website/images/photo-gallery.jpg" alt="image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="website/images/photo-gallery.jpg" class="swipebox"
-										title="Event Name"> <img
-										src="website/images/photo-gallery.jpg" alt="image">
-									</a>
-								</div>
-							</div>
+						<div id="galleryDiv" class="feature-wrap training-box" style="height:246px;">
+							
 						</div>
 					</div>
+					
+					<!-- <div class="item">
+									<a href="website/images/photo-gallery.jpg" class="swipebox"
+										title="Event Name"> <img
+										src="website/images/photo-gallery.jpg" alt="image">
+									</a>
+								</div> -->
+					
 					
 					<div class="col-sm-4">
     <h3 class="text-center">Upcoming Events</h3>
@@ -837,13 +855,3 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 <script>
 
 </script>
-
-
-
-
-
-
-
-
-
-

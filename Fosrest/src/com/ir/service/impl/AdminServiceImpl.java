@@ -1799,12 +1799,6 @@ public List<String> getAllScheduleCode() {
 	return adminDAO.getAllScheduleCode();
 }
 
-@Override
-@Transactional
-public List<String> disPhotoGallery() {
-	// TODO Auto-generated method stub
-	return adminDAO.disPhotoGallery();
-}
 
 @Override
 @Transactional

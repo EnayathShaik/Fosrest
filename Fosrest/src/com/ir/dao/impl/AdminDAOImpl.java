@@ -4677,15 +4677,6 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 	}
 
 	@Override
-	public List<String> disPhotoGallery() {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		List<String> links= session.createSQLQuery("select linkName from photoGallery").list();
-		
-		return links;
-	}
-
-	@Override
 	public List getScheduleCodeDetails(String schCode) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();

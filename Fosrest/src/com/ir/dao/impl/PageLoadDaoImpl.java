@@ -468,6 +468,13 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			}
 		}
 
-
+		@Override
+		public List disPhotoGallery() {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.getCurrentSession();
+			List links= session.createSQLQuery("select linkName,id,substr(linkName,15, position('.' in linkName)-15) from photoGallery order by id desc limit 5").list();
+			
+			return links;
+		}
 		
 }

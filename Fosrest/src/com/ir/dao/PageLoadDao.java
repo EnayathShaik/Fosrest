@@ -91,4 +91,9 @@ public interface PageLoadDao {
 	//public List masterTrainer();
 
 	public String feedbacksave(ContactTrainee contactTrainee, String id);
+
+
+	public List<String> disPhotoGallery();
+
+	
 }
