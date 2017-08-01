@@ -556,7 +556,6 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 			 if($("#day1").val()!=1){
 				 alert("Invalid DAY");
 					$("#day1").focus();  
-					
 					return false;
 				}
 			 
@@ -577,6 +576,12 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 						return false;
 					}
 					
+					if(i!=1)
+						if((dayCurr-1)>dayPrev){
+						alert("Day for subject "+$("#subject"+i+" option:selected").text()+" should be either "+dayPrev+" or "+(dayPrev+1));
+						$("#day"+i).focus();  
+						return false;
+						}
 					 
 					if(dayCurr==dayPrev)
 					if(idval!=1 && i!=1){

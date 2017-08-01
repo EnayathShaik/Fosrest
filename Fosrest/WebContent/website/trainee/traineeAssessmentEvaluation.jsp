@@ -43,7 +43,7 @@ window.onload = OnStart;
 </head>
 <!-- <body> -->
 <!-- logos -->
- <section>
+<!--  <section>
   <div class="container-fluid">
     <nav class="navbar navbar-default navbar-fixed-top top-logo-background">
       <div class="container-fluid">
@@ -55,7 +55,7 @@ window.onload = OnStart;
     </nav>
   </div>
 </section>
-
+ -->
 <!-- horizontal navigation -->
 <section>
   <%@include file="../roles/top-menu.jsp"%>
@@ -77,7 +77,7 @@ window.onload = OnStart;
         <div class="container-fluid"> 
           <!-- vertical button -->
           <div class="row">
-            <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Trainee</span> </a> </div>
+            <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName }</span> </a> </div>
           </div>
           <!-- add the content here for main body --> 
           <!-- timeline  -->

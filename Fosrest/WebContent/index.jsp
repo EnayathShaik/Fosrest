@@ -26,21 +26,21 @@
 
 .timepicker {
   @clock-padding: 5px;
-  
+
   background-color: #F2F2F2;
   position: absolute;
   color: #8C8C8C;
   border: 1px solid #B5B5B5;
   .box-shadow(2px, 2px, 4px);
   z-index: 2147483647;
-  
+
   .clock {
     width: 200px;
     height: 200px;
     position: relative;
     padding: @clock-padding;
   }
-  
+
   .done {
     cursor: pointer;
     text-align: center;
@@ -54,7 +54,7 @@
       color: #848484;
     }
   }
-  
+
   .meridiem {
     position: absolute;
     bottom: @clock-padding;
@@ -66,7 +66,7 @@
     text-align: center;
     border-radius: 50%;
     cursor: pointer;
-    
+
     &.selected {
       background-color: #D6F0F9;
       color: #6D828C;
@@ -78,7 +78,7 @@
       right: @clock-padding;
     }
   }
-  
+
   .bubble {
     position: absolute;
     width: 32px;
@@ -88,22 +88,22 @@
     text-align: center;
     border-radius: 50%;
     cursor: pointer;
-    
+
     &:hover {
       background-color: #D6F0F9;
       color: #6D828C;
     }
-    
+
     &.selected {
       color: #D6F0F9;
       background-color: #33B4E4
     }
   }
-  
+
   .unit {
     top: @clock-padding;
     background-color: white;
-    
+
     &.hour {
       left: @clock-padding;
     }
@@ -111,8 +111,8 @@
       right: @clock-padding;
     }
   }
-  
-  
+
+
   .face {
     width: 100%;
     height: 100%;
@@ -120,7 +120,7 @@
     border: none;
     border-radius: 50%;
     position: relative;
-    
+
     &:after {
       position: absolute;
       top: 50%;
@@ -134,7 +134,7 @@
       display: block;
     }
   }
-  
+
   .hand {
     width: 0;
     height: 0;
@@ -147,24 +147,24 @@
     transform-origin: 50% 100%;
     pointer-events:none;
     background-color: #8C8C8C;
-    
+
     &.minute {
       margin: -30% 0 0 -1px;
       padding: 30% 1px 0;
       border-radius: 1px 1px 0 0;
     }
-    
+
     &.hour {
       margin: -23% 0 0 -2px;
       padding: 23% 2px 0;
       border-radius: 2px 2px 0 0;
     }
-    
+
     &.selected {
       background-color: #33B4E4;
     }
   }
-  
+
   .time {
     background-color: #F2F2F2;
   }
@@ -176,34 +176,34 @@ body {
 
 <script>
 function OnStart(){
-	
 
-		
+
+
 	     var name1=JSON.stringify({
 	 		courseName:0
 	   })
-	  
+
 	 	$.ajax({
 	 	      type: 'get',
 	 	     url : 'upcomingevents.fssai',
 	 	      contentType : "application/json",
 	 		  data:name1,
-	 	  success: function (response) { 
+	 	  success: function (response) {
 	 	      var mainData1 = jQuery.parseJSON(response);
 	 	     $('#newTable tr').remove();
 	 	 $('#newTable').append( '<tr  class="background-open-vacancies" style="font-size:14px;"> <th title="Institute Name & Address">Training Start Date</th><th>Training End Date</th><th>State</th></tr>')
 	 	       var j = 1;
 				 $.each(mainData1,function(i, obj) {$('#newTable').append(
-				    		
+
 	                               '<tr style="background-color:#ccc;font-size:14px;" id="tableRow"><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[0] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[1] + '</td><td title="Institute Name: '+obj[2] +' & Address: '+obj[3]+'">' + obj[4] + '</td></tr>');
 	                   });
-				    
+
 	 	      }
-	 	      });  
+	 	      });
 	     $('#newTable').show();
 	    // return result;
 	     displayPhotos();
-	     
+
 }
 window.onload = OnStart;
 $(document).ready(function() {
@@ -213,7 +213,7 @@ $(document).ready(function() {
 	    }, 'text');
 	 });
 	});
-	
+
 function displayPhotos(){
 	//	alert("aaaaaaaaaaaaaaaaaaa");//disPhotoGallery
 		   var name1=JSON.stringify({
@@ -225,25 +225,25 @@ function displayPhotos(){
 		 	     url : 'disPhotoGallery.fssai',
 		 	      contentType : "application/json",
 		 		  data:name1,
-		 	  success: function (response) { 
-		 		  
+		 	  success: function (response) {
+
 		 	       var mainData1 = jQuery.parseJSON(response);
 		 	  //	$("#galleryDiv").append("<div id='gallery' class='owl-carousel' ></div>");
-						var str="<div id='gallery' class='owl-carousel'>";	
-						
+						var str="<div id='gallery' class='owl-carousel'>";
+
 						 if(mainData1!=''){
 							 $.each(mainData1,function(i, obj) {
 								// $(".owl-carousel").append("<div class='item'><a href="+obj+" class='swipebox' title='Event Name'><img src="+obj+" alt='image'></a></div>");
 
 								 str=str+"<div class='item'><a href="+obj[0]+" class='swipebox' title="+obj[2]+"><img  style='height:246px; width:480px;' src="+obj[0]+" alt='image'></a></div>";
-	
-							 });  	
+
+							 });
 						 }
 						 else
 							 str=str+"<h3 style='margin-top: 97px;'>No Images were Found</h3>";
 							str=str+"</div>";
 							//alert("strsrrrr "+str);
-						
+
 							 var div = document.getElementById('galleryDiv');
 							 		div.innerHTML=div.innerHTML+str;
 									///alert("www|"+div.innerHTML+"|www");
@@ -255,24 +255,22 @@ function displayPhotos(){
 											singleItem : true,
 											autoPlay : true,
 											responsive : true
-							
+
 										// "singleItem:true" is a shortcut for:
-										// items : 1, 
+										// items : 1,
 										// itemsDesktop : false,
 										// itemsDesktopSmall : false,
 										// itemsTablet: false,
 										// itemsMobile : false
-							
+
 										});
-								 $('.owl-carousel').owlCarousel('update');
-									   
-							} 
-		 	
-		 	      });  
-		 
-	
+							}
+
+		 	      });
+
+
 	}
-	
+
 	</script>
 <head>
 <base href="<%=basePath%>">
@@ -307,7 +305,7 @@ function displayPhotos(){
 <script src="website/js/jquery.newstape.js"></script>
 <link href="website/css/demo.css" rel="stylesheet">
 <style>
-.holder { 
+.holder {
   background-color:#ccc;
   width:300px;
   height:250px;
@@ -352,7 +350,7 @@ function displayPhotos(){
 	display: block;
 	width: 100%;
 	height: auto;
-	
+
 }
 body{
 overflow-x:hidden;}
@@ -364,7 +362,7 @@ width:30%;
 jQuery.fn.liScroll = function(settings) {
 	settings = jQuery.extend({
 		travelocity: 0.03
-		}, settings);		
+		}, settings);
 		return this.each(function(){
 				var $strip = jQuery(this);
 				$strip.addClass("newsticker")
@@ -373,15 +371,15 @@ jQuery.fn.liScroll = function(settings) {
 					stripHeight += jQuery(this, i).outerHeight(true); // thanks to Michael Haszprunar and Fabien Volpi
 				});
 				var $mask = $strip.wrap("<div class='mask'></div>");
-				var $tickercontainer = $strip.parent().wrap("<div class='tickercontainer'></div>");								
-				var containerHeight = $strip.parent().parent().height();	//a.k.a. 'mask' width 	
-				$strip.height(stripHeight);			
+				var $tickercontainer = $strip.parent().wrap("<div class='tickercontainer'></div>");
+				var containerHeight = $strip.parent().parent().height();	//a.k.a. 'mask' width
+				$strip.height(stripHeight);
 				var totalTravel = stripHeight;
-				var defTiming = totalTravel/settings.travelocity;	// thanks to Scott Waye		
+				var defTiming = totalTravel/settings.travelocity;	// thanks to Scott Waye
 				function scrollnews(spazio, tempo){
 				$strip.animate({top: '-='+ spazio}, tempo, "linear", function(){$strip.css("top", containerHeight); scrollnews(totalTravel, defTiming);});
 				}
-				scrollnews(totalTravel, defTiming);				
+				scrollnews(totalTravel, defTiming);
 				$strip.hover(function(){
 				jQuery(this).stop();
 				},
@@ -390,8 +388,8 @@ jQuery.fn.liScroll = function(settings) {
 				var residualSpace = offset.top + stripHeight;
 				var residualTime = residualSpace/settings.travelocity;
 				scrollnews(residualSpace, residualTime);
-				});			
-		});	
+				});
+		});
 };
 
 $(function(){
@@ -476,9 +474,9 @@ $(function(){
 	</header>
 	<!--/header-->
 	<hr>
-	
-	
-	
+
+
+
 <div class="header">
 <div class="container">
 <div class="row" >
@@ -487,7 +485,7 @@ $(function(){
 <div class = "panel-heading">
    <h4 class = "panel-title">
       <a data-toggle = "collapse"  href = "#collapseTwo">
-      <center style="font-size:20px; color:#e6511a;font-weight:bold;">State Admin</center> 
+      <center style="font-size:20px; color:#e6511a;font-weight:bold;">State Admin</center>
       </a>
    </h4>
 </div>
@@ -498,7 +496,7 @@ $(function(){
 <div class="col-sm-12 text-center">
 <div style="font-size:16px;color:#000;font-weight:bold;"><a href="login.fssai" style="color:#000;">Login</a></div>
 </div>
-</div> 
+</div>
 <div class="row" style="height:55px;">
 </div>
 <div class="row">
@@ -561,7 +559,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 <h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 28px;">Training of Trainer Calendar</h3></a></div>
 </div>
 <div class="col-sm-2"></div>
-</div>         
+</div>
 
          </div>
       </div>
@@ -580,28 +578,28 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 							<div class="course-heading"> Gallery</div>
 						</div>
 						<div id="galleryDiv" class="feature-wrap training-box" style="height:238px; margin-top: 9px;">
-							
+
 						</div>
 					</div>
-					
+
 					<!-- <div class="item">
 									<a href="website/images/photo-gallery.jpg" class="swipebox"
 										title="Event Name"> <img
 										src="website/images/photo-gallery.jpg" alt="image">
 									</a>
 								</div> -->
-					
-					
+
+
 					<div class="col-sm-4">
     <h3 class="text-center">Upcoming Events</h3>
     <div class="newstape">
         <div class="newstape-content">
             <div class="news-block">
                 <p class="text-justify">
-                                                                               
+
 <table class="table  table-responsive" id="newTable" background="#f5f5f5">
 												  <thead>
-                                                
+
                                                 </thead>
 										<tbody></tbody>
 												</table>
@@ -609,7 +607,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
                 </p>
                 <hr />
             </div>
-            <div class="news-block">             
+            <div class="news-block">
                 <p class="text-justify">
   <a href="#" style="cursor:pointer">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a></p>
                 <hr />
@@ -642,7 +640,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 							<div style="display: inline-block;">
 								<div class="monthly" id="mycalendar"></div>
 							</div>
-						</div>	
+						</div>
 				</div> -->
 	<div class="col-sm-3" style="margin-top: 34px;">
 	<div style="margin-top: 10px; padding: 0px; " >
@@ -659,7 +657,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 	</div>
 	</div>
 	</div>
-	
+
 
 	<section id="bottom">
 		<div class="container wow fadeInDown" data-wow-duration="1000ms"
@@ -724,11 +722,11 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 									</div>
 								</form>
 							</li>
-						
+
 						</ul>
 					</div>
 				</div> -->
-				
+
 				<!--/.col-md-3-->
 			</div>
 		</div>
@@ -755,7 +753,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 	<script src="js/owl.carousel.js"></script>
 	<script src="js/monthly.js"></script>
 	<script src="js/jquery.swipebox.js"></script>
-	<script>
+	<!-- <script>
 		$(document).ready(function() {
 
 			$("#gallery").owlCarousel({
@@ -768,7 +766,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 				responsive : true
 
 			// "singleItem:true" is a shortcut for:
-			// items : 1, 
+			// items : 1,
 			// itemsDesktop : false,
 			// itemsDesktopSmall : false,
 			// itemsTablet: false,
@@ -777,7 +775,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 			});
 
 		});
-	</script>
+	</script> -->
 	<script>
 		$(document).ready(function() {
 
@@ -791,7 +789,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 				responsive : true
 
 			// "singleItem:true" is a shortcut for:
-			// items : 1, 
+			// items : 1,
 			// itemsDesktop : false,
 			// itemsDesktopSmall : false,
 			// itemsTablet: false,

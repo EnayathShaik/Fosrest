@@ -8,11 +8,16 @@
 
  <%@ include file="/website/roles/slider.jsp" %>
  <%@ include file="/website/roles/top-menu.jsp" %>
+ <div class="row">
+                            <div class="col-lg-12">
+                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName} </span> </a>
+                            </div>
+                        </div>
 <div style="height:70px;"></div>
 <h3 style="margin-top: 160px;
     margin-left: 435px;">
 <strong>
-Has been registered successfully !!!
+Registeration successful !!!
 </strong>
 <br><br>
 UserId id : ${id } and password is ${pwd}

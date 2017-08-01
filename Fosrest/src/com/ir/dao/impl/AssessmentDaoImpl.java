@@ -609,7 +609,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
 			
-			List list = session.createSQLQuery("select id from nomineeTrainee where logindetails="+loginIdUniuqe+" and certificateStatus='N'").list();
+			List list = session.createSQLQuery("select id from nomineeTrainee where logindetails="+loginIdUniuqe+" and status='N'").list();
 			
 			traineeEvaluation.setNomineeId((int)list.get(0));
 			traineeEvaluation.setLogindetails(loginIdUniuqe);
