@@ -552,7 +552,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 
 <!-- <div class="col-sm-4">
 	<div class="feature-wrap panelimg" >
-<img class="img-responsive center-block" style="height: 39px;"><a href="mastertrainer.fssai">
+<img class="img-responsive center-block" style="height: 39px;"><a href="stateMaster.fssai">
 <h3 class="industry-heading" style="color:#fff !important;padding:0px;margin-bottom: 37px;">Master Trainer</h3></a></div>
 </div> -->
 <div class="col-sm-4" style="margin-left: 88px;">
@@ -579,7 +579,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 						<div class="row">
 							<div class="course-heading"> Gallery</div>
 						</div>
-						<div id="galleryDiv" class="feature-wrap training-box" style="height:246px;">
+						<div id="galleryDiv" class="feature-wrap training-box" style="height:238px; margin-top: 9px;">
 							
 						</div>
 					</div>
@@ -644,8 +644,8 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 							</div>
 						</div>	
 				</div> -->
-	<div class="col-sm-3">
-	<div style="margin-top: 10px; padding: 0px;">
+	<div class="col-sm-3" style="margin-top: 34px;">
+	<div style="margin-top: 10px; padding: 0px; " >
 								<a href="shareInitiative.fssai"><img src="website/images/share-intitiave.jpg" class="img-responsive"></a>
 							</div>
 							<div style="margin-top: 30px; padding: 0px;">
