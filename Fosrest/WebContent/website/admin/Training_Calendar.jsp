@@ -466,7 +466,7 @@
 																				var="listPersonalInfoTrainer" varStatus="loop">
 
 																				<option 
-																					value="${listPersonalInfoTrainer[0]}">${listPersonalInfoTrainer[1]}&nbsp ${listPersonalInfoTrainer[3]}</option>
+																					value="${listPersonalInfoTrainer[0]}">${listPersonalInfoTrainer[1]}&nbsp; ${listPersonalInfoTrainer[3]}</option>
 																			</ct:forEach>
 																			
 																		</select>
@@ -474,18 +474,10 @@
 																	</ct:forEach>
 																</div></td>
 																<td>
-																<ct:forEach items="${listSchCodeSubjects}" 	var="subjects" varStatus="loop2">
-																<input type="checkbox" onclick="trainerMailData('${loop2.count}');" >
-											<br><br><br>					
-																<ct:forEach items="${listPersonalInfoTrainer}"
-																				var="listPersonalInfoTrainer" varStatus="loop1">
-																				
-															
-                                                                  <input type="hidden" id="mail_${loop1.count}" value="${listPersonalInfoTrainer[0]}">
-														<input type="hidden" id="emailId_${listPersonalInfoTrainer[0]}"
-														value="${listPersonalInfoTrainer[2]}"/>
-																			</ct:forEach>
-																	</ct:forEach>		
+														<ct:forEach items="${listSchCodeSubjects}" 	var="subjects" varStatus="loop2">
+																<input type="checkbox" onclick="trainerMailData('${subjects[1]}','${loop2.count}');"  id="subjcheck_${subjects[1]}" >
+										            	<br><br><br>					
+																	</ct:forEach> 	
 														
 														</td>
 														</tr>
@@ -1058,41 +1050,26 @@ alert("Click on Nominate Trainee button to nominate Trainees into Training Calen
 	 document.getElementById(id).value=endDate;
 	
 	 }  */
-	 
-	 window.trainerArray = [];
-	 function trainerMailData(count){
-
-		 var tid=$("#trainer_"+ count).val();
-		// var q=$("#mail_"+ count).val();
-		 var sid=$("#subj_"+ count).val();
-        if(tid!=0){
-			var e1=$("#emailId_"+ tid).val();
+	 window.subjectIdArray = [];
+	 function trainerMailData(idd){
+		 
+				
+        if(document.getElementById("subjcheck_"+idd).checked)
+		 {
+		         window.subjectIdArray.push(idd);	
 		 }
-			var loginIds = "";
-			$('#testTable').find('input[type="checkbox"]').each(
-					function(i) {
-						if (this.checked) {
-							if (loginIds == "") {
-									loginIds = tid + "%"+ e1+"%"+sid;
-									
-								window.trainerArray.push(loginIds);	
-							}
-							else {
-								
-							loginIds = loginIds + "," + tid+ "%" + e1+"%"+sid;
-							
-							}
-						}
-						 else{
-							window.trainerArray.splice(i , 1);
-						} 
-					});
-		
+		 if( !document.getElementById("subjcheck_"+idd).checked)
+		 {
+			 var index = window.subjectIdArray.indexOf(""+idd+"");
+		 			if(index!=-1){
+		 				window.subjectIdArray.splice(index , 1);	
+		 			}
+		 }
+		 			
 			console.log(loginIds);
 	 }
 	 function allTrainerMailData(){
-		 
-		 var a=window.trainerArray;
+		 var a=window.window.subjectIdArray;
 		 $('#data').val(a);
 	
 	 }

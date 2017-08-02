@@ -73,7 +73,7 @@ public class SendContectMail {
 		else if(msg.contains(","))
 			
 		{
-			String s[]=msg.split(",");
+			String s[]=msg.split("$#$");
 			System.out.println(s[0]+" "+s[1]);
 			
 			try {

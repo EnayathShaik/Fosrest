@@ -4023,12 +4023,8 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		Session session=this.sessionFactory.getCurrentSession();
 		String mailDetails[]=new String[days.length];
 		 String data=p.getData();
-		 System.out.println("INFOOOOOO::::::::::::::: "+p.getData());
 		String[] arrData = data.split(",");
-		//String q1=null,q2=null,s=null;
 		String email[]=	new String[days.length];
-		String tr[]=new String[days.length];
-		String subj[]=new String[days.length];
 		String subjName[]=new String[days.length];
 		
 		tc.setDesignation(p.getDesignation());
@@ -4087,37 +4083,30 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		
 					if (data.contains(",")) {
 				for (int i = 0; i < arrData.length; i++) {
-					System.out.println(" DATA::::::::::::::: " + arrData[i]);
 					String d=arrData[i];
-					 String[] q=d.split("%");
-					 	/* q1=q[0];
-						 q2=q[1];
-						 s=q[2];*/
-						 tr[i]=q[0];
-						 subj[i]=q[2];
-                         email[i]=q[1];
-							String sql = "select subjectName from subjectMaster  where subjectId='"+subj[i]+"'";
-							Query query2 = session.createSQLQuery(sql);
-						    List list2 = query2.list();
-						    System.out.println("SUBJECT NAME:::::::::::::: "+list2.get(0));
-						    String subject=(String) list2.get(0);
-							subjName[i]=subject; 
-							
-							
-						
-						}
+					String sql2 = "select subjectName from subjectMaster  where subjectId='"+d+"'";
+					Query query2 = session.createSQLQuery(sql2);
+				    List list2 = query2.list();
+				  String subject=(String) list2.get(0);
+					subjName[i]=subject; 
+					
+					String sql = "select email from personalinformationtrainer  where id='"+trainers[i]+"'";
+					Query query = session.createSQLQuery(sql);
+				    List list = query.list();
+				    String trainer=(String) list.get(0);
+				    email[i]=trainer; 
+					}
 			}
 		
 	for(int t=0;t<arrData.length;t++){
 			String id="";
-			if(subjName[t]==null){
-			}
-			else{
-				finalData[t]=subjName[t]+","+p.getTrainingStartDate2();
+			if(subjName[t]!=null){
+				finalData[t]=subjName[t]+"$#$"+p.getTrainingStartDate2();
 		        SendContectMail traineeMaail = new SendContectMail();
 				TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
 				traineeMaail.mailProperty(finalData[t], email[t], id);
 			}
+			
 			
 		}
 		
