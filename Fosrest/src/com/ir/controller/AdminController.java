@@ -465,8 +465,10 @@ public class AdminController {
 	@RequestMapping(value = "/traineeUserManagementForm", method = RequestMethod.GET)
 	public String traineeUserManagementForm(
 			@ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm, HttpSession session) {
-		/*if(checkAccess(session))
-			return "redirect:login.fssai";*/
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+		return "redirect:login.fssai";
+		}
 		return "traineeUserManagementForm";
 	}
 
@@ -499,16 +501,20 @@ public class AdminController {
 	@RequestMapping(value = "/trainerUserManagementForm", method = RequestMethod.GET)
 	public String trainerUserManagementForm(
 			@ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm, HttpSession session) {
-		/*if(checkAccess(session))
-			return "redirect:login.fssai";*/
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+		return "redirect:login.fssai";
+		}
 		return "trainerUserManagementForm";
 	}
 
 	@RequestMapping(value = "/trainingCenterUserManagementForm", method = RequestMethod.GET)
 	public String adminUserManagementForm(
 			@ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainerUserManagementForm, HttpSession session) {
-		/*if(checkAccess(session))
-			return "redirect:login.fssai";*/
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+		return "redirect:login.fssai";
+		}
 		return "trainingCenterUserManagementForm";
 	}
 
@@ -589,8 +595,10 @@ public class AdminController {
 	@RequestMapping(value = "/stateAdminPersonalInformation", method = RequestMethod.GET)
 	public String stateAdminPersonalInformation(StateAdmin StateAdmin ,Model model,HttpServletRequest request, HttpSession session) {
 		System.out.println("stateAdminPersonalInformation");
-		/*if(checkAccess(session))
-			return "redirect:login.fssai";*/
+		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+		return "redirect:login.fssai";
+		}
 		//String userId = request.getParameter("userId");
 		List<Designation> DesignationList=pageLoadService.loadDesignation();
 		model.addAttribute("DesignationList", DesignationList);
@@ -797,7 +805,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/trainingCalendarForm", method = RequestMethod.GET)
 	public String trainingCalendarForm(Model model, HttpSession session) {
-		if(checkAccess(session))
+	/*	if(checkAccess(session))
 			return "redirect:login.fssai";
 		try {
 			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
@@ -806,7 +814,7 @@ public class AdminController {
 			e.printStackTrace();
 			new ZLogger("trainingCalendarForm", "Exception while trainingCalendarForm :  " + e.getMessage(),
 					"AdminController.java");
-		}
+		}*/
 		return "trainingCalendarForm";
 	}
 
@@ -1923,7 +1931,7 @@ public class AdminController {
 	@RequestMapping(value = "/TrainingSchedule", method = RequestMethod.GET)
 	public String TrainingSchedule(@ModelAttribute("TrainingScheduleForm") TrainingSchedule TrainingSchedule,
 			Model model, HttpSession session) {
-		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+		/*if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
 			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
 		return "redirect:login.fssai";
 		}
@@ -1944,7 +1952,7 @@ public class AdminController {
 		model.addAttribute("listStateMaster", this.adminService.listStateMaster());
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster2());
 		model.addAttribute("listModuleMaster", this.adminService.listSubjectMaster());
-		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());
+		model.addAttribute("listPersonalInfoTrainer", this.adminService.trainingNameList());*/
 		return "TrainingSchedule";
 	}
 
@@ -2741,27 +2749,27 @@ public class AdminController {
 
 	// for Assessment Questions
 
-	@RequestMapping(value = "/assessmentquestions", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/assessmentquestions", method = RequestMethod.GET)
 	public String assessquestion(@ModelAttribute("AssessmentQuestionForm") AssessmentQuestionForm assesQuestionForm,
 			Model model, HttpSession session) {
 		System.out.println("assessment questins");
 		if(checkAccess(session))
 			return "redirect:login.fssai";
-		/*
+		
 		 * model.addAttribute("listCourseName",
 		 * this.adminService.courseNameList());
 		 * System.out.println("CourseNameList.............."
 		 * +this.adminService.courseNameList());
 		 * model.addAttribute("listCourseType",
 		 * this.adminService.courseTypeList());
-		 */
+		 
 		// model.addAttribute("ModuleMasterForm", new ModuleMasterForm());
 		model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
 
 		return "assessmentquestions";
 	}
-
+*/
 	
 	@RequestMapping(value = "/updateCertificate", method = RequestMethod.POST)
 	@ResponseBody
@@ -3019,6 +3027,10 @@ public class AdminController {
 	
 		public String trainingschedule12(@ModelAttribute("TrainingScheduleForm") TrainingScheduleForm TrainingScheduleForm,
 				Model model, HttpSession session) {
+		
+		if(checkAccess(session))
+			return "redirect:login.fssai";
+
 		System.out.println("trainingschedulemaster");
 /*	Map<String, String> trainingType = lst.trainingTypeMap;
 		Map<String, String> trainingPhase = lst.trainingPhaseMap;
@@ -3166,10 +3178,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 			Model model, HttpSession session,HttpServletRequest request) {
 	   System.out.println("traininigcalendaradd");
       
-		if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
-			new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
-		return "redirect:login.fssai";
-		}
+		
 		int profileId=(int) session.getAttribute("profileId");
 	   
 		if(p.getTrainingCalendarId()!=0){
@@ -3196,10 +3205,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 @RequestMapping(value = "/trainingcalendarsearch", method = RequestMethod.POST)
 public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") TrainingCalendarForm form,
 		Model model, HttpSession session) {
-	if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
-		new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
-	return "redirect:login.fssai";
-	}
+	
 	int profileId=(int) session.getAttribute("profileId");
   /* if(profileId==1){
 		System.out.println("admin");
@@ -3352,8 +3358,10 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 				@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm, Model model, HttpSession session) {
 			//int trainerId=(int) session.getAttribute("loginUser2");
 					System.out.println("UploadAssessment");
-			/*if(checkAccess(session))
-				return "redirect:login.fssai";*/
+					if((int)session.getAttribute("profileId")!=2){	
+						new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+					return "redirect:login.fssai";
+					}
 					int stateId=Integer.parseInt( (String) session.getAttribute("stateId"));
 					model.addAttribute("batchCodeList", this.adminService.listBatchCodeListStateAdmin(stateId));
 					Map<String , String> result = lst.Result;
@@ -3397,7 +3405,14 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 				@ModelAttribute("UploadAssessmentForm") UploadAssessmentForm UploadAssessmentForm, Model model, HttpSession session
 				,HttpServletResponse response) throws IOException {
 			/*	if(checkAccess(session))
-				return "redirect:login.fssai";*/
+				return "redirect:login.fssai";
+				
+				if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1){	
+						new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+					return "redirect:login.fssai";
+					}
+				*
+				*/
 			Map<String , String> result = lst.Result;
 			model.addAttribute("result",result);
 			String hm= this.adminService.saveTraineeResult(data);
@@ -3410,6 +3425,8 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 		
 		@RequestMapping(value = "/ResetPassword", method = RequestMethod.GET)
 		public String ResetPassword(@ModelAttribute("LoginDetails") LoginDetails loginDetails, HttpSession session) {
+			if(checkAccess(session))
+				return "redirect:login.fssai";
 			
 			return "ResetPassword";
 		}
@@ -3507,8 +3524,10 @@ System.out.println(p.getTrainingEndDate2());
 		@RequestMapping(value = "/viewnominatedtrainee", method = RequestMethod.GET)
 		public String viewnominatedtrainee( Model model, HttpSession session) {
 			System.out.println("viewnominatedtrainee");
-			/*if(checkAccess(session))
-				return "redirect:login.fssai";*/
+			if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=1 && (int)session.getAttribute("profileId")!=5){	
+				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+			return "redirect:login.fssai";
+			}
 			int profileId = (Integer) session.getAttribute("profileId");
 			int id= (int) session.getAttribute("userId");
 			model.addAttribute("listNominatedTrainee", this.adminService.listNominatedTrainee(profileId,id));
@@ -3572,8 +3591,10 @@ System.out.println(p.getTrainingEndDate2());
 		@RequestMapping(value = "/viewassessmentquestions", method = RequestMethod.GET)
 		public String viewAssessmentQuestions(
 				@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model, HttpSession session) {
-			/*if(checkAccess(session))
-				return "redirect:login.fssai";*/
+			if((int)session.getAttribute("profileId")!=2){	
+				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
+			return "redirect:login.fssai";
+			}
 			//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 			model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
 			return "viewassessmentquestions";
@@ -3582,8 +3603,7 @@ System.out.println(p.getTrainingEndDate2());
 		@RequestMapping(value = "/viewassessmentquestions", method = RequestMethod.POST)
 		public String viewAssessmentQuestions2(
 				@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model, HttpSession session) {
-			/*if(checkAccess(session))
-				return "redirect:login.fssai";*/
+			
 			model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
 
 			model.addAttribute("listAllSubjectQuestion", this.adminService.listAllSubjectQuestion(assessmentQuestionForm.getSubjectCode1()));

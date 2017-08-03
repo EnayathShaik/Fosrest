@@ -48,7 +48,8 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	
 	@Override
 	public List<AssessmentQuestions> getAssessmentQuestions( List<Integer> subIds) {
-		System.out.println("AssessmentQuestions");
+		new ZLogger("getAssessmentQuestions", "", "AssessmentDAOImpl.java");
+
 		List<AssessmentQuestions> assessmentQuestions = null; 
 		Session session = sessionFactory.getCurrentSession();
 		String strIds=subIds.toString();
@@ -71,6 +72,8 @@ public class AssessmentDaoImpl implements AssessmentDao{
 
 	public String saveAssessment(List<AssessmentAnswerCriteria> answerCriterias){
 		Session session = sessionFactory.getCurrentSession();
+		new ZLogger("saveAssessment", "", "AssessmentDAOImpl.java");
+
 		try{
 		for(int i= 0; i<answerCriterias.size(); i++){
 			session.save(answerCriterias.get(i));
@@ -129,6 +132,8 @@ public class AssessmentDaoImpl implements AssessmentDao{
 
 	@Override
 	public List<AssessmentQuestions> getAssessmentAnswers(List<Integer> subIds, List<Integer> questions) {
+		new ZLogger("getAssessmentAnswers", "", "AssessmentDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		String questionIds = questions.toString();
 		if(questionIds.length() >2){
@@ -146,6 +151,8 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	}
 	@Override
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation){
+		new ZLogger("saveTraineeAssessmentEvaluation", "", "AssessmentDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		Integer traineeAssessmentEvaluationId = (Integer) session.save(traineeAssessmentEvaluation);
 		return traineeAssessmentEvaluationId;
@@ -153,6 +160,8 @@ public class AssessmentDaoImpl implements AssessmentDao{
 
 	
 	public List<Integer> getElegibilityForAssessment(Set<Integer> distinctSubjectIds){
+		new ZLogger("getElegibilityForAssessment", "", "AssessmentDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		System.out.println("in getElegibilityForAssessment "+distinctSubjectIds);
 		String strIds=distinctSubjectIds.toString();
@@ -481,6 +490,8 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	@Override
 	public TraineeAssessmentEvaluation evaluate(TreeMap<Integer, Integer> questions, List<AssessmentQuestions> answers,
 			List<Integer> lst,int loginIdUniuqe) {
+		new ZLogger("evaluate", "", "AssessmentDAOImpl.java");
+
 			Session session = sessionFactory.getCurrentSession();
 		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
 		//int totalQuestion = answers.size();

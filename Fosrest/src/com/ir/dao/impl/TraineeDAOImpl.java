@@ -655,6 +655,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		String newPassword = changePasswordForm.getNewPassword();
 		// String idd=changePasswordForm.getLoginid();
 		System.out.println("new pass   " + oldPassword);
+		new ZLogger("changePasswordAssesorSave", "", "TraineeDAOImpl.java");
 
 		boolean confirm = changePasswordUtility.changePasswordUtil(oldPassword,
 				newPassword, id);
@@ -723,6 +724,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 	@Override
 	public List<FeedbackForm> getFeedbackDetails(Utility utility) {
+		
+		new ZLogger("getFeedbackDetails", "", "TraineeDAOImpl.java");
+
 		String str_query = "select fbd.feedbackId as feedBackFormId ,fdm.feedback as feedbackId,fbd.feedbackrating as feedbackRating,fbd.userid as userid from  feedbackdetail fbd inner join personalinformationtrainingpartner pitp on pitp.personalinformationtrainingpartnerid="
 				+ utility.getFeedbackId()
 				+ " and "
@@ -747,6 +751,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 	@Override
 	public List<Integer> getCurrentSubjectId(int loginId) {
+		
+		new ZLogger("getCurrentSubjectId", "", "TraineeDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		/**
 		 * TODO - add training status change training status as 'A' while course
@@ -886,6 +893,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public String isCourseOnline(int userID) {
 		// TODO Auto-generated method stub
+		
+		new ZLogger("isCourseOnline", "userId"+userID, "TraineeDAOImpl.java");
+
 		String status = "";
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select C.classroom||C.online course from courseenrolleduser A inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) inner join coursename C on(B.coursename=C.coursenameid)"
@@ -904,6 +914,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public Boolean closeCourse(int userId,  String status) {
 		// TODO Auto-generated method stub
 		int id = 0;
+		new ZLogger("closeCourse", "userId"+userId, "TraineeDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select id from nomineetrainee where status = 'N' AND logindetails  = "
 				+ userId;
@@ -1243,6 +1255,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public  String updatePersonalInfoTrainee(PersonalInformationTrainee p){
 
 		int id =  p.getId();
+		new ZLogger("updatePersonalInfoTrainee", "userId"+id, "TraineeDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session.load(PersonalInformationTrainee.class, id);
 		personalInformationTrainee.setDesignation(p.getDesignation());
@@ -1297,6 +1311,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public  String addPersonalInfoTrainer(PersonalInformationTrainer p,String pid){
 
+		new ZLogger("addPersonalInfoTrainer", "userId"+pid, "TraineeDAOImpl.java");
+
+		
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 		char[] pass = passwordGenerator.get();
 		String passwordString = String.valueOf(pass);
@@ -1361,6 +1378,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public  String updatePersonalInfoTrainer(PersonalInformationTrainer p){
 		int id =  p.getId();
+		new ZLogger("updatePersonalInfoTrainer", "userId"+id, "TraineeDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class, id);
 		
@@ -1452,6 +1471,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public  String updatePersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p){
 
 		int id =  p.getId();
+		new ZLogger("updatePersonalInfoTrainingInstitute", "userId"+id, "TraineeDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainingInstitute personalInformationTrainingInstitute = (PersonalInformationTrainingInstitute) session.load(PersonalInformationTrainingInstitute.class, id);
 		personalInformationTrainingInstitute.setTrainingCenterName(p.getTrainingCenterName());
@@ -1513,6 +1534,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 	
 	@Override
 	public  String addPersonalInfoTrainingInstitute(PersonalInformationTrainingInstitute p,int pid){
+		
+		new ZLogger("addPersonalInfoTrainingInstitute", "userId"+pid, "TraineeDAOImpl.java");
 
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 		char[] pass = passwordGenerator.get();
@@ -1558,6 +1581,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public List<MyTrainingForm> listMyTraining() {
 		// TODO Auto-generated method stub
 		System.out.println("inside listMyTrainingForm");
+		new ZLogger("listMyTraining", "", "TraineeDAOImpl.java");
+
 		MyTrainingForm bean = new MyTrainingForm();
 		List<MyTrainingForm> list = new ArrayList<MyTrainingForm>();
 		Session session = this.sessionFactory.getCurrentSession();
@@ -1582,6 +1607,8 @@ System.out.println("list "+list);
 		public GetScoreCardForm listGetScoreCard(int id) {
 			// TODO Auto-generated method stub
 			System.out.println("inside listGetScoreCardForm");
+			new ZLogger("listGetScoreCard", "id"+id, "TraineeDAOImpl.java");
+
 			Session session = sessionFactory.getCurrentSession();
 			GetScoreCardForm bean = new GetScoreCardForm();
 			/*List<GetScoreCardForm> list = new ArrayList<GetScoreCardForm>();*/
@@ -1591,7 +1618,6 @@ System.out.println("list "+list);
 			int nomineeid=(int) list.get(0);
 			List<Object[]> lst = session.createSQLQuery("select * from assessmentevaluationtrainee where nomineeid='"+ nomineeid +"' ").list();
 			
-			System.out.println(lst);
 			if(lst.size() >0){
 				 Object[] obj=	lst.get(0);
 				 bean.setScore((Double)obj[7]);
@@ -1609,7 +1635,8 @@ System.out.println("list "+list);
 		public List<CertificateForm> listCertificate(int loginId) {
 			// TODO Auto-generated method stub
 			System.out.println("inside listCertificateForm");
-			
+			new ZLogger("listCertificate", "id"+loginId, "TraineeDAOImpl.java");
+
 			List<CertificateForm> list = new ArrayList<CertificateForm>();
 			Session session = this.sessionFactory.getCurrentSession();
 			StringBuffer sqlQuery  = new StringBuffer();
@@ -1625,7 +1652,6 @@ System.out.println("list "+list);
 		
 				list.add(bean);
 			}
-	System.out.println("list "+list);
 			return list;
 		}
 				
@@ -1636,9 +1662,10 @@ System.out.println("list "+list);
 	public PersonalInformationTrainer fullDetailtrainer(int loginId) {
 		// TODO Auto-generated method stub
 		System.out.println("LogintrainerDAOImpl full detail process start ");
+		new ZLogger("fullDetailtrainer", "id"+loginId, "TraineeDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		Integer i = loginId;
-		System.out.println("search " + loginId);
 		Query query = session.createQuery("from PersonalInformationTrainer where loginDetails = '"+ i +"'");
 		List<PersonalInformationTrainer> list = query.list();
 		PersonalInformationTrainer personalInformationTrainer = null;
@@ -1654,6 +1681,8 @@ System.out.println("list "+list);
 	public PersonalInformationTrainingInstitute FullDetailTrainingInstitude(int loginId) {
 		// TODO Auto-generated method stub
 		System.out.println("LogintrainerDAOImpl full detail process start ");
+		new ZLogger("FullDetailTrainingInstitude", "id"+loginId, "TraineeDAOImpl.java");
+
 		Session session = sessionFactory.getCurrentSession();
 		Integer i = loginId;
 		System.out.println("search " + loginId);
@@ -1671,7 +1700,9 @@ System.out.println("list "+list);
 	@Override
 	public UnitMaster listTrainingTopic(int id) {
 		// TODO Auto-generated method stub
-		System.out.println("inside listUnitMaster");
+		System.out.println("inside listTrainingTopic");
+		new ZLogger("listTrainingTopic", "id"+id, "TraineeDAOImpl.java");
+
 		Session session = this.sessionFactory.getCurrentSession();
 		UnitMaster bean=new UnitMaster();
 		List<Object[]> list = session.createSQLQuery("select um.unitname,mst.contentname,mst.contenttype,mst.contentlink from nomineetrainee nt inner join trainingschedule ts on (nt.trainingscheduleid = ts.trainingscheduleid) left join modulemaster mst on (ts.moduleid = mst.moduleid)left join unitmaster um on (um.unitid = mst.unitid)where nt.logindetails='"+ id +"'").list();
@@ -1693,6 +1724,7 @@ System.out.println("list "+list);
 		public OnlineTrainingForm listOnlineTraining(int id) {
 			// TODO Auto-generated method stub
 			System.out.println("inside listOnlineTrainingForm");
+			new ZLogger("listOnlineTraining", "id"+id, "TraineeDAOImpl.java");
 			OnlineTrainingForm bean = new OnlineTrainingForm();
 		//	List<OnlineTrainingForm> list = new ArrayList<OnlineTrainingForm>();
 			Session session = this.sessionFactory.getCurrentSession();
@@ -1785,6 +1817,9 @@ System.out.println("list "+list);
 		public List listsubjects(int id) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.getCurrentSession();
+			new ZLogger("listsubjects", "", "TraineeDAOImpl.java");
+
+			
 			/*Query query2  = session.createSQLQuery("select * from assessmentevaluationtrainee where logindetails='"+ id +"'");
 			System.out.println("QUUUUUUUUUUUUUUUUU "+query2);*/
 		/*	String sql = "select * from assessmentevaluationtrainee where logindetails='"+ id +"'";
@@ -1824,6 +1859,7 @@ System.out.println("list "+list);
 @Override
 public List listsubjects2(int id) {
 	// TODO Auto-generated method stub
+	new ZLogger("listsubjects2", "", "TraineeDAOImpl.java");
 	Session session = this.sessionFactory.getCurrentSession();
 	Query query=null;
 	
@@ -1840,6 +1876,8 @@ public List listsubjects2(int id) {
 @Override
 public String listOfflineTraining(int userID) {
 	// TODO Auto-generated method stub
+	new ZLogger("listOfflineTraining", "", "TraineeDAOImpl.java");
+
 			String eligible = "";
 			Session session = sessionFactory.getCurrentSession();
 			String sql = "select tc.trainingphase from nomineetrainee nt inner join trainingcalendar tc on tc.trainingcalendarid=nt.trainingcalendarid where nt.result='-1' and nt.logindetails='"+userID+"'";

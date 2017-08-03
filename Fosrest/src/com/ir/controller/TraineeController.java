@@ -147,7 +147,9 @@ public class TraineeController {
 	
 	
 	@RequestMapping(value="/changePasswordTrainee" , method=RequestMethod.GET)
-	public String contactTrainee(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm ){
+	public String contactTrainee(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm ,HttpSession session){
+		if(checkAccess(session))
+			return "redirect:login.fssai";
 		return "changePasswordTrainee";
 	}
 	
