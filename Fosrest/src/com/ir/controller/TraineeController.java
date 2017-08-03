@@ -147,9 +147,10 @@ public class TraineeController {
 	
 	
 	@RequestMapping(value="/changePasswordTrainee" , method=RequestMethod.GET)
-	public String contactTrainee(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm ,HttpSession session){
-		if(checkAccess(session))
-			return "redirect:login.fssai";
+	public String changePasswordTrainee(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm ,HttpSession session){
+		System.out.println("changePasswordTrainee");
+		/*if(checkAccess(session))
+			return "redirect:login.fssai";*/
 		return "changePasswordTrainee";
 	}
 	

@@ -3591,7 +3591,7 @@ System.out.println(p.getTrainingEndDate2());
 		@RequestMapping(value = "/viewassessmentquestions", method = RequestMethod.GET)
 		public String viewAssessmentQuestions(
 				@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model, HttpSession session) {
-			if((int)session.getAttribute("profileId")!=2){	
+			if((int)session.getAttribute("profileId")!=2 && (int)session.getAttribute("profileId")!=4){	
 				new ZLogger("Illegal profileId Access","By profileId  " +session.getAttribute("profileId") ,"AdminController.java");
 			return "redirect:login.fssai";
 			}
