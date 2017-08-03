@@ -1809,8 +1809,8 @@ public class AdminController {
 		System.out.println("result " + result.hasErrors());
 		if (result.hasErrors()) {
 
-			new ZLogger("StateMaster", "bindingResult.hasErrors  " + result.hasErrors(), "AdminController.java");
-			new ZLogger("StateMaster",
+			new ZLogger("SubjectMaster", "bindingResult.hasErrors  " + result.hasErrors(), "AdminController.java");
+			new ZLogger("SubjectMaster",
 					"bindingResult.hasErrors  " + result.getErrorCount() + " All Errors " + result.getAllErrors(),
 					"AdminController.java");
 			ValidationUtils.rejectIfEmpty(result, "subjectName", "Name can not be empty.");
@@ -2153,7 +2153,7 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		Gson g = new Gson();
 		String newList = g.toJson(hm);
-		System.out.println("newList " + newList);
+		System.out.println("getDistrictMasterById newList " + newList);
 		out.write(newList);
 		out.flush();
 

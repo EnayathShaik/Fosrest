@@ -230,10 +230,6 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = sessionFactory.getCurrentSession();
 		String district1 = "select * from district where upper(districtname) ='"
 				+ districtForm.getDistrictName().replaceAll("%20", " ").toUpperCase() + "'";
-		// String sql = "select s.stateId from district as d inner join state as
-		// s on s.stateid = d.stateid where "+
-		// " s.stateId='" + districtForm.getStateId()+ "' and d.districtname='"
-		// +districtForm.getDistrictName().toUpperCase() +"'";
 		Query query = session.createSQLQuery(district1);
 
 		State s = (State) session.load(State.class, districtForm.getStateId());
@@ -390,6 +386,7 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
+		new ZLogger("courseTypeList", "courseTypeList" + courseTypeList, "AdminDAOImpl.java");
 		return courseTypeList;
 	}
 
@@ -538,7 +535,6 @@ public class AdminDAOImpl implements AdminDAO {
 		String select = "pitp.id,ld.loginid,pitp.firstname,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.status = 'A' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.status = 'A' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus  , ld.id as loginDetailId";
 
 		String sql = "Select " + select + "  from PersonalInformationTrainee as pitp " + join + like;
-		System.out.println("sql " + sql);
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationTrainee> list = query.list();
 		new ZLogger("traineeUserManagementSearch", "list  " + list.toString(), "AdminDAOImpl.java");
@@ -774,10 +770,6 @@ public class AdminDAOImpl implements AdminDAO {
 			}
 			String sun;
 			sun=p.getStateName();
-			/*Query query = session.createQuery("from StateMaster where stateid=" + p.getState());
-			List list= query.list();
-			StateMaster statemaster = (StateMaster)list.get(0);
-			sun=statemaster.getStateName();*/
 			try{
 				sun=sun.substring(0,4).toUpperCase();
 			}
@@ -786,8 +778,6 @@ public class AdminDAOImpl implements AdminDAO {
 				sun=sun.substring(0,4).toUpperCase();
 			}
 			sun=sun+"_ST";
-			//String nextSequenceUserID = pageLoadService.getNextCombinationId(sun+"_ST", "StateAdmin" , "");
-			
 			LoginDetails loginDetails = new LoginDetails();
 			//StateAdmin s=new StateAdmin();
 			loginDetails.setLoginId(sun);
@@ -795,7 +785,6 @@ public class AdminDAOImpl implements AdminDAO {
 			loginDetails.setEncrypted_Password(encryprPassword);
 			loginDetails.setStatus("A");
 			loginDetails.setProfileId(2);
-			//s.setUserId(nextSequenceUserID);
 			
 			StateAdmin s=new StateAdmin();
 			s.setAadharNumber(p.getAadharNumber());
@@ -816,16 +805,10 @@ public class AdminDAOImpl implements AdminDAO {
 			s.setLoginDetails(loginDetails);
 			s.setUserId(sun);
 			session.save(s);
-			//session.persist(s);
-			//return passwordString+"&"+nextSequenceUserID;
+			
 			return passwordString+"&"+sun;
 		}	
 			
-
-			//new ZLogger("ManageTraining saved successfully", " ManageTraining Details=" + p, "AdminDAOImpl.java");
-			// new ZLogger("ManageTraining", "list.size() "+list.size(),
-			// "AdminDAOImpl.java");
-		
 
 		@Override
 		public void updatestateadmin(stateAdminForm p) {
@@ -847,26 +830,9 @@ public class AdminDAOImpl implements AdminDAO {
 			s.setMiddleName(p.getMiddleName());
 			s.setMobileNo(p.getMobileNo());
 			s.setPincode(p.getPincode());
-			//s.setState(p.getState());
-			
 			session.update(s);
 			
-			//new ZLogger("ManageTraining saved successfully", " ManageTraining Details=" + p, "AdminDAOImpl.java");
 		}
-		/*@Override
-		public  String updatestateadmin(StateAdmin p){
-
-			int id =  p.getId();
-			System.out.println("bbbbbbbbbbbbbbbbbb");
-			Session session = sessionFactory.getCurrentSession();
-			StateAdmin StateAdmin = (StateAdmin) session.load(StateAdmin.class, id);
-			StateAdmin.setFirstName(p.getFirstName());
-			StateAdmin.setMiddleName(p.getMiddleName());
-			StateAdmin.setAadharNumber(p.getAadharNumber());
-			StateAdmin.setEmail(p.getEmail());
-			session.update(StateAdmin);
-			return "updated";
-		}	*/
 		
 		@SuppressWarnings("unchecked")
 		@Override
@@ -884,17 +850,12 @@ public class AdminDAOImpl implements AdminDAO {
 		@Override
 		public StateAdmin getstateadminById(int id) {
 			// TODO Auto-generated method stub
-			System.out.println(" id " + id);
+			System.out.println("inside getstateadminById AdminDaoImpl");
 			Session session = this.sessionFactory.getCurrentSession();
-			/*
-			 * ManageTraining p = (ManageTraining)
-			 * session.load(ManageTraining.class, new Integer(id)); logger.info(
-			 * "ManageTraining loaded successfully, ManageTraining details=" + p);
-			 * return p;
-			 */
 			Query query = session.createQuery("from StateAdmin where id=" + id);
 			List<StateAdmin> StateAdmin = query.list();
 			StateAdmin mt = StateAdmin.get(0);
+			new ZLogger("getstateadminById", " StateAdmin id=" + mt, "AdminDAOImpl.java");
 			return mt;
 		}
 
@@ -906,7 +867,7 @@ public class AdminDAOImpl implements AdminDAO {
 			if (null != p) {
 				session.delete(p);
 			}
-			new ZLogger("StateAdmin saved successfully", " StateAdmin Details=" + p, "AdminDAOImpl.java");
+			new ZLogger("removestateadmin", " StateAdmin Details=" + p, "AdminDAOImpl.java");
 		}
 
 	@Override
@@ -964,6 +925,7 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from PersonalInformationTrainer");
 		List<PersonalInformationTrainer> trainingNameList = query.list();
+		new ZLogger("trainingNameList", ""+trainingNameList, "AdminDAOImpl.java");
 		return trainingNameList;
 	}
 
@@ -1281,7 +1243,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List searchManageCourse(String data) {
 		String name = data;
-		System.out.println("passing name   :" + name);
+		System.out.println("searchManageCourse" + name);
 		String[] totalConnected = name.split("-");
 		String courseType = "", courseName = "", freePaid = "", status = "", duration = "";
 		if (!name.equalsIgnoreCase("ALL")) {
@@ -1508,15 +1470,11 @@ public class AdminDAOImpl implements AdminDAO {
 		String[] totalConnected = data.split("-");
 		String stateId = (totalConnected[0].split("="))[1];
 		String districtName = null;
-		System.out.println("length  " + totalConnected[1].split("=").length);
-
 		try {
 			districtName = (totalConnected[1].split("="))[1];
 		} catch (Exception e) {
 			districtName = "%";
 		}
-
-		System.out.println("stateId " + stateId + " districtName " + districtName);
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select  s.stateName , d.districtName  , d.districtId  from district as d inner join state as s on s.stateid = d.stateid where "
 				+ " d.status = 'A' and upper(districtname) like '" + districtName.replaceAll("%20", " ").toUpperCase()
@@ -1532,7 +1490,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String editCityData(String data) {
 		String name = data;
-		System.out.println("passing name state update  :" + name);
 		String[] totalConnected = name.split("-");
 		String status, cityName;
 		int cityId;
@@ -1930,6 +1887,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String sql = "select * from holidaymaster where HolidayDate = '" + p.getHolidayDate() + "'";
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
+		new ZLogger("addHolidayMaster", "list" + l, "AdminDAOImpl.java");
 		if (l != null && l.size() > 0) {
 			return "error";
 		} else {
@@ -1974,6 +1932,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 		List<HolidayMaster> HolidayMasterList = query.list();
 		HolidayMaster hm = HolidayMasterList.get(0);
+		new ZLogger("getHolidayMasterById", "list" + HolidayMasterList, "AdminDAOImpl.java");
 		return hm;
 
 	}
@@ -2143,8 +2102,6 @@ public class AdminDAOImpl implements AdminDAO {
 		mm.setSubjectName(p.getSubjectName());
 		mm.setStatus(p.getStatus());
 		mm.setEligibility(p.getEligibility());
-		//mm.setContentLink(p.getContentLink());
-		//mm.setContentType(p.getContentType());
 		session.update(mm);
 
 	}
@@ -2174,6 +2131,7 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query = session.createQuery("from SubjectMaster where subjectId=" + id);
 
 		List<SubjectMaster> SubjectMasterList = query.list();
+		new ZLogger("getSubjectMasterById", "list.size() " + SubjectMasterList.size(), "AdminDAOImpl.java");
 		SubjectMaster hm = SubjectMasterList.get(0);
 		return hm;
 
@@ -2183,10 +2141,9 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<SubjectMaster> listSubjectMaster() {
 		System.out.println("inside listSubjectMaster");
 		List<SubjectMasterForm> list = new ArrayList<SubjectMasterForm>();
-		Session session = this.sessionFactory.getCurrentSession();
-		
-/*		List<ModuleMaster> lst = session.createSQLQuery("select m.moduleName ,u.unitName,m.status,m.moduleId from modulemaster m join unitmaster u on(u.unitid=m.unitid) where m.isactive='Y'").list();*/		
+		Session session = this.sessionFactory.getCurrentSession();	
 		List<SubjectMaster> lst = session.createSQLQuery("select * from SubjectMaster where isActive='Y'").list();
+		new ZLogger("listSubjectMaster", "list.size() " + lst.size(), "AdminDAOImpl.java");
 		return lst;
 	}
 
@@ -2412,11 +2369,6 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<TrainingSchedule> mccList = session
 				.createQuery("from TrainingSchedule where coalesce(isactive,'') <> 'I' ").list();
-		/*List<TrainingSchedule> mccList = session
-				.createQuery("from TrainingCalendar where coalesce(isactive,'') <> 'I' ").list();*/
-		// List<TrainingSchedule> mccList = session.createSQLQuery("select *
-		// from TrainingSchedule where trainer_status='N' ").list();
-
 		for (TrainingSchedule p : mccList) {
 			System.out.println("TrainingSchedule List::" + p);
 		}
@@ -2541,6 +2493,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 		List<StateMaster> StateMasterList = query.list();
 		StateMaster hm = StateMasterList.get(0);
+		new ZLogger("getStateMasterById", "list.size() " + StateMasterList.size(), "AdminDAOImpl.java");
 		return hm;
 
 	}
@@ -2662,6 +2615,7 @@ public class AdminDAOImpl implements AdminDAO {
 				+ p.getDistrictMaster().getDistrictId() + "'";
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
+		
 		if (l != null && l.size() > 0) {
 			return "error";
 		} else {
@@ -2706,6 +2660,7 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query = session.createQuery("from CityMaster where CityId=" + id);
 		List<CityMaster> CityMasterList = query.list();
 		CityMaster hm = CityMasterList.get(0);
+		new ZLogger("getCityMasterById", "list.size() " + CityMasterList.size(), "AdminDAOImpl.java");
 		return hm;
 
 	}
@@ -2782,10 +2737,9 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		System.out.println(" id " + id);
 		Session session = this.sessionFactory.getCurrentSession();
-
 		Query query = session.createQuery("from RegionMaster where id=" + id);
-
 		List<RegionMaster> RegionMasterList = query.list();
+		new ZLogger("getRegionMasterById", "list.size() " + RegionMasterList.size(), "AdminDAOImpl.java");
 		RegionMaster hm = RegionMasterList.get(0);
 		return hm;
 
@@ -3131,6 +3085,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String sql = "select * from nomineetrainee";
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
+		new ZLogger("listEligibleuser", "list.size() " + list.size(), "AdminDAOImpl.java");
 		Query query = null;
 
 		if (list.size() > 0) {
@@ -3164,7 +3119,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String enrollUser(String data,int stateAdminId) {
 		// TODO Auto-generated method stub
-		System.out.println("inside listEligibleuser " + data);
+		System.out.println("inside enrollUser " + data);
 		Session session = this.sessionFactory.getCurrentSession();
 		String[] arrData = data.split("-");
 		List<String> loginDetails = new ArrayList<String>();
@@ -3172,10 +3127,6 @@ public class AdminDAOImpl implements AdminDAO {
 		int trainingCalendarId = Integer.parseInt(arrData[1]);
 		int trainingPhase=Integer.parseInt(arrData[2]);
 		TrainingCalendar ts = (TrainingCalendar) session.load(TrainingCalendar.class, trainingCalendarId);
-		//int unitCode = ts.getChapterId();
-		//String moduleId = ts.getSubjects();
-		//ModuleMaster mm = getModuleMasterById(moduleId);
-		//String moduleCode = mm.getModuleCode();
 		if (arrData[0].contains(",")) {
 			for (int i = 0; i < loginIdName.length; i++) {
 				System.out.println(" loginIdName[i] " + loginIdName[i]);
@@ -3192,7 +3143,6 @@ public class AdminDAOImpl implements AdminDAO {
 					s.split("@")[1],stateAdminId,trainingPhase);
 
 		}
-		System.out.println("6:1 st return created");
 		return "created";
 	}
 
@@ -3209,15 +3159,11 @@ public class AdminDAOImpl implements AdminDAO {
 
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
-		System.out.println(list.size());
-		new ZLogger("manageCourse", "list.size() " + list.size(), "AdminDAOImpl.java");
+		new ZLogger("addNomineeTrainee", "list.size() " + list.size(), "AdminDAOImpl.java");
 		if (list.size() > 0) {
 			maxId = (int) list.get(0);
 
 		}
-		//Query query2 = null;
-		//String sql2="select distinct tcm.subjectid from nomineetrainee nt inner join trainingCalendar tc on tc.trainingcalendarId=nt.trainingcalendarId inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode";
-		//System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDDD"+sql2);
 		NomineeTrainee nt = new NomineeTrainee();
 
 		nt.setStatus("N");
@@ -3241,12 +3187,6 @@ public class AdminDAOImpl implements AdminDAO {
 		if(trainingPhase!=3){
 			addviewResult(loginId,trainingCalendarId,rollno);
 		}
-		else {
-			
-			
-		}
-		
-		System.out.println("before return");
 		return "created";
 	}
 	public void addviewResult( int loginId,int trainingCalendarId,String rollno) {
@@ -3256,6 +3196,7 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query2 = session.createSQLQuery(
 				"select distinct tcm.subjectid,tcm.trainerId,tc.trainingcalendarId from nomineetrainee nt inner join trainingCalendar tc on tc.trainingcalendarId=nt.trainingcalendarId inner join trainingcalendarmapping tcm on tc.batchcode=tcm.batchcode where nt.logindetails='"+loginId+"'and nt.trainingCalendarId='"+trainingCalendarId+"'");
 		List<Object[]> ss = query2.list();
+		new ZLogger("addviewResult", "list.size() " + ss.size(), "AdminDAOImpl.java");
 		ViewResult vr;
 		for (Object[] li : ss) {
 			vr=new ViewResult();
@@ -3281,9 +3222,7 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		System.out.println("getAssessmentquestion---- id " + id);
 		Session session = this.sessionFactory.getCurrentSession();
-
 		Query query = session.createQuery("from assessmenyquestion where id=" + id);
-
 		List<AssessmentQuestions> AssessmentQuestionsList = query.list();
 		AssessmentQuestions aq = AssessmentQuestionsList.get(0);
 		System.out.println(aq);
@@ -3553,11 +3492,11 @@ public class AdminDAOImpl implements AdminDAO {
 		String sql = "Select " + select + "  from StateAdmin as st " + join + like;
 		Query query = session.createSQLQuery(sql);
 		List<StateAdmin> list = query.list();
-		new ZLogger("trainerUserManagementSearch", "list  " + list, "AdminDAOImpl.java");
+		new ZLogger("stateAdminsearch", "list  " + list, "AdminDAOImpl.java");
 		if (list.size() > 0) {
 			return list;
 		} else {
-			new ZLogger("trainerUserManagementSearch", "list size null", "AdminDAOImpl.java");
+			new ZLogger("stateAdminsearch", "list size null", "AdminDAOImpl.java");
 			list = null;
 			return list;
 		}
@@ -3620,6 +3559,7 @@ public class AdminDAOImpl implements AdminDAO {
 			query =session.createSQLQuery("select batchCode, (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),scheduleCode,(select trainingCenterName from personalinformationtraininginstitute where id=cast(traininginstitute as numeric)), totalDays,trainingStartDate,trainingEndDate,trainingcalendarid,(CASE WHEN isActive = 'TRUE' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus, (CASE WHEN isActive = 'TRUE' THEN 'DEACTIVATE' ELSE 'ACTIVATE' END) as updateStatus    from trainingCalendar where stateId='"+id+"' ");
 
 		List list = query.list();
+		new ZLogger("listCalendar", "list  " +list, "AdminDAOImpl.java");
 		return list;
 	}
 
@@ -3663,7 +3603,7 @@ public class AdminDAOImpl implements AdminDAO {
 		}*/
 		
 		List <TrainingScheduleForm> resulList = session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),scheduleCode,days,trainingscheduleid from TrainingSchedule where isActive='Y'").list();
-		
+		new ZLogger("listtrainingScheduleMaster", "list  " +resulList, "AdminDAOImpl.java");
 		
 		return resulList;
 	}
@@ -3933,11 +3873,11 @@ p.setBatchCode(batchCode);
 	@Override
 	public List<PersonalInformationTrainingInstitute> listTrainingInstitude2(int id) {
 		// TODO Auto-generated method stub
-		System.out.println("inside listSubjectMaster");
+		System.out.println("inside listTrainingInstitude2");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<PersonalInformationTrainingInstitute> mccList;
 		mccList = session.createQuery("from PersonalInformationTrainingInstitute where correspondenceState='"+id+"'").list();
-
+		new ZLogger("listTrainingInstitude2", "list.size() " + mccList.size(), "AdminDAOImpl.java");
 			
 		return mccList;
 	}
@@ -3948,7 +3888,7 @@ p.setBatchCode(batchCode);
 		Session session = sessionFactory.getCurrentSession();
 		Query query;
 		
-		System.out.println(profileId);
+		System.out.println("trainingNameList2");
 		if(profileId==1)
 		query= session.createQuery("from PersonalInformationTrainer");
 		else
@@ -3961,7 +3901,7 @@ p.setBatchCode(batchCode);
 	@Override
 	public List<StateMaster> listStateMaster2(int sid) {
 		// TODO Auto-generated method stub
-		System.out.println("inside listStateMaster");
+		System.out.println("inside listStateMaster2");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<StateMaster> mccList = session.createQuery("from StateMaster where coalesce(isactive,'') <> 'N' and stateId='"+sid+"' ").list();
 		for (StateMaster p : mccList) {
@@ -3976,7 +3916,7 @@ p.setBatchCode(batchCode);
 Session session = this.sessionFactory.getCurrentSession();
 		
 List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname from subjectmaster where isActive='Y'").list();
-
+new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 		return mod;
 		 
 	}
@@ -3997,12 +3937,11 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		
 		Query query = 	session.createSQLQuery("select trainingcalendarid from trainingcalendar where traininginstitute='"+form.getTrainingInstitute()+"' and scheduleCode='"+form.getScheduleCode()+"' and trainingstartdate='"+form.getTrainingStartDate()+"'");
 		List list = query.list();
-		
+		new ZLogger("listCalendarSearch", "list.size() " + list.size(), "AdminDAOImpl.java");
 		System.out.println(list);
 		
 		
 			if(list.size()!=0 && !(list.get(0).equals(form.getTrainingCalendarId()))){
-			System.out.println("nulllllllllllllll");
 			//if((list.get(0).equals(form.getTrainingCalendarId())))
 				return null;
 			}
@@ -4013,6 +3952,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 
 		
 		List list1 = query1.list();
+		new ZLogger("listCalendarSearch", "list1.size() " + list1.size(), "AdminDAOImpl.java");
 		return list1;
 	}
 
@@ -4124,14 +4064,10 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		Query query;
-		/*query= session.createQuery("from MappingMasterTrainer where state='"+id+"'");
-		List<MappingMasterTrainer> trainingNameList = query.list();
-		
-		*/
 		String sql = "select mmt.personalinformationtrainer,mmt.firstName,pit.email,pit.lastName from MappingMasterTrainer mmt inner join personalinformationtrainer pit on pit.id=mmt.personalinformationtrainer join logindetails ld on (ld.id=pit.logindetails)  where state='"+id+"' and ld.status='A'";
 		Query query2 = session.createSQLQuery(sql);
 	    List list2 = query2.list();
-
+		new ZLogger("trainerMappingState", "list2.size() " + list2.size(), "AdminDAOImpl.java");
         return list2;
 		//return trainingNameList;
 	}
@@ -4141,9 +4077,8 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query = 	session.createSQLQuery("select (select subjectName from subjectMaster where subjectId=cast(subject as numeric)),subject,day from SubjectMapping where scheduleCode='"+scheduleCode+"'");
-
-		
 		List list = query.list();
+		new ZLogger("listSchCodeSubjects", "list.size() " + list.size(), "AdminDAOImpl.java");
 		return list;
 	}
 
@@ -4268,13 +4203,9 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 	public List<PersonalInformationTrainer> listpendingTrainer(int id, int profileId) {
 		
 		// TODO Auto-generated method stub
-		System.out.println("inside SuperAdmin with parameter");
+		System.out.println("inside listpendingTrainer with parameter");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<PersonalInformationTrainer> mccList = null;
-			/*mccList = session.createQuery(
-					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"
-							+ id + "'  ")
-					.list();*/
 		mccList = session.createSQLQuery(
 				" select ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber from PersonalInformationTrainer as pitp inner join loginDetails as ld on pitp.loginDetails = ld.id where ld.status='I' ").list();
 		
@@ -4284,13 +4215,9 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 	@Override
 	public List<PersonalInformationTrainingInstitute> listpendingTrainingInstitute(int id, int profileid) {
 		// TODO Auto-generated method stub
-		System.out.println("inside SuperAdmin with parameter");
+		System.out.println("inside listpendingTrainingInstitute with parameter");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<PersonalInformationTrainingInstitute> mccList = null;
-			/*mccList = session.createQuery(
-					"from TrainingSchedule where coalesce(isactive,'') <> 'I' and coalesce(training_institude_status,'') not in ( 'Y' , '') and traininginstitude='"
-							+ id + "'  ")
-					.list();*/
 		mccList = session.createSQLQuery(
 				" select ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName from PersonalInformationTrainingInstitute as pitp inner join loginDetails as ld on pitp.loginDetails = ld.id where ld.status='I'  ").list();
 		
@@ -4302,11 +4229,9 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		// TODO Auto-generated method stub
 		System.out.println("editTrainingSchedule2: id " + id);
 		Session session = this.sessionFactory.getCurrentSession();
-		
-
 		Query query = session.createSQLQuery("select designation,trainingType,trainingPhase,status,subject,sm.day,sm.startTime,sm.endTime,sm.duration from trainingschedule ts join subjectmapping sm on ts.scheduleCode=sm.scheduleCode where trainingscheduleid=" + id+" order by subjectmappingid"); 
-
 		List list = query.list();
+		new ZLogger("editTrainingSchedule2", "list.size() " + list.size(), "AdminDAOImpl.java");
 		return list;
 	}
 
@@ -4333,6 +4258,7 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 
 		
 		List list1 = query1.list();
+		new ZLogger("editTrainingCalendar", "list1.size() " + list1.size(), "AdminDAOImpl.java");
 		return list1;
 	}
 
@@ -4341,11 +4267,8 @@ List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname
 		// TODO Auto-generated method stub
 		System.out.println("editTrainingCalendar: id " + id);
 		Session session = this.sessionFactory.getCurrentSession();
-
-	///Query query1 = 	session.createSQLQuery("select (select designationName from designation where designationid=cast(designation as numeric)),(select trainingTypeName from trainingType where trainingTypeid=cast(trainingType as numeric)),(select trainingPhaseName from trainingPhase where trainingPhaseid=cast(trainingPhase as numeric)),designation,trainingType,trainingPhase,scheduleCode,totalDuration,trainingStartDate,trainingEndDate  from trainingCalendar  where trainingCalendarId='"+id+"'");
-
 		List p = session.createSQLQuery(" select *  from trainingCalendar  where trainingCalendarId='"+id+"'").list();
-TrainingCalendarForm tc=new TrainingCalendarForm();
+		TrainingCalendarForm tc=new TrainingCalendarForm();
 		if (p.size() > 0) {
 			for (int i = 0; i < p.size(); i++) {
 				Object[] obj = (Object[]) p.get(i);
@@ -4403,10 +4326,10 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 	public List getTrainingCalendarMappingTrainer(int editId) {
 		// TODO Auto-generated method stub
 		System.out.println("getTrainingCalendarMappingTrainer");
-
 		Session session=sessionFactory.getCurrentSession();
 		Query query = session.createSQLQuery("select trainerId from trainingCalendarMapping tcm join trainingCalendar tc on(tcm.batchCode=tc.batchCode) where tc.trainingCalendarId='"+editId+"'");
 		List list1 = query.list();
+		new ZLogger("getTrainingCalendarMappingTrainer", "list1.size() " + list1.size(), "AdminDAOImpl.java");
 		return list1;
 		
 	}
@@ -4418,7 +4341,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
 		Query query=session.createSQLQuery("select distinct nt.rollno, nt.traineename,nt.logindetails from NomineeTrainee nt inner join viewResult vr on vr.trainingCalendarId=nt.trainingCalendarId where  nt.trainingCalendarId='"+trainingCalendarId+"'and nt.result='-1'");
 		uas = query.list();
-		System.out.println(uas);
+		new ZLogger("listofTrainee", "uas.size() " + uas.size(), "AdminDAOImpl.java");
 		return uas; 
 		
 	}
@@ -4431,10 +4354,9 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		int loginId = Integer.parseInt(arrData[0]);
 		int trainingCalendarId = Integer.parseInt(arrData[1]);
 		List uas =new ArrayList();
-		 //Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join trainingcalendar tc on (vr.batchCode=tc.batchCode ) inner join nomineetrainee nt on (nt.trainingCalendarId=tc.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'");
-		 Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join nomineetrainee nt on (nt.trainingCalendarId=vr.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'and vr.status='I'");
+		Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join nomineetrainee nt on (nt.trainingCalendarId=vr.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'and vr.status='I'");
 		uas = query.list();
-		System.out.println(uas);
+		new ZLogger("listofTraineeforResult", "uas.size() " + uas.size(), "AdminDAOImpl.java");
 		return uas; 
 	}
 
@@ -4442,7 +4364,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 	@Override
 	public String saveTraineeResult(String data) {
 		// TODO Auto-generated method stub
-		System.out.println("inside listEligibleuser " + data);
+		System.out.println("inside saveTraineeResult: " + data);
 		Session session = this.sessionFactory.getCurrentSession();
 		String[] arrData = data.split("-");
 		int loginId = Integer.parseInt(arrData[0]);
@@ -4467,7 +4389,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 	@Override
 	public StateAdmin FullDetailStateAdmin(int loginId) {
 		// TODO Auto-generated method stub
-		System.out.println("LogintrainerDAOImpl full detail process start ");
+		System.out.println("FullDetailStateAdmin process start ");
 		Session session = sessionFactory.getCurrentSession();
 		Integer i = loginId;
 		Query query = session.createQuery("from StateAdmin where loginDetails = '"+ i +"'");
@@ -4487,14 +4409,10 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		String ttype=nominateTraineeForm.getTrainingType();
 		String tphase=nominateTraineeForm.getTrainingPhase();
 		String trainingInstitute=nominateTraineeForm.getTrainingInstitute();
-		/*List<TrainingCalendar> mccList = session
-				.createQuery("from TrainingCalendar where coalesce(isactive,'') <> 'I' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"' and designation='"+des+"' ").list();
-		for (TrainingCalendar p : mccList) {
-			System.out.println("TrainingSchedule List::" + p);
-		}*/
-	String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where isActive='TRUE' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"'and designation='"+des+"' and tc.trainingInstitute='"+trainingInstitute+"' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') >= current_date";
+		String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where isActive='TRUE' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"'and designation='"+des+"' and tc.trainingInstitute='"+trainingInstitute+"' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') >= current_date";
 		Query query = session.createSQLQuery(sql);
 		List batchCodeList = query.list();
+		new ZLogger("listBatchCodeListNomineeTrainee", "batchCodeList.size() " + batchCodeList.size(), "AdminDAOImpl.java");
 		return batchCodeList;
 	}
 	
@@ -4505,6 +4423,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where isActive='TRUE' and coalesce(trainingPhase,'')<> '3' and pit.correspondenceState='"+stateId+"'";
 		Query query = session.createSQLQuery(sql);
 		List batchCodeList = query.list();
+		new ZLogger("listBatchCodeListStateAdmin", "batchCodeList.size() " + batchCodeList.size(), "AdminDAOImpl.java");
 	return batchCodeList;
 	}
 
@@ -4527,6 +4446,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
    +" where trainingCalendarId="+id+" and tc.scheduleCode=smmm.scheduleCode");
 		
 		List list=query.list();
+		new ZLogger("getTrainingCalendarById", "list.size() " + list.size(), "AdminDAOImpl.java");
 		return list;
 		
 	}
@@ -4549,7 +4469,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		String sql = "update logindetails set password='"+pass+"',encrypted_password='"+encryprPassword+"' where loginid='"+loginid+"' ";
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
-
+		new ZLogger("addResetPassword", "update logindetails set password= " + pass+"encrypted_password="+ encryprPassword +" where loginid="+loginid, "AdminDAOImpl.java");
 		
 		return "created";
 	}
@@ -4560,14 +4480,15 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		System.out.println("getEnteredSubjectDates");
 		Session session=sessionFactory.getCurrentSession();
 		Query query = session.createSQLQuery("select distinct subjectDate, to_date(subjectDate, 'DD/MM/YYYY') from trainingCalendarMapping tcm join trainingCalendar tc on(tcm.batchCode=tc.batchCode) where tc.trainingCalendarId='"+editId+"' order by to_date(subjectDate, 'DD/MM/YYYY')");
-
 		List list1 = query.list();
+		new ZLogger("getEnteredSubjectDates", "list1.size() " + list1.size(), "AdminDAOImpl.java");
 		return list1;
 	}	
 
 @Override
 	public String photogallery(String linkName) {
 		// TODO Auto-generated method stub
+	System.out.println("inside photogallery");
 	Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		PhotoGallery pg = new PhotoGallery();
@@ -4580,16 +4501,18 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		
 	@Override
 	public List<PhotoGallery> listPhotoGallery() {
-		System.out.println("inside PhotoGallery");
+		System.out.println("inside listPhotoGallery");
 		List<PhotoGallery> list = new ArrayList<PhotoGallery>();
 		Session session = this.sessionFactory.getCurrentSession();
 		List<PhotoGallery> lst = session.createSQLQuery("select * from photoGallery").list();
+		new ZLogger("listPhotoGallery", "lst.size() " + lst.size(), "AdminDAOImpl.java");
 		return lst;
 	}
 	
 	@Override
 	public void removePhotoGallery(int id) {
 		// TODO Auto-generated method stub
+		System.out.println("inside removePhotoGallery");
 		Session session = this.sessionFactory.getCurrentSession();
 		PhotoGallery p = (PhotoGallery) session.load(PhotoGallery.class, new Integer(id));
 		String sql = null;
@@ -4649,11 +4572,13 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		
 		Integer contactTraineeModelId = (Integer) session
 				.save(contactTraineeModel);
+		new ZLogger("Helpsave", "EmailId is  " + email1+"message "+msg, "AdminDAOImpl.java");
 		if (contactTraineeModelId > 0 && contactTraineeModelId != null) {
 			return "created";
 		} else {
 			return "error";
 		}
+		
 	}
 
 	@Override
@@ -4661,7 +4586,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		List<String> chkSch1= session.createSQLQuery("select tc.scheduleCode from trainingSchedule ts join trainingCalendar tc on(ts.scheduleCode=tc.scheduleCode)").list();
-		
+		new ZLogger("getAllScheduleCode", "chkSch1 " + chkSch1, "AdminDAOImpl.java");
 		return chkSch1;
 	}
 
@@ -4670,7 +4595,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		List subjectName= session.createSQLQuery("select s.subjectname from subjectmapping sm join subjectmaster s on(cast(sm.subject as numeric)=s.subjectId) where scheduleCode='"+schCode+"'").list();
-		
+		new ZLogger("getScheduleCodeDetails", "subjectName.size() " + subjectName.size(), "AdminDAOImpl.java");
 		return subjectName;
 	}
 
@@ -4679,7 +4604,7 @@ TrainingCalendarForm tc=new TrainingCalendarForm();
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		List<AssessmentQuestions> allQuestions= session.createQuery("from AssessmentQuestions where subjectMaster="+a).list();
-			
+		new ZLogger("listAllSubjectQuestion", "allQuestions.size() " + allQuestions.size(), "AdminDAOImpl.java");
 		return allQuestions;
 		
 	}

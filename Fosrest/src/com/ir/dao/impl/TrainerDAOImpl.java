@@ -20,6 +20,7 @@ import com.ir.model.TrainingCalendar;
 import com.ir.model.ViewResult;
 import com.ir.service.PageLoadService;
 import com.ir.util.ChangePasswordUtility;
+import com.zentech.logger.ZLogger;
 
 @Service
 public class TrainerDAOImpl implements TrainerDAO {
@@ -39,7 +40,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 	@Override
 	public List<TrainerRequestForm> listTrainerRequest(TrainerRequestForm s) {
 		// TODO Auto-generated method stub
-		System.out.println("inside listTrainingRequestForm");
+		System.out.println("inside listTrainerRequest");
 		TrainerRequestForm bean;
 		List<TrainerRequestForm> list = new ArrayList<TrainerRequestForm>();
 		Session session = this.sessionFactory.getCurrentSession();
@@ -65,9 +66,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 		// TODO Auto-generated method stub
 		System.out.println("inside listBatchCodeListforTrainer wo parameter");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<TrainingCalendar> mccList = session
-				.createSQLQuery("select distinct tc.batchCode,tc.trainingCalendarId from TrainingCalendar tc inner join TrainingCalendarMapping tcm on tc.batchCode=tcm.batchCode where trainerId='"+trainerId+"'and coalesce(tc.trainingPhase,'') <> '3'").list();
-				return mccList;
+		List<TrainingCalendar> mccList = session.createSQLQuery("select distinct tc.batchCode,tc.trainingCalendarId from TrainingCalendar tc inner join TrainingCalendarMapping tcm on tc.batchCode=tcm.batchCode where trainerId='"+trainerId+"'and coalesce(tc.trainingPhase,'') <> '3'").list();
+		new ZLogger("listBatchCodeListforTrainer", "mccList.size() " + mccList.size(), "TrainerDAOImpl.java");
+		return mccList;
 	}
 
 	@Override
@@ -77,7 +78,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
 		Query query=session.createSQLQuery("select pit.firstName,pit.loginDetails from viewResult vr inner join PersonalInformationTrainee pit on vr.traineeId=pit.logindetails where vr.marks<0 and vr.trainerid='"+trainerId+"'");
 		uas = query.list();
-		System.out.println(uas);
+		new ZLogger("listofTrainer", "uas.size() " + uas.size(), "TrainerDAOImpl.java");
 		return uas; 
 
 	}
@@ -97,10 +98,6 @@ public class TrainerDAOImpl implements TrainerDAO {
 			sql = "update ViewResult set marks = '"+marks+"' where  trainingcalendarId='"+batchCode+"' and subject='"+subject+"'and traineeId='"+loginId+"'and status='I'";
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
-			/*String sql2;
-			sql2 = "update NomineeTrainee set assignedByTrainer = '"+trainerId+"' where  trainingCalendarId='"+batchCode+"'and logindetails='"+loginId+"'";
-			Query query2 = session.createSQLQuery(sql2);
-			query2.executeUpdate();*/
 			return null;
 }
 
@@ -110,10 +107,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 		System.out.println("inside listofSubjects" );
 		Session session = this.sessionFactory.getCurrentSession();
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
-		//Query query=session.createSQLQuery("select distinct mm.subjectName,mm.subjectId from nomineetrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) inner join subjectmaster mm on (tcmap.subjectId=mm.subjectId) where tcmap.trainerid='"+trainerId+"'and  tc.batchCode='"+batchCode+"'and nt.score=0");
 		Query query=session.createSQLQuery("select distinct mm.subjectName,mm.subjectId from NomineeTrainee nt inner join trainingcalendar tc on (nt.trainingcalendarid =tc.trainingcalendarid ) inner join trainingcalendarmapping tcmap on (tc.batchcode = tcmap.batchcode) inner join subjectmaster mm on (tcmap.subjectId=mm.subjectId) where tcmap.trainerid='"+trainerId+"'and  tc.trainingCalendarId='"+batchCode+"'and nt.score=0");
 		uas = query.list();
-		System.out.println(uas);
+		new ZLogger("listofSubjects", "uas.size() " + uas.size(), "TrainerDAOImpl.java");
 		return uas; 
 
 	
@@ -130,6 +126,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		String sql="select tc.trainingCalendarId,tc.batchCode from TrainingCalendar tc inner join personalinformationtraininginstitute pit on pit.id=cast(tc.traininginstitute as numeric) where isActive='TRUE' and trainingType='"+ttype+"' and trainingPhase='"+tphase+"'and designation='"+des+"' and tc.trainingInstitute='"+trainingInstitute+"' and to_date(tc.trainingstartdate, 'DD/MM/YYYY') >= current_date";
 		Query query = session.createSQLQuery(sql);
 		List batchCodeList = query.list();
+		new ZLogger("getTrainingStartDate", "batchCodeList.size() " + batchCodeList.size(), "TrainerDAOImpl.java");
 		return batchCodeList;
 	}
 	

@@ -170,6 +170,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		String sql="select distinct pitp.personalinformationtrainerid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainer pitp , logindetails pit";
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
+		new ZLogger("getTrainerList", "courseTypeList.size() " + courseTypeList.size(), "TrainingPartnerDAOImpl.java");
 		if(courseTypeList.size()>0){
 			for(int index=0;index<courseTypeList.size();index++){
 				IntStringBean bean=new IntStringBean();
@@ -188,6 +189,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		String sql="select distinct pitp.personalinformationtraineeid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainee pitp , logindetails pit";
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
+		new ZLogger("getTraineeList", "courseTypeList.size() " + courseTypeList.size(), "TrainingPartnerDAOImpl.java");
 		if(courseTypeList.size()>0){
 			for(int index=0;index<courseTypeList.size();index++){
 				IntStringBean bean=new IntStringBean();
@@ -239,7 +241,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		new ZLogger("getTrainingCenter","sql "+sql, "TrainingPartnerDaoImpl.java");
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
-		
+		new ZLogger("getTrainingCenter", "list.size() " + list.size(), "TrainingPartnerDAOImpl.java");
 			if(list.size() > 0){
 				trainingCenter = (int) list.get(0);
 				new ZLogger("getTrainingCenter"," ", "TrainingPartnerDaoImpl.java");
@@ -1271,6 +1273,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 						criteria.add(Restrictions.eq("attendanceDate", modifiedDate));
 						
 						List l = criteria.list();
+						new ZLogger("markTraineeAttendance", "l.size() " + l.size(), "TrainingPartnerDAOImpl.java");
 						System.out.println("l.size() "+l.size());
 						if(l != null && l.size() > 0){
 							result ="Attendance is already marked for date "+modifiedDate;
@@ -1398,6 +1401,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		
 		Query query = session.createSQLQuery(sql);
 		List courseTypeList = query.list();
+		new ZLogger("certificateForTraineeList", "courseTypeList.size() " + courseTypeList.size(), "TrainingPartnerDAOImpl.java");
 		return courseTypeList;
 	}
 	
@@ -1614,7 +1618,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		
 		Query query=session.createSQLQuery("select distinct batchCode from trainingCalendar tc join nomineetrainee nt on(tc.trainingcalendarid=nt.trainingcalendarid) ");
 		List lst=query.list(); 
-		
+		new ZLogger("listNominatedTraineeBatchCode", "lst.size() " + lst.size(), "TrainingPartnerDAOImpl.java");
 		
 		return lst;
 	}
@@ -1625,7 +1629,7 @@ Session session=sessionFactory.getCurrentSession();
 		
 		Query query=session.createSQLQuery("select rollno from nomineetrainee nt where trainingCalendarId=(select TrainingCalendarId from trainingCalendar where batchCode='"+batchCode+"')");
 		List lst=query.list();
-		
+		new ZLogger("listTraineeRollNo", "lst.size() " + lst.size(), "TrainingPartnerDAOImpl.java");
 		
 		return lst;
 	}
