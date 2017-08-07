@@ -238,10 +238,30 @@ return answerno("correctAnswer",$("#correctAnswer").val());
 
 
 
-function getQuestionNo(val){
+function getQuestionNo(subId){
 	//var val=document.getElementById('unitCode2').value+'-'+	document.getElementById('moduleCode2').value;
 
 	//alert(val );
+	$("#designationErr").css("display", "none");
+
+	$("#trainingTypeErr").css("display", "none");
+	$("#trainingPhaseErr").css("display", "none"); 
+	
+if ($("#designation2").val() == 0) {
+	$("#designationErr").css("display", "block"); 
+	$("#subjectCode2").val('0');
+	return false;
+}
+if ($("#trainingType2").val() == 0) {
+	$("#trainingTypeErr").css("display", "block");
+	$("#subjectCode2").val('0');
+	return false;
+}
+if ($("#trainingType2").val() == 3 && $("#trainingPhase2").val() == 0) {// 3 for induction 
+	$("#trainingPhaseErr").css("display", "block");
+	$("#subjectCode2").val('0');
+	return false;
+}
 	
 	var name=JSON.stringify({
 		courseType:0,
@@ -249,7 +269,7 @@ function getQuestionNo(val){
   })
 	$.ajax({
 		type : 'post', 
-		url : 'getQuestionNumber.fssai?data='+ val,
+		url : 'getQuestionNumber.fssai?data='+$("#designation2").val()+"|"+$("#trainingType2").val()+"|"+$("#trainingPhase2").val()+"|"+ subId,
 		contentType : "application/json",
 	    data:name,
 		success : function(response) {
@@ -301,6 +321,14 @@ function getQuestionNo(val){
     			document.getElementById('optionSix').value = ''; 
     	}
     	}
+    }
+    
+    function func2(){
+    	$("#designationErr").css("display", "none");
+
+    	$("#trainingTypeErr").css("display", "none");
+    	$("#trainingPhaseErr").css("display", "none"); 
+    	$("#subjectCode2").val('0');
     }
     
 
@@ -532,7 +560,7 @@ function getQuestionNo(val){
 																	class="style-li error-red">Select Designation.</li>
 																</ul>
 															</div>
-															<cf:select path="designation2" class="form-control">
+															<cf:select path="designation2" class="form-control" onchange="func2();">
 																<cf:option value="0" label="Select Designation" />
 															 	<cf:options items="${DesignationList}" 
 																	itemValue="designationId" itemLabel="designationName"  /> 
@@ -550,7 +578,7 @@ function getQuestionNo(val){
 														</ul>
 													</div>
 													<cf:select path="trainingType2" class="form-control"
-														onchange="getTrainingPhase(this.value , 'trainingPhase2');">
+														onchange="func2();getTrainingPhase(this.value , 'trainingPhase2');">
 														<cf:option value="0" label="Select Training Type" />
 														<cf:options items="${TrainingTypeList}"
 															itemValue="trainingTypeId" itemLabel="trainingTypeName" />
@@ -566,7 +594,7 @@ function getQuestionNo(val){
 															
 														</ul>
 													</div>
-													<cf:select path="trainingPhase2" class="form-control"
+													<cf:select path="trainingPhase2" class="form-control" onchange="func2();"
 														>
 														<cf:option value="0" label="Select Training Phase" />
 														<cf:options items="${TrainingPhaseList}"

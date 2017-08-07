@@ -459,7 +459,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 														<div class="col-md-06 col-xs-12" style="margin-top: 39px;">
 															<input type="submit" id="commonbtn" value="Create"
 																style="float: right; padding: 10px 50px 10px 50px"
-																class="btn login-btn" onclick="return chkDates();" />
+																class="btn login-btn"  />
 														</div>
 												</div>
 											</fieldset>
@@ -645,6 +645,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 
 	    function editSchedule(schCode,id){
 		
+		 $("#result").css("display", "none");
 		 if(chkIfExists(schCode,"EDIT")==false){
 			 return false;
 		 }

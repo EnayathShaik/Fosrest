@@ -46,10 +46,11 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
 	
-	@Override
-	public List<AssessmentQuestions> getAssessmentQuestions( List<Integer> subIds) {
-		new ZLogger("getAssessmentQuestions", "", "AssessmentDAOImpl.java");
 
+	
+	@Override
+	public List<AssessmentQuestions> getAssessmentQuestions(int logid, List<Integer> subIds) {
+		System.out.println("AssessmentQuestions");
 		List<AssessmentQuestions> assessmentQuestions = null; 
 		Session session = sessionFactory.getCurrentSession();
 		String strIds=subIds.toString();
@@ -58,7 +59,17 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		strIds=strIds.replace("]", ")");
 		System.out.println(strIds);
 		try{
-			Query query = session.createQuery("from AssessmentQuestions where isActive='Y' and subjectmaster in "+ strIds+" order by assessmentQuestionId");
+			List<Object[]> l1 = session.createSQLQuery("select designation,trainingtype,trainingphase from trainingcalendar tc join nomineetrainee nt on (tc.trainingcalendarId=nt.trainingCalendarId) where nt.status='N' and nt.logindetails="+logid).list();
+			int designationid=0;
+			int trainingTypeid=0;
+			int trainingPhaseid=0;
+			
+			for (Object[] i:l1) {
+				 designationid=Integer.parseInt((String)i[0]);
+				trainingTypeid=Integer.parseInt((String)i[1]);
+				trainingPhaseid=Integer.parseInt((String)i[2]);
+			}
+			Query query = session.createQuery("from AssessmentQuestions where isActive='Y' and subjectmaster in "+ strIds+" and designationid="+designationid+" and trainingTypeid="+trainingTypeid+" and trainingPhaseid="+trainingPhaseid+" order by assessmentQuestionId");
 			 assessmentQuestions = query.list();
 			 //System.out.println(" assessmentQuestions "+assessmentQuestions);
 		}catch(Exception e){

@@ -2814,7 +2814,7 @@ public class AdminController {
 		//model.addAttribute("listUnitMaster", this.adminService.listUnitMaster());
 		model.addAttribute("DesignationList", pageLoadService.loadDesignation());
   		model.addAttribute("TrainingTypeList", pageLoadService.loadTrainingType());
-  		model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
+  		//model.addAttribute("TrainingPhaseList",  pageLoadService.loadTrainingPhase());
 		model.addAttribute("listSubjectMaster", this.adminService.listSubjectMaster());
 		return "manageAssessmentQuestions";
 	}
@@ -3194,7 +3194,7 @@ public String contactTrainee1(@ModelAttribute("ContactTraineee") ContactTrainee 
 	String subjectDates[]=request.getParameterValues("subjectDates");
 	String days[]=request.getParameterValues("days");
 
-	         String result = this.adminService.createTrainingCalendar(days,subjectDates,trainers,subjects,p);
+	         String result = this.adminService.createTrainingCalendar(days,subjectDates,trainers,subjects,p,profileId);
 		}
 		return "redirect:trainingcalendar.fssai";
 	}

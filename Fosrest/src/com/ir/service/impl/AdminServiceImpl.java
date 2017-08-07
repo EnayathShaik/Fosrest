@@ -1594,9 +1594,9 @@ public List listCalendarSearch(TrainingCalendarForm form) {
 
 @Override
 @Transactional
-public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p) {
+public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p,int profileId) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.createTrainingCalendar( days,subjectDates,trainers,subjects,p);
+	return this.adminDAO.createTrainingCalendar( days,subjectDates,trainers,subjects,p,profileId);
 }
 
 @Override

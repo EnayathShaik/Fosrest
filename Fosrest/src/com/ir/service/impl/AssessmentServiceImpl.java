@@ -34,9 +34,9 @@ public class AssessmentServiceImpl implements AssessmentService {
 	private AssessmentDao assessmentDao;
 	@Override
 	@Transactional
-	public List<AssessmentQuestions> getAssessmentQuestions( List<Integer> subIds) {
+	public List<AssessmentQuestions> getAssessmentQuestions(int logid, List<Integer> subIds) {
 //		AssessmentDaoImpl assessmentDao = new AssessmentDaoImpl();
-		final List<AssessmentQuestions> listAssessmetQustions = assessmentDao.getAssessmentQuestions( subIds);
+		final List<AssessmentQuestions> listAssessmetQustions = assessmentDao.getAssessmentQuestions(logid, subIds);
 		return listAssessmetQustions;
 	}
 	@Override

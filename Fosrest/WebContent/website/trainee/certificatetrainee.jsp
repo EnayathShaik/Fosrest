@@ -114,7 +114,7 @@
 													<hr class="left-sign">
 													<h4></h4>
 													<p class="left-p" style="left: 78px;">
-														<b style="left: 78px;">Madhavi Das</b> <br /> Chief
+														Chief
 														Management Service Officer <br /> <span>Fssai,
 															New-Delhi.</span>
 

@@ -15,7 +15,7 @@ import com.ir.model.trainee.TraineeAssessmentEvaluation;
 
 public interface AssessmentDao {
 	
-	public List<AssessmentQuestions> getAssessmentQuestions( List<Integer> subIds);
+	public List<AssessmentQuestions> getAssessmentQuestions(int logid, List<Integer> subIds);
 	public String saveAssessment(List<AssessmentAnswerCriteria> answerCriterias);
 	public List<CourseType> courseTypes();
 	public List<CourseName> courseNames();

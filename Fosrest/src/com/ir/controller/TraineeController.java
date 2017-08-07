@@ -480,7 +480,7 @@ public class TraineeController {
 			int courseType = 1;
 			List<Integer> subIds = 	traineeService.getCurrentSubjectId(loginId);
 			System.out.println("subIds "+subIds);
-			List<AssessmentQuestions> assessmentQuestions =  assessmentService.getAssessmentQuestions(subIds);
+			List<AssessmentQuestions> assessmentQuestions =  assessmentService.getAssessmentQuestions(loginId,subIds);
 			traineeAssessment.setListAssessmentQuestion(assessmentQuestions);
 			traineeAssessment.setSubjectId(subIds);
 			Gson gson=new Gson();

@@ -3523,21 +3523,18 @@ public class AdminDAOImpl implements AdminDAO {
 	public int getQuestionNumber(String data) {
 		// TODO Auto-generated method stub
 		System.out.println(data);
-		/*
-		String[] codes = data.split("-");
-		System.out.println(codes.length);
-		System.out.println(codes[0]);
-		System.out.println(codes[1]);
-		*/Session session = this.sessionFactory.getCurrentSession();
+		
+		String[] data1 = data.split("\\|");
+		for(String s:data1)
+			System.out.println(s);
+		Session session = this.sessionFactory.getCurrentSession();
 		int i=0;
 		try{
 		//Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where unitMaster="+codes[0]+" and moduleMaster="+codes[1]+"and isactive='Y'");
-			Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where subjectMaster="+data+"and isactive='Y'");
+			Query query = session.createSQLQuery("select count(isactive) from assessmentQuestions where designationid="+data1[0]+" and trainingTypeId="+data1[1]+" and trainingPhaseId="+data1[2]+" and subjectMaster="+data1[3]+"and isactive='Y'");
 
 			List list = query.list();
 		i=((BigInteger)list.get(0)).intValue();
-		
-		System.out.println("aaaa "+i);
 		}
 		catch (NullPointerException e) {
 			new ZLogger("getQuestionNumber", "Exception while  " + e.getMessage(), "AdminDAOImpl.java");
@@ -3657,23 +3654,22 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		ArrayList arrL=new ArrayList();
 		String newArr[]=subjects.split("\\|");
-		for(String a:newArr)
-		System.out.println(a); 
+		
 		
 	
-Boolean flag=false;
+		Boolean flag=false;
 		
 		String sql=null;
 		if(form.getTrainingScheduleId()!=0 ){
+			System.out.println("edit");
 			ts = (TrainingSchedule) session.load(TrainingSchedule.class,form.getTrainingScheduleId());
-		sql="select subjects from trainingSchedule where designation='"+ts.getDesignation()+"' and trainingType='"+ts.getTrainingType()+"' and trainingPhase='"+ts.getTrainingPhase()+"' and  length(subjects)="+subjects.length()+" and isActive='Y'";
+		sql="select subjects from trainingSchedule where designation='"+ts.getDesignation()+"' and trainingType='"+ts.getTrainingType()+"' and trainingPhase='"+ts.getTrainingPhase()+"' and  length(subjects)="+subjects.length()+" and TrainingScheduleId not in("+ts.getTrainingScheduleId()+") and isActive='Y'";
 		}
 		else
 		sql="select subjects from trainingSchedule where designation='"+form.getDesignation()+"' and trainingType='"+form.getTrainingType()+"' and trainingPhase='"+form.getTrainingPhase()+"' and  length(subjects)="+subjects.length()+" and isActive='Y'";
 		
 		List chkSch1= session
 				.createSQLQuery(sql).list();
-		
 		if(chkSch1.size()!=0)
 		for(int i=0;i<newArr.length && i<chkSch1.size();i++){
 			if(chkSch1.get(i).toString().contains(newArr[i])){
@@ -3686,9 +3682,7 @@ Boolean flag=false;
 		
 		if(form.getTrainingScheduleId()!=0 )
 		{//edit
-				 List chkSch= session
-							.createSQLQuery("select trainingScheduleId from trainingSchedule where designation='"+ts.getDesignation()+"' and trainingType='"+ts.getTrainingType()+"' and trainingPhase='"+ts.getTrainingPhase()+"' and subjects='"+subjects+"' and isActive='Y'").list();
-				if((flag==false)||(int)chkSch.get(0)==ts.getTrainingScheduleId() )
+				if((flag==false))
 				{
 					Query query = session.createQuery("delete SubjectMapping where scheduleCode = :sch");
 					query.setParameter("sch", ts.getScheduleCode());
@@ -3726,7 +3720,6 @@ Boolean flag=false;
 			ts= new TrainingSchedule();
 		
 /*
-		
 		for(int i=0;i<subject.length;i++){
 			subjects=subjects+subject[i]+"|";
 			
@@ -3957,7 +3950,7 @@ new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 	}
 
 	@Override
-	public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p) {
+	public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p,int profileId) {
 		// TODO Auto-generated method stub
 		TrainingCalendar tc = new TrainingCalendar();
 		Session session=this.sessionFactory.getCurrentSession();
@@ -3978,6 +3971,9 @@ new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 		tc.setTrainingInstitute(p.getTrainingInstitute2());
 		String batchCode = pageLoadService.getNextCombinationId("BC", "trainingCalendar" , "000000");
 		tc.setBatchCode(batchCode);
+		if(profileId==1)
+			tc.setActive(true);
+		else
 		tc.setActive(false);
 		
 			TrainingCalendarMapping tcm;
