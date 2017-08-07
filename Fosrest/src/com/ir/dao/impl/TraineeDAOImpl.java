@@ -1253,7 +1253,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 	
 	@Override
 	public  String updatePersonalInfoTrainee(PersonalInformationTrainee p){
-
 		int id =  p.getId();
 		new ZLogger("updatePersonalInfoTrainee", "userId"+id, "TraineeDAOImpl.java");
 
@@ -1284,8 +1283,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainee.setResCity(p.getResCity());
 		personalInformationTrainee.setResPincode(p.getResPincode());
 		personalInformationTrainee.setDojService(p.getDojService());
+		//personalInformationTrainee.setDojService(p.getDojService());
 		//personalInformationTrainee.setEmpDate(p.getEmpDate());
-		//personalInformationTrainee.setDojPost(p.getDojPost());
+		personalInformationTrainee.setDojPost(p.getDojPost());
 		personalInformationTrainee.setDateRetirement(p.getDateRetirement());
 		//personalInformationTrainee.setPostDistrict(p.getPostDistrict());
 		
@@ -1907,4 +1907,3 @@ public String listOfflineTraining(int userID) {
 			}
 			return resulList;
 		}*/
-	

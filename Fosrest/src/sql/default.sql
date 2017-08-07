@@ -92,9 +92,9 @@ INSERT INTO trainingType(  trainingTypeId, trainingTypeName) VALUES (3, 'Inducti
 INSERT INTO trainingType(  trainingTypeId, trainingTypeName) VALUES (4, 'Training of Trainers');
 
 
-INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (1, 'Refresher',3);
+INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (1, 'Classroom',3);
 INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (2, 'Onjob',3);
-INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (3, 'Foundation',3);
+INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (3, 'Online',3);
 INSERT INTO trainingPhase(  trainingPhaseId, trainingPhaseName,trainingType) VALUES (0, 'Not Avaialble',null);
 
 

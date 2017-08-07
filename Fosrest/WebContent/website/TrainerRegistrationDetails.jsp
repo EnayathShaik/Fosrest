@@ -25,7 +25,7 @@
 	}
 
 	function OnStart() {
-
+		flatpickr("#dob", {});
 		/* $("#Oti").css("display", "none");
 	 	$("#Ati").css("display", "none"); */
 		/* if(c!=4){
@@ -47,6 +47,7 @@
 
 			$("#logId").val('${PersonalInformationTrainer.loginDetails.id}');
 			$("#status").val('${PersonalInformationTrainer.status}');
+			$("#dob").val('${PersonalInformationTrainer.dob}');
 			$("#correspondenceState").val(
 					'${PersonalInformationTrainer.correspondenceState}');
 			$("#correspondenceState").trigger("change");
@@ -90,7 +91,7 @@
 			}
 		DrawCaptcha();
 
-		flatpickr("#dob", {});
+		
 		$('#sameAddr')
 				.change(
 						function() {

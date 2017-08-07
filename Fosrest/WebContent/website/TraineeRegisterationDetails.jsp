@@ -28,7 +28,16 @@
  
  
  function OnStart(){
-	 
+	 DrawCaptcha(); 
+		
+		flatpickr("#dob", {});
+		flatpickr("#dojService", {});
+		flatpickr("#dojPost", {});
+		flatpickr("#empDate", {});
+   	
+   
+   	flatpickr("#dateRetirement", {});
+	 		 
 	 var isUpdate = '${isUpdate}';
 	 var profileId = '${profileId}';
 	// alert("profileId"+profileId);
@@ -39,7 +48,9 @@
 	 
 	 }
 	 if(isUpdate !=null && isUpdate== "Y"){
-
+			$("#dob").val('${PersonalInformationTrainee.dob}');
+			$("#dojPost").val('${PersonalInformationTrainee.dojPost}');
+			$("#dateRetirement").val('${PersonalInformationTrainee.dateRetirement}');
 		 var name = '${PersonalInformationTrainee.firstName}';
 		$("#logId").val('${PersonalInformationTrainee.loginDetails.id}');
 		$("#status").val('${PersonalInformationTrainee.status}');
@@ -84,16 +95,7 @@
 	 }
 
 	
-		DrawCaptcha(); 
 		
-		flatpickr("#dob", {});
-		flatpickr("#dojService", {});
-		flatpickr("#dojPost", {});
-		flatpickr("#empDate", {});
-      	
-      
-      	flatpickr("#dateRetirement", {});
-	 		 
 		 		$('#sameAddr').change(function(){
 		 			
 		 			if(this.checked){
