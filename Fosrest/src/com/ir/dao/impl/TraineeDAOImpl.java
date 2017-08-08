@@ -1615,6 +1615,7 @@ System.out.println("list "+list);
 			String sql = "select  max(nomineeid) from assessmentevaluationtrainee GROUP BY logindetails='"+ id +"' ";
 			Query query = session.createSQLQuery(sql);
 			List list = query.list();
+			if(list.size() >0){
 			int nomineeid=(int) list.get(0);
 			List<Object[]> lst = session.createSQLQuery("select * from assessmentevaluationtrainee where nomineeid='"+ nomineeid +"' ").list();
 			
@@ -1624,7 +1625,7 @@ System.out.println("list "+list);
 				
 				}
 	
-			
+			}
 	//System.out.println("list "+list);
 			return bean;
 		}

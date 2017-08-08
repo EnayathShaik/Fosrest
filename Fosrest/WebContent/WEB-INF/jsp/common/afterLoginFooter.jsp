@@ -63,7 +63,7 @@
         	    $('#seltraineeDate').attr('min', minDate);
         	});
 
-            $("#news").owlCarousel({
+        /*     $("#news").owlCarousel({
 
                 navigation: false, // Show next and prev buttons
                 slideSpeed: 300,
@@ -78,7 +78,7 @@
                 // itemsTablet: false,
                 // itemsMobile : false
 
-            });
+            }); */
 
         });
     </script>

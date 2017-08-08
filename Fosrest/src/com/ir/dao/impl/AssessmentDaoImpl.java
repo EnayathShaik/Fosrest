@@ -616,7 +616,6 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		
 		avgEligibility=avgEligibility/eligibility.size();
 			
-		
 		if(avgEligibility > -1){
 			if(totalScore >= avgEligibility){
 				traineeEvaluation.setResult("Pass");
@@ -626,10 +625,10 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		}else{
 			traineeEvaluation.setResult("Eligibility yet to declare");
 		}
-			String sql;
+			/*String sql;
 			sql = "update NomineeTrainee set result = '"+traineeEvaluation.getResult()+"' where  logindetails='"+traineeEvaluation.getLogindetails()+"'";
 			Query query = session.createSQLQuery(sql);
-			query.executeUpdate();
+			query.executeUpdate();*/
 			
 			List list = session.createSQLQuery("select id from nomineeTrainee where logindetails="+loginIdUniuqe+" and status='N'").list();
 			
