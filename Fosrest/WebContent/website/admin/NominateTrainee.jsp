@@ -253,9 +253,9 @@
 													</ul>
 												</div>
 												<cf:select path="batchCode" class="form-control" id="batchCode">
-												<ct:forEach items="${batchCodeList}" var="batchcodelist">
 												<cf:option value="0" label="Select Batch" />
-													<cf:option value="${batchcodelist[0] }" label="${batchcodelist[1] }" />
+												<ct:forEach items="${batchCodeList}" var="batchcodelist">
+												<cf:option value="${batchcodelist[0] }" label="${batchcodelist[1] }" />
 												</ct:forEach>
 												</cf:select>
 											</div>
