@@ -49,7 +49,7 @@ INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000005, 'Gwl_C
 INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000006, 'Morena_Cantt', 100003, 'A');
 INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000007, 'Morena_Stand', 100003, 'A');
 
---INSERT INTO logindetails( id, encrypted_password, password, loginid, profileid, status) VALUES (2, 'jhjhj', 'Password', 'SUPERADMIN', 1, 'A');
+--INSERT INTO logindetails( id, encrypted_password, password, loginid, profileid, status) VALUES (2, 'e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a', 'Password', 'SUPERADMIN', 1, 'A');
 --commit;
 --INSERT INTO adminusermanagement( adminusermanagementid, aadharnumber, firstname, lastname, middlename, logindetails) VALUES (1, 123456789123, 'Lalit', 'Kr', 'Pachauri', 2);
 create sequence assessmentsequence increment by 1 start with 100;
@@ -65,7 +65,7 @@ INSERT INTO ASSESSMENTELIGIBILITYTRAINER(COURSENAMEID, ELIGIBILITY) VALUES (?, ?
 --ALTER TABLE public.personalinformationtrainingpartner drop COLUMN noofinhousetrainers
 
 
-INSERT INTO logindetails( id, encrypted_password, password, loginid, profileid, status) VALUES (2, 'jhjhj', 'Password', 'SUPERADMIN', 1, 'A');
+INSERT INTO logindetails( id, encrypted_password, password, loginid, profileid, status) VALUES (2, 'e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a', 'Password', 'SUPERADMIN', 1, 'A');
 
 
 INSERT INTO stateMaster(  stateid, statename, status) VALUES (100, 'UP', 'A');
