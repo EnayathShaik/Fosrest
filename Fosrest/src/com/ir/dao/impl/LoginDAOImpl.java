@@ -73,8 +73,8 @@ public class LoginDAOImpl implements LoginDAO{
 		if(loginForm.getUserId().equals("SUPERADMIN")){
 			Criteria criteria = session.createCriteria(LoginDetails.class);
 			criteria.add(Restrictions.eq("loginId", loginForm.getUserId()));
-			criteria.add(Restrictions.eq("Password", loginForm.getPassword()));
-			//criteria.add(Restrictions.eq("Encrypted_Password", encryprPassword));
+			//criteria.add(Restrictions.eq("Password", loginForm.getPassword()));
+			criteria.add(Restrictions.eq("Encrypted_Password", encryprPassword));
 			System.out.println("encryprPassword  " +encryprPassword);
 			List<LoginDetails> list = criteria.list();
 			System.out.println("list size  " + list.size()  + "      " + list);
