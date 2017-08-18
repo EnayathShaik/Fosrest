@@ -7,13 +7,25 @@
           <ul>
             <li><a href="fostac.fssai">Home</a></li>
             <li><a href="about.fssai">About</a></li>
-            <li class="dropdown"> <a href="courses.html" class="dropdown-toggle" data-toggle="dropdown">Courses<i class="fa fa-angle-down"></i></a>
+            <li class="dropdown"><a href=""
+							class="dropdown-toggle" data-toggle="dropdown">Training<i
+								class="fa fa-angle-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="induction-training.html">Induction
+										Training</a></li>
+								<li><a href="refresher-training.html">Refresher
+										Training</a></li>
+								<li><a href="training-of-trainers.html">Training of
+										Trainers</a></li>
+								<li><a href="specific-training.html">Specific Training</a></li>
+							</ul></li>
+            <!-- <li class="dropdown"> <a href="courses.html" class="dropdown-toggle" data-toggle="dropdown">Courses<i class="fa fa-angle-down"></i></a>
               <ul class="dropdown-menu">
                 <li><a href="basic-level.fssai">Basic Level</a></li>
                 <li><a href="advance-level.fssai">Advance Level</a></li>
                 <li><a href="special-level.fssai">Special Level</a></li>
               </ul>
-            </li>
+            </li> -->
             <!-- <li><a href="#">Risk & Solutions</a></li>
             <li><a href="#">Help</a></li> -->
             <li><a href="contact.fssai">Contact</a></li>
@@ -28,7 +40,7 @@
             <li><a href="#">Archives</a></li>
             <li><a href="#">Useful Links</a></li> -->
                             <li><a href="#">Sitemap</a></li>
-							<li><a href="#">FAQ's</a></li>
+							<li><a href="faq.fssai">FAQ's</a></li>
 							<li><a href="feedback.fssai">Feedback</a></li>
 							<li><a href="Help.fssai">Help</a></li>
             <!-- <li><a href="#">Faqs</a></li>

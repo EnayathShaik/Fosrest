@@ -424,7 +424,7 @@ $(function(){
 				</div>
 			</div>
 			<!--/.container-->
-		</div>
+		
 		<!--/.top-bar-->
 
 		<nav class="navbar navbar-inverse" role="banner">
@@ -659,7 +659,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 	</div>
 
 
-	<section id="bottom">
+<!-- 	<section id="bottom">
 		<div class="container wow fadeInDown" data-wow-duration="1000ms"
 			data-wow-delay="600ms">
 			<div class="row">
@@ -675,28 +675,28 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
                 <li><a href="special-level.fssai">Special Level</a></li>
               </ul>
             </li>
-							<!-- <li><a href="#">Risk & Solutions</a></li>
-							<li><a href="#">Help</a></li> -->
+							<li><a href="#">Risk & Solutions</a></li>
+							<li><a href="#">Help</a></li>
 							<li><a href="contact.fssai">Contact</a></li>
 						</ul>
 					</div>
 				</div>
-				<!--/.col-md-3-->
+				/.col-md-3
 
 				<div class="col-md-2 col-sm-6">
 					<div class="widget center-block">
 						<ul>
 							<li><a href="#">Sitemap</a></li>
-							<!-- <li><a href="disclaimer.html">Disclaimer</a></li>
+							<li><a href="disclaimer.html">Disclaimer</a></li>
 							<li><a href="#">Archives</a></li>
-							<li><a href="#">Useful Links</a></li> -->
+							<li><a href="#">Useful Links</a></li>
 							<li><a href="#">FAQ's</a></li>
 							<li><a href="feedback.fssai">Feedback</a></li>
 							<li><a href="Help.fssai">Help</a></li>
 						</ul>
 					</div>
 				</div>
-				<!--/.col-md-3-->
+				/.col-md-3
 
 				<div class="col-md-3 col-sm-6 text-left">
 			<ul>
@@ -707,9 +707,9 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 
 			</ul>
 				</div>
-				<!--/.col-md-3-->
+				/.col-md-3
 
-			<!-- 	<div class="col-md-3 col-sm-6">
+				<div class="col-md-3 col-sm-6">
 							<div class="widget center-block text-center"
 						style="border-right: none;">
 						<ul>
@@ -725,15 +725,15 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 
 						</ul>
 					</div>
-				</div> -->
+				</div>
 
-				<!--/.col-md-3-->
+				/.col-md-3
 			</div>
 		</div>
-	</section>
+	</section> -->
 	<!--/#bottom-->
 
-	<footer id="footer" class="midnight-blue">
+<!-- 	<footer id="footer" class="midnight-blue">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center">
@@ -744,7 +744,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
 				</div>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 	<!--/#footer-->
  	<!-- <script src="js/jquery.js"></script> -->
 	<script src="js/bootstrap.min.js"></script>
@@ -845,6 +845,7 @@ src="website/images/learning-resource-icon.png"><a href="learningresource.fssai"
         $('.newstape').newstape();
     });
 </script>
+ <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
 </html>
 
