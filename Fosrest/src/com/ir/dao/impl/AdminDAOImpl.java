@@ -3076,30 +3076,47 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<PersonalInformationTrainee> listEligibleuser(String designation,String stateId) {
+	public List<PersonalInformationTrainee> listEligibleuser(NominateTraineeForm nominateTraineeForm,String stateId) {
 		// TODO Auto-generated method stub
-		System.out.println("inside listEligibleuser" + designation);
+		System.out.println("inside listEligibleuser" + nominateTraineeForm.getDesignation());
+		String designation=nominateTraineeForm.getDesignation();
+		String state=nominateTraineeForm.getMultiState();
 		List<PersonalInformationTrainee> personalInfoList = new ArrayList<PersonalInformationTrainee>();
 		Session session = this.sessionFactory.getCurrentSession();
-
 		String sql = "select * from nomineetrainee";
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
 		new ZLogger("listEligibleuser", "list.size() " + list.size(), "AdminDAOImpl.java");
 		Query query = null;
+if(state==""){
+	if (list.size() > 0) {
+		query = session.createSQLQuery(
+				"select distinct pit.id , d.designationName , firstName , pit.loginDetails,sm.stateName from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails inner join StateMaster sm on sm.stateId=cast(pit.correspondenceState as numeric) where ld.status='A' and pit.steps=0 and pit.designation='"
+						+ designation+"'and pit.correspondenceState='"+stateId+"'");
+		System.out.println("data der " + query);
+	} else {
+		query = session.createSQLQuery(
+				"select distinct pit.id , d.designationName , firstName , pit.loginDetails,sm.stateName from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails inner join StateMaster sm on sm.stateId=cast(pit.correspondenceState as numeric) where  ld.status='A' and pit.designation='"
+						+ designation+"'and pit.correspondenceState='"+stateId+"'");
+		System.out.println("data not der " + query);
 
-		if (list.size() > 0) {
-			query = session.createSQLQuery(
-					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails  where ld.status='A' and pit.steps=0 and pit.designation='"
-							+ designation + "' and pit.correspondenceState='"+stateId+"'");
-			System.out.println("data der " + query);
-		} else {
-			query = session.createSQLQuery(
-					"select distinct pit.id , d.designationName , firstName , pit.loginDetails from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails where  ld.status='A' and pit.designation='"
-							+ designation + "'and pit.correspondenceState='"+stateId+"'");
-			System.out.println("data not der " + query);
+	}
+}
+else{
+	if (list.size() > 0) {
+		query = session.createSQLQuery(
+				"select distinct pit.id , d.designationName , firstName , pit.loginDetails,sm.stateName from PersonalInformationTrainee pit left join nomineetrainee eu on (pit.logindetails = eu.loginDetails) left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails inner join StateMaster sm on sm.stateId=cast(pit.correspondenceState as numeric) where ld.status='A' and pit.steps=0 and pit.designation='"
+						+ designation+"'and cast(pit.correspondenceState as numeric) IN("+state+")");
+		System.out.println("data der " + query);
+	} else {
+		query = session.createSQLQuery(
+				"select distinct pit.id , d.designationName , firstName , pit.loginDetails,sm.stateName from PersonalInformationTrainee pit left join designation d on (cast(pit.designation as numeric) = d.designationId) inner join logindetails ld on ld.id=pit.logindetails inner join StateMaster sm on sm.stateId=cast(pit.correspondenceState as numeric) where  ld.status='A' and pit.designation='"
+						+ designation+"'and cast(pit.correspondenceState as numeric) IN("+state+")");
+		System.out.println("data not der " + query);
 
-		}
+	}
+}
+		
 
 		List<Object[]> list11 = query.list();
 		for (int i = 0; i < list11.size(); i++) {
@@ -3108,6 +3125,7 @@ public class AdminDAOImpl implements AdminDAO {
 			pit.setId((int) obj[0]);
 			pit.setDesignation((String) obj[1]);
 			pit.setFirstName((String) obj[2]);
+			pit.setCorrespondenceState((String) obj[4]);
 			System.out.println(obj[3]);
 			pit.setId((int) obj[3]);
 			personalInfoList.add(pit);
@@ -4335,7 +4353,7 @@ new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 		System.out.println("inside listofTrainee" );
 		Session session = this.sessionFactory.getCurrentSession();
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
-		Query query=session.createSQLQuery("select distinct nt.rollno, nt.traineename,nt.logindetails from NomineeTrainee nt inner join viewResult vr on vr.trainingCalendarId=nt.trainingCalendarId where  nt.trainingCalendarId='"+trainingCalendarId+"'and nt.result='-1'");
+		Query query=session.createSQLQuery("select distinct nt.rollno, nt.traineename,nt.logindetails from NomineeTrainee nt inner join viewResult vr on vr.trainingCalendarId=nt.trainingCalendarId where  nt.result='-1'");
 		uas = query.list();
 		new ZLogger("listofTrainee", "uas.size() " + uas.size(), "AdminDAOImpl.java");
 		return uas; 
@@ -4348,9 +4366,9 @@ new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 		Session session = this.sessionFactory.getCurrentSession();
 		String[] arrData = data.split("-");
 		int loginId = Integer.parseInt(arrData[0]);
-		int trainingCalendarId = Integer.parseInt(arrData[1]);
+		//int trainingCalendarId = Integer.parseInt(arrData[1]);
 		List uas =new ArrayList();
-		Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join nomineetrainee nt on (nt.trainingCalendarId=vr.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId and nt.trainingCalendarId='"+trainingCalendarId+"' and vr.traineeId='"+loginId+"'and vr.status='I'");
+		Query query=session.createSQLQuery("select distinct nt.traineeName,mm.subjectName,vr.marks from viewResult vr inner join nomineetrainee nt on (nt.trainingCalendarId=vr.trainingCalendarId) inner join subjectMaster mm on mm.subjectId=vr.subject where nt.logindetails=vr.traineeId  and vr.traineeId='"+loginId+"'and vr.status='I'");
 		uas = query.list();
 		new ZLogger("listofTraineeforResult", "uas.size() " + uas.size(), "AdminDAOImpl.java");
 		return uas; 
@@ -4364,11 +4382,11 @@ new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 		Session session = this.sessionFactory.getCurrentSession();
 		String[] arrData = data.split("-");
 		int loginId = Integer.parseInt(arrData[0]);
-		int trainingCalendarId = Integer.parseInt(arrData[1]);
+		//int trainingCalendarId = Integer.parseInt(arrData[1]);
 		String rollno=arrData[3];
 		String result = arrData[2];
 		String sql;
-		sql = "update NomineeTrainee set result = '"+result+"' where  trainingCalendarId='"+trainingCalendarId+"'and logindetails='"+loginId+"'and rollno='"+rollno+"'";
+		sql = "update NomineeTrainee set result = '"+result+"' where logindetails='"+loginId+"'and rollno='"+rollno+"'";
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
 		String sql2;
@@ -4376,7 +4394,7 @@ new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 		Query query2 = session.createSQLQuery(sql2);
 		query2.executeUpdate();
 		String sql3;
-		sql3 = "update ViewResult set status = 'A' where  trainingCalendarId='"+trainingCalendarId+"'and traineeId='"+loginId+"'";
+		sql3 = "update ViewResult set status = 'A' where  traineeId='"+loginId+"'and rollno='"+rollno+"'";
 		Query query3 = session.createSQLQuery(sql3);
 		query3.executeUpdate();
 		return "created";

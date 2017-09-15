@@ -76,6 +76,18 @@ public String getModule() {
 public void setModule(String module) {
 	this.module = module;
 }
+private String multiState;
+
+
+
+public String getMultiState() {
+	return multiState;
+}
+
+public void setMultiState(String multiState) {
+	this.multiState = multiState;
+}
+
 
 
 

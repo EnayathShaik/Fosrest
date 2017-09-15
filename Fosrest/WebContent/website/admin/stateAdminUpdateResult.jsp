@@ -48,7 +48,7 @@
                                         <div class="col-xs-12">
 
                                             <!-- left side -->
-                                            <div class="col-xs-6">
+                                            <%-- <div class="col-xs-6">
                                                 <div class="form-group">
 												<div>
 													<ul class="lab-no">
@@ -66,8 +66,8 @@
 												</cf:select>
 												 </div>
                                           
-                                           </div> <!-- left side ends -->
-                                              <div class="row">
+                                           </div> <!-- left side ends --> --%>
+                                           <!--    <div class="row">
                                                 <div class="col-md-6 col-xs-12"></div>
                                                 
                                                 <div class="col-md-6 col-xs-12">
@@ -75,7 +75,7 @@
                                                     <input type="submit"  class="btn login-btn show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" value="Search" style="margin-top: 26px;"/> 
                                                
                                                 </div>
-                                            </div>
+                                            </div> -->
 <div class="row">
 								<div class="col-xs-12">
 									<fieldset>

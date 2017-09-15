@@ -162,11 +162,23 @@
 														<cf:option value="0" label="Select Batch" />
 													</cf:select>
 											</div>
+											<div class="form-group">
+										<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Select State for Eligible user list:</strong></li>
+											<li class="style-li error-red"></li>	
+										</ul>
+										<button type="button" class="btn btn-primary btn-lg"
+												data-toggle="modal" data-target="#myModal3">Select States</button>
+									</div>
 												
+										  </div>
+										  
+										  
 												<div class="row">
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
 													<!-- c data-target="#myModal2" -->
-												<button type="button" id="batchDetails" class="btn btn-primary btn-lg"  data-toggle="modal" style="    margin-top: 82px;"
+												<button type="button" id="batchDetails" class="btn btn-primary btn-lg"  data-toggle="modal" style="    margin-top: -4px;"
 												 >View Details</button>
 													</div>
 													<div class="col-md-6 col-xs-12" style="margin-top: 25px;">
@@ -180,6 +192,86 @@
 
 								</div>
 							</div>
+
+
+
+
+			<!-- Modal -->
+							<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel">All States</h4>
+										</div>
+									<div class="modal-body">
+
+							<!-- table -->
+							<div class="row">
+								<div class="col-xs-12">
+								<table class="table table-bordered table-responsive"
+												id="testTable2">
+												<thead>
+													<tr class="background-open-vacancies">
+
+														<th>S.No.</th>
+														<th>State Id</th>
+														<th>State Name</th>
+														 <th>Enroll States</th>
+													</tr>
+												</thead>
+												<ct:forEach items="${listStateMaster}" var="listStateMaster"
+													varStatus="loop">
+													<tr>
+													<td>${loop.count}</td>
+													<td>${listStateMaster.stateId}</td>
+													<td id="stateName_${loop.index}">${listStateMaster.stateName}
+													</td>
+												
+													<td class="text-center" ><input type="checkbox" id="statecheck_${listStateMaster.stateId}" onclick='selectStates(${listStateMaster.stateId})' >
+													</td>
+
+
+													</tr>
+												</ct:forEach>
+
+											</table>
+											
+											
+								</div>
+							</div>
+						</div>
+								<div class="modal-footer">
+											<div>
+												<input type="button"
+													class="btn login-btn show-details-vacancy collapsed"
+													data-toggle="collapse" data-target="#show-result"
+													aria-expanded="false" data-dismiss="modal" onclick="setAllStates();"  value="OK" />
+
+											</div>
+										</div>
+</div>
+									</div>
+								</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 						<!-- Modal -->
 							<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
@@ -259,6 +351,7 @@
 												</ct:forEach>
 												</cf:select>
 											</div>
+											
 										</div>
 
 										<div class="modal-footer">
@@ -299,6 +392,7 @@
 														<th>S.No.</th>
 														<th>Designation</th>
 														<th>Trainee Name</th>
+														<th>State</th>
 														<th>Enroll for Trainee</th>
 
 
@@ -316,6 +410,7 @@
 														<input type="hidden" id="userId_${loop.index}"
 														value="${EligibleUser.id}" />
 													</td>
+													<td>${EligibleUser.correspondenceState}</td>
 													<td class="text-center"><input type="checkbox">
 													</td>
 
@@ -341,7 +436,7 @@
 
 						</div>
 						<!-- row ends -->
-
+<cf:hidden path="multiState" value="" />
 					</div>
 				</div>
 			</div>
@@ -553,4 +648,27 @@
 			  }
 		});
 	});
+	
+	window.stateArray = [];
+	 function selectStates(stateId){
+		 console.log(stateId);
+		 var ischecked = document.getElementById("statecheck_"+stateId).checked;
+		 console.log(ischecked);
+		 
+		if(document.getElementById("statecheck_"+stateId).checked  ){
+			window.stateArray.push(stateId);	
+		}
+	else if(!document.getElementById("statecheck_"+stateId).checked){
+			 var index = window.stateArray.indexOf(""+stateId+"");
+			if(index != -1){
+				window.stateArray.splice(index , 1);	
+			}
+		}
+	 }
+	 
+	 function setAllStates(){
+		 var a=window.stateArray;
+			 $('#multiState').val(a);
+		 } 
+
 </script>

@@ -76,7 +76,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		System.out.println("inside listEligibleuser" );
 		Session session = this.sessionFactory.getCurrentSession();
 		List<UploadAssessmentForm> uas =new ArrayList<UploadAssessmentForm>();
-		Query query=session.createSQLQuery("select pit.firstName,pit.loginDetails from viewResult vr inner join PersonalInformationTrainee pit on vr.traineeId=pit.logindetails where vr.marks<0 and vr.trainerid='"+trainerId+"'");
+		Query query=session.createSQLQuery("select pit.firstName,pit.loginDetails from viewResult vr inner join PersonalInformationTrainee pit on vr.traineeId=pit.logindetails where vr.marks<0 and vr.trainerid='"+trainerId+"'and vr.trainingCalendarId='"+batchCode+"'");
 		uas = query.list();
 		new ZLogger("listofTrainer", "uas.size() " + uas.size(), "TrainerDAOImpl.java");
 		return uas; 
