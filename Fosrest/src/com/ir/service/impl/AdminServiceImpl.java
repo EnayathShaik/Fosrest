@@ -1601,9 +1601,9 @@ public String createTrainingCalendar(String[] days,String[] subjectDates,String[
 
 @Override
 @Transactional
-public List<MappingMasterTrainer> trainerMappingState(int id) {
+public 		List <List> trainerMappingState(int id, String schCode) {
 	// TODO Auto-generated method stub
-	return this.adminDAO.trainerMappingState(id);
+	return this.adminDAO.trainerMappingState(id,schCode);
 }
 
 @Override

@@ -3243,7 +3243,7 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 	  //	model.addAttribute("endDate",result);
   	model.addAttribute("listCalendarSearch", list);
  	model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
-  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(form.getStateId2()));
+  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(form.getStateId2(),form.getScheduleCode()));
 	model.addAttribute("institute", form.getTrainingInstitute());
 	model.addAttribute("startDate", form.getTrainingStartDate());
   	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
@@ -3278,15 +3278,18 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 		model.addAttribute("endDate",form.getTrainingEndDate2());
 		model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(form.getScheduleCode()));
 	
-  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(form.getStateId2()));
+  	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(form.getStateId2(),form.getScheduleCode()));
 	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(form.getTrainingCalendarId()));
 	model.addAttribute("listEnteredSubjectDates", this.adminService.getEnteredSubjectDates(form.getTrainingCalendarId()));
 	model.addAttribute("listCalendarSearch", list1);
 	model.addAttribute("stateId", form.getStateId2());//jo
-	model.addAttribute("errorTime", "Same Start-Date exists for ScheduleCode "+form.getScheduleCode());
+	//model.addAttribute("errorTime", "Same Start-Date exists for ScheduleCode "+form.getScheduleCode());
+	model.addAttribute("errorTime", "Schedule already exists for the same Start-Date ");
+
     }
 		else 
-		model.addAttribute("errorTime", "Same Start-Date exists for ScheduleCode "+form.getScheduleCode());
+		//model.addAttribute("errorTime", "Same Start-Date exists for ScheduleCode "+form.getScheduleCode());
+			model.addAttribute("errorTime", "Schedule already exists for the same Start-Date ");
 
   if(form.getTrainingCalendarId()!=0)
 	  model.addAttribute("searchwhileedit","Y");
@@ -3348,7 +3351,7 @@ public String trainingCalendarSearch1(@ModelAttribute("TrainingCalendarForm") Tr
 			 model.addAttribute("institute",p.getTrainingInstitute());
 		   model.addAttribute("startDate",p.getTrainingStartDate()); 
 		   model.addAttribute("listSchCodeSubjects", this.adminService.listSchCodeSubjects(p.getScheduleCode()));
-	      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(p.getStateId()));
+	      	model.addAttribute("listPersonalInfoTrainer", this.adminService.trainerMappingState(p.getStateId(),p.getScheduleCode()));
 	      	model.addAttribute("listPreSelectedTrainers", this.adminService.getTrainingCalendarMappingTrainer(editId));
 	      	model.addAttribute("listEnteredSubjectDates", this.adminService.getEnteredSubjectDates(editId));
 

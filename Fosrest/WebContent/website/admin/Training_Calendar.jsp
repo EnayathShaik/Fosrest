@@ -43,7 +43,7 @@
       	  
 			$("#scheduleCode").val('${schCode}');
 			}, 1000); 
-		
+	
 	}
 	if('${isEdit}'=='Y'){
 
@@ -233,7 +233,7 @@
 
 											<!-- right side -->
 											<div class="col-xs-6">
-
+												<div style="display: none;">
 												<div class="col-xs-9" style="padding-left: 0px;">
 												<div class="form-group">
 													<div>
@@ -257,10 +257,11 @@
 												<div class="col-md-3 col-xs-12">	
 												<input type="button" onclick="showSchedules();return false;" value="--> Show subject" class="btn login-btn" style="margin-top: 26px; margin-left: -18px; padding: 6px 6px;">
 												</div>
+												</div>
 												<div class="form-group">
 													<div >
 														<ul class="lab-no">
-															<li class="style-li"><strong>Select State:&nbsp&nbsp&nbsp&nbsp</strong></li>
+															<li class="style-li"><strong>State:&nbsp&nbsp&nbsp&nbsp</strong></li>
 															<li id="statesErr" style="display: none;"
 																class="style-li error-red">Select state.</li>
 															<li class="style-li error-red"></li>
@@ -462,12 +463,17 @@
 																				<option 
 																					value="${listPersonalInfoTrainer.trainerId.id}">${listPersonalInfoTrainer.firstName}</option>
 																			</ct:forEach> --%>
-																			<ct:forEach items="${listPersonalInfoTrainer}"
-																				var="listPersonalInfoTrainer" varStatus="loop">
-
-																				<option 
-																					value="${listPersonalInfoTrainer[0]}">${listPersonalInfoTrainer[1]}&nbsp; ${listPersonalInfoTrainer[3]}</option>
-																			</ct:forEach>
+																				
+																		<ct:forEach items='${listPersonalInfoTrainer}' var="abc" varStatus="inloop"> 
+																		
+																		<ct:if test="${inloop.count == loop2.count}"> 
+																		<ct:forEach items='${abc}' var="a" >
+																		<option value="${a[0]}">${a[1]}&nbsp; ${a[3]}</option>
+																			
+																		</ct:forEach>
+																		</ct:if>
+																		</ct:forEach>
+														
 																			
 																		</select>
 																		
@@ -992,9 +998,11 @@ alert("Click on Nominate Trainee button to nominate Trainees into Training Calen
 	
 		  $('#calendarTable tr').remove();
 		  $('#calendarTable2 tr').remove();
-		 	$('#calendarTable').append( '<tr  class="background-open-vacancies"><th>Training Details</th><th>BatchCode</th><th>ScheduleCode</th><th>Start Date</th><th>End Date</th><th>Total Days</th><th>Training Institute</th></tr>')
-		 	var row1="<tr><td style='text-align:left;'><ul><li>"+mainData1[0][0]+"</li><br /><li>"+mainData1[0][1]+"</li><br /><li>"+mainData1[0][2]+"</li></td><td>"+mainData1[0][3]+"</td><td>"+mainData1[0][4]+"</td><td>"+mainData1[0][5]+"</td><td>"+mainData1[0][6]+"</td><td>"+mainData1[0][7]+"</td><td>"+mainData1[0][8]+"</td></tr>";
-		 	 $('#calendarTable').append(row1); 
+		 	$('#calendarTable').append( '<tr  class="background-open-vacancies"><th>Training Details</th><th>BatchCode</th><th>Start Date</th><th>End Date</th><th>Total Days</th><th>Training Institute</th></tr>')
+		 	var row1="<tr><td style='text-align:left;'><ul><li>"+mainData1[0][0]+"</li><br /><li>"+mainData1[0][1]+"</li><br /><li>"+mainData1[0][2]+"</li></td><td>"+mainData1[0][3]+"</td><td>"+mainData1[0][5]+"</td><td>"+mainData1[0][6]+"</td><td>"+mainData1[0][7]+"</td><td>"+mainData1[0][8]+"</td></tr>";
+		 	//scheduleCode at <td>"+mainData1[0][4]+"</td>
+		 	
+		 	$('#calendarTable').append(row1); 
 			 
 			 $('#calendarTable2').append( '<tr  class="background-open-vacancies"><th>Sr.No.</th><th>Day</th><th>Date</th><th>Start & End Time</th><th>Subject</th><th>Trainer</th></tr>');
 			 var row2=""; 

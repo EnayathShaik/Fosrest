@@ -59,6 +59,7 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingInstitute;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainerSubjectMapping;
 import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingSchedule;
 import com.ir.model.UnitMaster;
@@ -1364,6 +1365,24 @@ public class TraineeDAOImpl implements TraineeDAO {
 				session.save(mmt);
 				
 			}
+			
+			String subs=p.getKnownSubjects();
+			String arr[]=subs.split(",");
+			System.out.println("traier   "+p);
+			TrainerSubjectMapping tsm;
+			
+			for(int i=0;i<arr.length;i++)
+			{
+				tsm=new TrainerSubjectMapping();
+				
+				tsm.setTrainerId(p);
+				tsm.setSubjectId(Integer.parseInt(arr[i]));
+				session.save(tsm);
+				
+			}
+			p.setKnownSubjects(p.getKnownSubjects().replaceAll(",", "|"));
+			
+			
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -1428,6 +1447,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainer.setCaseStudy(p.isCaseStudy());
 		personalInformationTrainer.setGlobalPerspective(p.isGlobalPerspective());
 		personalInformationTrainer.setOtherExp(p.isOtherExp());
+		
 		System.out.println(" status "+p.getStatus());
 		/*if(p.getStatus() != null){
 			System.out.println(" loginId "+p.getLogId() );
@@ -1435,7 +1455,11 @@ public class TraineeDAOImpl implements TraineeDAO {
 			String sql = "update logindetails set status ='"+p.getStatus()+"'  where id =("+loginId+")";
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();}*/
-		
+		System.out.println(p.getKnownSubjects());
+		String subs=p.getKnownSubjects();
+		String arr[]=subs.split(",");
+		personalInformationTrainer.setKnownSubjects(p.getKnownSubjects().replaceAll(",", "|"));
+
 						p = (PersonalInformationTrainer) session.load(PersonalInformationTrainer.class,p.getId());
 						Query query = session.createSQLQuery("delete from  MappingMasterTrainer where personalinformationtrainer ='"+p.getId()+"'");
 						//query.setParameter("state", p.getTrainingState());
@@ -1455,11 +1479,26 @@ public class TraineeDAOImpl implements TraineeDAO {
 								session.save(mmt);
 								
 							}
+							
+							query = session.createSQLQuery("delete from  TrainerSubjectMapping where personalinformationtrainer ='"+p.getId()+"'");
+							query.executeUpdate();
+							
+							TrainerSubjectMapping tsm;
+							
+							for(int i=0;i<arr.length;i++)
+							{
+								tsm=new TrainerSubjectMapping();
+								
+								tsm.setTrainerId(p);
+								tsm.setSubjectId(Integer.parseInt(arr[i]));
+								session.save(tsm);
+								
+							}
 						}
 						catch(Exception e){
 							e.printStackTrace();
 						}
-						session.save(p);
+						//session.save(p);
 				    
 		session.update(personalInformationTrainer);
 		return "updated";

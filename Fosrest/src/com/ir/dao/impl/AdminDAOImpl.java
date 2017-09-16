@@ -3926,7 +3926,7 @@ p.setBatchCode(batchCode);
 		// TODO Auto-generated method stub
 Session session = this.sessionFactory.getCurrentSession();
 		
-List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname from subjectmaster where isActive='Y'").list();
+List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname,subjectcode from subjectmaster where isActive='Y'").list();
 new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 		return mod;
 		 
@@ -4074,15 +4074,25 @@ new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 	
 
 	@Override
-	public List<MappingMasterTrainer> trainerMappingState(int id) {
+	public 		List <List> trainerMappingState(int id, String schCode) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		Query query;
-		String sql = "select mmt.personalinformationtrainer,mmt.firstName,pit.email,pit.lastName from MappingMasterTrainer mmt inner join personalinformationtrainer pit on pit.id=mmt.personalinformationtrainer join logindetails ld on (ld.id=pit.logindetails)  where state='"+id+"' and ld.status='A'";
-		Query query2 = session.createSQLQuery(sql);
-	    List list2 = query2.list();
-		new ZLogger("trainerMappingState", "list2.size() " + list2.size(), "AdminDAOImpl.java");
-        return list2;
+		query = 	session.createSQLQuery("select subject from SubjectMapping where scheduleCode='"+schCode+"'");
+		List list = query.list();
+		
+		List <List> listTwo=new ArrayList();
+		
+		
+		for(int i=0;i<list.size();i++){
+			String sql = "select mmt.personalinformationtrainer,mmt.firstName,pit.email,pit.lastName from MappingMasterTrainer mmt inner join personalinformationtrainer pit on pit.id=mmt.personalinformationtrainer join logindetails ld on (ld.id=pit.logindetails) join trainersubjectmapping tsm on(pit.id=tsm.personalinformationtrainer)  where state='"+id+"' and ld.status='A' and tsm.subjectId="+list.get(i);
+			Query query2 = session.createSQLQuery(sql);
+		    List list2 = query2.list();
+			new ZLogger("trainerMappingState", "list2.size() " + list2.size(), "AdminDAOImpl.java");
+			listTwo.add(list2);
+			
+			}
+        return listTwo;
 		//return trainingNameList;
 	}
 

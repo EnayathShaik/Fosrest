@@ -1,6 +1,13 @@
 package com.ir.dao.impl;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -270,7 +277,9 @@ public class LoginDAOImpl implements LoginDAO{
 		
 		int id = 0;
 		String pass = null;
-		Query query = session.createSQLQuery("select id , password from logindetails where coalesce(profile,'') not in ('A')");
+		//Query query = session.createSQLQuery("select id , password from logindetails where coalesce(profile,'') not in ('A')");
+		Query query = session.createSQLQuery("select id , password from logindetails");
+
 		List list = query.list();
 		System.out.println(" list.size() "+list.size());
 		for(int i = 0 ; i < list.size() ; i++){
@@ -282,7 +291,7 @@ public class LoginDAOImpl implements LoginDAO{
 			String encryprPassword=null;
 			try {
 				
-				encryprPassword = encryptionPasswordANDVerification.encryptPass(pass+"ji");
+				encryprPassword = encryptionPasswordANDVerification.encryptPass(pass);
 			} catch (NoSuchAlgorithmException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -290,7 +299,7 @@ public class LoginDAOImpl implements LoginDAO{
 		
 			LoginDetails logindetails = (LoginDetails) session.load(LoginDetails.class, id);
 			logindetails.setEncrypted_Password(encryprPassword);
-			logindetails.setProfile("A");
+			//logindetails.setProfile("A");
 			session.update(logindetails);
 		
 		}
@@ -298,6 +307,55 @@ public class LoginDAOImpl implements LoginDAO{
 	
 		
 	}
+	
+	
+/*	public static void main(String args[])throws IOException, ClassNotFoundException, SQLException{
+	new LoginDAOImpl().revert();
+	}
+	
+	
+	public void revert() throws ClassNotFoundException, SQLException {
+		
+		Class.forName("org.postgresql.Driver");
+		Connection con = null;
+		con = DriverManager.getConnection("jdbc:postgresql://114.79.137.170:5433/fosrest","postgres", "Fss2iZentech");
+		
+		
+		int id = 0;
+		String pass = null;
+		Statement stmt=con.createStatement();
+		
+		ResultSet rs=stmt.executeQuery("select id , password from logindetails ");
+		
+		
+		while(rs.next()){
+	
+			id=rs.getInt(1);
+			pass=rs.getString(2);
+			
+			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
+			String encryprPassword=null;
+			try {
+				
+				encryprPassword = encryptionPasswordANDVerification.encryptPass(pass);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			
+			PreparedStatement pstmt =con.prepareStatement("update  LoginDetails  set Encrypted_Password=? where id =?");
+			pstmt.setInt(2,id);
+			pstmt.setString(1,encryprPassword);
+			
+			System.out.println(pstmt.executeUpdate());
+		
+		}
+		
+		con.close();
+		
+	}
 
 
+*/
 }

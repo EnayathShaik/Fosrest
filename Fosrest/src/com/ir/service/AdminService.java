@@ -525,7 +525,7 @@ public List<SubjectMaster>  allSubjects();
 public List listCalendarSearch(TrainingCalendarForm form);
 
 public String createTrainingCalendar(String[] days,String[] subjectDates,String[] trainers, String[] subjects, TrainingCalendarForm p,int profileId);
-public List<MappingMasterTrainer> trainerMappingState(int id);
+public 		List <List> trainerMappingState(int id, String chCode);
 
 public List listSchCodeSubjects(String scheduleCode);
 

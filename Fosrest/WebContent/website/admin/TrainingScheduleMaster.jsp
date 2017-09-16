@@ -482,7 +482,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 																<th>Designation</th>
 																<th>Training Type</th>
 																<th>Training Phase</th>
-																<th>Schedule Code</th>
+															<!-- 	<th>Schedule Code</th> -->
 																
 																<th>Total Days</th>
 																<th>Edit</th>
@@ -497,7 +497,7 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 																<td>${listtrainingScheduleMaster[0]}</td>
 																<td>${listtrainingScheduleMaster[1]}</td>
 																<td>${listtrainingScheduleMaster[2]}</td>
-																<td>${listtrainingScheduleMaster[3]}</td>
+																<%-- <td>${listtrainingScheduleMaster[3]}</td> --%>
 																<td>${listtrainingScheduleMaster[4]} </td>
 																<td><button class="btn login-btn"  onclick="return editSchedule('${listtrainingScheduleMaster[3]}',${listtrainingScheduleMaster[5]});return false;" >Edit</button></td>
 																 <td><a onclick="return chkIfExists('${listtrainingScheduleMaster[3]}','DELETE');" href="remove/trainingschedule/${listtrainingScheduleMaster[5]}.fssai">Delete</a></td>
@@ -534,7 +534,9 @@ var dur=(hours <= 9 ? "0" : "") + hours + " hrs " + (minutes <= 9 ? "0" : "") + 
 	function chkIfExists(schCode,opr){
 		<ct:forEach items="${listAllCalendarScheduleCodes}" var="schCode" > 
 		 if('${schCode}'==schCode){
-			 alert("CANNOT "+opr+": Training Calendar Exists for this ScheduleCode "+schCode);
+			// alert("CANNOT "+opr+": Training Calendar Exists for this ScheduleCode "+schCode);
+			 alert("CANNOT "+opr+": Training Calendar Exists for this Schedule");
+
 			 return false;
 		 }
 			</ct:forEach>

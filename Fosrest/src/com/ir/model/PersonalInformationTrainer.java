@@ -30,20 +30,9 @@ public class PersonalInformationTrainer {
 	
 	private boolean fssai_tot;
 
-
-	//private String userType;
-	
-	//private int modulesId;
+	private String knownSubjects;
 
 
-/*	public int getModulesId() {
-		return modulesId;
-	}
-
-	public void setModulesId(int modulesId) {
-		this.modulesId = modulesId;
-	}
-*/
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
 	
@@ -68,21 +57,17 @@ public class PersonalInformationTrainer {
 		this.empID = empID;
 	}
 
-
-/*
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}*/
-
-
-
 	private String title;
 	
 	
+	public String getKnownSubjects() {
+		return knownSubjects;
+	}
+
+	public void setKnownSubjects(String knownSubjects) {
+		this.knownSubjects = knownSubjects;
+	}
+
 	@NotNull
 	
 	@Size(min=1, max=50 , message="enter your FirstName")

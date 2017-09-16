@@ -8,7 +8,64 @@
     <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
         rel="stylesheet" type="text/css" />
    -->
+<style>
+/* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 69%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+</style>
 <script src="website/js/commonController.js"></script>
 
 
@@ -39,6 +96,12 @@
 		// alert("profileId"+profileId);
 		 
 		 if (isUpdate != null && isUpdate == "Y") {
+			 var strUser=10;
+			 var arr='${PersonalInformationTrainer.knownSubjects}'.split("|");
+			for(var i=0;i<arr.length;i++)
+			 $("#subs1 option[value='"+arr[i]+"']").attr("selected", 1);
+		
+			
 			if ( $('#YesLabNotified').is(':checked')==false) {
 				$("#Oti").css("display", "none");
 			 	$("#Ati").css("display", "none");
@@ -692,25 +755,11 @@
 										<button type="button" class="btn btn-primary btn-lg"
 												data-toggle="modal" data-target="#myModal" onclick="statecheckbox(); return false;">Select States</button>
 									</div>
-												
-												
-                                                
-									
-                                             </div>
-                                             <div class="form-group">
-										<div>
-										<ul class="lab-no">
-											<li class="style-li"><strong>Undergone Fssai approved TOT course:&nbsp&nbsp</strong> <cf:checkbox path="fssai_tot" ></cf:checkbox></li>
-									
-										</ul>
 										
-									</div>
-												
-												
-                                                
-									
                                              </div>
                                              
+                                             
+        	
 									<!-- Modal -->
 							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 								aria-labelledby="myModalLabel">
@@ -771,9 +820,37 @@
 										</div>
 </div>
 									</div>
-								</div>
-							
+								</div>		
 <br>
+                           
+ <div class="form-group">
+                               	               
+									<ul class="lab-no">
+ 
+											<li class="style-li" ><strong >Select known Subjects:</strong></li>
+											<li id="subs1Err" style="display: none;"
+												class="style-li error-red">Please select atleast 1 subject.</li>
+											<li ></li>	
+										</ul><div class="popup" > <span class="popuptext" id="myPopup">ctrl+click to select multiple subjects</span>
+                                                 <select name="subs1" id="subs1" onfocus="myFunction()" multiple>
+														<ct:forEach items="${allSubjects}" var="aaa">
+ 															 <option value="${aaa[0]}">${aaa[2]} - ${aaa[1]}</option>
+ 														 </ct:forEach>
+
+												</select>
+												</div>
+									</div>
+						 
+                                             
+                                             <div class="form-group">
+										<div>
+										<ul class="lab-no">
+											<li class="style-li"><strong>Undergone Fssai approved TOT course:&nbsp&nbsp</strong> <cf:checkbox path="fssai_tot" ></cf:checkbox></li>
+									
+										</ul>
+										
+									</div>
+                                             </div>
 </div>
 							<!-- </div> -->
 							<div class="col-md-6 col-xs-12">
@@ -969,6 +1046,7 @@
 
 		<cf:hidden path="trainingState" value="" />
 		<cf:hidden path="languages" value="" />
+		<cf:hidden path="knownSubjects" value="" />
 					</form>
 					<!-- form ends -->
 
@@ -1051,9 +1129,11 @@
 	 	$("#Ati").css("display", "block");
 	  }
 	function validateFields() {
-	
+		
 		var isUpdate = '${isUpdate}';
 
+	
+		
 		$("#titleErr").css("display", "none");
 		$("#correspondencePincodeErr").css("display", "none");
 		$("#correspondencePincodeErr1").css("display", "none");
@@ -1077,6 +1157,7 @@
 		$("#resCityErr").css("display", "none");
 		$("#resPincodeErr").css("display", "none");
 		$("#txtInputErr").css("display", "none");
+		$("#subs1Err").css("display", "none");
 
 		$("#sessWishToConductErr").css("display", "none");
 		$("#expInYearErr").css("display", "none");
@@ -1242,6 +1323,16 @@
 			return false;
 
 		}
+		
+		if($("select[name='subs1'] option:selected").index()==-1)
+		{
+		//alert("Select atleast 1 subject");
+		$("#subs1Err").css("display", "block");
+		$("#subs1").focus();
+		return false;
+		
+		}
+	
 		if ($("#AssociatedWithAnyTrainingInstitute").val() == 0 && $('#YesLabNotified').is(':checked')) {
 				$("#AssociatedWithAnyTrainingInstituteErr").css("display", "block");
 				return false;
@@ -1250,6 +1341,10 @@
 			if (a == -1) {
 				$("#otherTrainingInstituteErr").css("display", "Block");
 			}
+			
+		
+			$("#knownSubjects").val($("#subs1").val());
+
 		if (!(isUpdate != null && isUpdate == "Y")) {
 
 			if ($("#txtInput").val() == '') {
@@ -1271,6 +1366,7 @@
 			return false;
 		}
 
+		
 	}
 </script>
 <script>
@@ -1333,7 +1429,7 @@
 			if(index != -1){
 				window.stateArray.splice(index , 1);	
 			}
-		}
+		}	
 	 }
 	 
 	 function setAllStates(){
@@ -1345,7 +1441,18 @@
 			 $('#languages').val(a);
 		 } 
 	 
-	 
+
 
 </script>
-
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+    
+    window.setTimeout(function() {
+    	  popup.classList.toggle("show");}, 5000);
+  
+  //  popup.classList.toggle("show");
+}
+</script>

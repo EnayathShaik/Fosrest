@@ -358,8 +358,7 @@ $.ajax({
 	success : function(response) {
 		var mainData1 = jQuery.parseJSON(response);
 		$('#'+idName+' option').remove();
-		$('#'+idName).append(
-				'<option value="0" label="Select Schedule Code" >Select Schedule Code</option>');
+		//$('#'+idName).append('<option value="0" label="Select Schedule Code" >Select Schedule Code</option>');
 		$.each(mainData1, function(i, obj) {
 		
 			$('#'+idName) 

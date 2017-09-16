@@ -7,10 +7,10 @@
 	<session-factory>
 	 	<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 	 	
-	<!--   <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/fosrest</property>
+		 <!-- <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/fosrest</property>
 		<property name="hibernate.connection.username">postgres</property>
-		<property name="hibernate.connection.password">Fss2iZentech</property> -->
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost/fosrest</property>
+		<property name="hibernate.connection.password">Fss2iZentech</property>  -->
+		 <property name="hibernate.connection.url">jdbc:postgresql://localhost/fosrest</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">pass@123</property>
 		
@@ -102,6 +102,7 @@
 	 	  <mapping class="com.ir.model.PhotoGallery" />
 	 	    	 	    <mapping class="com.ir.model.AssessmentAnswerCriteria" />
 	 	    	 	     <mapping class="com.ir.model.OnlineAssessmentSubjectsScore" />
+	 	    	 	         <mapping class="com.ir.model.TrainerSubjectMapping" />
 	 	    
 	</session-factory>
 </hibernate-configuration>

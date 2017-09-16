@@ -284,8 +284,9 @@ public class TrainerController {
 		
 		model.addAttribute("listTrainingInstitude",
 				this.adminService.listTrainingInstitude());
-		model.addAttribute("allModules", this.adminService.allUnitModules());
-		
+		//model.addAttribute("allModules", this.adminService.allUnitModules());
+		model.addAttribute("allSubjects", this.adminService.allSubjects());
+
 		String userId = request.getParameter("userId");
 		/*int ui= (int) session.getAttribute("Id");
 		System.out.println("dddddddddddd"+ui);*/

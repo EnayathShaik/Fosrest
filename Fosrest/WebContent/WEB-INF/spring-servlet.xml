@@ -188,6 +188,8 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 			    <value>com.ir.model.PhotoGallery</value>
 			    			    <value>com.ir.model.AssessmentAnswerCriteria</value>
 			 <value>com.ir.model.OnlineAssessmentSubjectsScore</value>
+			 			 <value>com.ir.model.TrainerSubjectMapping</value>
+			 
 			    			    
 			    
 			</list>
