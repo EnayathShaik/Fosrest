@@ -66,7 +66,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		// TODO Auto-generated method stub
 		System.out.println("inside listBatchCodeListforTrainer wo parameter");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<TrainingCalendar> mccList = session.createSQLQuery("select distinct tc.batchCode,tc.trainingCalendarId from TrainingCalendar tc inner join TrainingCalendarMapping tcm on tc.batchCode=tcm.batchCode where trainerId='"+trainerId+"'and coalesce(tc.trainingPhase,'') <> '3'").list();
+		List<TrainingCalendar> mccList = session.createSQLQuery("select distinct tc.trainingCalendarId,tc.trainingStartDate,pit.trainingCenterName,sm.stateName from TrainingCalendar tc inner join TrainingCalendarMapping tcm on tc.batchCode=tcm.batchCode inner join personalInformationTrainingInstitute pit on pit.id=cast(tc.trainingInstitute as numeric) inner join stateMaster sm on sm.stateId=cast(tc.stateId as numeric) where trainerId='"+trainerId+"'and coalesce(tc.trainingPhase,'') <> '3'").list();
 		new ZLogger("listBatchCodeListforTrainer", "mccList.size() " + mccList.size(), "TrainerDAOImpl.java");
 		return mccList;
 	}

@@ -60,7 +60,7 @@
 												<cf:select path="batchCode" class="form-control"   id="batchCodeid">
 													<cf:option value="0" label="Select Batch Code" />
 												<ct:forEach items="${batchCodeList}" var="bc" >
-													<cf:option value="${bc[1]}" label="${bc[0]}" /> 
+													<cf:option value="${bc[0]}" label="${bc[1]}-${bc[2]}-${bc[3]}" /> 
 													</ct:forEach> 
 												</cf:select> 
 											</div>
