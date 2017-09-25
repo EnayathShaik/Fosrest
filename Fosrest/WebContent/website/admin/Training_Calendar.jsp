@@ -262,7 +262,7 @@
 													<div >
 														<ul class="lab-no">
 															<li class="style-li"><strong>State:&nbsp&nbsp&nbsp&nbsp</strong></li>
-															<li id="statesErr" style="display: none;"
+															<li id="stateIdErr" style="display: none;"
 																class="style-li error-red">Select state.</li>
 															<li class="style-li error-red"></li>
 														</ul>
@@ -754,6 +754,7 @@
 
 
 	function validateFields() {
+
 		$("#stateId2").val($("#stateId").val());
 		
 		
@@ -762,6 +763,7 @@
 		$("#trainingTypeErr").css("display", "none");
 		$("#trainingPhaseErr").css("display", "none");
 		$("#scheduleCodeErr").css("display", "none");
+		$("#stateIdErr").css("display", "none");
 
 		$("#trainingInstituteErr").css("display", "none");
 		$("#trainingStartDateErr").css("display", "none");
@@ -780,12 +782,23 @@
 			$("#trainingPhaseErr").css("display", "block");
 			return false;
 		}
-		if ($("#scheduleCode").val() == 0) {
-			$("#scheduleCodeErr").css("display", "block");
-			$("#scheduleCode").focus();
+		if($("select[name='scheduleCode'] option:selected").index()==-1){
+			var desigA=["","AO","DO","RO","FSO","Other"];
+			var trTypeA=["","Refresher","Specific Training","Induction","Training of Trainers"];
+			var trPhaseA=["","classroom","Onjob","Online"];
+		alert("No Training Schedule exists for "+desigA[$("#designation").val()]+"-"+trTypeA[$("#trainingType").val()]+"-"+trPhaseA[$("#trainingPhase").val()]);
+			
+			return false;
+		} 
+		
+
+		if ($("#stateId").val() == 0) {
+			$("#stateIdErr").css("display", "block");
 			return false;
 		}
-		if ($("#trainingInstitute").val() == 0 && $("#trainingPhase").val() !=3) {
+		
+		//if ($("#trainingInstitute").val() == 0 && $("#trainingPhase").val() !=3) {
+			if ($("#trainingInstitute").val() == 0 ){
 			$("#trainingInstituteErr").css("display", "block");
 			return false;
 		}
