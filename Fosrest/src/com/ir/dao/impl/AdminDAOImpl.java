@@ -2142,7 +2142,7 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("inside listSubjectMaster");
 		List<SubjectMasterForm> list = new ArrayList<SubjectMasterForm>();
 		Session session = this.sessionFactory.getCurrentSession();	
-		List<SubjectMaster> lst = session.createSQLQuery("select * from SubjectMaster where isActive='Y'").list();
+		List<SubjectMaster> lst = session.createSQLQuery("select * from SubjectMaster where status='A'").list();
 		new ZLogger("listSubjectMaster", "list.size() " + lst.size(), "AdminDAOImpl.java");
 		return lst;
 	}
@@ -3926,7 +3926,7 @@ p.setBatchCode(batchCode);
 		// TODO Auto-generated method stub
 Session session = this.sessionFactory.getCurrentSession();
 		
-List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname,subjectcode from subjectmaster where isActive='Y'").list();
+List <SubjectMaster> mod = session.createSQLQuery("select  subjectId,subjectname,subjectcode from subjectmaster where status='A'").list();
 new ZLogger("allSubjects", "list.size() " + mod.size(), "AdminDAOImpl.java");
 		return mod;
 		 

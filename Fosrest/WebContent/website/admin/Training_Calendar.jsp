@@ -78,8 +78,12 @@
 
         <ct:forEach items="${listPreSelectedTrainers}" var="lpt" varStatus="loop" > 
         $("#trainer_"+'${loop.count}').val('${lpt}');   
+        //$('[id^=trainer_]').val('${lpt}');   
 		</ct:forEach> 
-        
+		
+		var listOfTrainers = '${listPreSelectedTrainers}';
+	
+       
         <ct:forEach items="${listEnteredSubjectDates}" var="lesd" varStatus="loop" > 
         $("#subjectDates_"+'${loop.count}').val('${lesd[0]}');  
 		</ct:forEach>
@@ -466,12 +470,12 @@
 																				
 																		<ct:forEach items='${listPersonalInfoTrainer}' var="abc" varStatus="inloop"> 
 																		
-																		<ct:if test="${inloop.count == loop2.count}"> 
+																		<%-- <ct:if test="${inloop.count == loop2.count}"> --%> 
 																		<ct:forEach items='${abc}' var="a" >
 																		<option value="${a[0]}">${a[1]}&nbsp; ${a[3]}</option>
 																			
 																		</ct:forEach>
-																		</ct:if>
+																	<%-- 	</ct:if> --%>
 																		</ct:forEach>
 														
 																			
